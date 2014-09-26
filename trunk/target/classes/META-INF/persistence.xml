@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="fise-data-access">
+	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>gob.osinergmin.fise.domain.AdmEmpresa</class>
+		<class>gob.osinergmin.fise.domain.FiseEtapa</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12AC</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12ACPK</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12AD</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12ADPK</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12ADObs</class>
+		<class>gob.osinergmin.fise.domain.FiseFormato12ADObsPK</class>
+		<class>gob.osinergmin.fise.domain.FiseGrupoInformacion</class>
+		<class>gob.osinergmin.fise.domain.FiseObservacion</class>
+		<class>gob.osinergmin.fise.domain.FisePeriodoEnvio</class>
+		<class>gob.osinergmin.fise.domain.FisePeriodoEnvioPK</class>
+		<class>gob.osinergmin.fise.domain.FiseTipCostoGestion</class>
+		<class>gob.osinergmin.fise.domain.FiseTipDocRef</class>
+		<class>gob.osinergmin.fise.domain.FiseTipGasto</class>
+		<class>gob.osinergmin.fise.domain.FiseTipPersonal</class>
+		<class>gob.osinergmin.fise.domain.FiseZonaBenef</class>
+	</persistence-unit>
+</persistence>

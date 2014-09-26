@@ -19,6 +19,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	
 	@Override
 	public List<FiseFormato12AC> listarFormato12AC() {
+		System.out.println();
 		return formato12AGartDao.listarFormato12AC();
 	}
 

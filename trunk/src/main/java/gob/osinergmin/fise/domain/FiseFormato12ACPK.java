@@ -12,19 +12,19 @@ public class FiseFormato12ACPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA")
+	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION")
+	@Column(name="ANO_PRESENTACION", insertable=false, updatable=false)
 	private long anoPresentacion;
 
-	@Column(name="MES_PRESENTACION")
+	@Column(name="MES_PRESENTACION", insertable=false, updatable=false)
 	private long mesPresentacion;
 
-	@Column(name="ANO_EJECUCION_GASTO")
+	@Column(name="ANO_EJECUCION_GASTO", insertable=false, updatable=false)
 	private long anoEjecucionGasto;
 
-	@Column(name="MES_EJECUCION_GASTO")
+	@Column(name="MES_EJECUCION_GASTO", insertable=false, updatable=false)
 	private long mesEjecucionGasto;
 
 	private String etapa;

@@ -1,9 +1,8 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_GRUPO_INFORMACION")
+@Table(name="FISE_GRUPO_INFORMACION", schema="FISE")
 @NamedQuery(name="FiseGrupoInformacion.findAll", query="SELECT f FROM FiseGrupoInformacion f")
 public class FiseGrupoInformacion implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,13 +26,13 @@ public class FiseGrupoInformacion implements Serializable {
 
 	private String descripcion;
 
-	private long estado;
+	private BigDecimal estado;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -83,11 +82,11 @@ public class FiseGrupoInformacion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public long getEstado() {
+	public BigDecimal getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(long estado) {
+	public void setEstado(BigDecimal estado) {
 		this.estado = estado;
 	}
 

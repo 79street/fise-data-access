@@ -1,9 +1,7 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +11,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_ZONA_BENEF")
+@Table(name="FISE_ZONA_BENEF", schema="FISE")
 @NamedQuery(name="FiseZonaBenef.findAll", query="SELECT f FROM FiseZonaBenef f")
 public class FiseZonaBenef implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +22,11 @@ public class FiseZonaBenef implements Serializable {
 
 	private String descripcion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -45,8 +43,8 @@ public class FiseZonaBenef implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseFormato12AD
-	@OneToMany(mappedBy="fiseZonaBenef")
-	private List<FiseFormato12AD> fiseFormato12ADs;
+	/*@OneToMany(mappedBy="fiseZonaBenef")
+	private List<FiseFormato12AD> fiseFormato12ADs;*/
 
 	public FiseZonaBenef() {
 	}
@@ -115,7 +113,7 @@ public class FiseZonaBenef implements Serializable {
 		this.usuarioCreacion = usuarioCreacion;
 	}
 
-	public List<FiseFormato12AD> getFiseFormato12ADs() {
+	/*public List<FiseFormato12AD> getFiseFormato12ADs() {
 		return this.fiseFormato12ADs;
 	}
 
@@ -135,6 +133,6 @@ public class FiseZonaBenef implements Serializable {
 		fiseFormato12AD.setFiseZonaBenef(null);
 
 		return fiseFormato12AD;
-	}
+	}*/
 
 }

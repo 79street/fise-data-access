@@ -12,7 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_12A_C")
+@Table(name="FISE_FORMATO_12A_C", schema="FISE")
 @NamedQuery(name="FiseFormato12AC.findAll", query="SELECT f FROM FiseFormato12AC f")
 public class FiseFormato12AC implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,11 +20,11 @@ public class FiseFormato12AC implements Serializable {
 	@EmbeddedId
 	private FiseFormato12ACPK id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -44,22 +44,14 @@ public class FiseFormato12AC implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseGrupoInformacion
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
 
 	//bi-directional many-to-one association to FiseFormato12AD
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="fiseFormato12AC")
+	@OneToMany(mappedBy="fiseFormato12AC")
 	private List<FiseFormato12AD> fiseFormato12ADs;
 
-	@Transient
-	private String descEmpresa;
-	@Transient
-	private String descEstado;
-	@Transient
-	private String descMes;
-	
-	
 	public FiseFormato12AC() {
 	}
 
@@ -155,30 +147,6 @@ public class FiseFormato12AC implements Serializable {
 		fiseFormato12AD.setFiseFormato12AC(null);
 
 		return fiseFormato12AD;
-	}
-
-	public String getDescEmpresa() {
-		return descEmpresa;
-	}
-
-	public void setDescEmpresa(String descEmpresa) {
-		this.descEmpresa = descEmpresa;
-	}
-
-	public String getDescEstado() {
-		return descEstado;
-	}
-
-	public void setDescEstado(String descEstado) {
-		this.descEstado = descEstado;
-	}
-
-	public String getDescMes() {
-		return descMes;
-	}
-
-	public void setDescMes(String descMes) {
-		this.descMes = descMes;
 	}
 
 }

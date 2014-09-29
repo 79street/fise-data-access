@@ -1,9 +1,7 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -12,7 +10,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="FISE_TIP_GASTO")
+@Table(name="FISE_TIP_GASTO", schema="FISE")
 @NamedQuery(name="FiseTipGasto.findAll", query="SELECT f FROM FiseTipGasto f")
 public class FiseTipGasto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,11 +21,11 @@ public class FiseTipGasto implements Serializable {
 
 	private String descripcion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 

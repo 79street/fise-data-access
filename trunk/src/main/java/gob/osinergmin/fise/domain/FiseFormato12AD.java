@@ -1,21 +1,10 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
@@ -23,7 +12,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_12A_D")
+@Table(name="FISE_FORMATO_12A_D", schema="FISE")
 @NamedQuery(name="FiseFormato12AD.findAll", query="SELECT f FROM FiseFormato12AD f")
 public class FiseFormato12AD implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -43,11 +32,11 @@ public class FiseFormato12AD implements Serializable {
 	@Column(name="COSTO_TOTAL_GEST_RED_AG_GLP")
 	private BigDecimal costoTotalGestRedAgGlp;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -77,24 +66,24 @@ public class FiseFormato12AD implements Serializable {
 
 	//bi-directional many-to-one association to FiseFormato12AC
 	@ManyToOne
-	@JoinColumns({
+	/*@JoinColumns({
 		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),
 		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
 		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
+		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
 		@JoinColumn(name="MES_EJECUCION_GASTO", referencedColumnName="MES_EJECUCION_GASTO"),
-		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION"),
-		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA")
-		})
+		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
+		})*/
 	private FiseFormato12AC fiseFormato12AC;
 
 	//bi-directional many-to-one association to FiseZonaBenef
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="ID_ZONA_BENEF")
-	private FiseZonaBenef fiseZonaBenef;
+	private FiseZonaBenef fiseZonaBenef;*/
 
-	//bi-directional many-to-one association to FiseFormato12ADObs
+	//bi-directional many-to-one association to FiseFormato12ADOb
 	@OneToMany(mappedBy="fiseFormato12AD")
-	private List<FiseFormato12ADObs> fiseFormato12ADObs;
+	private List<FiseFormato12ADOb> fiseFormato12ADObs;
 
 	public FiseFormato12AD() {
 	}
@@ -227,30 +216,30 @@ public class FiseFormato12AD implements Serializable {
 		this.fiseFormato12AC = fiseFormato12AC;
 	}
 
-	public FiseZonaBenef getFiseZonaBenef() {
+	/*public FiseZonaBenef getFiseZonaBenef() {
 		return this.fiseZonaBenef;
 	}
 
 	public void setFiseZonaBenef(FiseZonaBenef fiseZonaBenef) {
 		this.fiseZonaBenef = fiseZonaBenef;
-	}
+	}*/
 
-	public List<FiseFormato12ADObs> getFiseFormato12ADObs() {
+	public List<FiseFormato12ADOb> getFiseFormato12ADObs() {
 		return this.fiseFormato12ADObs;
 	}
 
-	public void setFiseFormato12ADObs(List<FiseFormato12ADObs> fiseFormato12ADObs) {
+	public void setFiseFormato12ADObs(List<FiseFormato12ADOb> fiseFormato12ADObs) {
 		this.fiseFormato12ADObs = fiseFormato12ADObs;
 	}
 
-	public FiseFormato12ADObs addFiseFormato12ADOb(FiseFormato12ADObs fiseFormato12ADOb) {
+	public FiseFormato12ADOb addFiseFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb) {
 		getFiseFormato12ADObs().add(fiseFormato12ADOb);
 		fiseFormato12ADOb.setFiseFormato12AD(this);
 
 		return fiseFormato12ADOb;
 	}
 
-	public FiseFormato12ADObs removeFiseFormato12ADOb(FiseFormato12ADObs fiseFormato12ADOb) {
+	public FiseFormato12ADOb removeFiseFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb) {
 		getFiseFormato12ADObs().remove(fiseFormato12ADOb);
 		fiseFormato12ADOb.setFiseFormato12AD(null);
 

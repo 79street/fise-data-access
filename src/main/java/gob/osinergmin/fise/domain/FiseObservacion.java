@@ -1,9 +1,7 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +11,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_OBSERVACION")
+@Table(name="FISE_OBSERVACION", schema="FISE")
 @NamedQuery(name="FiseObservacion.findAll", query="SELECT f FROM FiseObservacion f")
 public class FiseObservacion implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +22,11 @@ public class FiseObservacion implements Serializable {
 
 	private String descripcion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -48,9 +46,9 @@ public class FiseObservacion implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	//bi-directional many-to-one association to FiseFormato12ADObs
+	//bi-directional many-to-one association to FiseFormato12ADOb
 	@OneToMany(mappedBy="fiseObservacion")
-	private List<FiseFormato12ADObs> fiseFormato12ADObs;
+	private List<FiseFormato12ADOb> fiseFormato12ADObs;
 
 	public FiseObservacion() {
 	}
@@ -135,22 +133,22 @@ public class FiseObservacion implements Serializable {
 		this.usuarioCreacion = usuarioCreacion;
 	}
 
-	public List<FiseFormato12ADObs> getFiseFormato12ADObs() {
+	public List<FiseFormato12ADOb> getFiseFormato12ADObs() {
 		return this.fiseFormato12ADObs;
 	}
 
-	public void setFiseFormato12ADObs(List<FiseFormato12ADObs> fiseFormato12ADObs) {
+	public void setFiseFormato12ADObs(List<FiseFormato12ADOb> fiseFormato12ADObs) {
 		this.fiseFormato12ADObs = fiseFormato12ADObs;
 	}
 
-	public FiseFormato12ADObs addFiseFormato12ADOb(FiseFormato12ADObs fiseFormato12ADOb) {
+	public FiseFormato12ADOb addFiseFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb) {
 		getFiseFormato12ADObs().add(fiseFormato12ADOb);
 		fiseFormato12ADOb.setFiseObservacion(this);
 
 		return fiseFormato12ADOb;
 	}
 
-	public FiseFormato12ADObs removeFiseFormato12ADOb(FiseFormato12ADObs fiseFormato12ADOb) {
+	public FiseFormato12ADOb removeFiseFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb) {
 		getFiseFormato12ADObs().remove(fiseFormato12ADOb);
 		fiseFormato12ADOb.setFiseObservacion(null);
 

@@ -27,7 +27,7 @@ public class FiseFormato12ADPK implements Serializable {
 	@Column(name="MES_EJECUCION_GASTO", insertable=false, updatable=false)
 	private long mesEjecucionGasto;
 
-	@Column(insertable=false, updatable=false)
+	@Column
 	private String etapa;
 
 	@Column(name="ID_ZONA_BENEF", insertable=false, updatable=false)

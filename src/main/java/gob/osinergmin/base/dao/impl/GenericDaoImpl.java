@@ -1,6 +1,7 @@
 package gob.osinergmin.base.dao.impl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,11 @@ public class GenericDaoImpl {
 	public GenericDaoImpl() {
 	}
 
+	@PersistenceContext(unitName = "fisePU")
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
 	@Transactional
 	public void save(Object object) {
 		System.out.println("entro a guardar");

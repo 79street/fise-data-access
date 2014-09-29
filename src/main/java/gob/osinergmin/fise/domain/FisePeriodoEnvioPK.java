@@ -12,7 +12,7 @@ public class FisePeriodoEnvioPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA")
+	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
 	private String codEmpresa;
 
 	@Column(name="ANO_PRESENTACION")

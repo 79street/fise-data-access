@@ -20,11 +20,11 @@ public class FiseFormato12AC implements Serializable {
 	@EmbeddedId
 	private FiseFormato12ACPK id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -49,9 +49,19 @@ public class FiseFormato12AC implements Serializable {
 	private FiseGrupoInformacion fiseGrupoInformacion;
 
 	//bi-directional many-to-one association to FiseFormato12AD
-	@OneToMany(mappedBy="fiseFormato12AC")
+	@Transient
+	@OneToMany(mappedBy="fiseFormato12AC", fetch=FetchType.EAGER)
 	private List<FiseFormato12AD> fiseFormato12ADs;
 
+	@Transient
+	private String descEmpresa;
+	@Transient
+	private String descEstado;
+	@Transient
+	private String descMesPresentacion;
+	@Transient
+	private String descMesEjecucion;
+	
 	public FiseFormato12AC() {
 	}
 
@@ -148,5 +158,39 @@ public class FiseFormato12AC implements Serializable {
 
 		return fiseFormato12AD;
 	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public String getDescMesEjecucion() {
+		return descMesEjecucion;
+	}
+
+	public void setDescMesEjecucion(String descMesEjecucion) {
+		this.descMesEjecucion = descMesEjecucion;
+	}
+
+
 
 }

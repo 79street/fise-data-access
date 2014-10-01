@@ -1,7 +1,9 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -19,28 +21,28 @@ public class FisePeriodoEnvio implements Serializable {
 	@EmbeddedId
 	private FisePeriodoEnvioPK id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecdocobs;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecemanotobs;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecenv;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecenvdocobs;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecrecgart;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecrecnotobs;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecrecosi;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date cegifecvenlvtoobs;
 
 	private String ceginrodoc;
@@ -51,21 +53,21 @@ public class FisePeriodoEnvio implements Serializable {
 
 	private String ceginrotra;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date desde;
 
 	@Column(name="DIAS_NOTIFICACION_ANTES_CIERRE")
 	private BigDecimal diasNotificacionAntesCierre;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date hasta;
 
 	@Column(name="TERMINAL_ACTUALIZACION")

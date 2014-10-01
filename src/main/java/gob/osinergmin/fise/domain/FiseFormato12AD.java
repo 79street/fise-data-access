@@ -1,7 +1,9 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -32,11 +34,11 @@ public class FiseFormato12AD implements Serializable {
 	@Column(name="COSTO_TOTAL_GEST_RED_AG_GLP")
 	private BigDecimal costoTotalGestRedAgGlp;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
@@ -65,6 +67,7 @@ public class FiseFormato12AD implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseFormato12AC
+	@Transient
 	@ManyToOne
 	/*@JoinColumns({
 		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),

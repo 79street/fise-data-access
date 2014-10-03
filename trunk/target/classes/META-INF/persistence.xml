@@ -19,6 +19,12 @@
 	<class>gob.osinergmin.fise.domain.FiseTipPersonal</class>
 	<class>gob.osinergmin.fise.domain.FiseZonaBenef</class>
 	<class>gob.osinergmin.fise.domain.AdmEmpresa</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14AC</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14ACPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14AD</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14ADPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14ADOb</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14ADObPK</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 	      </properties>

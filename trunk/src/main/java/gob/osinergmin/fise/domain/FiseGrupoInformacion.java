@@ -24,7 +24,7 @@ public class FiseGrupoInformacion implements Serializable {
 	private long idGrupoInformacion;
 
 	@Column(name="ANO_PRESENTACION")
-	private long anoPresentacion;
+	private Long anoPresentacion;
 
 	private String descripcion;
 
@@ -39,7 +39,7 @@ public class FiseGrupoInformacion implements Serializable {
 	private Date fechaCreacion;
 
 	@Column(name="MES_PRESENTACION")
-	private long mesPresentacion;
+	private Long mesPresentacion;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -60,19 +60,19 @@ public class FiseGrupoInformacion implements Serializable {
 	public FiseGrupoInformacion() {
 	}
 
-	public long getIdGrupoInformacion() {
+	public Long getIdGrupoInformacion() {
 		return this.idGrupoInformacion;
 	}
 
-	public void setIdGrupoInformacion(long idGrupoInformacion) {
+	public void setIdGrupoInformacion(Long idGrupoInformacion) {
 		this.idGrupoInformacion = idGrupoInformacion;
 	}
 
-	public long getAnoPresentacion() {
+	public Long getAnoPresentacion() {
 		return this.anoPresentacion;
 	}
 
-	public void setAnoPresentacion(long anoPresentacion) {
+	public void setAnoPresentacion(Long anoPresentacion) {
 		this.anoPresentacion = anoPresentacion;
 	}
 
@@ -108,11 +108,11 @@ public class FiseGrupoInformacion implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public long getMesPresentacion() {
+	public Long getMesPresentacion() {
 		return this.mesPresentacion;
 	}
 
-	public void setMesPresentacion(long mesPresentacion) {
+	public void setMesPresentacion(Long mesPresentacion) {
 		this.mesPresentacion = mesPresentacion;
 	}
 

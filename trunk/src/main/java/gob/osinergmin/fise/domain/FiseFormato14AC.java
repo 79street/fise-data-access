@@ -5,20 +5,21 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
- * The persistent class for the FISE_FORMATO_12A_D_OBS database table.
+ * The persistent class for the FISE_FORMATO_14A_C database table.
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_12A_D_OBS")
-@NamedQuery(name="FiseFormato12ADObs.findAll", query="SELECT f FROM FiseFormato12ADObs f")
-public class FiseFormato12ADObs implements Serializable {
+@Table(name="FISE_FORMATO_14A_C", schema="FISE")
+@NamedQuery(name="FiseFormato14AC.findAll", query="SELECT f FROM FiseFormato14AC f")
+public class FiseFormato14AC implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FiseFormato12ADObsPK id;
+	private FiseFormato14ACPK id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -27,6 +28,9 @@ public class FiseFormato12ADObs implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
+
+	@Column(name="ID_GRUPO_INFORMACION")
+	private java.math.BigDecimal idGrupoInformacion;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -40,32 +44,19 @@ public class FiseFormato12ADObs implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	//bi-directional many-to-one association to FiseFormato12AD
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),
-		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
-		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
-		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
-		@JoinColumn(name="ID_ZONA_BENEF", referencedColumnName="ID_ZONA_BENEF"),
-		@JoinColumn(name="MES_EJECUCION_GASTO", referencedColumnName="MES_EJECUCION_GASTO"),
-		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
-		})
-	private FiseFormato12AD fiseFormato12AD;
+	//bi-directional many-to-one association to FiseFormato14AD
+	@Transient
+	@OneToMany(mappedBy="fiseFormato14AC", cascade={CascadeType.ALL})
+	private List<FiseFormato14AD> fiseFormato14ADs;
 
-	//bi-directional many-to-one association to FiseObservacion
-	@ManyToOne
-	@JoinColumn(name="ID_OBSERVACION")
-	private FiseObservacion fiseObservacion;
-
-	public FiseFormato12ADObs() {
+	public FiseFormato14AC() {
 	}
 
-	public FiseFormato12ADObsPK getId() {
+	public FiseFormato14ACPK getId() {
 		return this.id;
 	}
 
-	public void setId(FiseFormato12ADObsPK id) {
+	public void setId(FiseFormato14ACPK id) {
 		this.id = id;
 	}
 
@@ -83,6 +74,14 @@ public class FiseFormato12ADObs implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public java.math.BigDecimal getIdGrupoInformacion() {
+		return this.idGrupoInformacion;
+	}
+
+	public void setIdGrupoInformacion(java.math.BigDecimal idGrupoInformacion) {
+		this.idGrupoInformacion = idGrupoInformacion;
 	}
 
 	public String getTerminalActualizacion() {
@@ -117,20 +116,26 @@ public class FiseFormato12ADObs implements Serializable {
 		this.usuarioCreacion = usuarioCreacion;
 	}
 
-	public FiseFormato12AD getFiseFormato12AD() {
-		return this.fiseFormato12AD;
+	public List<FiseFormato14AD> getFiseFormato14ADs() {
+		return this.fiseFormato14ADs;
 	}
 
-	public void setFiseFormato12AD(FiseFormato12AD fiseFormato12AD) {
-		this.fiseFormato12AD = fiseFormato12AD;
+	public void setFiseFormato14ADs(List<FiseFormato14AD> fiseFormato14ADs) {
+		this.fiseFormato14ADs = fiseFormato14ADs;
 	}
 
-	public FiseObservacion getFiseObservacion() {
-		return this.fiseObservacion;
+	public FiseFormato14AD addFiseFormato14AD(FiseFormato14AD fiseFormato14AD) {
+		getFiseFormato14ADs().add(fiseFormato14AD);
+		fiseFormato14AD.setFiseFormato14AC(this);
+
+		return fiseFormato14AD;
 	}
 
-	public void setFiseObservacion(FiseObservacion fiseObservacion) {
-		this.fiseObservacion = fiseObservacion;
+	public FiseFormato14AD removeFiseFormato14AD(FiseFormato14AD fiseFormato14AD) {
+		getFiseFormato14ADs().remove(fiseFormato14AD);
+		fiseFormato14AD.setFiseFormato14AC(null);
+
+		return fiseFormato14AD;
 	}
 
 }

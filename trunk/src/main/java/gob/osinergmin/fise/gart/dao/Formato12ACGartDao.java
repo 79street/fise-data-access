@@ -6,7 +6,7 @@ import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 
 import java.util.List;
 
-public interface Formato12AGartDao extends GenericDao {
+public interface Formato12ACGartDao extends GenericDao {
 	
 	List<FiseFormato12AC> listarFormato12AC();
 	FiseFormato12AC obtenerFormato12ACByPK(FiseFormato12ACPK fiseFormato12ACPK);

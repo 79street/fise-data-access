@@ -3,17 +3,17 @@ package gob.osinergmin.fise.gart.dao.impl;
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
-import gob.osinergmin.fise.gart.dao.Formato12AGartDao;
+import gob.osinergmin.fise.gart.dao.Formato12ACGartDao;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
-@Repository(value = "formato12AGartDaoImpl")
-public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AGartDao {
+@Repository(value = "formato12ACGartDaoImpl")
+public class Formato12ACGartDaoImpl extends GenericDaoImpl implements Formato12ACGartDao {
 
 	@SuppressWarnings("unchecked")
 	//@Override
@@ -39,7 +39,7 @@ public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AG
 			//em.getTransaction().begin();
 			formato = em.find(FiseFormato12AC.class, fiseFormato12ACPK);
 			//em.getTransaction().commit();
-			return formato;
+			//return formato;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,10 +73,10 @@ public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AG
 	@Override
 	public void eliminarFormato12AC(FiseFormato12AC fiseFormato12AC){
 		try{
-			//em.getTransaction().begin();
+			em.getTransaction().begin();
 			em.remove(fiseFormato12AC);
 			//em.flush();
-			//em.getTransaction().commit();
+			em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,7 +105,7 @@ public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AG
 		List<FiseFormato12AC> lista = null;
 		try{
 			String q = "SELECT t FROM FiseFormato12AC t WHERE 1=1 ";
-			if(StringUtils.isNotBlank(codEmpresa)){ 
+			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				q = q  + " AND t.id.codEmpresa = :codEmpresa ";
 			}
 			if(anioDesde!=0){ 
@@ -120,11 +120,11 @@ public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AG
 			if(mesHasta!=0){ 
 				q = q + " AND t.id.mesPresentacion <= :mesHasta ";
 			}
-			if(StringUtils.isNotBlank(etapa)){ 
+			if(FormatoUtil.isNotBlank(etapa)){ 
 				q = q + " AND t.id.etapa = :etapa ";
 			}
 			Query query = em.createQuery(q); 
-			if(StringUtils.isNotBlank(codEmpresa)){ 
+			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				query.setParameter("codEmpresa", codEmpresa);
 			}
 			if(anioDesde!=0){
@@ -139,7 +139,7 @@ public class Formato12AGartDaoImpl extends GenericDaoImpl implements Formato12AG
 			if(mesHasta!=0){ 
 				query.setParameter("mesHasta", mesHasta);
 			}
-			if(StringUtils.isNotBlank(etapa)){ 
+			if(FormatoUtil.isNotBlank(etapa)){ 
 				query.setParameter("etapa", etapa);
 			}
 			

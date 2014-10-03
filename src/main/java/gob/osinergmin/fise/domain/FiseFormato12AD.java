@@ -43,10 +43,10 @@ public class FiseFormato12AD implements Serializable {
 	private Date fechaCreacion;
 
 	@Column(name="NUMERO_AGENTES_AUTORIZ_GLP")
-	private long numeroAgentesAutorizGlp;
+	private Long numeroAgentesAutorizGlp;
 
 	@Column(name="NUMERO_EMPADRONADOS")
-	private long numeroEmpadronados;
+	private Long numeroEmpadronados;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -147,19 +147,19 @@ public class FiseFormato12AD implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public long getNumeroAgentesAutorizGlp() {
+	public Long getNumeroAgentesAutorizGlp() {
 		return this.numeroAgentesAutorizGlp;
 	}
 
-	public void setNumeroAgentesAutorizGlp(long numeroAgentesAutorizGlp) {
+	public void setNumeroAgentesAutorizGlp(Long numeroAgentesAutorizGlp) {
 		this.numeroAgentesAutorizGlp = numeroAgentesAutorizGlp;
 	}
 
-	public long getNumeroEmpadronados() {
+	public Long getNumeroEmpadronados() {
 		return this.numeroEmpadronados;
 	}
 
-	public void setNumeroEmpadronados(long numeroEmpadronados) {
+	public void setNumeroEmpadronados(Long numeroEmpadronados) {
 		this.numeroEmpadronados = numeroEmpadronados;
 	}
 

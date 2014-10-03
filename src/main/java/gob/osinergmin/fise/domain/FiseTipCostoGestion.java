@@ -46,11 +46,11 @@ public class FiseTipCostoGestion implements Serializable {
 	public FiseTipCostoGestion() {
 	}
 
-	public long getIdTipCostoGestion() {
+	public Long getIdTipCostoGestion() {
 		return this.idTipCostoGestion;
 	}
 
-	public void setIdTipCostoGestion(long idTipCostoGestion) {
+	public void setIdTipCostoGestion(Long idTipCostoGestion) {
 		this.idTipCostoGestion = idTipCostoGestion;
 	}
 

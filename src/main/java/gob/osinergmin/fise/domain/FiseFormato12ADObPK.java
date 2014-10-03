@@ -8,35 +8,35 @@ import javax.persistence.*;
  * 
  */
 @Embeddable
-public class FiseFormato12ADObsPK implements Serializable {
+public class FiseFormato12ADObPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
+	@Column(name="COD_EMPRESA")
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="ANO_PRESENTACION")
 	private long anoPresentacion;
 
-	@Column(name="MES_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="MES_PRESENTACION")
 	private long mesPresentacion;
 
-	@Column(name="ANO_EJECUCION_GASTO", insertable=false, updatable=false)
+	@Column(name="ANO_EJECUCION_GASTO")
 	private long anoEjecucionGasto;
 
-	@Column(name="MES_EJECUCION_GASTO", insertable=false, updatable=false)
+	@Column(name="MES_EJECUCION_GASTO")
 	private long mesEjecucionGasto;
 
-	@Column(insertable=false, updatable=false)
+	@Column
 	private String etapa;
 
-	@Column(name="ID_ZONA_BENEF", insertable=false, updatable=false)
+	@Column(name="ID_ZONA_BENEF")
 	private long idZonaBenef;
 
 	@Column(name="ITEM_OBSERVACION")
 	private long itemObservacion;
 
-	public FiseFormato12ADObsPK() {
+	public FiseFormato12ADObPK() {
 	}
 	public String getCodEmpresa() {
 		return this.codEmpresa;
@@ -91,10 +91,10 @@ public class FiseFormato12ADObsPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof FiseFormato12ADObsPK)) {
+		if (!(other instanceof FiseFormato12ADObPK)) {
 			return false;
 		}
-		FiseFormato12ADObsPK castOther = (FiseFormato12ADObsPK)other;
+		FiseFormato12ADObPK castOther = (FiseFormato12ADObPK)other;
 		return 
 			this.codEmpresa.equals(castOther.codEmpresa)
 			&& (this.anoPresentacion == castOther.anoPresentacion)

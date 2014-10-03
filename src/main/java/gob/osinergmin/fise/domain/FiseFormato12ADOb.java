@@ -8,20 +8,17 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the FISE_ETAPA database table.
+ * The persistent class for the FISE_FORMATO_12A_D_OBS database table.
  * 
  */
 @Entity
-@Table(name="FISE_ETAPA")
-@NamedQuery(name="FiseEtapa.findAll", query="SELECT f FROM FiseEtapa f")
-public class FiseEtapa implements Serializable {
+@Table(name="FISE_FORMATO_12A_D_OBS", schema="FISE")
+@NamedQuery(name="FiseFormato12ADOb.findAll", query="SELECT f FROM FiseFormato12ADOb f")
+public class FiseFormato12ADOb implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="ID_ETAPA")
-	private long idEtapa;
-
-	private String descripcion;
+	@EmbeddedId
+	private FiseFormato12ADObPK id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -43,23 +40,33 @@ public class FiseEtapa implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	public FiseEtapa() {
+	//bi-directional many-to-one association to FiseFormato12AD
+	@ManyToOne
+	/*@JoinColumns({
+		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),
+		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
+		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
+		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
+		@JoinColumn(name="ID_ZONA_BENEF", referencedColumnName="ID_ZONA_BENEF"),
+		@JoinColumn(name="MES_EJECUCION_GASTO", referencedColumnName="MES_EJECUCION_GASTO"),
+		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
+		})*/
+	private FiseFormato12AD fiseFormato12AD;
+
+	//bi-directional many-to-one association to FiseObservacion
+	@ManyToOne
+	@JoinColumn(name="ID_OBSERVACION")
+	private FiseObservacion fiseObservacion;
+
+	public FiseFormato12ADOb() {
 	}
 
-	public long getIdEtapa() {
-		return this.idEtapa;
+	public FiseFormato12ADObPK getId() {
+		return this.id;
 	}
 
-	public void setIdEtapa(long idEtapa) {
-		this.idEtapa = idEtapa;
-	}
-
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setId(FiseFormato12ADObPK id) {
+		this.id = id;
 	}
 
 	public Date getFechaActualizacion() {
@@ -108,6 +115,22 @@ public class FiseEtapa implements Serializable {
 
 	public void setUsuarioCreacion(String usuarioCreacion) {
 		this.usuarioCreacion = usuarioCreacion;
+	}
+
+	public FiseFormato12AD getFiseFormato12AD() {
+		return this.fiseFormato12AD;
+	}
+
+	public void setFiseFormato12AD(FiseFormato12AD fiseFormato12AD) {
+		this.fiseFormato12AD = fiseFormato12AD;
+	}
+
+	public FiseObservacion getFiseObservacion() {
+		return this.fiseObservacion;
+	}
+
+	public void setFiseObservacion(FiseObservacion fiseObservacion) {
+		this.fiseObservacion = fiseObservacion;
 	}
 
 }

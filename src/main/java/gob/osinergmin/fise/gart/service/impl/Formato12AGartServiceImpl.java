@@ -304,7 +304,9 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void modificarFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) {
+	public FiseFormato12AC modificarFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) {
+		
+		FiseFormato12AC dto = null;
 		
 		try {
 			
@@ -460,19 +462,30 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			for (FiseFormato12AD detalle : lista) {
 				formato12ADDao.modificarFormato12AD(detalle);
 			}
+			dto= fiseFormato12AC;
 			
 		}	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
 		}
 		//
+		return dto;
 
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void eliminarFormato12AC(FiseFormato12AC fiseFormato12AC) {
+		//eliminar antes los detalles creados para esa cabecera
+		List<FiseFormato12AD> lista = null;
+		lista = formato12ADDao.listarFormato12ADByFormato12AC(fiseFormato12AC);
+		//por el momento no se esta borrando las dependencias hacias el detalle de observaciones
+		//luego aumentar esta dependencia
+		for (FiseFormato12AD detalle : lista) {
+			formato12ADDao.eliminarFormato12AD(detalle);
+		}
 		formato12ACDao.eliminarFormato12AC(fiseFormato12AC);
-	}
+	} 
 	
 	@Override
 	public boolean existeFormato12AC(FiseFormato12AC fiseFormato12AC) {

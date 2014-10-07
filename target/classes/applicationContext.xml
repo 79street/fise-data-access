@@ -16,7 +16,7 @@
 	<context:component-scan base-package="gob.osinergmin" />
 
   <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
-    <beans:property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+    <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
     <beans:property name="url" value="jdbc:oracle:thin:@192.168.1.7:1521:bdsphere"/>
     <beans:property name="username" value="fise"/>
     <beans:property name="password" value="fise"/>
@@ -31,21 +31,12 @@
   	<!--<beans:property name="packagesToScan" value="gob.osinergmin" />-->
     <beans:property name="persistenceUnitName" value="fisePU"/>
     <beans:property name="dataSource" ref="dataSource"/>
-    <!--<beans:property name="loadTimeWeaver">
-        <beans:bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
-      </beans:property>-->
-    <!-- <beans:property name="jpaVendorAdapter">
+   <!--  <beans:property name="jpaVendorAdapter">
 			<beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<beans:property name="database" value="ORACLE" />
-				<beans:property name="showSql" value="${jpaVendorAdapter.showSql}"  />
+				<beans:property name="showSql" value="true"  />
 			</beans:bean>
 		</beans:property> -->
-		<beans:property name="jpaVendorAdapter">
-		<beans:bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
-			<beans:property name="database" value="ORACLE" />
-			<beans:property name="showSql" value="true"  />
-		</beans:bean>
-	</beans:property>
   </beans:bean>
    
   <!-- Transaction Manager -->

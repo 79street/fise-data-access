@@ -85,6 +85,7 @@ public class FiseFormato12AD implements Serializable {
 	private FiseZonaBenef fiseZonaBenef;*/
 
 	//bi-directional many-to-one association to FiseFormato12ADOb
+	@Transient
 	@OneToMany(mappedBy="fiseFormato12AD")
 	private List<FiseFormato12ADOb> fiseFormato12ADObs;
 

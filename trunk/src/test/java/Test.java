@@ -1,4 +1,5 @@
 import gob.osinergmin.fise.domain.FiseFormato12AC;
+import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class Test {
 		public void testGetSHA1(){
 			List<FiseFormato12AC> lista = formatoService.listarFormato12AC();
 			System.out.println("sdsdsd"+lista);
+			//List<FiseFormato12AD> lista2 = formatoService.;
 
 		}
 

@@ -41,6 +41,7 @@ public class FiseFormato12ADOb implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseFormato12AD
+	@Transient
 	@ManyToOne
 	/*@JoinColumns({
 		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),

@@ -73,10 +73,10 @@ public class Formato12ACGartDaoImpl extends GenericDaoImpl implements Formato12A
 	@Override
 	public void eliminarFormato12AC(FiseFormato12AC fiseFormato12AC){
 		try{
-			em.getTransaction().begin();
+			//em.getTransaction().begin();
 			em.remove(fiseFormato12AC);
 			//em.flush();
-			em.getTransaction().commit();
+			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

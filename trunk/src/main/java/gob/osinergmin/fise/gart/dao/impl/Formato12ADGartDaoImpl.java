@@ -54,6 +54,20 @@ public class Formato12ADGartDaoImpl extends GenericDaoImpl implements Formato12A
 		}
 	}
 	
+	@Override
+	public void eliminarFormato12AD(FiseFormato12AD fiseFormato12AD){
+		try{
+			//em.getTransaction().begin();
+			//verificar si la entidad pertenece a la transaccion o no
+			//em.remove(em.contains(fiseFormato12AD) ? fiseFormato12AD : em.merge(fiseFormato12AD));
+			em.remove(fiseFormato12AD);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FiseFormato12AD> listarFormato12ADByFormato12AC(FiseFormato12AC formato12AC) {

@@ -54,6 +54,7 @@ public class Formato12ACBean implements Serializable {
 	
 	private String usuario;
 	private String terminal;
+	private String nombreArchivo;
 
 	public Formato12ACBean(){
 		
@@ -364,6 +365,14 @@ public class Formato12ACBean implements Serializable {
 
 	public void setTerminal(String terminal) {
 		this.terminal = terminal;
+	}
+
+	public String getNombreArchivo() {
+		return nombreArchivo;
+	}
+
+	public void setNombreArchivo(String nombreArchivo) {
+		this.nombreArchivo = nombreArchivo;
 	}
 
 }

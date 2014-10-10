@@ -10,7 +10,7 @@ public abstract class FechaUtil {
 	public static final String[] MESES = 
 		{"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"};
 	public static final String[] DIAS = 
-		{"Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"};
+		{"Domingo","Lunes","Martes","MiÃ©rcoles","Jueves","Viernes","SÃ¡bado"};
 	
 	public static Map<Long,String> cargarMapaMeses() {
 		

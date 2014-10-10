@@ -59,8 +59,8 @@ public class Formato12ADGartDaoImpl extends GenericDaoImpl implements Formato12A
 		try{
 			//em.getTransaction().begin();
 			//verificar si la entidad pertenece a la transaccion o no
-			//em.remove(em.contains(fiseFormato12AD) ? fiseFormato12AD : em.merge(fiseFormato12AD));
-			em.remove(fiseFormato12AD);
+			em.remove(em.contains(fiseFormato12AD) ? fiseFormato12AD : em.merge(fiseFormato12AD));
+			//em.remove(fiseFormato12AD);
 			//em.flush();
 			//em.getTransaction().commit();
 		}catch (Exception e) {

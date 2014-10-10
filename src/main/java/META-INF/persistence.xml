@@ -25,6 +25,8 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato14ADPK</class>
 	<class>gob.osinergmin.fise.domain.FiseFormato14ADOb</class>
 	<class>gob.osinergmin.fise.domain.FiseFormato14ADObPK</class>
+	<class>gob.osinergmin.fise.domain.CfgCampo</class>
+	<class>gob.osinergmin.fise.domain.CfgTabla</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 	      </properties>

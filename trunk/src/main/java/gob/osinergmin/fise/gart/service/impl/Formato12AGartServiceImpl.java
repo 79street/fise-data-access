@@ -18,19 +18,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 
 @Service(value="formato12AGartServiceImpl")
 public class Formato12AGartServiceImpl implements Formato12AGartService {
 
-	Log logger=LogFactoryUtil.getLog(Formato12AGartServiceImpl.class);
+	Logger logger=LoggerFactory.getLogger(Formato12AGartServiceImpl.class);
 	
 	@Autowired
 	@Qualifier("formato12ACGartDaoImpl")
@@ -80,8 +84,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
 			fiseFormato12AC.setId(id);
 			
-			logger.info(formulario.getNroEmpadP()!=0);
-			//total de las 3 detalles segun sea el caso
+		//total de las 3 detalles segun sea el caso
 			BigDecimal total = new BigDecimal(0);
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
 			//RURAL
@@ -126,7 +129,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleRural.getTotalActividadesExtraord());
 				//
 				detalleRural.setFiseFormato12AC(fiseFormato12AC);
-				//ªªdetalleRural.setFiseZonaBenef(zonaBenef);
+				//detalleRural.setFiseZonaBenef(zonaBenef);
 				//
 				detalleRural.setUsuarioCreacion(formulario.getUsuario());
 				detalleRural.setTerminalCreacion(formulario.getTerminal());
@@ -184,7 +187,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleProvincia.getTotalActividadesExtraord());
 				//
 				detalleProvincia.setFiseFormato12AC(fiseFormato12AC);
-				//ªªªdetalleProvincia.setFiseZonaBenef(zonaBenef);
+				//detalleProvincia.setFiseZonaBenef(zonaBenef);
 				//
 				detalleProvincia.setUsuarioCreacion(formulario.getUsuario());
 				detalleProvincia.setTerminalCreacion(formulario.getTerminal());
@@ -241,7 +244,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleLima.getTotalDesplazamientoPersonal())
 						.add(detalleLima.getTotalActividadesExtraord());
 				detalleLima.setFiseFormato12AC(fiseFormato12AC);
-				//ªªªªdetalleLima.setFiseZonaBenef(zonaBenef);
+				//ï¿½ï¿½ï¿½ï¿½detalleLima.setFiseZonaBenef(zonaBenef);
 				//
 				detalleLima.setUsuarioCreacion(formulario.getUsuario());
 				detalleLima.setTerminalCreacion(formulario.getTerminal());
@@ -268,7 +271,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			
 			logger.info("aca se va  a guardar"+fiseFormato12AC);
 			//fiseFormato12AC = (FiseFormato12AC) TrimUtil.trimReflective(fiseFormato12AC);
-			formato12ACDao.registrarFormato12AC(fiseFormato12AC);
+			
+			boolean existe = false;
+			existe = formato12ACDao.existeFormato12AC(fiseFormato12AC);
+			if(existe){
+				throw new Exception("Ya existe un registro con la misma clave.");
+			}else{
+				formato12ACDao.registrarFormato12AC(fiseFormato12AC);
+			}
 			
 			//add
 			for (FiseFormato12AD detalle : lista) {
@@ -279,21 +289,6 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				fiseFormato12AC.setFiseFormato12ADs(lista);
 			}
 			dto = fiseFormato12AC;
-			
-			
-			/*boolean existe = false;
-			existe = formatoService.existeFormato(fiseFormato12AC);
-			
-			if(existe){
-				logger.info("--formato existe");
-				formatoService.modificarFormato(fiseFormato12AC);
-			}else{
-				logger.info("--formato no existe");
-				fiseFormato12AC.setUsuarioCreacion(user.getLogin());
-				fiseFormato12AC.setTerminalCreacion(user.getLoginIP());
-				fiseFormato12AC.setFechaCreacion(hoy);
-				formatoService.registrarFormato(fiseFormato12AC);
-			}*/
 			
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());

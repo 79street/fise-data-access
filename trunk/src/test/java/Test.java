@@ -1,5 +1,4 @@
 import gob.osinergmin.fise.domain.FiseFormato12AC;
-import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations = { "classpath:/applicationContext.xml" })  
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })  
 //@Transactional  
 //@TransactionConfiguration(defaultRollback=true)  
 public class Test {
@@ -18,7 +17,7 @@ public class Test {
 		@Autowired
 		private Formato12AGartService formatoService;
 
-		// Método con el test unitario, identificado con la anotación @Test.
+		// MÃ©todo con el test unitario, identificado con la anotaciÃ³n @Test.
 		@org.junit.Test
 		public void testGetSHA1(){
 			List<FiseFormato12AC> lista = formatoService.listarFormato12AC();

@@ -18,11 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -34,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service(value="formato12AGartServiceImpl")
 public class Formato12AGartServiceImpl implements Formato12AGartService {
 
-	Logger logger=LoggerFactory.getLogger(Formato12AGartServiceImpl.class);
+	Logger logger=Logger.getLogger(Formato12AGartServiceImpl.class);
 	
 	@Autowired
 	@Qualifier("formato12ACGartDaoImpl")

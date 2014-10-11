@@ -4,8 +4,7 @@ import gob.osinergmin.fise.domain.FiseFormato14AD;
 import gob.osinergmin.fise.gart.dao.Formato14ADGartDao;
 import gob.osinergmin.fise.gart.service.Formato14AGartService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service(value="formato14AGartServiceImpl")
 public class Formato14AGartServiceImpl implements Formato14AGartService {
 	
-	Logger logger=LoggerFactory.getLogger(Formato14AGartServiceImpl.class);
+	Logger logger=Logger.getLogger(Formato14AGartServiceImpl.class);
 	
 	@Autowired
 	@Qualifier("formato14ADGartDaoImpl")

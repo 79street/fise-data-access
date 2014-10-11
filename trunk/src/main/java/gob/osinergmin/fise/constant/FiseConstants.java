@@ -3,6 +3,8 @@ package gob.osinergmin.fise.constant;
 
 public class FiseConstants {
 	
+	
+	public final static String KEY_CFG_EXCEL_EXPORT = "CFG_XLS_EXPORT";
 	public final static String BLANCO ="";
 	public final static String SALTO_LINEA = "\n";
 	
@@ -23,6 +25,14 @@ public class FiseConstants {
 	public final static long ID_TABLA_FORMATO12A = 100;
 	//-public final static String ID_TABLA_FORMATO12A = "100";
 	
+	public final static String TIPO_FORMATO_12 = "F12";
+	public final static String TIPO_FORMATO_13 = "F13";
+	public final static String TIPO_FORMATO_14 = "F14";
+	
+	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12";
+	public final static String NOMBRE_EXCEL_FORMATO13A = "Formatos13";
+	public final static String NOMBRE_EXCEL_FORMATO14A = "Formatos14";
+	
 	//FORMATO 12 A
 	public final static String TIPOARCHIVO_XLS = "1";
 	public final static String TIPOARCHIVO_TXT = "2";
@@ -30,7 +40,7 @@ public class FiseConstants {
 	public final static String FLAG_CARGAEXCEL_FORMULARIOMODIFICACION = "3";
 	public final static String FLAG_CARGATXT_FORMULARIONUEVO = "4";
 	public final static String FLAG_CARGATXT_FORMULARIOMODIFICACION = "5";
-	public final static String NOMBRE_HOJA_FORMATO12A = "F12A_Remision";
+	public final static String NOMBRE_HOJA_FORMATO12A = "F12A";
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12A = 4;
 	public final static int NRO_FILA_ANIOMES_FORMATO12A = 5;
 	public final static int NRO_FILA_EMPAD_FORMATO12A = 12;

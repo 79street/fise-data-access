@@ -36,7 +36,7 @@ public class Formato12AGartServiceTest {
 		public void testEmpresasRem(){
 			List<AdmEmpresa> lista = empresaService.getEmpresaFise("FISE", "REMISION", "'EDLN'");
 			if(lista!=null){
-				System.out.println("Tamanio"+lista.size());
+				System.out.println("Tamanio lista:"+lista.size());
 				//List<FiseFormato12AD> lista2 = formatoService.;
 				for (AdmEmpresa admEmpresa : lista) {
 					System.out.println("VALOR:"+admEmpresa.getCodEmpresa()+" / "+admEmpresa.getDscEmpresa());

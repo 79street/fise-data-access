@@ -1,7 +1,9 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the FISE_FORMATO_12A_D database table.

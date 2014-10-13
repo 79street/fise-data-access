@@ -21,5 +21,9 @@ public class AdmEmpresaGartServiceImpl implements AdmEmpresaGartService {
 	public List<AdmEmpresa> listarAdmEmpresa() {
 		return admEmpresaGartDao.listarAdmEmpresa();
 	}
+	
+	public List<AdmEmpresa> getEmpresaFise(String codProceso, String codFuncion,String cadenaEmpresas){
+		return admEmpresaGartDao.getEmpresaFise( codProceso,  codFuncion, cadenaEmpresas);
+	}
 
 }

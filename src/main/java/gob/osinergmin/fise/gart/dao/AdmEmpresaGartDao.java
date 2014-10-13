@@ -8,5 +8,6 @@ import java.util.List;
 public interface AdmEmpresaGartDao extends GenericDao {
 
 	List<AdmEmpresa> listarAdmEmpresa();
+	List<AdmEmpresa> getEmpresaFise(String codProceso, String codFuncion,String cadenaEmpresas);
 	
 }

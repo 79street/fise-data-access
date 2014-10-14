@@ -99,6 +99,44 @@ public class FiseConstants {
 	public final static int POSICION_DESPLAZ_PERSONAL = 123;
 	public final static int POSICION_ACTIVID_EXTRAORD = 141;
 	public final static int POSICION_TOTAL_RECONOCER = 159;
+	
+	//parametros
+	public final static String PARAM_DESC_EMPRESA_F12A = "DESC_EMPRESA";
+	public final static String PARAM_ANO_PRES_F12A = "ANO_PRESENTACION";
+	public final static String PARAM_DESC_MES_PRES_F12A = "DESC_MES_PRESENTACION";
+	public final static String PARAM_ANO_EJEC_F12A = "ANO_EJECUCION";
+	public final static String PARAM_DESC_MES_EJEC_F12A = "DESC_MES_PRESENTACION";
+	public final static String PARAM_NRO_EMPAD_R_F12A = "NRO_EMPAD_R";
+	public final static String PARAM_CU_EMPAD_R_F12A = "COSTO_UNIT_EMPAD_R";
+	public final static String PARAM_CT_EMPAD_R_F12A = "COSTO_TOTAL_EMPAD_R";
+	public final static String PARAM_NRO_AGENT_R_F12A = "NRO_AGENT_R";
+	public final static String PARAM_CU_AGENT_R_F12A = "COSTO_UNIT_AGENT_R";
+	public final static String PARAM_CT_AGENT_R_F12A = "COSTO_TOTAL_AGENT_R";
+	public final static String PARAM_DESPL_PERS_R_F12A = "DESPL_PERSONAL_R";
+	public final static String PARAM_ACTIV_EXTR_R_F12A = "ACTIV_EXTRAORD_R";
+	public final static String PARAM_NRO_EMPAD_P_F12A = "NRO_EMPAD_P";
+	public final static String PARAM_CU_EMPAD_P_F12A = "COSTO_UNIT_EMPAD_P";
+	public final static String PARAM_CT_EMPAD_P_F12A = "COSTO_TOTAL_EMPAD_P";
+	public final static String PARAM_NRO_AGENT_P_F12A = "NRO_AGENT_P";
+	public final static String PARAM_CU_AGENT_P_F12A = "COSTO_UNIT_AGENT_P";
+	public final static String PARAM_CT_AGENT_P_F12A = "COSTO_TOTAL_AGENT_P";
+	public final static String PARAM_DESPL_PERS_P_F12A = "DESPL_PERSONAL_P";
+	public final static String PARAM_ACTIV_EXTR_P_F12A = "ACTIV_EXTRAORD_P";
+	public final static String PARAM_NRO_EMPAD_L_F12A = "NRO_EMPAD_L";
+	public final static String PARAM_CU_EMPAD_L_F12A = "COSTO_UNIT_EMPAD_L";
+	public final static String PARAM_CT_EMPAD_L_F12A = "COSTO_TOTAL_EMPAD_L";
+	public final static String PARAM_NRO_AGENT_L_F12A = "NRO_AGENT_L";
+	public final static String PARAM_CU_AGENT_L_F12A = "COSTO_UNIT_AGENT_L";
+	public final static String PARAM_CT_AGENT_L_F12A = "COSTO_TOTAL_AGENT_L";
+	public final static String PARAM_DESPL_PERS_L_F12A = "DESPL_PERSONAL_L";
+	public final static String PARAM_ACTIV_EXTR_L_F12A = "ACTIV_EXTRAORD_L";
+	
+	public final static String PARAM_TOTAL_EMPAD_F12A = "TOTAL_EMPAD";
+	public final static String PARAM_TOTAL_AGENT_F12A = "TOTAL_AGENT";
+	public final static String PARAM_TOTAL_DESPLAZ_F12A = "TOTAL_DESPL_PERSONAL";
+	public final static String PARAM_TOTAL_ACTIV_F12A = "TOTAL_ACTIV_EXTRAORD";
+	public final static String PARAM_TOTAL_GENERAL_F12A = "TOTAL_GENERAL";
+	
 	//FORMATO 14 A
 	
 

@@ -16,6 +16,7 @@ import gob.osinergmin.fise.util.FechaUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -492,6 +493,138 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			formato.setFiseFormato12ADs(formato12ADDao.listarFormato12ADByFormato12AC(formato));
 		}
 		return lista;
+	}
+	
+	@Override
+	public Formato12ACBean estructurarFormato12ABeanByFiseFormato12AC(FiseFormato12AC formato){
+		
+		Formato12ACBean formato12ABean = new Formato12ACBean();
+		
+		//setamos los valores en el bean
+		//formato12ABean.setDescEmpresa(mapaEmpresa.get(formato.getId().getCodEmpresa()));
+		formato12ABean.setAnioPresent(formato.getId().getAnoPresentacion());
+		//formato12ABean.setDescMesPresentacion(listaMes.get(formato.getId().getMesPresentacion()));
+		formato12ABean.setAnioEjecuc(formato.getId().getAnoEjecucionGasto());
+		//formato12ABean.setDescMesEjecucion(listaMes.get(formato.getId().getMesEjecucionGasto()));
+    	//
+		BigDecimal totalEmpadronamiento = new BigDecimal(0);
+		BigDecimal totalAgentes = new BigDecimal(0);
+		BigDecimal totalDesplazamiento = new BigDecimal(0);
+		BigDecimal totalActividades = new BigDecimal(0);
+		
+    	for (FiseFormato12AD detalle : formato.getFiseFormato12ADs()) {
+			if( FiseConstants.ZONABENEF_RURAL == detalle.getId().getIdZonaBenef() ){
+				formato12ABean.setNroEmpadR(detalle.getNumeroEmpadronados());
+				formato12ABean.setCostoUnitEmpadR(detalle.getCostoEstandarUnitarioEmpad());
+				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
+				formato12ABean.setCostoTotalEmpadR(costoTotalEmpad);
+			
+				formato12ABean.setNroAgentR(detalle.getNumeroAgentesAutorizGlp());
+				formato12ABean.setCostoUnitEmpadR(detalle.getCostoEstandarUnitAgAutGlp());
+				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
+				formato12ABean.setCostoTotalAgentR(costoTotalAgent);
+				
+				formato12ABean.setDesplPersonalR(detalle.getTotalDesplazamientoPersonal());
+				formato12ABean.setActivExtraordR(detalle.getTotalActividadesExtraord());
+				//
+				totalEmpadronamiento = totalEmpadronamiento.add(formato12ABean.getCostoTotalEmpadR());
+				totalAgentes = totalAgentes.add(formato12ABean.getCostoTotalAgentR());
+				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalR());
+				totalActividades = totalActividades.add(formato12ABean.getActivExtraordR());
+			}else if( FiseConstants.ZONABENEF_PROVINCIA == detalle.getId().getIdZonaBenef() ){
+				formato12ABean.setNroEmpadP(detalle.getNumeroEmpadronados());
+				formato12ABean.setCostoUnitEmpadP(detalle.getCostoEstandarUnitarioEmpad());
+				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
+				formato12ABean.setCostoTotalEmpadP(costoTotalEmpad);
+			
+				formato12ABean.setNroAgentP(detalle.getNumeroAgentesAutorizGlp());
+				formato12ABean.setCostoUnitEmpadP(detalle.getCostoEstandarUnitAgAutGlp());
+				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
+				formato12ABean.setCostoTotalAgentP(costoTotalAgent);
+				
+				formato12ABean.setDesplPersonalP(detalle.getTotalDesplazamientoPersonal());
+				formato12ABean.setActivExtraordP(detalle.getTotalActividadesExtraord());
+				//
+				totalEmpadronamiento = totalEmpadronamiento.add(formato12ABean.getCostoTotalEmpadP());
+				totalAgentes = totalAgentes.add(formato12ABean.getCostoTotalAgentP());
+				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalP());
+				totalActividades = totalActividades.add(formato12ABean.getActivExtraordP());
+			}else if( FiseConstants.ZONABENEF_LIMA == detalle.getId().getIdZonaBenef() ){
+				formato12ABean.setNroEmpadR(detalle.getNumeroEmpadronados());
+				formato12ABean.setCostoUnitEmpadL(detalle.getCostoEstandarUnitarioEmpad());
+				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
+				formato12ABean.setCostoTotalEmpadL(costoTotalEmpad);
+			
+				formato12ABean.setNroAgentL(detalle.getNumeroAgentesAutorizGlp());
+				formato12ABean.setCostoUnitEmpadL(detalle.getCostoEstandarUnitAgAutGlp());
+				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
+				formato12ABean.setCostoTotalAgentL(costoTotalAgent);
+				
+				formato12ABean.setDesplPersonalL(detalle.getTotalDesplazamientoPersonal());
+				formato12ABean.setActivExtraordL(detalle.getTotalActividadesExtraord());
+				//
+				totalEmpadronamiento = totalEmpadronamiento.add(formato12ABean.getCostoTotalEmpadL());
+				totalAgentes = totalAgentes.add(formato12ABean.getCostoTotalAgentL());
+				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalL());
+				totalActividades = totalActividades.add(formato12ABean.getActivExtraordL());
+			}
+		}
+    	formato12ABean.setTotalCostoTotalEmpad(totalEmpadronamiento);
+    	formato12ABean.setTotalCostoTotalAgent(totalAgentes);
+    	formato12ABean.setTotalDesplPersonal(totalDesplazamiento);
+    	formato12ABean.setTotalActivExtraord(totalActividades);
+    	//
+    	formato12ABean.setTotalGeneral(formato.getTotalAReconocer());
+		
+		return formato12ABean;
+	}
+	
+	@Override
+	public HashMap<String, Object> mapearParametrosFormato12A(Formato12ACBean formato12ABean){
+		
+		HashMap<String, Object> mapJRParams = new HashMap<String, Object>();
+		
+		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA_F12A, formato12ABean.getDescEmpresa());
+		mapJRParams.put(FiseConstants.PARAM_ANO_PRES_F12A, formato12ABean.getAnioPresent());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRES_F12A, formato12ABean.getDescMesPresentacion());
+		mapJRParams.put(FiseConstants.PARAM_ANO_EJEC_F12A, formato12ABean.getAnioEjecuc());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJEC_F12A, formato12ABean.getDescMesEjecucion());
+		//
+		mapJRParams.put(FiseConstants.PARAM_NRO_EMPAD_R_F12A, formato12ABean.getNroEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_CU_EMPAD_R_F12A, formato12ABean.getCostoUnitEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_CT_EMPAD_R_F12A, formato12ABean.getCostoTotalEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_NRO_AGENT_R_F12A, formato12ABean.getNroAgentR());
+		mapJRParams.put(FiseConstants.PARAM_CU_AGENT_R_F12A, formato12ABean.getCostoUnitAgentR());
+		mapJRParams.put(FiseConstants.PARAM_CT_AGENT_R_F12A, formato12ABean.getCostoTotalAgentR());
+		mapJRParams.put(FiseConstants.PARAM_DESPL_PERS_R_F12A, formato12ABean.getDesplPersonalR());
+		mapJRParams.put(FiseConstants.PARAM_ACTIV_EXTR_R_F12A, formato12ABean.getActivExtraordR());
+		//
+		mapJRParams.put(FiseConstants.PARAM_NRO_EMPAD_P_F12A, formato12ABean.getNroEmpadP());
+		mapJRParams.put(FiseConstants.PARAM_CU_EMPAD_P_F12A, formato12ABean.getCostoUnitEmpadP());
+		mapJRParams.put(FiseConstants.PARAM_CT_EMPAD_P_F12A, formato12ABean.getCostoTotalEmpadP());
+		mapJRParams.put(FiseConstants.PARAM_NRO_AGENT_P_F12A, formato12ABean.getNroAgentP());
+		mapJRParams.put(FiseConstants.PARAM_CU_AGENT_P_F12A, formato12ABean.getCostoUnitAgentP());
+		mapJRParams.put(FiseConstants.PARAM_CT_AGENT_P_F12A, formato12ABean.getCostoTotalAgentP());
+		mapJRParams.put(FiseConstants.PARAM_DESPL_PERS_P_F12A, formato12ABean.getDesplPersonalP());
+		mapJRParams.put(FiseConstants.PARAM_ACTIV_EXTR_P_F12A, formato12ABean.getActivExtraordP());
+		//
+		mapJRParams.put(FiseConstants.PARAM_NRO_EMPAD_L_F12A, formato12ABean.getNroEmpadL());
+		mapJRParams.put(FiseConstants.PARAM_CU_EMPAD_L_F12A, formato12ABean.getCostoUnitEmpadL());
+		mapJRParams.put(FiseConstants.PARAM_CT_EMPAD_L_F12A, formato12ABean.getCostoTotalEmpadL());
+		mapJRParams.put(FiseConstants.PARAM_NRO_AGENT_L_F12A, formato12ABean.getNroAgentL());
+		mapJRParams.put(FiseConstants.PARAM_CU_AGENT_L_F12A, formato12ABean.getCostoUnitAgentL());
+		mapJRParams.put(FiseConstants.PARAM_CT_AGENT_L_F12A, formato12ABean.getCostoTotalAgentL());
+		mapJRParams.put(FiseConstants.PARAM_DESPL_PERS_L_F12A, formato12ABean.getDesplPersonalL());
+		mapJRParams.put(FiseConstants.PARAM_ACTIV_EXTR_L_F12A, formato12ABean.getActivExtraordL());
+		//
+		mapJRParams.put(FiseConstants.PARAM_TOTAL_EMPAD_F12A,formato12ABean.getTotalCostoTotalEmpad());
+		mapJRParams.put(FiseConstants.PARAM_TOTAL_AGENT_F12A, formato12ABean.getTotalCostoTotalAgent());
+		mapJRParams.put(FiseConstants.PARAM_TOTAL_DESPLAZ_F12A, formato12ABean.getTotalDesplPersonal());
+		mapJRParams.put(FiseConstants.PARAM_TOTAL_ACTIV_F12A, formato12ABean.getTotalActivExtraord());
+		//
+		mapJRParams.put(FiseConstants.PARAM_TOTAL_GENERAL_F12A, formato12ABean.getTotalGeneral());
+		
+		return mapJRParams;
 	}
 
 }

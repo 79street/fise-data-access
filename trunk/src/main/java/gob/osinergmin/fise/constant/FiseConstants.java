@@ -7,6 +7,7 @@ public class FiseConstants {
 	public final static String KEY_CFG_EXCEL_EXPORT = "CFG_XLS_EXPORT";
 	public final static String BLANCO ="";
 	public final static String SALTO_LINEA = "\n";
+	public final static String UNDERLINE = "_";
 	
 	public final static String ETAPA_SOLICITUD= "SOLICITUD";
 	public final static String ETAPA_LEVOBS= "LEV.OBS";
@@ -105,7 +106,7 @@ public class FiseConstants {
 	public final static String PARAM_ANO_PRES_F12A = "ANO_PRESENTACION";
 	public final static String PARAM_DESC_MES_PRES_F12A = "DESC_MES_PRESENTACION";
 	public final static String PARAM_ANO_EJEC_F12A = "ANO_EJECUCION";
-	public final static String PARAM_DESC_MES_EJEC_F12A = "DESC_MES_PRESENTACION";
+	public final static String PARAM_DESC_MES_EJEC_F12A = "DESC_MES_EJECUCION";
 	public final static String PARAM_NRO_EMPAD_R_F12A = "NRO_EMPAD_R";
 	public final static String PARAM_CU_EMPAD_R_F12A = "COSTO_UNIT_EMPAD_R";
 	public final static String PARAM_CT_EMPAD_R_F12A = "COSTO_TOTAL_EMPAD_R";

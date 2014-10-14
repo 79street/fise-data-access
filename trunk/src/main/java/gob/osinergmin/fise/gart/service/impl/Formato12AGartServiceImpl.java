@@ -266,6 +266,12 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setTerminalCreacion(formulario.getTerminal());
 			fiseFormato12AC.setFechaCreacion(hoy);
 			
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
+			}
+			
 			logger.info("aca se va  a guardar"+fiseFormato12AC);
 			//fiseFormato12AC = (FiseFormato12AC) TrimUtil.trimReflective(fiseFormato12AC);
 			
@@ -449,6 +455,12 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setTerminalActualizacion(formulario.getTerminal());
 			fiseFormato12AC.setFechaActualizacion(hoy);
 		
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
+			}
+			
 			formato12ACDao.modificarFormato12AC(fiseFormato12AC);
 			//add
 			for (FiseFormato12AD detalle : lista) {
@@ -520,7 +532,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				formato12ABean.setCostoTotalEmpadR(costoTotalEmpad);
 			
 				formato12ABean.setNroAgentR(detalle.getNumeroAgentesAutorizGlp());
-				formato12ABean.setCostoUnitEmpadR(detalle.getCostoEstandarUnitAgAutGlp());
+				formato12ABean.setCostoUnitAgentR(detalle.getCostoEstandarUnitAgAutGlp());
 				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
 				formato12ABean.setCostoTotalAgentR(costoTotalAgent);
 				
@@ -538,7 +550,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				formato12ABean.setCostoTotalEmpadP(costoTotalEmpad);
 			
 				formato12ABean.setNroAgentP(detalle.getNumeroAgentesAutorizGlp());
-				formato12ABean.setCostoUnitEmpadP(detalle.getCostoEstandarUnitAgAutGlp());
+				formato12ABean.setCostoUnitAgentP(detalle.getCostoEstandarUnitAgAutGlp());
 				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
 				formato12ABean.setCostoTotalAgentP(costoTotalAgent);
 				
@@ -550,13 +562,13 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalP());
 				totalActividades = totalActividades.add(formato12ABean.getActivExtraordP());
 			}else if( FiseConstants.ZONABENEF_LIMA == detalle.getId().getIdZonaBenef() ){
-				formato12ABean.setNroEmpadR(detalle.getNumeroEmpadronados());
+				formato12ABean.setNroEmpadL(detalle.getNumeroEmpadronados());
 				formato12ABean.setCostoUnitEmpadL(detalle.getCostoEstandarUnitarioEmpad());
 				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
 				formato12ABean.setCostoTotalEmpadL(costoTotalEmpad);
 			
 				formato12ABean.setNroAgentL(detalle.getNumeroAgentesAutorizGlp());
-				formato12ABean.setCostoUnitEmpadL(detalle.getCostoEstandarUnitAgAutGlp());
+				formato12ABean.setCostoUnitAgentL(detalle.getCostoEstandarUnitAgAutGlp());
 				BigDecimal costoTotalAgent = detalle.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalle.getNumeroAgentesAutorizGlp()));
 				formato12ABean.setCostoTotalAgentL(costoTotalAgent);
 				
@@ -625,6 +637,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		mapJRParams.put(FiseConstants.PARAM_TOTAL_GENERAL_F12A, formato12ABean.getTotalGeneral());
 		
 		return mapJRParams;
+	}
+	
+	@Override
+	public int obtenerSecuencia() {
+		return formato12ACDao.obtenerSecuencia();
 	}
 
 }

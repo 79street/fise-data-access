@@ -18,5 +18,6 @@ public interface Formato12AGartService {
 	List<FiseFormato12AC> buscarFormato12AC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa);
 	Formato12ACBean estructurarFormato12ABeanByFiseFormato12AC(FiseFormato12AC formato);
 	HashMap<String, Object> mapearParametrosFormato12A(Formato12ACBean formato12ABean);
+	int obtenerSecuencia();
 	
 }

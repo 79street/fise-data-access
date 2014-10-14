@@ -6,6 +6,7 @@ import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.gart.dao.Formato12ACGartDao;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -156,6 +157,21 @@ public class Formato12ACGartDaoImpl extends GenericDaoImpl implements Formato12A
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	@Override
+	public int obtenerSecuencia(){
+		int i=0;
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_CORR_ARCH_FUN FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			BigDecimal secuencia = (BigDecimal)query.getSingleResult();
+			i = secuencia.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
 	
 }

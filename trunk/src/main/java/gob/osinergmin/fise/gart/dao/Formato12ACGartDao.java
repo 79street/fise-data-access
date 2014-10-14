@@ -15,5 +15,6 @@ public interface Formato12ACGartDao extends GenericDao {
 	void eliminarFormato12AC(FiseFormato12AC fiseFormato12AC);
 	boolean existeFormato12AC(FiseFormato12AC fiseFormato12AC);
 	List<FiseFormato12AC> buscarFormato12AC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa);
-
+	int obtenerSecuencia();
+	
 }

@@ -55,6 +55,7 @@ public class Formato12ACBean implements Serializable {
 	private String usuario;
 	private String terminal;
 	private String nombreArchivo;
+	private String tipoArchivo;
 	
 	private String descEmpresa;
 	private String descMesPresentacion;
@@ -401,6 +402,14 @@ public class Formato12ACBean implements Serializable {
 
 	public void setDescMesEjecucion(String descMesEjecucion) {
 		this.descMesEjecucion = descMesEjecucion;
+	}
+
+	public String getTipoArchivo() {
+		return tipoArchivo;
+	}
+
+	public void setTipoArchivo(String tipoArchivo) {
+		this.tipoArchivo = tipoArchivo;
 	}
 
 }

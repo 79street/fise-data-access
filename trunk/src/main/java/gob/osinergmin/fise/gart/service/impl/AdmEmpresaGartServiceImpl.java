@@ -1,7 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.dao.AdmEmpresaDao;
 import gob.osinergmin.fise.domain.AdmEmpresa;
-import gob.osinergmin.fise.gart.dao.AdmEmpresaGartDao;
 import gob.osinergmin.fise.gart.service.AdmEmpresaGartService;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class AdmEmpresaGartServiceImpl implements AdmEmpresaGartService {
 	
 	@Autowired
 	@Qualifier("admEmpresaDaoImpl")
-	private AdmEmpresaGartDao admEmpresaDao;
+	private AdmEmpresaDao admEmpresaDao;
 	
 	@Override
 	public List<AdmEmpresa> listarAdmEmpresa() {

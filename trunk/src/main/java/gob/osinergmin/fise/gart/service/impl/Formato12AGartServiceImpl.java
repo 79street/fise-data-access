@@ -38,11 +38,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	private Formato12ACDao formato12ACDao;
 	
 	@Autowired
-	@Qualifier("formato12ADGartDaoImpl")
+	@Qualifier("formato12ADDaoImpl")
 	private Formato12ADDao formato12ADDao;
 	
 	@Autowired
-	@Qualifier("fiseZonaBenefGartDaoImpl")
+	@Qualifier("fiseZonaBenefDaoImpl")
 	private FiseZonaBenefDao zonaBenefDao;
 	
 	//@Override

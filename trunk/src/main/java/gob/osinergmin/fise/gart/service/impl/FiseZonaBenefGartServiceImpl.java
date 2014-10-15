@@ -1,7 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
-import gob.osinergmin.fise.gart.dao.FiseZonaBenefGartDao;
 import gob.osinergmin.fise.gart.service.FiseZonaBenefGartService;
 
 import java.util.List;
@@ -14,17 +14,17 @@ import org.springframework.stereotype.Service;
 public class FiseZonaBenefGartServiceImpl implements FiseZonaBenefGartService {
 	
 	@Autowired
-	@Qualifier("fiseZonaBenefGartDaoImpl")
-	private FiseZonaBenefGartDao fiseZonaBenefGartDao;
+	@Qualifier("fiseZonaBenefDaoImpl")
+	private FiseZonaBenefDao fiseZonaBenefDao;
 	
 	@Override
 	public List<FiseZonaBenef> listarFiseZonaBenef() {
-		return fiseZonaBenefGartDao.listarFiseZonaBenef();
+		return fiseZonaBenefDao.listarFiseZonaBenef();
 	}
 	
 	@Override
 	public FiseZonaBenef obtenerFiseZonaBenefByPK(long id) {
-		return fiseZonaBenefGartDao.obtenerFiseZonaBenefByPK(id);
+		return fiseZonaBenefDao.obtenerFiseZonaBenefByPK(id);
 	}
 
 }

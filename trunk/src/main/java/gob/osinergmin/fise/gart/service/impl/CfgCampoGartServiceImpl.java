@@ -1,8 +1,8 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.dao.CfgCampoDao;
 import gob.osinergmin.fise.domain.CfgCampo;
 import gob.osinergmin.fise.domain.CfgTabla;
-import gob.osinergmin.fise.gart.dao.CfgCampoGartDao;
 import gob.osinergmin.fise.gart.service.CfgCampoGartService;
 
 import java.util.List;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class CfgCampoGartServiceImpl implements CfgCampoGartService {
 
 	@Autowired
-	@Qualifier("cfgCampoGartDaoImpl")
-	private CfgCampoGartDao cfgCampoGartDao;
+	@Qualifier("cfgCampoDaoImpl")
+	private CfgCampoDao cfgCampoDao;
 	
 	@Override
 	public List<CfgCampo> listarCamposByTabla(CfgTabla cfgTabla) {
-		return cfgCampoGartDao.listarCamposByTabla(cfgTabla);
+		return cfgCampoDao.listarCamposByTabla(cfgTabla);
 	}
 	
 	@Override

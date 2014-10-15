@@ -2,14 +2,14 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato12ACBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.FiseZonaBenefDao;
+import gob.osinergmin.fise.dao.Formato12ACDao;
+import gob.osinergmin.fise.dao.Formato12ADDao;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.domain.FiseFormato12ADPK;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
-import gob.osinergmin.fise.gart.dao.FiseZonaBenefGartDao;
-import gob.osinergmin.fise.gart.dao.Formato12ACGartDao;
-import gob.osinergmin.fise.gart.dao.Formato12ADGartDao;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
@@ -34,16 +34,16 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	Logger logger=Logger.getLogger(Formato12AGartServiceImpl.class);
 	
 	@Autowired
-	@Qualifier("formato12ACGartDaoImpl")
-	private Formato12ACGartDao formato12ACDao;
+	@Qualifier("formato12ACDaoImpl")
+	private Formato12ACDao formato12ACDao;
 	
 	@Autowired
 	@Qualifier("formato12ADGartDaoImpl")
-	private Formato12ADGartDao formato12ADDao;
+	private Formato12ADDao formato12ADDao;
 	
 	@Autowired
 	@Qualifier("fiseZonaBenefGartDaoImpl")
-	private FiseZonaBenefGartDao zonaBenefDao;
+	private FiseZonaBenefDao zonaBenefDao;
 	
 	//@Override
 	public List<FiseFormato12AC> listarFormato12AC() {

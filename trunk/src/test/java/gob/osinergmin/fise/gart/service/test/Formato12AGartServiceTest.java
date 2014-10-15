@@ -1,8 +1,7 @@
 package gob.osinergmin.fise.gart.service.test;
-import gob.osinergmin.fise.bean.Formato12ACBean;
 import gob.osinergmin.fise.domain.AdmEmpresa;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
-import gob.osinergmin.fise.domain.FiseFormato12ACPK;
+import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.gart.service.AdmEmpresaGartService;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 
@@ -28,10 +27,10 @@ public class Formato12AGartServiceTest {
 		// Método con el test unitario, identificado con la anotación @Test.
 		@org.junit.Test
 		public void testGetSHA1(){
-			//List<FiseFormato12AC> lista = formatoService.listarFormato12AC();
-			//System.out.println("sdsdsd"+lista);
+			List<FiseFormato12AC> lista = formatoService.listarFormato12AC();
+			System.out.println("sdsdsd"+lista);
 			//List<FiseFormato12AD> lista2 = formatoService.;
-			int i=0;
+			/*int i=0;
 			i = formatoService.obtenerSecuencia();
 			System.out.println(i);
 			
@@ -45,7 +44,7 @@ public class Formato12AGartServiceTest {
 			pk.setEtapa("SOLICITUD");
 			fo = formatoService.obtenerFormato12ACByPK(pk);
 			Formato12ACBean bean = formatoService.estructurarFormato12ABeanByFiseFormato12AC(fo);
-			System.out.println(bean);
+			System.out.println(bean);*/
 			
 			
 		}

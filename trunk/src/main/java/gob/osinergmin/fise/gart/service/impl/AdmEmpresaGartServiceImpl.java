@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 public class AdmEmpresaGartServiceImpl implements AdmEmpresaGartService {
 	
 	@Autowired
-	@Qualifier("admEmpresaGartDaoImpl")
-	private AdmEmpresaGartDao admEmpresaGartDao;
+	@Qualifier("admEmpresaDaoImpl")
+	private AdmEmpresaGartDao admEmpresaDao;
 	
 	@Override
 	public List<AdmEmpresa> listarAdmEmpresa() {
-		return admEmpresaGartDao.listarAdmEmpresa();
+		return admEmpresaDao.listarAdmEmpresa();
 	}
 	
 	public List<AdmEmpresa> getEmpresaFise(String codProceso, String codFuncion,String cadenaEmpresas){
-		return admEmpresaGartDao.getEmpresaFise( codProceso,  codFuncion, cadenaEmpresas);
+		return admEmpresaDao.getEmpresaFise( codProceso,  codFuncion, cadenaEmpresas);
 	}
 
 }

@@ -2,7 +2,11 @@ package gob.osinergmin.fise.gart.service.test;
 import gob.osinergmin.fise.domain.AdmEmpresa;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
+import gob.osinergmin.fise.domain.FiseObservacion;
+import gob.osinergmin.fise.domain.FisePeriodoEnvio;
 import gob.osinergmin.fise.gart.service.AdmEmpresaGartService;
+import gob.osinergmin.fise.gart.service.FiseObservacionGartService;
+import gob.osinergmin.fise.gart.service.FisePeriodoEnvioGartService;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 
 import java.util.List;
@@ -21,10 +25,13 @@ public class Formato12AGartServiceTest {
 	
 		@Autowired
 		private Formato12AGartService formatoService;
-
 		@Autowired
 		private AdmEmpresaGartService empresaService;
-		// Método con el test unitario, identificado con la anotación @Test.
+		@Autowired
+		private FiseObservacionGartService observacionService;
+		@Autowired
+		private FisePeriodoEnvioGartService periodoService;
+		
 		@org.junit.Test
 		public void testGetSHA1(){
 			List<FiseFormato12AC> lista = formatoService.listarFormato12AC();
@@ -59,6 +66,18 @@ public class Formato12AGartServiceTest {
 					System.out.println("VALOR:"+admEmpresa.getCodEmpresa()+" / "+admEmpresa.getDscEmpresa());
 				}
 			}
+		}
+		
+		@org.junit.Test
+		public void testFiseObservacion(){
+			List<FiseObservacion> lista = observacionService.listarFiseObservacion();
+			System.out.println("otrooo"+lista);
+		}
+		
+		@org.junit.Test
+		public void testFisePeriodo(){
+			List<FisePeriodoEnvio> lista = periodoService.listarFisePeriodoEnvioMesAnioEtapa("ADIL", "F12A");
+			System.out.println("otrooo"+lista);
 		}
 
 }

@@ -62,11 +62,20 @@ public abstract class FechaUtil {
 		return new Date();
 	}
 	
+	public static String fechaHoyYYYYMMDD(){
+    	StringBuilder sb = new StringBuilder();
+    	Calendar c = Calendar.getInstance();
+    	sb.append(c.get(Calendar.YEAR));
+    	sb.append(c.get(Calendar.MONTH)<9?"0"+(c.get(Calendar.MONTH)+1):c.get(Calendar.MONTH)+1);
+    	sb.append(c.get(Calendar.DAY_OF_MONTH)<10?"0"+c.get(Calendar.DAY_OF_MONTH):c.get(Calendar.DAY_OF_MONTH));
+    	return sb.toString();
+	}
+	
 	public static void main(String[] args) {
-		//System.out.println(horaActualHHMMSS());
+		System.out.println(fechaHoyYYYYMMDD());
 		
-		System.out.println( Calendar.getInstance() );
-		System.out.println( cargarMapaMeses());
+		//System.out.println( Calendar.getInstance() );
+		//System.out.println( cargarMapaMeses());
 		
 	}
 	

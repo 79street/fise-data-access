@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -87,6 +88,12 @@ public class FisePeriodoEnvio implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
+	//valores de combo
+	@Transient
+	private String codigoItem;
+	@Transient
+	private String descripcionItem;
+	
 	public FisePeriodoEnvio() {
 	}
 
@@ -264,6 +271,22 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setUsuarioCreacion(String usuarioCreacion) {
 		this.usuarioCreacion = usuarioCreacion;
+	}
+
+	public String getCodigoItem() {
+		return codigoItem;
+	}
+
+	public void setCodigoItem(String codigoItem) {
+		this.codigoItem = codigoItem;
+	}
+
+	public String getDescripcionItem() {
+		return descripcionItem;
+	}
+
+	public void setDescripcionItem(String descripcionItem) {
+		this.descripcionItem = descripcionItem;
 	}
 
 }

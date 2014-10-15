@@ -60,6 +60,12 @@ public class FiseConstants {
 	public final static String COD_ERROR_F12_270 = "270";
 	public final static String COD_ERROR_F12_280 = "280";
 	public final static String COD_ERROR_F12_290 = "290";
+	public final static String COD_ERROR_F12_300 = "300";
+	public final static String COD_ERROR_F12_310 = "310";
+	public final static String COD_ERROR_F12_320 = "320";
+	public final static String COD_ERROR_F12_330 = "330";
+	public final static String COD_ERROR_F12_340 = "340";
+	public final static String COD_ERROR_F12_350 = "350";
 	//TXT
 	
 	public final static String TIPO_FORMATO_12 = "F12";

@@ -1,7 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.dao.Formato14ADDao;
 import gob.osinergmin.fise.domain.FiseFormato14AD;
-import gob.osinergmin.fise.gart.dao.Formato14ADGartDao;
 import gob.osinergmin.fise.gart.service.Formato14AGartService;
 
 import org.apache.log4j.Logger;
@@ -15,8 +15,8 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 	Logger logger=Logger.getLogger(Formato14AGartServiceImpl.class);
 	
 	@Autowired
-	@Qualifier("formato14ADGartDaoImpl")
-	private Formato14ADGartDao formato14ADDao;
+	@Qualifier("formato14ADDaoImpl")
+	private Formato14ADDao formato14ADDao;
 	
 	@Override
 	public FiseFormato14AD obtenerFormato14ADVigente(String codEmpresa, long anioVigencia, long idZonaBenef){

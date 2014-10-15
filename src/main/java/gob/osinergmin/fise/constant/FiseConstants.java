@@ -9,6 +9,11 @@ public class FiseConstants {
 	public final static String SALTO_LINEA = "\n";
 	public final static String UNDERLINE = "_";
 	
+	public final static String ITEM_SELECCIONE_VALUE = "";
+	public final static String ITEM_SELECCIONE_DESCRIPCION = "-Selecccione-";
+	public final static String ITEM_TODOS_VALUE = "";
+	public final static String ITEM_TODOS_DESCRIPCION = "-Todos-";
+	
 	public final static String ETAPA_SOLICITUD= "SOLICITUD";
 	public final static String ETAPA_LEVOBS= "LEV.OBS";
 	public final static String ETAPA_RECONSIDERACION= "RECONSIDERACION";
@@ -25,6 +30,37 @@ public class FiseConstants {
 	
 	public final static long ID_TABLA_FORMATO12A = 100;
 	//-public final static String ID_TABLA_FORMATO12A = "100";
+	//EXCEL
+	public final static String COD_ERROR_F12_10 = "10";
+	public final static String COD_ERROR_F12_20 = "20";
+	public final static String COD_ERROR_F12_30 = "30";
+	public final static String COD_ERROR_F12_40 = "40";
+	public final static String COD_ERROR_F12_50 = "50";
+	public final static String COD_ERROR_F12_60 = "60";
+	public final static String COD_ERROR_F12_70 = "70";
+	public final static String COD_ERROR_F12_80 = "80";
+	public final static String COD_ERROR_F12_90 = "90";
+	public final static String COD_ERROR_F12_100 = "100";
+	public final static String COD_ERROR_F12_110 = "110";
+	public final static String COD_ERROR_F12_120 = "120";
+	public final static String COD_ERROR_F12_130 = "130";
+	public final static String COD_ERROR_F12_140 = "140";
+	public final static String COD_ERROR_F12_150 = "150";
+	public final static String COD_ERROR_F12_160 = "160";
+	public final static String COD_ERROR_F12_170 = "170";
+	public final static String COD_ERROR_F12_180 = "180";
+	public final static String COD_ERROR_F12_190 = "190";
+	public final static String COD_ERROR_F12_200 = "200";
+	public final static String COD_ERROR_F12_210 = "210";
+	public final static String COD_ERROR_F12_220 = "220";
+	public final static String COD_ERROR_F12_230 = "230";
+	public final static String COD_ERROR_F12_240 = "240";
+	public final static String COD_ERROR_F12_250 = "250";
+	public final static String COD_ERROR_F12_260 = "260";
+	public final static String COD_ERROR_F12_270 = "270";
+	public final static String COD_ERROR_F12_280 = "280";
+	public final static String COD_ERROR_F12_290 = "290";
+	//TXT
 	
 	public final static String TIPO_FORMATO_12 = "F12";
 	public final static String TIPO_FORMATO_13 = "F13";

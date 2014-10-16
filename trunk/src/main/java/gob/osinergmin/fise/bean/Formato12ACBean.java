@@ -60,6 +60,8 @@ public class Formato12ACBean implements Serializable {
 	private String descEmpresa;
 	private String descMesPresentacion;
 	private String descMesEjecucion;
+	
+	private String etapa;
 
 	public Formato12ACBean(){
 		
@@ -410,6 +412,14 @@ public class Formato12ACBean implements Serializable {
 
 	public void setTipoArchivo(String tipoArchivo) {
 		this.tipoArchivo = tipoArchivo;
+	}
+
+	public String getEtapa() {
+		return etapa;
+	}
+
+	public void setEtapa(String etapa) {
+		this.etapa = etapa;
 	}
 
 }

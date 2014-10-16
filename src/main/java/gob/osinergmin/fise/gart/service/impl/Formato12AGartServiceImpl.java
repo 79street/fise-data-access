@@ -79,6 +79,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			id.setAnoEjecucionGasto(formulario.getAnioEjecuc());
 			id.setMesEjecucionGasto(formulario.getMesEjecuc());
 			id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
+			}else{
+				id.setEtapa(formulario.getEtapa());
+			}
+			
 			fiseFormato12AC.setId(id);
 			
 		//total de las 3 detalles segun sea el caso
@@ -266,11 +274,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setTerminalCreacion(formulario.getTerminal());
 			fiseFormato12AC.setFechaCreacion(hoy);
 			
-			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
-				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
-			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
-				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
-			}
+			
 			
 			logger.info("aca se va  a guardar"+fiseFormato12AC);
 			//fiseFormato12AC = (FiseFormato12AC) TrimUtil.trimReflective(fiseFormato12AC);

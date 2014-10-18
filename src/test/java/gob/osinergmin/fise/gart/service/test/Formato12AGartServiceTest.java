@@ -78,6 +78,7 @@ public class Formato12AGartServiceTest {
 		public void testFisePeriodo(){
 			List<FisePeriodoEnvio> lista = periodoService.listarFisePeriodoEnvioMesAnioEtapa("ADIL", "F12A");
 			System.out.println("otrooo"+lista);
+			System.out.println(123);
 		}
 
 }

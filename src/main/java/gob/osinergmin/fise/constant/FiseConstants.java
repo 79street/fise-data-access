@@ -30,6 +30,9 @@ public class FiseConstants {
 	public final static String COD_GET= "GET";
 	public final static String COD_DELETE= "DELETE";
 	
+	public final static String FORMATO_EXPORT_PDF = "0";
+	public final static String FORMATO_EXPORT_XLS = "1";
+	
 	public final static long ID_TABLA_FORMATO12A = 100;
 	//-public final static String ID_TABLA_FORMATO12A = "100";
 	//EXCEL

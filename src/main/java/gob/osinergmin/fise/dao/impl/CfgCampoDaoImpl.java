@@ -32,7 +32,9 @@ public class CfgCampoDaoImpl extends GenericDaoImpl implements CfgCampoDao {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lista;
 	}
 

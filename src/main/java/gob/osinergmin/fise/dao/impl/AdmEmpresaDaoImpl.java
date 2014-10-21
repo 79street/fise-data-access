@@ -28,7 +28,9 @@ public class AdmEmpresaDaoImpl extends GenericDaoImpl implements AdmEmpresaDao {
 			lst = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lst;
 	}
 	
@@ -68,7 +70,9 @@ public List<AdmEmpresa> getEmpresaFise(String codProceso, String codFuncion,Stri
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 
 		return lst;
 	}

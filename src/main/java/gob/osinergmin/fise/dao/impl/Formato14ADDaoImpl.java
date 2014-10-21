@@ -27,7 +27,9 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 			//return formato;
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return formato;
 	}
 	
@@ -85,7 +87,9 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lista;
 	}
 	
@@ -127,7 +131,9 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return objeto;
 	}
 

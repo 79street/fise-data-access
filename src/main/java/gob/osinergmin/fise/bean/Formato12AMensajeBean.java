@@ -14,6 +14,7 @@ public class Formato12AMensajeBean implements Serializable {
 	
 	private FiseFormato12AC fiseFormato12AC;
 	private String mensajeInformacion;
+	private String mensajeError;
 	private List<MensajeErrorBean> listaMensajeError;
 	
 	public FiseFormato12AC getFiseFormato12AC() {
@@ -33,6 +34,12 @@ public class Formato12AMensajeBean implements Serializable {
 	}
 	public void setListaMensajeError(List<MensajeErrorBean> listaMensajeError) {
 		this.listaMensajeError = listaMensajeError;
+	}
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
 	}
 
 }

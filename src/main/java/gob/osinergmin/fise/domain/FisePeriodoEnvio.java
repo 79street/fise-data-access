@@ -94,6 +94,12 @@ public class FisePeriodoEnvio implements Serializable {
 	@Transient
 	private String descripcionItem;
 	
+	@Column(name="FLAG_MOSTRAR_ANO_MES_EJEC")
+	private String flagMostrarAnoMesEjec;
+	
+	@Transient
+	private String flagPeriodoEjecucion;
+	
 	public FisePeriodoEnvio() {
 	}
 
@@ -287,6 +293,22 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setDescripcionItem(String descripcionItem) {
 		this.descripcionItem = descripcionItem;
+	}
+
+	public String getFlagPeriodoEjecucion() {
+		return flagPeriodoEjecucion;
+	}
+
+	public void setFlagPeriodoEjecucion(String flagPeriodoEjecucion) {
+		this.flagPeriodoEjecucion = flagPeriodoEjecucion;
+	}
+
+	public String getFlagMostrarAnoMesEjec() {
+		return flagMostrarAnoMesEjec;
+	}
+
+	public void setFlagMostrarAnoMesEjec(String flagMostrarAnoMesEjec) {
+		this.flagMostrarAnoMesEjec = flagMostrarAnoMesEjec;
 	}
 
 }

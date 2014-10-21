@@ -5,6 +5,7 @@ import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
 import gob.osinergmin.fise.dao.Formato12ADDao;
+import gob.osinergmin.fise.dao.Formato12ADObDao;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
@@ -45,6 +46,10 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Qualifier("fiseZonaBenefDaoImpl")
 	private FiseZonaBenefDao zonaBenefDao;
 	
+	@Autowired
+	@Qualifier("formato12ADObDaoImpl")
+	private Formato12ADObDao formato12AObsDao;
+	
 	//@Override
 	public List<FiseFormato12AC> listarFormato12AC() {
 		return formato12ACDao.listarFormato12AC();
@@ -62,7 +67,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato12AC registrarFormato12AC(Formato12ACBean formulario) {
+	public FiseFormato12AC registrarFormato12AC(Formato12ACBean formulario) throws Exception {
 		
 		FiseFormato12AC dto = null;
 		
@@ -300,13 +305,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
+			throw e;
 		}
 		return dto;
 	}
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato12AC modificarFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) {
+	public FiseFormato12AC modificarFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) throws Exception {
 		
 		FiseFormato12AC dto = null;
 		
@@ -475,6 +481,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		}	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
+			throw e;
 		}
 		//
 		return dto;
@@ -646,6 +653,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Override
 	public int obtenerSecuencia() {
 		return formato12ACDao.obtenerSecuencia();
+	}
+	
+	@Override
+	public int validarFormato12A(FiseFormato12AC fiseFormato12AC, String tipoFormato) {
+		return formato12AObsDao.validarFormato12A(fiseFormato12AC, tipoFormato);
 	}
 
 }

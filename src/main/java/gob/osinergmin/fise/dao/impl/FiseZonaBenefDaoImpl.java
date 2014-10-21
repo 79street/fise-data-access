@@ -26,7 +26,9 @@ public class FiseZonaBenefDaoImpl extends GenericDaoImpl implements FiseZonaBene
 			lst = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lst;
 	}
 	
@@ -39,7 +41,9 @@ public class FiseZonaBenefDaoImpl extends GenericDaoImpl implements FiseZonaBene
 			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return fiseZonaBenef;
 	}
 	

@@ -29,7 +29,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			lst = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lst;
 	}
 	
@@ -43,7 +45,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			//return formato;
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return formato;
 	}
 	
@@ -56,7 +60,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 	}
 	
 	@Override
@@ -68,7 +74,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 	}
 	
 	@Override
@@ -81,7 +89,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 	}
 	
 	@Override
@@ -97,7 +107,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			//em.getTransaction().commit();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return existe;
 	}
 	
@@ -155,7 +167,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lista;
 	}
 	
@@ -170,7 +184,9 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			i = secuencia.intValue();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return i;
 	}
 	

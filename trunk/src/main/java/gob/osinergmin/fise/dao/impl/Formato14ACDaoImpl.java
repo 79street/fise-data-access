@@ -20,7 +20,9 @@ public class Formato14ACDaoImpl extends GenericDaoImpl implements Formato14ACDao
 			//return formato;
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return formato;
 	}
 

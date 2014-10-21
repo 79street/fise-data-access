@@ -16,7 +16,9 @@ public class CfgTablaDaoImpl extends GenericDaoImpl implements CfgTablaDao {
 			tabla = em.find(CfgTabla.class, idTabla);
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return tabla;
 	}
 

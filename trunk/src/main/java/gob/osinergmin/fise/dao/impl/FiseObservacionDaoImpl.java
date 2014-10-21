@@ -24,7 +24,9 @@ public class FiseObservacionDaoImpl extends GenericDaoImpl implements FiseObserv
 			lst = query.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} finally {
+			 em.close();
+		 }
 		return lst;
 	}
 	

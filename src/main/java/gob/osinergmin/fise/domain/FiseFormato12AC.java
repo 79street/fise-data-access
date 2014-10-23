@@ -61,6 +61,8 @@ public class FiseFormato12AC implements Serializable {
 	private String descMesPresentacion;
 	@Transient
 	private String descMesEjecucion;
+	@Transient
+	private String descGrupoInformacion;
 	
 	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String archivoExcel;
@@ -210,6 +212,14 @@ public class FiseFormato12AC implements Serializable {
 
 	public void setArchivoTexto(String archivoTexto) {
 		this.archivoTexto = archivoTexto;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
 	}
 
 

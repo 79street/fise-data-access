@@ -21,9 +21,12 @@ public class FiseConstants {
 	
 	public final static String NOMBRE_FORMATO_12A = "F12A";
 	
-	public final static long ZONABENEF_RURAL = 1;
-	public final static long ZONABENEF_PROVINCIA = 2;
-	public final static long ZONABENEF_LIMA = 3;
+	public final static long ZONABENEF_RURAL_COD = 1;
+	public final static long ZONABENEF_PROVINCIA_COD = 2;
+	public final static long ZONABENEF_LIMA_COD = 3;
+	public final static String ZONABENEF_RURAL_DESC = "Rural";
+	public final static String ZONABENEF_PROVINCIA_DESC = "Urbano Provincia";
+	public final static String ZONABENEF_LIMA_DESC = "Urbano Lima";
 	
 	public final static String COD_SAVE= "SAVE";
 	public final static String COD_UPDATE= "UPDATE";
@@ -73,13 +76,34 @@ public class FiseConstants {
 	public final static String COD_ERROR_F12_350 = "350";
 	//TXT
 	
-	public final static String TIPO_FORMATO_12 = "F12";
-	public final static String TIPO_FORMATO_13 = "F13";
-	public final static String TIPO_FORMATO_14 = "F14";
+	public final static String TIPO_FORMATO_12A = "F12A";
+	public final static String TIPO_FORMATO_12B = "F12B";
+	public final static String TIPO_FORMATO_12C = "F12C";
+	public final static String TIPO_FORMATO_12D = "F12D";
+	public final static String TIPO_FORMATO_13A = "F13A";
+	public final static String TIPO_FORMATO_14A = "F14A";
+	public final static String TIPO_FORMATO_14B = "F14B";
+	public final static String TIPO_FORMATO_14C = "F14C";
+	public final static String TIPO_FORMATO_VAL = "VAL";
 	
-	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12";
-	public final static String NOMBRE_EXCEL_FORMATO13A = "Formatos13";
-	public final static String NOMBRE_EXCEL_FORMATO14A = "Formatos14";
+	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
+	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
+	public final static String NOMBRE_EXCEL_FORMATO12C = "Formatos12C";
+	public final static String NOMBRE_EXCEL_FORMATO12D = "Formatos12D";
+	public final static String NOMBRE_EXCEL_FORMATO13A = "Formatos13A";
+	public final static String NOMBRE_EXCEL_FORMATO14A = "Formatos14A";
+	public final static String NOMBRE_EXCEL_FORMATO14B = "Formatos14B";
+	public final static String NOMBRE_EXCEL_FORMATO14C = "Formatos14C";
+	public final static String NOMBRE_EXCEL_VALIDACION = "Validaciones";
+	
+	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
+	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";
+	public final static String NOMBRE_HOJA_FORMATO12D = "F12D";
+	public final static String NOMBRE_HOJA_FORMATO13A = "F13A";
+	public final static String NOMBRE_HOJA_FORMATO14A = "F14A";
+	public final static String NOMBRE_HOJA_FORMATO14B = "F14B";
+	public final static String NOMBRE_HOJA_FORMATO14C = "F14C";
+	public final static String NOMBRE_HOJA_VALIDACION = "Validacion";
 	
 	//FORMATO 12 A
 	public final static String TIPOARCHIVO_XLS = "1";

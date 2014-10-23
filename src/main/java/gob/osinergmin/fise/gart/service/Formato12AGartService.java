@@ -3,6 +3,8 @@ package gob.osinergmin.fise.gart.service;
 import gob.osinergmin.fise.bean.Formato12ACBean;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
+import gob.osinergmin.fise.domain.FiseFormato12AD;
+import gob.osinergmin.fise.domain.FiseFormato12ADOb;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ public interface Formato12AGartService {
 	Formato12ACBean estructurarFormato12ABeanByFiseFormato12AC(FiseFormato12AC formato);
 	HashMap<String, Object> mapearParametrosFormato12A(Formato12ACBean formato12ABean);
 	int obtenerSecuencia();
-	int validarFormato12A(FiseFormato12AC fiseFormato12Ac, String tipoFormato);
+	int validarFormato12A(FiseFormato12AC fiseFormato12Ac, String tipoFormato, String usuario, String terminal);
+	List<FiseFormato12ADOb> listarFormato12ADObByFormato12AD(FiseFormato12AD formato12AD);
 	
 }

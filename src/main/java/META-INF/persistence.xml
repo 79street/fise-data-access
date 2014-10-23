@@ -27,6 +27,18 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato14ADObPK</class>
 	<class>gob.osinergmin.fise.domain.CfgCampo</class>
 	<class>gob.osinergmin.fise.domain.CfgTabla</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BC</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BCPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BD</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BDPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BDOb</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14BDObPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CC</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CCPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CD</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CDPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CDOb</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato14CDObPK</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	      </properties>

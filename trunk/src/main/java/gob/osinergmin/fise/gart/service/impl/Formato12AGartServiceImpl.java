@@ -9,6 +9,7 @@ import gob.osinergmin.fise.dao.Formato12ADObDao;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
+import gob.osinergmin.fise.domain.FiseFormato12ADOb;
 import gob.osinergmin.fise.domain.FiseFormato12ADPK;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
@@ -99,15 +100,15 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
 			//RURAL
 			if( formulario.getNroEmpadR() != 0 &&
-					!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentR() != 0 &&
-					!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentR() != 0 //&&
+					//!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
 					){
 				logger.info("entro a RURAL");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL);
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
 				//
 				FiseFormato12AD detalleRural = new FiseFormato12AD();
 				//pk
@@ -157,15 +158,15 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			//PROVINCIA
 			if( formulario.getNroEmpadP() != 0 &&
-					!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentP() != 0 &&
-					!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentP() != 0 //&&
+					//!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
 					){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA);
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
 				//
 				FiseFormato12AD detalleProvincia = new FiseFormato12AD();
 				//pk
@@ -215,15 +216,15 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			//LIMA
 			if( formulario.getNroEmpadL() != 0 &&
-					!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentL() != 0 &&
-					!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentL() != 0 //&&
+					//!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
 					){
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA);
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
 				//
 				FiseFormato12AD detalleLima = new FiseFormato12AD();
 				//pk
@@ -328,11 +329,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			FiseFormato12AD detalleLima = new FiseFormato12AD();
 			if( fiseFormato12AC.getFiseFormato12ADs()!=null ){
 				for (FiseFormato12AD detalle : fiseFormato12AC.getFiseFormato12ADs()) {
-					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL ){
+					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
 						detalleRural = detalle;
-					}else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA ){
+					}else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
 						detalleProvincia = detalle;
-					} else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA ){
+					} else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
 						detalleLima = detalle;
 					}
 				}
@@ -341,11 +342,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			//RURAL
 			if( detalleRural != null &&
 					formulario.getNroEmpadR() != 0 &&
-					!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentR() != 0 &&
-					!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentR() != 0 //&&
+					//!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
 					){
 				logger.info("se modificara RURAL");
 				detalleRural.setNumeroEmpadronados(formulario.getNroEmpadR());
@@ -381,11 +382,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			//PROVINCIA
 			if( detalleProvincia != null &&
 					formulario.getNroEmpadP() != 0 &&
-					!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentP() != 0 &&
-					!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentP() != 0 //&&
+					//!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
 					){
 				logger.info("se modificara PROVINCIA");
 				detalleProvincia.setNumeroEmpadronados(formulario.getNroEmpadP());
@@ -421,11 +422,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			//LIMA
 			if( detalleLima != null &&
 					formulario.getNroEmpadL() != 0 &&
-					!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
-					formulario.getNroAgentL() != 0 &&
-					!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
-					!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
-					!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
+					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
+					formulario.getNroAgentL() != 0 //&&
+					//!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
+					//!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
+					//!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
 					){
 				logger.info("se modificara LIMA");
 				detalleLima.setNumeroEmpadronados(formulario.getNroEmpadL());
@@ -497,6 +498,10 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		//por el momento no se esta borrando las dependencias hacias el detalle de observaciones
 		//luego aumentar esta dependencia
 		for (FiseFormato12AD detalle : lista) {
+			List<FiseFormato12ADOb> listaObservacion = formato12AObsDao.listarFormato12ADObByFormato12AD(detalle);
+			for (FiseFormato12ADOb observacion : listaObservacion) {
+				formato12AObsDao.eliminarFormato12ADOb(observacion);
+			}
 			formato12ADDao.eliminarFormato12AD(detalle);
 		}
 		formato12ACDao.eliminarFormato12AC(fiseFormato12AC);
@@ -536,7 +541,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		BigDecimal totalActividades = new BigDecimal(0);
 		
     	for (FiseFormato12AD detalle : formato.getFiseFormato12ADs()) {
-			if( FiseConstants.ZONABENEF_RURAL == detalle.getId().getIdZonaBenef() ){
+			if( FiseConstants.ZONABENEF_RURAL_COD == detalle.getId().getIdZonaBenef() ){
 				formato12ABean.setNroEmpadR(detalle.getNumeroEmpadronados());
 				formato12ABean.setCostoUnitEmpadR(detalle.getCostoEstandarUnitarioEmpad());
 				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
@@ -554,7 +559,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				totalAgentes = totalAgentes.add(formato12ABean.getCostoTotalAgentR());
 				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalR());
 				totalActividades = totalActividades.add(formato12ABean.getActivExtraordR());
-			}else if( FiseConstants.ZONABENEF_PROVINCIA == detalle.getId().getIdZonaBenef() ){
+			}else if( FiseConstants.ZONABENEF_PROVINCIA_COD == detalle.getId().getIdZonaBenef() ){
 				formato12ABean.setNroEmpadP(detalle.getNumeroEmpadronados());
 				formato12ABean.setCostoUnitEmpadP(detalle.getCostoEstandarUnitarioEmpad());
 				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
@@ -572,7 +577,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				totalAgentes = totalAgentes.add(formato12ABean.getCostoTotalAgentP());
 				totalDesplazamiento = totalDesplazamiento.add(formato12ABean.getDesplPersonalP());
 				totalActividades = totalActividades.add(formato12ABean.getActivExtraordP());
-			}else if( FiseConstants.ZONABENEF_LIMA == detalle.getId().getIdZonaBenef() ){
+			}else if( FiseConstants.ZONABENEF_LIMA_COD == detalle.getId().getIdZonaBenef() ){
 				formato12ABean.setNroEmpadL(detalle.getNumeroEmpadronados());
 				formato12ABean.setCostoUnitEmpadL(detalle.getCostoEstandarUnitarioEmpad());
 				BigDecimal costoTotalEmpad = detalle.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalle.getNumeroEmpadronados()));
@@ -656,8 +661,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	}
 	
 	@Override
-	public int validarFormato12A(FiseFormato12AC fiseFormato12AC, String tipoFormato) {
-		return formato12AObsDao.validarFormato12A(fiseFormato12AC, tipoFormato);
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public int validarFormato12A(FiseFormato12AC fiseFormato12AC, String tipoFormato, String usuario, String terminal) {
+		return formato12AObsDao.validarFormato12A(fiseFormato12AC, tipoFormato, usuario, terminal);
 	}
 
+	@Override
+	public List<FiseFormato12ADOb> listarFormato12ADObByFormato12AD(FiseFormato12AD formato12AD){
+		return formato12AObsDao.listarFormato12ADObByFormato12AD(formato12AD); 
+	}
+	
 }

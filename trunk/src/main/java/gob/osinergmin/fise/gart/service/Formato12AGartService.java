@@ -23,5 +23,6 @@ public interface Formato12AGartService {
 	int obtenerSecuencia();
 	int validarFormato12A(FiseFormato12AC fiseFormato12Ac, String tipoFormato, String usuario, String terminal);
 	List<FiseFormato12ADOb> listarFormato12ADObByFormato12AD(FiseFormato12AD formato12AD);
+	public FiseFormato12AC modificarEnvioDefinitivoFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) throws Exception;
 	
 }

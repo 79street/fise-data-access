@@ -671,4 +671,28 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		return formato12AObsDao.listarFormato12ADObByFormato12AD(formato12AD); 
 	}
 	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato12AC modificarEnvioDefinitivoFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) throws Exception {
+		
+		FiseFormato12AC dto = null;
+		Date hoy = FechaUtil.obtenerFechaActual();
+		try{
+			fiseFormato12AC.setFechaEnvioDefinitivo(hoy);
+			fiseFormato12AC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato12AC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato12AC.setFechaActualizacion(hoy);
+			formato12ACDao.modificarFormato12AC(fiseFormato12AC);
+			/*for (FiseFormato12AD detalle : lista) {
+				formato12ADDao.modificarFormato12AD(detalle);
+			}*/
+			dto= fiseFormato12AC;
+		} catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		return dto;
+	}
+	
 }

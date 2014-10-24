@@ -69,6 +69,10 @@ public class FiseFormato12AC implements Serializable {
 	@Column(name="NOMBRE_ARCHIVO_TEXTO")
 	private String archivoTexto;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_ENVIO_DEFINITIVO")
+	private Date fechaEnvioDefinitivo;
+	
 	public FiseFormato12AC() {
 	}
 
@@ -220,6 +224,14 @@ public class FiseFormato12AC implements Serializable {
 
 	public void setDescGrupoInformacion(String descGrupoInformacion) {
 		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public Date getFechaEnvioDefinitivo() {
+		return fechaEnvioDefinitivo;
+	}
+
+	public void setFechaEnvioDefinitivo(Date fechaEnvioDefinitivo) {
+		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
 	}
 
 

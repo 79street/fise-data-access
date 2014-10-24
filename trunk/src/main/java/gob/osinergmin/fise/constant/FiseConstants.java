@@ -84,7 +84,14 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_14A = "F14A";
 	public final static String TIPO_FORMATO_14B = "F14B";
 	public final static String TIPO_FORMATO_14C = "F14C";
-	public final static String TIPO_FORMATO_VAL = "VAL";
+	public final static String TIPO_FORMATO_VAL_12A = "VAL12A";
+	public final static String TIPO_FORMATO_VAL_12B = "VAL12B";
+	public final static String TIPO_FORMATO_VAL_12C = "VAL12C";
+	public final static String TIPO_FORMATO_VAL_12D = "VAL12D";
+	public final static String TIPO_FORMATO_VAL_13A = "VAL13A";
+	public final static String TIPO_FORMATO_VAL_14A = "VAL14A";
+	public final static String TIPO_FORMATO_VAL_14B = "VAL14B";
+	public final static String TIPO_FORMATO_VAL_14C = "VAL14C";
 	
 	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
@@ -105,9 +112,15 @@ public class FiseConstants {
 	public final static String NOMBRE_HOJA_FORMATO14C = "F14C";
 	public final static String NOMBRE_HOJA_VALIDACION = "Validacion";
 	
+	public final static String EXTENSIONARCHIVO_XSL = ".xls";
+	public final static String EXTENSIONARCHIVO_TXT = ".txt";
+	public final static String EXTENSIONARCHIVO_PDF = ".pdf";
+	public final static String EXTENSIONARCHIVO_XSLX = ".xlsx";
+	
 	//FORMATO 12 A
 	public final static String TIPOARCHIVO_XLS = "1";
 	public final static String TIPOARCHIVO_TXT = "2";
+	public final static String TIPOARCHIVO_PDF = "3";
 	public final static String FLAG_CARGAEXCEL_FORMULARIONUEVO = "2";
 	public final static String FLAG_CARGAEXCEL_FORMULARIOMODIFICACION = "3";
 	public final static String FLAG_CARGATXT_FORMULARIONUEVO = "4";

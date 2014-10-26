@@ -16,7 +16,7 @@ public class GenericDaoImpl {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
+	/**no se esta utilizando*/
 	@Transactional
 	public void save(Object object) {
 		System.out.println("entro a guardar");
@@ -48,5 +48,7 @@ public class GenericDaoImpl {
 			re.printStackTrace();
 		}
 	}
+	
+	/**fin no se esta utilizando*/
 	
 }

@@ -222,7 +222,11 @@ public class FiseConstants {
 	public final static String PARAM_TOTAL_ACTIV_F12A = "TOTAL_ACTIV_EXTRAORD";
 	public final static String PARAM_TOTAL_GENERAL_F12A = "TOTAL_GENERAL";
 	
-	//FORMATO 14 A
+	//FORMATO 14C
+	public final static long TIPO_PERSONAL_CORDINADOR_COD = 1;
+	public final static long TIPO_PERSONAL_SUPERVISOR_COD = 2;
+	public final static long TIPO_PERSONAL_GESTOR_COD = 3;
+	public final static long TIPO_PERSONAL_ASISTENTE_COD = 4;
 	
 
 }

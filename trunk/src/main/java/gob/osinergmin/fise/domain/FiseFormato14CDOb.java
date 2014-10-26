@@ -1,9 +1,7 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -12,24 +10,20 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_14C_D_OBS", schema="FISE")
-@NamedQuery(name="FiseFormato14CDOb.findAll", query="SELECT f FROM FiseFormato14CDOb f")
+@Table(name="FISE_FORMATO_14C_D_OBS")
 public class FiseFormato14CDOb implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private FiseFormato14CDObPK id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
-
-	@Column(name="ID_OBSERVACION")
-	private String idObservacion;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -43,19 +37,24 @@ public class FiseFormato14CDOb implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	//bi-directional many-to-one association to FiseFormato14CD
-	@Transient
-	@ManyToOne
+	//bi-directional many-to-one association to FiseFormato14cD
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-		@JoinColumn(name="ANO_FIN_VIGENCIA", referencedColumnName="ANO_FIN_VIGENCIA"),
-		@JoinColumn(name="ANO_INICIO_VIGENCIA", referencedColumnName="ANO_INICIO_VIGENCIA"),
-		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
-		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
-		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
-		@JoinColumn(name="ID_ZONA_BENEF", referencedColumnName="ID_ZONA_BENEF"),
-		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
+		@JoinColumn(name="ANO_FIN_VIGENCIA", referencedColumnName="ANO_FIN_VIGENCIA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ANO_INICIO_VIGENCIA", referencedColumnName="ANO_INICIO_VIGENCIA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ID_TIP_PERSONAL", referencedColumnName="ID_TIP_PERSONAL",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ID_ZONA_BENEF", referencedColumnName="ID_ZONA_BENEF",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION",nullable=false, insertable=false, updatable=false)
 		})
-	private FiseFormato14CD fiseFormato14CD;
+	private FiseFormato14CD fiseFormato14cD;
+
+	//bi-directional many-to-one association to FiseObservacion
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_OBSERVACION",nullable=false, insertable=false, updatable=false)
+	private FiseObservacion fiseObservacion;
 
 	public FiseFormato14CDOb() {
 	}
@@ -82,14 +81,6 @@ public class FiseFormato14CDOb implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getIdObservacion() {
-		return this.idObservacion;
-	}
-
-	public void setIdObservacion(String idObservacion) {
-		this.idObservacion = idObservacion;
 	}
 
 	public String getTerminalActualizacion() {
@@ -124,12 +115,20 @@ public class FiseFormato14CDOb implements Serializable {
 		this.usuarioCreacion = usuarioCreacion;
 	}
 
-	public FiseFormato14CD getFiseFormato14CD() {
-		return this.fiseFormato14CD;
+	public FiseFormato14CD getFiseFormato14cD() {
+		return this.fiseFormato14cD;
 	}
 
-	public void setFiseFormato14CD(FiseFormato14CD fiseFormato14CD) {
-		this.fiseFormato14CD = fiseFormato14CD;
+	public void setFiseFormato14cD(FiseFormato14CD fiseFormato14cD) {
+		this.fiseFormato14cD = fiseFormato14cD;
+	}
+
+	public FiseObservacion getFiseObservacion() {
+		return this.fiseObservacion;
+	}
+
+	public void setFiseObservacion(FiseObservacion fiseObservacion) {
+		this.fiseObservacion = fiseObservacion;
 	}
 
 }

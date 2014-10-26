@@ -12,26 +12,29 @@ public class FiseFormato14CDPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
+	@Column(name="COD_EMPRESA",unique=true, nullable=false)
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="ANO_PRESENTACION",unique=true, nullable=false)
 	private long anoPresentacion;
 
-	@Column(name="MES_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="MES_PRESENTACION",unique=true, nullable=false)
 	private long mesPresentacion;
 
-	@Column(name="ANO_INICIO_VIGENCIA", insertable=false, updatable=false)
+	@Column(name="ANO_INICIO_VIGENCIA",unique=true, nullable=false)
 	private long anoInicioVigencia;
 
-	@Column(name="ANO_FIN_VIGENCIA", insertable=false, updatable=false)
+	@Column(name="ANO_FIN_VIGENCIA",unique=true, nullable=false)
 	private long anoFinVigencia;
 
-	@Column(insertable=false, updatable=false)
+	@Column(name="ETAPA",unique=true, nullable=false)
 	private String etapa;
 
-	@Column(name="ID_ZONA_BENEF", insertable=false, updatable=false)
+	@Column(name="ID_ZONA_BENEF",unique=true, nullable=false)
 	private long idZonaBenef;
+
+	@Column(name="ID_TIP_PERSONAL",unique=true, nullable=false)
+	private long idTipPersonal;
 
 	public FiseFormato14CDPK() {
 	}
@@ -77,6 +80,12 @@ public class FiseFormato14CDPK implements Serializable {
 	public void setIdZonaBenef(long idZonaBenef) {
 		this.idZonaBenef = idZonaBenef;
 	}
+	public long getIdTipPersonal() {
+		return this.idTipPersonal;
+	}
+	public void setIdTipPersonal(long idTipPersonal) {
+		this.idTipPersonal = idTipPersonal;
+	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
@@ -93,7 +102,8 @@ public class FiseFormato14CDPK implements Serializable {
 			&& (this.anoInicioVigencia == castOther.anoInicioVigencia)
 			&& (this.anoFinVigencia == castOther.anoFinVigencia)
 			&& this.etapa.equals(castOther.etapa)
-			&& (this.idZonaBenef == castOther.idZonaBenef);
+			&& (this.idZonaBenef == castOther.idZonaBenef)
+			&& (this.idTipPersonal == castOther.idTipPersonal);
 	}
 
 	public int hashCode() {
@@ -106,6 +116,7 @@ public class FiseFormato14CDPK implements Serializable {
 		hash = hash * prime + ((int) (this.anoFinVigencia ^ (this.anoFinVigencia >>> 32)));
 		hash = hash * prime + this.etapa.hashCode();
 		hash = hash * prime + ((int) (this.idZonaBenef ^ (this.idZonaBenef >>> 32)));
+		hash = hash * prime + ((int) (this.idTipPersonal ^ (this.idTipPersonal >>> 32)));
 		
 		return hash;
 	}

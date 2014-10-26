@@ -1,12 +1,21 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -14,47 +23,28 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_14C_D", schema="FISE")
-@NamedQuery(name="FiseFormato14CD.findAll", query="SELECT f FROM FiseFormato14CD f")
+@Table(name="FISE_FORMATO_14C_D")
 public class FiseFormato14CD implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private FiseFormato14CDPK id;
 
-	private Long cantidad;
+	private Integer cantidad;
 
-	@Column(name="COSTO_TOT_TIP_PERSONA_UTL_ESCR")
-	private BigDecimal costoTotTipPersonaUtlEscr;
+	@Column(name="COSTO_DIRECTO")
+	private BigDecimal costoDirecto;
 
-	@Column(name="COSTO_TOTAL_ZONA")
-	private BigDecimal costoTotalZona;
+	@Column(name="COSTO_INDIRECTO")
+	private BigDecimal costoIndirecto;
 
-	@Column(name="COSTO_UNITARIO")
-	private BigDecimal costoUnitario;
-
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
-
-	@Column(name="ID_TIP_COSTO_GESTION")
-	private BigDecimal idTipCostoGestion;
-
-	@Column(name="ID_TIP_PERSONAL")
-	private BigDecimal idTipPersonal;
-
-	@Column(name="NOMBRE_SEDE")
-	private String nombreSede;
-
-	@Column(name="NUMERO_ITEM_TIPO_COSTO_GESTION")
-	private Long numeroItemTipoCostoGestion;
-
-	@Column(name="NUMRO_TOT_BENE_EMP_DIC_PER_ANT")
-	private Long numroTotBeneEmpDicPerAnt;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -68,23 +58,31 @@ public class FiseFormato14CD implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	//bi-directional many-to-one association to FiseFormato14CC
-	@Transient
-	@ManyToOne(cascade={CascadeType.ALL})
+	//bi-directional many-to-one association to FiseFormato14cC
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-		@JoinColumn(name="ANO_FIN_VIGENCIA", referencedColumnName="ANO_FIN_VIGENCIA"),
-		@JoinColumn(name="ANO_INICIO_VIGENCIA", referencedColumnName="ANO_INICIO_VIGENCIA"),
-		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
-		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
-		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
-		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
+		@JoinColumn(name="ANO_FIN_VIGENCIA", referencedColumnName="ANO_FIN_VIGENCIA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ANO_INICIO_VIGENCIA", referencedColumnName="ANO_INICIO_VIGENCIA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION",nullable=false, insertable=false, updatable=false)
 		})
-	private FiseFormato14CC fiseFormato14CC;
+	private FiseFormato14CC fiseFormato14cC;
 
-	//bi-directional many-to-one association to FiseFormato14CDOb
-	@Transient
-	@OneToMany(mappedBy="fiseFormato14CD")
-	private List<FiseFormato14CDOb> fiseFormato14CDObs;
+	//bi-directional many-to-one association to FiseTipPersonal
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_TIP_PERSONAL",nullable=false, insertable=false, updatable=false)
+	private FiseTipPersonal fiseTipPersonal;
+
+	//bi-directional many-to-one association to FiseZonaBenef
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_ZONA_BENEF",nullable=false, insertable=false, updatable=false)
+	private FiseZonaBenef fiseZonaBenef;
+
+	//bi-directional many-to-one association to FiseFormato14cDOb
+	@OneToMany(mappedBy="fiseFormato14cD")
+	private List<FiseFormato14CDOb> fiseFormato14cDObs;
 
 	public FiseFormato14CD() {
 	}
@@ -97,36 +95,28 @@ public class FiseFormato14CD implements Serializable {
 		this.id = id;
 	}
 
-	public Long getCantidad() {
+	public Integer getCantidad() {
 		return this.cantidad;
 	}
 
-	public void setCantidad(Long cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getCostoTotTipPersonaUtlEscr() {
-		return this.costoTotTipPersonaUtlEscr;
+	public BigDecimal getCostoDirecto() {
+		return this.costoDirecto;
 	}
 
-	public void setCostoTotTipPersonaUtlEscr(BigDecimal costoTotTipPersonaUtlEscr) {
-		this.costoTotTipPersonaUtlEscr = costoTotTipPersonaUtlEscr;
+	public void setCostoDirecto(BigDecimal costoDirecto) {
+		this.costoDirecto = costoDirecto;
 	}
 
-	public BigDecimal getCostoTotalZona() {
-		return this.costoTotalZona;
+	public BigDecimal getCostoIndirecto() {
+		return this.costoIndirecto;
 	}
 
-	public void setCostoTotalZona(BigDecimal costoTotalZona) {
-		this.costoTotalZona = costoTotalZona;
-	}
-
-	public BigDecimal getCostoUnitario() {
-		return this.costoUnitario;
-	}
-
-	public void setCostoUnitario(BigDecimal costoUnitario) {
-		this.costoUnitario = costoUnitario;
+	public void setCostoIndirecto(BigDecimal costoIndirecto) {
+		this.costoIndirecto = costoIndirecto;
 	}
 
 	public Date getFechaActualizacion() {
@@ -143,46 +133,6 @@ public class FiseFormato14CD implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public BigDecimal getIdTipCostoGestion() {
-		return this.idTipCostoGestion;
-	}
-
-	public void setIdTipCostoGestion(BigDecimal idTipCostoGestion) {
-		this.idTipCostoGestion = idTipCostoGestion;
-	}
-
-	public BigDecimal getIdTipPersonal() {
-		return this.idTipPersonal;
-	}
-
-	public void setIdTipPersonal(BigDecimal idTipPersonal) {
-		this.idTipPersonal = idTipPersonal;
-	}
-
-	public String getNombreSede() {
-		return this.nombreSede;
-	}
-
-	public void setNombreSede(String nombreSede) {
-		this.nombreSede = nombreSede;
-	}
-
-	public Long getNumeroItemTipoCostoGestion() {
-		return this.numeroItemTipoCostoGestion;
-	}
-
-	public void setNumeroItemTipoCostoGestion(Long numeroItemTipoCostoGestion) {
-		this.numeroItemTipoCostoGestion = numeroItemTipoCostoGestion;
-	}
-
-	public Long getNumroTotBeneEmpDicPerAnt() {
-		return this.numroTotBeneEmpDicPerAnt;
-	}
-
-	public void setNumroTotBeneEmpDicPerAnt(Long numroTotBeneEmpDicPerAnt) {
-		this.numroTotBeneEmpDicPerAnt = numroTotBeneEmpDicPerAnt;
 	}
 
 	public String getTerminalActualizacion() {
@@ -217,34 +167,50 @@ public class FiseFormato14CD implements Serializable {
 		this.usuarioCreacion = usuarioCreacion;
 	}
 
-	public FiseFormato14CC getFiseFormato14CC() {
-		return this.fiseFormato14CC;
+	public FiseFormato14CC getFiseFormato14cC() {
+		return this.fiseFormato14cC;
 	}
 
-	public void setFiseFormato14CC(FiseFormato14CC fiseFormato14CC) {
-		this.fiseFormato14CC = fiseFormato14CC;
+	public void setFiseFormato14cC(FiseFormato14CC fiseFormato14cC) {
+		this.fiseFormato14cC = fiseFormato14cC;
 	}
 
-	public List<FiseFormato14CDOb> getFiseFormato14CDObs() {
-		return this.fiseFormato14CDObs;
+	public FiseTipPersonal getFiseTipPersonal() {
+		return this.fiseTipPersonal;
 	}
 
-	public void setFiseFormato14CDObs(List<FiseFormato14CDOb> fiseFormato14CDObs) {
-		this.fiseFormato14CDObs = fiseFormato14CDObs;
+	public void setFiseTipPersonal(FiseTipPersonal fiseTipPersonal) {
+		this.fiseTipPersonal = fiseTipPersonal;
 	}
 
-	public FiseFormato14CDOb addFiseFormato14CDOb(FiseFormato14CDOb fiseFormato14CDOb) {
-		getFiseFormato14CDObs().add(fiseFormato14CDOb);
-		fiseFormato14CDOb.setFiseFormato14CD(this);
-
-		return fiseFormato14CDOb;
+	public FiseZonaBenef getFiseZonaBenef() {
+		return this.fiseZonaBenef;
 	}
 
-	public FiseFormato14CDOb removeFiseFormato14CDOb(FiseFormato14CDOb fiseFormato14CDOb) {
-		getFiseFormato14CDObs().remove(fiseFormato14CDOb);
-		fiseFormato14CDOb.setFiseFormato14CD(null);
+	public void setFiseZonaBenef(FiseZonaBenef fiseZonaBenef) {
+		this.fiseZonaBenef = fiseZonaBenef;
+	}
 
-		return fiseFormato14CDOb;
+	public List<FiseFormato14CDOb> getFiseFormato14cDObs() {
+		return this.fiseFormato14cDObs;
+	}
+
+	public void setFiseFormato14cDObs(List<FiseFormato14CDOb> fiseFormato14cDObs) {
+		this.fiseFormato14cDObs = fiseFormato14cDObs;
+	}
+
+	public FiseFormato14CDOb addFiseFormato14cDOb(FiseFormato14CDOb fiseFormato14cDOb) {
+		getFiseFormato14cDObs().add(fiseFormato14cDOb);
+		fiseFormato14cDOb.setFiseFormato14cD(this);
+
+		return fiseFormato14cDOb;
+	}
+
+	public FiseFormato14CDOb removeFiseFormato14cDOb(FiseFormato14CDOb fiseFormato14cDOb) {
+		getFiseFormato14cDObs().remove(fiseFormato14cDOb);
+		fiseFormato14cDOb.setFiseFormato14cD(null);
+
+		return fiseFormato14cDOb;
 	}
 
 }

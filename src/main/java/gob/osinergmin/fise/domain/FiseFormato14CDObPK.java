@@ -12,28 +12,28 @@ public class FiseFormato14CDObPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
+	@Column(name="COD_EMPRESA",unique=true, nullable=false)
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="ANO_PRESENTACION",unique=true, nullable=false)
 	private long anoPresentacion;
 
-	@Column(name="MES_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="MES_PRESENTACION",unique=true, nullable=false)
 	private long mesPresentacion;
 
-	@Column(name="ANO_INICIO_VIGENCIA", insertable=false, updatable=false)
+	@Column(name="ANO_INICIO_VIGENCIA",unique=true, nullable=false)
 	private long anoInicioVigencia;
 
-	@Column(name="ANO_FIN_VIGENCIA", insertable=false, updatable=false)
+	@Column(name="ANO_FIN_VIGENCIA",unique=true, nullable=false)
 	private long anoFinVigencia;
-
-	@Column(insertable=false, updatable=false)
+	
+	@Column(name="ETAPA",unique=true, nullable=false)
 	private String etapa;
 
-	@Column(name="ID_ZONA_BENEF", insertable=false, updatable=false)
+	@Column(name="ID_ZONA_BENEF",unique=true, nullable=false)
 	private long idZonaBenef;
 
-	@Column(name="ITEM_OBSERVACION")
+	@Column(name="ITEM_OBSERVACION",unique=true, nullable=false)
 	private long itemObservacion;
 
 	public FiseFormato14CDObPK() {

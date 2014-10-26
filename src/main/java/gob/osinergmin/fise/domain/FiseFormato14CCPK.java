@@ -12,21 +12,22 @@ public class FiseFormato14CCPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA")
+	@Column(name="COD_EMPRESA",unique=true, nullable=false)
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION")
+	@Column(name="ANO_PRESENTACION",unique=true, nullable=false)
 	private long anoPresentacion;
 
-	@Column(name="MES_PRESENTACION")
+	@Column(name="MES_PRESENTACION",unique=true, nullable=false)
 	private long mesPresentacion;
 
-	@Column(name="ANO_INICIO_VIGENCIA")
+	@Column(name="ANO_INICIO_VIGENCIA",unique=true, nullable=false)
 	private long anoInicioVigencia;
 
-	@Column(name="ANO_FIN_VIGENCIA")
+	@Column(name="ANO_FIN_VIGENCIA",unique=true, nullable=false)
 	private long anoFinVigencia;
 
+	@Column(name="ETAPA",unique=true, nullable=false)
 	private String etapa;
 
 	public FiseFormato14CCPK() {

@@ -30,7 +30,11 @@ public class FiseFormato14CD implements Serializable {
 	@EmbeddedId
 	private FiseFormato14CDPK id;
 
-	private Integer cantidad;
+	@Column(name="CANTIDAD_COSTO_DIRECTO")
+	private Integer cantCostDirecto;
+	
+	@Column(name="CANTIDAD_COSTO_INDIRECTO")
+	private Integer cantCostIndirecto;
 
 	@Column(name="COSTO_DIRECTO")
 	private BigDecimal costoDirecto;
@@ -93,14 +97,22 @@ public class FiseFormato14CD implements Serializable {
 
 	public void setId(FiseFormato14CDPK id) {
 		this.id = id;
+	}	
+
+	public Integer getCantCostDirecto() {
+		return cantCostDirecto;
 	}
 
-	public Integer getCantidad() {
-		return this.cantidad;
+	public void setCantCostDirecto(Integer cantCostDirecto) {
+		this.cantCostDirecto = cantCostDirecto;
 	}
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+	public Integer getCantCostIndirecto() {
+		return cantCostIndirecto;
+	}
+
+	public void setCantCostIndirecto(Integer cantCostIndirecto) {
+		this.cantCostIndirecto = cantCostIndirecto;
 	}
 
 	public BigDecimal getCostoDirecto() {

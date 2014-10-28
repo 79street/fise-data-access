@@ -56,6 +56,15 @@ public class FiseFormato14AC implements Serializable {
 	@Transient
 	@OneToMany(mappedBy="fiseFormato14AC", cascade={CascadeType.ALL})
 	private List<FiseFormato14AD> fiseFormato14ADs;
+	
+	@Transient
+	private String descEmpresa;
+	@Transient
+	private String descEstado;
+	@Transient
+	private String descMesPresentacion;
+	@Transient
+	private String descGrupoInformacion;
 
 	public FiseFormato14AC() {
 	}
@@ -144,6 +153,38 @@ public class FiseFormato14AC implements Serializable {
 		fiseFormato14AD.setFiseFormato14AC(null);
 
 		return fiseFormato14AD;
+	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
 	}
 
 }

@@ -50,13 +50,13 @@ public class FiseFormato14CC implements Serializable {
 	private String nombreSede;
 
 	@Column(name="NUM_BENEF_EMP_PER_ANT_RURAL")
-	private Integer numBenefEmpPerAntRural;
+	private Long numBenefEmpPerAntRural;
 
 	@Column(name="NUM_BENEF_EMP_PER_ANT_URB_LIMA")
-	private Integer numBenefEmpPerAntUrbLima;
+	private Long numBenefEmpPerAntUrbLima;
 
 	@Column(name="NUM_BENEF_EMP_PER_ANT_URB_PROV")
-	private Integer numBenefEmpPerAntUrbProv;
+	private Long numBenefEmpPerAntUrbProv;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -162,27 +162,27 @@ public class FiseFormato14CC implements Serializable {
 		this.nombreSede = nombreSede;
 	}
 
-	public Integer getNumBenefEmpPerAntRural() {
+	public Long getNumBenefEmpPerAntRural() {
 		return this.numBenefEmpPerAntRural;
 	}
 
-	public void setNumBenefEmpPerAntRural(Integer numBenefEmpPerAntRural) {
+	public void setNumBenefEmpPerAntRural(Long numBenefEmpPerAntRural) {
 		this.numBenefEmpPerAntRural = numBenefEmpPerAntRural;
 	}
 
-	public Integer getNumBenefEmpPerAntUrbLima() {
+	public Long getNumBenefEmpPerAntUrbLima() {
 		return this.numBenefEmpPerAntUrbLima;
 	}
 
-	public void setNumBenefEmpPerAntUrbLima(Integer numBenefEmpPerAntUrbLima) {
+	public void setNumBenefEmpPerAntUrbLima(Long numBenefEmpPerAntUrbLima) {
 		this.numBenefEmpPerAntUrbLima = numBenefEmpPerAntUrbLima;
 	}
 
-	public Integer getNumBenefEmpPerAntUrbProv() {
+	public Long getNumBenefEmpPerAntUrbProv() {
 		return this.numBenefEmpPerAntUrbProv;
 	}
 
-	public void setNumBenefEmpPerAntUrbProv(Integer numBenefEmpPerAntUrbProv) {
+	public void setNumBenefEmpPerAntUrbProv(Long numBenefEmpPerAntUrbProv) {
 		this.numBenefEmpPerAntUrbProv = numBenefEmpPerAntUrbProv;
 	}
 

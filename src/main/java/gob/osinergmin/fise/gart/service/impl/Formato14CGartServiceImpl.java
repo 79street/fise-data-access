@@ -29,7 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
     Logger logger=Logger.getLogger(Formato14CGartServiceImpl.class);
-	
+   
+    
+    
 	@Autowired
 	@Qualifier("formato14CCDaoImpl")
 	private Formato14CCDao formato14CCDao;	
@@ -66,7 +68,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
 	
 	/**Metodo para insertar Cabecera y Detalle del formato 14C*/
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)	
 	public void insertarDatosFormato14C(Formato14CBean bean) throws Exception{
 		FiseFormato14CC cab = null;
 		FiseFormato14CCPK idCab = null;
@@ -80,13 +83,15 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idCab.setCodEmpresa(bean.getCodEmpresa());
 			idCab.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idCab.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idCab.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idCab.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idCab.setAnoInicioVigencia(Long.valueOf(2009)); 
+			idCab.setAnoFinVigencia(Long.valueOf(2010)); 
 			idCab.setEtapa(bean.getEtapa()); 
 			//FIN PK
 			cab.setId(idCab);
 			cab.setNombreSede(bean.getNombreSede());
-			FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1)); 
+			logger.info("Obtneniendo el obk informacion: "); 
+			FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000));			
+			logger.info("Obtneniendo el obk informacion: "+inf.getDescripcion()); 
 			cab.setFiseGrupoInformacion(inf);  
 			cab.setNombreArchivoExcel("");
 			cab.setNombreArchivoTexto(""); 
@@ -101,7 +106,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			cab.setTerminalCreacion("192.168.1.15");
 			cab.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CCDao.insertarFiseFormato14CC(cab); 
-		
+			logger.info("GRABO EN LA CABECERA OK");		
 			/*Grabando en el detalle de la cabecera*/
 		    
 			/**Grabando el primer detalle Rural-Coordinador**/
@@ -114,7 +119,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+            det.setId(idDet); 		
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDRCoord()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIRCoord())); 
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
@@ -134,6 +140,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDPCoord()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIPCoord())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
@@ -153,6 +160,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDLCoord()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanILCoord()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
@@ -173,6 +181,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDRSupe()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIRSupe())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
@@ -193,6 +202,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDPSupe()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIPSupe())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
@@ -213,6 +223,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDLSupe()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanILSupe())); 	
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
@@ -233,6 +244,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDRGest()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIRGest())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
@@ -253,6 +265,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDPGest()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIPGest())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
@@ -273,6 +286,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDLGest()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanDLGest())); 				
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
@@ -293,6 +307,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDRAsist()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIRAsist())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
@@ -313,6 +328,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDPAsist()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanIPAsist()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
@@ -333,6 +349,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+			det.setId(idDet); 	
 			det.setCantCostDirecto(Integer.valueOf(bean.getCanDLAsist()));
 			det.setCantCostIndirecto(Integer.valueOf(bean.getCanILAsist()));	
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 

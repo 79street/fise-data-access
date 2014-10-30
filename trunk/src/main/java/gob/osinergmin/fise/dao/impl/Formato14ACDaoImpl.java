@@ -86,4 +86,66 @@ public class Formato14ACDaoImpl extends GenericDaoImpl implements Formato14ACDao
 		return lista;
 	}
 	
+	@Override
+	public void registrarFormato14AC(FiseFormato14AC fiseFormato14AC){
+		try{
+			//em.getTransaction().begin();
+			em.persist(fiseFormato14AC);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
+	@Override
+	public void modificarFormato14AC(FiseFormato14AC fiseFormato14AC){
+		try{
+			//em.getTransaction().begin();
+			em.merge(fiseFormato14AC);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
+	@Override
+	public void eliminarFormato14AC(FiseFormato14AC fiseFormato14AC){
+		try{
+			//em.getTransaction().begin();
+			em.remove(em.contains(fiseFormato14AC) ? fiseFormato14AC : em.merge(fiseFormato14AC));
+			//em.remove(fiseFormato14AC);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
+	@Override
+	public boolean existeFormato14AC(FiseFormato14AC fiseFormato14AC){
+		boolean existe = false;
+		try{
+			//em.getTransaction().begin();
+			FiseFormato14AC formato = em.find(FiseFormato14AC.class, fiseFormato14AC.getId());
+			if( formato != null ){
+		    	existe = true;
+		    }
+			//em.persist(fiseFormato14A);
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return existe;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.bean;
 
 import gob.osinergmin.fise.domain.AdmEmpresa;
+import gob.osinergmin.fise.domain.FisePeriodoEnvio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ private static final long serialVersionUID = 1L;
 	private Map<Long,String> listaMes;
 	private List<AdmEmpresa> listaEmpresas;
 	private Map<String,String> listaEtapa;
+	private List<FisePeriodoEnvio> listaPeriodoEnvio;
 	
 	private String codEmpresaB;
 	private String mesDesde;
@@ -25,10 +27,13 @@ private static final long serialVersionUID = 1L;
 	private boolean admin;
 
 	private String codigoEmpresa;
-	private long anioPresent = 0;
-	private long mesPresent = 0;
-	private long anioInicioVigencia = 0;
-	private long anioFinVigencia = 0;
+	private Long anioPresent = 0L;
+	private Long mesPresent = 0L;
+	private Long anioInicioVigencia = 0L;
+	private Long anioFinVigencia = 0L;
+	
+	private String periodoEnvio;
+	private String flagPeriodoEjecucion;
 	
 	//private long idZonaBnfcio = 0;
 
@@ -48,13 +53,13 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal spotPublTvR = new BigDecimal(0);
 	private BigDecimal spotPublRadioR = new BigDecimal(0);
 	private BigDecimal totalDifIniProgR = new BigDecimal(0);
-	private long nroBenefEmpadR = 0;
+	private Long nroBenefEmpadR = 0L;
 	private BigDecimal costoUnitEmpadR = new BigDecimal(0);
 	private BigDecimal promConvAgentR = new BigDecimal(0);
 	private BigDecimal regConvAgentR = new BigDecimal(0);
 	private BigDecimal impEntrBandR = new BigDecimal(0);
 	private BigDecimal totalCostoAgentR = new BigDecimal(0);
-	private long nroAgentR = 0;
+	private Long nroAgentR = 0L;
 	private BigDecimal costoUnitAgentR = new BigDecimal(0);
 	
 	//-------------------------
@@ -75,13 +80,13 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal spotPublTvP = new BigDecimal(0);
 	private BigDecimal spotPublRadioP = new BigDecimal(0);
 	private BigDecimal totalDifIniProgP = new BigDecimal(0);
-	private long nroBenefEmpadP = 0;
+	private Long nroBenefEmpadP = 0L;
 	private BigDecimal costoUnitEmpadP = new BigDecimal(0);
 	private BigDecimal promConvAgentP = new BigDecimal(0);
 	private BigDecimal regConvAgentP = new BigDecimal(0);
 	private BigDecimal impEntrBandP = new BigDecimal(0);
 	private BigDecimal totalCostoAgentP = new BigDecimal(0);
-	private long nroAgentP = 0;
+	private Long nroAgentP = 0L;
 	private BigDecimal costoUnitAgentP = new BigDecimal(0);
 	
 	//--------------------
@@ -101,13 +106,13 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal spotPublTvL = new BigDecimal(0);
 	private BigDecimal spotPublRadioL = new BigDecimal(0);
 	private BigDecimal totalDifIniProgL = new BigDecimal(0);
-	private long nroBenefEmpadL = 0;
+	private Long nroBenefEmpadL = 0L;
 	private BigDecimal costoUnitEmpadL = new BigDecimal(0);
 	private BigDecimal promConvAgentL = new BigDecimal(0);
 	private BigDecimal regConvAgentL = new BigDecimal(0);
 	private BigDecimal impEntrBandL = new BigDecimal(0);
 	private BigDecimal totalCostoAgentL = new BigDecimal(0);
-	private long nroAgentL = 0;
+	private Long nroAgentL = 0L;
 	private BigDecimal costoUnitAgentL = new BigDecimal(0);
 	
 	//
@@ -860,6 +865,30 @@ private static final long serialVersionUID = 1L;
 
 	public void setListaEtapa(Map<String, String> listaEtapa) {
 		this.listaEtapa = listaEtapa;
+	}
+
+	public String getPeriodoEnvio() {
+		return periodoEnvio;
+	}
+
+	public void setPeriodoEnvio(String periodoEnvio) {
+		this.periodoEnvio = periodoEnvio;
+	}
+
+	public List<FisePeriodoEnvio> getListaPeriodoEnvio() {
+		return listaPeriodoEnvio;
+	}
+
+	public void setListaPeriodoEnvio(List<FisePeriodoEnvio> listaPeriodoEnvio) {
+		this.listaPeriodoEnvio = listaPeriodoEnvio;
+	}
+
+	public String getFlagPeriodoEjecucion() {
+		return flagPeriodoEjecucion;
+	}
+
+	public void setFlagPeriodoEjecucion(String flagPeriodoEjecucion) {
+		this.flagPeriodoEjecucion = flagPeriodoEjecucion;
 	}
 
 	

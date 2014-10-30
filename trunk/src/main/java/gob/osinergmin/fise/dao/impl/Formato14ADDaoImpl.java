@@ -136,5 +136,49 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 		 }
 		return objeto;
 	}
+	
+	@Override
+	public void registrarFormato14AD(FiseFormato14AD fiseFormato14AD){
+		try{
+			//em.getTransaction().begin();
+			em.persist(fiseFormato14AD);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
+	@Override
+	public void modificarFormato14AD(FiseFormato14AD fiseFormato14AD){
+		try{
+			//em.getTransaction().begin();
+			em.merge(fiseFormato14AD);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
+	@Override
+	public void eliminarFormato14AD(FiseFormato14AD fiseFormato14AD){
+		try{
+			//em.getTransaction().begin();
+			//verificar si la entidad pertenece a la transaccion o no
+			em.remove(em.contains(fiseFormato14AD) ? fiseFormato14AD : em.merge(fiseFormato14AD));
+			//em.remove(fiseFormato14AD);
+			//em.flush();
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
 
 }

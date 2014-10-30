@@ -65,6 +65,15 @@ public class FiseFormato14AC implements Serializable {
 	private String descMesPresentacion;
 	@Transient
 	private String descGrupoInformacion;
+	
+	@Column(name="NOMBRE_ARCHIVO_EXCEL")
+	private String archivoExcel;
+	@Column(name="NOMBRE_ARCHIVO_TEXTO")
+	private String archivoTexto;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_ENVIO_DEFINITIVO")
+	private Date fechaEnvioDefinitivo;
 
 	public FiseFormato14AC() {
 	}
@@ -186,5 +195,30 @@ public class FiseFormato14AC implements Serializable {
 	public void setDescGrupoInformacion(String descGrupoInformacion) {
 		this.descGrupoInformacion = descGrupoInformacion;
 	}
+
+	public String getArchivoExcel() {
+		return archivoExcel;
+	}
+
+	public void setArchivoExcel(String archivoExcel) {
+		this.archivoExcel = archivoExcel;
+	}
+
+	public String getArchivoTexto() {
+		return archivoTexto;
+	}
+
+	public void setArchivoTexto(String archivoTexto) {
+		this.archivoTexto = archivoTexto;
+	}
+
+	public Date getFechaEnvioDefinitivo() {
+		return fechaEnvioDefinitivo;
+	}
+
+	public void setFechaEnvioDefinitivo(Date fechaEnvioDefinitivo) {
+		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
+	}
+	
 
 }

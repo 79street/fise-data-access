@@ -4,8 +4,10 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14CCDao;
 import gob.osinergmin.fise.domain.FiseFormato14CC;
 import gob.osinergmin.fise.domain.FiseFormato14CCPK;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -55,7 +57,47 @@ public class Formato14CCDaoImpl extends GenericDaoImpl implements Formato14CCDao
 	}
 	
 	
-	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
+			long anioHasta, long mesDesde, long mesHasta, String etapa) throws SQLException{
+		
+		String q = "SELECT f FROM " + FiseFormato14CC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(anioDesde!=0 && anioHasta!=0){ 		
+			q = q.concat(" AND f.id.anoPresentacion BETWEEN :anioDesde AND :anioHasta ");	
+		}
+		if(mesDesde!=0 && mesHasta!=0 ){ 
+			q = q.concat(" AND f.id.mesPresentacion BETWEEN :mesDesde AND :mesHasta ");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			query.setParameter("codEmpresa", codEmpresa);
+		}
+		if(anioDesde!=0 && anioHasta!=0){
+			query.setParameter("anioDesde", anioDesde);
+			query.setParameter("anioHasta", anioHasta);
+		}
+		if(mesDesde!=0 && mesHasta!=0){ 
+			query.setParameter("mesDesde", mesDesde);
+			query.setParameter("mesHasta", mesHasta);
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato14CC> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
+	}
 	
 
 }

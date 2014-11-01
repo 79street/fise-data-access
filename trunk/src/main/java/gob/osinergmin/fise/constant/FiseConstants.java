@@ -37,7 +37,13 @@ public class FiseConstants {
 	public final static String FORMATO_EXPORT_XLS = "1";
 	
 	public final static long ID_TABLA_FORMATO12A = 100;
-	//-public final static String ID_TABLA_FORMATO12A = "100";
+	public final static long ID_TABLA_FORMATO12B = 101;
+	public final static long ID_TABLA_FORMATO12C = 102;
+	public final static long ID_TABLA_FORMATO12D = 103;
+	public final static long ID_TABLA_FORMATO13A = 104;
+	public final static long ID_TABLA_FORMATO14A = 105;
+	public final static long ID_TABLA_FORMATO14B = 106;
+	public final static long ID_TABLA_FORMATO14C = 107;
 	//EXCEL
 	public final static String COD_ERROR_F12_10 = "10";
 	public final static String COD_ERROR_F12_20 = "20";
@@ -117,7 +123,7 @@ public class FiseConstants {
 	public final static String EXTENSIONARCHIVO_PDF = ".pdf";
 	public final static String EXTENSIONARCHIVO_XSLX = ".xlsx";
 	
-	//FORMATO 12 A
+	
 	public final static String TIPOARCHIVO_XLS = "1";
 	public final static String TIPOARCHIVO_TXT = "2";
 	public final static String TIPOARCHIVO_PDF = "3";
@@ -125,6 +131,7 @@ public class FiseConstants {
 	public final static String FLAG_CARGAEXCEL_FORMULARIOMODIFICACION = "3";
 	public final static String FLAG_CARGATXT_FORMULARIONUEVO = "4";
 	public final static String FLAG_CARGATXT_FORMULARIOMODIFICACION = "5";
+	//FORMATO 12A
 	public final static String NOMBRE_HOJA_FORMATO12A = "F12A";
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12A = 4;
 	public final static int NRO_FILA_ANIOMES_FORMATO12A = 5;
@@ -132,14 +139,42 @@ public class FiseConstants {
 	public final static int NRO_FILA_AGENT_FORMATO12A = 16;
 	public final static int NRO_FILA_DESPLPERSON_FORMATO12A = 19;
 	public final static int NRO_FILA_ACTIVEXTR_FORMATO12A = 20;
-	public final static int NRO_CELDA_EMPRESA = 5;
-	public final static int NRO_CELDA_ANIO= 5;
-	public final static int NRO_CELDA_MES = 6;
-	public final static int NRO_CELDA_RURAL = 7;
-	public final static int NRO_CELDA_PROVINCIA = 8;
-	public final static int NRO_CELDA_LIMA = 9;
-	public final static int NRO_MAX_FILAS = 3;
-	public final static int TAMANIO_MAX_FILA = 159;
+	public final static int NRO_CELDA_EMPRESA_FORMATO12A = 5;
+	public final static int NRO_CELDA_ANIO_FORMATO12A = 5;
+	public final static int NRO_CELDA_MES_FORMATO12A = 6;
+	public final static int NRO_CELDA_RURAL_FORMATO12A = 7;
+	public final static int NRO_CELDA_PROVINCIA_FORMATO12A = 8;
+	public final static int NRO_CELDA_LIMA_FORMATO12A = 9;
+	public final static int NRO_MAX_FILAS_FORMATO12A = 3;
+	public final static int TAMANIO_MAX_FILA_FORMATO12A = 159;
+	//FORMATO 14A
+	public final static int NRO_FILA_CODEMPRESA_FORMATO14A = 5;
+	public final static int NRO_FILA_ANIOMES_FORMATO14A = 6;
+	public final static int NRO_FILA_IMPESQINV_FORMATO14A = 15;
+	public final static int NRO_FILA_IMPDECLJURADA_FORMATO14A = 16;
+	public final static int NRO_FILA_IMPFICHAVERIF_FORMATO14A = 17;
+	public final static int NRO_FILA_REPESQINV_FORMATO14A = 18;
+	public final static int NRO_FILA_VERIFINFO_FORMATO14A = 19;
+	public final static int NRO_FILA_ELABARCHBENEF_FORMATO14A = 20;
+	public final static int NRO_FILA_DIGITFICHABENEF_FORMATO14A = 21;
+	public final static int NRO_FILA_IMPVOLANTES_FORMATO14A = 23;
+	public final static int NRO_FILA_IMPAFICHES_FORMATO14A = 24;
+	public final static int NRO_FILA_REPFOLLETOS_FORMATO14A = 25;
+	public final static int NRO_FILA_SPOTPUBLICTV_FORMATO14A = 26;
+	public final static int NRO_FILA_SPOTPUBLICRADIO_FORMATO14A = 27;
+	public final static int NRO_FILA_EMPAD_FORMATO14A = 28;
+	public final static int NRO_FILA_PROMCONVENIOS_FORMATO14A = 32;
+	public final static int NRO_FILA_REGFIRMACONV_FORMATO14A = 33;
+	public final static int NRO_FILA_IMPENTBANDER_FORMATO14A = 34;
+	public final static int NRO_FILA_AGENTES_FORMATO14A = 35;
+	public final static int NRO_CELDA_EMPRESA_FORMATO14A = 6;
+	public final static int NRO_CELDA_ANIO_FORMATO14A = 6;
+	public final static int NRO_CELDA_MES_FORMATO14A = 7;
+	public final static int NRO_CELDA_RURAL_FORMATO14A = 9;
+	public final static int NRO_CELDA_PROVINCIA_FORMATO14A = 10;
+	public final static int NRO_CELDA_LIMA_FORMATO14A = 11;
+	//public final static int NRO_MAX_FILAS_FORMATO12A = 3;
+	//public final static int TAMANIO_MAX_FILA_FORMATO12A = 159;
 	//
 	public final static String NOMBRE_COD_EMPRESA="COD_EMPRESA";
 	public final static String NOMBRE_ANO_PRESENTACION="ANO_PRESENTACION";

@@ -132,6 +132,7 @@ public class FiseFormato14AD implements Serializable {
 	private FiseFormato14AC fiseFormato14AC;
 
 	//bi-directional many-to-one association to FiseFormato14ADOb
+	@Transient
 	@OneToMany(mappedBy="fiseFormato14AD")
 	private List<FiseFormato14ADOb> fiseFormato14ADObs;
 

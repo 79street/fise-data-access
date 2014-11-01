@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -50,6 +51,7 @@ public class FiseFormato14ADOb implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseFormato14AD
+	@Transient
 	@ManyToOne
 	/*@JoinColumns({
 		@JoinColumn(name="ANO_FIN_VIGENCIA", referencedColumnName="ANO_FIN_VIGENCIA"),

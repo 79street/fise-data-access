@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="fiseZonaBenefGartServiceImpl")
 public class FiseZonaBenefGartServiceImpl implements FiseZonaBenefGartService {
@@ -18,11 +19,13 @@ public class FiseZonaBenefGartServiceImpl implements FiseZonaBenefGartService {
 	private FiseZonaBenefDao fiseZonaBenefDao;
 	
 	@Override
+	@Transactional
 	public List<FiseZonaBenef> listarFiseZonaBenef() {
 		return fiseZonaBenefDao.listarFiseZonaBenef();
 	}
 	
 	@Override
+	@Transactional
 	public FiseZonaBenef obtenerFiseZonaBenefByPK(long id) {
 		return fiseZonaBenefDao.obtenerFiseZonaBenefByPK(id);
 	}

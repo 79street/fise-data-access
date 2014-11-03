@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="formato14BGartServiceImpl")
 public class Formato14BGartServiceImpl implements Formato14BGartService {
@@ -24,11 +25,13 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 	private Formato14BDDao formato14BDDao;
 	
 	@Override
+	@Transactional
 	public List<FiseFormato14BC> listarFormato14BC() {
 		return formato14BCDao.listarFormato14BC();
 	}
 	
 	@Override
+	@Transactional
 	public List<FiseFormato14BD> listarFormato14BD() {
 		return formato14BDDao.listarFormato14BD();
 	}

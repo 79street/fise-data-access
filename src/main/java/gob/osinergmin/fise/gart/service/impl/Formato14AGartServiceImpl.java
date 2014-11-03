@@ -50,11 +50,13 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 	private Formato14ADObDao formato14AObsDao;
 	
 	@Override
+	@Transactional
 	public FiseFormato14AD obtenerFormato14ADVigente(String codEmpresa, long anioVigencia, long idZonaBenef){
 		return formato14ADDao.obtenerFormato14ADVigente(codEmpresa, anioVigencia, idZonaBenef);
 	}
 
 	@Override
+	@Transactional
 	public FiseFormato14AC obtenerFormato14ACByPK(FiseFormato14ACPK fiseFormato14ACPK) {
 		FiseFormato14AC formato = null;
 		formato = formato14ACDao.obtenerFormato14ACByPK(fiseFormato14ACPK);
@@ -65,6 +67,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 	}
 	
 	@Override
+	@Transactional
 	public List<FiseFormato14AC> buscarFormato14AC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa){
 		
 		List<FiseFormato14AC> lista = null;

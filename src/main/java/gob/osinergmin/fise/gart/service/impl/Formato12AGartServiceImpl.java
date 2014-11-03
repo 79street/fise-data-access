@@ -508,11 +508,13 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	} 
 	
 	@Override
+	@Transactional
 	public boolean existeFormato12AC(FiseFormato12AC fiseFormato12AC) {
 		return formato12ACDao.existeFormato12AC(fiseFormato12AC);
 	}
 
 	@Override
+	@Transactional
 	public List<FiseFormato12AC> buscarFormato12AC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa){
 		
 		List<FiseFormato12AC> lista = null;
@@ -656,6 +658,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	}
 	
 	@Override
+	@Transactional
 	public int obtenerSecuencia() {
 		return formato12ACDao.obtenerSecuencia();
 	}
@@ -667,6 +670,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	}
 
 	@Override
+	@Transactional
 	public List<FiseFormato12ADOb> listarFormato12ADObByFormato12AD(FiseFormato12AD formato12AD){
 		return formato12AObsDao.listarFormato12ADObByFormato12AD(formato12AD); 
 	}

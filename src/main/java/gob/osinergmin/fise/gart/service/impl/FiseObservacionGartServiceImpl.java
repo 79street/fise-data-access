@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="fiseObservacionGartServiceImpl")
 public class FiseObservacionGartServiceImpl implements FiseObservacionGartService {
@@ -18,6 +19,7 @@ public class FiseObservacionGartServiceImpl implements FiseObservacionGartServic
 	private FiseObservacionDao fiseObservacionDao;
 	
 	@Override
+	@Transactional
 	public List<FiseObservacion> listarFiseObservacion() {
 		return fiseObservacionDao.listarFiseObservacion();
 	}

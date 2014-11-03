@@ -1,8 +1,26 @@
 package gob.osinergmin.fise.bean;
 
+import gob.osinergmin.fise.domain.AdmEmpresa;
+import gob.osinergmin.fise.domain.FisePeriodoEnvio;
+
+import java.util.List;
+import java.util.Map;
+
 
 public class Formato14CBean {
 
+	/*******DATOS PARA BUSQUEDA**************/
+	private Map<Long,String> listaMes;
+	private List<AdmEmpresa> listaEmpresas;
+	private String mesDesde;
+	private String anioDesde;
+	private String mesHasta;
+	private String anioHasta;	
+	private String codEmpresaBusq;
+	private String etapaBusq;	
+	private boolean admin;	
+	
+	/**DATOS PARA NUEVO REGISTRO*****/
 	/**datos de la cabecera*/
 	private String codEmpresa;
 	private String anioPres;
@@ -17,6 +35,10 @@ public class Formato14CBean {
 	private String costoPromRural;//costo promedio mensual utiles rural
 	private String costoPromUrbProv;//costo promedio mensual utiles urbano provincias
 	private String costoPromUrbLima;//costo promedio mensual utiles urbano lima	
+	
+	private List<FisePeriodoEnvio> listaPeriodoEnvio;
+	//private String codigoPeriodo;
+	private String periodoEnvio;
 	
 	 /**datos del detalle de la cabecera*/
 	private String idZonaBenef;
@@ -844,6 +866,76 @@ public class Formato14CBean {
 	 */
 	public void setCostILAsist(String costILAsist) {
 		this.costILAsist = costILAsist;
-	}	
+	}
+	public Map<Long, String> getListaMes() {
+		return listaMes;
+	}
+	public void setListaMes(Map<Long, String> listaMes) {
+		this.listaMes = listaMes;
+	}
+	public List<AdmEmpresa> getListaEmpresas() {
+		return listaEmpresas;
+	}
+	public void setListaEmpresas(List<AdmEmpresa> listaEmpresas) {
+		this.listaEmpresas = listaEmpresas;
+	}
+	public String getMesDesde() {
+		return mesDesde;
+	}
+	public void setMesDesde(String mesDesde) {
+		this.mesDesde = mesDesde;
+	}
+	public String getAnioDesde() {
+		return anioDesde;
+	}
+	public void setAnioDesde(String anioDesde) {
+		this.anioDesde = anioDesde;
+	}
+	public String getMesHasta() {
+		return mesHasta;
+	}
+	public void setMesHasta(String mesHasta) {
+		this.mesHasta = mesHasta;
+	}
+	public String getAnioHasta() {
+		return anioHasta;
+	}
+	public void setAnioHasta(String anioHasta) {
+		this.anioHasta = anioHasta;
+	}
+	public String getEtapaBusq() {
+		return etapaBusq;
+	}
+	public void setEtapaBusq(String etapaBusq) {
+		this.etapaBusq = etapaBusq;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public String getCodEmpresaBusq() {
+		return codEmpresaBusq;
+	}
+	public void setCodEmpresaBusq(String codEmpresaBusq) {
+		this.codEmpresaBusq = codEmpresaBusq;
+	}
+	public List<FisePeriodoEnvio> getListaPeriodoEnvio() {
+		return listaPeriodoEnvio;
+	}
+	public void setListaPeriodoEnvio(List<FisePeriodoEnvio> listaPeriodoEnvio) {
+		this.listaPeriodoEnvio = listaPeriodoEnvio;
+	}
+	public String getPeriodoEnvio() {
+		return periodoEnvio;
+	}
+	public void setPeriodoEnvio(String periodoEnvio) {
+		this.periodoEnvio = periodoEnvio;
+	}
+	
+	
+	
+	
 	
 }

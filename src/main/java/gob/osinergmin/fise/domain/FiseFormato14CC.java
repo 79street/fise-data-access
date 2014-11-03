@@ -19,6 +19,16 @@ public class FiseFormato14CC implements Serializable {
 	@EmbeddedId
 	private FiseFormato14CCPK id;
 
+	@Transient
+	private String descEmpresa;
+	
+	@Transient
+	private String descEstado;
+	
+	@Transient
+	private String descMesPresentacion;	
+	
+	
 	@Column(name="COSTO_PROM_MEN_RURAL")
 	private BigDecimal costoPromMenRural;
 
@@ -247,5 +257,33 @@ public class FiseFormato14CC implements Serializable {
 
 		return fiseFormato14cD;
 	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+	
+	
+	
+	
 
 }

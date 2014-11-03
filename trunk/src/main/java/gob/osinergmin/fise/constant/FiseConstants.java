@@ -20,6 +20,7 @@ public class FiseConstants {
 	public final static String ETAPA_RECONOCIDO= "RECONOCIDO";
 	
 	public final static String NOMBRE_FORMATO_12A = "F12A";
+	public final static String NOMBRE_FORMATO_14C = "F14C";
 	
 	public final static long ZONABENEF_RURAL_COD = 1;
 	public final static long ZONABENEF_PROVINCIA_COD = 2;

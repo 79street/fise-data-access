@@ -17,6 +17,7 @@ public interface Formato14CGartService {
     void insertarDatosFormato14C(Formato14CBean bean) 
     		throws Exception;
     
-    
+    List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
+			long anioHasta, long mesDesde, long mesHasta, String etapa) throws Exception;
 
 }

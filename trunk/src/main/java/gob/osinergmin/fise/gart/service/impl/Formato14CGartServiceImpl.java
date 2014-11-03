@@ -679,6 +679,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	public void eliminarDatosFormato14C(Formato14CBean bean) throws Exception{
 		
 	}
+
+	@Override
+	@Transactional
+	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa,
+			long anioDesde, long anioHasta, long mesDesde, long mesHasta,
+			String etapa) throws Exception {		
+		return formato14CCDao.buscarFiseFormato14CC(codEmpresa, anioDesde, anioHasta, mesDesde, mesHasta, etapa); 
+	}
+	
+	
+	
 	
 
 }

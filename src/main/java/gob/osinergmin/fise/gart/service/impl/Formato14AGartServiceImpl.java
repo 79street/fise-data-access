@@ -220,7 +220,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleProvincia.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaP());
 				detalleProvincia.setImpresionFichasVerificacion(formulario.getImprFichaVerifP());
 				detalleProvincia.setRepartoEsquelaInvitacion(formulario.getRepartoEsqInvitP());
-				detalleProvincia.setVerificacionInformacion(formulario.getVerifInfoR());
+				detalleProvincia.setVerificacionInformacion(formulario.getVerifInfoP());
 				detalleProvincia.setElaboracionArchivoBenef(formulario.getElabArchivoBenefP());
 				detalleProvincia.setDigitacionFichaBenef(formulario.getDigitFichaBenefP());
 				
@@ -311,7 +311,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleLima.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaL());
 				detalleLima.setImpresionFichasVerificacion(formulario.getImprFichaVerifL());
 				detalleLima.setRepartoEsquelaInvitacion(formulario.getRepartoEsqInvitL());
-				detalleLima.setVerificacionInformacion(formulario.getVerifInfoR());
+				detalleLima.setVerificacionInformacion(formulario.getVerifInfoL());
 				detalleLima.setElaboracionArchivoBenef(formulario.getElabArchivoBenefL());
 				detalleLima.setDigitacionFichaBenef(formulario.getDigitFichaBenefL());
 				
@@ -519,7 +519,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleProvincia.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaP());
 				detalleProvincia.setImpresionFichasVerificacion(formulario.getImprFichaVerifP());
 				detalleProvincia.setRepartoEsquelaInvitacion(formulario.getRepartoEsqInvitP());
-				detalleProvincia.setVerificacionInformacion(formulario.getVerifInfoR());
+				detalleProvincia.setVerificacionInformacion(formulario.getVerifInfoP());
 				detalleProvincia.setElaboracionArchivoBenef(formulario.getElabArchivoBenefP());
 				detalleProvincia.setDigitacionFichaBenef(formulario.getDigitFichaBenefP());
 				
@@ -591,7 +591,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleLima.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaL());
 				detalleLima.setImpresionFichasVerificacion(formulario.getImprFichaVerifL());
 				detalleLima.setRepartoEsquelaInvitacion(formulario.getRepartoEsqInvitL());
-				detalleLima.setVerificacionInformacion(formulario.getVerifInfoR());
+				detalleLima.setVerificacionInformacion(formulario.getVerifInfoP());
 				detalleLima.setElaboracionArchivoBenef(formulario.getElabArchivoBenefL());
 				detalleLima.setDigitacionFichaBenef(formulario.getDigitFichaBenefL());
 				

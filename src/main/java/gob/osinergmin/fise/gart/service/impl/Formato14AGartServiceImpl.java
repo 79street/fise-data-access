@@ -863,57 +863,57 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_R_F14A, formato14ABean.getCostoUnitAgentR());
 		
 		////----PROVINCIAS
-		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_P_F14A,formato14ABean.getSumEmpadDifusionR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_P_F14A, formato14ABean.getImprEsqInvitR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_P_F14A, formato14ABean.getImprDeclaJuradaR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_P_F14A, formato14ABean.getImprFichaVerifR());
-		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_P_F14A, formato14ABean.getRepartoEsqInvitR());
-		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_P_F14A, formato14ABean.getVerifInfoR());
-		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_P_F14A, formato14ABean.getElabArchivoBenefR());
-		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_P_F14A, formato14ABean.getDigitFichaBenefR());
-		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_P_F14A, formato14ABean.getTotalEmpadR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_P_F14A, formato14ABean.getImprVolantesR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_P_F14A, formato14ABean.getImprAfichesR());
-		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_P_F14A, formato14ABean.getRepFolletosR());
-		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_P_F14A, formato14ABean.getSpotPublTvR());
-		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_P_F14A, formato14ABean.getSpotPublRadioR());
-		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_P_F14A, formato14ABean.getTotalDifIniProgR());
-		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_P_F14A, formato14ABean.getNroBenefEmpadR());
-		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_P_F14A, formato14ABean.getCostoUnitEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_P_F14A,formato14ABean.getSumEmpadDifusionP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_P_F14A, formato14ABean.getImprEsqInvitP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_P_F14A, formato14ABean.getImprDeclaJuradaP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_P_F14A, formato14ABean.getImprFichaVerifP());
+		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_P_F14A, formato14ABean.getRepartoEsqInvitP());
+		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_P_F14A, formato14ABean.getVerifInfoP());
+		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_P_F14A, formato14ABean.getElabArchivoBenefP());
+		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_P_F14A, formato14ABean.getDigitFichaBenefP());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_P_F14A, formato14ABean.getTotalEmpadP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_P_F14A, formato14ABean.getImprVolantesP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_P_F14A, formato14ABean.getImprAfichesP());
+		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_P_F14A, formato14ABean.getRepFolletosP());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_P_F14A, formato14ABean.getSpotPublTvP());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_P_F14A, formato14ABean.getSpotPublRadioP());
+		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_P_F14A, formato14ABean.getTotalDifIniProgP());
+		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_P_F14A, formato14ABean.getNroBenefEmpadP());
+		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_P_F14A, formato14ABean.getCostoUnitEmpadP());
 		
-		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_P_F14A, formato14ABean.getTotalCostoAgentR());
-		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_P_F14A, formato14ABean.getPromConvAgentR());
-		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_P_F14A, formato14ABean.getRegConvAgentR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_P_F14A, formato14ABean.getImpEntrBandR());
-		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_P_F14A, formato14ABean.getNroAgentR());
-		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_P_F14A, formato14ABean.getCostoUnitAgentR());
+		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_P_F14A, formato14ABean.getTotalCostoAgentP());
+		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_P_F14A, formato14ABean.getPromConvAgentP());
+		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_P_F14A, formato14ABean.getRegConvAgentP());
+		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_P_F14A, formato14ABean.getImpEntrBandP());
+		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_P_F14A, formato14ABean.getNroAgentP());
+		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_P_F14A, formato14ABean.getCostoUnitAgentP());
 		
 		////-----LIMA
 		
-		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_L_F14A,formato14ABean.getSumEmpadDifusionR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_L_F14A, formato14ABean.getImprEsqInvitR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_L_F14A, formato14ABean.getImprDeclaJuradaR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_L_F14A, formato14ABean.getImprFichaVerifR());
-		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_L_F14A, formato14ABean.getRepartoEsqInvitR());
-		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_L_F14A, formato14ABean.getVerifInfoR());
-		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_L_F14A, formato14ABean.getElabArchivoBenefR());
-		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_L_F14A, formato14ABean.getDigitFichaBenefR());
-		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_L_F14A, formato14ABean.getTotalEmpadR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_L_F14A, formato14ABean.getImprVolantesR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_L_F14A, formato14ABean.getImprAfichesR());
-		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_L_F14A, formato14ABean.getRepFolletosR());
-		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_L_F14A, formato14ABean.getSpotPublTvR());
-		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_L_F14A, formato14ABean.getSpotPublRadioR());
-		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_L_F14A, formato14ABean.getTotalDifIniProgR());
-		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_L_F14A, formato14ABean.getNroBenefEmpadR());
-		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_L_F14A, formato14ABean.getCostoUnitEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_L_F14A,formato14ABean.getSumEmpadDifusionL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_L_F14A, formato14ABean.getImprEsqInvitL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_L_F14A, formato14ABean.getImprDeclaJuradaL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_L_F14A, formato14ABean.getImprFichaVerifL());
+		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_L_F14A, formato14ABean.getRepartoEsqInvitL());
+		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_L_F14A, formato14ABean.getVerifInfoL());
+		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_L_F14A, formato14ABean.getElabArchivoBenefL());
+		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_L_F14A, formato14ABean.getDigitFichaBenefL());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_L_F14A, formato14ABean.getTotalEmpadL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_L_F14A, formato14ABean.getImprVolantesL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_L_F14A, formato14ABean.getImprAfichesL());
+		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_L_F14A, formato14ABean.getRepFolletosL());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_L_F14A, formato14ABean.getSpotPublTvL());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_L_F14A, formato14ABean.getSpotPublRadioL());
+		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_L_F14A, formato14ABean.getTotalDifIniProgL());
+		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_L_F14A, formato14ABean.getNroBenefEmpadL());
+		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_L_F14A, formato14ABean.getCostoUnitEmpadL());
 		
-		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_L_F14A, formato14ABean.getTotalCostoAgentR());
-		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_L_F14A, formato14ABean.getPromConvAgentR());
-		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_L_F14A, formato14ABean.getRegConvAgentR());
-		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_L_F14A, formato14ABean.getImpEntrBandR());
-		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_L_F14A, formato14ABean.getNroAgentR());
-		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_L_F14A, formato14ABean.getCostoUnitAgentR());
+		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_L_F14A, formato14ABean.getTotalCostoAgentL());
+		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_L_F14A, formato14ABean.getPromConvAgentL());
+		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_L_F14A, formato14ABean.getRegConvAgentL());
+		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_L_F14A, formato14ABean.getImpEntrBandL());
+		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_L_F14A, formato14ABean.getNroAgentL());
+		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_L_F14A, formato14ABean.getCostoUnitAgentL());
 		
 		return mapJRParams;
 	}

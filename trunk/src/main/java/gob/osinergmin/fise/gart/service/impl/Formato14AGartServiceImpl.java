@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -697,6 +698,224 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			formato14ADDao.eliminarFormato14AD(detalle);
 		}
 		formato14ACDao.eliminarFormato14AC(fiseFormato14AC);
+	}
+	
+	//reporte
+	@Override
+	public Formato14ACBean estructurarFormato14ABeanByFiseFormato14AC(FiseFormato14AC formato){
+		
+		Formato14ACBean formato14ABean = new Formato14ACBean();
+		
+		formato14ABean.setAnioPresent(formato.getId().getAnoPresentacion());
+		formato14ABean.setAnioInicioVigencia(formato.getId().getAnoInicioVigencia());
+		formato14ABean.setAnioFinVigencia(formato.getId().getAnoFinVigencia());
+		
+    	for (FiseFormato14AD detalle : formato.getFiseFormato14ADs()) {
+			if( FiseConstants.ZONABENEF_RURAL_COD == detalle.getId().getIdZonaBenef() ){
+				formato14ABean.setImprEsqInvitR(detalle.getImpresionEsquelaInvitacion());
+				formato14ABean.setImprDeclaJuradaR(detalle.getImpresionDeclaracionJurada());
+				formato14ABean.setImprEsqInvitR(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setRepartoEsqInvitR(detalle.getRepartoEsquelaInvitacion());
+				formato14ABean.setVerifInfoR(detalle.getVerificacionInformacion());
+				formato14ABean.setElabArchivoBenefR(detalle.getElaboracionArchivoBenef());
+				formato14ABean.setDigitFichaBenefR(detalle.getDigitacionFichaBenef());
+				// total  de empadronamiento
+				formato14ABean.setTotalEmpadR(detalle.getTotalEmpadronamiento());
+				
+				formato14ABean.setImprVolantesR(detalle.getImpresionVolantes());
+				formato14ABean.setImprAfichesR(detalle.getImpresionAfiches());
+				formato14ABean.setRepFolletosR(detalle.getRepartoFolletoPotenciaBenef());
+				formato14ABean.setSpotPublTvR(detalle.getSpotPublicitarioRadio());
+				formato14ABean.setSpotPublRadioR(detalle.getSpotPublicitarioTv());
+				// Suma de total de difusion
+				formato14ABean.setTotalDifIniProgR(detalle.getTotalDifusionInicioPrgFise());
+				
+				formato14ABean.setNroBenefEmpadR(detalle.getNumeroBenefEmpadroMesDic());
+				//suma del empadronamiento + difusion
+				BigDecimal sumTotalEmpadDifusionR = new BigDecimal(0);
+				sumTotalEmpadDifusionR=sumTotalEmpadDifusionR.add(detalle.getTotalEmpadronamiento())
+							.add(detalle.getTotalDifusionInicioPrgFise());
+				formato14ABean.setSumEmpadDifusionR(sumTotalEmpadDifusionR);
+				// Costo unitario por empadronamiento
+				formato14ABean.setCostoUnitEmpadR(detalle.getCostoUnitarioEmpadronamiento());
+				
+				formato14ABean.setPromConvAgentR(detalle.getPromocionConvenioAgAutGlp());
+				formato14ABean.setRegConvAgentR(detalle.getRegistroFirmaConvAgAutGlp());
+				formato14ABean.setImpEntrBandR(detalle.getImpresionEntregaBanderola());
+				formato14ABean.setNroAgentR(detalle.getNumeroAgentes());
+				//total agentes
+				formato14ABean.setTotalCostoAgentR(detalle.getTotalCostoGestionRedAgGlp());
+				// Costo unitario por Agente
+				formato14ABean.setCostoUnitAgentR(detalle.getCostoUntitarioAgenteGlp());
+				
+			}else if( FiseConstants.ZONABENEF_PROVINCIA_COD == detalle.getId().getIdZonaBenef() ){
+				formato14ABean.setImprEsqInvitP(detalle.getImpresionEsquelaInvitacion());
+				formato14ABean.setImprDeclaJuradaP(detalle.getImpresionDeclaracionJurada());
+				formato14ABean.setImprEsqInvitP(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setRepartoEsqInvitP(detalle.getRepartoEsquelaInvitacion());
+				formato14ABean.setVerifInfoP(detalle.getVerificacionInformacion());
+				formato14ABean.setElabArchivoBenefP(detalle.getElaboracionArchivoBenef());
+				formato14ABean.setDigitFichaBenefP(detalle.getDigitacionFichaBenef());
+				// total  de empadronamiento
+				formato14ABean.setTotalEmpadP(detalle.getTotalEmpadronamiento());
+				
+				formato14ABean.setImprVolantesP(detalle.getImpresionVolantes());
+				formato14ABean.setImprAfichesP(detalle.getImpresionAfiches());
+				formato14ABean.setRepFolletosP(detalle.getRepartoFolletoPotenciaBenef());
+				formato14ABean.setSpotPublTvP(detalle.getSpotPublicitarioRadio());
+				formato14ABean.setSpotPublRadioP(detalle.getSpotPublicitarioTv());
+				// Suma de total de difusion
+				formato14ABean.setTotalDifIniProgP(detalle.getTotalDifusionInicioPrgFise());
+				
+				formato14ABean.setNroBenefEmpadP(detalle.getNumeroBenefEmpadroMesDic());
+				//suma del empadronamiento + difusion
+				BigDecimal sumTotalEmpadDifusionR = new BigDecimal(0);
+				sumTotalEmpadDifusionR=sumTotalEmpadDifusionR.add(detalle.getTotalEmpadronamiento())
+							.add(detalle.getTotalDifusionInicioPrgFise());
+				formato14ABean.setSumEmpadDifusionP(sumTotalEmpadDifusionR);
+				// Costo unitario por empadronamiento
+				formato14ABean.setCostoUnitEmpadP(detalle.getCostoUnitarioEmpadronamiento());
+				
+				formato14ABean.setPromConvAgentP(detalle.getPromocionConvenioAgAutGlp());
+				formato14ABean.setRegConvAgentP(detalle.getRegistroFirmaConvAgAutGlp());
+				formato14ABean.setImpEntrBandP(detalle.getImpresionEntregaBanderola());
+				formato14ABean.setNroAgentP(detalle.getNumeroAgentes());
+				//total agentes
+				formato14ABean.setTotalCostoAgentP(detalle.getTotalCostoGestionRedAgGlp());
+				// Costo unitario por Agente
+				formato14ABean.setCostoUnitAgentP(detalle.getCostoUntitarioAgenteGlp());
+				
+			}else if( FiseConstants.ZONABENEF_LIMA_COD == detalle.getId().getIdZonaBenef() ){
+				formato14ABean.setImprEsqInvitL(detalle.getImpresionEsquelaInvitacion());
+				formato14ABean.setImprDeclaJuradaL(detalle.getImpresionDeclaracionJurada());
+				formato14ABean.setImprEsqInvitL(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setRepartoEsqInvitL(detalle.getRepartoEsquelaInvitacion());
+				formato14ABean.setVerifInfoL(detalle.getVerificacionInformacion());
+				formato14ABean.setElabArchivoBenefL(detalle.getElaboracionArchivoBenef());
+				formato14ABean.setDigitFichaBenefL(detalle.getDigitacionFichaBenef());
+				// total  de empadronamiento
+				formato14ABean.setTotalEmpadL(detalle.getTotalEmpadronamiento());
+				
+				formato14ABean.setImprVolantesL(detalle.getImpresionVolantes());
+				formato14ABean.setImprAfichesL(detalle.getImpresionAfiches());
+				formato14ABean.setRepFolletosL(detalle.getRepartoFolletoPotenciaBenef());
+				formato14ABean.setSpotPublTvL(detalle.getSpotPublicitarioRadio());
+				formato14ABean.setSpotPublRadioL(detalle.getSpotPublicitarioTv());
+				// Suma de total de difusion
+				formato14ABean.setTotalDifIniProgL(detalle.getTotalDifusionInicioPrgFise());
+				
+				formato14ABean.setNroBenefEmpadL(detalle.getNumeroBenefEmpadroMesDic());
+				//suma del empadronamiento + difusion
+				BigDecimal sumTotalEmpadDifusionR = new BigDecimal(0);
+				sumTotalEmpadDifusionR=sumTotalEmpadDifusionR.add(detalle.getTotalEmpadronamiento())
+							.add(detalle.getTotalDifusionInicioPrgFise());
+				formato14ABean.setSumEmpadDifusionL(sumTotalEmpadDifusionR);
+				// Costo unitario por empadronamiento
+				formato14ABean.setCostoUnitEmpadL(detalle.getCostoUnitarioEmpadronamiento());
+				
+				formato14ABean.setPromConvAgentL(detalle.getPromocionConvenioAgAutGlp());
+				formato14ABean.setRegConvAgentL(detalle.getRegistroFirmaConvAgAutGlp());
+				formato14ABean.setImpEntrBandL(detalle.getImpresionEntregaBanderola());
+				formato14ABean.setNroAgentL(detalle.getNumeroAgentes());
+				//total agentes
+				formato14ABean.setTotalCostoAgentL(detalle.getTotalCostoGestionRedAgGlp());
+				// Costo unitario por Agente
+				formato14ABean.setCostoUnitAgentL(detalle.getCostoUntitarioAgenteGlp());
+			}
+		}
+
+		return formato14ABean;	
+	}
+ 
+ 	@Override
+	public HashMap<String, Object> mapearParametrosFormato14A(Formato14ACBean formato14ABean){
+		
+		HashMap<String, Object> mapJRParams = new HashMap<String, Object>();
+		
+		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA_F14A, formato14ABean.getDescEmpresa());
+		mapJRParams.put(FiseConstants.PARAM_ANO_PRES_F14A, formato14ABean.getAnioPresent());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRES_F14A, formato14ABean.getDescMesPresentacion());
+		
+		////----RURAL
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_R_F14A,formato14ABean.getSumEmpadDifusionR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_R_F14A, formato14ABean.getImprEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_R_F14A, formato14ABean.getImprDeclaJuradaR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_R_F14A, formato14ABean.getImprFichaVerifR());
+		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_R_F14A, formato14ABean.getRepartoEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_R_F14A, formato14ABean.getVerifInfoR());
+		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_R_F14A, formato14ABean.getElabArchivoBenefR());
+		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_R_F14A, formato14ABean.getDigitFichaBenefR());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_R_F14A, formato14ABean.getTotalEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_R_F14A, formato14ABean.getImprVolantesR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_R_F14A, formato14ABean.getImprAfichesR());
+		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_R_F14A, formato14ABean.getRepFolletosR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_R_F14A, formato14ABean.getSpotPublTvR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_R_F14A, formato14ABean.getSpotPublRadioR());
+		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_R_F14A, formato14ABean.getTotalDifIniProgR());
+		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_R_F14A, formato14ABean.getNroBenefEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_R_F14A, formato14ABean.getCostoUnitEmpadR());
+		
+		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_R_F14A, formato14ABean.getTotalCostoAgentR());
+		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_R_F14A, formato14ABean.getPromConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_R_F14A, formato14ABean.getRegConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_R_F14A, formato14ABean.getImpEntrBandR());
+		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_R_F14A, formato14ABean.getNroAgentR());
+		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_R_F14A, formato14ABean.getCostoUnitAgentR());
+		
+		////----PROVINCIAS
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_P_F14A,formato14ABean.getSumEmpadDifusionR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_P_F14A, formato14ABean.getImprEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_P_F14A, formato14ABean.getImprDeclaJuradaR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_P_F14A, formato14ABean.getImprFichaVerifR());
+		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_P_F14A, formato14ABean.getRepartoEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_P_F14A, formato14ABean.getVerifInfoR());
+		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_P_F14A, formato14ABean.getElabArchivoBenefR());
+		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_P_F14A, formato14ABean.getDigitFichaBenefR());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_P_F14A, formato14ABean.getTotalEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_P_F14A, formato14ABean.getImprVolantesR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_P_F14A, formato14ABean.getImprAfichesR());
+		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_P_F14A, formato14ABean.getRepFolletosR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_P_F14A, formato14ABean.getSpotPublTvR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_P_F14A, formato14ABean.getSpotPublRadioR());
+		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_P_F14A, formato14ABean.getTotalDifIniProgR());
+		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_P_F14A, formato14ABean.getNroBenefEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_P_F14A, formato14ABean.getCostoUnitEmpadR());
+		
+		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_P_F14A, formato14ABean.getTotalCostoAgentR());
+		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_P_F14A, formato14ABean.getPromConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_P_F14A, formato14ABean.getRegConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_P_F14A, formato14ABean.getImpEntrBandR());
+		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_P_F14A, formato14ABean.getNroAgentR());
+		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_P_F14A, formato14ABean.getCostoUnitAgentR());
+		
+		////-----LIMA
+		
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_L_F14A,formato14ABean.getSumEmpadDifusionR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_ESQ_INV_L_F14A, formato14ABean.getImprEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_DECJUR_L_F14A, formato14ABean.getImprDeclaJuradaR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_FCH_VRFC_L_F14A, formato14ABean.getImprFichaVerifR());
+		mapJRParams.put(FiseConstants.PARAM_RPT_EQL_INV_L_F14A, formato14ABean.getRepartoEsqInvitR());
+		mapJRParams.put(FiseConstants.PARAM_VRF_INFOR_L_F14A, formato14ABean.getVerifInfoR());
+		mapJRParams.put(FiseConstants.PARAM_ELBRCION_ACHVOS_L_F14A, formato14ABean.getElabArchivoBenefR());
+		mapJRParams.put(FiseConstants.PARAM_DGTCION_FCHAS_L_F14A, formato14ABean.getDigitFichaBenefR());
+		mapJRParams.put(FiseConstants.PARAM_SUM_EMPADR_L_F14A, formato14ABean.getTotalEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_VOL_L_F14A, formato14ABean.getImprVolantesR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_AFCHES_L_F14A, formato14ABean.getImprAfichesR());
+		mapJRParams.put(FiseConstants.PARAM_RPTO_FLLETOS_L_F14A, formato14ABean.getRepFolletosR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_TV_L_F14A, formato14ABean.getSpotPublTvR());
+		mapJRParams.put(FiseConstants.PARAM_SPORT_RADIO_L_F14A, formato14ABean.getSpotPublRadioR());
+		mapJRParams.put(FiseConstants.PARAM_SUMA_DIFUSION_L_F14A, formato14ABean.getTotalDifIniProgR());
+		mapJRParams.put(FiseConstants.PARAM_NRO_BNFCIARIOS_L_F14A, formato14ABean.getNroBenefEmpadR());
+		mapJRParams.put(FiseConstants.PARAM_CSTO_UNIT_L_F14A, formato14ABean.getCostoUnitEmpadR());
+		
+		mapJRParams.put(FiseConstants.PARAM_SUMCSTO_GSTION_L_F14A, formato14ABean.getTotalCostoAgentR());
+		mapJRParams.put(FiseConstants.PARAM_PROM_AGENTES_L_F14A, formato14ABean.getPromConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_RGTROS_AGENTES_L_F14A, formato14ABean.getRegConvAgentR());
+		mapJRParams.put(FiseConstants.PARAM_IMP_BANDER_L_F14A, formato14ABean.getImpEntrBandR());
+		mapJRParams.put(FiseConstants.PARAM_NUM_AGENTES_L_F14A, formato14ABean.getNroAgentR());
+		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_L_F14A, formato14ABean.getCostoUnitAgentR());
+		
+		return mapJRParams;
 	}
 	
 }

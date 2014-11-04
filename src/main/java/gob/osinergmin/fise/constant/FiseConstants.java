@@ -286,6 +286,93 @@ public class FiseConstants {
 	public final static String PARAM_TOTAL_ACTIV_F12A = "TOTAL_ACTIV_EXTRAORD";
 	public final static String PARAM_TOTAL_GENERAL_F12A = "TOTAL_GENERAL";
 	
+	//FORMATO 14 A
+
+	public final static String PARAM_DESC_EMPRESA_F14A = "DESC_EMPRESA";
+	public final static String PARAM_ANO_PRES_F14A = "ANO_PRESENTACION";
+	public final static String PARAM_DESC_MES_PRES_F14A = "DESC_MES_PRESENTACION";
+	
+	public final static String PARAM_SUM_EMP_SUMI_R_F14A = "SUM_EMPAD_Y_DIFUSION_R";
+	public final static String PARAM_IMP_ESQ_INV_R_F14A = "IMP_EQL_INV_R";
+	public final static String PARAM_IMP_DECJUR_R_F14A = "IMP_DCL_JUR_R";
+	public final static String PARAM_IMP_FCH_VRFC_R_F14A = "IMP_FCHAS_VRFCION_R";
+	public final static String PARAM_RPT_EQL_INV_R_F14A = "ESQ_INV_R";
+	public final static String PARAM_VRF_INFOR_R_F14A = "VRFCION_INF_R";
+	public final static String PARAM_ELBRCION_ACHVOS_R_F14A = "ELABOR_ARCH_R";
+	public final static String PARAM_DGTCION_FCHAS_R_F14A = "DGTCION_FCHAS_R";
+	public final static String PARAM_SUM_EMPADR_R_F14A = "SUM_EMPAD_R";
+	
+	public final static String PARAM_IMP_VOL_R_F14A = "IMP_VOL_R";
+	public final static String PARAM_IMP_AFCHES_R_F14A = "IMP_AFCHES_R";
+	public final static String PARAM_RPTO_FLLETOS_R_F14A = "RTO_FLLTOS_R";
+	public final static String PARAM_SPORT_TV_R_F14A = "SP_PUBLIC_R";
+	public final static String PARAM_SPORT_RADIO_R_F14A = "SP_PUBLIC_RADIO_R";
+	public final static String PARAM_SUMA_DIFUSION_R_F14A = "SUM_DIFUS_R";
+	
+	public final static String PARAM_NRO_BNFCIARIOS_R_F14A = "NRO_BNFCRIOS_R";
+	public final static String PARAM_CSTO_UNIT_R_F14A = "CTO_UNT_EMPAD_R";
+	public final static String PARAM_PROM_AGENTES_R_F14A = "PROM_AGTES_R";
+	public final static String PARAM_RGTROS_AGENTES_R_F14A = "RGTROS_FMAS_R";
+	public final static String PARAM_IMP_BANDER_R_F14A = "IMP_ENTREG_BAN_R";
+	public final static String PARAM_NUM_AGENTES_R_F14A = "NRO_AGENTES_R";
+	public final static String PARAM_SUMCSTO_GSTION_R_F14A = "CTO_GTION_RED_R";
+	public final static String PARAM_CSTOUNIT_AGENTES_R_F14A = "CTO_UNT_AGENTE_R";
+	
+	//----
+	public final static String PARAM_SUM_EMP_SUMI_P_F14A = "SUM_EMPAD_Y_DIFUSION_P";
+	public final static String PARAM_IMP_ESQ_INV_P_F14A = "IMP_EQL_INV_P";
+	public final static String PARAM_IMP_DECJUR_P_F14A = "IMP_DCL_JUR_P";
+	public final static String PARAM_IMP_FCH_VRFC_P_F14A = "IMP_FCHAS_VRFCION_P";
+	public final static String PARAM_RPT_EQL_INV_P_F14A = "ESQ_INV_P";
+	public final static String PARAM_VRF_INFOR_P_F14A = "VRFCION_INF_P";
+	public final static String PARAM_ELBRCION_ACHVOS_P_F14A = "ELABOR_ARCH_P";
+	public final static String PARAM_DGTCION_FCHAS_P_F14A = "DGTCION_FCHAS_P";
+	public final static String PARAM_SUM_EMPADR_P_F14A = "SUM_EMPAD_P";
+	
+	public final static String PARAM_IMP_VOL_P_F14A = "IMP_VOL_P";
+	public final static String PARAM_IMP_AFCHES_P_F14A = "IMP_AFCHES_P";
+	public final static String PARAM_RPTO_FLLETOS_P_F14A = "RTO_FLLTOS_P";
+	public final static String PARAM_SPORT_TV_P_F14A = "SP_PUBLIC_P";
+	public final static String PARAM_SPORT_RADIO_P_F14A = "SP_PUBLIC_RADIO_P";
+	public final static String PARAM_SUMA_DIFUSION_P_F14A = "SUM_DIFUS_P";
+	
+	public final static String PARAM_NRO_BNFCIARIOS_P_F14A = "NRO_BNFCRIOS_P";
+	public final static String PARAM_CSTO_UNIT_P_F14A = "CTO_UNT_EMPAD_P";
+	public final static String PARAM_PROM_AGENTES_P_F14A = "PROM_AGTES_P";
+	public final static String PARAM_RGTROS_AGENTES_P_F14A = "RGTROS_FMAS_P";
+	public final static String PARAM_IMP_BANDER_P_F14A = "IMP_ENTREG_BAN_P";
+	public final static String PARAM_NUM_AGENTES_P_F14A = "NRO_AGENTES_P";
+	public final static String PARAM_SUMCSTO_GSTION_P_F14A = "CTO_GTION_RED_P";
+	public final static String PARAM_CSTOUNIT_AGENTES_P_F14A = "CTO_UNT_AGENTE_P";
+	
+	//--
+	public final static String PARAM_SUM_EMP_SUMI_L_F14A = "SUM_EMPAD_Y_DIFUSION_L";
+	public final static String PARAM_IMP_ESQ_INV_L_F14A = "IMP_EQL_INV_L";
+	public final static String PARAM_IMP_DECJUR_L_F14A = "IMP_DCL_JUR_L";
+	public final static String PARAM_IMP_FCH_VRFC_L_F14A = "IMP_FCHAS_VRFCION_L";
+	public final static String PARAM_RPT_EQL_INV_L_F14A = "ESQ_INV_L";
+	public final static String PARAM_VRF_INFOR_L_F14A = "VRFCION_INF_L";
+	public final static String PARAM_ELBRCION_ACHVOS_L_F14A = "ELABOR_ARCH_L";
+	public final static String PARAM_DGTCION_FCHAS_L_F14A = "DGTCION_FCHAS_L";
+	public final static String PARAM_SUM_EMPADR_L_F14A = "SUM_EMPAD_L";
+	
+	
+	public final static String PARAM_IMP_VOL_L_F14A = "IMP_VOL_L";
+	public final static String PARAM_IMP_AFCHES_L_F14A = "IMP_AFCHES_L";
+	public final static String PARAM_RPTO_FLLETOS_L_F14A = "RTO_FLLTOS_L";
+	public final static String PARAM_SPORT_TV_L_F14A = "SP_PUBLIC_L";
+	public final static String PARAM_SPORT_RADIO_L_F14A = "SP_PUBLIC_RADIO_L";
+	public final static String PARAM_SUMA_DIFUSION_L_F14A = "SUM_DIFUS_L";
+	
+	public final static String PARAM_NRO_BNFCIARIOS_L_F14A = "NRO_BNFCRIOS_L";
+	public final static String PARAM_CSTO_UNIT_L_F14A = "CTO_UNT_EMPAD_L";
+	public final static String PARAM_PROM_AGENTES_L_F14A = "PROM_AGTES_L";
+	public final static String PARAM_RGTROS_AGENTES_L_F14A = "RGTROS_FMAS_L";
+	public final static String PARAM_IMP_BANDER_L_F14A = "IMP_ENTREG_BAN_L";
+	public final static String PARAM_NUM_AGENTES_L_F14A = "NRO_AGENTES_L";
+	public final static String PARAM_SUMCSTO_GSTION_L_F14A = "CTO_GTION_RED_L";
+	public final static String PARAM_CSTOUNIT_AGENTES_L_F14A = "CTO_UNT_AGENTE_L";
+	
 	//FORMATO 14C
 	public final static long TIPO_PERSONAL_CORDINADOR_COD = 1;
 	public final static long TIPO_PERSONAL_SUPERVISOR_COD = 2;

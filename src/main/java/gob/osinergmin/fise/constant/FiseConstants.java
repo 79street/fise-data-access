@@ -171,9 +171,9 @@ public class FiseConstants {
 	public final static int NRO_CELDA_EMPRESA_FORMATO14A = 6;
 	public final static int NRO_CELDA_ANIO_FORMATO14A = 6;
 	public final static int NRO_CELDA_MES_FORMATO14A = 7;
-	public final static int NRO_CELDA_RURAL_FORMATO14A = 9;
-	public final static int NRO_CELDA_PROVINCIA_FORMATO14A = 10;
-	public final static int NRO_CELDA_LIMA_FORMATO14A = 11;
+	public final static int NRO_CELDA_RURAL_FORMATO14A = 8;
+	public final static int NRO_CELDA_PROVINCIA_FORMATO14A = 9;
+	public final static int NRO_CELDA_LIMA_FORMATO14A = 10;
 	//public final static int NRO_MAX_FILAS_FORMATO12A = 3;
 	//public final static int TAMANIO_MAX_FILA_FORMATO12A = 159;
 	//

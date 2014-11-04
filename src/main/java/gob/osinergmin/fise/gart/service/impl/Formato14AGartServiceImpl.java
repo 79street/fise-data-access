@@ -161,7 +161,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleRural.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadR());
 				//costo
 				if( formulario.getNroBenefEmpadR() !=0 ){
-					detalleRural.setCostoUnitarioEmpadronamiento(detalleRural.getTotalEmpadronamiento().divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic())));
+					detalleRural.setCostoUnitarioEmpadronamiento(detalleRural.getTotalEmpadronamiento().divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -179,7 +179,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleRural.setNumeroAgentes(formulario.getNroAgentR());
 				//costo
 				if( formulario.getNroAgentR() !=0 ){
-					detalleRural.setCostoUntitarioAgenteGlp(detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes())));
+					detalleRural.setCostoUntitarioAgenteGlp(detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}

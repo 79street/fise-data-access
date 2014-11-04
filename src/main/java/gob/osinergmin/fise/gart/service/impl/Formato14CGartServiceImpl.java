@@ -54,6 +54,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
 	/**Metodo para listar el formato 14C*/
 	@Override
+	@Transactional
 	public List<FiseFormato14CC> listarFormato14CC() 
 			throws Exception{
 		return formato14CCDao.listarFormato14CC();
@@ -61,6 +62,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
 	/**Metodo para listar el formato 14C detalle*/
 	@Override
+	@Transactional
 	public List<FiseFormato14CD> listarFormato14CD() 
 			throws Exception{
 		return formato14CDDao.listarFormato14CD();
@@ -83,14 +85,14 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idCab.setCodEmpresa(bean.getCodEmpresa());
 			idCab.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idCab.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idCab.setAnoInicioVigencia(Long.valueOf(2009)); 
-			idCab.setAnoFinVigencia(Long.valueOf(2010)); 
+			idCab.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idCab.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 
 			idCab.setEtapa(bean.getEtapa()); 
 			//FIN PK
 			cab.setId(idCab);
 			cab.setNombreSede(bean.getNombreSede());
 			logger.info("Obtneniendo el obk informacion: "); 
-			FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000));			
+			FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000));	//falta		
 			logger.info("Obtneniendo el obk informacion: "+inf.getDescripcion()); 
 			cab.setFiseGrupoInformacion(inf);  
 			cab.setNombreArchivoExcel("");
@@ -102,8 +104,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));
 			cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));
 			cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima()));  
-			cab.setUsuarioCreacion("USER1");
-			cab.setTerminalCreacion("192.168.1.15");
+			cab.setUsuarioCreacion(bean.getUsuario());
+			cab.setTerminalCreacion(bean.getTerminal());
 			cab.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CCDao.insertarFiseFormato14CC(cab); 
 			logger.info("GRABO EN LA CABECERA OK");		
@@ -115,8 +117,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
@@ -125,8 +127,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det); 
 			/**Grabando el primer detalle Urbano Provincia-Coordinador**/
@@ -134,9 +136,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet = new FiseFormato14CDPK();		
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 		
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
@@ -145,8 +147,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det); 
 			/**Grabando el primer detalle Urbano Lima-Coordinador**/
@@ -155,8 +157,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
@@ -165,8 +167,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -176,8 +178,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
@@ -186,8 +188,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -197,8 +199,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
@@ -207,8 +209,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -218,8 +220,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
@@ -228,8 +230,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe())); 	
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -239,8 +241,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
@@ -249,8 +251,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -260,8 +262,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
@@ -270,8 +272,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -281,8 +283,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
@@ -291,8 +293,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanDLGest())); 				
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -302,8 +304,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
@@ -312,8 +314,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -323,8 +325,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
@@ -333,8 +335,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -344,8 +346,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
@@ -354,8 +356,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist()));	
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
-			det.setUsuarioCreacion("USER1");
-			det.setTerminalCreacion("192.168.1.15");
+			det.setUsuarioCreacion(bean.getUsuario());
+			det.setTerminalCreacion(bean.getTerminal());
 			det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
 			formato14CDDao.insertarFiseFormato14CD(det);
 			
@@ -392,8 +394,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idCab.setCodEmpresa(bean.getCodEmpresa());
 			idCab.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idCab.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idCab.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idCab.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idCab.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idCab.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 
 			idCab.setEtapa(bean.getEtapa()); 
 			//FIN PK
 			cab = formato14CCDao.obtenerFormato14CC(idCab);
@@ -409,8 +411,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));
 			cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));
 			cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima()));  
-			cab.setUsuarioActualizacion("USER2"); 
-			cab.setTerminalActualizacion("192.168.1.20"); 
+			cab.setUsuarioActualizacion(bean.getUsuario()); 
+			cab.setTerminalActualizacion(bean.getTerminal()); 
 			cab.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CCDao.actualizarFiseFormato14CC(cab); 
 		
@@ -421,8 +423,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
@@ -431,8 +433,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det); 
 			
@@ -441,8 +443,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
@@ -451,8 +453,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord())); 		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
 			formato14CDDao.actualizarFiseFormato14CD(det); 
 			
@@ -461,8 +463,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
@@ -471,8 +473,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -481,8 +483,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
@@ -491,8 +493,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe()));		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -501,8 +503,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
@@ -511,8 +513,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe()));		
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -521,8 +523,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
@@ -531,8 +533,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -541,8 +543,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
@@ -551,8 +553,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -561,8 +563,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
@@ -571,8 +573,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -581,8 +583,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
@@ -591,8 +593,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILGest()));			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -601,8 +603,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
@@ -611,8 +613,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -621,8 +623,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
@@ -631,8 +633,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist())); 			
 			det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			
@@ -641,8 +643,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idDet.setCodEmpresa(bean.getCodEmpresa());
 			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
 			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioPres())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioPres())); 
+			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnioInicioVig())); 
+			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnioFinVig())); 	
 			idDet.setEtapa(bean.getEtapa()); 
 			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
 			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
@@ -651,8 +653,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist())); 			 
 			det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
 			det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
-			det.setUsuarioActualizacion("USER2"); 
-			det.setTerminalActualizacion("192.168.1.20"); 
+			det.setUsuarioActualizacion(bean.getUsuario()); 
+			det.setTerminalActualizacion(bean.getTerminal()); 
 			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
 			formato14CDDao.actualizarFiseFormato14CD(det);
 			

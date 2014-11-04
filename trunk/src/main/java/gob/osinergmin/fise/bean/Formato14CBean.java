@@ -25,16 +25,23 @@ public class Formato14CBean {
 	private String codEmpresa;
 	private String anioPres;
 	private String mesPres;	
-	private String etapa;
+	private String anioInicioVig;
+	private String anioFinVig;
+	private String etapa;	
 	private String nombreSede;
 	private String nombreExel;
 	private String nombreText;
 	private String numRural;//numero de beneficiarios del periodo anterior rural
 	private String numUrbProv;//numero de beneficiarios del periodo anterior urbano provincias
 	private String numUrbLima; //numero de beneficiarios del periodo anterior lima
+	private String numTotal;//no editable
 	private String costoPromRural;//costo promedio mensual utiles rural
 	private String costoPromUrbProv;//costo promedio mensual utiles urbano provincias
-	private String costoPromUrbLima;//costo promedio mensual utiles urbano lima	
+	private String costoPromUrbLima;//costo promedio mensual utiles urbano lima
+	//datos de auditoria
+	private String usuario;
+	private String terminal;
+	
 	
 	private List<FisePeriodoEnvio> listaPeriodoEnvio;
 	//private String codigoPeriodo;
@@ -49,67 +56,112 @@ public class Formato14CBean {
 	private String costDRCoord;//costo directo rural persona coordinador
 	private String canIRCoord;//cantidad costo indirecto rural persona coordinador
 	private String costIRCoord;//costo indirecto rural persona coordinador
+	private String costTotalRCoord;//no editable
+	
 	
 	private String canDRSupe;//cantidad costo directo rural persona supervisor
 	private String costDRSupe;//costo directo rural persona supervisor
 	private String canIRSupe;//cantidad costo indirecto rural persona supervisor
 	private String costIRSupe;//costo indirecto rural persona supervisor
-	
+	private String costTotalRSupe;//no editable
 	
 	private String canDRGest;//cantidad costo directo rural persona gestor
 	private String costDRGest;//costo directo rural persona gestor
 	private String canIRGest;//cantidad costo indirecto rural persona gestor
 	private String costIRGest;//costo indirecto rural persona gestor
+	private String costTotalRGest;//no editable
 	
 	private String canDRAsist;//cantidad costo directo rural persona asistente /auxiliar	
 	private String costDRAsist;//costo directo rural persona asistente /auxiliar
 	private String canIRAsist;//cantidad costo indirecto rural persona asistente /auxiliar	
 	private String costIRAsist;//costo indirecto rural persona asistente /auxiliar
+	private String costTotalRAsist;//no editable
 	
 	//**ZONA URBANA PROVINCIAS
 	private String canDPCoord;//cantidad costo directo urbano provincias persona coordinador
 	private String costDPCoord;//costo directo urbano provincias persona coordinador
 	private String canIPCoord;//cantidad costo indirecto urbano provincias persona coordinador
 	private String costIPCoord;//costo indirecto urbano lima persona coordinador	
+	private String costTotalPCoord;//no editable
 	
 	private String canDPSupe;//cantidad costo directo urbano provincias persona supervisor
 	private String costDPSupe;//costo directo urbano provincias persona supervisor
 	private String canIPSupe;//cantidad costo indirecto urbano provincias persona supervisor
 	private String costIPSupe;//costo indirecto urbano lima persona supervisor	
+	private String costTotalPSupe;//no editable
 	
 	private String canDPGest;//cantidad costo directo urbano provincias persona gestor
 	private String costDPGest;//costo directo urbano provincias persona gestor
 	private String canIPGest;//cantidad costo indirecto urbano provincias persona gestor
 	private String costIPGest;//costo indirecto urbano lima persona gestor	
+	private String costTotalPGest;//no editable
 	
 	private String canDPAsist;//cantidad costo directo urbano provincias persona asistente /auxiliar
 	private String costDPAsist;//costo directo urbano provincias persona asistente /auxiliar
 	private String canIPAsist;//cantidad costo indirecto urbano provincias persona asistente /auxiliar
 	private String costIPAsist;//costo indirecto urbano lima persona asistente /auxiliar
-	
+	private String costTotalPAsist;//no editable
 		
 	//**ZONA URBANA LIMA
 	private String canDLCoord;//cantidad costo directo urbano lima persona coordinador
 	private String costDLCoord;//costo directo urbano lima persona coordinador
 	private String canILCoord;//cantidad costo indirecto urbano lima persona coordinador
 	private String costILCoord;//costo indirecto urbano lima persona coordinador
+	private String costTotalLCoord;//no editable
 	
 	private String canDLSupe;//cantidad costo directo urbano lima persona supervisor
 	private String costDLSupe;//costo directo urbano lima persona supervisor
 	private String canILSupe;//cantidad costo indirecto urbano lima persona supervisor
 	private String costILSupe;//costo indirecto urbano lima persona supervisor
+	private String costTotalLSupe;//no editable
 	
 	private String canDLGest;//cantidad costo directo urbano lima persona gestor
 	private String costDLGest;//costo directo urbano lima persona gestor
 	private String canILGest;//cantidad costo indirecto urbano lima persona gestor
 	private String costILGest;//costo indirecto urbano lima persona gestor
+	private String costTotalLGest;//no editable
 	
 	private String canDLAsist;//cantidad costo directo urbano lima persona asistente /auxiliar
 	private String costDLAsist;//costo directo urbano lima persona asistente /auxiliar
 	private String canILAsist;//cantidad costo indirecto urbano lima persona asistente /auxiliar
 	private String costILAsist;//costo indirecto urbano lima persona asistente /auxiliar
+	private String costTotalLAsist;//no editable
 	
 	
+	private String canTotalCoord;//no editable
+	private String costTotalCoord;//no editable
+	
+	private String canTotalSupe;//no editable
+	private String costTotalSupe;//no editable
+	
+	private String canTotalGest;//no editable
+	private String costTotalGest;//no editable
+	
+	private String canTotalAsist;//no editable	
+	private String costTotalAsist;//no editable
+	
+	private String canDRGP;//no editable GP gestion de personal
+	private String costDRGP;//no editable GP gestion de personal
+	private String canIRGP;//no editable GP gestion de personal
+	private String costIRGP;//no editable GP gestion de personal
+	private String costTotalRGP;//no editable GP gestion de personal
+	
+	private String canDPGP;//no editable GP gestion de personal
+	private String costDPGP;//no editable GP gestion de personal
+	private String canIPGP;//no editable GP gestion de personal
+	private String costIPGP;//no editable GP gestion de personal
+	private String costTotalPGP;//no editable GP gestion de personal
+	
+	private String canDLGP;//no editable GP gestion de personal
+	private String costDLGP;//no editable GP gestion de personal
+	private String canILGP;//no editable GP gestion de personal
+	private String costILGP;//no editable GP gestion de personal
+	private String costTotalLGP;//no editable GP gestion de personal
+	
+	private String canTotalGP;//no editable GP gestion de personal
+	private String costTotalGP;//no editable GP gestion de personal
+	
+	private String costTotalPromedio;//no editable GP gestion de personal
 	
 	/**
 	 * @return the codEmpresa
@@ -933,8 +985,264 @@ public class Formato14CBean {
 	public void setPeriodoEnvio(String periodoEnvio) {
 		this.periodoEnvio = periodoEnvio;
 	}
-	
-	
+	public String getAnioInicioVig() {
+		return anioInicioVig;
+	}
+	public void setAnioInicioVig(String anioInicioVig) {
+		this.anioInicioVig = anioInicioVig;
+	}
+	public String getAnioFinVig() {
+		return anioFinVig;
+	}
+	public void setAnioFinVig(String anioFinVig) {
+		this.anioFinVig = anioFinVig;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public String getTerminal() {
+		return terminal;
+	}
+	public void setTerminal(String terminal) {
+		this.terminal = terminal;
+	}
+	public String getNumTotal() {
+		return numTotal;
+	}
+	public void setNumTotal(String numTotal) {
+		this.numTotal = numTotal;
+	}
+	public String getCostTotalRCoord() {
+		return costTotalRCoord;
+	}
+	public void setCostTotalRCoord(String costTotalRCoord) {
+		this.costTotalRCoord = costTotalRCoord;
+	}
+	public String getCostTotalRSupe() {
+		return costTotalRSupe;
+	}
+	public void setCostTotalRSupe(String costTotalRSupe) {
+		this.costTotalRSupe = costTotalRSupe;
+	}
+	public String getCostTotalRGest() {
+		return costTotalRGest;
+	}
+	public void setCostTotalRGest(String costTotalRGest) {
+		this.costTotalRGest = costTotalRGest;
+	}
+	public String getCostTotalRAsist() {
+		return costTotalRAsist;
+	}
+	public void setCostTotalRAsist(String costTotalRAsist) {
+		this.costTotalRAsist = costTotalRAsist;
+	}
+	public String getCostTotalPCoord() {
+		return costTotalPCoord;
+	}
+	public void setCostTotalPCoord(String costTotalPCoord) {
+		this.costTotalPCoord = costTotalPCoord;
+	}
+	public String getCostTotalPSupe() {
+		return costTotalPSupe;
+	}
+	public void setCostTotalPSupe(String costTotalPSupe) {
+		this.costTotalPSupe = costTotalPSupe;
+	}
+	public String getCostTotalPGest() {
+		return costTotalPGest;
+	}
+	public void setCostTotalPGest(String costTotalPGest) {
+		this.costTotalPGest = costTotalPGest;
+	}
+	public String getCostTotalPAsist() {
+		return costTotalPAsist;
+	}
+	public void setCostTotalPAsist(String costTotalPAsist) {
+		this.costTotalPAsist = costTotalPAsist;
+	}
+	public String getCostTotalLCoord() {
+		return costTotalLCoord;
+	}
+	public void setCostTotalLCoord(String costTotalLCoord) {
+		this.costTotalLCoord = costTotalLCoord;
+	}
+	public String getCostTotalLSupe() {
+		return costTotalLSupe;
+	}
+	public void setCostTotalLSupe(String costTotalLSupe) {
+		this.costTotalLSupe = costTotalLSupe;
+	}
+	public String getCostTotalLGest() {
+		return costTotalLGest;
+	}
+	public void setCostTotalLGest(String costTotalLGest) {
+		this.costTotalLGest = costTotalLGest;
+	}
+	public String getCostTotalLAsist() {
+		return costTotalLAsist;
+	}
+	public void setCostTotalLAsist(String costTotalLAsist) {
+		this.costTotalLAsist = costTotalLAsist;
+	}
+	public String getCanTotalCoord() {
+		return canTotalCoord;
+	}
+	public void setCanTotalCoord(String canTotalCoord) {
+		this.canTotalCoord = canTotalCoord;
+	}
+	public String getCostTotalCoord() {
+		return costTotalCoord;
+	}
+	public void setCostTotalCoord(String costTotalCoord) {
+		this.costTotalCoord = costTotalCoord;
+	}
+	public String getCanTotalSupe() {
+		return canTotalSupe;
+	}
+	public void setCanTotalSupe(String canTotalSupe) {
+		this.canTotalSupe = canTotalSupe;
+	}
+	public String getCostTotalSupe() {
+		return costTotalSupe;
+	}
+	public void setCostTotalSupe(String costTotalSupe) {
+		this.costTotalSupe = costTotalSupe;
+	}
+	public String getCanTotalGest() {
+		return canTotalGest;
+	}
+	public void setCanTotalGest(String canTotalGest) {
+		this.canTotalGest = canTotalGest;
+	}
+	public String getCostTotalGest() {
+		return costTotalGest;
+	}
+	public void setCostTotalGest(String costTotalGest) {
+		this.costTotalGest = costTotalGest;
+	}
+	public String getCanTotalAsist() {
+		return canTotalAsist;
+	}
+	public void setCanTotalAsist(String canTotalAsist) {
+		this.canTotalAsist = canTotalAsist;
+	}
+	public String getCostTotalAsist() {
+		return costTotalAsist;
+	}
+	public void setCostTotalAsist(String costTotalAsist) {
+		this.costTotalAsist = costTotalAsist;
+	}
+	public String getCanDRGP() {
+		return canDRGP;
+	}
+	public void setCanDRGP(String canDRGP) {
+		this.canDRGP = canDRGP;
+	}
+	public String getCostDRGP() {
+		return costDRGP;
+	}
+	public void setCostDRGP(String costDRGP) {
+		this.costDRGP = costDRGP;
+	}
+	public String getCanIRGP() {
+		return canIRGP;
+	}
+	public void setCanIRGP(String canIRGP) {
+		this.canIRGP = canIRGP;
+	}
+	public String getCostIRGP() {
+		return costIRGP;
+	}
+	public void setCostIRGP(String costIRGP) {
+		this.costIRGP = costIRGP;
+	}
+	public String getCostTotalRGP() {
+		return costTotalRGP;
+	}
+	public void setCostTotalRGP(String costTotalRGP) {
+		this.costTotalRGP = costTotalRGP;
+	}
+	public String getCanDPGP() {
+		return canDPGP;
+	}
+	public void setCanDPGP(String canDPGP) {
+		this.canDPGP = canDPGP;
+	}
+	public String getCostDPGP() {
+		return costDPGP;
+	}
+	public void setCostDPGP(String costDPGP) {
+		this.costDPGP = costDPGP;
+	}
+	public String getCanIPGP() {
+		return canIPGP;
+	}
+	public void setCanIPGP(String canIPGP) {
+		this.canIPGP = canIPGP;
+	}
+	public String getCostIPGP() {
+		return costIPGP;
+	}
+	public void setCostIPGP(String costIPGP) {
+		this.costIPGP = costIPGP;
+	}
+	public String getCostTotalPGP() {
+		return costTotalPGP;
+	}
+	public void setCostTotalPGP(String costTotalPGP) {
+		this.costTotalPGP = costTotalPGP;
+	}
+	public String getCanDLGP() {
+		return canDLGP;
+	}
+	public void setCanDLGP(String canDLGP) {
+		this.canDLGP = canDLGP;
+	}
+	public String getCostDLGP() {
+		return costDLGP;
+	}
+	public void setCostDLGP(String costDLGP) {
+		this.costDLGP = costDLGP;
+	}
+	public String getCanILGP() {
+		return canILGP;
+	}
+	public void setCanILGP(String canILGP) {
+		this.canILGP = canILGP;
+	}
+	public String getCostILGP() {
+		return costILGP;
+	}
+	public void setCostILGP(String costILGP) {
+		this.costILGP = costILGP;
+	}
+	public String getCostTotalLGP() {
+		return costTotalLGP;
+	}
+	public void setCostTotalLGP(String costTotalLGP) {
+		this.costTotalLGP = costTotalLGP;
+	}
+	public String getCanTotalGP() {
+		return canTotalGP;
+	}
+	public void setCanTotalGP(String canTotalGP) {
+		this.canTotalGP = canTotalGP;
+	}
+	public String getCostTotalGP() {
+		return costTotalGP;
+	}
+	public void setCostTotalGP(String costTotalGP) {
+		this.costTotalGP = costTotalGP;
+	}
+	public String getCostTotalPromedio() {
+		return costTotalPromedio;
+	}
+	public void setCostTotalPromedio(String costTotalPromedio) {
+		this.costTotalPromedio = costTotalPromedio;
+	}	
 	
 	
 	

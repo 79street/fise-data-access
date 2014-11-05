@@ -127,7 +127,7 @@ public class Formato14CBean {
 	private String costILAsist;//costo indirecto urbano lima persona asistente /auxiliar
 	private String costTotalLAsist;//no editable
 	
-	
+	//Panel totales
 	private String canTotalCoord;//no editable
 	private String costTotalCoord;//no editable
 	
@@ -140,6 +140,7 @@ public class Formato14CBean {
 	private String canTotalAsist;//no editable	
 	private String costTotalAsist;//no editable
 	
+	//panel detalle
 	private String canDRGP;//no editable GP gestion de personal
 	private String costDRGP;//no editable GP gestion de personal
 	private String canIRGP;//no editable GP gestion de personal

@@ -20,6 +20,12 @@ public class FiseConstants {
 	public final static String ETAPA_RECONOCIDO= "RECONOCIDO";
 	
 	public final static String NOMBRE_FORMATO_12A = "F12A";
+	public final static String NOMBRE_FORMATO_12B = "F12B";
+	public final static String NOMBRE_FORMATO_12C = "F12C";
+	public final static String NOMBRE_FORMATO_12D = "F12D";
+	public final static String NOMBRE_FORMATO_13A = "F13A";
+	public final static String NOMBRE_FORMATO_14A = "F14A";
+	public final static String NOMBRE_FORMATO_14B = "F1AB";
 	public final static String NOMBRE_FORMATO_14C = "F14C";
 	
 	public final static long ZONABENEF_RURAL_COD = 1;
@@ -91,6 +97,7 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_14A = "F14A";
 	public final static String TIPO_FORMATO_14B = "F14B";
 	public final static String TIPO_FORMATO_14C = "F14C";
+	public final static String TIPO_FORMATO_VAL= "VAL";
 	public final static String TIPO_FORMATO_VAL_12A = "VAL12A";
 	public final static String TIPO_FORMATO_VAL_12B = "VAL12B";
 	public final static String TIPO_FORMATO_VAL_12C = "VAL12C";
@@ -108,7 +115,14 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_FORMATO14A = "Formatos14A";
 	public final static String NOMBRE_EXCEL_FORMATO14B = "Formatos14B";
 	public final static String NOMBRE_EXCEL_FORMATO14C = "Formatos14C";
-	public final static String NOMBRE_EXCEL_VALIDACION = "Validaciones";
+	public final static String NOMBRE_EXCEL_VALIDACION_F12A = "ValidacionesF12A";
+	public final static String NOMBRE_EXCEL_VALIDACION_F12B = "ValidacionesF12B";
+	public final static String NOMBRE_EXCEL_VALIDACION_F12C = "ValidacionesF12C";
+	public final static String NOMBRE_EXCEL_VALIDACION_F12D = "ValidacionesF12D";
+	public final static String NOMBRE_EXCEL_VALIDACION_F13A = "ValidacionesF13A";
+	public final static String NOMBRE_EXCEL_VALIDACION_F14A = "ValidacionesF14A";
+	public final static String NOMBRE_EXCEL_VALIDACION_F14B = "ValidacionesF14B";
+	public final static String NOMBRE_EXCEL_VALIDACION_F14C = "ValidacionesF14C";
 	
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
 	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";

@@ -46,6 +46,7 @@ public class Formato14CBean {
 	private List<FisePeriodoEnvio> listaPeriodoEnvio;
 	//private String codigoPeriodo;
 	private String periodoEnvio;
+	private String desperiodoEnvio;//para el proceso editar
 	
 	 /**datos del detalle de la cabecera*/
 	private String idZonaBenef;
@@ -1243,6 +1244,12 @@ public class Formato14CBean {
 	}
 	public void setCostTotalPromedio(String costTotalPromedio) {
 		this.costTotalPromedio = costTotalPromedio;
+	}
+	public String getDesperiodoEnvio() {
+		return desperiodoEnvio;
+	}
+	public void setDesperiodoEnvio(String desperiodoEnvio) {
+		this.desperiodoEnvio = desperiodoEnvio;
 	}	
 	
 	

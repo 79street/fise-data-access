@@ -1,0 +1,14 @@
+package gob.osinergmin.fise.gart.service;
+
+import gob.osinergmin.fise.bean.Formato12A12BGeneric;
+import gob.osinergmin.fise.bean.Formato12C12D13Generic;
+import gob.osinergmin.fise.bean.Formato14Generic;
+
+public interface CommonGartService {
+	
+	int obtenerSecuencia();
+	int validarFormatos_12A12B(Formato12A12BGeneric formato, String tipoFormato, String usuario, String terminal);
+	int validarFormatos_12C12D13A(Formato12C12D13Generic formato, String tipoFormato, String usuario, String terminal);
+	int validarFormatos_14(Formato14Generic formato14, String tipoFormato, String usuario, String terminal);
+
+}

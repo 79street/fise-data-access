@@ -140,6 +140,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				totalEmpadronamiento = totalEmpadronamiento.add(detalleRural.getImpresionEsquelaInvitacion())
 						.add(detalleRural.getImpresionDeclaracionJurada())
 						.add(detalleRural.getImpresionFichasVerificacion())
+						.add(detalleRural.getVerificacionInformacion())
 						.add(detalleRural.getRepartoEsquelaInvitacion())
 						.add(detalleRural.getElaboracionArchivoBenef())
 						.add(detalleRural.getDigitacionFichaBenef());
@@ -159,10 +160,13 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleRural.getSpotPublicitarioRadio());
 				detalleRural.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				
 				detalleRural.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadR());
 				//costo
 				if( formulario.getNroBenefEmpadR() !=0 ){
-					detalleRural.setCostoUnitarioEmpadronamiento(detalleRural.getTotalEmpadronamiento().divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioEmpadronamiento(sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -180,7 +184,8 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleRural.setNumeroAgentes(formulario.getNroAgentR());
 				//costo
 				if( formulario.getNroAgentR() !=0 ){
-					detalleRural.setCostoUntitarioAgenteGlp(detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUntitarioAgenteGlp(
+							detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -230,6 +235,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleProvincia.getImpresionDeclaracionJurada())
 						.add(detalleProvincia.getImpresionFichasVerificacion())
 						.add(detalleProvincia.getRepartoEsquelaInvitacion())
+						.add(detalleProvincia.getVerificacionInformacion())
 						.add(detalleProvincia.getElaboracionArchivoBenef())
 						.add(detalleProvincia.getDigitacionFichaBenef());
 				detalleProvincia.setTotalEmpadronamiento(totalEmpadronamiento);
@@ -248,11 +254,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleProvincia.getSpotPublicitarioRadio());
 				detalleProvincia.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleProvincia.getTotalEmpadronamiento()).add(detalleProvincia.getTotalDifusionInicioPrgFise());
+				
 				detalleProvincia.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadP());
 				//costo
 				if( formulario.getNroBenefEmpadP() !=0 ){
 					detalleProvincia.setCostoUnitarioEmpadronamiento(
-							detalleProvincia.getTotalEmpadronamiento().divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -321,6 +330,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleLima.getImpresionDeclaracionJurada())
 						.add(detalleLima.getImpresionFichasVerificacion())
 						.add(detalleLima.getRepartoEsquelaInvitacion())
+						.add(detalleLima.getVerificacionInformacion())
 						.add(detalleLima.getElaboracionArchivoBenef())
 						.add(detalleLima.getDigitacionFichaBenef());
 				detalleLima.setTotalEmpadronamiento(totalEmpadronamiento);
@@ -339,11 +349,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleLima.getSpotPublicitarioRadio());
 				detalleLima.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleLima.getTotalEmpadronamiento()).add(detalleLima.getTotalDifusionInicioPrgFise());
+				
 				detalleLima.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadL());
 				//costo
 				if( formulario.getNroBenefEmpadL() !=0 ){
 					detalleLima.setCostoUnitarioEmpadronamiento(
-							detalleLima.getTotalEmpadronamiento().divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -457,6 +470,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleRural.getImpresionDeclaracionJurada())
 						.add(detalleRural.getImpresionFichasVerificacion())
 						.add(detalleRural.getRepartoEsquelaInvitacion())
+						.add(detalleRural.getVerificacionInformacion())
 						.add(detalleRural.getElaboracionArchivoBenef())
 						.add(detalleRural.getDigitacionFichaBenef());
 				detalleRural.setTotalEmpadronamiento(totalEmpadronamiento);
@@ -475,11 +489,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleRural.getSpotPublicitarioRadio());
 				detalleRural.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				
 				detalleRural.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadR());
 				//costo
 				if( formulario.getNroBenefEmpadR() !=0 ){
 					detalleRural.setCostoUnitarioEmpadronamiento(
-							detalleRural.getTotalEmpadronamiento().divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -529,6 +546,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleProvincia.getImpresionDeclaracionJurada())
 						.add(detalleProvincia.getImpresionFichasVerificacion())
 						.add(detalleProvincia.getRepartoEsquelaInvitacion())
+						.add(detalleProvincia.getVerificacionInformacion())
 						.add(detalleProvincia.getElaboracionArchivoBenef())
 						.add(detalleProvincia.getDigitacionFichaBenef());
 				detalleProvincia.setTotalEmpadronamiento(totalEmpadronamiento);
@@ -547,11 +565,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleProvincia.getSpotPublicitarioRadio());
 				detalleProvincia.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				
 				detalleProvincia.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadP());
 				//costo
 				if( formulario.getNroBenefEmpadP() !=0 ){
 					detalleProvincia.setCostoUnitarioEmpadronamiento(
-							detalleProvincia.getTotalEmpadronamiento().divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -592,7 +613,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleLima.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaL());
 				detalleLima.setImpresionFichasVerificacion(formulario.getImprFichaVerifL());
 				detalleLima.setRepartoEsquelaInvitacion(formulario.getRepartoEsqInvitL());
-				detalleLima.setVerificacionInformacion(formulario.getVerifInfoP());
+				detalleLima.setVerificacionInformacion(formulario.getVerifInfoL());
 				detalleLima.setElaboracionArchivoBenef(formulario.getElabArchivoBenefL());
 				detalleLima.setDigitacionFichaBenef(formulario.getDigitFichaBenefL());
 				
@@ -601,6 +622,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleLima.getImpresionDeclaracionJurada())
 						.add(detalleLima.getImpresionFichasVerificacion())
 						.add(detalleLima.getRepartoEsquelaInvitacion())
+						.add(detalleLima.getVerificacionInformacion())
 						.add(detalleLima.getElaboracionArchivoBenef())
 						.add(detalleLima.getDigitacionFichaBenef());
 				detalleLima.setTotalEmpadronamiento(totalEmpadronamiento);
@@ -619,11 +641,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 						.add(detalleLima.getSpotPublicitarioRadio());
 				detalleLima.setTotalDifusionInicioPrgFise(totalDifusion);
 				
+				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				
 				detalleLima.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadL());
 				//costo
 				if( formulario.getNroBenefEmpadL() !=0 ){
 					detalleLima.setCostoUnitarioEmpadronamiento(
-							detalleLima.getTotalEmpadronamiento().divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -714,7 +739,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			if( FiseConstants.ZONABENEF_RURAL_COD == detalle.getId().getIdZonaBenef() ){
 				formato14ABean.setImprEsqInvitR(detalle.getImpresionEsquelaInvitacion());
 				formato14ABean.setImprDeclaJuradaR(detalle.getImpresionDeclaracionJurada());
-				formato14ABean.setImprEsqInvitR(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setImprFichaVerifR(detalle.getImpresionFichasVerificacion());
 				formato14ABean.setRepartoEsqInvitR(detalle.getRepartoEsquelaInvitacion());
 				formato14ABean.setVerifInfoR(detalle.getVerificacionInformacion());
 				formato14ABean.setElabArchivoBenefR(detalle.getElaboracionArchivoBenef());
@@ -725,8 +750,8 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				formato14ABean.setImprVolantesR(detalle.getImpresionVolantes());
 				formato14ABean.setImprAfichesR(detalle.getImpresionAfiches());
 				formato14ABean.setRepFolletosR(detalle.getRepartoFolletoPotenciaBenef());
-				formato14ABean.setSpotPublTvR(detalle.getSpotPublicitarioRadio());
-				formato14ABean.setSpotPublRadioR(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublTvR(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublRadioR(detalle.getSpotPublicitarioRadio());
 				// Suma de total de difusion
 				formato14ABean.setTotalDifIniProgR(detalle.getTotalDifusionInicioPrgFise());
 				
@@ -751,7 +776,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			}else if( FiseConstants.ZONABENEF_PROVINCIA_COD == detalle.getId().getIdZonaBenef() ){
 				formato14ABean.setImprEsqInvitP(detalle.getImpresionEsquelaInvitacion());
 				formato14ABean.setImprDeclaJuradaP(detalle.getImpresionDeclaracionJurada());
-				formato14ABean.setImprEsqInvitP(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setImprFichaVerifP(detalle.getImpresionFichasVerificacion());
 				formato14ABean.setRepartoEsqInvitP(detalle.getRepartoEsquelaInvitacion());
 				formato14ABean.setVerifInfoP(detalle.getVerificacionInformacion());
 				formato14ABean.setElabArchivoBenefP(detalle.getElaboracionArchivoBenef());
@@ -762,17 +787,17 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				formato14ABean.setImprVolantesP(detalle.getImpresionVolantes());
 				formato14ABean.setImprAfichesP(detalle.getImpresionAfiches());
 				formato14ABean.setRepFolletosP(detalle.getRepartoFolletoPotenciaBenef());
-				formato14ABean.setSpotPublTvP(detalle.getSpotPublicitarioRadio());
-				formato14ABean.setSpotPublRadioP(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublTvP(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublRadioP(detalle.getSpotPublicitarioRadio());
 				// Suma de total de difusion
 				formato14ABean.setTotalDifIniProgP(detalle.getTotalDifusionInicioPrgFise());
 				
 				formato14ABean.setNroBenefEmpadP(detalle.getNumeroBenefEmpadroMesDic());
 				//suma del empadronamiento + difusion
-				BigDecimal sumTotalEmpadDifusionR = new BigDecimal(0);
-				sumTotalEmpadDifusionR=sumTotalEmpadDifusionR.add(detalle.getTotalEmpadronamiento())
+				BigDecimal sumTotalEmpadDifusionP = new BigDecimal(0);
+				sumTotalEmpadDifusionP=sumTotalEmpadDifusionP.add(detalle.getTotalEmpadronamiento())
 							.add(detalle.getTotalDifusionInicioPrgFise());
-				formato14ABean.setSumEmpadDifusionP(sumTotalEmpadDifusionR);
+				formato14ABean.setSumEmpadDifusionP(sumTotalEmpadDifusionP);
 				// Costo unitario por empadronamiento
 				formato14ABean.setCostoUnitEmpadP(detalle.getCostoUnitarioEmpadronamiento());
 				
@@ -788,7 +813,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			}else if( FiseConstants.ZONABENEF_LIMA_COD == detalle.getId().getIdZonaBenef() ){
 				formato14ABean.setImprEsqInvitL(detalle.getImpresionEsquelaInvitacion());
 				formato14ABean.setImprDeclaJuradaL(detalle.getImpresionDeclaracionJurada());
-				formato14ABean.setImprEsqInvitL(detalle.getImpresionFichasVerificacion());
+				formato14ABean.setImprFichaVerifL(detalle.getImpresionFichasVerificacion());
 				formato14ABean.setRepartoEsqInvitL(detalle.getRepartoEsquelaInvitacion());
 				formato14ABean.setVerifInfoL(detalle.getVerificacionInformacion());
 				formato14ABean.setElabArchivoBenefL(detalle.getElaboracionArchivoBenef());
@@ -799,17 +824,17 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				formato14ABean.setImprVolantesL(detalle.getImpresionVolantes());
 				formato14ABean.setImprAfichesL(detalle.getImpresionAfiches());
 				formato14ABean.setRepFolletosL(detalle.getRepartoFolletoPotenciaBenef());
-				formato14ABean.setSpotPublTvL(detalle.getSpotPublicitarioRadio());
-				formato14ABean.setSpotPublRadioL(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublTvL(detalle.getSpotPublicitarioTv());
+				formato14ABean.setSpotPublRadioL(detalle.getSpotPublicitarioRadio());
 				// Suma de total de difusion
 				formato14ABean.setTotalDifIniProgL(detalle.getTotalDifusionInicioPrgFise());
 				
 				formato14ABean.setNroBenefEmpadL(detalle.getNumeroBenefEmpadroMesDic());
 				//suma del empadronamiento + difusion
-				BigDecimal sumTotalEmpadDifusionR = new BigDecimal(0);
-				sumTotalEmpadDifusionR=sumTotalEmpadDifusionR.add(detalle.getTotalEmpadronamiento())
+				BigDecimal sumTotalEmpadDifusionL = new BigDecimal(0);
+				sumTotalEmpadDifusionL=sumTotalEmpadDifusionL.add(detalle.getTotalEmpadronamiento())
 							.add(detalle.getTotalDifusionInicioPrgFise());
-				formato14ABean.setSumEmpadDifusionL(sumTotalEmpadDifusionR);
+				formato14ABean.setSumEmpadDifusionL(sumTotalEmpadDifusionL);
 				// Costo unitario por empadronamiento
 				formato14ABean.setCostoUnitEmpadL(detalle.getCostoUnitarioEmpadronamiento());
 				
@@ -916,6 +941,33 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		mapJRParams.put(FiseConstants.PARAM_CSTOUNIT_AGENTES_L_F14A, formato14ABean.getCostoUnitAgentL());
 		
 		return mapJRParams;
+	}
+
+	@Override
+	@Transactional
+	public List<FiseFormato14ADOb> listarFormato14ADObByFormato14AD(FiseFormato14AD formato14AD){
+		return formato14AObsDao.listarFormato14ADObByFormato14AD(formato14AD); 
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato14AC modificarEnvioDefinitivoFormato14AC(Formato14ACBean formulario, FiseFormato14AC fiseFormato14AC) throws Exception {
+		
+		FiseFormato14AC dto = null;
+		Date hoy = FechaUtil.obtenerFechaActual();
+		try{
+			fiseFormato14AC.setFechaEnvioDefinitivo(hoy);
+			fiseFormato14AC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato14AC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato14AC.setFechaActualizacion(hoy);
+			formato14ACDao.modificarFormato14AC(fiseFormato14AC);
+			dto= fiseFormato14AC;
+		} catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		return dto;
 	}
 	
 }

@@ -57,6 +57,10 @@ public class FiseObservacion implements Serializable {
 	//bi-directional many-to-one association to FiseFormato12ADOb
 	@OneToMany(mappedBy="fiseObservacion")
 	private List<FiseFormato12ADOb> fiseFormato12ADObs;
+	
+	//bi-directional many-to-one association to FiseFormato12ADOb
+	@OneToMany(mappedBy="fiseObservacion")
+	private List<FiseFormato14ADOb> fiseFormato14ADObs;
 
 	public FiseObservacion() {
 	}
@@ -149,6 +153,14 @@ public class FiseObservacion implements Serializable {
 		this.fiseFormato12ADObs = fiseFormato12ADObs;
 	}
 
+	public List<FiseFormato14ADOb> getFiseFormato14ADObs() {
+		return fiseFormato14ADObs;
+	}
+
+	public void setFiseFormato14ADObs(List<FiseFormato14ADOb> fiseFormato14ADObs) {
+		this.fiseFormato14ADObs = fiseFormato14ADObs;
+	}
+
 	public FiseFormato12ADOb addFiseFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb) {
 		getFiseFormato12ADObs().add(fiseFormato12ADOb);
 		fiseFormato12ADOb.setFiseObservacion(this);
@@ -162,5 +174,7 @@ public class FiseObservacion implements Serializable {
 
 		return fiseFormato12ADOb;
 	}
+	
+	
 
 }

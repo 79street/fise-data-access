@@ -1,12 +1,16 @@
 package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
+import gob.osinergmin.fise.bean.CorreoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
 import gob.osinergmin.fise.dao.CommonDao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -124,4 +128,41 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		return result;
 	}
 
+	@Override
+	public List<CorreoBean> obtenerListaCorreosDestinatarios(){
+		
+		List<CorreoBean> listaCorreo = new ArrayList<CorreoBean>();
+		try {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" SELECT EMAILADDRESS CORREO, FIRSTNAME || ' ' || LASTNAME NOMBRE ");
+			sql.append(" FROM USER_ T ");
+			sql.append(" WHERE USERID IN (SELECT USERID FROM USERS_GROUPS WHERE GROUPID IN ");
+			sql.append(" (SELECT GROUPID FROM GROUP_ WHERE ACTIVE_= 1 AND SITE = 1 AND UPPER(NAME) LIKE '%FISE%')) ");
+			sql.append(" AND LTRIM(EMAILADDRESS) IS NOT NULL ");
+			sql.append("  AND USERID IN (SELECT USERID FROM USERS_ORGS T WHERE ORGANIZATIONID IN ");
+			sql.append(" (SELECT CLASSPK FROM EXPANDOVALUE T WHERE UPPER(RTRIM(DATA_)) = UPPER(RTRIM('OSI')))) ");
+			
+			Query query = em.createNativeQuery(sql.toString());
+			
+			List resultado = query.getResultList();
+			Iterator it=resultado.iterator();
+			while(it.hasNext()){
+				Object[] valor=(Object[] )it.next();
+				CorreoBean correo=new CorreoBean();
+				correo.setDireccionCorreo((String)valor[0]);
+				correo.setUsuarioCorreo((String)valor[1]);
+				listaCorreo.add(correo);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+
+		return listaCorreo;
+
+	}
+	
 }

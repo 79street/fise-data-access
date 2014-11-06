@@ -1,10 +1,13 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.bean.CorreoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.gart.service.CommonGartService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,4 +46,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 		return commonDao.validarFormatos_14(formato14, tipoFormato, usuario, terminal);
 	}
 
+	@Override
+	@Transactional
+	public List<CorreoBean> obtenerListaCorreosDestinatarios() {
+		return commonDao.obtenerListaCorreosDestinatarios();
+	}
+	
 }

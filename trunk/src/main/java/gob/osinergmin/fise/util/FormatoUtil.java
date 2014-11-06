@@ -1,5 +1,7 @@
 package gob.osinergmin.fise.util;
 
+import java.math.BigDecimal;
+
 public class FormatoUtil {
 	
 	public static String rellenaIzquierda(String cadena, char relleno, int longitud) {
@@ -53,4 +55,26 @@ public class FormatoUtil {
 		return !isBlank(str);
 	}
 	
+	//validacion txt
+	public static boolean validarCampoLongTxt(String valor){
+		boolean val=false;
+		try {
+			Long.parseLong(valor);
+			val = true;
+		} catch (Exception e) {
+			val = false;
+		}
+		return val;
+	}
+	
+	public static boolean validarCampoBigDecimalTxt(String valor){
+		boolean val=false;
+		try {
+			new BigDecimal(valor);
+			val = true;
+		} catch (Exception e) {
+			val = false;
+		}
+		return val;
+	}
 }

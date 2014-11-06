@@ -264,6 +264,7 @@ public class FiseConstants {
 	public final static int POSICION_TOTAL_RECONOCER = 159;
 	
 	//parametros
+	//FORMATO 12A
 	public final static String PARAM_DESC_EMPRESA_F12A = "DESC_EMPRESA";
 	public final static String PARAM_ANO_PRES_F12A = "ANO_PRESENTACION";
 	public final static String PARAM_DESC_MES_PRES_F12A = "DESC_MES_PRESENTACION";
@@ -299,6 +300,13 @@ public class FiseConstants {
 	public final static String PARAM_TOTAL_DESPLAZ_F12A = "TOTAL_DESPL_PERSONAL";
 	public final static String PARAM_TOTAL_ACTIV_F12A = "TOTAL_ACTIV_EXTRAORD";
 	public final static String PARAM_TOTAL_GENERAL_F12A = "TOTAL_GENERAL";
+	
+	//FORMATO 13 A - REPORTE HORIZONTAL CON DETALLE
+	//DATOS DE CABECERA
+	public final static String PARAM_DESC_EMPRESA_F13A = "DESC_EMPRESA";
+	public final static String PARAM_ANO_PRES_F13A = "ANO_PRESENTACION";
+	public final static String PARAM_DESC_MES_PRES_F13A = "DESC_MES_PRESENTACION";
+  //EL DETALLE NO POR QUE LOS VALORES NO SE PASARAN COMO PARAMETROS
 	
 	//FORMATO 14 A
 

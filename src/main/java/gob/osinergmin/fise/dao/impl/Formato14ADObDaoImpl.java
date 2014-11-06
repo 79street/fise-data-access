@@ -17,38 +17,6 @@ import org.springframework.stereotype.Repository;
 public class Formato14ADObDaoImpl extends GenericDaoImpl implements Formato14ADObDao {
 	
 	@Override
-	public int validarFormato14A(FiseFormato14AC fiseformato14AC, String tipoFormato, String usuario, String terminal){
-		int result = -1;
-		try {
-			 
-			StringBuffer jql = new StringBuffer();
-			jql.append("CALL FISE.FISE_GEN_PKG.FISE_VAL_FORM_PRC (?,?,?,?,?,?,?,?,?)");
-			Query query = em.createNativeQuery(jql.toString());
-			query.setParameter(1, tipoFormato);
-			query.setParameter(2, fiseformato14AC.getId().getCodEmpresa());
-			query.setParameter(3, fiseformato14AC.getId().getAnoPresentacion());
-			query.setParameter(4, fiseformato14AC.getId().getMesPresentacion());
-			query.setParameter(5, fiseformato14AC.getId().getAnoInicioVigencia());
-			query.setParameter(6, fiseformato14AC.getId().getAnoFinVigencia());
-			query.setParameter(7, fiseformato14AC.getId().getEtapa());
-			query.setParameter(8, usuario);
-			query.setParameter(9, terminal);
-			/*int v = query.executeUpdate();
-			if (v == 0) {
-				return new MensajeTransaccion();
-			}*/
-			//podemos validar posteriormente la transaccion
-			result = query.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			em.close();
-		 }
-		return result;
-	}
-	
-	@Override
 	public void eliminarFormato14ADOb(FiseFormato14ADOb fiseFormato14ADOb){
 		try{
 			//em.getTransaction().begin();

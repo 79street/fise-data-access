@@ -4,6 +4,7 @@ import gob.osinergmin.fise.bean.Formato14ACBean;
 import gob.osinergmin.fise.domain.FiseFormato14AC;
 import gob.osinergmin.fise.domain.FiseFormato14ACPK;
 import gob.osinergmin.fise.domain.FiseFormato14AD;
+import gob.osinergmin.fise.domain.FiseFormato14ADOb;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,5 +19,8 @@ public interface Formato14AGartService {
 	void eliminarFormato14AC(FiseFormato14AC fiseFormato14AC);
 	Formato14ACBean estructurarFormato14ABeanByFiseFormato14AC(FiseFormato14AC formato);
 	HashMap<String, Object> mapearParametrosFormato14A(Formato14ACBean formato14ACBean);
+	List<FiseFormato14ADOb> listarFormato14ADObByFormato14AD(FiseFormato14AD formato14AD);
+	FiseFormato14AC modificarEnvioDefinitivoFormato14AC(Formato14ACBean formulario, FiseFormato14AC fiseFormato14AC) throws Exception;
+	
 	
 }

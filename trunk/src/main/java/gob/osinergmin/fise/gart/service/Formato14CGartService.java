@@ -1,9 +1,12 @@
 package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.Formato14CBean;
+import gob.osinergmin.fise.bean.Formato14CReportBean;
 import gob.osinergmin.fise.domain.FiseFormato14CC;
 import gob.osinergmin.fise.domain.FiseFormato14CD;
+import gob.osinergmin.fise.domain.FiseFormato14CDOb;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface Formato14CGartService {
@@ -20,13 +23,31 @@ public interface Formato14CGartService {
     String actualizarDatosFormato14C(Formato14CBean bean) 
     		throws Exception;
     
+    String actualizarDatosEnvioFormato14C(Formato14CBean bean) 
+    		throws Exception;
+    
+    String eliminarDatosFormato14C(Formato14CBean bean) 
+    		throws Exception;
+    
     List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
 			long anioHasta, long mesDesde, long mesHasta, String etapa) 
-					throws Exception;
+					throws Exception;    
     
-    
-    public Formato14CBean buscarFormato14CEditar(String codEmpresa,String anioPres,String mesPres,
+    Formato14CBean buscarFormato14CEditar(String codEmpresa,String anioPres,String mesPres,
 			String anioIniVig,String anioFinVig,String etapa) 
 					throws Exception;
+    
+    FiseFormato14CC obtenerFiseFormato14CC(Formato14CBean bean) 
+    		throws Exception;
+    
+    List<FiseFormato14CDOb> listaObservacionesF14C(FiseFormato14CD d) 
+    		throws Exception;
+    
+    Formato14CReportBean estructurarFormato14CBeanByFiseFormato14C(
+			FiseFormato14CC formato) throws Exception;
+    
+    HashMap<String, Object> mapearParametrosFormato14C(
+			Formato14CReportBean f) throws Exception;
+    
 
 }

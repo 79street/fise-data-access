@@ -42,11 +42,11 @@ public class FiseFormato14CD implements Serializable {
 	@Column(name="COSTO_INDIRECTO")
 	private BigDecimal costoIndirecto;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 

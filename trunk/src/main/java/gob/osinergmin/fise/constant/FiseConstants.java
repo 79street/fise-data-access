@@ -31,6 +31,9 @@ public class FiseConstants {
 	public final static long ZONABENEF_RURAL_COD = 1;
 	public final static long ZONABENEF_PROVINCIA_COD = 2;
 	public final static long ZONABENEF_LIMA_COD = 3;
+	public final static String ZONABENEF_RURAL_COD_STRING = "1";
+	public final static String ZONABENEF_PROVINCIA_COD_STRING = "2";
+	public final static String ZONABENEF_LIMA_COD_STRING = "3";
 	public final static String ZONABENEF_RURAL_DESC = "Rural";
 	public final static String ZONABENEF_PROVINCIA_DESC = "Urbano Provincia";
 	public final static String ZONABENEF_LIMA_DESC = "Urbano Lima";

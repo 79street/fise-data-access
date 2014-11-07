@@ -2,7 +2,6 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14ADObDao;
-import gob.osinergmin.fise.domain.FiseFormato14AC;
 import gob.osinergmin.fise.domain.FiseFormato14AD;
 import gob.osinergmin.fise.domain.FiseFormato14ADOb;
 import gob.osinergmin.fise.util.FormatoUtil;

@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -32,6 +33,9 @@ public class FiseFormato14CDObPK implements Serializable {
 
 	@Column(name="ID_ZONA_BENEF",unique=true, nullable=false)
 	private long idZonaBenef;
+	
+	@Column(name="ID_TIP_PERSONAL",unique=true, nullable=false)
+	private long idTipPersonal;
 
 	@Column(name="ITEM_OBSERVACION",unique=true, nullable=false)
 	private long itemObservacion;
@@ -86,7 +90,13 @@ public class FiseFormato14CDObPK implements Serializable {
 	public void setItemObservacion(long itemObservacion) {
 		this.itemObservacion = itemObservacion;
 	}
-
+	public long getIdTipPersonal() {
+		return idTipPersonal;
+	}
+	public void setIdTipPersonal(long idTipPersonal) {
+		this.idTipPersonal = idTipPersonal;
+	}
+	
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -103,6 +113,7 @@ public class FiseFormato14CDObPK implements Serializable {
 			&& (this.anoFinVigencia == castOther.anoFinVigencia)
 			&& this.etapa.equals(castOther.etapa)
 			&& (this.idZonaBenef == castOther.idZonaBenef)
+			&& (this.idTipPersonal == castOther.idTipPersonal)
 			&& (this.itemObservacion == castOther.itemObservacion);
 	}
 
@@ -116,6 +127,7 @@ public class FiseFormato14CDObPK implements Serializable {
 		hash = hash * prime + ((int) (this.anoFinVigencia ^ (this.anoFinVigencia >>> 32)));
 		hash = hash * prime + this.etapa.hashCode();
 		hash = hash * prime + ((int) (this.idZonaBenef ^ (this.idZonaBenef >>> 32)));
+		hash = hash * prime + ((int) (this.idTipPersonal ^ (this.idTipPersonal >>> 32)));
 		hash = hash * prime + ((int) (this.itemObservacion ^ (this.itemObservacion >>> 32)));
 		
 		return hash;

@@ -404,5 +404,130 @@ public class FiseConstants {
 	public final static long TIPO_PERSONAL_GESTOR_COD = 3;
 	public final static long TIPO_PERSONAL_ASISTENTE_COD = 4;
 	
+    public final static String PARAM_NOMBRE_SEDE_F14C = "NOMBRE_SEDE";
+	
+	//------------------------------RURAL--------------------------
+	public final static String PARAM_NUMBENEF_EMPAD_CANT_R_F14C = "NUMBENEF_EMPAD_CANT_R";
+	
+	public final static String PARAM_COSTO_COORD_CANTCD_R_F14C = "COSTO_COORD_CANT_R";
+	public final static String PARAM_COSTO_SUPER_CANTCD_R_F14C = "COSTO_SUP_CANT_R";
+	public final static String PARAM_COSTO_GEST_CANTCD_R_F14C = "COSTO_GEST_CANT_R";
+	public final static String PARAM_COSTO_ASIST_CANTCD_R_F14C = "COSTO_ASIST_CANT_R";
+	public final static String PARAM_COSTO_TOTGESTPERS_CANTCD_R_F14C = "COSTOTOTAL_GESTPER_CANT_R";
+	
+	public final static String PARAM_COSTO_COORD_CD_R_F14C = "COSTO_COORD_CD_R";
+	public final static String PARAM_COSTO_SUP_CD_R_F14C = "COSTO_SUP_CD_R";
+	public final static String PARAM_COSTO_GEST_CD_R_F14C = "COSTO_GEST_CD_R";
+	public final static String PARAM_COSTO_ASIST_CD_R_F14C = "COSTO_ASIST_CD_R";
+	public final static String PARAM_COSTO_TOTALGESTPERS_CD_R_F14C = "COSTOTOTAL_GESTPER_CD_R";
+	
+	public final static String PARAM_COSTO_COORD_CANTCI_R_F14C = "COSTO_COORD_CANT_CI_R";
+	public final static String PARAM_COSTO_SUPER_CANTCI_R_F14C = "COSTO_SUP_CANT_CI_R";
+	public final static String PARAM_COSTO_GEST_CANTCI_R_F14C = "COSTO_GEST_CANT_CI_R";
+	public final static String PARAM_COSTO_ASIST_CANTCI_R_F14C = "COSTO_ASIST_CANT_CI_R";
+	public final static String PARAM_COSTO_TOTALGESTPERS_CANTCI_R_F14C = "COSTOTOTAL_GESTPER_CANT_CI_R";
+	
+	public final static String PARAM_COSTO_COORD_CI_R_F14C = "COSTO_COORD_CI_R";
+	public final static String PARAM_COSTO_SUP_CI_R_F14C = "COSTO_SUP_CI_R";
+	public final static String PARAM_COSTO_GEST_CI_R_F14C = "COSTO_GEST_CI_R";
+	public final static String PARAM_COSTO_ASIST_CI_R_F14C = "COSTO_ASIST_CI_R";
+	public final static String PARAM_COSTO_TOTALGESTPERS_CI_R_F14C = "COSTOTOTAL_GESTPER_CI_R";
+	
+	public final static String PARAM_COSTO_TOTAL_COORD_R_F14C = "COSTO_COORD_TOTAL_R";
+	public final static String PARAM_COSTO_TOTAL_SUPERV_R_F14C = "COSTO_SUP_TOTAL_R";
+	public final static String PARAM_COSTO_TOTAL_GESTOR_R_F14C = "COSTO_GEST_TOTAL_R";
+	public final static String PARAM_COSTO_TOTAL_ASIST_R_F14C = "COSTO_ASIST_TOTAL_R";
+	public final static String PARAM_COSTO_TOTAL_GEST_R_F14C = "COSTOTOTAL_GESTPER_SUMA_R";
+	
+	public final static String PARAM_COSTO_PROM_CD_R_F14C = "COSTOPROM_MENSUAL_CD_R";
+	public final static String PARAM_COSTO_PROM_TOTAL_R_F14C = "COSTOPROM_MENSUAL_TOTAL_R";
+	
+	//------------------------------PROVINCIAL--------------------------	
+	public final static String PARAM_NUMBENEF_EMPAD_CANT_P_F14C = "NUMBENEF_EMPAD_CANT_P";
+	
+	public final static String PARAM_COSTO_COORD_CANTCD_P_F14C = "COSTO_COORD_CANT_P";
+	public final static String PARAM_COSTO_SUPER_CANTCD_P_F14C = "COSTO_SUP_CANT_P";
+	public final static String PARAM_COSTO_GEST_CANTCD_P_F14C = "COSTO_GEST_CANT_P";
+	public final static String PARAM_COSTO_ASIST_CANTCD_P_F14C = "COSTO_ASIST_CANT_P";
+	public final static String PARAM_COSTO_TOTALGESTPERS_CANTCD_P_F14C = "COSTOTOTAL_GESTPER_CANT_P";
+		
+	public final static String PARAM_COSTO_COORD_CD_P_F14C = "COSTO_COORD_CD_P";
+	public final static String PARAM_COSTO_SUP_CD_P_F14C = "COSTO_SUP_CD_P";
+	public final static String PARAM_COSTO_GEST_CD_P_F14C = "COSTO_GEST_CD_P";
+	public final static String PARAM_COSTO_ASIST_CD_P_F14C = "COSTO_ASIST_CD_P";
+	public final static String PARAM_COSTO_TOTALGESTPERS_CD_P_F14C = "COSTOTOTAL_GESTPER_CD_P";
+		
+	public final static String PARAM_COSTO_COORD_CANTCI_P_F14C = "COSTO_COORD_CANT_CI_P";
+	public final static String PARAM_COSTO_SUPER_CANTCI_P_F14C = "COSTO_SUP_CANT_CI_P";
+	public final static String PARAM_COSTO_GEST_CANTCI_P_F14C = "COSTO_GEST_CANT_CI_P";
+	public final static String PARAM_COSTO_ASIST_CANTCI_P_F14C = "COSTO_ASIST_CANT_CI_P";
+	public final static String PARAM_COSTO_TOTGESTPERS_CANTCI_P_F14C = "COSTOTOTAL_GESTPER_CANT_CI_P";
+	
+	public final static String PARAM_COSTO_COORD_CI_P_F14C = "COSTO_COORD_CI_P";
+	public final static String PARAM_COSTO_SUP_CI_P_F14C = "COSTO_SUP_CI_P";
+	public final static String PARAM_COSTO_GEST_CI_P_F14C = "COSTO_GEST_CI_P";
+	public final static String PARAM_COSTO_ASIST_CI_P_F14C = "COSTO_ASIST_CI_P";
+	public final static String PARAM_COSTO_TOTGESTPERS_CI_P_F14C = "COSTOTOTAL_GESTPER_CI_P";
+	
+	public final static String PARAM_COSTO_TOTAL_COORD_P_F14C = "COSTO_COORD_TOTAL_P";
+	public final static String PARAM_COSTO_TOTAL_SUPERV_P_F14C = "COSTO_SUP_TOTAL_P";
+	public final static String PARAM_COSTO_TOTAL_GESTOR_P_F14C = "COSTO_GEST_TOTAL_P";
+	public final static String PARAM_COSTO_TOTAL_ASIST_P_F14C = "COSTO_ASIST_TOTAL_P";
+	public final static String PARAM_COSTO_TOTAL_GEST_P_F14C = "COSTOTOTAL_GESTPER_SUMA_P";
+	
+	public final static String PARAM_COSTO_PROM_CD_P_F14C = "COSTOPROM_MENS_CD_P";
+	public final static String PARAM_COSTO_PROM_TOT_P_F14C = "COSTOPROM_MENS_TOTAL_P";
+	
+	//------------------------------LIMA--------------------------		
+	public final static String PARAM_NUMBENEF_EMPAD_CANT_L_F14C = "NUMBENEF_EMPAD_CANT_L";
+	
+	public final static String PARAM_COSTO_COORD_CANTCD_L_F14C = "COSTO_COORD_CANT_L";
+	public final static String PARAM_COSTO_SUPER_CANTCD_L_F14C = "COSTO_SUP_CANT_L";
+	public final static String PARAM_COSTO_GEST_CANTCD_L_F14C = "COSTO_GEST_CANT_L";
+	public final static String PARAM_COSTO_ASIST_CANTCD_L_F14C = "COSTO_ASIST_CANT_L";
+	public final static String PARAM_COSTO_TOTGESTPERS_CANTCD_L_F14C = "COSTOTOTAL_GESTPER_CANT_L";
+	
+	public final static String PARAM_COSTO_COORD_CD_L_F14C = "COSTO_COORD_CD_L";
+	public final static String PARAM_COSTO_SUP_CD_L_F14C = "COSTO_SUP_CD_L";
+	public final static String PARAM_COSTO_GEST_CD_L_F14C = "COSTO_GEST_CD_L";
+	public final static String PARAM_COSTO_ASIST_CD_L_F14C = "COSTO_ASIST_CD_L";
+	public final static String PARAM_COSTO_TOTGESTPERS_CD_L_F14C = "COSTOTOTAL_GESTPER_CD_L";
+	
+	public final static String PARAM_COSTO_COORD_CANTCI_L_F14C = "COSTO_COORD_CANT_CI_L";
+	public final static String PARAM_COSTO_SUPER_CANTCI_L_F14C = "COSTO_SUP_CANT_CI_L";
+	public final static String PARAM_COSTO_GEST_CANTCI_L_F14C = "COSTO_GEST_CANT_CI_L";
+	public final static String PARAM_COSTO_ASIST_CANTCI_L_F14C = "COSTO_ASIST_CANT_CI_L";
+	public final static String PARAM_COSTO_TOTGESTPERS_CANTCI_L_F14C = "COSTOTOTAL_GESTPER_CANT_CI_L";
+	
+	public final static String PARAM_COSTO_COORD_CI_L_F14C = "COSTO_COORD_CI_L";
+	public final static String PARAM_COSTO_SUP_CI_L_F14C = "COSTO_SUP_CI_L";
+	public final static String PARAM_COSTO_GEST_CI_L_F14C = "COSTO_GEST_CI_L";
+	public final static String PARAM_COSTO_ASIST_CI_L_F14C = "COSTO_ASIST_CI_L";
+	public final static String PARAM_COSTO_TOTGESTPERS_CI_L_F14C = "COSTOTOTAL_GESTPER_CI_L";
+	
+	public final static String PARAM_COSTO_TOTAL_COORD_L_F14C = "COSTO_COORD_TOTAL_L";
+	public final static String PARAM_COSTO_TOTAL_SUPERV_L_F14C = "COSTO_SUP_TOTAL_L";
+	public final static String PARAM_COSTO_TOTAL_GESTOR_L_F14C = "COSTO_GEST_TOTAL_L";
+	public final static String PARAM_COSTO_TOTAL_ASIST_L_F14C = "COSTO_ASIST_TOTAL_L";
+	public final static String PARAM_COSTO_TOTAL_GEST_L_F14C = "COSTOTOTAL_GESTPER_SUMA_L";
+	
+	public final static String PARAM_COSTO_PROM_CD_L_F14C = "COSTOPROM_MENS_CD_L";
+	public final static String PARAM_COSTO_PROM_TOT_L_F14C = "COSTOPROM_MENS_TOTAL_L";
+	
+	//---------------------- SUMA TOTALES---------------------------------------	
+	public final static String PARAM_SUMANEBEF_CANT_T_F14C = "SUMANUMBENEF_EMPAD_CANT_T";
+	public final static String PARAM_SUMACOORD_CANT_T_F14C = "SUMACOSTO_COORD_CANT_T";
+	public final static String PARAM_SUMASUP_CANT_T_F14C = "SUMACOSTO_SUP_CANT_T";
+	public final static String PARAM_SUMAGEST_CANT_T_F14C = "SUMACOSTO_GEST_CANT_T";
+	public final static String PARAM_SUMASIST_CANT_T_F14C = "SUMACOSTO_ASIST_CANT_T";
+	public final static String PARAM_SUMACSTO_GESPER_CANT_T_F14C = "SUMACOSTOTOTAL_GESTPER_CANT_T";
+	
+	public final static String PARAM_SUMACSTO_COORD_COSTO_T_F14C = "SUMACOSTO_COORD_COSTO_T";
+	public final static String PARAM_SUMACSTO_SUP_COSTO_T_F14C = "SUMACOSTO_SUP_COSTO_T";
+	public final static String PARAM_SUMACSTO_GEST_COSTO_T_F14C = "SUMACOSTO_GEST_COSTO_T";
+	public final static String PARAM_SUMACSTO_ASIST_COSTO_T_F14C = "SUMACOSTO_ASIST_COSTO_T";
+	public final static String PARAM_SUMACSTO_GESPER_COSTO_T_F14C = "SUMACOSTOTOTAL_GESTPER_COSTO_T";
+	public final static String PARAM_CSPOPROM_MENS_TOTCOS_T_F14C = "COSTOPROM_MENS_TOTALCOSTO_T";
+	
 
 }

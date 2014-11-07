@@ -1,6 +1,5 @@
 package gob.osinergmin.fise.dao;
 
-import gob.osinergmin.fise.domain.FiseFormato14CD;
 import gob.osinergmin.fise.domain.FiseFormato14CDOb;
 import gob.osinergmin.fise.domain.FiseFormato14CDObPK;
 
@@ -20,7 +19,11 @@ public interface Formato14CDObDao {
 	void eliminarFiseFormato14CDOb(FiseFormato14CDOb fiseFormato14CDOb) 
 			throws SQLException;
 	
-	FiseFormato14CD obtenerFiseFormato14CDOb(FiseFormato14CDObPK id) 
+	FiseFormato14CDOb obtenerFiseFormato14CDOb(FiseFormato14CDObPK id) 
 			throws SQLException;
+	
+	List<FiseFormato14CDOb> buscarFiseFormato14CDOb(String codEmpresa, long anioPresentaion, 
+			long mesPresentacion, long anioInicioVige, long anioFinVige, 
+			String etapa,long idZonaBenef,long idTipoPersonal) throws SQLException;
 
 }

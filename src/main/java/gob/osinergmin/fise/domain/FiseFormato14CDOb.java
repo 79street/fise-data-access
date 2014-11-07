@@ -52,7 +52,7 @@ public class FiseFormato14CDOb implements Serializable {
 	private FiseFormato14CD fiseFormato14cD;
 
 	//bi-directional many-to-one association to FiseObservacion
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ID_OBSERVACION",nullable=false, insertable=false, updatable=false)
 	private FiseObservacion fiseObservacion;
 

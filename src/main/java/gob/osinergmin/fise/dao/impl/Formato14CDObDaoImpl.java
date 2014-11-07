@@ -2,7 +2,6 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14CDObDao;
-import gob.osinergmin.fise.domain.FiseFormato14CD;
 import gob.osinergmin.fise.domain.FiseFormato14CDOb;
 import gob.osinergmin.fise.domain.FiseFormato14CDObPK;
 
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository(value = "formato14CDObDaoImpl")
 public class Formato14CDObDaoImpl extends GenericDaoImpl implements Formato14CDObDao {
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FiseFormato14CDOb> listarFiseFormato14CDOb() {
@@ -52,9 +51,43 @@ public class Formato14CDObDaoImpl extends GenericDaoImpl implements Formato14CDO
 	}
 
 	@Override
-	public FiseFormato14CD obtenerFiseFormato14CDOb(FiseFormato14CDObPK id)
+	public FiseFormato14CDOb obtenerFiseFormato14CDOb(FiseFormato14CDObPK id)
 			throws SQLException {		
-		return em.find(FiseFormato14CD.class, id); 
+		return em.find(FiseFormato14CDOb.class, id); 
+	}
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato14CDOb> buscarFiseFormato14CDOb(String codEmpresa, long anioPresentaion, 
+			long mesPresentacion, long anioInicioVige, long anioFinVige, 
+			String etapa,long idZonaBenef,long idTipoPersonal) throws SQLException{
+		
+		String q = "SELECT f FROM " + FiseFormato14CDOb.class.getName()
+				+ " f WHERE 1=1 ";		
+		q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		q = q.concat(" AND f.id.anoPresentacion =:anioPres ");	
+		q = q.concat(" AND f.id.mesPresentacion =:mesPres ");
+		q = q.concat(" AND f.id.anoInicioVigencia =:anioInicio ");	
+		q = q.concat(" AND f.id.anoFinVigencia =:anioFin ");	
+		q = q.concat(" AND f.id.etapa =:etapa ");
+		q = q.concat(" AND f.id.idZonaBenef =:idZona ");
+		q = q.concat(" AND f.id.idTipPersonal =:idTipoPer ");
+		
+		Query query = em.createQuery(q); 		
+		query.setParameter("codEmpresa", codEmpresa);
+		query.setParameter("anioPres", anioPresentaion);
+		query.setParameter("mesPres", mesPresentacion);
+		query.setParameter("anioInicio", anioInicioVige);
+		query.setParameter("anioFin", anioFinVige);
+		query.setParameter("etapa", etapa);
+		query.setParameter("idZona", idZonaBenef);	
+		query.setParameter("idTipoPer", idTipoPersonal);		
+		List<FiseFormato14CDOb> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
 	}
 
 }

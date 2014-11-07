@@ -1,10 +1,21 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -38,15 +49,15 @@ public class FiseFormato14CC implements Serializable {
 	@Column(name="COSTO_PROM_MEN_URB_PROV")
 	private BigDecimal costoPromMenUrbProv;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ENVIO_DEFINITIVO")
 	private Date fechaEnvioDefinitivo;
 
@@ -88,6 +99,11 @@ public class FiseFormato14CC implements Serializable {
 	//bi-directional many-to-one association to FiseFormato14cD
 	@OneToMany(mappedBy="fiseFormato14cC")
 	private List<FiseFormato14CD> fiseFormato14cDs;
+	
+	@Transient
+	@OneToMany(mappedBy="fiseFormato14cC")
+	private List<FiseFormato14CD> listaDetalle14cDs;
+	
 
 	public FiseFormato14CC() {
 	}
@@ -280,6 +296,14 @@ public class FiseFormato14CC implements Serializable {
 
 	public void setDescMesPresentacion(String descMesPresentacion) {
 		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public List<FiseFormato14CD> getListaDetalle14cDs() {
+		return listaDetalle14cDs;
+	}
+
+	public void setListaDetalle14cDs(List<FiseFormato14CD> listaDetalle14cDs) {
+		this.listaDetalle14cDs = listaDetalle14cDs;
 	}
 	
 	

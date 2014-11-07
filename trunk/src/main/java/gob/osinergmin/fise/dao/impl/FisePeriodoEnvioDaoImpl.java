@@ -35,7 +35,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			if(FormatoUtil.isNotBlank(nombreFormato))
 				sql.append(" AND FORMATO = '").append(nombreFormato.trim()).append("' ");
 			
-			//sql.append(" AND '").append(FechaUtil.fechaHoyYYYYMMDD().trim()).append("' BETWEEN TO_CHAR(DESDE, 'YYYYMMDD') AND TO_CHAR(hasta, 'YYYYMMDD') ");
+			 sql.append(" AND '").append(FechaUtil.fechaHoyYYYYMMDD().trim()).append("' BETWEEN TO_CHAR(DESDE, 'YYYYMMDD') AND TO_CHAR(hasta, 'YYYYMMDD') ");
 			
 			//sql.append(" ORDER BY ordenador");
 			//System.out.println("QUERY:"+sql.toString());

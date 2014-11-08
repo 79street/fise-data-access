@@ -45,6 +45,7 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADPK</class>
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADOb</class>
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADObPK</class>
+	<class>gob.osinergmin.fise.domain.AdmUbigeo</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	      </properties>

@@ -1,10 +1,12 @@
 package gob.osinergmin.fise.gart.service.test;
-import java.util.List;
-
+import gob.osinergmin.fise.domain.AdmUbigeo;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
+import gob.osinergmin.fise.gart.service.AdmUbigeoGartService;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,9 @@ public class Formato13AGartServiceTest {
 	
 		@Autowired
 		private Formato13AGartService formatoService;
+		
+		@Autowired
+		private AdmUbigeoGartService ubigeoService;
 		
 		@Test
 		public void buscarEmpresaTest(){
@@ -57,6 +62,39 @@ public class Formato13AGartServiceTest {
 			if(formatos!=null){
 				for (FiseFormato13AD fiseFormato13AD : formatos) {
 					System.out.println("EMPRESA:"+fiseFormato13AD.getId().getCodEmpresa());
+				}
+			}
+		}
+		
+		@Test
+		public void listarDepartamentos(){
+			List<AdmUbigeo>depas=ubigeoService.listarDepartamentos();
+			
+			if(!depas.isEmpty()){
+				for (AdmUbigeo admUbigeo : depas) {
+					System.out.println("COD:"+admUbigeo.getCodUbigeo());
+				}
+			}
+		}
+		
+		@Test
+		public void listarProvincias(){
+			List<AdmUbigeo>depas=ubigeoService.listarProvincias("15");
+			
+			if(!depas.isEmpty()){
+				for (AdmUbigeo admUbigeo : depas) {
+					System.out.println("COD:"+admUbigeo.getCodUbigeo());
+				}
+			}
+		}
+		
+		@Test
+		public void listarDistritos(){
+			List<AdmUbigeo>depas=ubigeoService.listarDistritos("1501");
+			
+			if(!depas.isEmpty()){
+				for (AdmUbigeo admUbigeo : depas) {
+					System.out.println("COD:"+admUbigeo.getCodUbigeo());
 				}
 			}
 		}

@@ -48,6 +48,7 @@ public class FiseConstants {
 	
 	public final static String FORMATO_EXPORT_PDF = "0";
 	public final static String FORMATO_EXPORT_XLS = "1";
+	public final static String FORMATO_EXPORT_ACTAENVIO = "2";
 	
 	public final static long ID_TABLA_FORMATO12A = 100;
 	public final static long ID_TABLA_FORMATO12B = 101;
@@ -104,6 +105,7 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_14B = "F14B";
 	public final static String TIPO_FORMATO_14C = "F14C";
 	public final static String TIPO_FORMATO_VAL= "VAL";
+	public final static String TIPO_FORMATO_ACTAENVIO = "ACTA";
 	public final static String TIPO_FORMATO_VAL_12A = "VAL12A";
 	public final static String TIPO_FORMATO_VAL_12B = "VAL12B";
 	public final static String TIPO_FORMATO_VAL_12C = "VAL12C";

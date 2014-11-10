@@ -25,8 +25,7 @@ public class Formato14CBean {
 	private String codEmpresa;
 	private String anioPres;
 	private String mesPres;	
-	private String anioInicioVig;
-	private String anioFinVig;
+	
 	private String etapa;	
 	private String nombreSede;
 	private String nombreExel;
@@ -47,6 +46,7 @@ public class Formato14CBean {
 	//private String codigoPeriodo;
 	private String periodoEnvio;
 	private String desperiodoEnvio;//para el proceso editar
+	private String flagPeriodoEjecucion;
 	
 	 /**datos del detalle de la cabecera*/
 	private String idZonaBenef;
@@ -165,762 +165,20 @@ public class Formato14CBean {
 	
 	private String costTotalPromedio;//no editable GP gestion de personal
 	
-	/**
-	 * @return the codEmpresa
-	 */
-	public String getCodEmpresa() {
-		return codEmpresa;
-	}
-	/**
-	 * @param codEmpresa the codEmpresa to set
-	 */
-	public void setCodEmpresa(String codEmpresa) {
-		this.codEmpresa = codEmpresa;
-	}
-	/**
-	 * @return the anioPres
-	 */
-	public String getAnioPres() {
-		return anioPres;
-	}
-	/**
-	 * @param anioPres the anioPres to set
-	 */
-	public void setAnioPres(String anioPres) {
-		this.anioPres = anioPres;
-	}
-	/**
-	 * @return the mesPres
-	 */
-	public String getMesPres() {
-		return mesPres;
-	}
-	/**
-	 * @param mesPres the mesPres to set
-	 */
-	public void setMesPres(String mesPres) {
-		this.mesPres = mesPres;
-	}
-	/**
-	 * @return the etapa
-	 */
-	public String getEtapa() {
-		return etapa;
-	}
-	/**
-	 * @param etapa the etapa to set
-	 */
-	public void setEtapa(String etapa) {
-		this.etapa = etapa;
-	}
-	/**
-	 * @return the nombreSede
-	 */
-	public String getNombreSede() {
-		return nombreSede;
-	}
-	/**
-	 * @param nombreSede the nombreSede to set
-	 */
-	public void setNombreSede(String nombreSede) {
-		this.nombreSede = nombreSede;
-	}
-	/**
-	 * @return the nombreExel
-	 */
-	public String getNombreExel() {
-		return nombreExel;
-	}
-	/**
-	 * @param nombreExel the nombreExel to set
-	 */
-	public void setNombreExel(String nombreExel) {
-		this.nombreExel = nombreExel;
-	}
-	/**
-	 * @return the nombreText
-	 */
-	public String getNombreText() {
-		return nombreText;
-	}
-	/**
-	 * @param nombreText the nombreText to set
-	 */
-	public void setNombreText(String nombreText) {
-		this.nombreText = nombreText;
-	}
-	/**
-	 * @return the numRural
-	 */
-	public String getNumRural() {
-		return numRural;
-	}
-	/**
-	 * @param numRural the numRural to set
-	 */
-	public void setNumRural(String numRural) {
-		this.numRural = numRural;
-	}
-	/**
-	 * @return the numUrbProv
-	 */
-	public String getNumUrbProv() {
-		return numUrbProv;
-	}
-	/**
-	 * @param numUrbProv the numUrbProv to set
-	 */
-	public void setNumUrbProv(String numUrbProv) {
-		this.numUrbProv = numUrbProv;
-	}
-	/**
-	 * @return the numUrbLima
-	 */
-	public String getNumUrbLima() {
-		return numUrbLima;
-	}
-	/**
-	 * @param numUrbLima the numUrbLima to set
-	 */
-	public void setNumUrbLima(String numUrbLima) {
-		this.numUrbLima = numUrbLima;
-	}
-	/**
-	 * @return the costoPromRural
-	 */
-	public String getCostoPromRural() {
-		return costoPromRural;
-	}
-	/**
-	 * @param costoPromRural the costoPromRural to set
-	 */
-	public void setCostoPromRural(String costoPromRural) {
-		this.costoPromRural = costoPromRural;
-	}
-	/**
-	 * @return the costoPromUrbProv
-	 */
-	public String getCostoPromUrbProv() {
-		return costoPromUrbProv;
-	}
-	/**
-	 * @param costoPromUrbProv the costoPromUrbProv to set
-	 */
-	public void setCostoPromUrbProv(String costoPromUrbProv) {
-		this.costoPromUrbProv = costoPromUrbProv;
-	}
-	/**
-	 * @return the costoPromUrbLima
-	 */
-	public String getCostoPromUrbLima() {
-		return costoPromUrbLima;
-	}
-	/**
-	 * @param costoPromUrbLima the costoPromUrbLima to set
-	 */
-	public void setCostoPromUrbLima(String costoPromUrbLima) {
-		this.costoPromUrbLima = costoPromUrbLima;
-	}
-	/**
-	 * @return the idZonaBenef
-	 */
-	public String getIdZonaBenef() {
-		return idZonaBenef;
-	}
-	/**
-	 * @param idZonaBenef the idZonaBenef to set
-	 */
-	public void setIdZonaBenef(String idZonaBenef) {
-		this.idZonaBenef = idZonaBenef;
-	}
-	/**
-	 * @return the idTipoPersonal
-	 */
-	public String getIdTipoPersonal() {
-		return idTipoPersonal;
-	}
-	/**
-	 * @param idTipoPersonal the idTipoPersonal to set
-	 */
-	public void setIdTipoPersonal(String idTipoPersonal) {
-		this.idTipoPersonal = idTipoPersonal;
-	}
-	/**
-	 * @return the canDRCoord
-	 */
-	public String getCanDRCoord() {
-		return canDRCoord;
-	}
-	/**
-	 * @param canDRCoord the canDRCoord to set
-	 */
-	public void setCanDRCoord(String canDRCoord) {
-		this.canDRCoord = canDRCoord;
-	}
-	/**
-	 * @return the costDRCoord
-	 */
-	public String getCostDRCoord() {
-		return costDRCoord;
-	}
-	/**
-	 * @param costDRCoord the costDRCoord to set
-	 */
-	public void setCostDRCoord(String costDRCoord) {
-		this.costDRCoord = costDRCoord;
-	}
-	/**
-	 * @return the canIRCoord
-	 */
-	public String getCanIRCoord() {
-		return canIRCoord;
-	}
-	/**
-	 * @param canIRCoord the canIRCoord to set
-	 */
-	public void setCanIRCoord(String canIRCoord) {
-		this.canIRCoord = canIRCoord;
-	}
-	/**
-	 * @return the costIRCoord
-	 */
-	public String getCostIRCoord() {
-		return costIRCoord;
-	}
-	/**
-	 * @param costIRCoord the costIRCoord to set
-	 */
-	public void setCostIRCoord(String costIRCoord) {
-		this.costIRCoord = costIRCoord;
-	}
-	/**
-	 * @return the canDRSupe
-	 */
-	public String getCanDRSupe() {
-		return canDRSupe;
-	}
-	/**
-	 * @param canDRSupe the canDRSupe to set
-	 */
-	public void setCanDRSupe(String canDRSupe) {
-		this.canDRSupe = canDRSupe;
-	}
-	/**
-	 * @return the costDRSupe
-	 */
-	public String getCostDRSupe() {
-		return costDRSupe;
-	}
-	/**
-	 * @param costDRSupe the costDRSupe to set
-	 */
-	public void setCostDRSupe(String costDRSupe) {
-		this.costDRSupe = costDRSupe;
-	}
-	/**
-	 * @return the canIRSupe
-	 */
-	public String getCanIRSupe() {
-		return canIRSupe;
-	}
-	/**
-	 * @param canIRSupe the canIRSupe to set
-	 */
-	public void setCanIRSupe(String canIRSupe) {
-		this.canIRSupe = canIRSupe;
-	}
-	/**
-	 * @return the costIRSupe
-	 */
-	public String getCostIRSupe() {
-		return costIRSupe;
-	}
-	/**
-	 * @param costIRSupe the costIRSupe to set
-	 */
-	public void setCostIRSupe(String costIRSupe) {
-		this.costIRSupe = costIRSupe;
-	}
-	/**
-	 * @return the canDRGest
-	 */
-	public String getCanDRGest() {
-		return canDRGest;
-	}
-	/**
-	 * @param canDRGest the canDRGest to set
-	 */
-	public void setCanDRGest(String canDRGest) {
-		this.canDRGest = canDRGest;
-	}
-	/**
-	 * @return the costDRGest
-	 */
-	public String getCostDRGest() {
-		return costDRGest;
-	}
-	/**
-	 * @param costDRGest the costDRGest to set
-	 */
-	public void setCostDRGest(String costDRGest) {
-		this.costDRGest = costDRGest;
-	}
-	/**
-	 * @return the canIRGest
-	 */
-	public String getCanIRGest() {
-		return canIRGest;
-	}
-	/**
-	 * @param canIRGest the canIRGest to set
-	 */
-	public void setCanIRGest(String canIRGest) {
-		this.canIRGest = canIRGest;
-	}
-	/**
-	 * @return the costIRGest
-	 */
-	public String getCostIRGest() {
-		return costIRGest;
-	}
-	/**
-	 * @param costIRGest the costIRGest to set
-	 */
-	public void setCostIRGest(String costIRGest) {
-		this.costIRGest = costIRGest;
-	}
-	/**
-	 * @return the canDRAsist
-	 */
-	public String getCanDRAsist() {
-		return canDRAsist;
-	}
-	/**
-	 * @param canDRAsist the canDRAsist to set
-	 */
-	public void setCanDRAsist(String canDRAsist) {
-		this.canDRAsist = canDRAsist;
-	}
-	/**
-	 * @return the costDRAsist
-	 */
-	public String getCostDRAsist() {
-		return costDRAsist;
-	}
-	/**
-	 * @param costDRAsist the costDRAsist to set
-	 */
-	public void setCostDRAsist(String costDRAsist) {
-		this.costDRAsist = costDRAsist;
-	}
-	/**
-	 * @return the canIRAsist
-	 */
-	public String getCanIRAsist() {
-		return canIRAsist;
-	}
-	/**
-	 * @param canIRAsist the canIRAsist to set
-	 */
-	public void setCanIRAsist(String canIRAsist) {
-		this.canIRAsist = canIRAsist;
-	}
-	/**
-	 * @return the costIRAsist
-	 */
-	public String getCostIRAsist() {
-		return costIRAsist;
-	}
-	/**
-	 * @param costIRAsist the costIRAsist to set
-	 */
-	public void setCostIRAsist(String costIRAsist) {
-		this.costIRAsist = costIRAsist;
-	}
-	/**
-	 * @return the canDPCoord
-	 */
-	public String getCanDPCoord() {
-		return canDPCoord;
-	}
-	/**
-	 * @param canDPCoord the canDPCoord to set
-	 */
-	public void setCanDPCoord(String canDPCoord) {
-		this.canDPCoord = canDPCoord;
-	}
-	/**
-	 * @return the costDPCoord
-	 */
-	public String getCostDPCoord() {
-		return costDPCoord;
-	}
-	/**
-	 * @param costDPCoord the costDPCoord to set
-	 */
-	public void setCostDPCoord(String costDPCoord) {
-		this.costDPCoord = costDPCoord;
-	}
-	/**
-	 * @return the canIPCoord
-	 */
-	public String getCanIPCoord() {
-		return canIPCoord;
-	}
-	/**
-	 * @param canIPCoord the canIPCoord to set
-	 */
-	public void setCanIPCoord(String canIPCoord) {
-		this.canIPCoord = canIPCoord;
-	}
-	/**
-	 * @return the costIPCoord
-	 */
-	public String getCostIPCoord() {
-		return costIPCoord;
-	}
-	/**
-	 * @param costIPCoord the costIPCoord to set
-	 */
-	public void setCostIPCoord(String costIPCoord) {
-		this.costIPCoord = costIPCoord;
-	}
-	/**
-	 * @return the canDPSupe
-	 */
-	public String getCanDPSupe() {
-		return canDPSupe;
-	}
-	/**
-	 * @param canDPSupe the canDPSupe to set
-	 */
-	public void setCanDPSupe(String canDPSupe) {
-		this.canDPSupe = canDPSupe;
-	}
-	/**
-	 * @return the costDPSupe
-	 */
-	public String getCostDPSupe() {
-		return costDPSupe;
-	}
-	/**
-	 * @param costDPSupe the costDPSupe to set
-	 */
-	public void setCostDPSupe(String costDPSupe) {
-		this.costDPSupe = costDPSupe;
-	}
-	/**
-	 * @return the canIPSupe
-	 */
-	public String getCanIPSupe() {
-		return canIPSupe;
-	}
-	/**
-	 * @param canIPSupe the canIPSupe to set
-	 */
-	public void setCanIPSupe(String canIPSupe) {
-		this.canIPSupe = canIPSupe;
-	}
-	/**
-	 * @return the costIPSupe
-	 */
-	public String getCostIPSupe() {
-		return costIPSupe;
-	}
-	/**
-	 * @param costIPSupe the costIPSupe to set
-	 */
-	public void setCostIPSupe(String costIPSupe) {
-		this.costIPSupe = costIPSupe;
-	}
-	/**
-	 * @return the canDPGest
-	 */
-	public String getCanDPGest() {
-		return canDPGest;
-	}
-	/**
-	 * @param canDPGest the canDPGest to set
-	 */
-	public void setCanDPGest(String canDPGest) {
-		this.canDPGest = canDPGest;
-	}
-	/**
-	 * @return the costDPGest
-	 */
-	public String getCostDPGest() {
-		return costDPGest;
-	}
-	/**
-	 * @param costDPGest the costDPGest to set
-	 */
-	public void setCostDPGest(String costDPGest) {
-		this.costDPGest = costDPGest;
-	}
-	/**
-	 * @return the canIPGest
-	 */
-	public String getCanIPGest() {
-		return canIPGest;
-	}
-	/**
-	 * @param canIPGest the canIPGest to set
-	 */
-	public void setCanIPGest(String canIPGest) {
-		this.canIPGest = canIPGest;
-	}
-	/**
-	 * @return the costIPGest
-	 */
-	public String getCostIPGest() {
-		return costIPGest;
-	}
-	/**
-	 * @param costIPGest the costIPGest to set
-	 */
-	public void setCostIPGest(String costIPGest) {
-		this.costIPGest = costIPGest;
-	}
-	/**
-	 * @return the canDPAsist
-	 */
-	public String getCanDPAsist() {
-		return canDPAsist;
-	}
-	/**
-	 * @param canDPAsist the canDPAsist to set
-	 */
-	public void setCanDPAsist(String canDPAsist) {
-		this.canDPAsist = canDPAsist;
-	}
-	/**
-	 * @return the costDPAsist
-	 */
-	public String getCostDPAsist() {
-		return costDPAsist;
-	}
-	/**
-	 * @param costDPAsist the costDPAsist to set
-	 */
-	public void setCostDPAsist(String costDPAsist) {
-		this.costDPAsist = costDPAsist;
-	}
-	/**
-	 * @return the canIPAsist
-	 */
-	public String getCanIPAsist() {
-		return canIPAsist;
-	}
-	/**
-	 * @param canIPAsist the canIPAsist to set
-	 */
-	public void setCanIPAsist(String canIPAsist) {
-		this.canIPAsist = canIPAsist;
-	}
-	/**
-	 * @return the costIPAsist
-	 */
-	public String getCostIPAsist() {
-		return costIPAsist;
-	}
-	/**
-	 * @param costIPAsist the costIPAsist to set
-	 */
-	public void setCostIPAsist(String costIPAsist) {
-		this.costIPAsist = costIPAsist;
-	}
-	/**
-	 * @return the canDLCoord
-	 */
-	public String getCanDLCoord() {
-		return canDLCoord;
-	}
-	/**
-	 * @param canDLCoord the canDLCoord to set
-	 */
-	public void setCanDLCoord(String canDLCoord) {
-		this.canDLCoord = canDLCoord;
-	}
-	/**
-	 * @return the costDLCoord
-	 */
-	public String getCostDLCoord() {
-		return costDLCoord;
-	}
-	/**
-	 * @param costDLCoord the costDLCoord to set
-	 */
-	public void setCostDLCoord(String costDLCoord) {
-		this.costDLCoord = costDLCoord;
-	}
-	/**
-	 * @return the canILCoord
-	 */
-	public String getCanILCoord() {
-		return canILCoord;
-	}
-	/**
-	 * @param canILCoord the canILCoord to set
-	 */
-	public void setCanILCoord(String canILCoord) {
-		this.canILCoord = canILCoord;
-	}
-	/**
-	 * @return the costILCoord
-	 */
-	public String getCostILCoord() {
-		return costILCoord;
-	}
-	/**
-	 * @param costILCoord the costILCoord to set
-	 */
-	public void setCostILCoord(String costILCoord) {
-		this.costILCoord = costILCoord;
-	}
-	/**
-	 * @return the canDLSupe
-	 */
-	public String getCanDLSupe() {
-		return canDLSupe;
-	}
-	/**
-	 * @param canDLSupe the canDLSupe to set
-	 */
-	public void setCanDLSupe(String canDLSupe) {
-		this.canDLSupe = canDLSupe;
-	}
-	/**
-	 * @return the costDLSupe
-	 */
-	public String getCostDLSupe() {
-		return costDLSupe;
-	}
-	/**
-	 * @param costDLSupe the costDLSupe to set
-	 */
-	public void setCostDLSupe(String costDLSupe) {
-		this.costDLSupe = costDLSupe;
-	}
-	/**
-	 * @return the canILSupe
-	 */
-	public String getCanILSupe() {
-		return canILSupe;
-	}
-	/**
-	 * @param canILSupe the canILSupe to set
-	 */
-	public void setCanILSupe(String canILSupe) {
-		this.canILSupe = canILSupe;
-	}
-	/**
-	 * @return the costILSupe
-	 */
-	public String getCostILSupe() {
-		return costILSupe;
-	}
-	/**
-	 * @param costILSupe the costILSupe to set
-	 */
-	public void setCostILSupe(String costILSupe) {
-		this.costILSupe = costILSupe;
-	}
-	/**
-	 * @return the canDLGest
-	 */
-	public String getCanDLGest() {
-		return canDLGest;
-	}
-	/**
-	 * @param canDLGest the canDLGest to set
-	 */
-	public void setCanDLGest(String canDLGest) {
-		this.canDLGest = canDLGest;
-	}
-	/**
-	 * @return the costDLGest
-	 */
-	public String getCostDLGest() {
-		return costDLGest;
-	}
-	/**
-	 * @param costDLGest the costDLGest to set
-	 */
-	public void setCostDLGest(String costDLGest) {
-		this.costDLGest = costDLGest;
-	}
-	/**
-	 * @return the canILGest
-	 */
-	public String getCanILGest() {
-		return canILGest;
-	}
-	/**
-	 * @param canILGest the canILGest to set
-	 */
-	public void setCanILGest(String canILGest) {
-		this.canILGest = canILGest;
-	}
-	/**
-	 * @return the costILGest
-	 */
-	public String getCostILGest() {
-		return costILGest;
-	}
-	/**
-	 * @param costILGest the costILGest to set
-	 */
-	public void setCostILGest(String costILGest) {
-		this.costILGest = costILGest;
-	}
-	/**
-	 * @return the canDLAsist
-	 */
-	public String getCanDLAsist() {
-		return canDLAsist;
-	}
-	/**
-	 * @param canDLAsist the canDLAsist to set
-	 */
-	public void setCanDLAsist(String canDLAsist) {
-		this.canDLAsist = canDLAsist;
-	}
-	/**
-	 * @return the costDLAsist
-	 */
-	public String getCostDLAsist() {
-		return costDLAsist;
-	}
-	/**
-	 * @param costDLAsist the costDLAsist to set
-	 */
-	public void setCostDLAsist(String costDLAsist) {
-		this.costDLAsist = costDLAsist;
-	}
-	/**
-	 * @return the canILAsist
-	 */
-	public String getCanILAsist() {
-		return canILAsist;
-	}
-	/**
-	 * @param canILAsist the canILAsist to set
-	 */
-	public void setCanILAsist(String canILAsist) {
-		this.canILAsist = canILAsist;
-	}
-	/**
-	 * @return the costILAsist
-	 */
-	public String getCostILAsist() {
-		return costILAsist;
-	}
-	/**
-	 * @param costILAsist the costILAsist to set
-	 */
-	public void setCostILAsist(String costILAsist) {
-		this.costILAsist = costILAsist;
-	}
+	/***PARA CARGA DE EXEL Y TEXT***/
+	private String mensajeInfo;
+	private String mensajeError;
+	//
+	private String flag;//flag para controlar mostrar el formulario de ingreso cuando hay un error en carga de formulario excel o texto
+	
+	//private String anioInicioVig;
+	//private String anioFinVig;
+	
+	private String anoIniVigencia;
+	private String anoFinVigencia;
+	
+	
+	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}
@@ -957,6 +215,12 @@ public class Formato14CBean {
 	public void setAnioHasta(String anioHasta) {
 		this.anioHasta = anioHasta;
 	}
+	public String getCodEmpresaBusq() {
+		return codEmpresaBusq;
+	}
+	public void setCodEmpresaBusq(String codEmpresaBusq) {
+		this.codEmpresaBusq = codEmpresaBusq;
+	}
 	public String getEtapaBusq() {
 		return etapaBusq;
 	}
@@ -969,35 +233,89 @@ public class Formato14CBean {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-	public String getCodEmpresaBusq() {
-		return codEmpresaBusq;
+	public String getCodEmpresa() {
+		return codEmpresa;
 	}
-	public void setCodEmpresaBusq(String codEmpresaBusq) {
-		this.codEmpresaBusq = codEmpresaBusq;
+	public void setCodEmpresa(String codEmpresa) {
+		this.codEmpresa = codEmpresa;
 	}
-	public List<FisePeriodoEnvio> getListaPeriodoEnvio() {
-		return listaPeriodoEnvio;
+	public String getAnioPres() {
+		return anioPres;
 	}
-	public void setListaPeriodoEnvio(List<FisePeriodoEnvio> listaPeriodoEnvio) {
-		this.listaPeriodoEnvio = listaPeriodoEnvio;
+	public void setAnioPres(String anioPres) {
+		this.anioPres = anioPres;
 	}
-	public String getPeriodoEnvio() {
-		return periodoEnvio;
+	public String getMesPres() {
+		return mesPres;
 	}
-	public void setPeriodoEnvio(String periodoEnvio) {
-		this.periodoEnvio = periodoEnvio;
+	public void setMesPres(String mesPres) {
+		this.mesPres = mesPres;
 	}
-	public String getAnioInicioVig() {
-		return anioInicioVig;
+	public String getEtapa() {
+		return etapa;
 	}
-	public void setAnioInicioVig(String anioInicioVig) {
-		this.anioInicioVig = anioInicioVig;
+	public void setEtapa(String etapa) {
+		this.etapa = etapa;
 	}
-	public String getAnioFinVig() {
-		return anioFinVig;
+	public String getNombreSede() {
+		return nombreSede;
 	}
-	public void setAnioFinVig(String anioFinVig) {
-		this.anioFinVig = anioFinVig;
+	public void setNombreSede(String nombreSede) {
+		this.nombreSede = nombreSede;
+	}
+	public String getNombreExel() {
+		return nombreExel;
+	}
+	public void setNombreExel(String nombreExel) {
+		this.nombreExel = nombreExel;
+	}
+	public String getNombreText() {
+		return nombreText;
+	}
+	public void setNombreText(String nombreText) {
+		this.nombreText = nombreText;
+	}
+	public String getNumRural() {
+		return numRural;
+	}
+	public void setNumRural(String numRural) {
+		this.numRural = numRural;
+	}
+	public String getNumUrbProv() {
+		return numUrbProv;
+	}
+	public void setNumUrbProv(String numUrbProv) {
+		this.numUrbProv = numUrbProv;
+	}
+	public String getNumUrbLima() {
+		return numUrbLima;
+	}
+	public void setNumUrbLima(String numUrbLima) {
+		this.numUrbLima = numUrbLima;
+	}
+	public String getNumTotal() {
+		return numTotal;
+	}
+	public void setNumTotal(String numTotal) {
+		this.numTotal = numTotal;
+	}
+	public String getCostoPromRural() {
+		return costoPromRural;
+	}
+	public void setCostoPromRural(String costoPromRural) {
+		this.costoPromRural = costoPromRural;
+	}
+	public String getCostoPromUrbProv() {
+		return costoPromUrbProv;
+	}
+	public void setCostoPromUrbProv(String costoPromUrbProv) {
+		this.costoPromUrbProv = costoPromUrbProv;
+	}
+	public String getCostoPromUrbLima() {
+		return costoPromUrbLima;
+	}
+	public void setCostoPromUrbLima(String costoPromUrbLima) {
+		this.costoPromUrbLima = costoPromUrbLima;
 	}
 	public String getUsuario() {
 		return usuario;
@@ -1011,11 +329,65 @@ public class Formato14CBean {
 	public void setTerminal(String terminal) {
 		this.terminal = terminal;
 	}
-	public String getNumTotal() {
-		return numTotal;
+	public List<FisePeriodoEnvio> getListaPeriodoEnvio() {
+		return listaPeriodoEnvio;
 	}
-	public void setNumTotal(String numTotal) {
-		this.numTotal = numTotal;
+	public void setListaPeriodoEnvio(List<FisePeriodoEnvio> listaPeriodoEnvio) {
+		this.listaPeriodoEnvio = listaPeriodoEnvio;
+	}
+	public String getPeriodoEnvio() {
+		return periodoEnvio;
+	}
+	public void setPeriodoEnvio(String periodoEnvio) {
+		this.periodoEnvio = periodoEnvio;
+	}
+	public String getDesperiodoEnvio() {
+		return desperiodoEnvio;
+	}
+	public void setDesperiodoEnvio(String desperiodoEnvio) {
+		this.desperiodoEnvio = desperiodoEnvio;
+	}
+	public String getFlagPeriodoEjecucion() {
+		return flagPeriodoEjecucion;
+	}
+	public void setFlagPeriodoEjecucion(String flagPeriodoEjecucion) {
+		this.flagPeriodoEjecucion = flagPeriodoEjecucion;
+	}
+	public String getIdZonaBenef() {
+		return idZonaBenef;
+	}
+	public void setIdZonaBenef(String idZonaBenef) {
+		this.idZonaBenef = idZonaBenef;
+	}
+	public String getIdTipoPersonal() {
+		return idTipoPersonal;
+	}
+	public void setIdTipoPersonal(String idTipoPersonal) {
+		this.idTipoPersonal = idTipoPersonal;
+	}
+	public String getCanDRCoord() {
+		return canDRCoord;
+	}
+	public void setCanDRCoord(String canDRCoord) {
+		this.canDRCoord = canDRCoord;
+	}
+	public String getCostDRCoord() {
+		return costDRCoord;
+	}
+	public void setCostDRCoord(String costDRCoord) {
+		this.costDRCoord = costDRCoord;
+	}
+	public String getCanIRCoord() {
+		return canIRCoord;
+	}
+	public void setCanIRCoord(String canIRCoord) {
+		this.canIRCoord = canIRCoord;
+	}
+	public String getCostIRCoord() {
+		return costIRCoord;
+	}
+	public void setCostIRCoord(String costIRCoord) {
+		this.costIRCoord = costIRCoord;
 	}
 	public String getCostTotalRCoord() {
 		return costTotalRCoord;
@@ -1023,11 +395,59 @@ public class Formato14CBean {
 	public void setCostTotalRCoord(String costTotalRCoord) {
 		this.costTotalRCoord = costTotalRCoord;
 	}
+	public String getCanDRSupe() {
+		return canDRSupe;
+	}
+	public void setCanDRSupe(String canDRSupe) {
+		this.canDRSupe = canDRSupe;
+	}
+	public String getCostDRSupe() {
+		return costDRSupe;
+	}
+	public void setCostDRSupe(String costDRSupe) {
+		this.costDRSupe = costDRSupe;
+	}
+	public String getCanIRSupe() {
+		return canIRSupe;
+	}
+	public void setCanIRSupe(String canIRSupe) {
+		this.canIRSupe = canIRSupe;
+	}
+	public String getCostIRSupe() {
+		return costIRSupe;
+	}
+	public void setCostIRSupe(String costIRSupe) {
+		this.costIRSupe = costIRSupe;
+	}
 	public String getCostTotalRSupe() {
 		return costTotalRSupe;
 	}
 	public void setCostTotalRSupe(String costTotalRSupe) {
 		this.costTotalRSupe = costTotalRSupe;
+	}
+	public String getCanDRGest() {
+		return canDRGest;
+	}
+	public void setCanDRGest(String canDRGest) {
+		this.canDRGest = canDRGest;
+	}
+	public String getCostDRGest() {
+		return costDRGest;
+	}
+	public void setCostDRGest(String costDRGest) {
+		this.costDRGest = costDRGest;
+	}
+	public String getCanIRGest() {
+		return canIRGest;
+	}
+	public void setCanIRGest(String canIRGest) {
+		this.canIRGest = canIRGest;
+	}
+	public String getCostIRGest() {
+		return costIRGest;
+	}
+	public void setCostIRGest(String costIRGest) {
+		this.costIRGest = costIRGest;
 	}
 	public String getCostTotalRGest() {
 		return costTotalRGest;
@@ -1035,11 +455,59 @@ public class Formato14CBean {
 	public void setCostTotalRGest(String costTotalRGest) {
 		this.costTotalRGest = costTotalRGest;
 	}
+	public String getCanDRAsist() {
+		return canDRAsist;
+	}
+	public void setCanDRAsist(String canDRAsist) {
+		this.canDRAsist = canDRAsist;
+	}
+	public String getCostDRAsist() {
+		return costDRAsist;
+	}
+	public void setCostDRAsist(String costDRAsist) {
+		this.costDRAsist = costDRAsist;
+	}
+	public String getCanIRAsist() {
+		return canIRAsist;
+	}
+	public void setCanIRAsist(String canIRAsist) {
+		this.canIRAsist = canIRAsist;
+	}
+	public String getCostIRAsist() {
+		return costIRAsist;
+	}
+	public void setCostIRAsist(String costIRAsist) {
+		this.costIRAsist = costIRAsist;
+	}
 	public String getCostTotalRAsist() {
 		return costTotalRAsist;
 	}
 	public void setCostTotalRAsist(String costTotalRAsist) {
 		this.costTotalRAsist = costTotalRAsist;
+	}
+	public String getCanDPCoord() {
+		return canDPCoord;
+	}
+	public void setCanDPCoord(String canDPCoord) {
+		this.canDPCoord = canDPCoord;
+	}
+	public String getCostDPCoord() {
+		return costDPCoord;
+	}
+	public void setCostDPCoord(String costDPCoord) {
+		this.costDPCoord = costDPCoord;
+	}
+	public String getCanIPCoord() {
+		return canIPCoord;
+	}
+	public void setCanIPCoord(String canIPCoord) {
+		this.canIPCoord = canIPCoord;
+	}
+	public String getCostIPCoord() {
+		return costIPCoord;
+	}
+	public void setCostIPCoord(String costIPCoord) {
+		this.costIPCoord = costIPCoord;
 	}
 	public String getCostTotalPCoord() {
 		return costTotalPCoord;
@@ -1047,11 +515,59 @@ public class Formato14CBean {
 	public void setCostTotalPCoord(String costTotalPCoord) {
 		this.costTotalPCoord = costTotalPCoord;
 	}
+	public String getCanDPSupe() {
+		return canDPSupe;
+	}
+	public void setCanDPSupe(String canDPSupe) {
+		this.canDPSupe = canDPSupe;
+	}
+	public String getCostDPSupe() {
+		return costDPSupe;
+	}
+	public void setCostDPSupe(String costDPSupe) {
+		this.costDPSupe = costDPSupe;
+	}
+	public String getCanIPSupe() {
+		return canIPSupe;
+	}
+	public void setCanIPSupe(String canIPSupe) {
+		this.canIPSupe = canIPSupe;
+	}
+	public String getCostIPSupe() {
+		return costIPSupe;
+	}
+	public void setCostIPSupe(String costIPSupe) {
+		this.costIPSupe = costIPSupe;
+	}
 	public String getCostTotalPSupe() {
 		return costTotalPSupe;
 	}
 	public void setCostTotalPSupe(String costTotalPSupe) {
 		this.costTotalPSupe = costTotalPSupe;
+	}
+	public String getCanDPGest() {
+		return canDPGest;
+	}
+	public void setCanDPGest(String canDPGest) {
+		this.canDPGest = canDPGest;
+	}
+	public String getCostDPGest() {
+		return costDPGest;
+	}
+	public void setCostDPGest(String costDPGest) {
+		this.costDPGest = costDPGest;
+	}
+	public String getCanIPGest() {
+		return canIPGest;
+	}
+	public void setCanIPGest(String canIPGest) {
+		this.canIPGest = canIPGest;
+	}
+	public String getCostIPGest() {
+		return costIPGest;
+	}
+	public void setCostIPGest(String costIPGest) {
+		this.costIPGest = costIPGest;
 	}
 	public String getCostTotalPGest() {
 		return costTotalPGest;
@@ -1059,11 +575,59 @@ public class Formato14CBean {
 	public void setCostTotalPGest(String costTotalPGest) {
 		this.costTotalPGest = costTotalPGest;
 	}
+	public String getCanDPAsist() {
+		return canDPAsist;
+	}
+	public void setCanDPAsist(String canDPAsist) {
+		this.canDPAsist = canDPAsist;
+	}
+	public String getCostDPAsist() {
+		return costDPAsist;
+	}
+	public void setCostDPAsist(String costDPAsist) {
+		this.costDPAsist = costDPAsist;
+	}
+	public String getCanIPAsist() {
+		return canIPAsist;
+	}
+	public void setCanIPAsist(String canIPAsist) {
+		this.canIPAsist = canIPAsist;
+	}
+	public String getCostIPAsist() {
+		return costIPAsist;
+	}
+	public void setCostIPAsist(String costIPAsist) {
+		this.costIPAsist = costIPAsist;
+	}
 	public String getCostTotalPAsist() {
 		return costTotalPAsist;
 	}
 	public void setCostTotalPAsist(String costTotalPAsist) {
 		this.costTotalPAsist = costTotalPAsist;
+	}
+	public String getCanDLCoord() {
+		return canDLCoord;
+	}
+	public void setCanDLCoord(String canDLCoord) {
+		this.canDLCoord = canDLCoord;
+	}
+	public String getCostDLCoord() {
+		return costDLCoord;
+	}
+	public void setCostDLCoord(String costDLCoord) {
+		this.costDLCoord = costDLCoord;
+	}
+	public String getCanILCoord() {
+		return canILCoord;
+	}
+	public void setCanILCoord(String canILCoord) {
+		this.canILCoord = canILCoord;
+	}
+	public String getCostILCoord() {
+		return costILCoord;
+	}
+	public void setCostILCoord(String costILCoord) {
+		this.costILCoord = costILCoord;
 	}
 	public String getCostTotalLCoord() {
 		return costTotalLCoord;
@@ -1071,17 +635,89 @@ public class Formato14CBean {
 	public void setCostTotalLCoord(String costTotalLCoord) {
 		this.costTotalLCoord = costTotalLCoord;
 	}
+	public String getCanDLSupe() {
+		return canDLSupe;
+	}
+	public void setCanDLSupe(String canDLSupe) {
+		this.canDLSupe = canDLSupe;
+	}
+	public String getCostDLSupe() {
+		return costDLSupe;
+	}
+	public void setCostDLSupe(String costDLSupe) {
+		this.costDLSupe = costDLSupe;
+	}
+	public String getCanILSupe() {
+		return canILSupe;
+	}
+	public void setCanILSupe(String canILSupe) {
+		this.canILSupe = canILSupe;
+	}
+	public String getCostILSupe() {
+		return costILSupe;
+	}
+	public void setCostILSupe(String costILSupe) {
+		this.costILSupe = costILSupe;
+	}
 	public String getCostTotalLSupe() {
 		return costTotalLSupe;
 	}
 	public void setCostTotalLSupe(String costTotalLSupe) {
 		this.costTotalLSupe = costTotalLSupe;
 	}
+	public String getCanDLGest() {
+		return canDLGest;
+	}
+	public void setCanDLGest(String canDLGest) {
+		this.canDLGest = canDLGest;
+	}
+	public String getCostDLGest() {
+		return costDLGest;
+	}
+	public void setCostDLGest(String costDLGest) {
+		this.costDLGest = costDLGest;
+	}
+	public String getCanILGest() {
+		return canILGest;
+	}
+	public void setCanILGest(String canILGest) {
+		this.canILGest = canILGest;
+	}
+	public String getCostILGest() {
+		return costILGest;
+	}
+	public void setCostILGest(String costILGest) {
+		this.costILGest = costILGest;
+	}
 	public String getCostTotalLGest() {
 		return costTotalLGest;
 	}
 	public void setCostTotalLGest(String costTotalLGest) {
 		this.costTotalLGest = costTotalLGest;
+	}
+	public String getCanDLAsist() {
+		return canDLAsist;
+	}
+	public void setCanDLAsist(String canDLAsist) {
+		this.canDLAsist = canDLAsist;
+	}
+	public String getCostDLAsist() {
+		return costDLAsist;
+	}
+	public void setCostDLAsist(String costDLAsist) {
+		this.costDLAsist = costDLAsist;
+	}
+	public String getCanILAsist() {
+		return canILAsist;
+	}
+	public void setCanILAsist(String canILAsist) {
+		this.canILAsist = canILAsist;
+	}
+	public String getCostILAsist() {
+		return costILAsist;
+	}
+	public void setCostILAsist(String costILAsist) {
+		this.costILAsist = costILAsist;
 	}
 	public String getCostTotalLAsist() {
 		return costTotalLAsist;
@@ -1245,13 +881,36 @@ public class Formato14CBean {
 	public void setCostTotalPromedio(String costTotalPromedio) {
 		this.costTotalPromedio = costTotalPromedio;
 	}
-	public String getDesperiodoEnvio() {
-		return desperiodoEnvio;
+	public String getMensajeInfo() {
+		return mensajeInfo;
 	}
-	public void setDesperiodoEnvio(String desperiodoEnvio) {
-		this.desperiodoEnvio = desperiodoEnvio;
-	}	
-	
+	public void setMensajeInfo(String mensajeInfo) {
+		this.mensajeInfo = mensajeInfo;
+	}
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public String getAnoIniVigencia() {
+		return anoIniVigencia;
+	}
+	public void setAnoIniVigencia(String anoIniVigencia) {
+		this.anoIniVigencia = anoIniVigencia;
+	}
+	public String getAnoFinVigencia() {
+		return anoFinVigencia;
+	}
+	public void setAnoFinVigencia(String anoFinVigencia) {
+		this.anoFinVigencia = anoFinVigencia;
+	}
 	
 	
 }

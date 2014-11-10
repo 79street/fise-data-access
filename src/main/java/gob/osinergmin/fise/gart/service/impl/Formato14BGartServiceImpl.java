@@ -763,7 +763,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
     	for (FiseFormato14BD detalle : formato.getFiseFormato14BDs()) {
 			if( FiseConstants.ZONABENEF_RURAL_COD == detalle.getId().getIdZonaBenef() ){
 				
-				formato14BBean.setImpValDesctoNoEdeR(detalle.getImpresionValDsctoCliDisEl());
+				formato14BBean.setImpValDesctoEdeR(detalle.getImpresionValDsctoCliDisEl());
 				formato14BBean.setImpValDesctoNoEdeR(detalle.getImpreValDsctoCliNoDisEl());
 				formato14BBean.setCostoTotalImpR(detalle.getCostoTotalImpresion());
 				formato14BBean.setNroValesImpR(detalle.getNumeroValesImpreso());
@@ -796,7 +796,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				
 			}else if( FiseConstants.ZONABENEF_PROVINCIA_COD == detalle.getId().getIdZonaBenef() ){
 				
-				formato14BBean.setImpValDesctoNoEdeP(detalle.getImpresionValDsctoCliDisEl());
+				formato14BBean.setImpValDesctoEdeP(detalle.getImpresionValDsctoCliDisEl());
 				formato14BBean.setImpValDesctoNoEdeP(detalle.getImpreValDsctoCliNoDisEl());
 				formato14BBean.setCostoTotalImpP(detalle.getCostoTotalImpresion());
 				formato14BBean.setNroValesImpP(detalle.getNumeroValesImpreso());
@@ -829,7 +829,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				
 			}else if( FiseConstants.ZONABENEF_LIMA_COD == detalle.getId().getIdZonaBenef() ){
 				
-				formato14BBean.setImpValDesctoNoEdeL(detalle.getImpresionValDsctoCliDisEl());
+				formato14BBean.setImpValDesctoEdeL(detalle.getImpresionValDsctoCliDisEl());
 				formato14BBean.setImpValDesctoNoEdeL(detalle.getImpreValDsctoCliNoDisEl());
 				formato14BBean.setCostoTotalImpL(detalle.getCostoTotalImpresion());
 				formato14BBean.setNroValesImpL(detalle.getNumeroValesImpreso());

@@ -15,4 +15,8 @@ public interface Formato13AGartService {
 	Formato13ACBean estructurarFormato13ABeanByFiseFormato13AC(FiseFormato13AC formato);
 	HashMap<String, Object> mapearParametrosFormato13A(Formato13ACBean formato13ABean);
 	List<Formato13ADReportBean> listarLocalidadesPorZonasBenefFormato13ADByFormato13AC(FiseFormato13AC formato13AC);
+
+	FiseFormato13AC savecabecera(FiseFormato13AC fiseC);
+	FiseFormato13AD savedetalle(FiseFormato13AD fiseD);
+
 }

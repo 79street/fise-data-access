@@ -1,7 +1,6 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,14 +12,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-
 /**
  * The persistent class for the FISE_PERIODO_ENVIO database table.
  * 
  */
 @Entity
-@Table(name="FISE_PERIODO_ENVIO", schema="FISE")
-@NamedQuery(name="FisePeriodoEnvio.findAll", query="SELECT f FROM FisePeriodoEnvio f")
+@Table(name = "FISE_PERIODO_ENVIO", schema = "FISE")
+@NamedQuery(name = "FisePeriodoEnvio.findAll", query = "SELECT f FROM FisePeriodoEnvio f")
 public class FisePeriodoEnvio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -62,44 +60,47 @@ public class FisePeriodoEnvio implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date desde;
 
-	@Column(name="DIAS_NOTIFICACION_ANTES_CIERRE")
-	private BigDecimal diasNotificacionAntesCierre;
+	@Column(name = "DIAS_NOTIFICACION_ANTES_CIERRE")
+	private Integer diasNotificacionAntesCierre;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="FECHA_ACTUALIZACION")
+	@Column(name = "FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="FECHA_CREACION")
+	@Column(name = "FECHA_CREACION")
 	private Date fechaCreacion;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hasta;
 
-	@Column(name="TERMINAL_ACTUALIZACION")
+	@Column(name = "TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
 
-	@Column(name="TERMINAL_CREACION")
+	@Column(name = "TERMINAL_CREACION")
 	private String terminalCreacion;
 
-	@Column(name="USUARIO_ACTUALIZACION")
+	@Column(name = "USUARIO_ACTUALIZACION")
 	private String usuarioActualizacion;
 
-	@Column(name="USUARIO_CREACION")
+	@Column(name = "USUARIO_CREACION")
 	private String usuarioCreacion;
 
-	//valores de combo
+	// valores de combo
 	@Transient
 	private String codigoItem;
 	@Transient
 	private String descripcionItem;
-	
-	@Column(name="FLAG_MOSTRAR_ANO_MES_EJEC")
+
+	@Column(name = "FLAG_MOSTRAR_ANO_MES_EJEC")
 	private String flagMostrarAnoMesEjec;
-	
+
 	@Transient
 	private String flagPeriodoEjecucion;
-	
+
+	@Column(name = "FLAG_ENVIO_CON_OBSERVACIONES")
+	private String flagEnvioConObservaciones;
+
 	public FisePeriodoEnvio() {
 	}
 
@@ -215,11 +216,12 @@ public class FisePeriodoEnvio implements Serializable {
 		this.desde = desde;
 	}
 
-	public BigDecimal getDiasNotificacionAntesCierre() {
+	public Integer getDiasNotificacionAntesCierre() {
 		return this.diasNotificacionAntesCierre;
 	}
 
-	public void setDiasNotificacionAntesCierre(BigDecimal diasNotificacionAntesCierre) {
+	public void setDiasNotificacionAntesCierre(
+			Integer diasNotificacionAntesCierre) {
 		this.diasNotificacionAntesCierre = diasNotificacionAntesCierre;
 	}
 
@@ -309,6 +311,14 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setFlagMostrarAnoMesEjec(String flagMostrarAnoMesEjec) {
 		this.flagMostrarAnoMesEjec = flagMostrarAnoMesEjec;
+	}
+
+	public String getFlagEnvioConObservaciones() {
+		return flagEnvioConObservaciones;
+	}
+
+	public void setFlagEnvioConObservaciones(String flagEnvioConObservaciones) {
+		this.flagEnvioConObservaciones = flagEnvioConObservaciones;
 	}
 
 }

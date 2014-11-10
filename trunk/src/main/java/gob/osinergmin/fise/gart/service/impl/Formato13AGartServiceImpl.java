@@ -73,4 +73,20 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		return formato13ADDao.listarLocalidadesPorZonasBenefFormato13ADByFormato13AC(formato13AC);
 	}
 
+	@Transactional
+	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) {
+		return formato13ACDao.savecabecera(fiseC);
+	}
+
+	@Transactional
+	public FiseFormato13AD savedetalle(FiseFormato13AD fiseD) {
+		return formato13ADDao.savedetalle(fiseD);
+	}
+
+	
+
+	
+
+	
+
 }

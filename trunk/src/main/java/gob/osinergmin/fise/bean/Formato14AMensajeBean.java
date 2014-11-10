@@ -16,6 +16,9 @@ public class Formato14AMensajeBean implements Serializable {
 	private String mensajeInformacion;
 	private String mensajeError;
 	private List<MensajeErrorBean> listaMensajeError;
+	private String valor;
+	//para el formato 14c
+	private Formato14CBean formato14CBean;
 	
 	public FiseFormato14AC getFiseFormato14AC() {
 		return fiseFormato14AC;
@@ -41,5 +44,20 @@ public class Formato14AMensajeBean implements Serializable {
 	public void setMensajeError(String mensajeError) {
 		this.mensajeError = mensajeError;
 	}
+	public Formato14CBean getFormato14CBean() {
+		return formato14CBean;
+	}
+	public void setFormato14CBean(Formato14CBean formato14cBean) {
+		formato14CBean = formato14cBean;
+	}
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	
+	
+	
 
 }

@@ -23,6 +23,7 @@ public class CfgCampoDaoImpl extends GenericDaoImpl implements CfgCampoDao {
 			if(cfgTabla.getIdTabla()!=0){ 
 				q = q  + " AND t.cfgTabla.idTabla = :idTabla ";
 			}
+			q = q  + "  ORDER BY t.nroCampo ";
 			Query query = em.createQuery(q); 
 			if(cfgTabla.getIdTabla()!=0){
 				query.setParameter("idTabla", cfgTabla.getIdTabla());

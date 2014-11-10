@@ -534,5 +534,119 @@ public class FiseConstants {
 	public final static String PARAM_SUMACSTO_GESPER_COSTO_T_F14C = "SUMACOSTOTOTAL_GESTPER_COSTO_T";
 	public final static String PARAM_CSPOPROM_MENS_TOTCOS_T_F14C = "COSTOPROM_MENS_TOTALCOSTO_T";
 	
+	
+	/******varibales para leer exel para el formato 14C****/
+	//FORMATO 14C
+	//ROWS
+	public final static int NRO_FILA_CODEMPRESA_F14C = 5;
+	public final static int NRO_FILA_ANIO_MES_F14C= 6;
+	public final static int NRO_FILA_SEDE_F14C= 14;
+	public final static int NRO_FILA_NROTOTAL_BENEFICIARIOS_F14C= 15;
+	public final static int NRO_FILA_COSTO_PROMEDIO_F14C= 22;	
+	///////////////////////////////////////////////////////
+	public final static int NRO_FILA_COSTO_COORD_F14C= 17;
+	public final static int NRO_FILA_COSTO_SUPE_F14C= 18;
+	public final static int NRO_FILA_COSTO_GEST_F14C= 19;
+	public final static int NRO_FILA_COSTO_ASIST_F14C= 20;
+	//COLUMNS
+	public final static int NRO_CELDA_CODEMPRESA_F14C = 5;
+	public final static int NRO_CELDA_ANIO_F14C = 5;
+	public final static int NRO_CELDA_MES_F14C = 6;
+	public final static int NRO_CELDA_SEDE_F14C = 5;
+	public final static int NRO_CELDA_NUM_BENEF_RURAL_F14C = 6;
+	public final static int NRO_CELDA_NUM_BENEF_PROV_F14C = 11;
+	public final static int NRO_CELDA_NUM_BENEF_LIMA_F14C = 16;
+	public final static int NRO_CELDA_COSTOPROM_RURAL_F14C = 7;
+	public final static int NRO_CELDA_COSTOPROM_PROV_F14C = 12;
+	public final static int NRO_CELDA_COSTOPROM_LIMA_F14C = 17;
+	//////////////////////////////////////////////////////////
+	//RURAL
+	public final static int NRO_CELDA_CANTDR_COORD_F14C = 6;	
+	public final static int NRO_CELDA_COSTDR_COORD_F14C = 7;
+	public final static int NRO_CELDA_CANTIR_COORD_F14C = 8;
+	public final static int NRO_CELDA_COSTIR_COORD_F14C = 9;
+	
+	public final static int NRO_CELDA_CANTDR_SUPE_F14C = 6;
+	public final static int NRO_CELDA_COSTDR_SUPE_F14C = 7;
+	public final static int NRO_CELDA_CANTIR_SUPE_F14C = 8;
+	public final static int NRO_CELDA_COSTIR_SUPE_F14C = 9;
+	
+	public final static int NRO_CELDA_CANTDR_GEST_F14C = 6;	
+	public final static int NRO_CELDA_COSTDR_GEST_F14C = 7;
+	public final static int NRO_CELDA_CANTIR_GEST_F14C = 8;
+	public final static int NRO_CELDA_COSTIR_GEST_F14C = 9;
+	
+	public final static int NRO_CELDA_CANTDR_ASIST_F14C = 6;	
+	public final static int NRO_CELDA_COSTDR_ASIST_F14C = 7;
+	public final static int NRO_CELDA_CANTIR_ASIST_F14C = 8;
+	public final static int NRO_CELDA_COSTIR_ASIST_F14C = 9;
+
+	//PROVINCIAS
+	public final static int NRO_CELDA_CANTDP_COORD_F14C = 11;	
+	public final static int NRO_CELDA_COSTDP_COORD_F14C = 12;
+	public final static int NRO_CELDA_CANTIP_COORD_F14C = 13;
+	public final static int NRO_CELDA_COSTIP_COORD_F14C = 14;
+	
+	public final static int NRO_CELDA_CANTDP_SUPE_F14C = 11;
+	public final static int NRO_CELDA_COSTDP_SUPE_F14C = 12;
+	public final static int NRO_CELDA_CANTIP_SUPE_F14C = 13;
+	public final static int NRO_CELDA_COSTIP_SUPE_F14C = 14;
+	
+	public final static int NRO_CELDA_CANTDP_GEST_F14C = 11;	
+	public final static int NRO_CELDA_COSTDP_GEST_F14C = 12;
+	public final static int NRO_CELDA_CANTIP_GEST_F14C = 13;
+	public final static int NRO_CELDA_COSTIP_GEST_F14C = 14;
+	
+	public final static int NRO_CELDA_CANTDP_ASIST_F14C = 11;	
+	public final static int NRO_CELDA_COSTDP_ASIST_F14C = 12;
+	public final static int NRO_CELDA_CANTIP_ASIST_F14C = 13;
+	public final static int NRO_CELDA_COSTIP_ASIST_F14C = 14;
+	
+	//LIMA
+	public final static int NRO_CELDA_CANTDL_COORD_F14C = 16;	
+	public final static int NRO_CELDA_COSTDL_COORD_F14C = 17;
+	public final static int NRO_CELDA_CANTIL_COORD_F14C = 18;
+	public final static int NRO_CELDA_COSTIL_COORD_F14C = 19;
+	
+	public final static int NRO_CELDA_CANTDL_SUPE_F14C = 16;
+	public final static int NRO_CELDA_COSTDL_SUPE_F14C = 17;
+	public final static int NRO_CELDA_CANTIL_SUPE_F14C = 18;
+	public final static int NRO_CELDA_COSTIL_SUPE_F14C = 19;
+	
+	public final static int NRO_CELDA_CANTDL_GEST_F14C = 16;	
+	public final static int NRO_CELDA_COSTDL_GEST_F14C = 17;
+	public final static int NRO_CELDA_CANTIL_GEST_F14C = 18;
+	public final static int NRO_CELDA_COSTIL_GEST_F14C = 19;
+	
+	public final static int NRO_CELDA_CANTDL_ASIST_F14C = 16;	
+	public final static int NRO_CELDA_COSTDL_ASIST_F14C = 17;
+	public final static int NRO_CELDA_CANTIL_ASIST_F14C = 18;
+	public final static int NRO_CELDA_COSTIL_ASIST_F14C = 19;
+	
+	public final static String NOM_COD_EMPRESA_F14C="COD_EMPRESA";
+	public final static String NOM_ANO_PRESENTACION_F14C="ANO_PRESENTACION";
+	public final static String NOM_MES_PRESENTACION_F14C="MES_PRESENTACION";
+	public final static String NOM_ANIOINICIO_VIGE_F14C="ANO_INICIO_VIGENCIA";
+	public final static String NOM_ANIOFIN_VIGE_F14C="ANO_FIN_VIGENCIA";
+	public final static String NOM_IDZONA_BENEF_F14C="ID_ZONA_BENEF";
+	public final static String NOM_IDTIPO_PERSONAL_F14C="ID_TIP_PERSONAL";
+	public final static String NOM_NOMBRE_SEDE_F14C="NOMBRE_SEDE";
+	public final static String NOM_NRO_TOTAL_BENEF_F14C="NUMRO_TOT_BENE_EMP_DIC_PER_ANT";
+	public final static String NOM_NRO_ITEM_TIPO_GESTION_F14C="NUMERO_ITEM_TIPO_COSTO_GESTION";
+	public final static String NOM_ID_TIPO_COSTO_GESTION_F14C="ID_TIP_COSTO_GESTION";
+	public final static String NOM_CANTIDAD_F14C="CANTIDAD";
+	public final static String NOM_COSTO_UNITARIO_F14C="COSTO_UNITARIO";
+	public final static String NOM_COSTO_TOTAL_ZONA_F14C="COSTO_TOTAL_ZONA";
+	public final static String NOM_COSTO_TOTAL_TIPO_PERSONA_F14C="COSTO_TOT_TIP_PERSONA_UTL_ESCR";	
+	///para validacion 	
+	public final static String COSTODIERCTO_COORD_F14C="11";//1=costo directo,1=tipo persona coordinador
+	public final static String COSTODIRECTO_SUPE_F14C="12";//1=costo directo,2=tipo persona supervisor
+	public final static String COSTODIRECTO_GEST_F14C="13";//1=costo directo,3=tipo persona gestor
+	public final static String COSTODIRECTO_ASIST_F14C="14";//1=costo directo,4=tipo persona asistente
+	public final static String COSTOINDIRECTO_COORD_F14C="21";//2=costo indirecto,1=tipo persona coordinador
+	public final static String COSTOINDIRECTO_SUPE_F14C="22";//2=costo indirecto,2=tipo persona supervisor
+	public final static String COSTOINDIRECTO_GEST_F14C="23";//2=costo indirecto,3=tipo persona gestor
+	public final static String COSTOINDIRECTO_ASIST_F14C="24";	//2=costo indirecto,4=tipo persona asistente
+	
 
 }

@@ -58,6 +58,20 @@ public class FiseFormato14BC implements Serializable {
 	@Transient
 	@OneToMany(mappedBy="fiseFormato14BC", cascade={CascadeType.ALL})
 	private List<FiseFormato14BD> fiseFormato14BDs;
+	
+	@Transient
+	private String descEmpresa;
+	@Transient
+	private String descEstado;
+	@Transient
+	private String descMesPresentacion;
+	@Transient
+	private String descGrupoInformacion;
+	
+	@Column(name="NOMBRE_ARCHIVO_EXCEL")
+	private String archivoExcel;
+	@Column(name="NOMBRE_ARCHIVO_TEXTO")
+	private String archivoTexto;
 
 	public FiseFormato14BC() {
 	}
@@ -170,6 +184,54 @@ public class FiseFormato14BC implements Serializable {
 		fiseFormato14BD.setFiseFormato14BC(null);
 
 		return fiseFormato14BD;
+	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public String getArchivoExcel() {
+		return archivoExcel;
+	}
+
+	public void setArchivoExcel(String archivoExcel) {
+		this.archivoExcel = archivoExcel;
+	}
+
+	public String getArchivoTexto() {
+		return archivoTexto;
+	}
+
+	public void setArchivoTexto(String archivoTexto) {
+		this.archivoTexto = archivoTexto;
 	}
 
 }

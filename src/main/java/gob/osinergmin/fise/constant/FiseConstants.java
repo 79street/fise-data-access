@@ -581,6 +581,33 @@ public class FiseConstants {
 	public final static int NRO_CELDA_CANTIR_ASIST_F14C = 8;
 	public final static int NRO_CELDA_COSTIR_ASIST_F14C = 9;
 
+
+	//FORMATO 13A
+	public final static int ROW_INFO_EMPRESA = 5;
+	public final static int ROW_INFO_FECHA = 6;
+	public final static int ROW_INFO_RUBRO = 7;
+	public final static int ROW_INFO_FRECUENCIA= 8;
+	public final static int ROW_INIT_DETALLE= 11;
+	
+	public final static int COLUMN_B= 1;
+	public final static int COLUMN_C= 2;
+	public final static int COLUMN_D= 3;
+	public final static int COLUMN_E= 4;
+	public final static int COLUMN_F= 5;
+	public final static int COLUMN_G= 6;
+	
+	public final static int COLUMN_H= 7;
+	public final static int COLUMN_I= 8;
+	public final static int COLUMN_J= 9;
+	public final static int COLUMN_K= 10;
+	public final static int COLUMN_L= 11;
+	public final static int COLUMN_M= 12;
+	public final static int COLUMN_N= 13;
+	public final static int COLUMN_O= 14;
+	
+	
+	
+
 	//PROVINCIAS
 	public final static int NRO_CELDA_CANTDP_COORD_F14C = 11;	
 	public final static int NRO_CELDA_COSTDP_COORD_F14C = 12;

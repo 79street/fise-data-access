@@ -535,8 +535,32 @@ public class FiseConstants {
 	public final static String PARAM_CSPOPROM_MENS_TOTCOS_T_F14C = "COSTOPROM_MENS_TOTALCOSTO_T";
 	
 	
+	//FORMATO 13A
+	public final static int ROW_INFO_EMPRESA = 5;
+	public final static int ROW_INFO_FECHA = 6;
+	public final static int ROW_INFO_RUBRO = 7;
+	public final static int ROW_INFO_FRECUENCIA= 8;
+	public final static int ROW_INIT_DETALLE= 11;
+
+	public final static int COLUMN_B= 1;
+	public final static int COLUMN_C= 2;
+	public final static int COLUMN_D= 3;
+	public final static int COLUMN_E= 4;
+	public final static int COLUMN_F= 5;
+	public final static int COLUMN_G= 6;
+
+	public final static int COLUMN_H= 7;
+	public final static int COLUMN_I= 8;
+	public final static int COLUMN_J= 9;
+	public final static int COLUMN_K= 10;
+	public final static int COLUMN_L= 11;
+	public final static int COLUMN_M= 12;
+	public final static int COLUMN_N= 13;
+	public final static int COLUMN_O= 14;
+		
+	
 	/******varibales para leer exel para el formato 14C****/
-	//FORMATO 14C
+	/****FORMATO 14C****/
 	//ROWS
 	public final static int NRO_FILA_CODEMPRESA_F14C = 5;
 	public final static int NRO_FILA_ANIO_MES_F14C= 6;
@@ -580,33 +604,6 @@ public class FiseConstants {
 	public final static int NRO_CELDA_COSTDR_ASIST_F14C = 7;
 	public final static int NRO_CELDA_CANTIR_ASIST_F14C = 8;
 	public final static int NRO_CELDA_COSTIR_ASIST_F14C = 9;
-
-
-	//FORMATO 13A
-	public final static int ROW_INFO_EMPRESA = 5;
-	public final static int ROW_INFO_FECHA = 6;
-	public final static int ROW_INFO_RUBRO = 7;
-	public final static int ROW_INFO_FRECUENCIA= 8;
-	public final static int ROW_INIT_DETALLE= 11;
-	
-	public final static int COLUMN_B= 1;
-	public final static int COLUMN_C= 2;
-	public final static int COLUMN_D= 3;
-	public final static int COLUMN_E= 4;
-	public final static int COLUMN_F= 5;
-	public final static int COLUMN_G= 6;
-	
-	public final static int COLUMN_H= 7;
-	public final static int COLUMN_I= 8;
-	public final static int COLUMN_J= 9;
-	public final static int COLUMN_K= 10;
-	public final static int COLUMN_L= 11;
-	public final static int COLUMN_M= 12;
-	public final static int COLUMN_N= 13;
-	public final static int COLUMN_O= 14;
-	
-	
-	
 
 	//PROVINCIAS
 	public final static int NRO_CELDA_CANTDP_COORD_F14C = 11;	
@@ -674,6 +671,129 @@ public class FiseConstants {
 	public final static String COSTOINDIRECTO_SUPE_F14C="22";//2=costo indirecto,2=tipo persona supervisor
 	public final static String COSTOINDIRECTO_GEST_F14C="23";//2=costo indirecto,3=tipo persona gestor
 	public final static String COSTOINDIRECTO_ASIST_F14C="24";	//2=costo indirecto,4=tipo persona asistente
+	//CODIGO DE ERRORES
+	public final static String COD_ERROR_F14C_360 = "360";
+	public final static String COD_ERROR_F14C_370 = "370";
+	public final static String COD_ERROR_F14C_380 = "380";
+	public final static String COD_ERROR_F14C_390 = "390";
+	public final static String COD_ERROR_F14C_400 = "400";
+	public final static String COD_ERROR_F14C_410 = "410";
+	public final static String COD_ERROR_F14C_420 = "420";
+	public final static String COD_ERROR_F14C_430 = "430";
+	public final static String COD_ERROR_F14C_440 = "440";
+	public final static String COD_ERROR_F14C_450 = "450";
+	public final static String COD_ERROR_F14C_460 = "460";
+	public final static String COD_ERROR_F14C_470 = "470";
+	public final static String COD_ERROR_F14C_480 = "480";
+	public final static String COD_ERROR_F14C_490 = "490";
+	public final static String COD_ERROR_F14C_500 = "500";
+	public final static String COD_ERROR_F14C_510 = "510";
+	public final static String COD_ERROR_F14C_520 = "520";
+	public final static String COD_ERROR_F14C_530 = "530";
+	public final static String COD_ERROR_F14C_540 = "540";
+	public final static String COD_ERROR_F14C_550 = "550";
+	public final static String COD_ERROR_F14C_560 = "560";
+	public final static String COD_ERROR_F14C_570 = "570";
+	public final static String COD_ERROR_F14C_580 = "580";
+	public final static String COD_ERROR_F14C_590 = "590";
+	public final static String COD_ERROR_F14C_600 = "600";
+	public final static String COD_ERROR_F14C_610 = "610";
+	public final static String COD_ERROR_F14C_620 = "620";
+	public final static String COD_ERROR_F14C_630 = "630";
+	public final static String COD_ERROR_F14C_640 = "640";
+	public final static String COD_ERROR_F14C_650 = "650";
+	public final static String COD_ERROR_F14C_660 = "660";
+	public final static String COD_ERROR_F14C_670 = "670";
+	public final static String COD_ERROR_F14C_680 = "680";
+	public final static String COD_ERROR_F14C_690 = "690";
+	public final static String COD_ERROR_F14C_700 = "700";
+	public final static String COD_ERROR_F14C_710 = "710";
+	public final static String COD_ERROR_F14C_720 = "720";
+	public final static String COD_ERROR_F14C_730 = "730";
+	public final static String COD_ERROR_F14C_740 = "740";
+	public final static String COD_ERROR_F14C_750 = "750";
+	public final static String COD_ERROR_F14C_760 = "760";
+	public final static String COD_ERROR_F14C_770 = "770";
+	public final static String COD_ERROR_F14C_780 = "780";
+	public final static String COD_ERROR_F14C_790 = "790";
+	public final static String COD_ERROR_F14C_800 = "800";
+	public final static String COD_ERROR_F14C_810 = "810";
+	public final static String COD_ERROR_F14C_820 = "820";
+	public final static String COD_ERROR_F14C_830 = "830";
+	public final static String COD_ERROR_F14C_840 = "840";
+	public final static String COD_ERROR_F14C_850 = "850";
+	public final static String COD_ERROR_F14C_860 = "860";
+	public final static String COD_ERROR_F14C_870 = "870";
+	public final static String COD_ERROR_F14C_880 = "880";
+	public final static String COD_ERROR_F14C_890 = "890";
+	public final static String COD_ERROR_F14C_900 = "900";
+	public final static String COD_ERROR_F14C_910 = "910";
+	
+	public final static String COD_ERROR_F14C_920 = "920";
+	public final static String COD_ERROR_F14C_930 = "930";
+	public final static String COD_ERROR_F14C_940 = "940";
+	public final static String COD_ERROR_F14C_950 = "950";
+	public final static String COD_ERROR_F14C_960 = "960";
+	public final static String COD_ERROR_F14C_970 = "970";
+	public final static String COD_ERROR_F14C_980 = "980";
+	public final static String COD_ERROR_F14C_990 = "990";
+	public final static String COD_ERROR_F14C_1000 = "1000";
+	public final static String COD_ERROR_F14C_1010 = "1010";
+	public final static String COD_ERROR_F14C_1020 = "1020";
+	public final static String COD_ERROR_F14C_1030 = "1030";
+	public final static String COD_ERROR_F14C_1040 = "1040";
+	public final static String COD_ERROR_F14C_1050 = "1050";
+	
+	public final static String COD_ERROR_F14C_1060 = "1060";
+	public final static String COD_ERROR_F14C_1070 = "1070";
+	public final static String COD_ERROR_F14C_1080 = "1080";
+	public final static String COD_ERROR_F14C_1090 = "1090";
+	public final static String COD_ERROR_F14C_1100 = "1100";
+	public final static String COD_ERROR_F14C_1110= "1110";
+	public final static String COD_ERROR_F14C_1120 = "1120";
+	public final static String COD_ERROR_F14C_1130 = "1130";
+	public final static String COD_ERROR_F14C_1140 = "1140";
+	public final static String COD_ERROR_F14C_1150 = "1150";
+	public final static String COD_ERROR_F14C_1160 = "1160";
+	public final static String COD_ERROR_F14C_1170 = "1170";
+	public final static String COD_ERROR_F14C_1180 = "1180";
+	public final static String COD_ERROR_F14C_1190 = "1190";
+	
+	public final static String COD_ERROR_F14C_1200 = "1200";
+	public final static String COD_ERROR_F14C_1210 = "1210";
+	public final static String COD_ERROR_F14C_1220 = "1220";
+	public final static String COD_ERROR_F14C_1230 = "1230";
+	public final static String COD_ERROR_F14C_1240 = "1240";
+	public final static String COD_ERROR_F14C_1250 = "1250";
+	public final static String COD_ERROR_F14C_1260 = "1260";
+	public final static String COD_ERROR_F14C_1270 = "1270";
+	public final static String COD_ERROR_F14C_1280 = "1280";
+	public final static String COD_ERROR_F14C_1290 = "1290";
+	public final static String COD_ERROR_F14C_1300 = "1300";
+	public final static String COD_ERROR_F14C_1310 = "1310";
+	public final static String COD_ERROR_F14C_1320 = "1320";
+	public final static String COD_ERROR_F14C_1330 = "1330";
+	
+	public final static String COD_ERROR_F14C_1340 = "1340";
+	public final static String COD_ERROR_F14C_1350 = "1350";
+	public final static String COD_ERROR_F14C_1360 = "1360";
+	public final static String COD_ERROR_F14C_1370 = "1370";
+	public final static String COD_ERROR_F14C_1380 = "1380";
+	public final static String COD_ERROR_F14C_1390 = "1390";
+	public final static String COD_ERROR_F14C_1400 = "1400";
+	public final static String COD_ERROR_F14C_1410 = "1410";
+	public final static String COD_ERROR_F14C_1420 = "1420";
+	public final static String COD_ERROR_F14C_1430 = "1430";
+	public final static String COD_ERROR_F14C_1440 = "1440";
+	public final static String COD_ERROR_F14C_1450 = "1450";
+	public final static String COD_ERROR_F14C_1460 = "1460";
+	public final static String COD_ERROR_F14C_1470 = "1470";
+	
+	public final static String COD_ERROR_F14C_1480 = "1480";
+	public final static String COD_ERROR_F14C_1490 = "1490";
+	public final static String COD_ERROR_F14C_1500 = "1500";
+	public final static String COD_ERROR_F14C_1510 = "1510";
+	public final static String COD_ERROR_F14C_1520 = "1520";
 	
 
 }

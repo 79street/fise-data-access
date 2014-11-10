@@ -3,6 +3,7 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.Formato14CBean;
 import gob.osinergmin.fise.bean.Formato14CReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseTipPersonalDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
@@ -20,6 +21,7 @@ import gob.osinergmin.fise.gart.service.Formato14CGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,6 +64,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Qualifier("formato14CDObDaoImpl")
 	private Formato14CDObDao formato14CDObDao;
 	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
+	
 	
 	
 	/**Metodo para listar el formato 14C*/
@@ -89,6 +95,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		FiseFormato14CCPK idCab = null;
 		FiseFormato14CD det = null;
 		FiseFormato14CDPK idDet = null;
+		FiseGrupoInformacion inf =null;
 		String valor = "1";
 		try {
 		  /*Grabando en la cabecera*/
@@ -108,9 +115,14 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				cab = new FiseFormato14CC();
 				cab.setId(idCab);
 				cab.setNombreSede(bean.getNombreSede());
-				logger.info("Obtneniendo el obk informacion: "); 
-				FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000));	//falta		
-				logger.info("Obtneniendo el obk informacion: "+inf.getDescripcion()); 
+				logger.info("Obtneniendo el id Grupo informacion: "); 
+				long idGrupoInf = commonDao.obtnerIdGrupoInformacion(Integer.valueOf(bean.getAnioPres()),
+						Integer.valueOf(bean.getMesPres())); 
+				logger.info("El id Grupo informacion es  : " +idGrupoInf); 
+				if(idGrupoInf!=0){
+					inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+					logger.info("Grupo de infomacion:  "+inf); 					
+				}	
 				cab.setFiseGrupoInformacion(inf);  
 				cab.setNombreArchivoExcel("");
 				cab.setNombreArchivoTexto(""); 
@@ -397,6 +409,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			if(idDet!=null){
 				idDet=null;
 			}
+			if(inf!=null){
+				inf=null;
+			}
 		}
 		return valor;
 	}	
@@ -425,8 +440,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			logger.info("objeto en sesion : "+cab);
 			logger.info("Nombre sede: "+bean.getNombreSede());
 			cab.setNombreSede(bean.getNombreSede());
-			FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000)); 
-			cab.setFiseGrupoInformacion(inf);  
+			//FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000)); 
+			//cab.setFiseGrupoInformacion(inf);  
 			cab.setNombreArchivoExcel("");
 			cab.setNombreArchivoTexto(""); 
 			cab.setFechaEnvioDefinitivo(null);
@@ -882,8 +897,19 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Transactional
 	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa,
 			long anioDesde, long anioHasta, long mesDesde, long mesHasta,
-			String etapa) throws Exception {		
-		return formato14CCDao.buscarFiseFormato14CC(codEmpresa, anioDesde, anioHasta, mesDesde, mesHasta, etapa); 
+			String etapa) throws Exception {
+		List<FiseFormato14CC> lista = new ArrayList<FiseFormato14CC>();
+		List<FiseFormato14CC> listDatos = formato14CCDao.buscarFiseFormato14CC(codEmpresa, 
+				anioDesde, anioHasta, mesDesde, mesHasta, etapa); 
+		for(FiseFormato14CC f :listDatos){
+			FiseFormato14CC f14c = new	FiseFormato14CC();
+			if(f.getFiseGrupoInformacion()!=null){
+				f.getFiseGrupoInformacion().getDescripcion();	
+			}			
+			f14c =f;
+			lista.add(f14c);
+		}
+		return lista;
 	}
 	
 	@Override
@@ -902,7 +928,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		id.setEtapa(etapa); 
 		
 		FiseFormato14CC f = formato14CCDao.obtenerFormato14CC(id);		
-		logger.info("Tamaño de la lista de detalle:  "+f.getFiseFormato14cDs().size()); 
+		//logger.info("Tamaño de la lista de detalle:  "+f.getFiseFormato14cDs().size()); 
 		/**cabecera y pk**/
 		bean.setCodEmpresa(f.getId().getCodEmpresa()); 
 		bean.setAnioPres(""+f.getId().getAnoPresentacion()); 

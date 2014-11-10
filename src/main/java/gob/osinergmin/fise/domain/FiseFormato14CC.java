@@ -93,7 +93,7 @@ public class FiseFormato14CC implements Serializable {
 
 	//bi-directional many-to-one association to FiseGrupoInformacion
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_GRUPO_INFORMACION",nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
 
 	//bi-directional many-to-one association to FiseFormato14cD

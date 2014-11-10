@@ -28,8 +28,8 @@ public class FiseFormato14BDOb implements Serializable {
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Column(name="ID_OBSERVACION")
-	private String idObservacion;
+	/*@Column(name="ID_OBSERVACION")
+	private String idObservacion;*/
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -88,13 +88,13 @@ public class FiseFormato14BDOb implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public String getIdObservacion() {
+	/*public String getIdObservacion() {
 		return this.idObservacion;
 	}
 
 	public void setIdObservacion(String idObservacion) {
 		this.idObservacion = idObservacion;
-	}
+	}*/
 
 	public String getTerminalActualizacion() {
 		return this.terminalActualizacion;

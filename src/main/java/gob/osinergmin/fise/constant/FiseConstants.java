@@ -897,6 +897,6 @@ public class FiseConstants {
 	public final static String COD_ERROR_F14C_1500 = "1500";
 	public final static String COD_ERROR_F14C_1510 = "1510";
 	public final static String COD_ERROR_F14C_1520 = "1520";
-	
+	public final static String COD_ERROR_F14C_1530 = "1530";
 
 }

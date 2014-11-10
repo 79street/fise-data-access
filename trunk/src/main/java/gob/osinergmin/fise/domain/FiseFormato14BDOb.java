@@ -57,6 +57,10 @@ public class FiseFormato14BDOb implements Serializable {
 		})
 	private FiseFormato14BD fiseFormato14BD;
 
+	@ManyToOne
+	@JoinColumn(name="ID_OBSERVACION")
+	private FiseObservacion fiseObservacion;
+	
 	public FiseFormato14BDOb() {
 	}
 
@@ -130,6 +134,14 @@ public class FiseFormato14BDOb implements Serializable {
 
 	public void setFiseFormato14BD(FiseFormato14BD fiseFormato14BD) {
 		this.fiseFormato14BD = fiseFormato14BD;
+	}
+
+	public FiseObservacion getFiseObservacion() {
+		return fiseObservacion;
+	}
+
+	public void setFiseObservacion(FiseObservacion fiseObservacion) {
+		this.fiseObservacion = fiseObservacion;
 	}
 
 }

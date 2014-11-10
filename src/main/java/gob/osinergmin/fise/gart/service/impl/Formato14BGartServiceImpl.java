@@ -96,13 +96,13 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 			id.setAnoInicioVigencia(formulario.getAnioInicioVigencia());
 			id.setAnoFinVigencia(formulario.getAnioFinVigencia());
 			id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
-			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+			/*if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
 				fiseFormato14BC.setArchivoExcel(formulario.getNombreArchivo());
 			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
 				fiseFormato14BC.setArchivoTexto(formulario.getNombreArchivo());
 			}else{
 				id.setEtapa(formulario.getEtapa());
-			}
+			}*/
 			
 			fiseFormato14BC.setId(id);
 			

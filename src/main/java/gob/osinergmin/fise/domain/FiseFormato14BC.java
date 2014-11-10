@@ -68,10 +68,10 @@ public class FiseFormato14BC implements Serializable {
 	@Transient
 	private String descGrupoInformacion;
 	
-	@Column(name="NOMBRE_ARCHIVO_EXCEL")
+/*	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String archivoExcel;
 	@Column(name="NOMBRE_ARCHIVO_TEXTO")
-	private String archivoTexto;
+	private String archivoTexto;*/
 
 	public FiseFormato14BC() {
 	}
@@ -218,7 +218,7 @@ public class FiseFormato14BC implements Serializable {
 		this.descGrupoInformacion = descGrupoInformacion;
 	}
 
-	public String getArchivoExcel() {
+/*	public String getArchivoExcel() {
 		return archivoExcel;
 	}
 
@@ -232,6 +232,6 @@ public class FiseFormato14BC implements Serializable {
 
 	public void setArchivoTexto(String archivoTexto) {
 		this.archivoTexto = archivoTexto;
-	}
+	}*/
 
 }

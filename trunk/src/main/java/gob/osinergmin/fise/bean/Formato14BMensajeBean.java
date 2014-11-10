@@ -1,6 +1,6 @@
 package gob.osinergmin.fise.bean;
 
-import gob.osinergmin.fise.domain.FiseFormato14AC;
+import gob.osinergmin.fise.domain.FiseFormato14BC;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,16 +12,16 @@ public class Formato14BMensajeBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private FiseFormato14AC fiseFormato14AC;
+	private FiseFormato14BC fiseFormato14BC;
 	private String mensajeInformacion;
 	private String mensajeError;
 	private List<MensajeErrorBean> listaMensajeError;
 	
-	public FiseFormato14AC getFiseFormato14AC() {
-		return fiseFormato14AC;
+	public FiseFormato14BC getFiseFormato14BC() {
+		return fiseFormato14BC;
 	}
-	public void setFiseFormato14AC(FiseFormato14AC fiseFormato14AC) {
-		this.fiseFormato14AC = fiseFormato14AC;
+	public void setFiseFormato14BC(FiseFormato14BC fiseFormato14BC) {
+		this.fiseFormato14BC = fiseFormato14BC;
 	}
 	public String getMensajeInformacion() {
 		return mensajeInformacion;

@@ -1,11 +1,19 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -67,11 +75,6 @@ public class FiseFormato14BC implements Serializable {
 	private String descMesPresentacion;
 	@Transient
 	private String descGrupoInformacion;
-	
-/*	@Column(name="NOMBRE_ARCHIVO_EXCEL")
-	private String archivoExcel;
-	@Column(name="NOMBRE_ARCHIVO_TEXTO")
-	private String archivoTexto;*/
 
 	public FiseFormato14BC() {
 	}
@@ -218,20 +221,5 @@ public class FiseFormato14BC implements Serializable {
 		this.descGrupoInformacion = descGrupoInformacion;
 	}
 
-/*	public String getArchivoExcel() {
-		return archivoExcel;
-	}
-
-	public void setArchivoExcel(String archivoExcel) {
-		this.archivoExcel = archivoExcel;
-	}
-
-	public String getArchivoTexto() {
-		return archivoTexto;
-	}
-
-	public void setArchivoTexto(String archivoTexto) {
-		this.archivoTexto = archivoTexto;
-	}*/
 
 }

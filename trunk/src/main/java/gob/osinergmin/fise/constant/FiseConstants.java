@@ -403,6 +403,109 @@ public class FiseConstants {
 	public final static String PARAM_SUMCSTO_GSTION_L_F14A = "CTO_GTION_RED_L";
 	public final static String PARAM_CSTOUNIT_AGENTES_L_F14A = "CTO_UNT_AGENTE_L";
 	
+	// F14B
+	public final static String PARAM_DESC_EMPRESA_F14B = "DESC_EMPRESA";
+	public final static String PARAM_ANO_PRES_F14B = "ANO_PRESENTACION";
+	public final static String PARAM_DESC_MES_PRES_F14B = "DESC_MES_PRESENTACION";
+	public final static String PARAM_ANO_INICIO_VIGENCIA_F14B = "ANO_INICIO_VIGENCIA";
+	public final static String PARAM_ANO_FIN_VIGENCIA_F14B = "ANO_FIN_VIGENCIA";
+	//1.1
+	public final static String PARAM_IMP_VAL_DSCTO_EDE_R_F14B = "IMP_VAL_DSCTO_EDE_R";
+	public final static String PARAM_IMP_VAL_DSCTO_EDE_P_F14B = "IMP_VAL_DSCTO_EDE_P";
+	public final static String PARAM_IMP_VAL_DSCTO_EDE_L_F14B = "IMP_VAL_DSCTO_EDE_L";
+	//1.2
+	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_R_F14B = "IMP_VAL_DSCTO_NOEDE_R";
+	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_P_F14B = "IMP_VAL_DSCTO_NOEDE_R";
+	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_L_F14B = "IMP_VAL_DSCTO_NOEDE_L";
+	//1.3
+	public final static String PARAM_CSTO_TOTAL_IMP_R_F14B = "CSTO_TOTAL_IMP_R";
+	public final static String PARAM_CSTO_TOTAL_IMP_P_F14B = "CSTO_TOTAL_IMP_P";
+	public final static String PARAM_CSTO_TOTAL_IMP_L_F14B = "CSTO_TOTAL_IMP_L";
+	//1.4
+	public final static String PARAM_NRO_VALES_R_F14B = "NRO_VALES_R";
+	public final static String PARAM_NRO_VALES_P_F14B = "NRO_VALES_P";
+	public final static String PARAM_NRO_VALES_L_F14B = "NRO_VALES_L";
+	//1.5
+	public final static String PARAM_CSTO_UNIT_R_F14B = "CSTO_UNIT_R";
+	public final static String PARAM_CSTO_UNIT_P_F14B = "CSTO_UNIT_P";
+	public final static String PARAM_CSTO_UNIT_L_F14B = "CSTO_UNIT_L";
+	//2.1
+	public final static String PARAM_CSTO_TOTAL_VAL_DSCTO_R_F14B = "CSTO_TOTAL_VAL_DSCTO_R";
+	public final static String PARAM_CSTO_TOTAL_VAL_DSCTO_P_F14B = "CSTO_TOTAL_VAL_DSCTO_P";
+	public final static String PARAM_CSTO_TOTAL_VAL_DSCTO_L_F14B = "CSTO_TOTAL_VAL_DSCTO_L";
+	//2.2
+	public final static String PARAM_NRO_VALES_RPTDOS_R_F14B = "NRO_VALES_RPTDOS_R";
+	public final static String PARAM_NRO_VALES_RPTDOS_P_F14B = "NRO_VALES_RPTDOS_P";
+	public final static String PARAM_NRO_VALES_RPTDOS_L_F14B = "NRO_VALES_RPTDOS_L";
+	//2.3
+	public final static String PARAM_CSTOS_UNIT_DOM_R_F14B = "CSTOS_UNIT_DOM_R";
+	public final static String PARAM_CSTOS_UNIT_DOM_P_F14B = "CSTOS_UNIT_DOM_P";
+	public final static String PARAM_CSTOS_UNIT_DOM_L_F14B = "CSTOS_UNIT_DOM_L";
+	//3.1
+	public final static String PARAM_CSTO_TOTAL_AUT_R_F14B = "CSTO_TOTAL_AUT_R";
+	public final static String PARAM_CSTO_TOTAL_AUT_P_F14B = "CSTO_TOTAL_AUT_P";
+	public final static String PARAM_CSTO_TOTAL_AUT_L_F14B = "CSTO_TOTAL_AUT_L";
+	//3.2
+	public final static String PARAM_NRO_VALES_ENTREG_R_F14B = "NRO_VALES_ENTREG_R";
+	public final static String PARAM_NRO_VALES_ENTREG_P_F14B = "NRO_VALES_ENTREG_P";
+	public final static String PARAM_NRO_VALES_ENTREG_L_F14B = "NRO_VALES_ENTREG_L";
+	//3.3
+	public final static String PARAM_CSTOS_UNIT_ENT_R_F14B = "CSTOS_UNIT_ENT_R";
+	public final static String PARAM_CSTOS_UNIT_ENT_P_F14B = "CSTOS_UNIT_ENT_P";
+	public final static String PARAM_CSTOS_UNIT_ENT_L_F14B = "CSTOS_UNIT_ENT_L";
+	//4.1
+	public final static String PARAM_CSTO_VALES_AUTOR_R_F14B = "CSTO_VALES_AUTOR_R";
+	public final static String PARAM_CSTO_VALES_AUTOR_P_F14B = "CSTO_VALES_AUTOR_P";
+	public final static String PARAM_CSTO_VALES_AUTOR_L_F14B = "CSTO_VALES_AUTOR_L";
+	//4.2
+	public final static String PARAM_NRO_VALES_EMIT_R_F14B = "NRO_VALES_EMIT_R";
+	public final static String PARAM_NRO_VALES_EMIT_P_F14B = "NRO_VALES_EMIT_P";
+	public final static String PARAM_NRO_VALES_EMIT_L_F14B = "NRO_VALES_EMIT_L";
+	//4.3
+	public final static String PARAM_CSTO_UNIT_FIS_R_F14B = "CSTO_UNIT_FIS_R";
+	public final static String PARAM_CSTO_UNIT_FIS_P_F14B = "CSTO_UNIT_FIS_P";
+	public final static String PARAM_CSTO_UNIT_FIS_L_F14B = "CSTO_UNIT_FIS_L";
+	//5.1
+	public final static String PARAM_CSTO_UNIT_LIQ_R_F14B = "CSTO_UNIT_LIQ_R";
+	public final static String PARAM_CSTO_UNIT_LIQ_P_F14B = "CSTO_UNIT_LIQ_P";
+	public final static String PARAM_CSTO_UNIT_LIQ_L_F14B = "CSTO_UNIT_LIQ_L";
+	//6.1
+	public final static String PARAM_CSTO_ATCION_SOLIC_R_F14B = "CSTO_ATCION_SOLIC_R";
+	public final static String PARAM_CSTO_ATCION_SOLIC_P_F14B = "CSTO_ATCION_SOLIC_P";
+	public final static String PARAM_CSTO_ATCION_SOLIC_L_F14B = "CSTO_ATCION_SOLIC_L";
+	//6.2
+	public final static String PARAM_CSTO_ATCION_CONSUL_R_F14B = "CSTO_ATCION_CONSUL_R";
+	public final static String PARAM_CSTO_ATCION_CONSUL_P_F14B = "CSTO_ATCION_CONSUL_P";
+	public final static String PARAM_CSTO_ATCION_CONSUL_L_F14B = "CSTO_ATCION_CONSUL_L";
+	//6.3
+	public final static String PARAM_CSTO_TOTAL_ATCION_R_F14B = "CSTO_TOTAL_ATCION_R";
+	public final static String PARAM_CSTO_TOTAL_ATCION_P_F14B = "CSTO_TOTAL_ATCION_P";
+	public final static String PARAM_CSTO_TOTAL_ATCION_L_F14B = "CSTO_TOTAL_ATCION_L";
+	//6.4
+	public final static String PARAM_NRO_TOTAL_ATCION_R_F14B = "NRO_TOTAL_ATCION_R";
+	public final static String PARAM_NRO_TOTAL_ATCION_P_F14B = "NRO_TOTAL_ATCION_P";
+	public final static String PARAM_NRO_TOTAL_ATCION_L_F14B = "NRO_TOTAL_ATCION_L";
+	//6.5
+	public final static String PARAM_CSTO_UNIT_ATEN_R_F14B = "CSTO_UNIT_ATEN_R";
+	public final static String PARAM_CSTO_UNIT_ATEN_P_F14B = "CSTO_UNIT_ATEN_P";
+	public final static String PARAM_CSTO_UNIT_ATEN_L_F14B = "CSTO_UNIT_ATEN_L";
+	//7.1
+	public final static String PARAM_CSTO_PSNAL_R_F14B = "CSTO_PSNAL_R";
+	public final static String PARAM_CSTO_PSNAL_P_F14B = "CSTO_PSNAL_P";
+	public final static String PARAM_CSTO_PSNAL_L_F14B = "CSTO_PSNAL_L";
+	//7.2	
+	public final static String PARAM_CPTCON_AGE_R_F14B = "CPTCON_AGE_R";
+	public final static String PARAM_CPTCON_AGE_P_F14B = "CPTCON_AGE_P";
+	public final static String PARAM_CPTCON_AGE_L_F14B = "CPTCON_AGE_L";
+	//7.3
+	public final static String PARAM_UTLES_OFIC_R_F14B = "UTLES_OFIC_R";
+	public final static String PARAM_UTLES_OFIC_P_F14B = "UTLES_OFIC_P";
+	public final static String PARAM_UTLES_OFIC_L_F14B = "UTLES_OFIC_L";
+	//7.4
+	public final static String PARAM_CSTO_TOTAL_GTION_R_F14B = "CSTO_TOTAL_GTION_R";
+	public final static String PARAM_CSTO_TOTAL_GTION_P_F14B = "CSTO_TOTAL_GTION_P";
+	public final static String PARAM_CSTO_TOTAL_GTION_L_F14B = "CSTO_TOTAL_GTION_L";
+	
 	//FORMATO 14C
 	public final static long TIPO_PERSONAL_CORDINADOR_COD = 1;
 	public final static long TIPO_PERSONAL_SUPERVISOR_COD = 2;

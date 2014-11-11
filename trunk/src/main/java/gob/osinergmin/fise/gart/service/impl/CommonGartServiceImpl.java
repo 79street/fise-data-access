@@ -52,4 +52,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 		return commonDao.obtenerListaCorreosDestinatarios();
 	}
 	
+	@Override
+	@Transactional
+	public String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa) {
+		return commonDao.obtenerEstadoProceso(codEmpresa, tipoFormato, anoPresentacion, mesPresentacion, codEtapa);
+	}
+	
 }

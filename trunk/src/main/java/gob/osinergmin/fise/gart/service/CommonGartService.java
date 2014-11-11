@@ -14,5 +14,6 @@ public interface CommonGartService {
 	int validarFormatos_12C12D13A(Formato12C12D13Generic formato, String tipoFormato, String usuario, String terminal);
 	int validarFormatos_14(Formato14Generic formato14, String tipoFormato, String usuario, String terminal);
 	List<CorreoBean> obtenerListaCorreosDestinatarios();
+	String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa);
 	
 }

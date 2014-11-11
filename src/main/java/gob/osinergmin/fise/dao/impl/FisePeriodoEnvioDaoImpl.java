@@ -7,6 +7,7 @@ import gob.osinergmin.fise.domain.FisePeriodoEnvio;
 import gob.osinergmin.fise.util.FechaUtil;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -54,8 +55,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 				periodoEnvio.setCodigoItem((String)valor[0]);
 				periodoEnvio.setDescripcionItem((String)valor[1]);
 				periodoEnvio.setFlagPeriodoEjecucion((String)valor[2]);
-				periodoEnvio.setAnioInicioVig(((Long)valor[3])!=null?((Long)valor[3]).toString():FiseConstants.BLANCO);
-				periodoEnvio.setAnioFinVig(((Long)valor[4])!=null?((Long)valor[4]).toString():FiseConstants.BLANCO);
+				periodoEnvio.setAnioInicioVig(((BigDecimal)valor[3])!=null?((BigDecimal)valor[3]).toString():FiseConstants.BLANCO);
+				periodoEnvio.setAnioFinVig(((BigDecimal)valor[4])!=null?((BigDecimal)valor[4]).toString():FiseConstants.BLANCO);
 				periodoEnvio.setFlagHabilitaCostos((String)valor[5]);
 				lst.add(periodoEnvio);
 			}

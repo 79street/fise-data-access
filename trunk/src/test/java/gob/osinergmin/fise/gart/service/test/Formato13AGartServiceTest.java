@@ -99,4 +99,24 @@ public class Formato13AGartServiceTest {
 			}
 		}
 		
+		@Test
+		public void buscarFormato13Cabecera(){
+			String codEmpresa="ADILD";
+			long anioPresentacion=2014;
+			long mesPresentacion=11;
+			String etapa="SOLICITUD";
+			FiseFormato13ACPK fiseFormato13ACPK=new FiseFormato13ACPK();
+			fiseFormato13ACPK.setCodEmpresa(codEmpresa);
+			fiseFormato13ACPK.setAnoPresentacion(anioPresentacion);
+			fiseFormato13ACPK.setMesPresentacion(mesPresentacion);
+			fiseFormato13ACPK.setEtapa(etapa);
+			
+			FiseFormato13AC formato=formatoService.obtenerFormato13ACByPK(fiseFormato13ACPK);
+			
+			if(formato!=null){
+				System.out.println("EMPRESA PK:"+formato.getFechaEnvioDefinitivo());
+			}else{
+				System.out.println("NULO");
+			}
+		}
 }

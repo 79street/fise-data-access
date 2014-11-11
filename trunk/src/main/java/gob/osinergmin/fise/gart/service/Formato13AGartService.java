@@ -3,6 +3,7 @@ package gob.osinergmin.fise.gart.service;
 import gob.osinergmin.fise.bean.Formato13ACBean;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
+import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 
 import java.util.HashMap;
@@ -18,5 +19,5 @@ public interface Formato13AGartService {
 
 	FiseFormato13AC savecabecera(FiseFormato13AC fiseC);
 	FiseFormato13AD savedetalle(FiseFormato13AD fiseD);
-
+	FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK);
 }

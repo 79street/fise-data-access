@@ -6,6 +6,7 @@ import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
+import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 
@@ -83,10 +84,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		return formato13ADDao.savedetalle(fiseD);
 	}
 
-	
-
-	
-
-	
-
+	public FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK){
+		return formato13ACDao.obtenerFormato13ACByPK(fiseFormato13ACPK);
+	}
 }

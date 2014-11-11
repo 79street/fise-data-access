@@ -3,6 +3,7 @@ package gob.osinergmin.fise.dao.impl;
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
+import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.List;
@@ -87,5 +88,20 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 			em.close();
 		}
 		return result;
+	}
+	
+	public FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK){
+		FiseFormato13AC formato = null;
+		try{
+			//em.getTransaction().begin();
+			formato = em.find(FiseFormato13AC.class, fiseFormato13ACPK);
+			//em.getTransaction().commit();
+			//return formato;
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return formato;
 	}
 }

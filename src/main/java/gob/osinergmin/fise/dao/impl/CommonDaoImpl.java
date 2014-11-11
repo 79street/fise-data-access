@@ -188,4 +188,23 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		 }
 		return valor;
 	}	
+	
+	/**para validar el flujo de los procesos de EDITAR, ANULAR o ENVIO DEFINITIVO*/
+	
+	@Override
+	public String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa){
+		String estado="";
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(?,?,?,?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			estado = (String)query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return estado;
+	}
+	
 }

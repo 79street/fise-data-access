@@ -86,20 +86,34 @@ public class FisePeriodoEnvio implements Serializable {
 	@Column(name = "USUARIO_CREACION")
 	private String usuarioCreacion;
 
+	@Column(name = "FLAG_MOSTRAR_ANO_MES_EJEC")
+	private String flagMostrarAnoMesEjec;
+
+	@Column(name = "FLAG_ENVIO_CON_OBSERVACIONES")
+	private String flagEnvioConObservaciones;
+	
+	@Column(name = "ANO_INICIO_VIGENCIA")
+	private Long anoInicioVigencia;
+	
+	@Column(name = "ANO_FIN_VIGENCIA")
+	private Long anoFinVigencia;
+	
+	@Column(name = "FLAG_HABILITA_COSTOS_D_I_F14C")
+	private String flagHabilitaCostosDIF14C;
+	
 	// valores de combo
 	@Transient
 	private String codigoItem;
 	@Transient
 	private String descripcionItem;
-
-	@Column(name = "FLAG_MOSTRAR_ANO_MES_EJEC")
-	private String flagMostrarAnoMesEjec;
-
 	@Transient
 	private String flagPeriodoEjecucion;
-
-	@Column(name = "FLAG_ENVIO_CON_OBSERVACIONES")
-	private String flagEnvioConObservaciones;
+	@Transient
+	private String anioInicioVig;
+	@Transient
+	private String anioFinVig;
+	@Transient
+	private String flagHabilitaCostos;
 
 	public FisePeriodoEnvio() {
 	}
@@ -319,6 +333,54 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setFlagEnvioConObservaciones(String flagEnvioConObservaciones) {
 		this.flagEnvioConObservaciones = flagEnvioConObservaciones;
+	}
+
+	public Long getAnoInicioVigencia() {
+		return anoInicioVigencia;
+	}
+
+	public void setAnoInicioVigencia(Long anoInicioVigencia) {
+		this.anoInicioVigencia = anoInicioVigencia;
+	}
+
+	public Long getAnoFinVigencia() {
+		return anoFinVigencia;
+	}
+
+	public void setAnoFinVigencia(Long anoFinVigencia) {
+		this.anoFinVigencia = anoFinVigencia;
+	}
+
+	public String getAnioInicioVig() {
+		return anioInicioVig;
+	}
+
+	public void setAnioInicioVig(String anioInicioVig) {
+		this.anioInicioVig = anioInicioVig;
+	}
+
+	public String getAnioFinVig() {
+		return anioFinVig;
+	}
+
+	public void setAnioFinVig(String anioFinVig) {
+		this.anioFinVig = anioFinVig;
+	}
+
+	public String getFlagHabilitaCostosDIF14C() {
+		return flagHabilitaCostosDIF14C;
+	}
+
+	public void setFlagHabilitaCostosDIF14C(String flagHabilitaCostosDIF14C) {
+		this.flagHabilitaCostosDIF14C = flagHabilitaCostosDIF14C;
+	}
+
+	public String getFlagHabilitaCostos() {
+		return flagHabilitaCostos;
+	}
+
+	public void setFlagHabilitaCostos(String flagHabilitaCostos) {
+		this.flagHabilitaCostos = flagHabilitaCostos;
 	}
 
 }

@@ -145,31 +145,31 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleRural.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoR());
+				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoR());
 				detalleRural.setNumeroValesRepartidos(formulario.getNroValesReptR());
 				if( formulario.getNroValesReptR() !=0 ){
-					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficR());
+				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficR());
 				detalleRural.setNumeroValesEntregados(formulario.getNroValesEntrR());
 				if( formulario.getNroValesEntrR() !=0 ){
-					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales fisicos
 				detalleRural.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronR());
-				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
-				if( formulario.getNroValesFisP() !=0 ){
+				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisR());
+				if( formulario.getNroValesFisR() !=0 ){
 					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleRural.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitR()	);
+				detalleRural.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitR());
 				//atencion
 				detalleRural.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicR());
 				detalleRural.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsR());
@@ -215,7 +215,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
 				//
 				FiseFormato14BD detalleProvincia = new FiseFormato14BD();
 				//pk
@@ -244,18 +244,18 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleProvincia.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoP());
+				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoP());
 				detalleProvincia.setNumeroValesRepartidos(formulario.getNroValesReptP());
 				if( formulario.getNroValesReptP() !=0 ){
-					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficP());
+				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficP());
 				detalleProvincia.setNumeroValesEntregados(formulario.getNroValesEntrP());
 				if( formulario.getNroValesEntrP() !=0 ){
-					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -268,7 +268,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleProvincia.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleProvincia.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitP()	);
+				detalleProvincia.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitP());
 				//atencion
 				detalleProvincia.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicP());
 				detalleProvincia.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsP());
@@ -314,7 +314,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					){
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
 				//
 				FiseFormato14BD detalleLima = new FiseFormato14BD();
 				//pk
@@ -343,31 +343,31 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleLima.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoL());
+				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoL());
 				detalleLima.setNumeroValesRepartidos(formulario.getNroValesReptL());
 				if( formulario.getNroValesReptL() !=0 ){
-					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficL());
+				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficL());
 				detalleLima.setNumeroValesEntregados(formulario.getNroValesEntrL());
 				if( formulario.getNroValesEntrL() !=0 ){
-					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales fisicos
 				detalleLima.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronL());
-				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
-				if( formulario.getNroValesFisP() !=0 ){
+				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisL());
+				if( formulario.getNroValesFisL() !=0 ){
 					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleLima.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitL()	);
+				detalleLima.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitL());
 				//atencion
 				detalleLima.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicL());
 				detalleLima.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsL());
@@ -487,31 +487,31 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleRural.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoR());
+				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoR());
 				detalleRural.setNumeroValesRepartidos(formulario.getNroValesReptR());
 				if( formulario.getNroValesReptR() !=0 ){
-					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficR());
+				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficR());
 				detalleRural.setNumeroValesEntregados(formulario.getNroValesEntrR());
 				if( formulario.getNroValesEntrR() !=0 ){
-					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales fisicos
 				detalleRural.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronR());
-				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
-				if( formulario.getNroValesFisP() !=0 ){
+				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisR());
+				if( formulario.getNroValesFisR() !=0 ){
 					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleRural.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitR()	);
+				detalleRural.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitR());
 				//atencion
 				detalleRural.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicR());
 				detalleRural.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsR());
@@ -567,18 +567,18 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleProvincia.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoP());
+				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoP());
 				detalleProvincia.setNumeroValesRepartidos(formulario.getNroValesReptP());
 				if( formulario.getNroValesReptP() !=0 ){
-					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficP());
+				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficP());
 				detalleProvincia.setNumeroValesEntregados(formulario.getNroValesEntrP());
 				if( formulario.getNroValesEntrP() !=0 ){
-					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -591,7 +591,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleProvincia.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleProvincia.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitP()	);
+				detalleProvincia.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitP());
 				//atencion
 				detalleProvincia.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicP());
 				detalleProvincia.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsP());
@@ -647,31 +647,31 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 					detalleLima.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
 				//reparto vales
-				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValDesctoL());
+				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoL());
 				detalleLima.setNumeroValesRepartidos(formulario.getNroValesReptL());
 				if( formulario.getNroValesReptL() !=0 ){
-					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
 				//entrega vales
-				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValOficL());
+				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficL());
 				detalleLima.setNumeroValesEntregados(formulario.getNroValesEntrL());
 				if( formulario.getNroValesEntrL() !=0 ){
-					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales fisicos
 				detalleLima.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronL());
-				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
-				if( formulario.getNroValesFisP() !=0 ){
+				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisL());
+				if( formulario.getNroValesFisL() !=0 ){
 					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
 				//canje liquidacion vales digitales
-				detalleLima.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitL()	);
+				detalleLima.setCostoUnitCanjeValDigital(formulario.getCostoUnitValesDigitL());
 				//atencion
 				detalleLima.setCostoAtencionSolicitudes(formulario.getCostoAtenSolicL());
 				detalleLima.setCostoAtencionConsultaRecla(formulario.getCostoAtenConsL());

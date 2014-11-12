@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,8 +43,8 @@ public class FiseFormato14BC implements Serializable {
 	@Column(name="FECHA_ENVIO_DEFINITIVO")
 	private Date fechaEnvioDefinitivo;
 
-	@Column(name="ID_GRUPO_INFORMACION")
-	private java.math.BigDecimal idGrupoInformacion;
+	//@Column(name="ID_GRUPO_INFORMACION")
+	//private java.math.BigDecimal idGrupoInformacion;
 
 	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String nombreArchivoExcel;
@@ -66,6 +68,11 @@ public class FiseFormato14BC implements Serializable {
 	@Transient
 	@OneToMany(mappedBy="fiseFormato14BC", cascade={CascadeType.ALL})
 	private List<FiseFormato14BD> fiseFormato14BDs;
+	
+	//bi-directional many-to-one association to FiseGrupoInformacion
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="ID_GRUPO_INFORMACION")
+	private FiseGrupoInformacion fiseGrupoInformacion;
 	
 	@Transient
 	private String descEmpresa;
@@ -111,13 +118,13 @@ public class FiseFormato14BC implements Serializable {
 		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
 	}
 
-	public java.math.BigDecimal getIdGrupoInformacion() {
+	/*public java.math.BigDecimal getIdGrupoInformacion() {
 		return this.idGrupoInformacion;
 	}
 
 	public void setIdGrupoInformacion(java.math.BigDecimal idGrupoInformacion) {
 		this.idGrupoInformacion = idGrupoInformacion;
-	}
+	}*/
 
 	public String getNombreArchivoExcel() {
 		return this.nombreArchivoExcel;
@@ -219,6 +226,14 @@ public class FiseFormato14BC implements Serializable {
 
 	public void setDescGrupoInformacion(String descGrupoInformacion) {
 		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public FiseGrupoInformacion getFiseGrupoInformacion() {
+		return fiseGrupoInformacion;
+	}
+
+	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
+		this.fiseGrupoInformacion = fiseGrupoInformacion;
 	}
 
 

@@ -3,6 +3,9 @@ package gob.osinergmin.fise.constant;
 
 public class FiseConstants {
 	
+	public final static String COD_EMPRESA_EDELNOR = "EDELN";
+	
+	public final static String COD_EMPRESA_LUZ_SUR = "LDS";
 	
 	public final static String KEY_CFG_EXCEL_EXPORT = "CFG_XLS_EXPORT";
 	public final static String BLANCO ="";
@@ -719,6 +722,8 @@ public class FiseConstants {
 	
 	/******varibales para leer exel para el formato 14C****/
 	/****FORMATO 14C****/
+	public final static String ESTADO_ENVIADO_F14C = "Enviado";
+	public final static String  ESTADO_POR_ENVIAR_F14C = "Por Enviar";
 	//ROWS
 	public final static int NRO_FILA_CODEMPRESA_F14C = 5;
 	public final static int NRO_FILA_ANIO_MES_F14C= 6;

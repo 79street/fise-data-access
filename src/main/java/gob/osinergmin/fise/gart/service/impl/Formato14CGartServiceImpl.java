@@ -116,8 +116,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				cab.setId(idCab);
 				cab.setNombreSede(bean.getNombreSede());
 				logger.info("Obtneniendo el id Grupo informacion: "); 
-				long idGrupoInf = commonDao.obtnerIdGrupoInformacion(Integer.valueOf(bean.getAnioPres()),
-						Integer.valueOf(bean.getMesPres())); 
+				long idGrupoInf = commonDao.obtenerIdGrupoInformacion(Long.valueOf(bean.getAnioPres()),
+						Long.valueOf(bean.getMesPres())); 
 				logger.info("El id Grupo informacion es  : " +idGrupoInf); 
 				if(idGrupoInf!=0){
 					inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
@@ -936,6 +936,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		bean.setAnoIniVigencia(""+f.getId().getAnoInicioVigencia()); 
 		bean.setAnoFinVigencia(""+f.getId().getAnoFinVigencia()); 
 		bean.setEtapa(f.getId().getEtapa());  
+		if(f.getFiseGrupoInformacion()!=null && 
+				f.getFiseGrupoInformacion().getDescripcion()!=null){
+			bean.setGrupoInformacion(f.getFiseGrupoInformacion().getDescripcion());	
+		}else{
+			bean.setGrupoInformacion("---");	
+		}
+		if(f.getFechaEnvioDefinitivo()!=null){
+			bean.setEstado(FiseConstants.ESTADO_ENVIADO_F14C);
+		}else{
+			bean.setEstado(FiseConstants.ESTADO_POR_ENVIAR_F14C);
+		}		
 		///////////////////////////////////////
 		bean.setNombreSede(f.getNombreSede()); 
 		bean.setNumRural(""+f.getNumBenefEmpPerAntRural());

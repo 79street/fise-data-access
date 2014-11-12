@@ -168,7 +168,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 	/**Para obtener el id del grupo de informacion**/
 	
 	@Override
-	public Long obtnerIdGrupoInformacion(Integer anioPresentacion,Integer mesPresentacion){
+	public Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion){
      	Long valor = new Long(0); 
 		try {
 			StringBuffer jql = new StringBuffer();

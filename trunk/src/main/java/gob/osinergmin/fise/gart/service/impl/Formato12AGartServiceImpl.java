@@ -2,6 +2,8 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato12ACBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
 import gob.osinergmin.fise.dao.Formato12ADDao;
@@ -11,6 +13,7 @@ import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.domain.FiseFormato12ADOb;
 import gob.osinergmin.fise.domain.FiseFormato12ADPK;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 import gob.osinergmin.fise.util.FechaUtil;
@@ -50,6 +53,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Autowired
 	@Qualifier("formato12ADObDaoImpl")
 	private Formato12ADObDao formato12AObsDao;
+	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseGrupoInformacionDaoImpl")
+	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
 	
 	//@Override
 	public List<FiseFormato12AC> listarFormato12AC() {
@@ -94,6 +105,13 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			
 			fiseFormato12AC.setId(id);
+			
+			FiseGrupoInformacion grupoInfo = null;
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent()); 
+			if(idGrupoInf!=0){
+				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+			}	
+			fiseFormato12AC.setFiseGrupoInformacion(grupoInfo);
 			
 		//total de las 3 detalles segun sea el caso
 			BigDecimal total = new BigDecimal(0);

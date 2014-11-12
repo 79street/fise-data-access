@@ -2,6 +2,8 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato14BCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14BDDao;
@@ -11,6 +13,7 @@ import gob.osinergmin.fise.domain.FiseFormato14BCPK;
 import gob.osinergmin.fise.domain.FiseFormato14BD;
 import gob.osinergmin.fise.domain.FiseFormato14BDOb;
 import gob.osinergmin.fise.domain.FiseFormato14BDPK;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato14BGartService;
 import gob.osinergmin.fise.util.FechaUtil;
@@ -49,6 +52,14 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 	@Autowired
 	@Qualifier("formato14BDObDaoImpl")
 	private Formato14BDObDao formato14BObsDao;
+	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseGrupoInformacionDaoImpl")
+	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
 	
 	@Override
 	@Transactional
@@ -105,6 +116,14 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 			}
 			
 			fiseFormato14BC.setId(id);
+			
+			FiseGrupoInformacion grupoInfo = null;
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent()); 
+			if(idGrupoInf!=0){
+				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+			}	
+			fiseFormato14BC.setFiseGrupoInformacion(grupoInfo);  
+			
 			
 			List<FiseFormato14BD> lista = new ArrayList<FiseFormato14BD>();
 			//RURAL

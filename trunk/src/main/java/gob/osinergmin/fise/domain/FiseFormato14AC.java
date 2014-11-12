@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,9 +39,9 @@ public class FiseFormato14AC implements Serializable {
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Column(name="ID_GRUPO_INFORMACION")
-	private java.math.BigDecimal idGrupoInformacion;
-
+	//@Column(name="ID_GRUPO_INFORMACION")
+	//private java.math.BigDecimal idGrupoInformacion;
+	
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
 
@@ -56,6 +58,11 @@ public class FiseFormato14AC implements Serializable {
 	@Transient
 	@OneToMany(mappedBy="fiseFormato14AC", cascade={CascadeType.ALL})
 	private List<FiseFormato14AD> fiseFormato14ADs;
+	
+	//bi-directional many-to-one association to FiseGrupoInformacion
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="ID_GRUPO_INFORMACION")
+	private FiseGrupoInformacion fiseGrupoInformacion;
 	
 	@Transient
 	private String descEmpresa;
@@ -102,13 +109,13 @@ public class FiseFormato14AC implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public java.math.BigDecimal getIdGrupoInformacion() {
+	/*public java.math.BigDecimal getIdGrupoInformacion() {
 		return this.idGrupoInformacion;
 	}
 
 	public void setIdGrupoInformacion(java.math.BigDecimal idGrupoInformacion) {
 		this.idGrupoInformacion = idGrupoInformacion;
-	}
+	}*/
 
 	public String getTerminalActualizacion() {
 		return this.terminalActualizacion;
@@ -218,6 +225,14 @@ public class FiseFormato14AC implements Serializable {
 
 	public void setFechaEnvioDefinitivo(Date fechaEnvioDefinitivo) {
 		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
+	}
+
+	public FiseGrupoInformacion getFiseGrupoInformacion() {
+		return fiseGrupoInformacion;
+	}
+
+	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
+		this.fiseGrupoInformacion = fiseGrupoInformacion;
 	}
 	
 

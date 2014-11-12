@@ -25,6 +25,9 @@ public class FiseConstants {
 	public final static String MSG_OBSERVACION_REPORTE_VACIO = "Ninguno";
 	public final static String MSG_OBSERVACION_REPORTE_LLENO ="Observaciones de validación. Ver reporte adjunto";
 	
+	public final static String ESTADO_FECHAENVIO_ENVIADO = "Enviado";
+	public final static String ESTADO_FECHAENVIO_POR_ENVIAR = "Por Enviar";
+	
 	public final static String NOMBRE_FORMATO_12A = "F12A";
 	public final static String NOMBRE_FORMATO_12B = "F12B";
 	public final static String NOMBRE_FORMATO_12C = "F12C";

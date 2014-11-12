@@ -3,7 +3,7 @@ package gob.osinergmin.fise.constant;
 
 public class FiseConstants {
 	
-	public final static String COD_EMPRESA_EDELNOR = "EDELN";
+	public final static String COD_EMPRESA_EDELNOR = "EDLN";
 	
 	public final static String COD_EMPRESA_LUZ_SUR = "LDS";
 	

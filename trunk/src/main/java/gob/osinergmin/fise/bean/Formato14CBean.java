@@ -25,6 +25,8 @@ public class Formato14CBean {
 	private String codEmpresa;
 	private String anioPres;
 	private String mesPres;	
+	private String anoIniVigencia;
+	private String anoFinVigencia; 
 	
 	private String etapa;	
 	private String nombreSede;
@@ -47,6 +49,11 @@ public class Formato14CBean {
 	private String periodoEnvio;
 	private String desperiodoEnvio;//para el proceso editar
 	private String flagPeriodoEjecucion;
+	//para costos directo e indirecto
+	private String flagCosto;
+	
+	
+	
 	
 	 /**datos del detalle de la cabecera*/
 	private String idZonaBenef;
@@ -174,8 +181,11 @@ public class Formato14CBean {
 	//private String anioInicioVig;
 	//private String anioFinVig;
 	
-	private String anoIniVigencia;
-	private String anoFinVigencia;
+	private String  grupoInformacion;//descripcion del grupo de informacion
+	private String  estado;//estado del formato
+	
+	private String  codEdelnor;//cod empresa edelnor constante
+	private String  codLuzSur;//cod empresa luz del sur constante
 	
 	
 	
@@ -911,6 +921,38 @@ public class Formato14CBean {
 	public void setAnoFinVigencia(String anoFinVigencia) {
 		this.anoFinVigencia = anoFinVigencia;
 	}
+	public String getGrupoInformacion() {
+		return grupoInformacion;
+	}
+	public void setGrupoInformacion(String grupoInformacion) {
+		this.grupoInformacion = grupoInformacion;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getFlagCosto() {
+		return flagCosto;
+	}
+	public void setFlagCosto(String flagCosto) {
+		this.flagCosto = flagCosto;
+	}
+	public String getCodEdelnor() {
+		return codEdelnor;
+	}
+	public void setCodEdelnor(String codEdelnor) {
+		this.codEdelnor = codEdelnor;
+	}
+	public String getCodLuzSur() {
+		return codLuzSur;
+	}
+	public void setCodLuzSur(String codLuzSur) {
+		this.codLuzSur = codLuzSur;
+	}
+	
+	
 	
 	
 }

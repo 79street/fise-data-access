@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -70,7 +71,7 @@ public class FiseFormato14BC implements Serializable {
 	private List<FiseFormato14BD> fiseFormato14BDs;
 	
 	//bi-directional many-to-one association to FiseGrupoInformacion
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
 	

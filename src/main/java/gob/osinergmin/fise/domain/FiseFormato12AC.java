@@ -1,7 +1,9 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,7 @@ public class FiseFormato12AC implements Serializable {
 	private String usuarioCreacion;
 
 	//bi-directional many-to-one association to FiseGrupoInformacion
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
 

@@ -127,6 +127,12 @@ private static final long serialVersionUID = 1L;
 	
 	private String etapa;
 	
+	private String descGrupoInformacion;
+	private String descEstado;
+	
+	private String  codEdelnor;
+	private String  codLuzSur;
+	
 	public Formato14ACBean(){
 		
 	}
@@ -889,6 +895,78 @@ private static final long serialVersionUID = 1L;
 
 	public void setFlagPeriodoEjecucion(String flagPeriodoEjecucion) {
 		this.flagPeriodoEjecucion = flagPeriodoEjecucion;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getCodEdelnor() {
+		return codEdelnor;
+	}
+
+	public void setCodEdelnor(String codEdelnor) {
+		this.codEdelnor = codEdelnor;
+	}
+
+	public String getCodLuzSur() {
+		return codLuzSur;
+	}
+
+	public void setCodLuzSur(String codLuzSur) {
+		this.codLuzSur = codLuzSur;
+	}
+
+	public void setAnioPresent(Long anioPresent) {
+		this.anioPresent = anioPresent;
+	}
+
+	public void setMesPresent(Long mesPresent) {
+		this.mesPresent = mesPresent;
+	}
+
+	public void setAnioInicioVigencia(Long anioInicioVigencia) {
+		this.anioInicioVigencia = anioInicioVigencia;
+	}
+
+	public void setAnioFinVigencia(Long anioFinVigencia) {
+		this.anioFinVigencia = anioFinVigencia;
+	}
+
+	public void setNroBenefEmpadR(Long nroBenefEmpadR) {
+		this.nroBenefEmpadR = nroBenefEmpadR;
+	}
+
+	public void setNroAgentR(Long nroAgentR) {
+		this.nroAgentR = nroAgentR;
+	}
+
+	public void setNroBenefEmpadP(Long nroBenefEmpadP) {
+		this.nroBenefEmpadP = nroBenefEmpadP;
+	}
+
+	public void setNroAgentP(Long nroAgentP) {
+		this.nroAgentP = nroAgentP;
+	}
+
+	public void setNroBenefEmpadL(Long nroBenefEmpadL) {
+		this.nroBenefEmpadL = nroBenefEmpadL;
+	}
+
+	public void setNroAgentL(Long nroAgentL) {
+		this.nroAgentL = nroAgentL;
 	}
 
 	

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -86,7 +87,6 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		return formato14CDDao.listarFormato14CD();
 	}
 	
-	
 	/**Metodo para insertar Cabecera y Detalle del formato 14C*/
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)	
@@ -98,8 +98,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		FiseGrupoInformacion inf =null;
 		String valor = "1";
 		try {
-		  /*Grabando en la cabecera*/
-			
+		  /***Grabando en la cabecera*/			
 			idCab = new FiseFormato14CCPK();
 			//PK
 			idCab.setCodEmpresa(bean.getCodEmpresa());
@@ -111,7 +110,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			//FIN PK
 			/**verificamos que el registro no este en la base de datos caso contrario no insertamos**/
 			cab = formato14CCDao.obtenerFormato14CC(idCab); 
-			if(cab==null){
+			if(cab==null){				
 				cab = new FiseFormato14CC();
 				cab.setId(idCab);
 				cab.setNombreSede(bean.getNombreSede());
@@ -123,272 +122,729 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
 					logger.info("Grupo de infomacion:  "+inf); 					
 				}	
-				cab.setFiseGrupoInformacion(inf);  
-				cab.setNombreArchivoExcel("");
-				cab.setNombreArchivoTexto(""); 
-				cab.setFechaEnvioDefinitivo(null);
+				cab.setFiseGrupoInformacion(inf);  				
+				cab.setNombreArchivoExcel(bean.getNombreExel());
+				cab.setNombreArchivoTexto(bean.getNombreText()); 				
 				cab.setNumBenefEmpPerAntRural(Long.valueOf(bean.getNumRural())); 
-				cab.setNumBenefEmpPerAntUrbProv(Long.valueOf(bean.getNumUrbProv())); 
-				cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));  
+				cab.setNumBenefEmpPerAntUrbProv(Long.valueOf(bean.getNumUrbProv()));				
+				cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima())); 
+				cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima()));  
 				cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));
 				cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));
-				cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima()));  
+				
 				cab.setUsuarioCreacion(bean.getUsuario());
 				cab.setTerminalCreacion(bean.getTerminal());
 				cab.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CCDao.insertarFiseFormato14CC(cab); 
+				formato14CCDao.insertarFiseFormato14CC(cab);				
 				logger.info("GRABO EN LA CABECERA OK");		
-				/*Grabando en el detalle de la cabecera*/
-			    
-				/**Grabando el primer detalle Rural-Coordinador**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
-	            det.setId(idDet); 		
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 
-				det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det); 
-				/**Grabando el primer detalle Urbano Provincia-Coordinador**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det); 
-				/**Grabando el primer detalle Urbano Lima-Coordinador**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
 				
-				/**Grabando el primer detalle Rural-Supervisor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbano Provincias-Supervisor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbana Lima -Supervisor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 	
-				det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Rural-Gestor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbana Provincias-Gestor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 		
-				det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbana Lima -Gestor**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 				
-				det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Rural-Asistente/Auxiliar**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 		
-				det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbano Provincias -Asistente/Auxiliar**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));			
-				det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
-				
-				/**Grabando el primer detalle Urbana Lima -Asistente/Auxiliar**/
-				det = new  FiseFormato14CD();
-				idDet = new FiseFormato14CDPK();		
-				idDet.setCodEmpresa(bean.getCodEmpresa());
-				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-				idDet.setEtapa(bean.getEtapa()); 
-				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
-				det.setId(idDet); 	
-				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));
-				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
-				det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
-				det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
-				det.setUsuarioCreacion(bean.getUsuario());
-				det.setTerminalCreacion(bean.getTerminal());
-				det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
-				formato14CDDao.insertarFiseFormato14CD(det);
+				/***Grabando en el detalle de la cabecera*/				
+	            
+	            if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            		FiseConstants.COSTO_DIRECTO_F14C.equals(bean.getFlagCosto())){
+	            	/****COSTO DIRECTO****/
+	            	/**Grabando el primer detalle Rural-Coordinador**/
+	            	det = new  FiseFormato14CD();				
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+		            det.setId(idDet); 		            
+	            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));					
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 
+					/**Grabando el primer detalle Rural-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));							
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 				
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));						
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));						
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/****PROVINCIA****/				
+					/**Grabando el primer detalle Urbano Provincia-Coordinador**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet);					
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));					
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 				
+					/**Grabando el primer detalle Urbano Provincias-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));							
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);					
+					/**Grabando el primer detalle Urbana Provincias-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));					
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 					
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);				
+					/**Grabando el primer detalle Urbano Provincias -Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));								
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 				
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					
+					/****LIMA****/
+					if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+							FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+					{
+						/**Grabando el primer detalle Urbano Lima-Coordinador**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));						
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 					
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Supervisor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));					
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 					
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Gestor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));						
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLGest()));					
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Asistente/Auxiliar**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));						
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 					
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);     
+						
+					}//	fin de  empresa							       	
+	            	
+	            }else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            		FiseConstants.COSTO_INDIRECTO_F14C.equals(bean.getFlagCosto())){
+	            	/*****COSTO INDIRECTO*****/
+	            	/**Grabando el primer detalle Rural-Coordinador**/
+	            	det = new  FiseFormato14CD();				
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+		            det.setId(idDet); 	            	
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 
+					/**Grabando el primer detalle Rural-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 				
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/*****PROVINCIA*****/				
+					/**Grabando el primer detalle Urbano Provincia-Coordinador**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 				
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 					
+					/**Grabando el primer detalle Urbano Provincias-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);				
+					/**Grabando el primer detalle Urbana Provincias-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);				
+					/**Grabando el primer detalle Urbano Provincias -Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+					det.setId(idDet); 						
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					
+					/********LIMA********/					
+					if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+							FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+					{
+						/**Grabando el primer detalle Urbano Lima-Coordinador**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 						
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));					
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Supervisor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 						
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 				
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Gestor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 						
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 						
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Asistente/Auxiliar**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 				
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));						
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det); 
+					}//fin de empresa															      	
+	            	
+	            }else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            		FiseConstants.COSTO_D_I_F14C.equals(bean.getFlagCosto())){
+	            	 /*******COSTO DIRECTO E INDIRECTO*****/
+	            	/**Grabando el primer detalle Rural-Coordinador**/
+	            	det = new  FiseFormato14CD();				
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+		            det.setId(idDet); 
+	            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 
+					/**Grabando el primer detalle Rural-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/**Grabando el primer detalle Rural-Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 		
+					det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);
+					/****PROVINCIA*****/				
+					/**Grabando el primer detalle Urbano Provincia-Coordinador**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det); 				
+					/**Grabando el primer detalle Urbano Provincias-Supervisor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);					
+					/**Grabando el primer detalle Urbana Provincias-Gestor**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 		
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);				
+					/**Grabando el primer detalle Urbano Provincias -Asistente/Auxiliar**/
+					det = new  FiseFormato14CD();
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+					det.setId(idDet); 	
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
+					det.setUsuarioCreacion(bean.getUsuario());
+					det.setTerminalCreacion(bean.getTerminal());
+					det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+					formato14CDDao.insertarFiseFormato14CD(det);						
+					/*****LIMA******/
+					if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+							FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+					{
+						/**Grabando el primer detalle Urbano Lima-Coordinador**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));			
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);	
+						/**Grabando el primer detalle Urbana Lima -Supervisor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 	
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Gestor**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 				
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+						/**Grabando el primer detalle Urbana Lima -Asistente/Auxiliar**/
+						det = new  FiseFormato14CD();
+						idDet = new FiseFormato14CDPK();		
+						idDet.setCodEmpresa(bean.getCodEmpresa());
+						idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+						idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+						idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+						idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+						idDet.setEtapa(bean.getEtapa()); 
+						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+						det.setId(idDet); 	
+						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
+						det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
+						det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
+						det.setUsuarioCreacion(bean.getUsuario());
+						det.setTerminalCreacion(bean.getTerminal());
+						det.setFechaCreacion(FechaUtil.obtenerFechaActual());	
+						formato14CDDao.insertarFiseFormato14CD(det);
+					}//Fin de empresa 								
+	            }				
 			}else{
 			  valor ="2";	
 			}				
@@ -415,7 +871,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		}
 		return valor;
 	}	
-	
+		
 	/**Metodo para actualizar Cabecera y Detalle del formato 14C*/
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -437,267 +893,689 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idCab.setEtapa(bean.getEtapa()); 
 			//FIN PK
 			cab = formato14CCDao.obtenerFormato14CC(idCab); 
-			logger.info("objeto en sesion : "+cab);
-			logger.info("Nombre sede: "+bean.getNombreSede());
-			cab.setNombreSede(bean.getNombreSede());
-			//FiseGrupoInformacion inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(1000)); 
-			//cab.setFiseGrupoInformacion(inf);  
-			cab.setNombreArchivoExcel("");
-			cab.setNombreArchivoTexto(""); 
-			cab.setFechaEnvioDefinitivo(null);
+			logger.info("objeto en sesion : "+cab);			
+			cab.setNombreSede(bean.getNombreSede());			
+			cab.setNombreArchivoExcel(bean.getNombreExel());
+			cab.setNombreArchivoTexto(bean.getNombreText()); 			
 			cab.setNumBenefEmpPerAntRural(Long.valueOf(bean.getNumRural())); 
 			cab.setNumBenefEmpPerAntUrbProv(Long.valueOf(bean.getNumUrbProv())); 
 			cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));  
 			cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));
 			cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));
 			cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima()));  
+			
 			cab.setUsuarioActualizacion(bean.getUsuario()); 
 			cab.setTerminalActualizacion(bean.getTerminal()); 
 			cab.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
 			formato14CCDao.actualizarFiseFormato14CC(cab); 
 		
-			/*Grabando en el detalle de la cabecera*/
-		    
-			/**Grabando el primer detalle Rural-Coordinador**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 		
-			det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det); 
-			
-			/**Grabando el primer detalle Urbano Provincia-Coordinador**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 		
-			det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
-			formato14CDDao.actualizarFiseFormato14CD(det); 
-			
-			/**Grabando el primer detalle Urbano Lima-Coordinador**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Rural-Supervisor**/		
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe())));		
-			det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbano Provincias-Supervisor**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe())));		
-			det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbana Lima -Supervisor**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Rural-Gestor**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbana Provincias-Gestor**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbana Lima -Gestor**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest())));			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Rural-Asistente/Auxiliar**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbano Provincias -Asistente/Auxiliar**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist()))); 			
-			det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
-			/**Grabando el primer detalle Urbana Lima -Asistente/Auxiliar**/			
-			idDet = new FiseFormato14CDPK();		
-			idDet.setCodEmpresa(bean.getCodEmpresa());
-			idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
-			idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
-			idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
-			idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
-			idDet.setEtapa(bean.getEtapa()); 
-			idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
-			idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
-			det = formato14CDDao.obtenerFiseFormato14CD(idDet);
-			det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));
-			det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist()))); 			 
-			det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
-			det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
-			det.setUsuarioActualizacion(bean.getUsuario()); 
-			det.setTerminalActualizacion(bean.getTerminal()); 
-			det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
-			formato14CDDao.actualizarFiseFormato14CD(det);
-			
+			/***Actualizando en el detalle de la cabecera*/
+			if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+            		FiseConstants.COSTO_DIRECTO_F14C.equals(bean.getFlagCosto())){
+				/******COSTO DIRECTO*******/
+				/**Actualizando el primer detalle Rural-Coordinador**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));					
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 
+				/**Actualizando el primer detalle Rural-Supervisor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));							
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 				
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/**Actualizando el primer detalle Rural-Gestor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));						
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/**Actualizando el primer detalle Rural-Asistente/Auxiliar**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));						
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/******PROVINCIA******/		
+				/**Actualizando el primer detalle Urbano Provincia-Coordinador**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));					
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 				
+				/**Actualizando el primer detalle Urbano Provincias-Supervisor**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));							
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 				
+				/**Actualizando el primer detalle Urbana Provincias-Gestor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));					
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 					
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 				
+				/**Actualizando el primer detalle Urbano Provincias -Asistente/Auxiliar**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));								
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 				
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 
+				/****LIMA****/
+				if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+				{
+					/**actualizando el primer detalle Urbano Lima-Coordinador**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));						
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 					
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 
+					/**Actualizando el primer detalle Urbana Lima -Supervisor**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));					
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 					
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 
+					/**Actualizando el primer detalle Urbana Lima -Gestor**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));						
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLGest()));					
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 
+					/**Actualizando el primer detalle Urbana Lima -Asistente/Auxiliar**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));						
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 					
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 		
+				}//	fin de validacion de empresa							
+				
+			}else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+            		FiseConstants.COSTO_INDIRECTO_F14C.equals(bean.getFlagCosto())){
+				/**COSTO INDIRECTO**/
+				/**Actualizando el primer detalle Rural-Coordinador**/		
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);       	
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/**Actualizando el primer detalle Rural-Supervisor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/**Actualizando el primer detalle Rural-Gestor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);	
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 		
+				/**Actualizando el primer detalle Rural-Asistente/Auxiliar**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);	
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/***PROVINCIA**/				
+				/**Actualizando el primer detalle Urbano Provincia-Coordinador**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 		
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);				
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 				
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);			
+				/**Actualizando el primer detalle Urbano Provincias-Supervisor**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 				
+				/**Actualizando el primer detalle Urbana Provincias-Gestor**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 			
+				/**Actualizando el primer detalle Urbano Provincias -Asistente/Auxiliar**/				
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));					
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 	
+				/*****LIMA****/
+				if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+				{
+					/**Actualizando el primer detalle Urbano Lima-Coordinador**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);				
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));					
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 		
+					/**Actualizando el primer detalle Urbana Lima -Supervisor**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);					
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 				
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 		
+					/**Actualizando el primer detalle Urbana Lima -Gestor**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 						
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 		
+					/**Actualizando el primer detalle Urbana Lima -Asistente/Auxiliar**/					
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));						
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det); 		
+				}//fin de validacion empresa								
+				
+			}else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+            		FiseConstants.COSTO_D_I_F14C.equals(bean.getFlagCosto())){
+				/**AMBOS DIRECTO E INDIRECTO RURAL*/
+				/**Actualizando el primer detalle Rural-Coordinador**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 		
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det); 				
+				/**Actualizando el primer detalle Rural-Supervisor**/		
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe())));		
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);
+				/**Actualizando el primer detalle Rural-Gestor**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 			
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRGest())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);
+				/**Actualizando  el primer detalle Rural-Asistente/Auxiliar**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 			
+				det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);
+				/***PROVINCIA***/
+				/**Actualizando el primer detalle Urbano Provincia-Coordinador**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord()))); 		
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
+				formato14CDDao.actualizarFiseFormato14CD(det); 
+				/**Actualizando el primer detalle Urbano Provincias-Supervisor**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe())));		
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
+				formato14CDDao.actualizarFiseFormato14CD(det);			
+				/**Actualizando el primer detalle Urbana Provincias-Gestor**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 			
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);			
+				/**Actualizando el primer detalle Urbano Provincias -Asistente/Auxiliar**/			
+				idDet = new FiseFormato14CDPK();		
+				idDet.setCodEmpresa(bean.getCodEmpresa());
+				idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+				idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+				idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+				idDet.setEtapa(bean.getEtapa()); 
+				idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
+				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+				det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));
+				det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist()))); 			
+				det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 
+				det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  
+				det.setUsuarioActualizacion(bean.getUsuario()); 
+				det.setTerminalActualizacion(bean.getTerminal()); 
+				det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				formato14CDDao.actualizarFiseFormato14CD(det);				
+				/**LIMA**/
+				if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+				{
+					/**Actualizando el primer detalle Urbano Lima-Coordinador**/			
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_CORDINADOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
+					formato14CDDao.actualizarFiseFormato14CD(det);	
+					/**Actualizando el primer detalle Urbana Lima -Supervisor**/			
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_SUPERVISOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det);
+					/**Actualizando el primer detalle Urbana Lima -Gestor**/			
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest())));			
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+					formato14CDDao.actualizarFiseFormato14CD(det);
+					/**Actualizando el primer detalle Urbana Lima -Asistente/Auxiliar**/			
+					idDet = new FiseFormato14CDPK();		
+					idDet.setCodEmpresa(bean.getCodEmpresa());
+					idDet.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+					idDet.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
+					idDet.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
+					idDet.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 	
+					idDet.setEtapa(bean.getEtapa()); 
+					idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_ASISTENTE_COD);
+					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
+					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
+					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));
+					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist()))); 			 
+					det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 
+					det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  
+					det.setUsuarioActualizacion(bean.getUsuario()); 
+					det.setTerminalActualizacion(bean.getTerminal()); 
+					det.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 	
+					formato14CDDao.actualizarFiseFormato14CD(det);
+				}			
+			}		
 		} catch (Exception e) { 
 			valor ="0";
 		   logger.info("Error al actualizar datos del formato 14c:  "+e);

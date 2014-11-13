@@ -34,11 +34,11 @@ public class Formato14CBean {
 	private String nombreText;
 	private String numRural;//numero de beneficiarios del periodo anterior rural
 	private String numUrbProv;//numero de beneficiarios del periodo anterior urbano provincias
-	private String numUrbLima; //numero de beneficiarios del periodo anterior lima
+	private String numUrbLima="0"; //numero de beneficiarios del periodo anterior lima
 	private String numTotal;//no editable
 	private String costoPromRural;//costo promedio mensual utiles rural
 	private String costoPromUrbProv;//costo promedio mensual utiles urbano provincias
-	private String costoPromUrbLima;//costo promedio mensual utiles urbano lima
+	private String costoPromUrbLima="0.0";//costo promedio mensual utiles urbano lima
 	//datos de auditoria
 	private String usuario;
 	private String terminal;
@@ -60,79 +60,79 @@ public class Formato14CBean {
 	private String idTipoPersonal;
 	
 	//***ZONA RURAL
-	private String canDRCoord;//cantidad costo directo rural persona coordinador
-	private String costDRCoord;//costo directo rural persona coordinador
-	private String canIRCoord;//cantidad costo indirecto rural persona coordinador
-	private String costIRCoord;//costo indirecto rural persona coordinador
+	private String canDRCoord ="0";//cantidad costo directo rural persona coordinador
+	private String costDRCoord="0.0";//costo directo rural persona coordinador
+	private String canIRCoord="0";//cantidad costo indirecto rural persona coordinador
+	private String costIRCoord="0.0";//costo indirecto rural persona coordinador
 	private String costTotalRCoord;//no editable
 	
 	
-	private String canDRSupe;//cantidad costo directo rural persona supervisor
-	private String costDRSupe;//costo directo rural persona supervisor
-	private String canIRSupe;//cantidad costo indirecto rural persona supervisor
-	private String costIRSupe;//costo indirecto rural persona supervisor
+	private String canDRSupe="0";//cantidad costo directo rural persona supervisor
+	private String costDRSupe="0.0";//costo directo rural persona supervisor
+	private String canIRSupe="0";//cantidad costo indirecto rural persona supervisor
+	private String costIRSupe="0.0";//costo indirecto rural persona supervisor
 	private String costTotalRSupe;//no editable
 	
-	private String canDRGest;//cantidad costo directo rural persona gestor
-	private String costDRGest;//costo directo rural persona gestor
-	private String canIRGest;//cantidad costo indirecto rural persona gestor
-	private String costIRGest;//costo indirecto rural persona gestor
+	private String canDRGest="0";//cantidad costo directo rural persona gestor
+	private String costDRGest="0.0";//costo directo rural persona gestor
+	private String canIRGest="0";//cantidad costo indirecto rural persona gestor
+	private String costIRGest="0.0";//costo indirecto rural persona gestor
 	private String costTotalRGest;//no editable
 	
-	private String canDRAsist;//cantidad costo directo rural persona asistente /auxiliar	
-	private String costDRAsist;//costo directo rural persona asistente /auxiliar
-	private String canIRAsist;//cantidad costo indirecto rural persona asistente /auxiliar	
-	private String costIRAsist;//costo indirecto rural persona asistente /auxiliar
+	private String canDRAsist="0";//cantidad costo directo rural persona asistente /auxiliar	
+	private String costDRAsist="0.0";//costo directo rural persona asistente /auxiliar
+	private String canIRAsist="0";//cantidad costo indirecto rural persona asistente /auxiliar	
+	private String costIRAsist="0.0";//costo indirecto rural persona asistente /auxiliar
 	private String costTotalRAsist;//no editable
 	
 	//**ZONA URBANA PROVINCIAS
-	private String canDPCoord;//cantidad costo directo urbano provincias persona coordinador
-	private String costDPCoord;//costo directo urbano provincias persona coordinador
-	private String canIPCoord;//cantidad costo indirecto urbano provincias persona coordinador
-	private String costIPCoord;//costo indirecto urbano lima persona coordinador	
+	private String canDPCoord="0";//cantidad costo directo urbano provincias persona coordinador
+	private String costDPCoord="0.0";//costo directo urbano provincias persona coordinador
+	private String canIPCoord="0";//cantidad costo indirecto urbano provincias persona coordinador
+	private String costIPCoord="0.0";//costo indirecto urbano lima persona coordinador	
 	private String costTotalPCoord;//no editable
 	
-	private String canDPSupe;//cantidad costo directo urbano provincias persona supervisor
-	private String costDPSupe;//costo directo urbano provincias persona supervisor
-	private String canIPSupe;//cantidad costo indirecto urbano provincias persona supervisor
-	private String costIPSupe;//costo indirecto urbano lima persona supervisor	
+	private String canDPSupe="0";//cantidad costo directo urbano provincias persona supervisor
+	private String costDPSupe="0.0";//costo directo urbano provincias persona supervisor
+	private String canIPSupe="0";//cantidad costo indirecto urbano provincias persona supervisor
+	private String costIPSupe="0.0";//costo indirecto urbano lima persona supervisor	
 	private String costTotalPSupe;//no editable
 	
-	private String canDPGest;//cantidad costo directo urbano provincias persona gestor
-	private String costDPGest;//costo directo urbano provincias persona gestor
-	private String canIPGest;//cantidad costo indirecto urbano provincias persona gestor
-	private String costIPGest;//costo indirecto urbano lima persona gestor	
+	private String canDPGest="0";//cantidad costo directo urbano provincias persona gestor
+	private String costDPGest="0.0";//costo directo urbano provincias persona gestor
+	private String canIPGest="0";//cantidad costo indirecto urbano provincias persona gestor
+	private String costIPGest="0.0";//costo indirecto urbano lima persona gestor	
 	private String costTotalPGest;//no editable
 	
-	private String canDPAsist;//cantidad costo directo urbano provincias persona asistente /auxiliar
-	private String costDPAsist;//costo directo urbano provincias persona asistente /auxiliar
-	private String canIPAsist;//cantidad costo indirecto urbano provincias persona asistente /auxiliar
-	private String costIPAsist;//costo indirecto urbano lima persona asistente /auxiliar
+	private String canDPAsist="0";//cantidad costo directo urbano provincias persona asistente /auxiliar
+	private String costDPAsist="0.0";//costo directo urbano provincias persona asistente /auxiliar
+	private String canIPAsist="0";//cantidad costo indirecto urbano provincias persona asistente /auxiliar
+	private String costIPAsist="0.0";//costo indirecto urbano lima persona asistente /auxiliar
 	private String costTotalPAsist;//no editable
 		
 	//**ZONA URBANA LIMA
-	private String canDLCoord;//cantidad costo directo urbano lima persona coordinador
-	private String costDLCoord;//costo directo urbano lima persona coordinador
-	private String canILCoord;//cantidad costo indirecto urbano lima persona coordinador
-	private String costILCoord;//costo indirecto urbano lima persona coordinador
+	private String canDLCoord="0";//cantidad costo directo urbano lima persona coordinador
+	private String costDLCoord="0.0";//costo directo urbano lima persona coordinador
+	private String canILCoord="0";//cantidad costo indirecto urbano lima persona coordinador
+	private String costILCoord="0.0";//costo indirecto urbano lima persona coordinador
 	private String costTotalLCoord;//no editable
 	
-	private String canDLSupe;//cantidad costo directo urbano lima persona supervisor
-	private String costDLSupe;//costo directo urbano lima persona supervisor
-	private String canILSupe;//cantidad costo indirecto urbano lima persona supervisor
-	private String costILSupe;//costo indirecto urbano lima persona supervisor
+	private String canDLSupe="0";//cantidad costo directo urbano lima persona supervisor
+	private String costDLSupe="0.0";//costo directo urbano lima persona supervisor
+	private String canILSupe="0";//cantidad costo indirecto urbano lima persona supervisor
+	private String costILSupe="0.0";//costo indirecto urbano lima persona supervisor
 	private String costTotalLSupe;//no editable
 	
-	private String canDLGest;//cantidad costo directo urbano lima persona gestor
-	private String costDLGest;//costo directo urbano lima persona gestor
-	private String canILGest;//cantidad costo indirecto urbano lima persona gestor
-	private String costILGest;//costo indirecto urbano lima persona gestor
+	private String canDLGest="0";//cantidad costo directo urbano lima persona gestor
+	private String costDLGest="0.0";//costo directo urbano lima persona gestor
+	private String canILGest="0";//cantidad costo indirecto urbano lima persona gestor
+	private String costILGest="0.0";//costo indirecto urbano lima persona gestor
 	private String costTotalLGest;//no editable
 	
-	private String canDLAsist;//cantidad costo directo urbano lima persona asistente /auxiliar
-	private String costDLAsist;//costo directo urbano lima persona asistente /auxiliar
-	private String canILAsist;//cantidad costo indirecto urbano lima persona asistente /auxiliar
-	private String costILAsist;//costo indirecto urbano lima persona asistente /auxiliar
+	private String canDLAsist="0";//cantidad costo directo urbano lima persona asistente /auxiliar
+	private String costDLAsist="0.0";//costo directo urbano lima persona asistente /auxiliar
+	private String canILAsist="0";//cantidad costo indirecto urbano lima persona asistente /auxiliar
+	private String costILAsist="0.0";//costo indirecto urbano lima persona asistente /auxiliar
 	private String costTotalLAsist;//no editable
 	
 	//Panel totales

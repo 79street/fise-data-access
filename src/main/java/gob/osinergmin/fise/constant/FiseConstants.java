@@ -961,5 +961,10 @@ public class FiseConstants {
 	public final static String COD_ERROR_F14C_1510 = "1510";
 	public final static String COD_ERROR_F14C_1520 = "1520";
 	public final static String COD_ERROR_F14C_1530 = "1530";
+	
+	public final static String COSTO_DIRECTO_F14C = "D";
+	public final static String COSTO_INDIRECTO_F14C = "I";
+	public final static String COSTO_D_I_F14C = "A";//ambos
+	
 
 }

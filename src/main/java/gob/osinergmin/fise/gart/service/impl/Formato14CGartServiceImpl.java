@@ -19,13 +19,13 @@ import gob.osinergmin.fise.domain.FiseFormato14CDPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.gart.service.Formato14CGartService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -140,7 +140,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				
 				/***Grabando en el detalle de la cabecera*/				
 	            
-	            if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
 	            		FiseConstants.COSTO_DIRECTO_F14C.equals(bean.getFlagCosto())){
 	            	/****COSTO DIRECTO****/
 	            	/**Grabando el primer detalle Rural-Coordinador**/
@@ -368,7 +368,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						
 					}//	fin de  empresa							       	
 	            	
-	            }else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            }else if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
 	            		FiseConstants.COSTO_INDIRECTO_F14C.equals(bean.getFlagCosto())){
 	            	/*****COSTO INDIRECTO*****/
 	            	/**Grabando el primer detalle Rural-Coordinador**/
@@ -595,7 +595,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						formato14CDDao.insertarFiseFormato14CD(det); 
 					}//fin de empresa															      	
 	            	
-	            }else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+	            }else if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
 	            		FiseConstants.COSTO_D_I_F14C.equals(bean.getFlagCosto())){
 	            	 /*******COSTO DIRECTO E INDIRECTO*****/
 	            	/**Grabando el primer detalle Rural-Coordinador**/
@@ -910,7 +910,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			formato14CCDao.actualizarFiseFormato14CC(cab); 
 		
 			/***Actualizando en el detalle de la cabecera*/
-			if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+			if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
             		FiseConstants.COSTO_DIRECTO_F14C.equals(bean.getFlagCosto())){
 				/******COSTO DIRECTO*******/
 				/**Actualizando el primer detalle Rural-Coordinador**/			
@@ -1124,7 +1124,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					formato14CDDao.actualizarFiseFormato14CD(det); 		
 				}//	fin de validacion de empresa							
 				
-			}else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+			}else if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
             		FiseConstants.COSTO_INDIRECTO_F14C.equals(bean.getFlagCosto())){
 				/**COSTO INDIRECTO**/
 				/**Actualizando el primer detalle Rural-Coordinador**/		
@@ -1338,7 +1338,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					formato14CDDao.actualizarFiseFormato14CD(det); 		
 				}//fin de validacion empresa								
 				
-			}else if(StringUtils.isNotBlank(bean.getFlagCosto()) && 
+			}else if(FormatoUtil.isNotBlank(bean.getFlagCosto()) && 
             		FiseConstants.COSTO_D_I_F14C.equals(bean.getFlagCosto())){
 				/**AMBOS DIRECTO E INDIRECTO RURAL*/
 				/**Actualizando el primer detalle Rural-Coordinador**/			

@@ -34,7 +34,7 @@ public class FiseConstants {
 	public final static String NOMBRE_FORMATO_12D = "F12D";
 	public final static String NOMBRE_FORMATO_13A = "F13A";
 	public final static String NOMBRE_FORMATO_14A = "F14A";
-	public final static String NOMBRE_FORMATO_14B = "F1AB";
+	public final static String NOMBRE_FORMATO_14B = "F14B";
 	public final static String NOMBRE_FORMATO_14C = "F14C";
 	
 	public final static long ZONABENEF_RURAL_COD = 1;

@@ -47,6 +47,16 @@ public class FiseConstants {
 	public final static String ZONABENEF_PROVINCIA_DESC = "Urbano Provincia";
 	public final static String ZONABENEF_LIMA_DESC = "Urbano Lima";
 	
+	//sector tipico
+	public final static String SECTOR_TIPICO_1_COD = "1";
+	public final static String SECTOR_TIPICO_2_COD = "2";
+	public final static String SECTOR_TIPICO_3_COD = "3";
+	public final static String SECTOR_TIPICO_4_COD = "4";
+	public final static String SECTOR_TIPICO_5_COD = "5";
+	public final static String SECTOR_TIPICO_6_COD = "6";
+	public final static String SECTOR_TIPICO_SER_COD = "SER";
+	public final static String SECTOR_TIPICO_ESP_COD = "ESP";
+	
 	public final static String COD_SAVE= "SAVE";
 	public final static String COD_UPDATE= "UPDATE";
 	public final static String COD_GET= "GET";

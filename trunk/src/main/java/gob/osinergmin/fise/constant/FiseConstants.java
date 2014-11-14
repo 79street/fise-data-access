@@ -749,7 +749,7 @@ public class FiseConstants {
 	public final static int NRO_FILA_COSTO_GEST_F14C= 19;
 	public final static int NRO_FILA_COSTO_ASIST_F14C= 20;
 	//COLUMNS
-	public final static int NRO_CELDA_CODEMPRESA_F14C = 5;
+	public final static int NRO_CELDA_CODEMPRESA_F14C = 6;//antes 5
 	public final static int NRO_CELDA_ANIO_F14C = 5;
 	public final static int NRO_CELDA_MES_F14C = 6;
 	public final static int NRO_CELDA_SEDE_F14C = 5;

@@ -85,6 +85,22 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	}
 
 	public FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK){
-		return formato13ACDao.obtenerFormato13ACByPK(fiseFormato13ACPK);
+		FiseFormato13AC formato = null;
+		formato = formato13ACDao.obtenerFormato13ACByPK(fiseFormato13ACPK);
+		if(formato != null){
+			formato.setFiseFormato13ADs(formato13ADDao.listarFormato13ADByFormato13AC(formato));
+		}
+		return formato;
 	}
+	
+	@Transactional
+	public FiseFormato13AC updatecabecera(FiseFormato13AC fiseC) {
+		return formato13ACDao.updatecabecera(fiseC);
+	}
+
+	@Transactional
+	public FiseFormato13AD updatedetalle(FiseFormato13AD fiseD) {
+		return formato13ADDao.updatedetalle(fiseD);
+	}
+	
 }

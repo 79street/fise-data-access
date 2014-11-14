@@ -33,11 +33,11 @@ public class FiseFormato13AD implements Serializable {
 	@Column(name="DESCRIPCION_LOCALIDAD")
 	private String descripcionLocalidad;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 

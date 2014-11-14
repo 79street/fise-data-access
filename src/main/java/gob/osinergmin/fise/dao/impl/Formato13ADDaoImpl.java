@@ -144,5 +144,20 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 
 		return result;
 	}
+	
+	@Override
+	@Transactional
+	public FiseFormato13AD updatedetalle(FiseFormato13AD fiseD) {
+		FiseFormato13AD result = null;
+		try {
+			em.merge(fiseD);
+			result = fiseD;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
 
 }

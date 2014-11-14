@@ -12,4 +12,5 @@ public interface Formato13ADDao extends GenericDao {
 	List<FiseFormato13AD> listarFormato13ADByFormato13AC(FiseFormato13AC formato13AC);
 	List<Formato13ADReportBean> listarLocalidadesPorZonasBenefFormato13ADByFormato13AC(FiseFormato13AC formato13AC);
 	FiseFormato13AD savedetalle(FiseFormato13AD fiseD);
+	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 }

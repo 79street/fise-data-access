@@ -104,4 +104,21 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		 }
 		return formato;
 	}
+	
+	@Override
+	@Transactional
+	public FiseFormato13AC updatecabecera(FiseFormato13AC fiseC) {
+		FiseFormato13AC result = null;
+		try {
+			em.merge(fiseC);
+			System.out.println("cabecera persis::=>" + fiseC);
+			result = fiseC;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
+	
 }

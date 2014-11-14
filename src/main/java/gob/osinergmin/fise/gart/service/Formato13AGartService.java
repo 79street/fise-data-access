@@ -20,4 +20,6 @@ public interface Formato13AGartService {
 	FiseFormato13AC savecabecera(FiseFormato13AC fiseC);
 	FiseFormato13AD savedetalle(FiseFormato13AD fiseD);
 	FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK);
+	FiseFormato13AC updatecabecera(FiseFormato13AC fiseC);
+	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 }

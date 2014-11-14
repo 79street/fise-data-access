@@ -20,11 +20,11 @@ public class FiseFormato13ADOb implements Serializable {
 	@EmbeddedId
 	private FiseFormato13ADObPK id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 

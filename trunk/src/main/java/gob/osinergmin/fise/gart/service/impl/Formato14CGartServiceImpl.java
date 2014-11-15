@@ -569,7 +569,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdTipPersonal(FiseConstants.TIPO_PERSONAL_GESTOR_COD);
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 						
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 						
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 						
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
 						det.setUsuarioCreacion(bean.getUsuario());
 						det.setTerminalCreacion(bean.getTerminal());
@@ -816,7 +816,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 	
 						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanDLGest()))); 				
+						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 				
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  
 						det.setUsuarioCreacion(bean.getUsuario());

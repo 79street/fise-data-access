@@ -13,6 +13,7 @@ import gob.osinergmin.fise.gart.service.Formato13AGartService;
 import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	}
 
 	@Transactional
-	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) {
+	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws ConstraintViolationException {
 		return formato13ACDao.savecabecera(fiseC);
 	}
 

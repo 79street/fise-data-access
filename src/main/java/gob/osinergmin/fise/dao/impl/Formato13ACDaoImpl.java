@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,14 +77,12 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 
 	@Override
 	@Transactional
-	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) {
+	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws ConstraintViolationException {
 		FiseFormato13AC result = null;
 		try {
 			em.persist(fiseC);
 			System.out.println("cabecera persis::=>" + fiseC);
 			result = fiseC;
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			em.close();
 		}

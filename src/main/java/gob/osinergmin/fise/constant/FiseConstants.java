@@ -178,7 +178,7 @@ public class FiseConstants {
 	public final static int NRO_FILA_AGENT_FORMATO12A = 16;
 	public final static int NRO_FILA_DESPLPERSON_FORMATO12A = 19;
 	public final static int NRO_FILA_ACTIVEXTR_FORMATO12A = 20;
-	public final static int NRO_CELDA_EMPRESA_FORMATO12A = 5;
+	public final static int NRO_CELDA_EMPRESA_FORMATO12A = 6;
 	public final static int NRO_CELDA_ANIO_FORMATO12A = 5;
 	public final static int NRO_CELDA_MES_FORMATO12A = 6;
 	public final static int NRO_CELDA_RURAL_FORMATO12A = 7;
@@ -206,7 +206,7 @@ public class FiseConstants {
 	public final static int NRO_FILA_REGFIRMACONV_FORMATO14A = 33;
 	public final static int NRO_FILA_IMPENTBANDER_FORMATO14A = 34;
 	public final static int NRO_FILA_AGENTES_FORMATO14A = 35;
-	public final static int NRO_CELDA_EMPRESA_FORMATO14A = 6;
+	public final static int NRO_CELDA_EMPRESA_FORMATO14A = 7;
 	public final static int NRO_CELDA_ANIO_FORMATO14A = 6;
 	public final static int NRO_CELDA_MES_FORMATO14A = 7;
 	public final static int NRO_CELDA_RURAL_FORMATO14A = 8;
@@ -232,7 +232,7 @@ public class FiseConstants {
 	public final static int NRO_FILA_COSTOPERS_FORMATO14B = 39;
 	public final static int NRO_FILA_CAPACAGENT_FORMATO14B = 40;
 	public final static int NRO_FILA_UTILMATOFIC_FORMATO14B = 41;
-	public final static int NRO_CELDA_EMPRESA_FORMATO14B = 5;
+	public final static int NRO_CELDA_EMPRESA_FORMATO14B = 6;
 	public final static int NRO_CELDA_ANIO_FORMATO14B = 5;
 	public final static int NRO_CELDA_MES_FORMATO14B = 6;
 	public final static int NRO_CELDA_RURAL_FORMATO14B = 7;

@@ -2,6 +2,7 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
@@ -71,7 +72,7 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 		try {
 			StringBuilder sql = new StringBuilder();
 
-			sql.append(" SELECT COD_UBIGEO,ID_ZONA_BENEF,ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE, ");
+			sql.append(" SELECT COD_UBIGEO,ID_ZONA_BENEF,ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'1  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_1, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'2  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_2, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'3  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_3, ");
@@ -79,7 +80,8 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'5  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_5, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'6  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_6, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'SER',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_SER, ");
-			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'ESP',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ESPECIAL ");
+			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'ESP',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ESPECIAL, ");
+			sql.append(" ANO_INICIO_VIGENCIA, ANO_FIN_VIGENCIA, ");
 			sql.append(" FROM FISE.FISE_FORMATO_13A_D ");
 			sql.append(" WHERE 1=1 ");
 
@@ -92,7 +94,8 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 			if (FormatoUtil.isNotBlank(formato13AC.getId().getEtapa()))
 				sql.append(" AND ETAPA = '").append(formato13AC.getId().getEtapa().trim()).append("' ");
 
-			sql.append(" GROUP BY COD_UBIGEO, ID_ZONA_BENEF, ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE ");
+			sql.append(" GROUP BY COD_UBIGEO, ID_ZONA_BENEF, ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE, ");
+			sql.append(" ANO_INICIO_VIGENCIA, ANO_FIN_VIGENCIA ");
 
 			Query query = em.createNativeQuery(sql.toString());
 
@@ -115,7 +118,10 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 				objeto.setNroBenefPoteSecTipico6(((BigDecimal) valor[11]).longValue());
 				objeto.setNroBenefPoteSecTipico7(((BigDecimal) valor[12]).longValue());
 				objeto.setNroBenefPoteSecTipico8(((BigDecimal) valor[13]).longValue());
-
+				//add
+				objeto.setAnioInicioVigencia(((BigDecimal)valor[14])!=null?((BigDecimal)valor[14]).longValue():0);
+				objeto.setAnioFinVigencia(((BigDecimal)valor[15])!=null?((BigDecimal)valor[15]).longValue():0);
+				//
 				lst.add(objeto);
 			}
 		} catch (Exception e) {

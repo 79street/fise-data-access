@@ -63,6 +63,12 @@ public class FiseFormato13AC implements Serializable {
 	@Transient
 	private String descGrupoInformacion;
 	
+	//add
+	@Transient
+	private Long anoInicioVigenciaDetalle;
+	@Transient
+	private Long anoFinVigenciaDetalle;
+	
 	//bi-directional many-to-one association to FiseFormato13AD
 	@Transient
 	@OneToMany(mappedBy="fiseFormato13AC", cascade={CascadeType.ALL})
@@ -203,6 +209,22 @@ public class FiseFormato13AC implements Serializable {
 
 	public void setDescGrupoInformacion(String descGrupoInformacion) {
 		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public Long getAnoInicioVigenciaDetalle() {
+		return anoInicioVigenciaDetalle;
+	}
+
+	public void setAnoInicioVigenciaDetalle(Long anoInicioVigenciaDetalle) {
+		this.anoInicioVigenciaDetalle = anoInicioVigenciaDetalle;
+	}
+
+	public Long getAnoFinVigenciaDetalle() {
+		return anoFinVigenciaDetalle;
+	}
+
+	public void setAnoFinVigenciaDetalle(Long anoFinVigenciaDetalle) {
+		this.anoFinVigenciaDetalle = anoFinVigenciaDetalle;
 	}
 
 }

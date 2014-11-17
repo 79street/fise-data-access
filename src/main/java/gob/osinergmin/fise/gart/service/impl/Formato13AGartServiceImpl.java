@@ -95,7 +95,19 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		FiseFormato13AC formato = null;
 		formato = formato13ACDao.obtenerFormato13ACByPK(fiseFormato13ACPK);
 		if(formato != null){
-			formato.setFiseFormato13ADs(formato13ADDao.listarFormato13ADByFormato13AC(formato));
+			List<FiseFormato13AD> listaDetalle = formato13ADDao.listarFormato13ADByFormato13AC(formato);
+			//mostramos la fecha inicio fin de vigencia de uno de los detalles
+			if( listaDetalle!=null && !listaDetalle.isEmpty() ){
+				formato.setFiseFormato13ADs(listaDetalle);
+				for (FiseFormato13AD detalle : listaDetalle) {
+					if( (detalle.getAnoInicioVigencia()!=null && detalle.getAnoInicioVigencia()!=0) && 
+							(detalle.getAnoFinVigencia()!=null && detalle.getAnoFinVigencia()!=0) ){
+						formato.setAnoInicioVigenciaDetalle(detalle.getAnoInicioVigencia());
+						formato.setAnoFinVigenciaDetalle(detalle.getAnoFinVigencia());
+						break;
+					}
+				}
+			}
 		}
 		return formato;
 	}

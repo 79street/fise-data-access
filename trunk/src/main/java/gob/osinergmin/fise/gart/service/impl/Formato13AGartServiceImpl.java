@@ -5,9 +5,11 @@ import gob.osinergmin.fise.bean.Formato13ADReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato13ADDao;
+import gob.osinergmin.fise.dao.Formato13ADObDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
+import gob.osinergmin.fise.domain.FiseFormato13ADOb;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 
 import java.util.HashMap;
@@ -29,6 +31,10 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Autowired
 	@Qualifier("formato13ADDaoImpl")
 	private Formato13ADDao formato13ADDao;
+	
+	@Autowired
+	@Qualifier("formato13ADObDaoImpl")
+	private Formato13ADObDao formato13ADObDao;
 	
 	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa,
 			long anioDesde, long mesDesde, long anioHasta, long mesHasta,
@@ -102,6 +108,12 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Transactional
 	public FiseFormato13AD updatedetalle(FiseFormato13AD fiseD) {
 		return formato13ADDao.updatedetalle(fiseD);
+	}
+	
+	@Override
+	@Transactional
+	public List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD){
+		return formato13ADObDao.listarFormato13ADObByFormato13AD(formato13AD); 
 	}
 	
 }

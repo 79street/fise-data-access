@@ -13,6 +13,7 @@ public class MensajeErrorBean implements Serializable {
 	private String codigo;
 	private String descripcion;
 	private String descZonaBenef;
+	private String descCodSectorTipico;
 	
 	public int getId() {
 		return id;
@@ -37,6 +38,12 @@ public class MensajeErrorBean implements Serializable {
 	}
 	public void setDescZonaBenef(String descZonaBenef) {
 		this.descZonaBenef = descZonaBenef;
+	}
+	public String getDescCodSectorTipico() {
+		return descCodSectorTipico;
+	}
+	public void setDescCodSectorTipico(String descCodSectorTipico) {
+		this.descCodSectorTipico = descCodSectorTipico;
 	}
 
 }

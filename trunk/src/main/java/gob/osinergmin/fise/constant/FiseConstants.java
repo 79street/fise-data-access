@@ -57,6 +57,15 @@ public class FiseConstants {
 	public final static String SECTOR_TIPICO_SER_COD = "SER";
 	public final static String SECTOR_TIPICO_ESP_COD = "ESP";
 	
+	public final static String SECTOR_TIPICO_1_DESC = "ST-1";
+	public final static String SECTOR_TIPICO_2_DESC = "ST-2";
+	public final static String SECTOR_TIPICO_3_DESC = "ST-3";
+	public final static String SECTOR_TIPICO_4_DESC = "ST-4";
+	public final static String SECTOR_TIPICO_5_DESC = "ST-5";
+	public final static String SECTOR_TIPICO_6_DESC = "ST-6";
+	public final static String SECTOR_TIPICO_SER_DESC = "ST-SER";
+	public final static String SECTOR_TIPICO_ESP_DESC = "ST-ESP";
+	
 	public final static String COD_SAVE= "SAVE";
 	public final static String COD_UPDATE= "UPDATE";
 	public final static String COD_GET= "GET";

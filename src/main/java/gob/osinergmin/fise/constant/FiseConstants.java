@@ -11,6 +11,7 @@ public class FiseConstants {
 	public final static String BLANCO ="";
 	public final static String SALTO_LINEA = "\n";
 	public final static String UNDERLINE = "_";
+	public final static String CERO = "0";
 	
 	public final static String ITEM_SELECCIONE_VALUE = "";
 	public final static String ITEM_SELECCIONE_DESCRIPCION = "-Selecccione-";

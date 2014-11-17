@@ -41,6 +41,10 @@ public class Formato13ADReportBean implements Serializable {
 	
 	private String descEmpresa;
 	private String descMesPresentacion;
+	
+	private String descMesAlta;
+	private String descZonaBenef;
+	
 	public String getCodigoEmpresa() {
 		return codigoEmpresa;
 	}
@@ -202,6 +206,18 @@ public class Formato13ADReportBean implements Serializable {
 	}
 	public void setDescMesPresentacion(String descMesPresentacion) {
 		this.descMesPresentacion = descMesPresentacion;
+	}
+	public String getDescMesAlta() {
+		return descMesAlta;
+	}
+	public void setDescMesAlta(String descMesAlta) {
+		this.descMesAlta = descMesAlta;
+	}
+	public String getDescZonaBenef() {
+		return descZonaBenef;
+	}
+	public void setDescZonaBenef(String descZonaBenef) {
+		this.descZonaBenef = descZonaBenef;
 	}
 	
 	

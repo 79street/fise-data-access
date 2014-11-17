@@ -72,7 +72,7 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 		try {
 			StringBuilder sql = new StringBuilder();
 
-			sql.append(" SELECT COD_UBIGEO,ID_ZONA_BENEF,ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE ");
+			sql.append(" SELECT COD_UBIGEO,ID_ZONA_BENEF,ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'1  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_1, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'2  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_2, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'3  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_3, ");
@@ -81,7 +81,7 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'6  ',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_6, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'SER',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ST_SER, ");
 			sql.append(" SUM(DECODE(COD_SECTOR_TIPICO,'ESP',NUMERO_BENEFI_POTE_SECT_TIPICO,0)) ESPECIAL, ");
-			sql.append(" ANO_INICIO_VIGENCIA, ANO_FIN_VIGENCIA, ");
+			sql.append(" ANO_INICIO_VIGENCIA, ANO_FIN_VIGENCIA ");
 			sql.append(" FROM FISE.FISE_FORMATO_13A_D ");
 			sql.append(" WHERE 1=1 ");
 

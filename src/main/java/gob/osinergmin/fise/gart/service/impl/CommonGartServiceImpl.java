@@ -5,8 +5,12 @@ import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
 import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
+import gob.osinergmin.fise.domain.CfgTabla;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.gart.service.CommonGartService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Autowired
 	@Qualifier("commonDaoImpl")
 	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseGrupoInformacionDaoImpl")
+	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
 	
 	@Override
 	@Transactional
@@ -56,6 +64,24 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Transactional
 	public String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa) {
 		return commonDao.obtenerEstadoProceso(codEmpresa, tipoFormato, anoPresentacion, mesPresentacion, codEtapa);
+	}
+	
+	@Override
+	@Transactional
+	public FiseGrupoInformacion obtenerFiseGrupoInformacionByPK(long id) {
+		FiseGrupoInformacion dto = null;
+		try {
+			dto = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	@Override
+	@Transactional
+	public Long obtenerIdGrupoInformacion(Long anioPresentacion, Long mesPresentacion) {
+		return commonDao.obtenerIdGrupoInformacion(anioPresentacion, mesPresentacion);
 	}
 	
 }

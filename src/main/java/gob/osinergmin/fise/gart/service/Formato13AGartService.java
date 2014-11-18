@@ -27,6 +27,7 @@ public interface Formato13AGartService {
 	Integer deletedetalle(String emp,Integer anio,Integer mes,String etapa);
 	
 	List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD);
-	void eliminarCabeceraOrDetalle(FiseFormato13AC fiseFormato13AC, boolean deteleCabecera);
+	void eliminarCabecera(FiseFormato13AC fiseFormato13AC);
+	void eliminarDetalle(FiseFormato13AD fiseFormato13AD);
 	
 }

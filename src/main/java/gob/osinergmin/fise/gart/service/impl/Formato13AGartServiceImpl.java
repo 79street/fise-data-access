@@ -138,11 +138,10 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		return formato13ADDao.deletedetalle(emp, anio, mes, etapa);
 	}
 	
-	//eliminar detalle
+	//eliminar cabecera con detalle y observaciones
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void eliminarCabeceraOrDetalle(FiseFormato13AC fiseFormato13AC, boolean deleteCabecera) {
-		//eliminar antes los detalles creados para esa cabecera
+	public void eliminarCabecera(FiseFormato13AC fiseFormato13AC) {
 		List<FiseFormato13AD> lista = null;
 		lista = formato13ADDao.listarFormato13ADByFormato13AC(fiseFormato13AC);
 		for (FiseFormato13AD detalle : lista) {
@@ -152,9 +151,17 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			}
 			formato13ADDao.eliminarFormato13AD(detalle);
 		}
-		if( deleteCabecera ){
-			formato13ACDao.eliminarFormato13AC(fiseFormato13AC);
+		formato13ACDao.eliminarFormato13AC(fiseFormato13AC);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarDetalle(FiseFormato13AD fiseFormato13AD) {
+		List<FiseFormato13ADOb> listaObservacion = formato13ADObDao.listarFormato13ADObByFormato13AD(fiseFormato13AD);
+		for (FiseFormato13ADOb observacion : listaObservacion) {
+			formato13ADObDao.eliminarFormato13ADOb(observacion);
 		}
+		formato13ADDao.eliminarFormato13AD(fiseFormato13AD);
 	}
 	
 }

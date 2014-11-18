@@ -65,6 +65,10 @@ public class FiseGrupoInformacion implements Serializable {
 	
 	//bi-directional many-to-one association to FiseFormato12AC
 	@OneToMany(mappedBy="fiseGrupoInformacion")
+	private List<FiseFormato13AC> fiseFormato13ACs;
+	
+	//bi-directional many-to-one association to FiseFormato12AC
+	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato14AC> fiseFormato14ACs;
 		
 	//bi-directional many-to-one association to FiseFormato12AC

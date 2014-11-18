@@ -120,4 +120,15 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		return result;
 	}
 	
+	@Override
+	public void eliminarFormato13AC(FiseFormato13AC fiseFormato13AC){
+		try{
+			em.remove(em.contains(fiseFormato13AC) ? fiseFormato13AC : em.merge(fiseFormato13AC));
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+	}
+	
 }

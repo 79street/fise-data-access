@@ -14,4 +14,5 @@ public interface Formato13ACDao extends GenericDao {
 	FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws ConstraintViolationException;
 	FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK);
 	FiseFormato13AC updatecabecera(FiseFormato13AC fiseC);
+	void eliminarFormato13AC(FiseFormato13AC fiseFormato13AC);
 }

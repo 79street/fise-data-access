@@ -2,7 +2,6 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
-import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
@@ -170,6 +169,18 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void eliminarFormato13AD(FiseFormato13AD fiseFormato13AD){
+		try{
+			//verificar si la entidad pertenece a la transaccion o no
+			em.remove(em.contains(fiseFormato13AD) ? fiseFormato13AD : em.merge(fiseFormato13AD));
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
 	}
 
 }

@@ -989,4 +989,7 @@ public class FiseConstants {
 	public final static String COSTO_D_I_F14C = "A";//ambos
 	
 
+	public final static int ADD = 2;
+	public final static int UPDATE = 1;
+	public final static int VIEW = 0;
 }

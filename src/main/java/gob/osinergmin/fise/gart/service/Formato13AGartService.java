@@ -24,5 +24,7 @@ public interface Formato13AGartService {
 	FiseFormato13AC updatecabecera(FiseFormato13AC fiseC);
 	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 	
+	Integer deletedetalle(String emp,Integer anio,Integer mes,String etapa);
+	
 	List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD);
 }

@@ -166,4 +166,10 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 		return result;
 	}
 
+	@Override
+	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

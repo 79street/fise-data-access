@@ -14,4 +14,5 @@ public interface Formato13ADDao extends GenericDao {
 	FiseFormato13AD savedetalle(FiseFormato13AD fiseD);
 	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 	Integer deletedetalle(String emp,Integer anio,Integer mes,String etapa);
+	void eliminarFormato13AD(FiseFormato13AD fiseFormato13AD);
 }

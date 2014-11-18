@@ -10,6 +10,8 @@ import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
+import gob.osinergmin.fise.domain.FiseFormato14AD;
+import gob.osinergmin.fise.domain.FiseFormato14ADOb;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 
 import java.util.HashMap;
@@ -19,6 +21,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="formato13AGartServiceImpl")
@@ -133,6 +136,25 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
 		// TODO Auto-generated method stub
 		return formato13ADDao.deletedetalle(emp, anio, mes, etapa);
+	}
+	
+	//eliminar detalle
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarCabeceraOrDetalle(FiseFormato13AC fiseFormato13AC, boolean deleteCabecera) {
+		//eliminar antes los detalles creados para esa cabecera
+		List<FiseFormato13AD> lista = null;
+		lista = formato13ADDao.listarFormato13ADByFormato13AC(fiseFormato13AC);
+		for (FiseFormato13AD detalle : lista) {
+			List<FiseFormato13ADOb> listaObservacion = formato13ADObDao.listarFormato13ADObByFormato13AD(detalle);
+			for (FiseFormato13ADOb observacion : listaObservacion) {
+				formato13ADObDao.eliminarFormato13ADOb(observacion);
+			}
+			formato13ADDao.eliminarFormato13AD(detalle);
+		}
+		if( deleteCabecera ){
+			formato13ACDao.eliminarFormato13AC(fiseFormato13AC);
+		}
 	}
 	
 }

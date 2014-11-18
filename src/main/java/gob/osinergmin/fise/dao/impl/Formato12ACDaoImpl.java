@@ -40,6 +40,7 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 		FiseFormato12AC formato = null;
 		try{
 			//em.getTransaction().begin();
+			fiseFormato12ACPK.setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato12ACPK.getCodEmpresa(), ' ', 4));
 			formato = em.find(FiseFormato12AC.class, fiseFormato12ACPK);
 			//em.getTransaction().commit();
 			//return formato;

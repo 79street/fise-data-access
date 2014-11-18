@@ -53,6 +53,7 @@ public class Formato14CCDaoImpl extends GenericDaoImpl implements Formato14CCDao
 	@Override
 	public FiseFormato14CC obtenerFormato14CC(FiseFormato14CCPK id) 
 			throws SQLException{
+		id.setCodEmpresa(FormatoUtil.rellenaDerecha(id.getCodEmpresa(), ' ', 4));
 		return em.find(FiseFormato14CC.class, id);		
 	}
 	

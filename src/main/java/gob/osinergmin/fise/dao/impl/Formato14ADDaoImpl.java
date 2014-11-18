@@ -22,6 +22,7 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 		FiseFormato14AD formato = null;
 		try{
 			//em.getTransaction().begin();
+			fiseFormato14ADPK.setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato14ADPK.getCodEmpresa(), ' ', 4));
 			formato = em.find(FiseFormato14AD.class, fiseFormato14ADPK);
 			//em.getTransaction().commit();
 			//return formato;

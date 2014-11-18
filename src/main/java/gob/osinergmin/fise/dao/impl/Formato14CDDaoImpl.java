@@ -4,6 +4,7 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14CDDao;
 import gob.osinergmin.fise.domain.FiseFormato14CD;
 import gob.osinergmin.fise.domain.FiseFormato14CDPK;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
 import java.util.Collections;
@@ -55,6 +56,7 @@ public class Formato14CDDaoImpl extends GenericDaoImpl implements Formato14CDDao
 	@Override
 	public FiseFormato14CD obtenerFiseFormato14CD(FiseFormato14CDPK id)
 			throws SQLException {		
+		id.setCodEmpresa(FormatoUtil.rellenaDerecha(id.getCodEmpresa(), ' ', 4));
 		return em.find(FiseFormato14CD.class, id);
 	} 
 	

@@ -93,6 +93,7 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		FiseFormato13AC formato = null;
 		try{
 			//em.getTransaction().begin();
+			fiseFormato13ACPK.setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato13ACPK.getCodEmpresa(), ' ', 4));
 			formato = em.find(FiseFormato13AC.class, fiseFormato13ACPK);
 			//em.getTransaction().commit();
 			//return formato;

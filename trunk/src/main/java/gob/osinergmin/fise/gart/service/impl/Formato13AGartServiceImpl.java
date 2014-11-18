@@ -127,5 +127,12 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	public List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD){
 		return formato13ADObDao.listarFormato13ADObByFormato13AD(formato13AD); 
 	}
+
+	@Override
+	@Transactional
+	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
+		// TODO Auto-generated method stub
+		return formato13ADDao.deletedetalle(emp, anio, mes, etapa);
+	}
 	
 }

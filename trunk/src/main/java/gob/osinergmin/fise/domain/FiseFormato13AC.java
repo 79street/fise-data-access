@@ -33,9 +33,6 @@ public class FiseFormato13AC implements Serializable {
 	@Column(name="FECHA_ENVIO_DEFINITIVO")
 	private Date fechaEnvioDefinitivo;
 
-	@Column(name="ID_GRUPO_INFORMACION")
-	private Long idGrupoInformacion;
-
 	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String nombreArchivoExcel;
 
@@ -74,6 +71,11 @@ public class FiseFormato13AC implements Serializable {
 	@OneToMany(mappedBy="fiseFormato13AC", cascade={CascadeType.ALL})
 	private List<FiseFormato13AD> fiseFormato13ADs;
 
+	//bi-directional many-to-one association to FiseGrupoInformacion
+	@ManyToOne
+	@JoinColumn(name="ID_GRUPO_INFORMACION")
+	private FiseGrupoInformacion fiseGrupoInformacion;
+	
 	public FiseFormato13AC() {
 	}
 
@@ -107,14 +109,6 @@ public class FiseFormato13AC implements Serializable {
 
 	public void setFechaEnvioDefinitivo(Date fechaEnvioDefinitivo) {
 		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
-	}
-
-	public Long getIdGrupoInformacion() {
-		return this.idGrupoInformacion;
-	}
-
-	public void setIdGrupoInformacion(Long idGrupoInformacion) {
-		this.idGrupoInformacion = idGrupoInformacion;
 	}
 
 	public String getNombreArchivoExcel() {
@@ -225,6 +219,14 @@ public class FiseFormato13AC implements Serializable {
 
 	public void setAnoFinVigenciaDetalle(Long anoFinVigenciaDetalle) {
 		this.anoFinVigenciaDetalle = anoFinVigenciaDetalle;
+	}
+
+	public FiseGrupoInformacion getFiseGrupoInformacion() {
+		return fiseGrupoInformacion;
+	}
+
+	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
+		this.fiseGrupoInformacion = fiseGrupoInformacion;
 	}
 
 }

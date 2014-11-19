@@ -141,13 +141,13 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 			
 			if(fiseFormato13ACPK!=null){
 				if(fiseFormato13ACPK.getCodEmpresa()!=null){
-					q.append("t.id.codEmpresa = :emp");
+					q.append(" and t.id.codEmpresa = :emp");
 				}if(fiseFormato13ACPK.getAnoPresentacion()>0){
-					q.append("t.id.anoPresentacion = :anio");
+					q.append(" and t.id.anoPresentacion = :anio");
 				}if(fiseFormato13ACPK.getMesPresentacion()>0){
-					q.append("t.id.mesPresentacion = :mes");
+					q.append(" and t.id.mesPresentacion = :mes");
 				}if(fiseFormato13ACPK.getEtapa()!=null){
-					q.append("t.id.etapa = :etp");
+					q.append(" and t.id.etapa = :etp");
 				}
 				
 			}
@@ -161,7 +161,7 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 				}if(fiseFormato13ACPK.getMesPresentacion()>0){
 					query.setParameter("mes", fiseFormato13ACPK.getMesPresentacion());
 				}if(fiseFormato13ACPK.getEtapa()!=null){
-					query.setParameter("etapa", fiseFormato13ACPK.getEtapa());
+					query.setParameter("etp", fiseFormato13ACPK.getEtapa());
 				}
 				
 			}

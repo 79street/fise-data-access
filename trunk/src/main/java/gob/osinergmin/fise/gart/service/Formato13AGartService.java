@@ -32,7 +32,7 @@ public interface Formato13AGartService {
 	FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK);
 	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 	
-	Integer deletedetalle(String emp,Integer anio,Integer mes,String etapa);
+	Integer deletedetalle(String emp,Long anio,Long mes,String etapa);
 	
 	List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD);
 	void eliminarCabecera(FiseFormato13AC fiseFormato13AC);

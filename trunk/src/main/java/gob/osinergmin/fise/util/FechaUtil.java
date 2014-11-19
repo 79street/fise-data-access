@@ -15,7 +15,13 @@ public abstract class FechaUtil {
 		{"Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"};
 	
 	private static DateFormat format_full = new SimpleDateFormat(
-			"dd/MM/yyyy HH:mm:ss");//HH:mm:ss
+			"dd/MM/yyyy HH:mm:ss");
+	
+	private static DateFormat format = new SimpleDateFormat(
+			"dd/MM/yyyy");
+	
+	private static DateFormat formatHora = new SimpleDateFormat(
+			"HH:mm:ss");
 	
 	public static Map<Long,String> cargarMapaMeses() {
 		
@@ -142,10 +148,20 @@ public abstract class FechaUtil {
 		}
 	}
 	
+	public static String getFechaDateToString(Date date) {
+		String fecha = null;
+		try {
+			fecha = format.format(date);
+			return fecha;
+		} catch (Exception ex) {
+			System.out.println("Error al parsear la fecha");
+			return ""+date;
+		}
+	}
+	
 	public static String getHoraActual() {
-	    Date ahora = new Date();
-	    SimpleDateFormat formateador = new SimpleDateFormat("HH:mm:ss");
-	    return formateador.format(ahora);
+	    Date ahora = new Date();	  
+	    return formatHora.format(ahora);
 	}
 	
 }

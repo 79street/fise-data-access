@@ -496,7 +496,7 @@ public class FiseConstants {
 	public final static String PARAM_IMP_VAL_DSCTO_EDE_L_F14B = "IMP_VAL_DSCTO_EDE_L";
 	//1.2
 	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_R_F14B = "IMP_VAL_DSCTO_NOEDE_R";
-	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_P_F14B = "IMP_VAL_DSCTO_NOEDE_R";
+	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_P_F14B = "IMP_VAL_DSCTO_NOEDE_P";
 	public final static String PARAM_IMP_VAL_DSCTO_NOEDE_L_F14B = "IMP_VAL_DSCTO_NOEDE_L";
 	//1.3
 	public final static String PARAM_CSTO_TOTAL_IMP_R_F14B = "CSTO_TOTAL_IMP_R";
@@ -543,9 +543,9 @@ public class FiseConstants {
 	public final static String PARAM_NRO_VALES_EMIT_P_F14B = "NRO_VALES_EMIT_P";
 	public final static String PARAM_NRO_VALES_EMIT_L_F14B = "NRO_VALES_EMIT_L";
 	//4.3
-	public final static String PARAM_CSTO_UNIT_FIS_R_F14B = "CSTO_UNIT_FIS_R";
-	public final static String PARAM_CSTO_UNIT_FIS_P_F14B = "CSTO_UNIT_FIS_P";
-	public final static String PARAM_CSTO_UNIT_FIS_L_F14B = "CSTO_UNIT_FIS_L";
+	public final static String PARAM_CSTO_UNIT_FIS_R_F14B = "CSTOS_UNIT_FIS_R";
+	public final static String PARAM_CSTO_UNIT_FIS_P_F14B = "CSTOS_UNIT_FIS_P";
+	public final static String PARAM_CSTO_UNIT_FIS_L_F14B = "CSTOS_UNIT_FIS_L";
 	//5.1
 	public final static String PARAM_CSTO_UNIT_LIQ_R_F14B = "CSTO_UNIT_LIQ_R";
 	public final static String PARAM_CSTO_UNIT_LIQ_P_F14B = "CSTO_UNIT_LIQ_P";

@@ -823,7 +823,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				
 				formato14BBean.setCostoTotalValDesctoP(detalle.getCostoRepartoValesDescuento());
 				formato14BBean.setNroValesReptP(detalle.getNumeroValesRepartidos());
-				formato14BBean.setCostoUnitReptValesR(detalle.getCostoUnitReprtoValeDomici());
+				formato14BBean.setCostoUnitReptValesP(detalle.getCostoUnitReprtoValeDomici());
 				
 				formato14BBean.setCostoTotalValOficP(detalle.getCostoTotReprtoValDisEl());
 				formato14BBean.setNroValesEntrP(detalle.getNumeroValesEntregados());
@@ -856,7 +856,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				
 				formato14BBean.setCostoTotalValDesctoL(detalle.getCostoRepartoValesDescuento());
 				formato14BBean.setNroValesReptL(detalle.getNumeroValesRepartidos());
-				formato14BBean.setCostoUnitReptValesR(detalle.getCostoUnitReprtoValeDomici());
+				formato14BBean.setCostoUnitReptValesL(detalle.getCostoUnitReprtoValeDomici());
 				
 				formato14BBean.setCostoTotalValOficL(detalle.getCostoTotReprtoValDisEl());
 				formato14BBean.setNroValesEntrL(detalle.getNumeroValesEntregados());
@@ -990,6 +990,102 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 		mapJRParams.put(FiseConstants.PARAM_CPTCON_AGE_L_F14B,formato14BBean.getCapacAgentL());
 		mapJRParams.put(FiseConstants.PARAM_UTLES_OFIC_L_F14B,formato14BBean.getUtilMatOficL());
 		mapJRParams.put(FiseConstants.PARAM_CSTO_TOTAL_GTION_L_F14B,formato14BBean.getCostoTotalGestL());
+		
+		//logs
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_EDE_R_F14B+":"+ formato14BBean.getImpValDesctoEdeR());
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_NOEDE_R_F14B+":"+ formato14BBean.getImpValDesctoNoEdeR());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_IMP_R_F14B+":"+ formato14BBean.getCostoTotalImpR());
+		logger.info(FiseConstants.PARAM_NRO_VALES_R_F14B+":"+ formato14BBean.getNroValesImpR());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_R_F14B+":"+ formato14BBean.getCostoUnitImpValesR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_VAL_DSCTO_R_F14B+":"+ formato14BBean.getCostoTotalValDesctoR());
+		logger.info(FiseConstants.PARAM_NRO_VALES_RPTDOS_R_F14B+":"+ formato14BBean.getNroValesReptR());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_DOM_R_F14B+":"+ formato14BBean.getCostoUnitReptValesR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_AUT_R_F14B+":"+ formato14BBean.getCostoTotalValOficR());
+		logger.info(FiseConstants.PARAM_NRO_VALES_ENTREG_R_F14B+":"+formato14BBean.getNroValesEntrR());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_ENT_R_F14B+":"+formato14BBean.getCostoUnitEntrValesR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_VALES_AUTOR_R_F14B+":"+formato14BBean.getCostoEnvPadronR());
+		logger.info(FiseConstants.PARAM_NRO_VALES_EMIT_R_F14B+":"+formato14BBean.getNroValesFisR());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_FIS_R_F14B+":"+formato14BBean.getCostoUnitLiqR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_LIQ_R_F14B+":"+formato14BBean.getCostoUnitValesDigitR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_SOLIC_R_F14B+":"+formato14BBean.getCostoAtenSolicR());
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_CONSUL_R_F14B+":"+formato14BBean.getCostoAtenConsR());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_ATCION_R_F14B+":"+formato14BBean.getCostoTotalAtenR());
+		logger.info(FiseConstants.PARAM_NRO_TOTAL_ATCION_R_F14B+":"+formato14BBean.getNroTotalAtenR());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_ATEN_R_F14B+":"+formato14BBean.getCostoUnitAtenR());
+		
+		logger.info(FiseConstants.PARAM_CSTO_PSNAL_R_F14B+":"+formato14BBean.getCostoPersonalR());
+		logger.info(FiseConstants.PARAM_CPTCON_AGE_R_F14B+":"+formato14BBean.getCapacAgentR());
+		logger.info(FiseConstants.PARAM_UTLES_OFIC_R_F14B+":"+formato14BBean.getUtilMatOficR());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_GTION_R_F14B+":"+formato14BBean.getCostoTotalGestR());
+		
+		//PROVINCIA
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_EDE_P_F14B+":"+ formato14BBean.getImpValDesctoEdeP());
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_NOEDE_P_F14B+":"+ formato14BBean.getImpValDesctoNoEdeP());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_IMP_P_F14B+":"+ formato14BBean.getCostoTotalImpP());
+		logger.info(FiseConstants.PARAM_NRO_VALES_P_F14B+":"+ formato14BBean.getNroValesImpP());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_P_F14B+":"+ formato14BBean.getCostoUnitImpValesP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_VAL_DSCTO_P_F14B+":"+ formato14BBean.getCostoTotalValDesctoP());
+		logger.info(FiseConstants.PARAM_NRO_VALES_RPTDOS_P_F14B+":"+ formato14BBean.getNroValesReptP());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_DOM_P_F14B+":"+ formato14BBean.getCostoUnitReptValesP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_AUT_P_F14B+":"+ formato14BBean.getCostoTotalValOficP());
+		logger.info(FiseConstants.PARAM_NRO_VALES_ENTREG_P_F14B+":"+formato14BBean.getNroValesEntrP());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_ENT_P_F14B+":"+formato14BBean.getCostoUnitEntrValesP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_VALES_AUTOR_P_F14B+":"+formato14BBean.getCostoEnvPadronP());
+		logger.info(FiseConstants.PARAM_NRO_VALES_EMIT_P_F14B+":"+formato14BBean.getNroValesFisP());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_FIS_P_F14B+":"+formato14BBean.getCostoUnitLiqP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_LIQ_P_F14B+":"+formato14BBean.getCostoUnitValesDigitP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_SOLIC_P_F14B+":"+formato14BBean.getCostoAtenSolicP());
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_CONSUL_P_F14B+":"+formato14BBean.getCostoAtenConsP());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_ATCION_P_F14B+":"+formato14BBean.getCostoTotalAtenP());
+		logger.info(FiseConstants.PARAM_NRO_TOTAL_ATCION_P_F14B+":"+formato14BBean.getNroTotalAtenP());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_ATEN_P_F14B+":"+formato14BBean.getCostoUnitAtenP());
+		
+		logger.info(FiseConstants.PARAM_CSTO_PSNAL_P_F14B+":"+formato14BBean.getCostoPersonalP());
+		logger.info(FiseConstants.PARAM_CPTCON_AGE_P_F14B+":"+formato14BBean.getCapacAgentP());
+		logger.info(FiseConstants.PARAM_UTLES_OFIC_P_F14B+":"+formato14BBean.getUtilMatOficP());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_GTION_P_F14B+":"+formato14BBean.getCostoTotalGestP());
+		//LIMA
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_EDE_L_F14B+":"+ formato14BBean.getImpValDesctoEdeL());
+		logger.info(FiseConstants.PARAM_IMP_VAL_DSCTO_NOEDE_L_F14B+":"+ formato14BBean.getImpValDesctoNoEdeL());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_IMP_L_F14B+":"+ formato14BBean.getCostoTotalImpL());
+		logger.info(FiseConstants.PARAM_NRO_VALES_L_F14B+":"+ formato14BBean.getNroValesImpL());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_L_F14B+":"+ formato14BBean.getCostoUnitImpValesL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_VAL_DSCTO_L_F14B+":"+ formato14BBean.getCostoTotalValDesctoL());
+		logger.info(FiseConstants.PARAM_NRO_VALES_RPTDOS_L_F14B+":"+ formato14BBean.getNroValesReptL());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_DOM_L_F14B+":"+ formato14BBean.getCostoUnitReptValesL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_AUT_L_F14B+":"+ formato14BBean.getCostoTotalValOficL());
+		logger.info(FiseConstants.PARAM_NRO_VALES_ENTREG_L_F14B+":"+formato14BBean.getNroValesEntrL());
+		logger.info(FiseConstants.PARAM_CSTOS_UNIT_ENT_L_F14B+":"+formato14BBean.getCostoUnitEntrValesL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_VALES_AUTOR_L_F14B+":"+formato14BBean.getCostoEnvPadronL());
+		logger.info(FiseConstants.PARAM_NRO_VALES_EMIT_L_F14B+":"+formato14BBean.getNroValesFisL());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_FIS_L_F14B+":"+formato14BBean.getCostoUnitLiqL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_LIQ_L_F14B+":"+formato14BBean.getCostoUnitValesDigitL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_SOLIC_L_F14B+":"+formato14BBean.getCostoAtenSolicL());
+		logger.info(FiseConstants.PARAM_CSTO_ATCION_CONSUL_L_F14B+":"+formato14BBean.getCostoAtenConsL());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_ATCION_L_F14B+":"+formato14BBean.getCostoTotalAtenL());
+		logger.info(FiseConstants.PARAM_NRO_TOTAL_ATCION_L_F14B+":"+formato14BBean.getNroTotalAtenL());
+		logger.info(FiseConstants.PARAM_CSTO_UNIT_ATEN_L_F14B+":"+formato14BBean.getCostoUnitAtenL());
+		
+		logger.info(FiseConstants.PARAM_CSTO_PSNAL_L_F14B+":"+formato14BBean.getCostoPersonalL());
+		logger.info(FiseConstants.PARAM_CPTCON_AGE_L_F14B+":"+formato14BBean.getCapacAgentL());
+		logger.info(FiseConstants.PARAM_UTLES_OFIC_L_F14B+":"+formato14BBean.getUtilMatOficL());
+		logger.info(FiseConstants.PARAM_CSTO_TOTAL_GTION_L_F14B+":"+formato14BBean.getCostoTotalGestL());
+		
 		
 		/*
 		//1.1

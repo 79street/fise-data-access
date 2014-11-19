@@ -4,49 +4,62 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
 
 /**
  * The persistent class for the FISE_PERIODO_ENVIO database table.
  * 
  */
 @Entity
-@Table(name = "FISE_PERIODO_ENVIO", schema = "FISE")
-@NamedQuery(name = "FisePeriodoEnvio.findAll", query = "SELECT f FROM FisePeriodoEnvio f")
+@Table(name="FISE_PERIODO_ENVIO")
 public class FisePeriodoEnvio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private FisePeriodoEnvioPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_entity_seq_perido_envio")
+	@SequenceGenerator(name="my_entity_seq_perido_envio",sequenceName="FISE_PER_ENV_SEQ", allocationSize = 1)
+	private long secuencia;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="ANO_FIN_VIGENCIA")
+	private Integer anoFinVigencia;
+
+	@Column(name="ANO_INICIO_VIGENCIA")
+	private Integer anoInicioVigencia;
+
+	@Column(name="ANO_PRESENTACION")
+	private Integer anoPresentacion;
+
+	@Temporal(TemporalType.DATE)
 	private Date cegifecdocobs;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecemanotobs;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecenv;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecenvdocobs;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecrecgart;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecrecnotobs;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecrecosi;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cegifecvenlvtoobs;
 
 	private String ceginrodoc;
@@ -57,49 +70,56 @@ public class FisePeriodoEnvio implements Serializable {
 
 	private String ceginrotra;
 
+	@Column(name="COD_EMPRESA")
+	private String codEmpresa;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date desde;
 
-	@Column(name = "DIAS_NOTIFICACION_ANTES_CIERRE")
+	@Column(name="DIAS_NOTIFICACION_ANTES_CIERRE")
 	private Integer diasNotificacionAntesCierre;
 
+	private String estado;
+
+	private String etapa;
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FECHA_ACTUALIZACION")
+	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FECHA_CREACION")
+	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
+
+	@Column(name="FLAG_ENVIO_CON_OBSERVACIONES")
+	private String flagEnvioConObservaciones;
+
+	@Column(name="FLAG_HABILITA_COSTOS_D_I_F14C")
+	private String flagHabilitaCostosDIF14c;
+
+	@Column(name="FLAG_MOSTRAR_ANO_MES_EJEC")
+	private String flagMostrarAnoMesEjec;
+
+	private String formato;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hasta;
 
-	@Column(name = "TERMINAL_ACTUALIZACION")
+	@Column(name="MES_PRESENTACION")
+	private Integer mesPresentacion;
+
+	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
 
-	@Column(name = "TERMINAL_CREACION")
+	@Column(name="TERMINAL_CREACION")
 	private String terminalCreacion;
 
-	@Column(name = "USUARIO_ACTUALIZACION")
+	@Column(name="USUARIO_ACTUALIZACION")
 	private String usuarioActualizacion;
 
-	@Column(name = "USUARIO_CREACION")
+	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
-
-	@Column(name = "FLAG_MOSTRAR_ANO_MES_EJEC")
-	private String flagMostrarAnoMesEjec;
-
-	@Column(name = "FLAG_ENVIO_CON_OBSERVACIONES")
-	private String flagEnvioConObservaciones;
 	
-	@Column(name = "ANO_INICIO_VIGENCIA")
-	private Long anoInicioVigencia;
-	
-	@Column(name = "ANO_FIN_VIGENCIA")
-	private Long anoFinVigencia;
-	
-	@Column(name = "FLAG_HABILITA_COSTOS_D_I_F14C")
-	private String flagHabilitaCostosDIF14C;
 	
 	// valores de combo
 	@Transient
@@ -114,16 +134,47 @@ public class FisePeriodoEnvio implements Serializable {
 	private String anioFinVig;
 	@Transient
 	private String flagHabilitaCostos;
+	
+	@Transient
+	private String descEmpresa;	
+	
+	@Transient
+	private String descMesPresentacion;	
+	
 
 	public FisePeriodoEnvio() {
 	}
 
-	public FisePeriodoEnvioPK getId() {
-		return this.id;
+	public long getSecuencia() {
+		return this.secuencia;
 	}
 
-	public void setId(FisePeriodoEnvioPK id) {
-		this.id = id;
+	public void setSecuencia(long secuencia) {
+		this.secuencia = secuencia;
+	}
+
+	public Integer getAnoFinVigencia() {
+		return this.anoFinVigencia;
+	}
+
+	public void setAnoFinVigencia(Integer anoFinVigencia) {
+		this.anoFinVigencia = anoFinVigencia;
+	}
+
+	public Integer getAnoInicioVigencia() {
+		return this.anoInicioVigencia;
+	}
+
+	public void setAnoInicioVigencia(Integer anoInicioVigencia) {
+		this.anoInicioVigencia = anoInicioVigencia;
+	}
+
+	public Integer getAnoPresentacion() {
+		return this.anoPresentacion;
+	}
+
+	public void setAnoPresentacion(Integer anoPresentacion) {
+		this.anoPresentacion = anoPresentacion;
 	}
 
 	public Date getCegifecdocobs() {
@@ -222,6 +273,14 @@ public class FisePeriodoEnvio implements Serializable {
 		this.ceginrotra = ceginrotra;
 	}
 
+	public String getCodEmpresa() {
+		return this.codEmpresa;
+	}
+
+	public void setCodEmpresa(String codEmpresa) {
+		this.codEmpresa = codEmpresa;
+	}
+
 	public Date getDesde() {
 		return this.desde;
 	}
@@ -234,9 +293,24 @@ public class FisePeriodoEnvio implements Serializable {
 		return this.diasNotificacionAntesCierre;
 	}
 
-	public void setDiasNotificacionAntesCierre(
-			Integer diasNotificacionAntesCierre) {
+	public void setDiasNotificacionAntesCierre(Integer diasNotificacionAntesCierre) {
 		this.diasNotificacionAntesCierre = diasNotificacionAntesCierre;
+	}
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getEtapa() {
+		return this.etapa;
+	}
+
+	public void setEtapa(String etapa) {
+		this.etapa = etapa;
 	}
 
 	public Date getFechaActualizacion() {
@@ -255,12 +329,52 @@ public class FisePeriodoEnvio implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	public String getFlagEnvioConObservaciones() {
+		return this.flagEnvioConObservaciones;
+	}
+
+	public void setFlagEnvioConObservaciones(String flagEnvioConObservaciones) {
+		this.flagEnvioConObservaciones = flagEnvioConObservaciones;
+	}
+
+	public String getFlagHabilitaCostosDIF14c() {
+		return this.flagHabilitaCostosDIF14c;
+	}
+
+	public void setFlagHabilitaCostosDIF14c(String flagHabilitaCostosDIF14c) {
+		this.flagHabilitaCostosDIF14c = flagHabilitaCostosDIF14c;
+	}
+
+	public String getFlagMostrarAnoMesEjec() {
+		return this.flagMostrarAnoMesEjec;
+	}
+
+	public void setFlagMostrarAnoMesEjec(String flagMostrarAnoMesEjec) {
+		this.flagMostrarAnoMesEjec = flagMostrarAnoMesEjec;
+	}
+
+	public String getFormato() {
+		return this.formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+
 	public Date getHasta() {
 		return this.hasta;
 	}
 
 	public void setHasta(Date hasta) {
 		this.hasta = hasta;
+	}
+
+	public Integer getMesPresentacion() {
+		return this.mesPresentacion;
+	}
+
+	public void setMesPresentacion(Integer mesPresentacion) {
+		this.mesPresentacion = mesPresentacion;
 	}
 
 	public String getTerminalActualizacion() {
@@ -319,38 +433,6 @@ public class FisePeriodoEnvio implements Serializable {
 		this.flagPeriodoEjecucion = flagPeriodoEjecucion;
 	}
 
-	public String getFlagMostrarAnoMesEjec() {
-		return flagMostrarAnoMesEjec;
-	}
-
-	public void setFlagMostrarAnoMesEjec(String flagMostrarAnoMesEjec) {
-		this.flagMostrarAnoMesEjec = flagMostrarAnoMesEjec;
-	}
-
-	public String getFlagEnvioConObservaciones() {
-		return flagEnvioConObservaciones;
-	}
-
-	public void setFlagEnvioConObservaciones(String flagEnvioConObservaciones) {
-		this.flagEnvioConObservaciones = flagEnvioConObservaciones;
-	}
-
-	public Long getAnoInicioVigencia() {
-		return anoInicioVigencia;
-	}
-
-	public void setAnoInicioVigencia(Long anoInicioVigencia) {
-		this.anoInicioVigencia = anoInicioVigencia;
-	}
-
-	public Long getAnoFinVigencia() {
-		return anoFinVigencia;
-	}
-
-	public void setAnoFinVigencia(Long anoFinVigencia) {
-		this.anoFinVigencia = anoFinVigencia;
-	}
-
 	public String getAnioInicioVig() {
 		return anioInicioVig;
 	}
@@ -367,14 +449,6 @@ public class FisePeriodoEnvio implements Serializable {
 		this.anioFinVig = anioFinVig;
 	}
 
-	public String getFlagHabilitaCostosDIF14C() {
-		return flagHabilitaCostosDIF14C;
-	}
-
-	public void setFlagHabilitaCostosDIF14C(String flagHabilitaCostosDIF14C) {
-		this.flagHabilitaCostosDIF14C = flagHabilitaCostosDIF14C;
-	}
-
 	public String getFlagHabilitaCostos() {
 		return flagHabilitaCostos;
 	}
@@ -382,5 +456,24 @@ public class FisePeriodoEnvio implements Serializable {
 	public void setFlagHabilitaCostos(String flagHabilitaCostos) {
 		this.flagHabilitaCostos = flagHabilitaCostos;
 	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+	
+	
+	
 
 }

@@ -166,9 +166,49 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 	}
 
 	@Override
-	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer deletedetalle(String emp, Long anio, Long mes, String etapa) {
+		int result=-1;
+		try{
+			
+			StringBuffer q=new StringBuffer();
+			q.append("DELETE FROM FiseFormato13AD t where 1=1 ");
+			
+			
+				if(emp !=null){
+					q.append(" and t.id.codEmpresa = :emp");
+				}if(anio!=null){
+					q.append(" and t.id.anoPresentacion = :anio");
+				}if(mes!=null){
+					q.append(" and t.id.mesPresentacion = :mes");
+				}if(etapa!=null){
+					q.append(" and t.id.etapa = :etp");
+				}
+				
+			
+			Query query = em.createQuery(q.toString());
+			
+			
+			if(emp !=null){
+					query.setParameter("emp", emp);
+			}if(anio!=null){
+					query.setParameter("anio", anio);
+			}if(mes!=null){
+					query.setParameter("mes", mes);
+			}if(etapa!=null){
+					query.setParameter("etp", etapa);
+				}
+				
+			
+			
+			result= query.executeUpdate();
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return result;
 	}
 	
 	@Override
@@ -182,5 +222,7 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 			 em.close();
 		 }
 	}
+
+	
 
 }

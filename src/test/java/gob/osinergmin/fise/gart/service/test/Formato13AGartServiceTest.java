@@ -53,8 +53,8 @@ public class Formato13AGartServiceTest {
 			FiseFormato13AC formato13AC=new FiseFormato13AC();
 			formato13AC.setDescEmpresa("");
 			formato13AC.setId(new FiseFormato13ACPK());
-			formato13AC.getId().setAnoPresentacion(0);
-			formato13AC.getId().setMesPresentacion(0);;
+			formato13AC.getId().setAnoPresentacion(0L);
+			formato13AC.getId().setMesPresentacion(0L);
 			formato13AC.getId().setEtapa("");;
 			System.out.println("FORMATO DETALLE");
 			List<FiseFormato13AD> formatos=formatoService.listarFormato13ADByFormato13AC(formato13AC);

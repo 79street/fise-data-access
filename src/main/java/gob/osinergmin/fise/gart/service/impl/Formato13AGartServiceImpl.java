@@ -132,7 +132,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 
 	@Override
 	@Transactional
-	public Integer deletedetalle(String emp, Integer anio, Integer mes, String etapa) {
+	public Integer deletedetalle(String emp, Long anio, Long mes, String etapa) {
 		// TODO Auto-generated method stub
 		return formato13ADDao.deletedetalle(emp, anio, mes, etapa);
 	}

@@ -988,8 +988,13 @@ public class FiseConstants {
 	public final static String COSTO_INDIRECTO_F14C = "I";
 	public final static String COSTO_D_I_F14C = "A";//ambos
 	
-
 	public final static int ADD = 2;
 	public final static int UPDATE = 1;
 	public final static int VIEW = 0;
+	
+	//----------- reporte cumplimiento ------------------------------
+	public final static String PARAM_ANO_CUMPLI = "ANO_PRESENTACION";
+	public final static String PARAM_MES_CUMPLI = "DESC_MES_PRESENTACION";
+	public final static String PARAM_ETAPA_CUMPLI = "DESC_ETAPA";
+	
 }

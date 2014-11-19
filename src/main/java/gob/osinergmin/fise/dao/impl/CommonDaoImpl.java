@@ -2,6 +2,7 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.bean.CorreoBean;
+import gob.osinergmin.fise.bean.CumplimientoReportBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
@@ -211,6 +212,64 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			 em.close();
 		 }
 		return estado;
+	}
+
+//	@SuppressWarnings("unchecked")
+//	@Override
+	public List<CumplimientoReportBean> listarFormatolistaDet(long p_ano, long p_mes, String p_etapa ) {
+	
+		List<CumplimientoReportBean> lista = new ArrayList<CumplimientoReportBean>();
+		try{
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT trim(EMP.COD_EMPRESA) AS COD_EMPRESA,trim(EMP.DSC_CORTA_EMPRESA) AS DSC_CORTA_EMPRESA,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12A,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12B',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12B,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12C',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12C,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12F',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12D,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F13A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F13A,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14A,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14B',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14B,");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14C',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14C");
+			sql.append(" FROM ADMIN_GART.ADM_EMPRESA EMP");
+			sql.append(" JOIN ADMIN_GART.ADM_PROC_EMPRESA PEMP");
+			sql.append(" ON EMP.COD_EMPRESA = PEMP.COD_EMPRESA");
+			sql.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE'");
+			sql.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION'");
+			sql.append(" ORDER BY EMP.DSC_CORTA_EMPRESA");
+			
+			Query query = em.createNativeQuery(sql.toString());
+			
+			List resultado = query.getResultList();
+			Iterator it=resultado.iterator();
+			while(it.hasNext()){
+				Object[] valor=(Object[] )it.next();
+				CumplimientoReportBean cumplimiento=new CumplimientoReportBean();
+				cumplimiento.setCodigoEmpresa((String)valor[0]);
+				cumplimiento.setDescipcionCortaEmpresa((String)valor[1]);
+				cumplimiento.setFormat12A((String)valor[2]);
+				cumplimiento.setFormat12B((String)valor[3]);
+				cumplimiento.setFormat12C((String)valor[4]);
+				cumplimiento.setFormat12D((String)valor[5]);
+				cumplimiento.setFormat13A((String)valor[6]);
+				cumplimiento.setFormat14A((String)valor[7]);
+				cumplimiento.setFormat14B((String)valor[8]);
+				cumplimiento.setFormat14C((String)valor[9]);
+				lista.add(cumplimiento);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 	
 }

@@ -10,8 +10,6 @@ import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
-import gob.osinergmin.fise.domain.FiseFormato14AD;
-import gob.osinergmin.fise.domain.FiseFormato14ADOb;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 
 import java.util.HashMap;
@@ -20,6 +18,7 @@ import java.util.List;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,7 +84,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	}
 
 	@Transactional
-	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws ConstraintViolationException {
+	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws DataIntegrityViolationException {
 		return formato13ACDao.savecabecera(fiseC);
 	}
 
@@ -162,6 +161,11 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			formato13ADObDao.eliminarFormato13ADOb(observacion);
 		}
 		formato13ADDao.eliminarFormato13AD(fiseFormato13AD);
+	}
+
+	@Override
+	public FiseFormato13AC getCabecera(FiseFormato13ACPK fiseFormato13ACPK) {
+		return formato13ACDao.getCabecera(fiseFormato13ACPK);
 	}
 	
 }

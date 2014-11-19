@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +78,7 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 
 	@Override
 	@Transactional
-	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws ConstraintViolationException {
+	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws DataIntegrityViolationException {
 		FiseFormato13AC result = null;
 		try {
 			em.persist(fiseC);
@@ -92,11 +93,9 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 	public FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK){
 		FiseFormato13AC formato = null;
 		try{
-			//em.getTransaction().begin();
 			fiseFormato13ACPK.setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato13ACPK.getCodEmpresa(), ' ', 4));
 			formato = em.find(FiseFormato13AC.class, fiseFormato13ACPK);
-			//em.getTransaction().commit();
-			//return formato;
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -130,6 +129,52 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		} finally {
 			 em.close();
 		 }
+	}
+
+	@Override
+	public FiseFormato13AC getCabecera(FiseFormato13ACPK fiseFormato13ACPK) {
+		FiseFormato13AC cabecera=null;
+		try{
+			
+			StringBuffer q=new StringBuffer();
+			q.append("SELECT t FROM FiseFormato13AC t where 1=1 ");
+			
+			if(fiseFormato13ACPK!=null){
+				if(fiseFormato13ACPK.getCodEmpresa()!=null){
+					q.append("t.id.codEmpresa = :emp");
+				}if(fiseFormato13ACPK.getAnoPresentacion()>0){
+					q.append("t.id.anoPresentacion = :anio");
+				}if(fiseFormato13ACPK.getMesPresentacion()>0){
+					q.append("t.id.mesPresentacion = :mes");
+				}if(fiseFormato13ACPK.getEtapa()!=null){
+					q.append("t.id.etapa = :etp");
+				}
+				
+			}
+			Query query = em.createQuery(q.toString());
+			
+			if(fiseFormato13ACPK!=null){
+				if(fiseFormato13ACPK.getCodEmpresa()!=null){
+					query.setParameter("emp", fiseFormato13ACPK.getCodEmpresa());
+				}if(fiseFormato13ACPK.getAnoPresentacion()>0){
+					query.setParameter("anio", fiseFormato13ACPK.getAnoPresentacion());
+				}if(fiseFormato13ACPK.getMesPresentacion()>0){
+					query.setParameter("mes", fiseFormato13ACPK.getMesPresentacion());
+				}if(fiseFormato13ACPK.getEtapa()!=null){
+					query.setParameter("etapa", fiseFormato13ACPK.getEtapa());
+				}
+				
+			}
+			
+			cabecera=(FiseFormato13AC) query.getSingleResult();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally {
+			em.close();
+		}
+		return cabecera;
 	}
 	
 }

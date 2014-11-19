@@ -8,7 +8,10 @@ import gob.osinergmin.fise.util.FechaUtil;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,5 +72,95 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 
 		return lst;
 	}
+	
+	@Override
+	public void insertarFisePeriodoEnvio(FisePeriodoEnvio fisePeriodoEnvio) 
+			throws SQLException{
+		em.persist(fisePeriodoEnvio);
+		
+	}
+
+	@Override
+	public void actualizarFisePeriodoEnvio(FisePeriodoEnvio fisePeriodoEnvio) 
+			throws SQLException{
+		em.merge(fisePeriodoEnvio);		
+	}
+
+	@Override
+	public void eliminarFisePeriodoEnvio(FisePeriodoEnvio fisePeriodoEnvio) 
+			throws SQLException{
+		em.remove(fisePeriodoEnvio); 		
+	}
+	
+	@Override
+	public FisePeriodoEnvio obtenerFisePeriodoEnvio(Long id) 
+			throws SQLException{
+		return em.find(FisePeriodoEnvio.class, id);		
+	}
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FisePeriodoEnvio> buscarFisePeriodoEnvio(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,
+			String flagEnvio,String estado,Date fechaActual) throws SQLException{
+		
+		String q = "SELECT p FROM " + FisePeriodoEnvio.class.getName()
+				+ " p WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND p.codEmpresa = :codEmpresa ");
+		}
+		if(anioPres!=0){ 		
+			q = q.concat(" AND p.anoPresentacion =:anioPres");	
+		}
+		if(mesPres!=0){ 
+			q = q.concat(" AND p.mesPresentacion =:mesPres");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND p.id.etapa = :etapa ");
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			q = q.concat(" AND p.formato = :formato ");
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			q = q.concat(" AND p.estado = :estado ");
+		}
+		if(flagEnvio.equals("1")){ //SI
+			q = q.concat(" AND  p.desde <=:fechaActual AND p.hasta>=:fechaActual");
+		}else if(flagEnvio.equals("2")){//NO
+			q = q.concat(" AND  p.desde >=:fechaActual AND p.hasta<=:fechaActual ");
+		}
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			query.setParameter("codEmpresa", codEmpresa);
+		}
+		if(anioPres!=0){
+			query.setParameter("anioPres", anioPres);			
+		}
+		if(mesPres!=0){ 
+			query.setParameter("mesPres", mesPres);			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			query.setParameter("formato", formato);
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			query.setParameter("estado", estado);
+		}
+		if(flagEnvio.equals("1")){ //SI
+			query.setParameter("fechaActual", fechaActual);
+		}else if(flagEnvio.equals("2")){//NO
+			query.setParameter("fechaActual", fechaActual);
+		}
+		List<FisePeriodoEnvio> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
+	}
+	
+	
 
 }

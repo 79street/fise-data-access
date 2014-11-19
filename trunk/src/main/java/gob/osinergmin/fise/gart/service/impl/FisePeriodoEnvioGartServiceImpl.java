@@ -150,8 +150,8 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			bean.setMesPres(""+p.getMesPresentacion()); 
 			bean.setFormato(p.getFormato()); 			
 			bean.setEtapa(p.getEtapa());
-			bean.setDesde(""+p.getDesde()); 
-			bean.setHasta(""+p.getHasta()); 
+			bean.setDesde(FechaUtil.getFechaDateToString(p.getDesde()));  
+			bean.setHasta(FechaUtil.getFechaDateToString(p.getHasta())); 
 			bean.setDiasNotifCierre(""+p.getDiasNotificacionAntesCierre()); 
 			bean.setFlagAnioMesEjec(p.getFlagMostrarAnoMesEjec());
 			bean.setFlagEnvioObs(p.getFlagEnvioConObservaciones());

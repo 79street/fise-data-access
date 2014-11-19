@@ -23,5 +23,7 @@ public interface FisePeriodoEnvioGartService {
 			String flagEnvio,String estado,Date fechaActual)throws Exception;
 	
 	PeriodoEnvioBean buscarFisePeriodoEnvioEditar(String id) throws Exception;
+	
+	List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento();
 
 }

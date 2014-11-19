@@ -187,5 +187,10 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 				mesPres, formato, etapa, flagEnvio, estado, fechaActual);
 	}
 	
+	@Transactional
+	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(){
+		return fisePeriodoEnvioDao.listarFisePeriodoEnvioMesAnioEtapaCumplimiento();
+	}
+	
 	
 }

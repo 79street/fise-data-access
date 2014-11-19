@@ -7,8 +7,13 @@ import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
 
+
+
 import java.util.HashMap;
 import java.util.List;
+
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 public interface Formato13AGartService {
 
@@ -18,10 +23,13 @@ public interface Formato13AGartService {
 	HashMap<String, Object> mapearParametrosFormato13A(Formato13ACBean formato13ABean);
 	List<Formato13ADReportBean> listarLocalidadesPorZonasBenefFormato13ADByFormato13AC(FiseFormato13AC formato13AC);
 
-	FiseFormato13AC savecabecera(FiseFormato13AC fiseC)throws Exception;
+	FiseFormato13AC savecabecera(FiseFormato13AC fiseC)throws DataIntegrityViolationException;
+	FiseFormato13AC getCabecera(FiseFormato13ACPK fiseFormato13ACPK);
+	FiseFormato13AC updatecabecera(FiseFormato13AC fiseC)throws Exception;
+	
+	
 	FiseFormato13AD savedetalle(FiseFormato13AD fiseD)throws Exception;
 	FiseFormato13AC obtenerFormato13ACByPK(FiseFormato13ACPK fiseFormato13ACPK);
-	FiseFormato13AC updatecabecera(FiseFormato13AC fiseC);
 	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 	
 	Integer deletedetalle(String emp,Integer anio,Integer mes,String etapa);

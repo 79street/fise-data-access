@@ -121,7 +121,7 @@ public class FiseConstants {
 	public final static String COD_ERROR_F12_340 = "340";
 	public final static String COD_ERROR_F12_350 = "350";
 	//TXT
-	
+	public final static String TIPO_PERIODO_ENVIO = "PERIODO";
 	public final static String TIPO_FORMATO_12A = "F12A";
 	public final static String TIPO_FORMATO_12B = "F12B";
 	public final static String TIPO_FORMATO_12C = "F12C";

@@ -11,8 +11,6 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato12ADObPK</class>
 	<class>gob.osinergmin.fise.domain.FiseGrupoInformacion</class>
 	<class>gob.osinergmin.fise.domain.FiseObservacion</class>
-	<class>gob.osinergmin.fise.domain.FisePeriodoEnvio</class>
-	<class>gob.osinergmin.fise.domain.FisePeriodoEnvioPK</class>
 	<class>gob.osinergmin.fise.domain.FiseTipCostoGestion</class>
 	<class>gob.osinergmin.fise.domain.FiseTipDocRef</class>
 	<class>gob.osinergmin.fise.domain.FiseTipGasto</class>
@@ -46,6 +44,7 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADOb</class>
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADObPK</class>
 	<class>gob.osinergmin.fise.domain.AdmUbigeo</class>
+	<class>gob.osinergmin.fise.domain.FisePeriodoEnvio</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	      </properties>

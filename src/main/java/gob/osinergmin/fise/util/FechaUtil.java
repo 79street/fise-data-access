@@ -1,5 +1,7 @@
 package gob.osinergmin.fise.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +13,9 @@ public abstract class FechaUtil {
 		{"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"};
 	public static final String[] DIAS = 
 		{"Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"};
+	
+	private static DateFormat format_full = new SimpleDateFormat(
+			"dd/MM/yyyy HH:mm:ss");//HH:mm:ss
 	
 	public static Map<Long,String> cargarMapaMeses() {
 		
@@ -124,6 +129,23 @@ public abstract class FechaUtil {
 		     break;
 		 }
 		return mes;
+	}
+	
+	public static Date getFechaStringToDate(String date) {
+		Date fecha = null;
+		try {
+			fecha = format_full.parse(date);
+			return fecha;
+		} catch (Exception ex) {
+			System.out.println("Error al parsear la fecha");
+			return null;
+		}
+	}
+	
+	public static String getHoraActual() {
+	    Date ahora = new Date();
+	    SimpleDateFormat formateador = new SimpleDateFormat("HH:mm:ss");
+	    return formateador.format(ahora);
 	}
 	
 }

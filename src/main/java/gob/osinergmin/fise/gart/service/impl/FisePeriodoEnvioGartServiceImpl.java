@@ -80,8 +80,11 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			//periodo.setFormato(bean.getFormato());
 			//periodo.setEtapa(bean.getEtapa()); 
 			
-			//periodo.setDesde(null);
-			//periodo.setHasta(null);
+			logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
+			logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
+			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
+			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
+			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
 			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 

@@ -164,4 +164,29 @@ public abstract class FechaUtil {
 	    return formatHora.format(ahora);
 	}
 	
+	//comparar fechas sin importar hora minuto segundo
+	public static Date fechaDDMMYYYY(Date fecha){
+		DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String formatoDDMMYYY = formato.format(fecha);
+        Date fechaFinal = null;
+        try {
+        	fechaFinal = formato.parse(formatoDDMMYYY);
+        } catch (java.text.ParseException e) {
+        	e.printStackTrace();
+        }
+        return fechaFinal;
+    }
+	
+	public static boolean comparaRangoFecha( Date fecha, Date fechaInicio, Date fechaFin ){
+		boolean result = false;
+		Date fechaAComparar = fechaDDMMYYYY(fecha);
+		Date fechaInicial = fechaDDMMYYYY(fechaInicio);
+		Date fechaFinal = fechaDDMMYYYY(fechaFin);
+		if( (fechaAComparar.after(fechaInicial) || fechaAComparar.equals(fechaInicial)) 
+				&& (fechaAComparar.before(fechaFinal) || fechaAComparar.equals(fechaFinal))  ){
+			result = true;
+		}
+		return result;
+	}
+	
 }

@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -133,16 +134,13 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 
 	@Override
 	@Transactional
-	public FiseFormato13AD savedetalle(FiseFormato13AD fiseD) {
+	public FiseFormato13AD savedetalle(FiseFormato13AD fiseD) throws DataIntegrityViolationException{
 		FiseFormato13AD result = null;
 		try {
 
 			em.persist(fiseD);
 			result = fiseD;
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
+		}  finally {
 			em.close();
 
 		}

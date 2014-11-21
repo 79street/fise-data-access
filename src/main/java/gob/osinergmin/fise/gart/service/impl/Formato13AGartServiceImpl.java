@@ -89,7 +89,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	}
 
 	@Transactional
-	public FiseFormato13AD savedetalle(FiseFormato13AD fiseD) {
+	public FiseFormato13AD savedetalle(FiseFormato13AD fiseD) throws DataIntegrityViolationException{
 		return formato13ADDao.savedetalle(fiseD);
 	}
 

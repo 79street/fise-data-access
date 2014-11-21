@@ -191,8 +191,11 @@ public abstract class FechaUtil {
 	
 	public static String fecha_DD_MM_YYYY(Date fecha){
 		DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String cadenaFecha = formato.format(fecha);
-       return cadenaFecha.toString();
+		String cadenaFecha = "";
+		if( fecha!=null ){
+			cadenaFecha = formato.format(fecha);
+		}
+		return cadenaFecha.toString();
     }
 	
 	public static boolean fechaMayor(String fechaHasta,String fechaAmpl){

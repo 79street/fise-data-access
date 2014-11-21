@@ -195,4 +195,18 @@ public abstract class FechaUtil {
        return cadenaFecha.toString();
     }
 	
+	public static boolean fechaMayor(String fechaHasta,String fechaAmpl){
+		try {
+			Date fecHasta = format.parse(fechaHasta);
+			Date fecAmpl = format.parse(fechaAmpl);
+			 if (fecHasta.compareTo(fecAmpl) > 0) {
+		         return false;
+		     }else{
+		    	 return true;
+		     }
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 }

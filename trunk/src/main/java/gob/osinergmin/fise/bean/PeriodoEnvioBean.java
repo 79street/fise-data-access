@@ -30,6 +30,7 @@ public class PeriodoEnvioBean {
 	private String etapa;	
 	private String desde;//Date
 	private String hasta;//Date
+	private String fechaAmpl;//fecha ampliada
 	private String diasNotifCierre; //dias de notificacion antes de cierre
 	private String flagEnvioObs;//flag envio con observaciones
 	private String flagAnioMesEjec; //flag mostrar anio y mes de ejecucion
@@ -291,6 +292,12 @@ public class PeriodoEnvioBean {
 	}
 	public void setSecuencial(String secuencial) {
 		this.secuencial = secuencial;
+	}
+	public String getFechaAmpl() {
+		return fechaAmpl;
+	}
+	public void setFechaAmpl(String fechaAmpl) {
+		this.fechaAmpl = fechaAmpl;
 	}	
 		
 	

@@ -997,4 +997,24 @@ public class FiseConstants {
 	public final static String PARAM_MES_CUMPLI = "DESC_MES_PRESENTACION";
 	public final static String PARAM_ETAPA_CUMPLI = "DESC_ETAPA";
 	
+	//ACTA DE ENVIO Y VALIDACION
+	public final static String PARAM_IMG_LOGOTIPO = "IMG";
+	public final static String PARAM_USUARIO = "USUARIO";
+	public final static String PARAM_NOMBRE_FORMATO = "NOMBRE_FORMATO";
+	public final static String PARAM_FECHA_ENVIO = "FECHA_ENVIO";
+	public final static String PARAM_NRO_OBSERVACIONES = "NRO_OBSERVACIONES";
+	public final static String PARAM_MSG_OBSERVACIONES = "MSG_OBSERVACIONES";
+	public final static String PARAM_ANO_INICIO_VIGENCIA = "ANO_INICIO_VIGENCIA";
+	public final static String PARAM_ANO_FIN_VIGENCIA = "ANO_FIN_VIGENCIA";
+	public final static String PARAM_USUARIO_REGISTRO = "USUARIO_REGISTRO";
+	public final static String PARAM_FECHA_REGISTRO = "FECHA_REGISTRO";
+	public final static String PARAM_IMG_CHECKED = "CHECKED";
+	public final static String PARAM_IMG_UNCHECKED = "UNCHECKED";
+	public final static String PARAM_CHECKED_CUMPLEPLAZO = "CHECKED_CUMPLEPLAZO";
+	public final static String PARAM_CHECKED_OBSERVACION = "CHECKED_OBSERVACION";
+	public final static String PARAM_DESC_EMPRESA = "DESC_EMPRESA";
+	public final static String PARAM_ANO_PRESENTACION = "ANO_PRESENTACION";
+	public final static String PARAM_DESC_MES_PRESENTACION= "DESC_MES_PRESENTACION";
+	public final static String PARAM_ETAPA = "ETAPA";
+	
 }

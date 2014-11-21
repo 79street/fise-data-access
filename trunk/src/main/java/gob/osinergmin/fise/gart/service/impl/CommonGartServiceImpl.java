@@ -84,4 +84,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 		return commonDao.obtenerIdGrupoInformacion(anioPresentacion, mesPresentacion);
 	}
 	
+	@Override
+	@Transactional
+	public boolean fechaEnvioCumplePlazo(String tipoFormato, String codEmpresa, Long anoPresentacion, Long mesPresentacion, String etapa, String fechaEnvio) {
+		return commonDao.fechaEnvioCumplePlazo(tipoFormato, codEmpresa, anoPresentacion, mesPresentacion, etapa, fechaEnvio);
+	}
+	
 }

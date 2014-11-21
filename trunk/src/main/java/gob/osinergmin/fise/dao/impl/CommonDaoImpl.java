@@ -272,4 +272,38 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		return lista;
 	}
 	
+	@Override
+	public boolean fechaEnvioCumplePlazo(String tipoFormato, String codEmpresa, Long anoPresentacion, Long mesPresentacion, String etapa, String fechaEnvio){
+		 boolean result=false;
+		 String resultado = "";
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_EN_EL_PLAZO_FUN(?,?,?,?,?,?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1, codEmpresa);
+			query.setParameter(2, tipoFormato);
+			query.setParameter(3, anoPresentacion);
+			query.setParameter(4, mesPresentacion);
+			query.setParameter(5, etapa);
+			query.setParameter(6, fechaEnvio);
+			resultado = (String)query.getSingleResult();
+			
+			if( resultado != null ){
+				if( "S".equals(resultado.trim()) ){
+					result = true;
+				}else{
+					result = false;
+				}
+			}else{
+				result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return result;
+	}
+	
 }

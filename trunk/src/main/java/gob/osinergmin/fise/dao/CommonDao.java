@@ -18,5 +18,6 @@ public interface CommonDao {
 	Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion);
 	String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa);
 	List<CumplimientoReportBean> listarFormatolistaDet(long p_ano, long p_mes, String p_solicitud);
+	boolean fechaEnvioCumplePlazo(String tipoFormato, String codEmpresa, Long anoPresentacion, Long mesPresentacion, String etapa, String fechaEnvio);
 	
 }

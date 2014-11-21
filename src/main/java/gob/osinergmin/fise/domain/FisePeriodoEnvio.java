@@ -82,6 +82,10 @@ public class FisePeriodoEnvio implements Serializable {
 	private String estado;
 
 	private String etapa;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_AMPLIADA")
+	private Date fechaAmpliada;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -471,6 +475,14 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setDescMesPresentacion(String descMesPresentacion) {
 		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public Date getFechaAmpliada() {
+		return fechaAmpliada;
+	}
+
+	public void setFechaAmpliada(Date fechaAmpliada) {
+		this.fechaAmpliada = fechaAmpliada;
 	}
 	
 	

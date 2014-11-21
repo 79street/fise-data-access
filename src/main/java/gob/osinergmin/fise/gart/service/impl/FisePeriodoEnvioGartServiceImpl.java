@@ -5,6 +5,7 @@ import gob.osinergmin.fise.dao.FisePeriodoEnvioDao;
 import gob.osinergmin.fise.domain.FisePeriodoEnvio;
 import gob.osinergmin.fise.gart.service.FisePeriodoEnvioGartService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +42,9 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
 			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
 			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
+			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
+				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getHasta())); 
+			}			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
 			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 
@@ -84,6 +88,10 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
 			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
 			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
+			
+			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
+				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getHasta())); 
+			}	
 			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
@@ -155,6 +163,12 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			bean.setEtapa(p.getEtapa());
 			bean.setDesde(FechaUtil.getFechaDateToString(p.getDesde()));  
 			bean.setHasta(FechaUtil.getFechaDateToString(p.getHasta())); 
+			
+			if(p.getFechaAmpliada()!=null){ 
+				bean.setFechaAmpl(FechaUtil.getFechaDateToString(p.getFechaAmpliada())); 
+			}else{
+				bean.setFechaAmpl("");	
+			}			
 			bean.setDiasNotifCierre(""+p.getDiasNotificacionAntesCierre()); 
 			bean.setFlagAnioMesEjec(p.getFlagMostrarAnoMesEjec());
 			bean.setFlagEnvioObs(p.getFlagEnvioConObservaciones());

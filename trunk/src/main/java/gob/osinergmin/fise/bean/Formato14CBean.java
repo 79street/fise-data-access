@@ -32,12 +32,12 @@ public class Formato14CBean {
 	private String nombreSede;
 	private String nombreExel;
 	private String nombreText;
-	private String numRural;//numero de beneficiarios del periodo anterior rural
-	private String numUrbProv;//numero de beneficiarios del periodo anterior urbano provincias
+	private String numRural="0";//numero de beneficiarios del periodo anterior rural
+	private String numUrbProv="0";//numero de beneficiarios del periodo anterior urbano provincias
 	private String numUrbLima="0"; //numero de beneficiarios del periodo anterior lima
 	private String numTotal;//no editable
-	private String costoPromRural;//costo promedio mensual utiles rural
-	private String costoPromUrbProv;//costo promedio mensual utiles urbano provincias
+	private String costoPromRural="0.0";//costo promedio mensual utiles rural
+	private String costoPromUrbProv="0.0";//costo promedio mensual utiles urbano provincias
 	private String costoPromUrbLima="0.0";//costo promedio mensual utiles urbano lima
 	//datos de auditoria
 	private String usuario;

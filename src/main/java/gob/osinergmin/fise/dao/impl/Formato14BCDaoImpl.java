@@ -135,6 +135,7 @@ public class Formato14BCDaoImpl extends GenericDaoImpl implements Formato14BCDao
 		boolean existe = false;
 		try{
 			//em.getTransaction().begin();
+			fiseFormato14BC.getId().setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato14BC.getId().getCodEmpresa(), ' ', 4));
 			FiseFormato14BC formato = em.find(FiseFormato14BC.class, fiseFormato14BC.getId());
 			if( formato != null ){
 		    	existe = true;

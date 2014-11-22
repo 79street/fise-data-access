@@ -100,6 +100,7 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 		boolean existe = false;
 		try{
 			//em.getTransaction().begin();
+			fiseFormato12AC.getId().setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato12AC.getId().getCodEmpresa(), ' ', 4));
 			FiseFormato12AC formato = em.find(FiseFormato12AC.class, fiseFormato12AC.getId());
 			if( formato != null ){
 		    	existe = true;

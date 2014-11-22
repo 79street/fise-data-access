@@ -13,6 +13,10 @@ public class FiseConstants {
 	public final static String UNDERLINE = "_";
 	public final static String CERO = "0";
 	
+	public final static String SUFIJO_NOMBRE_INDIVIDUAL_ACTAREMISION = "01_ActaRemision";
+	public final static String SUFIJO_NOMBRE_INDIVIDUAL_FORMATO = "02_Formato";
+	public final static String SUFIJO_NOMBRE_INDIVIDUAL_ANEXOOBS = "03_AnexoObs";
+	
 	public final static String ITEM_SELECCIONE_VALUE = "";
 	public final static String ITEM_SELECCIONE_DESCRIPCION = "-Selecccione-";
 	public final static String ITEM_TODOS_VALUE = "";

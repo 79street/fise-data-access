@@ -1,5 +1,7 @@
 package gob.osinergmin.fise.util;
 
+import gob.osinergmin.fise.constant.FiseConstants;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 
@@ -106,6 +108,24 @@ public class FormatoUtil {
 		    offset += array.length;
 		  }
 		  return result;
+	}
+	
+	public static String nombreIndividualActaRemision(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoFormato){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_ACTAREMISION+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
+	}
+	
+	public static String nombreIndividualFormato(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoFormato){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_FORMATO+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
+	}
+	
+	public static String nombreIndividualAnexoObs(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoFormato){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_ANEXOOBS+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
 	}
 	
 }

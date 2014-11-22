@@ -2177,7 +2177,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
 	@Override
 	@Transactional
-	public List<FiseFormato14CDOb> listaObservacionesF14C(FiseFormato14CD d) throws Exception{
+	public List<FiseFormato14CDOb> listaObservacionesF14C(FiseFormato14CD d) throws Exception{	
+	  logger.info("tamaño del codigo de empresa al validacion:  "+d.getId().getCodEmpresa().length()); 	
 	  return formato14CDObDao.buscarFiseFormato14CDOb(d.getId().getCodEmpresa(),
 				d.getId().getAnoPresentacion(), d.getId().getMesPresentacion(),
 				d.getId().getAnoInicioVigencia(), d.getId().getAnoFinVigencia(), 

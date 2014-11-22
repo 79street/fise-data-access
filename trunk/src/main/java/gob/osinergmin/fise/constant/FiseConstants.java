@@ -159,6 +159,7 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_VALIDACION_F14A = "ValidacionesF14A";
 	public final static String NOMBRE_EXCEL_VALIDACION_F14B = "ValidacionesF14B";
 	public final static String NOMBRE_EXCEL_VALIDACION_F14C = "ValidacionesF14C";
+	public final static String TIPO_FORMATO_CUMPLIMIENTO = "CUMPLIMIENTO";
 	
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
 	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";

@@ -60,6 +60,9 @@ public class FiseFormato13AC implements Serializable {
 	@Transient
 	private String descGrupoInformacion;
 	
+	@Transient
+	private String descEstado;
+	
 	//add
 	@Transient
 	private Long anoInicioVigenciaDetalle;
@@ -228,5 +231,15 @@ public class FiseFormato13AC implements Serializable {
 	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
 		this.fiseGrupoInformacion = fiseGrupoInformacion;
 	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+	
+	
 
 }

@@ -47,9 +47,13 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			}			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
-			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 
-			periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 
-			periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 
+			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec());
+			if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
+				periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
+			}
+			if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
+				periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
+			}			
 			periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
 			periodo.setEstado(bean.getEstado()); 
 			//auditoria
@@ -96,8 +100,12 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
 			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 
-			periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 
-			periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 
+			if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
+				periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
+			}
+			if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
+				periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
+			}			
 			periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
 			periodo.setEstado(bean.getEstado()); 
 			//auditoria

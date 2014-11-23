@@ -145,6 +145,9 @@ public class FisePeriodoEnvio implements Serializable {
 	@Transient
 	private String descMesPresentacion;	
 	
+	@Transient
+	private String descEstado;	
+	
 
 	public FisePeriodoEnvio() {
 	}
@@ -483,6 +486,14 @@ public class FisePeriodoEnvio implements Serializable {
 
 	public void setFechaAmpliada(Date fechaAmpliada) {
 		this.fechaAmpliada = fechaAmpliada;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
 	}
 	
 	

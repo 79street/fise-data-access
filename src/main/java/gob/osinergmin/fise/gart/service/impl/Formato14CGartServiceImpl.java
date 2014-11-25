@@ -2353,7 +2353,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		bean.setAnioPresent(formato.getId().getAnoPresentacion());
 		bean.setAnioInicioVigencia(formato.getId().getAnoInicioVigencia());
 		bean.setAnioFinVigencia(formato.getId().getAnoFinVigencia());
-		bean.setNombreSede(formato.getNombreSede());
+		bean.setNombreSede(""+formato.getNombreSede());
 		// ------- sumatoria por total de las 3 zonas-------------
 		long totalCantBeneficiarios = (0);
 		long totalCantCoordinador = (0);
@@ -2404,9 +2404,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCDR(d.getCostoDirecto() != null ? d.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoCoordCantCIR(d.getCantCostIndirecto() != null ? d.getCantCostIndirecto() : new Long(0));
 					bean.setCostoCoordCIR(d.getCostoIndirecto() != null ? d.getCostoIndirecto() : new BigDecimal(0));
-					BigDecimal costoTotalCoordR = ((d.getCostoDirecto()	.multiply(new BigDecimal(d.getCantCostDirecto())))).add((d
-											.getCostoIndirecto().multiply(new BigDecimal(
-													d.getCantCostIndirecto()))));
+					BigDecimal costoTotalCoordR = ((bean.getCostoCoordCDR()	.multiply(new BigDecimal(bean.getCostoCoordCantCDR())))).add(
+							(bean.getCostoCoordCIR().multiply(new BigDecimal(
+													bean.getCostoCoordCantCIR()))));
 					bean.setCostoCoordCostoTotR(costoTotalCoordR);
 
 					totalCantCoordinador = totalCantCoordinador
@@ -2432,21 +2432,18 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCantCDR(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoSuperCDR(d.getCostoDirecto() != null ? d
+					bean.setCostoSuperCDR(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoSuperCantCIR(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoSuperCIR(d.getCostoIndirecto() != null ? d
+					bean.setCostoSuperCIR(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalSupeR = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalSupeR = ((bean.getCostoSuperCDR()
+							.multiply(new BigDecimal(bean.getCostoSuperCantCDR())))).add(
+									(bean.getCostoSuperCIR().multiply(new BigDecimal(
+							bean.getCostoSuperCantCIR()))));
 					bean.setCostoSuperCostoTotR(costoTotalSupeR);
 
 					totalCantSupervisor = totalCantSupervisor
@@ -2472,21 +2469,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCantCDR(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoGestCDR(d.getCostoDirecto() != null ? d
+					bean.setCostoGestCDR(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoGestCantCIR(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoGestCIR(d.getCostoIndirecto() != null ? d
+					bean.setCostoGestCIR(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalGestR = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalGestR = ((bean.getCostoGestCDR()
+							.multiply(new BigDecimal(bean.getCostoGestCantCDR())))).add((bean.getCostoGestCIR().multiply(new BigDecimal(
+									bean.getCostoGestCantCIR()))));
 					bean.setCostoGestCostoTotR(costoTotalGestR);
 
 					totalCantGestor = totalCantGestor
@@ -2511,21 +2504,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCantCDR(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoAsistCDR(d.getCostoDirecto() != null ? d
+					bean.setCostoAsistCDR(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoAsistCantCIR(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoAsistCIR(d.getCostoIndirecto() != null ? d
+					bean.setCostoAsistCIR(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalAsistR = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalAsistR = ((bean.getCostoAsistCDR()
+							.multiply(new BigDecimal(bean.getCostoAsistCantCDR())))).add((bean.getCostoAsistCIR().multiply(new BigDecimal(
+									bean.getCostoAsistCantCIR()))));
 					bean.setCostoAsistCostoTotR(costoTotalAsistR);
 
 					totalCantAsist = totalCantAsist
@@ -2564,21 +2553,18 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCantCDP(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoCoordCDP(d.getCostoDirecto() != null ? d
+					bean.setCostoCoordCDP(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoCoordCantCIP(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoCoordCIP(d.getCostoIndirecto() != null ? d
+					bean.setCostoCoordCIP(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalCoordP = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalCoordP = ((bean.getCostoCoordCDP()
+							.multiply(new BigDecimal(bean.getCostoCoordCantCDP())))).add((bean.getCostoCoordCIP().multiply(new BigDecimal(
+									bean.getCostoCoordCantCIP()))));
+					
 					bean.setCostoCoordCstoTotP(costoTotalCoordP);
 
 					totalCantCoordinador = totalCantCoordinador
@@ -2604,21 +2590,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCantCDP(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoSuperCDP(d.getCostoDirecto() != null ? d
+					bean.setCostoSuperCDP(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoSuperCantCIP(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoSuperCIP(d.getCostoIndirecto() != null ? d
+					bean.setCostoSuperCIP(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalSupeP = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalSupeP = ((bean.getCostoSuperCDP()
+							.multiply(new BigDecimal(bean.getCostoSuperCantCDP())))).add((bean.getCostoSuperCIP().multiply(new BigDecimal(
+									bean.getCostoSuperCantCIP()))));
 					bean.setCostoSuperCstoTotP(costoTotalSupeP);
 
 					totalCantSupervisor = totalCantSupervisor
@@ -2644,21 +2626,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCantCDP(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoGestCDP(d.getCostoDirecto() != null ? d
+					bean.setCostoGestCDP(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoGestCantCIP(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoGestCIP(d.getCostoIndirecto() != null ? d
+					bean.setCostoGestCIP(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalGestP = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalGestP = ((bean.getCostoGestCDP()
+							.multiply(new BigDecimal(bean.getCostoGestCantCDP())))).add((bean.getCostoGestCIP().multiply(new BigDecimal(
+									bean.getCostoGestCantCIP()))));
 					bean.setCostoGestCstoTotP(costoTotalGestP);
 
 					totalCantGestor = totalCantGestor
@@ -2683,21 +2661,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCantCDP(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoAsistCDP(d.getCostoDirecto() != null ? d
+					bean.setCostoAsistCDP(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoAsistCantCIP(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoAsistCIP(d.getCostoIndirecto() != null ? d
+					bean.setCostoAsistCIP(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalAsistP = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalAsistP = ((bean.getCostoAsistCDP()
+							.multiply(new BigDecimal(bean.getCostoAsistCantCDP())))).add((bean.getCostoAsistCIP().multiply(new BigDecimal(
+									bean.getCostoAsistCantCIP()))));
 					bean.setCostoAsistCstoTotP(costoTotalAsistP);
 
 					totalCantAsist = totalCantAsist
@@ -2736,21 +2710,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCantCDL(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoCoordCDL(d.getCostoDirecto() != null ? d
+					bean.setCostoCoordCDL(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoCoordCantCIL(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoCoordCIL(d.getCostoIndirecto() != null ? d
+					bean.setCostoCoordCIL(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalCoordL = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalCoordL = ((bean.getCostoCoordCDL()
+							.multiply(new BigDecimal(bean.getCostoCoordCantCDL())))).add((bean.getCostoCoordCIL().multiply(new BigDecimal(
+									bean.getCostoCoordCantCIL()))));
 					bean.setCostoCoordCstoTotL(costoTotalCoordL);
 
 					totalCantCoordinador = totalCantCoordinador
@@ -2776,21 +2746,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCantCDL(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoSuperCDL(d.getCostoDirecto() != null ? d
+					bean.setCostoSuperCDL(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoSuperCantCIL(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoSuperCIL(d.getCostoIndirecto() != null ? d
+					bean.setCostoSuperCIL(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalSupeL = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalSupeL = ((bean.getCostoSuperCDL()
+							.multiply(new BigDecimal(bean.getCostoSuperCantCDL())))).add((bean.getCostoSuperCIL().multiply(new BigDecimal(
+									bean.getCostoSuperCantCIL()))));
 					bean.setCostoSuperCstoTotL(costoTotalSupeL);
 
 					totalCantSupervisor = totalCantSupervisor
@@ -2816,8 +2782,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCantCDL(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoGestCDL(d.getCostoDirecto() != null ? d
+					bean.setCostoGestCDL(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoGestCantCIL(d
 							.getCantCostIndirecto() != null ? d
@@ -2826,11 +2791,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 							.getCostoIndirecto() != null ? d
 							.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalGestL = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalGestL = ((bean.getCostoGestCDL()
+							.multiply(new BigDecimal(bean.getCostoGestCantCDL())))).add((bean.getCostoGestorCIL().multiply(new BigDecimal(
+									bean.getCostoGestCantCIL()))));
 					bean.setCostoGestCstoTotL(costoTotalGestL);
 
 					totalCantGestor = totalCantGestor
@@ -2855,21 +2818,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCantCDL(d
 							.getCantCostDirecto() != null ? d
 							.getCantCostDirecto() : new Long(0));
-					bean
-							.setCostoAsistCDL(d.getCostoDirecto() != null ? d
+					bean.setCostoAsistCDL(d.getCostoDirecto() != null ? d
 									.getCostoDirecto() : new BigDecimal(0));
 					bean.setCostoAsistCantCIL(d
 							.getCantCostIndirecto() != null ? d
 							.getCantCostIndirecto() : new Long(0));
-					bean
-							.setCostoAsistCIL(d.getCostoIndirecto() != null ? d
+					bean.setCostoAsistCIL(d.getCostoIndirecto() != null ? d
 									.getCostoIndirecto() : new BigDecimal(0));
 
-					BigDecimal costoTotalAsistL = ((d.getCostoDirecto()
-							.multiply(new BigDecimal(d
-									.getCantCostDirecto())))).add((d
-							.getCostoIndirecto().multiply(new BigDecimal(
-							d.getCantCostIndirecto()))));
+					BigDecimal costoTotalAsistL = ((bean.getCostoAsistCDL()
+							.multiply(new BigDecimal(bean.getCostoAsistCantCDL())))).add((bean.getCostoAsistCIL().multiply(new BigDecimal(
+									bean.getCostoAsistCantCIL()))));
 					bean.setCostoAsistCstoTotL(costoTotalAsistL);
 
 					totalCantAsist = totalCantAsist

@@ -2410,19 +2410,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCostoTotR(costoTotalCoordR);
 
 					totalCantCoordinador = totalCantCoordinador
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoCoordCantCDR()
+							+ bean.getCostoCoordCantCIR();
 					totalSumaCoordinador = totalSumaCoordinador
 							.add(costoTotalCoordR);
 
 					totalCantCDTotalR = totalCantCDTotalR
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalR = totalSumaCDTotalR.add(d
-							.getCostoDirecto());
+							+ bean.getCostoCoordCantCDR();
+					totalSumaCDTotalR = totalSumaCDTotalR.add(bean.getCostoCoordCDR());
 					totalCantCITotalR = totalCantCITotalR
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalR = totalSumaCITotalR.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoCoordCantCIR();
+					totalSumaCITotalR = totalSumaCITotalR.add(bean.getCostoCoordCIR());
 					totalSumaCostoTotalR = totalSumaCostoTotalR
 							.add(costoTotalCoordR);
 
@@ -2447,19 +2445,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCostoTotR(costoTotalSupeR);
 
 					totalCantSupervisor = totalCantSupervisor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoSuperCantCDR()
+							+ bean.getCostoSuperCantCIR();
 					totalSumaSupervisor = totalSumaSupervisor
 							.add(costoTotalSupeR);
 
 					totalCantCDTotalR = totalCantCDTotalR
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalR = totalSumaCDTotalR.add(d
-							.getCostoDirecto());
+							+ bean.getCostoSuperCantCDR();
+					totalSumaCDTotalR = totalSumaCDTotalR.add(bean.getCostoSuperCDR());
 					totalCantCITotalR = totalCantCITotalR
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalR = totalSumaCITotalR.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoSuperCantCIR();
+					totalSumaCITotalR = totalSumaCITotalR.add(bean.getCostoSuperCIR());
 					totalSumaCostoTotalR = totalSumaCostoTotalR
 							.add(costoTotalSupeR);
 
@@ -2483,18 +2479,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCostoTotR(costoTotalGestR);
 
 					totalCantGestor = totalCantGestor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoGestCantCDR()
+							+ bean.getCostoGestCantCIR();
 					totalSumaGestor = totalSumaGestor.add(costoTotalGestR);
 
 					totalCantCDTotalR = totalCantCDTotalR
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalR = totalSumaCDTotalR.add(d
-							.getCostoDirecto());
+							+ bean.getCostoGestCantCDR();
+					totalSumaCDTotalR = totalSumaCDTotalR.add(bean.getCostoGestCDR());
 					totalCantCITotalR = totalCantCITotalR
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalR = totalSumaCITotalR.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoGestCantCIR();
+					totalSumaCITotalR = totalSumaCITotalR.add(bean.getCostoGestCIR());
 					totalSumaCostoTotalR = totalSumaCostoTotalR
 							.add(costoTotalGestR);
 
@@ -2518,18 +2512,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCostoTotR(costoTotalAsistR);
 
 					totalCantAsist = totalCantAsist
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoAsistCantCDR()
+							+ bean.getCostoAsistCantCIR();
 					totalSumaAsist = totalSumaAsist.add(costoTotalAsistR);
 
 					totalCantCDTotalR = totalCantCDTotalR
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalR = totalSumaCDTotalR.add(d
-							.getCostoDirecto());
+							+ bean.getCostoAsistCantCDR();
+					totalSumaCDTotalR = totalSumaCDTotalR.add(bean.getCostoAsistCDR());
 					totalCantCITotalR = totalCantCITotalR
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalR = totalSumaCITotalR.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoAsistCantCIR();
+					totalSumaCITotalR = totalSumaCITotalR.add(bean.getCostoAsistCIR());
 					totalSumaCostoTotalR = totalSumaCostoTotalR
 							.add(costoTotalAsistR);
 				}
@@ -2568,19 +2560,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCstoTotP(costoTotalCoordP);
 
 					totalCantCoordinador = totalCantCoordinador
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoCoordCantCDP()
+							+ bean.getCostoCoordCantCIP();
 					totalSumaCoordinador = totalSumaCoordinador
 							.add(costoTotalCoordP);
 
 					totalCantCDTotalP = totalCantCDTotalP
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalP = totalSumaCDTotalP.add(d
-							.getCostoDirecto());
+							+ bean.getCostoCoordCantCDP();
+					totalSumaCDTotalP = totalSumaCDTotalP.add(bean.getCostoCoordCDP());
 					totalCantCITotalP = totalCantCITotalP
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalP = totalSumaCITotalP.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoCoordCantCIP();
+					totalSumaCITotalP = totalSumaCITotalP.add(bean.getCostoCoordCIP());
 					totalSumaCostoTotalP = totalSumaCostoTotalP
 							.add(costoTotalCoordP);
 
@@ -2604,19 +2594,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCstoTotP(costoTotalSupeP);
 
 					totalCantSupervisor = totalCantSupervisor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoSuperCantCDP()
+							+ bean.getCostoSuperCantCIP();
 					totalSumaSupervisor = totalSumaSupervisor
 							.add(costoTotalSupeP);
 
 					totalCantCDTotalP = totalCantCDTotalP
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalP = totalSumaCDTotalP.add(d
-							.getCostoDirecto());
+							+ bean.getCostoSuperCantCDP();
+					totalSumaCDTotalP = totalSumaCDTotalP.add(bean.getCostoSuperCDP());
 					totalCantCITotalP = totalCantCITotalP
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalP = totalSumaCITotalP.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoSuperCantCIP();
+					totalSumaCITotalP = totalSumaCITotalP.add(bean.getCostoSuperCIP());
 					totalSumaCostoTotalP = totalSumaCostoTotalP
 							.add(costoTotalSupeP);
 
@@ -2640,18 +2628,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCstoTotP(costoTotalGestP);
 
 					totalCantGestor = totalCantGestor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoGestCantCDP()
+							+ bean.getCostoGestCantCIP();
 					totalSumaGestor = totalSumaGestor.add(costoTotalGestP);
 
 					totalCantCDTotalP = totalCantCDTotalP
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalP = totalSumaCDTotalP.add(d
-							.getCostoDirecto());
+							+ bean.getCostoGestCantCDP();
+					totalSumaCDTotalP = totalSumaCDTotalP.add(bean.getCostoGestCDP());
 					totalCantCITotalP = totalCantCITotalP
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalP = totalSumaCITotalP.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoGestCantCIP();
+					totalSumaCITotalP = totalSumaCITotalP.add(bean.getCostoGestCIP());
 					totalSumaCostoTotalP = totalSumaCostoTotalP
 							.add(costoTotalGestP);
 
@@ -2675,18 +2661,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCstoTotP(costoTotalAsistP);
 
 					totalCantAsist = totalCantAsist
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoAsistCantCDP()
+							+ bean.getCostoAsistCantCIP();
 					totalSumaAsist = totalSumaAsist.add(costoTotalAsistP);
 
 					totalCantCDTotalP = totalCantCDTotalP
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalP = totalSumaCDTotalP.add(d
-							.getCostoDirecto());
+							+ bean.getCostoAsistCantCDP();
+					totalSumaCDTotalP = totalSumaCDTotalP.add(bean.getCostoAsistCDP());
 					totalCantCITotalP = totalCantCITotalP
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalP = totalSumaCITotalP.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoAsistCantCIP();
+					totalSumaCITotalP = totalSumaCITotalP.add(bean.getCostoAsistCIP());
 					totalSumaCostoTotalP = totalSumaCostoTotalP
 							.add(costoTotalAsistP);
 				}
@@ -2724,19 +2708,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoCoordCstoTotL(costoTotalCoordL);
 
 					totalCantCoordinador = totalCantCoordinador
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoCoordCantCDL()
+							+ bean.getCostoCoordCantCIL();
 					totalSumaCoordinador = totalSumaCoordinador
 							.add(costoTotalCoordL);
 
 					totalCantCDTotalL = totalCantCDTotalL
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalL = totalSumaCDTotalL.add(d
-							.getCostoDirecto());
+							+ bean.getCostoCoordCantCDL();
+					totalSumaCDTotalL = totalSumaCDTotalL.add(bean.getCostoCoordCDL());
 					totalCantCITotalL = totalCantCITotalL
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalL = totalSumaCITotalL.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoCoordCantCIL();
+					totalSumaCITotalL = totalSumaCITotalL.add(bean.getCostoCoordCIL());
 					totalSumaCostoTotalL = totalSumaCostoTotalL
 							.add(costoTotalCoordL);
 
@@ -2760,19 +2742,17 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoSuperCstoTotL(costoTotalSupeL);
 
 					totalCantSupervisor = totalCantSupervisor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoSuperCantCDL()
+							+ bean.getCostoSuperCantCIL();
 					totalSumaSupervisor = totalSumaSupervisor
 							.add(costoTotalSupeL);
 
 					totalCantCDTotalL = totalCantCDTotalL
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalL = totalSumaCDTotalL.add(d
-							.getCostoDirecto());
+							+ bean.getCostoSuperCantCDL();
+					totalSumaCDTotalL = totalSumaCDTotalL.add(bean.getCostoSuperCDL());
 					totalCantCITotalL = totalCantCITotalL
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalL = totalSumaCITotalL.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoSuperCantCIL();
+					totalSumaCITotalL = totalSumaCITotalL.add(bean.getCostoSuperCIL());
 					totalSumaCostoTotalL = totalSumaCostoTotalL
 							.add(costoTotalSupeL);
 
@@ -2797,18 +2777,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoGestCstoTotL(costoTotalGestL);
 
 					totalCantGestor = totalCantGestor
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoGestCantCDL()
+							+ bean.getCostoGestCantCIL();
 					totalSumaGestor = totalSumaGestor.add(costoTotalGestL);
 
 					totalCantCDTotalL = totalCantCDTotalL
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalL = totalSumaCDTotalL.add(d
-							.getCostoDirecto());
+							+ bean.getCostoGestCantCDL();
+					totalSumaCDTotalL = totalSumaCDTotalL.add(bean.getCostoGestCDL());
 					totalCantCITotalL = totalCantCITotalL
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalL = totalSumaCITotalL.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoGestCantCIL();
+					totalSumaCITotalL = totalSumaCITotalL.add(bean.getCostoGestorCIL());
 					totalSumaCostoTotalL = totalSumaCostoTotalL
 							.add(costoTotalGestL);
 
@@ -2832,18 +2810,16 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					bean.setCostoAsistCstoTotL(costoTotalAsistL);
 
 					totalCantAsist = totalCantAsist
-							+ d.getCantCostDirecto()
-							+ d.getCantCostIndirecto();
+							+ bean.getCostoAsistCantCDL()
+							+ bean.getCostoAsistCantCIL();
 					totalSumaAsist = totalSumaAsist.add(costoTotalAsistL);
 
 					totalCantCDTotalL = totalCantCDTotalL
-							+ d.getCantCostDirecto();
-					totalSumaCDTotalL = totalSumaCDTotalL.add(d
-							.getCostoDirecto());
+							+ bean.getCostoAsistCantCDL();
+					totalSumaCDTotalL = totalSumaCDTotalL.add(bean.getCostoAsistCDL());
 					totalCantCITotalL = totalCantCITotalL
-							+ d.getCantCostIndirecto();
-					totalSumaCITotalL = totalSumaCITotalL.add(d
-							.getCostoIndirecto());
+							+ bean.getCostoAsistCantCIL();
+					totalSumaCITotalL = totalSumaCITotalL.add(bean.getCostoAsistCIL());
 					totalSumaCostoTotalL = totalSumaCostoTotalL
 							.add(costoTotalAsistL);
 				}

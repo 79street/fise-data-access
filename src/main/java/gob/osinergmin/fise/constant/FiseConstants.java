@@ -601,7 +601,9 @@ public class FiseConstants {
 	public final static long TIPO_PERSONAL_GESTOR_COD = 3;
 	public final static long TIPO_PERSONAL_ASISTENTE_COD = 4;
 	
-    public final static String PARAM_NOMBRE_SEDE_F14C = "NOMBRE_SEDE";
+    public final static String PARAM_NOMBRE_SEDE_F14C = "NOMBRE_SEDE";    
+    public final static String PARAM_ANO_INI_VIG_F14C = "ANO_INICIO_VIGENCIA";
+    public final static String PARAM_ANO_FIn_VIG_F14C = "ANO_FIN_VIGENCIA";
 	
 	//------------------------------RURAL--------------------------
 	public final static String PARAM_NUMBENEF_EMPAD_CANT_R_F14C = "NUMBENEF_EMPAD_CANT_R";

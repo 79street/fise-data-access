@@ -2353,7 +2353,12 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		bean.setAnioPresent(formato.getId().getAnoPresentacion());
 		bean.setAnioInicioVigencia(formato.getId().getAnoInicioVigencia());
 		bean.setAnioFinVigencia(formato.getId().getAnoFinVigencia());
-		bean.setNombreSede(""+formato.getNombreSede());
+		if(formato.getNombreSede()!=null){
+			bean.setNombreSede(formato.getNombreSede());	
+		}else{
+			bean.setNombreSede("---");	
+		}
+		
 		// ------- sumatoria por total de las 3 zonas-------------
 		long totalCantBeneficiarios = (0);
 		long totalCantCoordinador = (0);
@@ -2911,6 +2916,12 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				f.getAnioPresent());
 		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRES_F12A,
 				f.getDescMesPresentacion());
+		
+		mapJRParams.put(FiseConstants.PARAM_ANO_INI_VIG_F14C,
+				f.getAnioInicioVigencia());		
+		
+		mapJRParams.put(FiseConstants.PARAM_ANO_FIn_VIG_F14C,
+				f.getAnioFinVigencia());
 
 		// ---------------RURAL-------------------------------------//
 		mapJRParams.put(FiseConstants.PARAM_NUMBENEF_EMPAD_CANT_R_F14C,

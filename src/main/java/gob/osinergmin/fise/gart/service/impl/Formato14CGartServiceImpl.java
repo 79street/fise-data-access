@@ -2826,13 +2826,13 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 
 			}
 
-			totalCantBeneficiarios = formato.getNumBenefEmpPerAntRural()
-					+ formato.getNumBenefEmpPerAntUrbProv()
-					+ formato.getNumBenefEmpPerAntUrbLima();
+			totalCantBeneficiarios = bean.getNroBenefCantR()
+					+ bean.getNroBenefCantP()
+					+ bean.getNroBenefCantL();
 		
-			SumaCostoPromedioMensual = formato.getCostoPromMenRural()
-					.add(formato.getCostoPromMenUrbLima())
-					.add(formato.getCostoPromMenUrbProv());
+			SumaCostoPromedioMensual = bean.getCostoPromMensCDR()
+					.add(bean.getCostoPromMensCDL())
+					.add(bean.getCostoPromMensCDP());
 		}		
 		// ------------ SUMA TOTAL DE LAS 3 regiones---------
 		bean.setSumaCantNroBenefT(totalCantBeneficiarios);

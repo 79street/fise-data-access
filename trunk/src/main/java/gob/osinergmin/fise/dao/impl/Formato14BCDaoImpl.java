@@ -4,8 +4,11 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.domain.FiseFormato14BC;
 import gob.osinergmin.fise.domain.FiseFormato14BCPK;
+import gob.osinergmin.fise.domain.FiseFormato14CC;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -148,6 +151,48 @@ public class Formato14BCDaoImpl extends GenericDaoImpl implements Formato14BCDao
 			 em.close();
 		 }
 		return existe;
+	}
+	
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato14BC> buscarFormato14BCReenvio(String codEmpresa, long anioPres, 
+			long mesPres, String etapa) throws SQLException{
+		
+		String q = "SELECT f FROM " + FiseFormato14BC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(anioPres!=0){ 		
+			q = q.concat(" AND f.id.anoPresentacion =:anioPres ");	
+		}
+		if(mesPres!=0){ 
+			q = q.concat(" AND f.id.mesPresentacion = :mesPres ");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		q = q.concat(" AND f.fechaEnvioDefinitivo IS NOT NULL ");
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			query.setParameter("codEmpresa", codEmpresa);
+		}
+		if(anioPres!=0){
+			query.setParameter("anioPres", anioPres);			
+		}
+		if(mesPres!=0){ 
+			query.setParameter("mesPres", mesPres);	
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato14BC> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
 	}
 
 }

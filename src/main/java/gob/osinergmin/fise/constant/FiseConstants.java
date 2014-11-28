@@ -71,6 +71,12 @@ public class FiseConstants {
 	public final static String SECTOR_TIPICO_SER_DESC = "ST-SER";
 	public final static String SECTOR_TIPICO_ESP_DESC = "ST-ESP";
 	
+	public final static long ETAPA_EJECUCION_IMPLEMENTACION_COD = 1;
+	public final static long ETAPA_EJECUCION_OPERATIVA_COD = 2;
+	
+	public final static String ETAPA_EJECUCION_IMPLEMENTACION_DESC = "Implementación";
+	public final static String ETAPA_EJECUCION_OPERATIVA_DESC = "Operativa";
+	
 	public final static String COD_SAVE= "SAVE";
 	public final static String COD_UPDATE= "UPDATE";
 	public final static String COD_GET= "GET";

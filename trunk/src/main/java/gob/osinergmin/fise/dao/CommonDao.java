@@ -15,7 +15,7 @@ public interface CommonDao {
 	int validarFormatos_12C12D13A(Formato12C12D13Generic formato, String tipoFormato, String usuario, String terminal);
 	int validarFormatos_14(Formato14Generic formato, String tipoFormato, String usuario, String terminal);
 	List<CorreoBean> obtenerListaCorreosDestinatarios();
-	Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion);
+	Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion, String frecuencia);
 	String obtenerEstadoProceso(String codEmpresa, String tipoFormato, long anoPresentacion, long mesPresentacion, String codEtapa);
 	List<CumplimientoReportBean> listarFormatolistaDet(long p_ano, long p_mes, String p_solicitud);
 	boolean fechaEnvioCumplePlazo(String tipoFormato, String codEmpresa, Long anoPresentacion, Long mesPresentacion, String etapa, String fechaEnvio);

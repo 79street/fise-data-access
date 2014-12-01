@@ -132,8 +132,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Override
 	@Transactional
-	public Long obtenerIdGrupoInformacion(Long anioPresentacion, Long mesPresentacion) {
-		return commonDao.obtenerIdGrupoInformacion(anioPresentacion, mesPresentacion);
+	public Long obtenerIdGrupoInformacion(Long anioPresentacion, Long mesPresentacion,String frecuencia) {
+		return commonDao.obtenerIdGrupoInformacion(anioPresentacion, mesPresentacion, frecuencia);
 	}
 	
 	@Override

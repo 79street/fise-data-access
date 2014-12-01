@@ -123,7 +123,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				cab.setNombreSede(bean.getNombreSede());
 				logger.info("Obtneniendo el id Grupo informacion: "); 
 				long idGrupoInf = commonDao.obtenerIdGrupoInformacion(Long.valueOf(bean.getAnioPres()),
-						Long.valueOf(bean.getMesPres())); 
+						Long.valueOf(bean.getMesPres()), FiseConstants.FRECUENCIA_BIENAL_DESCRIPCION); 
 				logger.info("El id Grupo informacion es  : " +idGrupoInf); 
 				if(idGrupoInf!=0){
 					inf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	

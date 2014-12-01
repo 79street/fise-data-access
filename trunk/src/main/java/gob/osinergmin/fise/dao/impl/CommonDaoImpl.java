@@ -169,14 +169,15 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 	/**Para obtener el id del grupo de informacion**/
 	
 	@Override
-	public Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion){
+	public Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion, String frecuencia){
      	Long valor = new Long(0); 
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE_GEN_PKG.FISE_GET_GRUPO_FUN (?,?) FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_GET_GRUPO_FUN (?,?,?) FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, anioPresentacion);
 			query.setParameter(2, mesPresentacion);
+			query.setParameter(3, frecuencia);
 			if(query.getSingleResult()!=null){
 			 BigDecimal codigo = (BigDecimal)query.getSingleResult();
 			 valor = codigo.longValue();

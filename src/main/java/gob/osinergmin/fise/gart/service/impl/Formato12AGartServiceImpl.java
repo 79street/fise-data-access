@@ -107,7 +107,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setId(id);
 			
 			FiseGrupoInformacion grupoInfo = null;
-			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent()); 
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent(), FiseConstants.FRECUENCIA_MENSUAL_DESCRIPCION); 
 			if(idGrupoInf!=0){
 				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
 			}	

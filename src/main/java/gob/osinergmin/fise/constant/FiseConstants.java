@@ -22,6 +22,9 @@ public class FiseConstants {
 	public final static String ITEM_TODOS_VALUE = "";
 	public final static String ITEM_TODOS_DESCRIPCION = "-Todos-";
 	
+	public final static String FRECUENCIA_MENSUAL_DESCRIPCION = "MENSUAL";
+	public final static String FRECUENCIA_BIENAL_DESCRIPCION = "BIENAL";
+	
 	public final static String ETAPA_SOLICITUD= "SOLICITUD";
 	public final static String ETAPA_LEVOBS= "LEV.OBS";
 	public final static String ETAPA_RECONSIDERACION= "RECONSIDERACION";

@@ -22,9 +22,6 @@ public class CfgTabla implements Serializable {
 	@Column(name="CAMPO_EMPRESA")
 	private String campoEmpresa;
 
-	@Column(name="CAMPO_GRUPO_HIS")
-	private String campoGrupoHis;
-
 	@Column(name="CAMPO_PERIODO")
 	private String campoPeriodo;
 
@@ -42,9 +39,6 @@ public class CfgTabla implements Serializable {
 
 	@Column(name="ESTADO_TABLA")
 	private String estadoTabla;
-
-	@Column(name="FLAG_PERIODO_ANTERIOR")
-	private String flagPeriodoAnterior;
 
 	private String grupo;
 
@@ -75,14 +69,6 @@ public class CfgTabla implements Serializable {
 
 	public void setCampoEmpresa(String campoEmpresa) {
 		this.campoEmpresa = campoEmpresa;
-	}
-
-	public String getCampoGrupoHis() {
-		return this.campoGrupoHis;
-	}
-
-	public void setCampoGrupoHis(String campoGrupoHis) {
-		this.campoGrupoHis = campoGrupoHis;
 	}
 
 	public String getCampoPeriodo() {
@@ -131,14 +117,6 @@ public class CfgTabla implements Serializable {
 
 	public void setEstadoTabla(String estadoTabla) {
 		this.estadoTabla = estadoTabla;
-	}
-
-	public String getFlagPeriodoAnterior() {
-		return this.flagPeriodoAnterior;
-	}
-
-	public void setFlagPeriodoAnterior(String flagPeriodoAnterior) {
-		this.flagPeriodoAnterior = flagPeriodoAnterior;
 	}
 
 	public String getGrupo() {

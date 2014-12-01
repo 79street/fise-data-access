@@ -19,8 +19,6 @@ public class CfgCampo implements Serializable {
 	@Column(name="ID_CAMPO")
 	private long idCampo;
 
-	private String clasificacion;
-
 	@Column(name="COD_CAMPO")
 	private String codCampo;
 
@@ -77,14 +75,6 @@ public class CfgCampo implements Serializable {
 
 	public void setIdCampo(long idCampo) {
 		this.idCampo = idCampo;
-	}
-
-	public String getClasificacion() {
-		return this.clasificacion;
-	}
-
-	public void setClasificacion(String clasificacion) {
-		this.clasificacion = clasificacion;
 	}
 
 	public String getCodCampo() {

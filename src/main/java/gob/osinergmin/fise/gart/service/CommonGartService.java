@@ -28,7 +28,7 @@ public interface CommonGartService {
 	
 	FiseGrupoInformacion obtenerFiseGrupoInformacionByPK(long id);
 	
-	Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion);
+	Long obtenerIdGrupoInformacion(Long anioPresentacion,Long mesPresentacion,String frecuencia);
 	
 	boolean fechaEnvioCumplePlazo(String tipoFormato, String codEmpresa, 
 			Long anoPresentacion, Long mesPresentacion, String etapa, String fechaEnvio);

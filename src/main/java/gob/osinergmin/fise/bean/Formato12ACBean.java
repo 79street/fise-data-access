@@ -63,6 +63,12 @@ public class Formato12ACBean implements Serializable {
 	
 	private String etapa;
 
+	private String descGrupoInformacion;
+	private String descEstado;
+	
+	private String  codEdelnor;
+	private String  codLuzSur;
+	
 	public Formato12ACBean(){
 		
 	}
@@ -420,6 +426,38 @@ public class Formato12ACBean implements Serializable {
 
 	public void setEtapa(String etapa) {
 		this.etapa = etapa;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getCodEdelnor() {
+		return codEdelnor;
+	}
+
+	public void setCodEdelnor(String codEdelnor) {
+		this.codEdelnor = codEdelnor;
+	}
+
+	public String getCodLuzSur() {
+		return codLuzSur;
+	}
+
+	public void setCodLuzSur(String codLuzSur) {
+		this.codLuzSur = codLuzSur;
 	}
 
 }

@@ -5,6 +5,7 @@ import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
 import gob.osinergmin.fise.bean.AutorizarReenvioBean;
+import gob.osinergmin.fise.bean.NotificacionBean;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 
 import java.util.List;
@@ -37,6 +38,9 @@ public interface CommonGartService {
 			String mesPres,String formato,String etapa) throws Exception;
 	
 	String actualizarFormatoReenvio(AutorizarReenvioBean bean) throws Exception;
+	
+	List<NotificacionBean> buscarNotificacion(String codEmpresa,
+			String flag,String etapa,Long idGrupoInf) throws Exception;
     
 
 }

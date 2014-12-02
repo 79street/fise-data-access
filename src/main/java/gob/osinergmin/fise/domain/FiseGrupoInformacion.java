@@ -1,7 +1,6 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class FiseGrupoInformacion implements Serializable {
 
 	private String descripcion;
 
-	private BigDecimal estado;
+	private Integer estado;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -58,6 +57,8 @@ public class FiseGrupoInformacion implements Serializable {
 
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
+	
+	private String tipo;
 
 	//bi-directional many-to-one association to FiseFormato12AC
 	@OneToMany(mappedBy="fiseGrupoInformacion")
@@ -106,11 +107,11 @@ public class FiseGrupoInformacion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public BigDecimal getEstado() {
+	public Integer getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(BigDecimal estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 
@@ -214,5 +215,15 @@ public class FiseGrupoInformacion implements Serializable {
 
 		return fiseFormato14CC;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 
 }

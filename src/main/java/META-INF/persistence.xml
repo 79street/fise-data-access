@@ -45,6 +45,18 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato13ADObPK</class>
 	<class>gob.osinergmin.fise.domain.AdmUbigeo</class>
 	<class>gob.osinergmin.fise.domain.FisePeriodoEnvio</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CC</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CCPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CD</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CDPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CDOb</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12CDObPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DC</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DCPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DD</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DDPK</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DDOb</class>
+	<class>gob.osinergmin.fise.domain.FiseFormato12DDObPK</class>
 		<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	      </properties>

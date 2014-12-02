@@ -6,10 +6,14 @@ import gob.osinergmin.fise.bean.CumplimientoReportBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -306,5 +310,84 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		 }
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarObsNotificacion(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT DISTINCT ");
+		sb.append(" c.COD_EMPRESA, ");//0		
+		sb.append(" c.ANO_PRESENTACION, ");//1
+		sb.append(" c.MES_PRESENTACION, ");//2		
+		if(FiseConstants.NOMBRE_FORMATO_12A.equals(formato)){ 			
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE.FISE_FORMATO_12A_C c , FISE.FISE_FORMATO_12A_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");			
+		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
+			sb.append(" c.ETAPA ");//3				
+			sb.append(" FROM FISE.FISE_FORMATO_13A_C c , FISE.FISE_FORMATO_13A_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");
+		}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){			
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE.FISE_FORMATO_14A_C c, FISE.FISE_FORMATO_14A_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");	
+		}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE.FISE_FORMATO_14B_C c , FISE.FISE_FORMATO_14B_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");	
+		}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE.FISE_FORMATO_14C_C c, FISE.FISE_FORMATO_14C_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");	
+		}		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+"' ");
+		}		
+		if(idGrupoInf!=0){			
+			sb.append(" AND c.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){
+			sb.append(" AND c.ETAPA = '"+etapa+"' ");
+		}		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}	
 	
 }

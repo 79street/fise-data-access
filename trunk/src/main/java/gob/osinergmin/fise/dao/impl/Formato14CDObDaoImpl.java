@@ -69,21 +69,36 @@ public class Formato14CDObDaoImpl extends GenericDaoImpl implements Formato14CDO
 		q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
 		q = q.concat(" AND f.id.anoPresentacion =:anioPres ");	
 		q = q.concat(" AND f.id.mesPresentacion =:mesPres ");
-		q = q.concat(" AND f.id.anoInicioVigencia =:anioInicio ");	
-		q = q.concat(" AND f.id.anoFinVigencia =:anioFin ");	
 		q = q.concat(" AND f.id.etapa =:etapa ");
-		q = q.concat(" AND f.id.idZonaBenef =:idZona ");
-		q = q.concat(" AND f.id.idTipPersonal =:idTipoPer ");
-		
+		if(anioInicioVige!=0){
+			q = q.concat(" AND f.id.anoInicioVigencia =:anioInicio ");		
+		}
+		if(anioFinVige!=0){
+			q = q.concat(" AND f.id.anoFinVigencia =:anioFin ");	
+		}
+		if(idZonaBenef!=0){
+			q = q.concat(" AND f.id.idZonaBenef =:idZona ");
+		}
+		if(idTipoPersonal!=0){
+			q = q.concat(" AND f.id.idTipPersonal =:idTipoPer ");
+		}		
 		Query query = em.createQuery(q); 		
 		query.setParameter("codEmpresa", codEmpresa);
 		query.setParameter("anioPres", anioPresentaion);
 		query.setParameter("mesPres", mesPresentacion);
-		query.setParameter("anioInicio", anioInicioVige);
-		query.setParameter("anioFin", anioFinVige);
 		query.setParameter("etapa", etapa);
-		query.setParameter("idZona", idZonaBenef);	
-		query.setParameter("idTipoPer", idTipoPersonal);		
+		if(anioInicioVige!=0){
+			query.setParameter("anioInicio", anioInicioVige);
+		}
+		if(anioFinVige!=0){
+			query.setParameter("anioFin", anioFinVige);
+		}
+		if(idZonaBenef!=0){
+			query.setParameter("idZona", idZonaBenef);	
+		}
+		if(idTipoPersonal!=0){
+			query.setParameter("idTipoPer", idTipoPersonal);	
+		}		
 		List<FiseFormato14CDOb> lista= query.getResultList();
 		 if(lista==null){
 			 return Collections.EMPTY_LIST;

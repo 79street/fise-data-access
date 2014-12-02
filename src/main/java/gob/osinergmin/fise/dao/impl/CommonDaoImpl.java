@@ -330,11 +330,32 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
 			sb.append(" AND c.ETAPA = o.ETAPA ");			
 		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
-			
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE.FISE_FORMATO_12B_C c , FISE.FISE_FORMATO_12B_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");			
 		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
-			
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//3			
+			sb.append(" FROM FISE.FISE_FORMATO_12C_C c , FISE.FISE_FORMATO_12C_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");	
 		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
-			
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//3			
+			sb.append(" FROM FISE.FISE_FORMATO_12D_C c , FISE.FISE_FORMATO_12D_D_OBS o ");		
+			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
+			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
+			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
+			sb.append(" AND c.ETAPA = o.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
 			sb.append(" c.ETAPA ");//3				
 			sb.append(" FROM FISE.FISE_FORMATO_13A_C c , FISE.FISE_FORMATO_13A_D_OBS o ");		

@@ -1036,8 +1036,8 @@ public class FiseConstants {
 	public final static String PARAM_DESC_MES_PRESENTACION= "DESC_MES_PRESENTACION";
 	public final static String PARAM_ETAPA = "ETAPA";
 	
-	public final static String MENSUAL = "M";
-	public final static String BIENAL = "B";
+	public final static String MENSUAL = "MENSUAL";
+	public final static String BIENAL = "BIENAL";
 	
 	//CODIGO DE ERRORES
 	//F14A

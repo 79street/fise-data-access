@@ -1,10 +1,11 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.bean.AutorizarReenvioBean;
 import gob.osinergmin.fise.bean.CorreoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
-import gob.osinergmin.fise.bean.AutorizarReenvioBean;
+import gob.osinergmin.fise.bean.NotificacionBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
@@ -27,6 +28,7 @@ import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.gart.service.CommonGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +60,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Autowired
 	@Qualifier("formato13ACDaoImpl")
-	private Formato13ACDao formato13ACDao;
-	
+	private Formato13ACDao formato13ACDao;	
 	
 	@Autowired
 	@Qualifier("formato14ACDaoImpl")
@@ -67,12 +68,34 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Autowired
 	@Qualifier("formato14BCDaoImpl")
-	private Formato14BCDao formato14BCDao;
-	
+	private Formato14BCDao formato14BCDao;	
 	
 	@Autowired
 	@Qualifier("formato14CCDaoImpl")
-	private Formato14CCDao formato14CCDao;	
+	private Formato14CCDao formato14CCDao;
+	
+	
+	/*
+	@Autowired
+	@Qualifier("formato12ADObDaoImpl")
+	private Formato12ADObDao formato12AObsDao;
+	
+	@Autowired
+	@Qualifier("formato13ADObDaoImpl")
+	private Formato13ADObDao formato13ADObDao;
+	
+	@Autowired
+	@Qualifier("formato14ADObDaoImpl")
+	private Formato14ADObDao formato14AObsDao;
+	
+	@Autowired
+	@Qualifier("formato14BDObDaoImpl")
+	private Formato14BDObDao formato14BObsDao;
+	
+	@Autowired
+	@Qualifier("formato14CDObDaoImpl")
+	private Formato14CDObDao formato14CDObDao;
+	*/
 	
 	
 	/*******Implementaion de metodos*********/
@@ -234,7 +257,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				}			
 			}	
 		} catch (Exception e) {		
-		  logger.info("Error al listar formato reenvio:  "+e);
+		  logger.error("Error al listar formato reenvio:  "+e);
 		}		
 		return lista;
 	}	
@@ -326,6 +349,120 @@ public class CommonGartServiceImpl implements CommonGartService {
 		}
 		return valor;
 		
+	}
+	
+	
+	@Transactional
+	@Override
+	public List<NotificacionBean> buscarNotificacion(String codEmpresa,
+			String flag,String etapa,Long idGrupoInf) throws Exception{
+		List<NotificacionBean> lista =null;
+		try {		
+			/**mensual = formatos 12A,12B,12C,12C
+			  bienal = formatos 13A,14A,14B,14C******/			
+			if(FiseConstants.MENSUAL.equals(flag)){
+				lista = new ArrayList<NotificacionBean>();
+				/**FORMATO 12A*/
+				 List<Object[]> lista12A = commonDao.listarObsNotificacion(codEmpresa, 
+							etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf);			
+				 logger.info("Tamanio de la lista :  "+lista12A.size()); 
+				 for(int i = 0; i < lista12A.size(); i++){					
+					NotificacionBean n = new NotificacionBean();
+					n.setCodEmpresa(codEmpresa); 
+					n.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
+					n.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
+					n.setEtapa(etapa);
+					n.setFormato(FiseConstants.NOMBRE_FORMATO_12A);				
+					n.setAnioEjec(String.valueOf(((BigDecimal)lista12A.get(i)[3] == null) ? "---" :lista12A.get(i)[3]));
+					n.setMesEjec(String.valueOf(((BigDecimal)lista12A.get(i)[4] == null) ? "00" :lista12A.get(i)[4]));
+					n.setAnioIniVig("---");
+					n.setAnioFinVig("---");
+					lista.add(n);
+				 }				
+			   /**FORMATO 12B*/
+				
+			   /**FORMATO 12C*/
+				
+				
+			  /**FORMATO 12D*/
+				
+			}else if(FiseConstants.BIENAL.equals(flag)){
+				lista = new ArrayList<NotificacionBean>();
+				/**FORMATO 13A*/
+			   List<Object[]> lista13A = commonDao.listarObsNotificacion(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf);			
+			   logger.info("Tamanio de la lista :  "+lista13A.size()); 
+			   for(int i = 0; i < lista13A.size(); i++){				
+					NotificacionBean n = new NotificacionBean();
+					n.setCodEmpresa(codEmpresa); 
+					n.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
+					n.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
+					n.setEtapa(etapa);
+					n.setFormato(FiseConstants.NOMBRE_FORMATO_13A); 
+					n.setAnioEjec("---");
+					n.setMesEjec("00");
+					n.setAnioIniVig("---");
+					n.setAnioFinVig("---");
+					lista.add(n);
+				}				
+				/**FORMATO 14A*/
+			   List<Object[]> lista14A = commonDao.listarObsNotificacion(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf);			
+			   logger.info("Tamanio de la lista :  "+lista14A.size()); 
+			   for(int i = 0; i < lista14A.size(); i++){
+					NotificacionBean n = new NotificacionBean();
+					n.setCodEmpresa(codEmpresa); 
+					n.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
+					n.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
+					n.setEtapa(etapa);
+					n.setFormato(FiseConstants.NOMBRE_FORMATO_14A); 	
+					n.setAnioEjec("---");
+					n.setMesEjec("00");
+					n.setAnioIniVig(String.valueOf(((BigDecimal)lista14A.get(i)[3] == null) ? "---" :lista14A.get(i)[3]));
+					n.setAnioFinVig(String.valueOf(((BigDecimal)lista14A.get(i)[4] == null) ? "---" :lista14A.get(i)[4]));					
+					lista.add(n);
+				}
+			   List<Object[]> lista14B = commonDao.listarObsNotificacion(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf);			
+			   logger.info("Tamanio de la lista :  "+lista14B.size()); 
+			   for(int i = 0; i < lista14B.size(); i++){
+					NotificacionBean n = new NotificacionBean();
+					n.setCodEmpresa(codEmpresa); 
+					n.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
+					n.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
+					n.setEtapa(etapa);
+					n.setFormato(FiseConstants.NOMBRE_FORMATO_14B); 	
+					n.setAnioEjec("---");
+					n.setMesEjec("00");
+					n.setAnioIniVig(String.valueOf(((BigDecimal)lista14B.get(i)[3] == null) ? "---" :lista14B.get(i)[3]));
+					n.setAnioFinVig(String.valueOf(((BigDecimal)lista14B.get(i)[4] == null) ? "---" :lista14B.get(i)[4]));									
+					lista.add(n);
+				}
+				/**FORMATO 14C*/				
+			   List<Object[]> lista14C = commonDao.listarObsNotificacion(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf);			
+			   logger.info("Tamanio de la lista :  "+lista14C.size());
+			   for(int i = 0; i < lista14C.size(); i++){
+					NotificacionBean n = new NotificacionBean();
+					n.setCodEmpresa(codEmpresa); 
+					n.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
+					n.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
+					n.setEtapa(etapa);
+					n.setFormato(FiseConstants.NOMBRE_FORMATO_14C); 
+					n.setAnioEjec("---");
+					n.setMesEjec("00");
+					n.setAnioIniVig(String.valueOf(((BigDecimal)lista14C.get(i)[3] == null) ? "---" :lista14C.get(i)[3]));
+					n.setAnioFinVig(String.valueOf(((BigDecimal)lista14C.get(i)[4] == null) ? "---" :lista14C.get(i)[4]));					
+					lista.add(n);
+				}		
+			}else{
+				lista = new ArrayList<NotificacionBean>();	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Ocurrio un error al listar notificacion:  "+e); 
+		}
+	  return lista;
 	}
 	
 	

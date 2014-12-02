@@ -325,80 +325,80 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE.FISE_FORMATO_12A_C c , FISE.FISE_FORMATO_12A_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");			
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");			
 		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
 			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE.FISE_FORMATO_12B_C c , FISE.FISE_FORMATO_12B_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");			
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");			
 		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
 			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE.FISE_FORMATO_12C_C c , FISE.FISE_FORMATO_12C_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");	
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");	
 		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
 			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE.FISE_FORMATO_12D_C c , FISE.FISE_FORMATO_12D_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
 			sb.append(" c.ETAPA ");//3				
 			sb.append(" FROM FISE.FISE_FORMATO_13A_C c , FISE.FISE_FORMATO_13A_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){			
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE.FISE_FORMATO_14A_C c, FISE.FISE_FORMATO_14A_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");	
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");	
 		}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){ 
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE.FISE_FORMATO_14B_C c , FISE.FISE_FORMATO_14B_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");	
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");	
 		}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(formato)){ 
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE.FISE_FORMATO_14C_C c, FISE.FISE_FORMATO_14C_D_OBS o ");		
-			sb.append(" WHERE c.COD_EMPRESA = o.COD_EMPRESA");
-			sb.append(" AND c.ANO_PRESENTACION = o.ANO_PRESENTACION ");
-			sb.append(" AND c.MES_PRESENTACION = o.MES_PRESENTACION ");
-			sb.append(" AND c.ETAPA = o.ETAPA ");	
+			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
+			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
+			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
+			sb.append(" AND o.ETAPA = c.ETAPA ");	
 		}		
 		if(FormatoUtil.isNotBlank(codEmpresa)){
-			sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+"' ");
+			sb.append(" AND o.COD_EMPRESA = '"+codEmpresa+"' ");
 		}		
 		if(idGrupoInf!=0){			
 			sb.append(" AND c.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){
-			sb.append(" AND c.ETAPA = '"+etapa+"' ");
+			sb.append(" AND o.ETAPA = '"+etapa+"' ");
 		}		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	

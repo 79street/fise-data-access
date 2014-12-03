@@ -409,6 +409,31 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		} else {
 			return lista;
 		}		
-	}	
+	}
+	
+	/*****Funcion para realizar la notificacion del consolidado de observaciones****/
+	@Override
+	public String notificarValidacionMensual(String codEmpresa, String etapa, 
+			long idGrupoInf, String periodicidad, String user,String terminal) throws SQLException{
+		String mensaje="";
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_CREA_ETAPA_FUN(?,?,?,?,?,?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1, codEmpresa);
+			query.setParameter(2, etapa);
+			query.setParameter(3, periodicidad);//MENSUAL,BIENAL
+			query.setParameter(4, idGrupoInf);
+			query.setParameter(5, user);
+			query.setParameter(6, terminal);
+			mensaje = (String)query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return mensaje;
+	}
+	
 	
 }

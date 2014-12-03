@@ -7,12 +7,9 @@ import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 public interface Formato13AGartService {
@@ -37,5 +34,7 @@ public interface Formato13AGartService {
 	List<FiseFormato13ADOb> listarFormato13ADObByFormato13AD(FiseFormato13AD formato13AD);
 	void eliminarCabecera(FiseFormato13AC fiseFormato13AC);
 	void eliminarDetalle(FiseFormato13AD fiseFormato13AD);
+	
+	void eliminarObservaciones13A(List<FiseFormato13ADOb> listaObs) throws Exception;
 	
 }

@@ -49,5 +49,7 @@ public interface Formato14CGartService {
     HashMap<String, Object> mapearParametrosFormato14C(
 			Formato14CReportBean f) throws Exception;
     
+    void eliminarObservaciones14C(List<FiseFormato14CDOb> listObs) throws Exception;
+    
 
 }

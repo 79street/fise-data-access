@@ -41,6 +41,9 @@ public interface CommonGartService {
 	
 	List<NotificacionBean> buscarNotificacion(String codEmpresa,
 			String flag,String etapa,Long idGrupoInf) throws Exception;
+	
+	String notificarValidacionMensual(String codEmpresa, String etapa, 
+			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception;
     
 
 }

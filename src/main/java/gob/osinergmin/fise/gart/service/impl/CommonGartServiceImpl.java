@@ -75,31 +75,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 	private Formato14CCDao formato14CCDao;
 	
 	
-	/*
-	@Autowired
-	@Qualifier("formato12ADObDaoImpl")
-	private Formato12ADObDao formato12AObsDao;
-	
-	@Autowired
-	@Qualifier("formato13ADObDaoImpl")
-	private Formato13ADObDao formato13ADObDao;
-	
-	@Autowired
-	@Qualifier("formato14ADObDaoImpl")
-	private Formato14ADObDao formato14AObsDao;
-	
-	@Autowired
-	@Qualifier("formato14BDObDaoImpl")
-	private Formato14BDObDao formato14BObsDao;
-	
-	@Autowired
-	@Qualifier("formato14CDObDaoImpl")
-	private Formato14CDObDao formato14CDObDao;
-	*/
 	
 	
-	/*******Implementaion de metodos*********/
-	
+	/*******Implementaion de metodos*********/	
 	@Override
 	@Transactional
 	public int obtenerSecuencia() {
@@ -512,6 +490,13 @@ public class CommonGartServiceImpl implements CommonGartService {
 			logger.info("Ocurrio un error al listar notificacion:  "+e); 
 		}
 	  return lista;
+	}
+	
+	@Transactional
+	@Override
+	public String notificarValidacionMensual(String codEmpresa, String etapa, 
+			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception{
+		return commonDao.notificarValidacionMensual(codEmpresa, etapa, idGrupoInf, periodicidad, user, terminal);
 	}
 	
 	

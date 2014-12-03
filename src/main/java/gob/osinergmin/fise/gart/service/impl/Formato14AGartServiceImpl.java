@@ -988,4 +988,14 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		return dto;
 	}
 	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones14A(List<FiseFormato14ADOb> listaObs) throws Exception{	
+		for (FiseFormato14ADOb observacion : listaObs) {
+			formato14AObsDao.eliminarFormato14ADOb(observacion);
+		}		
+	}
+	
+	
 }

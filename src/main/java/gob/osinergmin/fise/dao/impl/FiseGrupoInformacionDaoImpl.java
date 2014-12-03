@@ -3,6 +3,7 @@ package gob.osinergmin.fise.dao.impl;
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
 import java.util.Collections;
@@ -36,6 +37,61 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 			 return lista;
 		 }	
 	}
+	
+	@Override
+	public void insertarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException{
+		em.persist(fiseGrupoInformacion);
+		
+	}
+
+	@Override
+	public void actualizarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException{
+		em.merge(fiseGrupoInformacion);		
+	}
+
+	@Override
+	public void eliminarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException{
+		em.remove(fiseGrupoInformacion); 		
+	}	
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseGrupoInformacion> buscarGrupoInformacion(String descripcion,String tipo,Integer estado) 
+			throws SQLException{
+		
+		String q = "SELECT g FROM " + FiseGrupoInformacion.class.getName()
+				+ " g WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(tipo)){ 
+			q = q.concat(" AND g.tipo = :tipo ");
+		}			
+		if(FormatoUtil.isNotBlank(descripcion)){ 
+			q = q.concat(" AND g.descripcion LIKE :descripcion ");
+		}
+		if(estado!=0){ 
+			q = q.concat(" AND g.estado = :estado ");
+		}
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(tipo)){ 
+			query.setParameter("tipo", tipo);
+		}			
+		if(FormatoUtil.isNotBlank(descripcion)){ 
+			String des = "%"+descripcion+"%";
+			query.setParameter("descripcion", des);
+		}
+		if(estado!=0){ 
+			query.setParameter("estado", estado);
+		}
+		List<FiseGrupoInformacion> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
+	}
+	
 	
 	
 

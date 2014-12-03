@@ -3154,5 +3154,40 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		return mapJRParams;
 	}
 	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones14C(List<FiseFormato14CDOb> listObs)  throws Exception{			
+		FiseFormato14CDOb objId =null;
+		try {
+			for (FiseFormato14CDOb o : listObs) {
+				FiseFormato14CDObPK idObs = new FiseFormato14CDObPK();	
+				idObs.setCodEmpresa(o.getId().getCodEmpresa()); 
+				idObs.setAnoPresentacion(o.getId().getAnoPresentacion());
+				idObs.setMesPresentacion(o.getId().getMesPresentacion()); 
+				idObs.setAnoInicioVigencia(o.getId().getAnoInicioVigencia()); 
+				idObs.setAnoFinVigencia(o.getId().getAnoFinVigencia()); 	
+				idObs.setEtapa(o.getId().getEtapa()); 				
+				idObs.setIdZonaBenef(o.getId().getIdZonaBenef()); 
+				idObs.setIdTipPersonal(o.getId().getIdTipPersonal()); 
+				idObs.setItemObservacion(o.getId().getItemObservacion()); 
+				if(idObs!=null){
+					/*Obtengo el objeto en session*/
+					objId = formato14CDObDao.obtenerFiseFormato14CDOb(idObs);
+					logger.info("objeto de observaciones en session"+objId); 	
+				}		
+				if(objId!=null){
+				   formato14CDObDao.eliminarFiseFormato14CDOb(objId); 	
+				}					
+			}			
+		} catch (Exception e) {
+			logger.error("Error al eliminar las observaciones"); 
+		}finally{
+			if(objId!=null){
+				objId =null;	
+			}
+		}
+	}
+	
 
 }

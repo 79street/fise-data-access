@@ -346,7 +346,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12A:  "+lista12A.size()); 
 				 for(int i = 0; i < lista12A.size(); i++){					
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -363,7 +363,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
 				 for(int i = 0; i < lista12B.size(); i++){					
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
 					n.setEtapa(etapa);
@@ -380,7 +380,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
 				 for(int i = 0; i < lista12C.size(); i++){					
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12C.get(i)[2]));
 					n.setEtapa(etapa);
@@ -400,7 +400,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
 				 for(int i = 0; i < lista12D.size(); i++){					
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12D.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12D.get(i)[2]));
 					n.setEtapa(etapa);
@@ -421,7 +421,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista13A:  "+lista13A.size()); 
 			   for(int i = 0; i < lista13A.size(); i++){				
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -438,7 +438,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14A:  "+lista14A.size()); 
 			   for(int i = 0; i < lista14A.size(); i++){
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -454,7 +454,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14B:  "+lista14B.size()); 
 			   for(int i = 0; i < lista14B.size(); i++){
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
 					n.setEtapa(etapa);
@@ -471,7 +471,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14C:  "+lista14C.size());
 			   for(int i = 0; i < lista14C.size(); i++){
 					NotificacionBean n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa); 
+					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
 					n.setEtapa(etapa);

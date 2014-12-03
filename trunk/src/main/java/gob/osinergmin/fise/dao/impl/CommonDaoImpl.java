@@ -392,7 +392,13 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" AND o.ETAPA = c.ETAPA ");	
 		}		
 		if(FormatoUtil.isNotBlank(codEmpresa)){
-			sb.append(" AND o.COD_EMPRESA = '"+codEmpresa+"' ");
+			if(codEmpresa.length()==3){
+				sb.append(" AND o.COD_EMPRESA = '"+codEmpresa+" "+"' ");	
+			}else if(codEmpresa.length()==2){
+				sb.append(" AND o.COD_EMPRESA = '"+codEmpresa+"  "+"' ");	
+			}else{
+				sb.append(" AND o.COD_EMPRESA = '"+codEmpresa+"' ");		
+			}			
 		}		
 		if(idGrupoInf!=0){			
 			sb.append(" AND c.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			

@@ -22,5 +22,6 @@ public interface Formato14AGartService {
 	List<FiseFormato14ADOb> listarFormato14ADObByFormato14AD(FiseFormato14AD formato14AD);
 	FiseFormato14AC modificarEnvioDefinitivoFormato14AC(Formato14ACBean formulario, FiseFormato14AC fiseFormato14AC) throws Exception;
 	
+	void eliminarObservaciones14A(List<FiseFormato14ADOb> listaObs) throws Exception;
 	
 }

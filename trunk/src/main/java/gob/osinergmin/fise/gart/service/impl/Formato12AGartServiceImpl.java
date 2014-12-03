@@ -717,4 +717,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		return dto;
 	}
 	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones12A(List<FiseFormato12ADOb> listaObs) throws Exception {	
+		for (FiseFormato12ADOb observacion : listaObs) {
+			formato12AObsDao.eliminarFormato12ADOb(observacion);
+		}
+	} 
+	
+	
 }

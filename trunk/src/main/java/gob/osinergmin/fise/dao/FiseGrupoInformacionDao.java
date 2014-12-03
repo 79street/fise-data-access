@@ -10,5 +10,19 @@ public interface FiseGrupoInformacionDao {
 	FiseGrupoInformacion obtenerFiseGrupoInformacionByPK(long id) throws SQLException;
 	
 	List<FiseGrupoInformacion> listarGrupoInformacion(String tipo) throws SQLException;
+	
+	void insertarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException;
+	
+	void actualizarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException;
+	
+	void eliminarGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) 
+			throws SQLException;
+	
+	List<FiseGrupoInformacion> buscarGrupoInformacion(String descripcion,String tipo,Integer estado ) 
+			throws SQLException;
+	
+	
 
 }

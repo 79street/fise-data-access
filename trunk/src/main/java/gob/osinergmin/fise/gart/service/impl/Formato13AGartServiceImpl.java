@@ -15,7 +15,6 @@ import gob.osinergmin.fise.gart.service.Formato13AGartService;
 import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -167,5 +166,15 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	public FiseFormato13AC getCabecera(FiseFormato13ACPK fiseFormato13ACPK) {
 		return formato13ACDao.getCabecera(fiseFormato13ACPK);
 	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones13A(List<FiseFormato13ADOb> listaObs) throws Exception{		
+		for (FiseFormato13ADOb observacion : listaObs) {
+			formato13ADObDao.eliminarFormato13ADOb(observacion);
+		}			
+	}
+	
 	
 }

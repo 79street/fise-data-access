@@ -22,4 +22,5 @@ public interface Formato14BGartService {
 	List<FiseFormato14BDOb> listarFormato14BDObByFormato14BD(FiseFormato14BD formato14BD);
 	FiseFormato14BC modificarEnvioDefinitivoFormato14BC(Formato14BCBean formulario, FiseFormato14BC fiseFormato14BC) throws Exception;
 
+	void eliminarObservaciones14B(List<FiseFormato14BDOb> listaObs) throws Exception;
 }

@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +28,8 @@ public class FiseGrupoInformacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_entity_seq_grupo_inf")
+	@SequenceGenerator(name="my_entity_seq_grupo_inf",sequenceName="FISE_GRUPO_INF_SEQ", allocationSize = 1)
 	@Column(name="ID_GRUPO_INFORMACION")
 	private long idGrupoInformacion;
 

@@ -2,7 +2,6 @@ package gob.osinergmin.fise.bean;
 import gob.osinergmin.fise.domain.AdmEmpresa;
 import gob.osinergmin.fise.domain.AdmUbigeo;
 import gob.osinergmin.fise.domain.FisePeriodoEnvio;
-import gob.osinergmin.fise.domain.FiseTipDocRef;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -33,7 +32,13 @@ public class Formato12CCBean implements Serializable {
 
 	private boolean admin;
 
+	private Long anoEjecucionHidden;
+	private Long mesEjecucionHidden;
+	private Long etapaEjecucionHidden;
+	
 	private String codigoEmpresa;
+	private String codigoEmpresaHidden;
+	
 	private Long anioPresentacion = 0L;
 	private Long mesPresentacion = 0L;
 	private Long anioEjecucion = 0L;
@@ -42,6 +47,8 @@ public class Formato12CCBean implements Serializable {
 	private Long nroItemEtapa = 0L;
 
 	private String periodoEnvio;
+	private String periodoEnvioHidden;
+	
 	private String flagPeriodoEjecucion;
 
 	//detalles
@@ -475,6 +482,36 @@ public class Formato12CCBean implements Serializable {
 	}
 	public void setListaTipoDocumento(Map<String, String> listaTipoDocumento) {
 		this.listaTipoDocumento = listaTipoDocumento;
+	}
+	public String getCodigoEmpresaHidden() {
+		return codigoEmpresaHidden;
+	}
+	public void setCodigoEmpresaHidden(String codigoEmpresaHidden) {
+		this.codigoEmpresaHidden = codigoEmpresaHidden;
+	}
+	public String getPeriodoEnvioHidden() {
+		return periodoEnvioHidden;
+	}
+	public void setPeriodoEnvioHidden(String periodoEnvioHidden) {
+		this.periodoEnvioHidden = periodoEnvioHidden;
+	}
+	public Long getAnoEjecucionHidden() {
+		return anoEjecucionHidden;
+	}
+	public void setAnoEjecucionHidden(Long anoEjecucionHidden) {
+		this.anoEjecucionHidden = anoEjecucionHidden;
+	}
+	public Long getMesEjecucionHidden() {
+		return mesEjecucionHidden;
+	}
+	public void setMesEjecucionHidden(Long mesEjecucionHidden) {
+		this.mesEjecucionHidden = mesEjecucionHidden;
+	}
+	public Long getEtapaEjecucionHidden() {
+		return etapaEjecucionHidden;
+	}
+	public void setEtapaEjecucionHidden(Long etapaEjecucionHidden) {
+		this.etapaEjecucionHidden = etapaEjecucionHidden;
 	}
 	
 	

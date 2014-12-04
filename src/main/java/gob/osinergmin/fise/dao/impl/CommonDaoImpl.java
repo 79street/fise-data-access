@@ -29,7 +29,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		int i=0;
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_CORR_ARCH_FUN FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_CORR_ARCH_FUN FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			BigDecimal secuencia = (BigDecimal)query.getSingleResult();
 			i = secuencia.intValue();
@@ -46,7 +46,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		int result = -1;
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("CALL FISE.FISE_GEN_PKG.FISE_VAL_FORM_PRC (?,?,?,?,?,?,?,?,?)");
+			jql.append("CALL FISE_GEN_PKG.FISE_VAL_FORM_PRC (?,?,?,?,?,?,?,?,?)");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, tipoFormato);
 			query.setParameter(2, formato.getCodigoEmpresa());
@@ -77,7 +77,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		int result = -1;
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("CALL FISE.FISE_GEN_PKG.FISE_VAL_FORM_PRC3 (?,?,?,?,?,?,?)");
+			jql.append("CALL FISE_GEN_PKG.FISE_VAL_FORM_PRC3 (?,?,?,?,?,?,?)");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, tipoFormato);
 			query.setParameter(2, formato.getCodigoEmpresa());
@@ -107,7 +107,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		try {
 			 
 			StringBuffer jql = new StringBuffer();
-			jql.append("CALL FISE.FISE_GEN_PKG.FISE_VAL_FORM_PRC2 (?,?,?,?,?,?,?,?,?)");
+			jql.append("CALL FISE_GEN_PKG.FISE_VAL_FORM_PRC2 (?,?,?,?,?,?,?,?,?)");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, tipoFormato);
 			query.setParameter(2, formato14.getCodigoEmpresa());
@@ -203,7 +203,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		String estado="";
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(?,?,?,?,?) FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(?,?,?,?,?) FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, codEmpresa);
 			query.setParameter(2, tipoFormato);
@@ -283,7 +283,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		 String resultado = "";
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_EN_EL_PLAZO_FUN(?,?,?,?,?,?) FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_EN_EL_PLAZO_FUN(?,?,?,?,?,?) FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, codEmpresa);
 			query.setParameter(2, tipoFormato);
@@ -324,7 +324,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//5				
-			sb.append(" FROM FISE.FISE_FORMATO_12A_C c , FISE.FISE_FORMATO_12A_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_12A_C c , FISE_FORMATO_12A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -333,7 +333,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//5				
-			sb.append(" FROM FISE.FISE_FORMATO_12B_C c , FISE.FISE_FORMATO_12B_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_12B_C c , FISE_FORMATO_12B_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -342,7 +342,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//3			
-			sb.append(" FROM FISE.FISE_FORMATO_12C_C c , FISE.FISE_FORMATO_12C_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_12C_C c , FISE_FORMATO_12C_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -351,14 +351,14 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
 			sb.append(" c.ETAPA ");//3			
-			sb.append(" FROM FISE.FISE_FORMATO_12D_C c , FISE.FISE_FORMATO_12D_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_12D_C c , FISE_FORMATO_12D_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
 			sb.append(" AND o.ETAPA = c.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
 			sb.append(" c.ETAPA ");//3				
-			sb.append(" FROM FISE.FISE_FORMATO_13A_C c , FISE.FISE_FORMATO_13A_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_13A_C c , FISE_FORMATO_13A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -367,7 +367,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
-			sb.append(" FROM FISE.FISE_FORMATO_14A_C c, FISE.FISE_FORMATO_14A_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_14A_C c, FISE_FORMATO_14A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -376,7 +376,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
-			sb.append(" FROM FISE.FISE_FORMATO_14B_C c , FISE.FISE_FORMATO_14B_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_14B_C c , FISE_FORMATO_14B_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -385,7 +385,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
 			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
 			sb.append(" c.ETAPA ");//5				
-			sb.append(" FROM FISE.FISE_FORMATO_14C_C c, FISE.FISE_FORMATO_14C_D_OBS o ");		
+			sb.append(" FROM FISE_FORMATO_14C_C c, FISE_FORMATO_14C_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
@@ -424,7 +424,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		String mensaje="";
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_CREA_ETAPA_FUN(?,?,?,?,?,?) FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_CREA_ETAPA_FUN(?,?,?,?,?,?) FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, codEmpresa);
 			query.setParameter(2, etapa);

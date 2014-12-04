@@ -35,7 +35,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			sql.append(" ANO_INICIO_VIGENCIA ANO_INICIO_VIGENCIA, ");
 			sql.append(" ANO_FIN_VIGENCIA ANO_FIN_VIGENCIA, ");
 			sql.append(" FLAG_HABILITA_COSTOS_D_I_F14C FLAG_HABILITA_COSTOS");
-			sql.append(" FROM FISE.FISE_PERIODO_ENVIO t");
+			sql.append(" FROM FISE_PERIODO_ENVIO t");
 			sql.append(" WHERE 1=1 ");
 			
 			if(FormatoUtil.isNotBlank(codEmpresa))
@@ -170,7 +170,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			sql.append(" select distinct ano_presentacion || LPAD(mes_presentacion, 2, '0') || ETAPA CODIGO,");
 			sql.append(" DECODE(MES_PRESENTACION,1,'Ene',2,'Feb',3,'Mar',4,'Abr',5,'May',6,'Jun',7,'Jul',8,'Ago',9,'Set',10,'Oct',11,'Nov',12,'Dic')");
 			sql.append(" || '-' || ANO_PRESENTACION || ' / ' || ETAPA DESCRIPCION");
-			sql.append(" FROM FISE.FISE_PERIODO_ENVIO t");
+			sql.append(" FROM FISE_PERIODO_ENVIO t");
 			//sql.append(" WHERE 1=1 ");
 			
 			sql.append(" order by 1 desc");

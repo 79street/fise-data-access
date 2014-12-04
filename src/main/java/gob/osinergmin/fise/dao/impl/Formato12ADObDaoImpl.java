@@ -22,7 +22,7 @@ public class Formato12ADObDaoImpl extends GenericDaoImpl implements Formato12ADO
 		try {
 			 
 			StringBuffer jql = new StringBuffer();
-			jql.append("CALL FISE.FISE_GEN_PKG.FISE_VAL_FORM_PRC (?,?,?,?,?,?,?,?,?)");
+			jql.append("CALL FISE_GEN_PKG.FISE_VAL_FORM_PRC (?,?,?,?,?,?,?,?,?)");
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, tipoFormato);
 			query.setParameter(2, fiseformato12AC.getId().getCodEmpresa());

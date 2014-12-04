@@ -1,13 +1,13 @@
 package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
-import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato12CDDao;
 import gob.osinergmin.fise.domain.FiseFormato12CC;
 import gob.osinergmin.fise.domain.FiseFormato12CD;
 import gob.osinergmin.fise.domain.FiseFormato12CDPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -105,6 +105,71 @@ public class Formato12CDDaoImpl extends GenericDaoImpl implements Formato12CDDao
 		} finally {
 			 em.close();
 		 }
+	}
+	
+	@Override
+	public Long obtenerMaximoItemEtapa(FiseFormato12CDPK formato12CDPK) {
+		Long valor = new Long(0);
+		try{
+			String q = "SELECT MAX(t.id.numeroItemEtapa) FROM FiseFormato12CD t WHERE 1=1 ";
+			if(FormatoUtil.isNotBlank(formato12CDPK.getCodEmpresa())){ 
+				q = q  + " AND t.id.codEmpresa = :codEmpresa ";
+			}
+			if(formato12CDPK.getAnoPresentacion()!=0){ 
+				q = q  + " AND t.id.anoPresentacion = :anioPresentacion ";
+			}
+			if(formato12CDPK.getMesPresentacion()!=0){ 
+				q = q + " AND t.id.mesPresentacion = :mesPresentacion ";
+			}
+			if(FormatoUtil.isNotBlank(formato12CDPK.getEtapa())){ 
+				q = q + " AND t.id.etapa = :etapa ";
+			}
+			if(formato12CDPK.getAnoEjecucionGasto()!=0){ 
+				q = q  + " AND t.id.anoEjecucionGasto = :anoEjecucionGasto ";
+			}
+			if(formato12CDPK.getMesEjecucionGasto()!=0){ 
+				q = q + " AND t.id.mesEjecucionGasto = :mesEjecucionGasto ";
+			}
+			if(formato12CDPK.getEtapaEjecucion()!=0){ 
+				q = q + " AND t.id.etapaEjecucion = :etapaEjecucion ";
+			}
+			Query query = em.createQuery(q); 
+			if(FormatoUtil.isNotBlank(formato12CDPK.getCodEmpresa())){ 
+				query.setParameter("codEmpresa", formato12CDPK.getCodEmpresa());
+			}
+			if(formato12CDPK.getAnoPresentacion()!=0){
+				query.setParameter("anioPresentacion", formato12CDPK.getAnoPresentacion());
+			}
+			if(formato12CDPK.getMesPresentacion()!=0){ 
+				query.setParameter("mesPresentacion", formato12CDPK.getMesPresentacion());
+			}
+			if(FormatoUtil.isNotBlank(formato12CDPK.getEtapa())){ 
+				query.setParameter("etapa", formato12CDPK.getEtapa());
+			}
+			if(formato12CDPK.getAnoEjecucionGasto()!=0){
+				query.setParameter("anoEjecucionGasto", formato12CDPK.getAnoEjecucionGasto());
+			}
+			if(formato12CDPK.getMesEjecucionGasto()!=0){ 
+				query.setParameter("mesEjecucionGasto", formato12CDPK.getMesEjecucionGasto());
+			}
+			if(formato12CDPK.getEtapaEjecucion()!=0){
+				query.setParameter("etapaEjecucion", formato12CDPK.getEtapaEjecucion());
+			}
+			
+			System.out.println("SQL   > " + query.toString());
+			if(query.getSingleResult()!=null){
+				BigDecimal codigo = (BigDecimal)query.getSingleResult();
+				valor = codigo.longValue();
+			}	
+			
+			
+		}catch (Exception e) {
+			valor =new Long(0);
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return valor;
 	}
 
 }

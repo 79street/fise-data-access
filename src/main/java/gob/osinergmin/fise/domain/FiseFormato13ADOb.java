@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_13A_D_OBS", schema="FISE")
+@Table(name="FISE_FORMATO_13A_D_OBS")
 @NamedQuery(name="FiseFormato13ADOb.findAll", query="SELECT f FROM FiseFormato13ADOb f")
 public class FiseFormato13ADOb implements Serializable {
 	private static final long serialVersionUID = 1L;

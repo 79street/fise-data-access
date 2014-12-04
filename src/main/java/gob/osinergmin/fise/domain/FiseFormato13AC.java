@@ -13,7 +13,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_13A_C", schema="FISE")
+@Table(name="FISE_FORMATO_13A_C")
 @NamedQuery(name="FiseFormato13AC.findAll", query="SELECT f FROM FiseFormato13AC f")
 public class FiseFormato13AC implements Serializable {
 	private static final long serialVersionUID = 1L;

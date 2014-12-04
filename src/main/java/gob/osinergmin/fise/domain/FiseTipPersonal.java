@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="FISE_TIP_PERSONAL", schema="FISE")
+@Table(name="FISE_TIP_PERSONAL")
 @NamedQuery(name="FiseTipPersonal.findAll", query="SELECT f FROM FiseTipPersonal f")
 public class FiseTipPersonal implements Serializable {
 	private static final long serialVersionUID = 1L;

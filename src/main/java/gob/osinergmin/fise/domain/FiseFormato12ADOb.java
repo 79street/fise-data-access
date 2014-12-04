@@ -20,7 +20,7 @@ import javax.persistence.Transient;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_12A_D_OBS", schema="FISE")
+@Table(name="FISE_FORMATO_12A_D_OBS")
 @NamedQuery(name="FiseFormato12ADOb.findAll", query="SELECT f FROM FiseFormato12ADOb f")
 public class FiseFormato12ADOb implements Serializable {
 	private static final long serialVersionUID = 1L;

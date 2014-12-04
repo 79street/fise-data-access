@@ -70,7 +70,7 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 		if(FormatoUtil.isNotBlank(descripcion)){ 
 			q = q.concat(" AND g.descripcion LIKE :descripcion ");
 		}
-		if(estado!=0){ 
+		if(estado!=null){ 
 			q = q.concat(" AND g.estado = :estado ");
 		}
 		Query query = em.createQuery(q); 
@@ -81,7 +81,7 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 			String des = "%"+descripcion+"%";
 			query.setParameter("descripcion", des);
 		}
-		if(estado!=0){ 
+		if(estado!=null){ 
 			query.setParameter("estado", estado);
 		}
 		List<FiseGrupoInformacion> lista= query.getResultList();

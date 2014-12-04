@@ -93,12 +93,16 @@ public class FiseGrupoInformacionGartServiceImpl implements
 	
 	@Override
 	@Transactional
-	public String eliminarDatosGrupoInf(Long id) throws Exception{
+	public String eliminarDatosGrupoInf(Long id,String user,String terminal) throws Exception{
 		FiseGrupoInformacion grupo =null;
 		String valor ="1";
 		try {			
-			grupo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(id); 		
-			fiseGrupoInformacionDao.eliminarGrupoInformacion(grupo);  			
+			grupo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(id); 			
+			grupo.setEstado(0); 
+			grupo.setUsuarioActualizacion(user);
+			grupo.setTerminalActualizacion(terminal); 
+			grupo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+			fiseGrupoInformacionDao.actualizarGrupoInformacion(grupo); 			
 		} catch (Exception e) {
 			logger.info("Error al eliminar  grupo informacion: "+e); 
 			valor = "0";

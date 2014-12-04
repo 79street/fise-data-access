@@ -18,6 +18,8 @@ public class NotificacionBean {
 	private String etapaBusq;
 	private String grupoInfBusq;
 	
+	private String descGrupoInf;//para envial email
+	
 	private String desEmpresa;	
 	private String desMes;
 	private String desMesEje;
@@ -175,6 +177,12 @@ public class NotificacionBean {
 	}
 	public void setGrupoInfBusq(String grupoInfBusq) {
 		this.grupoInfBusq = grupoInfBusq;
+	}
+	public String getDescGrupoInf() {
+		return descGrupoInf;
+	}
+	public void setDescGrupoInf(String descGrupoInf) {
+		this.descGrupoInf = descGrupoInf;
 	}
 	
 	

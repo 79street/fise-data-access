@@ -1041,6 +1041,9 @@ public class FiseConstants {
 	public final static String NOMBRE_CONSOLIDADO_EMAIL = "TF";
 	public final static String PROCESAR_VALIDACION = "P";
 	
+	public final static String PROCESO_ENVIO_EMAIL_OK = "1";
+	public final static String PROCESO_ENVIO_EMAIL_ERROR = "0";
+	
 	//CODIGO DE ERRORES
 	//F14A
 	public final static String COD_ERROR_F14A_1620 = "1620";

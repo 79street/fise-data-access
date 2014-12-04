@@ -158,8 +158,9 @@ public class Formato12CDDaoImpl extends GenericDaoImpl implements Formato12CDDao
 			
 			System.out.println("SQL   > " + query.toString());
 			if(query.getSingleResult()!=null){
-				BigDecimal codigo = (BigDecimal)query.getSingleResult();
-				valor = codigo.longValue();
+				valor = (Long)query.getSingleResult();
+				//BigDecimal codigo = (BigDecimal)query.getSingleResult();
+				//valor = codigo.longValue();
 			}	
 			
 			

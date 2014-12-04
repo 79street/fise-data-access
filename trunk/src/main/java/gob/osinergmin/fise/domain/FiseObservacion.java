@@ -61,8 +61,8 @@ public class FiseObservacion implements Serializable {
 	//private List<FiseFormato12BDOb> fiseFormato12bDObs;
 
 	//bi-directional many-to-one association to FiseFormato12cDOb
-	//@OneToMany(mappedBy="fiseObservacion")
-	//private List<FiseFormato12CDOb> fiseFormato12cDObs;
+	@OneToMany(mappedBy="fiseObservacion")
+	private List<FiseFormato12CDOb> fiseFormato12cDObs;
 
 	//bi-directional many-to-one association to FiseFormato12dDOb
 	//@OneToMany(mappedBy="fiseObservacion")

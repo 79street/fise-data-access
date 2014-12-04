@@ -70,10 +70,10 @@ public class Formato12CDObDaoImpl extends GenericDaoImpl implements Formato12CDO
 				query.setParameter("etapa", formato12CD.getId().getEtapa());
 			}
 			if(formato12CD.getId().getAnoEjecucionGasto()!=0){
-				query.setParameter("anioPresentacion", formato12CD.getId().getAnoEjecucionGasto());
+				query.setParameter("anioEjecucionGasto", formato12CD.getId().getAnoEjecucionGasto());
 			}
 			if(formato12CD.getId().getMesEjecucionGasto()!=0){ 
-				query.setParameter("mesPresentacion", formato12CD.getId().getMesEjecucionGasto());
+				query.setParameter("mesEjecucionGasto", formato12CD.getId().getMesEjecucionGasto());
 			}
 			if(formato12CD.getId().getEtapaEjecucion()!=0){ 
 				query.setParameter("etapaEjecucion", formato12CD.getId().getEtapaEjecucion());

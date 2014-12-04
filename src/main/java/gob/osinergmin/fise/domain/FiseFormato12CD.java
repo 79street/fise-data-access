@@ -119,6 +119,23 @@ public class FiseFormato12CD implements Serializable {
 	@Transient
 	private String descZonaBenef;
 	
+	@Transient
+	private String codEmpresaReport;
+	@Transient
+	private long anoPresentacionReport;
+	@Transient
+	private long mesPresentacionReport;
+	@Transient
+	private String etapaReport;
+	@Transient
+	private long anoEjecucionGastoReport;
+	@Transient
+	private long mesEjecucionGastoReport;
+	@Transient
+	private long etapaEjecucionReport;
+	@Transient
+	private long numeroItemEtapaReport;
+	
 	public FiseFormato12CD() {
 	}
 
@@ -374,6 +391,70 @@ public class FiseFormato12CD implements Serializable {
 
 	public void setDescZonaBenef(String descZonaBenef) {
 		this.descZonaBenef = descZonaBenef;
+	}
+
+	public String getCodEmpresaReport() {
+		return codEmpresaReport;
+	}
+
+	public void setCodEmpresaReport(String codEmpresaReport) {
+		this.codEmpresaReport = codEmpresaReport;
+	}
+
+	public long getAnoPresentacionReport() {
+		return anoPresentacionReport;
+	}
+
+	public void setAnoPresentacionReport(long anoPresentacionReport) {
+		this.anoPresentacionReport = anoPresentacionReport;
+	}
+
+	public long getMesPresentacionReport() {
+		return mesPresentacionReport;
+	}
+
+	public void setMesPresentacionReport(long mesPresentacionReport) {
+		this.mesPresentacionReport = mesPresentacionReport;
+	}
+
+	public String getEtapaReport() {
+		return etapaReport;
+	}
+
+	public void setEtapaReport(String etapaReport) {
+		this.etapaReport = etapaReport;
+	}
+
+	public long getAnoEjecucionGastoReport() {
+		return anoEjecucionGastoReport;
+	}
+
+	public void setAnoEjecucionGastoReport(long anoEjecucionGastoReport) {
+		this.anoEjecucionGastoReport = anoEjecucionGastoReport;
+	}
+
+	public long getMesEjecucionGastoReport() {
+		return mesEjecucionGastoReport;
+	}
+
+	public void setMesEjecucionGastoReport(long mesEjecucionGastoReport) {
+		this.mesEjecucionGastoReport = mesEjecucionGastoReport;
+	}
+
+	public long getEtapaEjecucionReport() {
+		return etapaEjecucionReport;
+	}
+
+	public void setEtapaEjecucionReport(long etapaEjecucionReport) {
+		this.etapaEjecucionReport = etapaEjecucionReport;
+	}
+
+	public long getNumeroItemEtapaReport() {
+		return numeroItemEtapaReport;
+	}
+
+	public void setNumeroItemEtapaReport(long numeroItemEtapaReport) {
+		this.numeroItemEtapaReport = numeroItemEtapaReport;
 	}
 
 }

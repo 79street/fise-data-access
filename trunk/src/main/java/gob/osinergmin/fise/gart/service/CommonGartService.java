@@ -40,7 +40,7 @@ public interface CommonGartService {
 	String actualizarFormatoReenvio(AutorizarReenvioBean bean) throws Exception;
 	
 	List<NotificacionBean> buscarNotificacion(String codEmpresa,
-			String flag,String etapa,Long idGrupoInf) throws Exception;
+			String flag,String etapa,Long idGrupoInf,String procesar) throws Exception;
 	
 	String notificarValidacionMensual(String codEmpresa, String etapa, 
 			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception;

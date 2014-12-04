@@ -36,4 +36,7 @@ public interface CommonDao {
 	
 	String notificarValidacionMensual(String codEmpresa, String etapa, 
 			long idGrupoInf, String periodicidad, String user,String terminal) throws SQLException;
+	
+	List<Object[]> listarObsNotificacionProcesar(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException;
 }

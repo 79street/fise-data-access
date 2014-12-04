@@ -333,19 +333,33 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Transactional
 	@Override
 	public List<NotificacionBean> buscarNotificacion(String codEmpresa,
-			String flag,String etapa,Long idGrupoInf) throws Exception{
+			String flag,String etapa,Long idGrupoInf,String procesar) throws Exception{
 		List<NotificacionBean> lista =null;
+		NotificacionBean n =null;
+		List<Object[]> lista12A =null;
+		List<Object[]> lista12B =null;
+		List<Object[]> lista12C =null;
+		List<Object[]> lista12D =null;
+		List<Object[]> lista13A =null;
+		List<Object[]> lista14A =null;
+		List<Object[]> lista14B =null;
+		List<Object[]> lista14C =null;
 		try {		
 			/**mensual = formatos 12A,12B,12C,12C
 			  bienal = formatos 13A,14A,14B,14C******/			
 			if(FiseConstants.MENSUAL.equals(flag)){
 				lista = new ArrayList<NotificacionBean>();
-				/**FORMATO 12A*/
-				 List<Object[]> lista12A = commonDao.listarObsNotificacion(codEmpresa, 
-							etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf);			
+				/**FORMATO 12A*/				
+				if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+					 lista12A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+								etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
+				 }else{
+					 lista12A = commonDao.listarObsNotificacion(codEmpresa, 
+								etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
+				 }			 
 				 logger.info("Tamanio de la lista lista12A:  "+lista12A.size()); 
 				 for(int i = 0; i < lista12A.size(); i++){					
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
@@ -357,12 +371,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioFinVig("---");
 					lista.add(n);
 				 }				
-			    /**FORMATO 12B*/
-				 List<Object[]> lista12B = commonDao.listarObsNotificacion(codEmpresa, 
-							etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf);			
+			    /**FORMATO 12B*/				
+				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+					 lista12B = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
+				 }else{
+					 lista12B = commonDao.listarObsNotificacion(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
+				 }					
 				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
 				 for(int i = 0; i < lista12B.size(); i++){					
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
@@ -374,12 +393,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioFinVig("---");
 					lista.add(n);
 				 }		
-			    /**FORMATO 12C*/
-				 List<Object[]> lista12C = commonDao.listarObsNotificacion(codEmpresa, 
-							etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf);			
+			    /**FORMATO 12C*/				
+				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+					 lista12C = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
+				 }else{
+					 lista12C = commonDao.listarObsNotificacion(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
+				 }	
 				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
 				 for(int i = 0; i < lista12C.size(); i++){					
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12C.get(i)[2]));
@@ -394,12 +418,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					lista.add(n);
 				 }		
 				
-			   /**FORMATO 12D*/
-				 List<Object[]> lista12D = commonDao.listarObsNotificacion(codEmpresa, 
-							etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf);			
+			   /**FORMATO 12D*/				
+				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+					 lista12D = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
+				 }else{
+					 lista12D = commonDao.listarObsNotificacion(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
+				 }	
 				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
 				 for(int i = 0; i < lista12D.size(); i++){					
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12D.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12D.get(i)[2]));
@@ -415,12 +444,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 }		
 			}else if(FiseConstants.BIENAL.equals(flag)){
 				lista = new ArrayList<NotificacionBean>();
-				/**FORMATO 13A*/
-			   List<Object[]> lista13A = commonDao.listarObsNotificacion(codEmpresa, 
-						etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf);			
+				/**FORMATO 13A*/			  
+			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+				   lista13A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf); 
+			   }else{
+				   lista13A = commonDao.listarObsNotificacion(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf); 
+			   }
 			   logger.info("Tamanio de la lista lista13A:  "+lista13A.size()); 
 			   for(int i = 0; i < lista13A.size(); i++){				
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
@@ -432,12 +466,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioFinVig("---");
 					lista.add(n);
 				}				
-				/**FORMATO 14A*/
-			   List<Object[]> lista14A = commonDao.listarObsNotificacion(codEmpresa, 
-						etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf);			
+				/**FORMATO 14A*/			   
+			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+				   lista14A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf); 
+			   }else{
+				   lista14A = commonDao.listarObsNotificacion(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf); 
+			   }
 			   logger.info("Tamanio de la lista lista14A:  "+lista14A.size()); 
 			   for(int i = 0; i < lista14A.size(); i++){
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
@@ -449,11 +488,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioFinVig(String.valueOf(((BigDecimal)lista14A.get(i)[4] == null) ? "---" :lista14A.get(i)[4]));					
 					lista.add(n);
 				}
-			   List<Object[]> lista14B = commonDao.listarObsNotificacion(codEmpresa, 
-						etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf);			
+			   /**FORMATO 14B*/		
+			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+				   lista14B = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf); 
+			   }else{
+				   lista14B = commonDao.listarObsNotificacion(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf); 
+			   }
 			   logger.info("Tamanio de la lista lista14B:  "+lista14B.size()); 
 			   for(int i = 0; i < lista14B.size(); i++){
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
@@ -465,12 +510,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioFinVig(String.valueOf(((BigDecimal)lista14B.get(i)[4] == null) ? "---" :lista14B.get(i)[4]));									
 					lista.add(n);
 				}
-				/**FORMATO 14C*/				
-			   List<Object[]> lista14C = commonDao.listarObsNotificacion(codEmpresa, 
-						etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf);			
+				/**FORMATO 14C*/			 
+			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
+				   lista14C = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf); 
+			   }else{
+				   lista14C = commonDao.listarObsNotificacion(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf); 
+			   }
 			   logger.info("Tamanio de la lista lista14C:  "+lista14C.size());
 			   for(int i = 0; i < lista14C.size(); i++){
-					NotificacionBean n = new NotificacionBean();
+					n = new NotificacionBean();
 					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
@@ -488,6 +538,34 @@ public class CommonGartServiceImpl implements CommonGartService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("Ocurrio un error al listar notificacion:  "+e); 
+		}finally{
+			if(n!=null){
+				n=null;
+			}
+			if(lista12A!=null){
+				lista12A=null;
+			}
+			if(lista12B!=null){
+				lista12B=null;
+			}
+			if(lista12C!=null){
+				lista12C=null;
+			}
+			if(lista12D!=null){
+				lista12D=null;
+			}
+			if(lista13A!=null){
+				lista13A=null;
+			}
+			if(lista14A!=null){
+				lista14A=null;
+			}
+			if(lista14B!=null){
+				lista14B=null;
+			}
+			if(lista14C!=null){
+				lista14C=null;
+			}
 		}
 	  return lista;
 	}

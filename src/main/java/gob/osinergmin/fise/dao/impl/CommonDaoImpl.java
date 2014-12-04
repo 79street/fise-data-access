@@ -437,7 +437,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			mensaje = String.valueOf(valor);
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "0";
+			mensaje = "1";
 		} finally {
 			 em.close();
 		 }

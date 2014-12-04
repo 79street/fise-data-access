@@ -761,7 +761,7 @@ public class FiseConstants {
 	public final static int COLUMN_N= 13;
 	public final static int COLUMN_O= 14;
 		
-	
+	public final static String ENVIO_EMAIL_OK_VALIDACION= "0";
 	/******varibales para leer exel para el formato 14C****/
 	/****FORMATO 14C****/
 	public final static String ESTADO_ENVIADO_F14C = "Enviado";

@@ -14,5 +14,6 @@ public interface Formato12CDDao extends GenericDao {
 	void registrarFormato12CD(FiseFormato12CD fiseFormato12CD);
 	void modificarFormato12CD(FiseFormato12CD fiseFormato12CD);
 	void eliminarFormato12CD(FiseFormato12CD fiseFormato12CD);
+	Long obtenerMaximoItemEtapa(FiseFormato12CDPK formato12CDPK);
 	
 }

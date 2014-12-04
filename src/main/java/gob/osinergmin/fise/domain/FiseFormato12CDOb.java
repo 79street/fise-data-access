@@ -1,10 +1,19 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -27,9 +36,6 @@ public class FiseFormato12CDOb implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
-
-	@Column(name="ID_OBSERVACION")
-	private String idObservacion;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -58,6 +64,10 @@ public class FiseFormato12CDOb implements Serializable {
 		})
 	private FiseFormato12CD fiseFormato12CD;
 
+	@ManyToOne
+	@JoinColumn(name="ID_OBSERVACION")
+	private FiseObservacion fiseObservacion;
+	
 	public FiseFormato12CDOb() {
 	}
 
@@ -83,14 +93,6 @@ public class FiseFormato12CDOb implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getIdObservacion() {
-		return this.idObservacion;
-	}
-
-	public void setIdObservacion(String idObservacion) {
-		this.idObservacion = idObservacion;
 	}
 
 	public String getTerminalActualizacion() {
@@ -131,6 +133,14 @@ public class FiseFormato12CDOb implements Serializable {
 
 	public void setFiseFormato12CD(FiseFormato12CD fiseFormato12CD) {
 		this.fiseFormato12CD = fiseFormato12CD;
+	}
+
+	public FiseObservacion getFiseObservacion() {
+		return fiseObservacion;
+	}
+
+	public void setFiseObservacion(FiseObservacion fiseObservacion) {
+		this.fiseObservacion = fiseObservacion;
 	}
 
 }

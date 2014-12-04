@@ -11,6 +11,7 @@ import gob.osinergmin.fise.dao.Formato12CDObDao;
 import gob.osinergmin.fise.domain.FiseFormato12CC;
 import gob.osinergmin.fise.domain.FiseFormato12CCPK;
 import gob.osinergmin.fise.domain.FiseFormato12CD;
+import gob.osinergmin.fise.domain.FiseFormato12CDOb;
 import gob.osinergmin.fise.domain.FiseFormato12CDPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
@@ -20,6 +21,7 @@ import gob.osinergmin.fise.util.FechaUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -48,7 +50,7 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	
 	@Autowired
 	@Qualifier("formato12CDObDaoImpl")
-	private Formato12CDObDao formato12CObsDao;
+	private Formato12CDObDao formato12CDObDao;
 	
 	@Autowired
 	@Qualifier("commonDaoImpl")
@@ -89,7 +91,7 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato12CC registrarFormato12CC(Formato12CCBean formulario) throws Exception {
+	public FiseFormato12CC registrarFormato12CCregistrarFormato12CD(Formato12CCBean formulario) throws Exception {
 		
 		FiseFormato12CC dto = null;
 		
@@ -272,7 +274,165 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato12CC modificarFormato12CC(Formato12CCBean formulario, FiseFormato12CC fiseFormato12CC) throws Exception {
+	public FiseFormato12CC modificarFormato12CCregistrarFormato12CD(Formato12CCBean formulario, FiseFormato12CC fiseFormato12CC) throws Exception {
+		
+		FiseFormato12CC dto = null;
+		
+		try {
+			
+			Date hoy = FechaUtil.obtenerFechaActual();
+	
+			List<FiseFormato12CD> lista = new ArrayList<FiseFormato12CD>();
+			
+			if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
+				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+				//
+				FiseFormato12CD detalleImplementacion = new FiseFormato12CD();
+				//pk
+				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+				//obtenemos el ultimo valor del itemetapa del detalle
+				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+				detalleImplementacion.setId(pkDetalle);
+				
+				detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+				detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+				detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+				detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+				detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+				detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+				detalleImplementacion.setDescripcionActividad(formulario.getActividad());
+				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+					detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
+					detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+					detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+					detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				}
+				detalleImplementacion.setNumeroDias(formulario.getNroDias());
+				detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
+				detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
+				detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
+				
+				BigDecimal total = new BigDecimal(0);
+				total = total.add(detalleImplementacion.getMontoAlimentacion())
+						.add(detalleImplementacion.getMontoAlojamiento())
+						.add(detalleImplementacion.getMontoMovilidad());
+				detalleImplementacion.setTotalGeneral(total);
+				
+				//
+				detalleImplementacion.setFiseFormato12CC(fiseFormato12CC);
+				//
+				detalleImplementacion.setUsuarioCreacion(formulario.getUsuario());
+				detalleImplementacion.setTerminalCreacion(formulario.getTerminal());
+				detalleImplementacion.setFechaCreacion(hoy);
+				detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
+				detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
+				detalleImplementacion.setFechaActualizacion(hoy);
+				lista.add(detalleImplementacion);
+				
+			}
+			
+			if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == formulario.getEtapaEjecucion() ){
+				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+				//
+				FiseFormato12CD detalleOperativo = new FiseFormato12CD();
+				//pk
+				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+				//obtenemos el ultimo valor del itemetapa del detalle
+				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+				detalleOperativo.setId(pkDetalle);
+				
+				detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+				detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+				detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+				detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+				detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+				detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+				detalleOperativo.setDescripcionActividad(formulario.getActividad());
+				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+					detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
+					detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+					detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+					detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				}
+				detalleOperativo.setNumeroDias(formulario.getNroDias());
+				detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
+				detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
+				detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
+				
+				BigDecimal total = new BigDecimal(0);
+				total = total.add(detalleOperativo.getMontoAlimentacion())
+						.add(detalleOperativo.getMontoAlojamiento())
+						.add(detalleOperativo.getMontoMovilidad());
+				detalleOperativo.setTotalGeneral(total);
+				
+				//
+				detalleOperativo.setFiseFormato12CC(fiseFormato12CC);
+				//
+				detalleOperativo.setUsuarioCreacion(formulario.getUsuario());
+				detalleOperativo.setTerminalCreacion(formulario.getTerminal());
+				detalleOperativo.setFechaCreacion(hoy);
+				detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
+				detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
+				detalleOperativo.setFechaActualizacion(hoy);
+				lista.add(detalleOperativo);
+				
+			}
+		
+			fiseFormato12CC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato12CC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato12CC.setFechaActualizacion(hoy);
+		
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12CC.setNombreArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12CC.setNombreArchivoTexto(formulario.getNombreArchivo());
+			}
+			
+			formato12CCDao.modificarFormato12CC(fiseFormato12CC);
+			//add
+			for (FiseFormato12CD detalle : lista) {
+				formato12CDDao.registrarFormato12CD(detalle);
+			}
+			if( lista != null && lista.size()>0 ){
+				if( lista.size()==1 ){
+					//enviamos la cabecera de informacion
+					fiseFormato12CC.setAnoEjecucionDetalle(lista.get(0).getId().getAnoEjecucionGasto());
+					fiseFormato12CC.setMesEjecucionDetalle(lista.get(0).getId().getMesEjecucionGasto());
+					fiseFormato12CC.setEtapaEjecucionDetalle(lista.get(0).getId().getEtapaEjecucion());
+					fiseFormato12CC.setNumeroItemEtapaDetalle(lista.get(0).getId().getNumeroItemEtapa());
+				}
+			}
+			dto= fiseFormato12CC;
+			
+		}	catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		//
+		return dto;
+
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato12CC modificarFormato12CCmodificarFormato12CD(Formato12CCBean formulario, FiseFormato12CC fiseFormato12CC) throws Exception {
 		
 		FiseFormato12CC dto = null;
 		
@@ -286,13 +446,27 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			FiseFormato12CD detalleOperativo = new FiseFormato12CD();
 			if( fiseFormato12CC.getFiseFormato12CDs()!=null ){
 				for (FiseFormato12CD detalle : fiseFormato12CC.getFiseFormato12CDs()) {
-					if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == detalle.getId().getEtapaEjecucion() && formulario.getNroItemEtapa() == detalle.getId().getNumeroItemEtapa() ){
-						detalleImplementacion = detalle;
-						break;
-					}else if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == detalle.getId().getEtapaEjecucion() && formulario.getNroItemEtapa() == detalle.getId().getNumeroItemEtapa() ){
-						detalleOperativo = detalle;
-						break;
-					} 
+					
+					if( formulario.getCodigoEmpresa().equals(detalle.getId().getCodEmpresa()) &&
+							formulario.getAnioPresentacion() == detalle.getId().getAnoPresentacion() &&
+							formulario.getMesPresentacion() == detalle.getId().getMesPresentacion() &&
+							formulario.getEtapa().equals(detalle.getId().getEtapa()) &&
+							formulario.getAnioEjecucion() == detalle.getId().getAnoEjecucionGasto() &&
+							formulario.getMesEjecucion() == detalle.getId().getMesEjecucionGasto() &&
+							formulario.getEtapaEjecucion() == detalle.getId().getEtapaEjecucion() &&
+							formulario.getNroItemEtapa() == detalle.getId().getNumeroItemEtapa()
+						){
+					
+						if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
+							detalleImplementacion = detalle;
+							break;
+						}else if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == formulario.getEtapaEjecucion() ){
+							detalleOperativo = detalle;
+							break;
+						}
+						
+					}
+
 				}
 			}
 			
@@ -394,6 +568,75 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		//
 		return dto;
 
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarFormato12CC(FiseFormato12CC fiseFormato12CC) {
+		List<FiseFormato12CD> lista = null;
+		lista = formato12CDDao.listarFormato12CDByFormato12CC(fiseFormato12CC);
+		for (FiseFormato12CD detalle : lista) {
+			List<FiseFormato12CDOb> listaObservacion = formato12CDObDao.listarFormato12CDObByFormato12CD(detalle);
+			for (FiseFormato12CDOb observacion : listaObservacion) {
+				formato12CDObDao.eliminarFormato12CDOb(observacion);
+			}
+			formato12CDDao.eliminarFormato12CD(detalle);
+		}
+		formato12CCDao.eliminarFormato12CC(fiseFormato12CC);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarFormato12CD(FiseFormato12CD fiseFormato12CD) {
+		List<FiseFormato12CDOb> listaObservacion = formato12CDObDao.listarFormato12CDObByFormato12CD(fiseFormato12CD);
+		for (FiseFormato12CDOb observacion : listaObservacion) {
+			formato12CDObDao.eliminarFormato12CDOb(observacion);
+		}
+		formato12CDDao.eliminarFormato12CD(fiseFormato12CD);
+	}
+	
+	@Override
+	public Formato12CCBean estructurarFormato12CBeanByFiseFormato12CC(FiseFormato12CC formato){
+		Formato12CCBean formato12CBean = new Formato12CCBean();
+		formato12CBean.setAnioPresentacion(formato.getId().getAnoPresentacion());
+		formato12CBean.setMesPresentacion(formato.getId().getMesPresentacion());
+		return formato12CBean;
+	}
+
+	@Override
+	public HashMap<String, Object> mapearParametrosFormato12C(Formato12CCBean formato12CBean){
+		HashMap<String, Object> mapJRParams = new HashMap<String, Object>();
+		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA, formato12CBean.getDescEmpresa());
+		mapJRParams.put(FiseConstants.PARAM_ANO_PRESENTACION, formato12CBean.getAnioPresentacion());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRESENTACION, formato12CBean.getDescMesPresentacion());
+		return mapJRParams;
+	}
+	
+	@Override
+	@Transactional
+	public List<FiseFormato12CDOb> listarFormato12CDObByFormato12CD(FiseFormato12CD formato12CD){
+		return formato12CDObDao.listarFormato12CDObByFormato12CD(formato12CD); 
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato12CC modificarEnvioDefinitivoFormato12CC(Formato12CCBean formulario, FiseFormato12CC fiseFormato12CC) throws Exception {
+		
+		FiseFormato12CC dto = null;
+		Date hoy = FechaUtil.obtenerFechaActual();
+		try{
+			fiseFormato12CC.setFechaEnvioDefinitivo(hoy);
+			fiseFormato12CC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato12CC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato12CC.setFechaActualizacion(hoy);
+			formato12CCDao.modificarFormato12CC(fiseFormato12CC);
+			dto= fiseFormato12CC;
+		} catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		return dto;
 	}
 	
 }

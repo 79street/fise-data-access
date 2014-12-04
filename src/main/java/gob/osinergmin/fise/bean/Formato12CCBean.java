@@ -56,11 +56,17 @@ public class Formato12CCBean implements Serializable {
 	private String codDepartamentoOrigen;
 	private String codProvinciaOrigen;
 	private String codDistritoOrigen;
+	private String descDepartamentoOrigen;
+	private String descProvinciaOrigen;
+	private String descDistritoOrigen;
 	private String localidadOrigen;
 	private String codUbigeoDestino;
 	private String codDepartamentoDestino;
 	private String codProvinciaDestino;
 	private String codDistritoDestino;
+	private String descDepartamentoDestino;
+	private String descProvinciaDestino;
+	private String descDistritoDestino;
 	private String localidadDestino;
 	private Long zonaBenef;
 	private String codCuentaContable;
@@ -76,6 +82,13 @@ public class Formato12CCBean implements Serializable {
 	private BigDecimal totalDesplazamiento = new BigDecimal(0);
 	private BigDecimal subTotalEtapa = new BigDecimal(0);
 	private BigDecimal totalGeneral = new BigDecimal(0);
+	
+	private String codDepartamentoOrigenHidden;
+	private String codProvinciaOrigenHidden;
+	private String codDistritoOrigenHidden;
+	private String codDepartamentoDestinoHidden;
+	private String codProvinciaDestinoHidden;
+	private String codDistritoDestinoHidden;
 	
 	private String usuario;
 	private String terminal;
@@ -512,6 +525,78 @@ public class Formato12CCBean implements Serializable {
 	}
 	public void setEtapaEjecucionHidden(Long etapaEjecucionHidden) {
 		this.etapaEjecucionHidden = etapaEjecucionHidden;
+	}
+	public String getDescDepartamentoOrigen() {
+		return descDepartamentoOrigen;
+	}
+	public void setDescDepartamentoOrigen(String descDepartamentoOrigen) {
+		this.descDepartamentoOrigen = descDepartamentoOrigen;
+	}
+	public String getDescProvinciaOrigen() {
+		return descProvinciaOrigen;
+	}
+	public void setDescProvinciaOrigen(String descProvinciaOrigen) {
+		this.descProvinciaOrigen = descProvinciaOrigen;
+	}
+	public String getDescDistritoOrigen() {
+		return descDistritoOrigen;
+	}
+	public void setDescDistritoOrigen(String descDistritoOrigen) {
+		this.descDistritoOrigen = descDistritoOrigen;
+	}
+	public String getDescDepartamentoDestino() {
+		return descDepartamentoDestino;
+	}
+	public void setDescDepartamentoDestino(String descDepartamentoDestino) {
+		this.descDepartamentoDestino = descDepartamentoDestino;
+	}
+	public String getDescProvinciaDestino() {
+		return descProvinciaDestino;
+	}
+	public void setDescProvinciaDestino(String descProvinciaDestino) {
+		this.descProvinciaDestino = descProvinciaDestino;
+	}
+	public String getDescDistritoDestino() {
+		return descDistritoDestino;
+	}
+	public void setDescDistritoDestino(String descDistritoDestino) {
+		this.descDistritoDestino = descDistritoDestino;
+	}
+	public String getCodDepartamentoOrigenHidden() {
+		return codDepartamentoOrigenHidden;
+	}
+	public void setCodDepartamentoOrigenHidden(String codDepartamentoOrigenHidden) {
+		this.codDepartamentoOrigenHidden = codDepartamentoOrigenHidden;
+	}
+	public String getCodProvinciaOrigenHidden() {
+		return codProvinciaOrigenHidden;
+	}
+	public void setCodProvinciaOrigenHidden(String codProvinciaOrigenHidden) {
+		this.codProvinciaOrigenHidden = codProvinciaOrigenHidden;
+	}
+	public String getCodDistritoOrigenHidden() {
+		return codDistritoOrigenHidden;
+	}
+	public void setCodDistritoOrigenHidden(String codDistritoOrigenHidden) {
+		this.codDistritoOrigenHidden = codDistritoOrigenHidden;
+	}
+	public String getCodDepartamentoDestinoHidden() {
+		return codDepartamentoDestinoHidden;
+	}
+	public void setCodDepartamentoDestinoHidden(String codDepartamentoDestinoHidden) {
+		this.codDepartamentoDestinoHidden = codDepartamentoDestinoHidden;
+	}
+	public String getCodProvinciaDestinoHidden() {
+		return codProvinciaDestinoHidden;
+	}
+	public void setCodProvinciaDestinoHidden(String codProvinciaDestinoHidden) {
+		this.codProvinciaDestinoHidden = codProvinciaDestinoHidden;
+	}
+	public String getCodDistritoDestinoHidden() {
+		return codDistritoDestinoHidden;
+	}
+	public void setCodDistritoDestinoHidden(String codDistritoDestinoHidden) {
+		this.codDistritoDestinoHidden = codDistritoDestinoHidden;
 	}
 	
 	

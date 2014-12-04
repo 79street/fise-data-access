@@ -66,7 +66,18 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		FiseFormato12CC formato = null;
 		formato = formato12CCDao.obtenerFormato12CCByPK(fiseFormato12CCPK);
 		if(formato != null){
-			formato.setFiseFormato12CDs(formato12CDDao.listarFormato12CDByFormato12CC(formato));
+			List<FiseFormato12CD> lista = formato12CDDao.listarFormato12CDByFormato12CC(formato);
+			for (FiseFormato12CD fiseFormato12CD : lista) {
+				fiseFormato12CD.setCodEmpresaReport(fiseFormato12CD.getId().getCodEmpresa());
+				fiseFormato12CD.setAnoPresentacionReport(fiseFormato12CD.getId().getAnoPresentacion());
+				fiseFormato12CD.setMesPresentacionReport(fiseFormato12CD.getId().getMesPresentacion());
+				fiseFormato12CD.setEtapaReport(fiseFormato12CD.getId().getEtapa());
+				fiseFormato12CD.setAnoEjecucionGastoReport(fiseFormato12CD.getId().getAnoEjecucionGasto());
+				fiseFormato12CD.setMesEjecucionGastoReport(fiseFormato12CD.getId().getMesEjecucionGasto());
+				fiseFormato12CD.setNumeroItemEtapaReport(fiseFormato12CD.getId().getNumeroItemEtapa());
+				fiseFormato12CD.setEtapaEjecucionReport(fiseFormato12CD.getId().getEtapaEjecucion());
+			}
+			formato.setFiseFormato12CDs(lista);
 		}
 		return formato;
 	}
@@ -84,8 +95,20 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	}
 	
 	public List<FiseFormato12CD> listarFormato12CDByFormato12CC(FiseFormato12CC formato12CC) {
+		//Obtener datos de PK del detalle(se inserto 8 campos de PK en el objeto FiseFormato12DD 
+		//para tener todos los campos en un solo objeto y poder leer los campos en iReport)
 		List<FiseFormato12CD> lista = null;
 		lista = formato12CDDao.listarFormato12CDByFormato12CC(formato12CC);
+		for (FiseFormato12CD fiseFormato12CD : lista) {
+			fiseFormato12CD.setCodEmpresaReport(fiseFormato12CD.getId().getCodEmpresa());
+			fiseFormato12CD.setAnoPresentacionReport(fiseFormato12CD.getId().getAnoPresentacion());
+			fiseFormato12CD.setMesPresentacionReport(fiseFormato12CD.getId().getMesPresentacion());
+			fiseFormato12CD.setEtapaReport(fiseFormato12CD.getId().getEtapa());
+			fiseFormato12CD.setAnoEjecucionGastoReport(fiseFormato12CD.getId().getAnoEjecucionGasto());
+			fiseFormato12CD.setMesEjecucionGastoReport(fiseFormato12CD.getId().getMesEjecucionGasto());
+			fiseFormato12CD.setNumeroItemEtapaReport(fiseFormato12CD.getId().getNumeroItemEtapa());
+			fiseFormato12CD.setEtapaEjecucionReport(fiseFormato12CD.getId().getEtapaEjecucion());
+		}
 		return lista;
 	}
 	

@@ -7,7 +7,6 @@ import gob.osinergmin.fise.domain.FiseFormato12CD;
 import gob.osinergmin.fise.domain.FiseFormato12CDPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -62,6 +61,8 @@ public class Formato12CDDaoImpl extends GenericDaoImpl implements Formato12CDDao
 			if(FormatoUtil.isNotBlank(formato12CC.getId().getEtapa())){ 
 				query.setParameter("etapa", formato12CC.getId().getEtapa());
 			}
+			
+			q = q + " AND order by t.id.etapaEjecucion ";
 			
 			lista= query.getResultList();
 			System.out.println("SQL   > " + query.toString());

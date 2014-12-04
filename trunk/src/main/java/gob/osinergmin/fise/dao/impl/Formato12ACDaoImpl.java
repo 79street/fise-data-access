@@ -182,7 +182,7 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 		int i=0;
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE.FISE_GEN_PKG.FISE_CORR_ARCH_FUN FROM DUAL");
+			jql.append("SELECT FISE_GEN_PKG.FISE_CORR_ARCH_FUN FROM DUAL");
 			Query query = em.createNativeQuery(jql.toString());
 			BigDecimal secuencia = (BigDecimal)query.getSingleResult();
 			i = secuencia.intValue();

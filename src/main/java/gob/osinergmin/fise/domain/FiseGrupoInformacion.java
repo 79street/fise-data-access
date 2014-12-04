@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -39,6 +40,9 @@ public class FiseGrupoInformacion implements Serializable {
 	private String descripcion;
 
 	private Integer estado;
+	
+	@Transient
+	private String descEstado;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -231,6 +235,22 @@ public class FiseGrupoInformacion implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getDescEstado() {
+		String desEstado;
+		if(estado!=null && estado==1){
+			desEstado ="Activo";	
+		}else if(estado!=null && estado==0){
+			desEstado ="Inactivo";	
+		}else{
+			desEstado ="";	
+		}
+		return desEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
 	}
 	
 	

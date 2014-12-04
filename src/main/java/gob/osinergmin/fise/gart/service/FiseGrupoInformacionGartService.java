@@ -13,7 +13,7 @@ public interface FiseGrupoInformacionGartService {
 	
 	String actualizarDatosGrupoInf(GrupoInformacionBean bean) throws Exception;
 	
-	String eliminarDatosGrupoInf(Long id) throws Exception;
+	String eliminarDatosGrupoInf(Long id,String user,String terminal) throws Exception;
 	
 	FiseGrupoInformacion obtenerGrupoInf(Long id) throws Exception;
 	

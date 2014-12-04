@@ -23,7 +23,7 @@ import javax.persistence.Transient;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_14C_C", schema="FISE")
+@Table(name="FISE_FORMATO_14C_C")
 public class FiseFormato14CC implements Serializable {
 	private static final long serialVersionUID = 1L;
 

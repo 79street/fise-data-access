@@ -74,6 +74,16 @@ public class FiseFormato12CC implements Serializable {
 	@Transient
 	private String descGrupoInformacion;
 	
+	//guardamos la cabecerta del ultimo detalle registrado
+	@Transient
+	private Long anoEjecucionDetalle;
+	@Transient
+	private Long mesEjecucionDetalle;
+	@Transient
+	private Long etapaEjecucionDetalle;
+	@Transient
+	private Long numeroItemEtapaDetalle;
+	
 	public FiseFormato12CC() {
 	}
 
@@ -225,6 +235,38 @@ public class FiseFormato12CC implements Serializable {
 		fiseFormato12CD.setFiseFormato12CC(null);
 
 		return fiseFormato12CD;
+	}
+
+	public Long getNumeroItemEtapaDetalle() {
+		return numeroItemEtapaDetalle;
+	}
+
+	public void setNumeroItemEtapaDetalle(Long numeroItemEtapaDetalle) {
+		this.numeroItemEtapaDetalle = numeroItemEtapaDetalle;
+	}
+
+	public Long getAnoEjecucionDetalle() {
+		return anoEjecucionDetalle;
+	}
+
+	public void setAnoEjecucionDetalle(Long anoEjecucionDetalle) {
+		this.anoEjecucionDetalle = anoEjecucionDetalle;
+	}
+
+	public Long getMesEjecucionDetalle() {
+		return mesEjecucionDetalle;
+	}
+
+	public void setMesEjecucionDetalle(Long mesEjecucionDetalle) {
+		this.mesEjecucionDetalle = mesEjecucionDetalle;
+	}
+
+	public Long getEtapaEjecucionDetalle() {
+		return etapaEjecucionDetalle;
+	}
+
+	public void setEtapaEjecucionDetalle(Long etapaEjecucionDetalle) {
+		this.etapaEjecucionDetalle = etapaEjecucionDetalle;
 	}
 
 }

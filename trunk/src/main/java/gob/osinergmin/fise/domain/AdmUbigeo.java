@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="ADM_UBIGEO", schema="ADMIN_GART")
+@Table(name="ADM_UBIGEO")
 @NamedQuery(name="AdmUbigeo.findAll", query="SELECT a FROM AdmUbigeo a")
 public class AdmUbigeo implements Serializable {
 	private static final long serialVersionUID = 1L;

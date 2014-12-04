@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="CFG_CAMPO", schema="REMISION")
+@Table(name="CFG_CAMPO")
 @NamedQuery(name="CfgCampo.findAll", query="SELECT c FROM CfgCampo c")
 public class CfgCampo implements Serializable {
 	private static final long serialVersionUID = 1L;

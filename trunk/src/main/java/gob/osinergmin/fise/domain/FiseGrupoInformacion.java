@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="FISE_GRUPO_INFORMACION", schema="FISE")
+@Table(name="FISE_GRUPO_INFORMACION")
 @NamedQuery(name="FiseGrupoInformacion.findAll", query="SELECT f FROM FiseGrupoInformacion f")
 public class FiseGrupoInformacion implements Serializable {
 	private static final long serialVersionUID = 1L;

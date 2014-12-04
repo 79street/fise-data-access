@@ -22,7 +22,7 @@ import javax.persistence.Transient;
  * 
  */
 @Entity
-@Table(name="FISE_FORMATO_12A_D", schema="FISE")
+@Table(name="FISE_FORMATO_12A_D")
 @NamedQuery(name="FiseFormato12AD.findAll", query="SELECT f FROM FiseFormato12AD f")
 public class FiseFormato12AD implements Serializable {
 	private static final long serialVersionUID = 1L;

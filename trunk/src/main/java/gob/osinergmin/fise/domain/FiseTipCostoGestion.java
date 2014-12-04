@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name="FISE_TIP_COSTO_GESTION", schema="FISE")
+@Table(name="FISE_TIP_COSTO_GESTION")
 @NamedQuery(name="FiseTipCostoGestion.findAll", query="SELECT f FROM FiseTipCostoGestion f")
 public class FiseTipCostoGestion implements Serializable {
 	private static final long serialVersionUID = 1L;

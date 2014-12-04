@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="CFG_TABLA", schema="REMISION")
+@Table(name="CFG_TABLA")
 @NamedQuery(name="CfgTabla.findAll", query="SELECT c FROM CfgTabla c")
 public class CfgTabla implements Serializable {
 	private static final long serialVersionUID = 1L;

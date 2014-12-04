@@ -433,6 +433,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			query.setParameter(5, user);
 			query.setParameter(6, terminal);
 			int valor = query.executeUpdate();	
+			System.out.println("Valor del mensaje al ejecutar el procedimiento :  "+valor); 
 			mensaje = String.valueOf(valor);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -424,7 +424,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		String mensaje="";
 		try {
 			StringBuffer jql = new StringBuffer();
-			jql.append("SELECT FISE_GEN_PKG.FISE_CREA_ETAPA_FUN(?,?,?,?,?,?) FROM DUAL");
+			jql.append("CALL FISE_GEN_PKG.FISE_CREA_ETAPA_PRC(?,?,?,?,?,?)");	
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, codEmpresa);
 			query.setParameter(2, etapa);
@@ -432,9 +432,11 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			query.setParameter(4, idGrupoInf);
 			query.setParameter(5, user);
 			query.setParameter(6, terminal);
-			mensaje = (String)query.getSingleResult();
+			int valor = query.executeUpdate();	
+			mensaje = String.valueOf(valor);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mensaje = "0";
 		} finally {
 			 em.close();
 		 }

@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.CorreoBean;
+import gob.osinergmin.fise.bean.EnvioDefinitivoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
@@ -44,6 +45,9 @@ public interface CommonGartService {
 	
 	String notificarValidacionMensual(String codEmpresa, String etapa, 
 			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception;
+	
+	List<EnvioDefinitivoBean> buscarEnvioDefinitivo(String codEmpresa,
+			String flag,String etapa,Long idGrupoInf) throws Exception;
     
 
 }

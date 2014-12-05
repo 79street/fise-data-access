@@ -430,7 +430,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		if(FiseConstants.NOMBRE_FORMATO_12A.equals(formato)){ 			
 			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
 			sb.append(" c.MES_EJECUCION_GASTO, ");//4
-			sb.append(" c.ETAPA ");//5				
+			sb.append(" c.ETAPA ");//5			
 			sb.append(" FROM FISE_FORMATO_12A_C c");		
 			sb.append(" WHERE 1=1 ");					
 		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
@@ -524,6 +524,96 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			 em.close();
 		 }
 		return mensaje;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarEnvioDefinitivo(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT DISTINCT ");
+		sb.append(" c.COD_EMPRESA, ");//0		
+		sb.append(" c.ANO_PRESENTACION, ");//1
+		sb.append(" c.MES_PRESENTACION, ");//2		
+		if(FiseConstants.NOMBRE_FORMATO_12A.equals(formato)){ 			
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA, ");//5
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,c.ANO_EJECUCION_GASTO,c.MES_EJECUCION_GASTO) AS ESTADO ");//6	
+			sb.append(" FROM FISE_FORMATO_12A_C c");		
+			sb.append(" WHERE 1=1 ");					
+		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA, ");//5	
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,c.ANO_EJECUCION_GASTO,c.MES_EJECUCION_GASTO) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_12B_C c ");		
+			sb.append(" WHERE 1=1 ");						
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA, ");//3
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_12C_C c ");		
+			sb.append(" WHERE 1=1 ");			
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA, ");//3
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_12D_C c ");		
+			sb.append(" WHERE 1=1 ");			
+		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
+			sb.append(" c.ETAPA, ");//3	
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_13A_C c ");		
+			sb.append(" WHERE 1=1 ");					
+		}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){			
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA, ");//5	
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,"+null+","+null+",c.ANO_INICIO_VIGENCIA,c.ANO_FIN_VIGENCIA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_14A_C c");		
+			sb.append(" WHERE 1=1 ");				
+		}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA, ");//5	
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,"+null+","+null+",c.ANO_INICIO_VIGENCIA,c.ANO_FIN_VIGENCIA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_14B_C c");		
+			sb.append(" WHERE 1=1 ");			
+		}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA, ");//5		
+			sb.append(" FISE_GEN_PKG.FISE_ESTADO_FORMATO_FUN(c.COD_EMPRESA,'"+formato+"',c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,"+null+","+null+",c.ANO_INICIO_VIGENCIA,c.ANO_FIN_VIGENCIA) AS ESTADO ");//6
+			sb.append(" FROM FISE_FORMATO_14C_C c");		
+			sb.append(" WHERE 1=1 ");			}		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			if(codEmpresa.length()==3){
+				sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+" "+"' ");	
+			}else if(codEmpresa.length()==2){
+				sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+"  "+"' ");	
+			}else{
+				sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+"' ");		
+			}			
+		}		
+		if(idGrupoInf!=0){			
+			sb.append(" AND c.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){
+			sb.append(" AND c.ETAPA = '"+etapa+"' ");
+		}		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
 	}
 	
 	

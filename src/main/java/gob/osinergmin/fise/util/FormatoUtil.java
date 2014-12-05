@@ -128,4 +128,24 @@ public class FormatoUtil {
 		return nombre;
 	}
 	
+	public static String eliminaDecimales(String string){
+        if(string != null && string.indexOf(".") > 0){
+            return string.substring(0, string.indexOf("."));
+        }else{
+            return string;
+        }
+    }
+    public static String eliminaPuntoDecimalToString(String string){
+        if(string != null && string.indexOf(".") > 0){
+            return string.substring(0, string.indexOf("."))+ string.substring(string.indexOf(".")+1, string.length());
+        }else{
+            return string;
+        }
+    }
+    
+    public static String  numeroSinPuntoDecimal(String numero){
+    	numero = numero.replace(".", "");
+    	return numero;
+    }
+	
 }

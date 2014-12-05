@@ -2,6 +2,7 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.AutorizarReenvioBean;
 import gob.osinergmin.fise.bean.CorreoBean;
+import gob.osinergmin.fise.bean.EnvioDefinitivoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
@@ -575,6 +576,223 @@ public class CommonGartServiceImpl implements CommonGartService {
 	public String notificarValidacionMensual(String codEmpresa, String etapa, 
 			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception{
 		return commonDao.notificarValidacionMensual(codEmpresa, etapa, idGrupoInf, periodicidad, user, terminal);
+	}
+	
+	
+	@Transactional
+	@Override
+	public List<EnvioDefinitivoBean> buscarEnvioDefinitivo(String codEmpresa,
+			String flag,String etapa,Long idGrupoInf) throws Exception{
+		List<EnvioDefinitivoBean> lista =null;
+		EnvioDefinitivoBean e =null;
+		List<Object[]> lista12A =null;
+		List<Object[]> lista12B =null;
+		List<Object[]> lista12C =null;
+		List<Object[]> lista12D =null;
+		List<Object[]> lista13A =null;
+		List<Object[]> lista14A =null;
+		List<Object[]> lista14B =null;
+		List<Object[]> lista14C =null;
+		try {		
+			/**mensual = formatos 12A,12B,12C,12C
+			  bienal = formatos 13A,14A,14B,14C******/			
+			if(FiseConstants.MENSUAL.equals(flag)){
+				lista = new ArrayList<EnvioDefinitivoBean>();
+				/**FORMATO 12A*/						
+				lista12A = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
+				
+				 logger.info("Tamanio de la lista lista12A:  "+lista12A.size()); 
+				 for(int i = 0; i < lista12A.size(); i++){					
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_12A);				
+					e.setAnioEjec(String.valueOf(((BigDecimal)lista12A.get(i)[3] == null) ? "---" :lista12A.get(i)[3]));
+					e.setMesEjec(String.valueOf(((BigDecimal)lista12A.get(i)[4] == null) ? "00" :lista12A.get(i)[4]));
+					e.setAnioIniVig("---");
+					e.setAnioFinVig("---");
+					e.setEstado((String)lista12A.get(i)[6] == null ? "---" :lista12A.get(i)[6].toString());
+					lista.add(e);
+				 }				
+			    /**FORMATO 12B*/								
+				 /*lista12B = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
+				 
+				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
+				 for(int i = 0; i < lista12B.size(); i++){					
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_12B);				
+					e.setAnioEjec(String.valueOf(((BigDecimal)lista12B.get(i)[3] == null) ? "---" :lista12B.get(i)[3]));
+					e.setMesEjec(String.valueOf(((BigDecimal)lista12B.get(i)[4] == null) ? "00" :lista12B.get(i)[4]));
+					e.setAnioIniVig("---");
+					e.setAnioFinVig("---");
+					e.setEstado((String)lista12B.get(i)[6] == null ? "---" :lista12B.get(i)[6].toString());
+					lista.add(e);
+				 }	*/	
+			    /**FORMATO 12C*/						
+				 /*lista12C = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
+				 
+				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
+				 for(int i = 0; i < lista12C.size(); i++){					
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista12C.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista12C.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_12C);	
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					//e.setAnioEjec(String.valueOf(((BigDecimal)lista12C.get(i)[3] == null) ? "---" :lista12C.get(i)[3]));
+					//e.setMesEjec(String.valueOf(((BigDecimal)lista12C.get(i)[4] == null) ? "00" :lista12C.get(i)[4]));
+					e.setAnioIniVig("---");
+					e.setAnioFinVig("---");
+					e.setEstado((String)lista12C.get(i)[4] == null ? "---" :lista12C.get(i)[4].toString());
+					lista.add(e);
+				 }	*/	
+				
+			   /**FORMATO 12D*/					 
+				/* lista12D = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
+				
+				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
+				 for(int i = 0; i < lista12D.size(); i++){					
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista12D.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista12D.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_12D);	
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					//n.setAnioEjec(String.valueOf(((BigDecimal)lista12D.get(i)[3] == null) ? "---" :lista12D.get(i)[3]));
+					//n.setMesEjec(String.valueOf(((BigDecimal)lista12D.get(i)[4] == null) ? "00" :lista12D.get(i)[4]));
+					e.setAnioIniVig("---");
+					e.setAnioFinVig("---");
+					e.setEstado((String)lista12D.get(i)[4] == null ? "---" :lista12D.get(i)[4].toString());
+					lista.add(e);
+				 }	*/	
+			}else if(FiseConstants.BIENAL.equals(flag)){
+				lista = new ArrayList<EnvioDefinitivoBean>();
+				/**FORMATO 13A*/			   
+				lista13A = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf); 
+			   
+			   logger.info("Tamanio de la lista lista13A:  "+lista13A.size()); 
+			   for(int i = 0; i < lista13A.size(); i++){				
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_13A); 
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					e.setAnioIniVig("---");
+					e.setAnioFinVig("---");
+					e.setEstado((String)lista13A.get(i)[4] == null ? "---" :lista13A.get(i)[4].toString());
+					lista.add(e);
+				}				
+				/**FORMATO 14A*/				  
+			   lista14A = commonDao.listarEnvioDefinitivo(codEmpresa, 
+					   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf); 
+			   
+			   logger.info("Tamanio de la lista lista14A:  "+lista14A.size()); 
+			   for(int i = 0; i < lista14A.size(); i++){
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_14A); 	
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					e.setAnioIniVig(String.valueOf(((BigDecimal)lista14A.get(i)[3] == null) ? "---" :lista14A.get(i)[3]));
+					e.setAnioFinVig(String.valueOf(((BigDecimal)lista14A.get(i)[4] == null) ? "---" :lista14A.get(i)[4]));
+					e.setEstado((String)lista14A.get(i)[6] == null ? "---" :lista14A.get(i)[6].toString());
+					lista.add(e);
+				}
+			   /**FORMATO 14B*/					  
+			   lista14B = commonDao.listarEnvioDefinitivo(codEmpresa, 
+					   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf); 
+			   
+			   logger.info("Tamanio de la lista lista14B:  "+lista14B.size()); 
+			   for(int i = 0; i < lista14B.size(); i++){
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_14B); 	
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					e.setAnioIniVig(String.valueOf(((BigDecimal)lista14B.get(i)[3] == null) ? "---" :lista14B.get(i)[3]));
+					e.setAnioFinVig(String.valueOf(((BigDecimal)lista14B.get(i)[4] == null) ? "---" :lista14B.get(i)[4]));
+					e.setEstado((String)lista14B.get(i)[6] == null ? "---" :lista14B.get(i)[6].toString());
+					lista.add(e);
+				}
+				/**FORMATO 14C*/			  
+			   lista14C = commonDao.listarEnvioDefinitivo(codEmpresa, 
+					   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf); 
+			   
+			   logger.info("Tamanio de la lista lista14C:  "+lista14C.size());
+			   for(int i = 0; i < lista14C.size(); i++){
+					e = new EnvioDefinitivoBean();
+					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					e.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
+					e.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
+					e.setEtapa(etapa);
+					e.setFormato(FiseConstants.NOMBRE_FORMATO_14C); 
+					e.setAnioEjec("---");
+					e.setMesEjec("00");
+					e.setAnioIniVig(String.valueOf(((BigDecimal)lista14C.get(i)[3] == null) ? "---" :lista14C.get(i)[3]));
+					e.setAnioFinVig(String.valueOf(((BigDecimal)lista14C.get(i)[4] == null) ? "---" :lista14C.get(i)[4]));
+					e.setEstado((String)lista14C.get(i)[6] == null ? "---" :lista14C.get(i)[6].toString());
+					lista.add(e);
+				}		
+			}else{
+				lista = new ArrayList<EnvioDefinitivoBean>();	
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			logger.info("Ocurrio un error al listar notificacion:  "+ex); 
+		}finally{
+			if(e!=null){
+				e=null;
+			}
+			if(lista12A!=null){
+				lista12A=null;
+			}
+			if(lista12B!=null){
+				lista12B=null;
+			}
+			if(lista12C!=null){
+				lista12C=null;
+			}
+			if(lista12D!=null){
+				lista12D=null;
+			}
+			if(lista13A!=null){
+				lista13A=null;
+			}
+			if(lista14A!=null){
+				lista14A=null;
+			}
+			if(lista14B!=null){
+				lista14B=null;
+			}
+			if(lista14C!=null){
+				lista14C=null;
+			}
+		}
+	  return lista;
 	}
 	
 	

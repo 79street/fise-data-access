@@ -39,4 +39,8 @@ public interface CommonDao {
 	
 	List<Object[]> listarObsNotificacionProcesar(String codEmpresa,
 			String etapa,String formato,Long idGrupoInf) throws SQLException;
+	
+	List<Object[]> listarEnvioDefinitivo(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException;
+			
 }

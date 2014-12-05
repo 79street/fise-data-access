@@ -90,6 +90,8 @@ public class Formato12CCBean implements Serializable {
 	private String codProvinciaDestinoHidden;
 	private String codDistritoDestinoHidden;
 	
+	private String tipoOperacion;
+	
 	private String usuario;
 	private String terminal;
 	private String nombreArchivo;
@@ -597,6 +599,12 @@ public class Formato12CCBean implements Serializable {
 	}
 	public void setCodDistritoDestinoHidden(String codDistritoDestinoHidden) {
 		this.codDistritoDestinoHidden = codDistritoDestinoHidden;
+	}
+	public String getTipoOperacion() {
+		return tipoOperacion;
+	}
+	public void setTipoOperacion(String tipoOperacion) {
+		this.tipoOperacion = tipoOperacion;
 	}
 	
 	

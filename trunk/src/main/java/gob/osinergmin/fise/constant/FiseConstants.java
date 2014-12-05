@@ -213,6 +213,36 @@ public class FiseConstants {
 	public final static int NRO_CELDA_LIMA_FORMATO12A = 9;
 	public final static int NRO_MAX_FILAS_FORMATO12A = 3;
 	public final static int TAMANIO_MAX_FILA_FORMATO12A = 159;
+	
+	//FORMATO 12C
+	public final static int NRO_FILA_CODEMPRESA_FORMATO12C = 2;
+	public final static int NRO_FILA_ANIOMES_FORMATO12C = 3;
+	public final static String DESC_FILA_INICIO_IMPLEMENTACION = "1. Desplazamiento de Personal Implementación";
+	public final static String DESC_FILA_INICIO_OPERATIVO = "2. Desplazamiento de Personal Mensual";
+	public final static String DESC_FILA_FIN_REGISTROS = "TOTAL FISE-12C";
+	public final static int NRO_CELDA_EMPRESA_FORMATO12C = 3;
+	public final static int NRO_CELDA_ANIO_FORMATO12C = 2;
+	public final static int NRO_CELDA_MES_FORMATO12C = 3;
+	public final static int NRO_CELDA_ANO_EJECUCION_FORMATO12C = 0;
+	public final static int NRO_CELDA_MES_EJECUCION_FORMATO12C = 1;
+	public final static int NRO_CELDA_ITEM_FORMATO12C = 2;
+	public final static int NRO_CELDA_CODUBIGEO_ORIGEN_FORMATO12C = 3;
+	public final static int NRO_CELDA_LOCALIDAD_ORIGEN_FORMATO12C = 4;
+	public final static int NRO_CELDA_CODUBIGEO_DESTINO_FORMATO12C = 5;
+	public final static int NRO_CELDA_LOCALIDAD_DESTINO_FORMATO12C = 6;
+	public final static int NRO_CELDA_ZONA_BENEFICIARIO_FORMATO12C = 7;
+	public final static int NRO_CELDA_CTACONTABLE_FORMATO12C = 8;
+	public final static int NRO_CELDA_ACTIVIDAD_FORMATO12C = 9;
+	public final static int NRO_CELDA_TIPODOCUMENTO_FORMATO12C = 10;
+	public final static int NRO_CELDA_RUC_FORMATO12C = 11;
+	public final static int NRO_CELDA_SERIEDOCUMENTO_FORMATO12C = 12;
+	public final static int NRO_CELDA_NRODOCUMENTO_FORMATO12C = 13;
+	public final static int NRO_CELDA_NRODIAS_FORMATO12C = 14;
+	public final static int NRO_CELDA_ALIMENTACION_FORMATO12C = 15;
+	public final static int NRO_CELDA_ALOJAMIENTO_FORMATO12C = 16;
+	public final static int NRO_CELDA_MOVILIDAD_FORMATO12C = 17;
+
+	
 	//FORMATO 14A
 	public final static int NRO_FILA_CODEMPRESA_FORMATO14A = 5;
 	public final static int NRO_FILA_ANIOMES_FORMATO14A = 6;

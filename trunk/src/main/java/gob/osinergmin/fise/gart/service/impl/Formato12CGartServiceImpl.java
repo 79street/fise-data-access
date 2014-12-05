@@ -147,113 +147,159 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			List<FiseFormato12CD> lista = new ArrayList<FiseFormato12CD>();
 			
 			if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
-				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
-				//
-				FiseFormato12CD detalleImplementacion = new FiseFormato12CD();
-				//pk
-				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
-				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
-				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
-				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
-				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
-				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
-				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
-				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
-				//obtenemos el ultimo valor del itemetapa del detalle
-				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
-				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
-				detalleImplementacion.setId(pkDetalle);
 				
-				detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
-				detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleImplementacion.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+					//
+					FiseFormato12CD detalleImplementacion = new FiseFormato12CD();
+					//pk
+					FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+					pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+					pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+					pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+					pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+					pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+					pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+					pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+					//obtenemos el ultimo valor del itemetapa del detalle
+					Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+					detalleImplementacion.setId(pkDetalle);
+					
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleImplementacion.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleImplementacion.setNumeroDias(formulario.getNroDias());
+					detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleImplementacion.getMontoAlimentacion())
+							.add(detalleImplementacion.getMontoAlojamiento())
+							.add(detalleImplementacion.getMontoMovilidad());
+					detalleImplementacion.setTotalGeneral(total);
+					
+					//
+					detalleImplementacion.setFiseFormato12CC(fiseFormato12CC);
+					//
+					detalleImplementacion.setUsuarioCreacion(formulario.getUsuario());
+					detalleImplementacion.setTerminalCreacion(formulario.getTerminal());
+					detalleImplementacion.setFechaCreacion(hoy);
+					detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
+					detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
+					detalleImplementacion.setFechaActualizacion(hoy);
+					lista.add(detalleImplementacion);
+					
 				}
-				detalleImplementacion.setNumeroDias(formulario.getNroDias());
-				detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
-				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleImplementacion.getMontoAlimentacion())
-						.add(detalleImplementacion.getMontoAlojamiento())
-						.add(detalleImplementacion.getMontoMovilidad());
-				detalleImplementacion.setTotalGeneral(total);
-				
-				//
-				detalleImplementacion.setFiseFormato12CC(fiseFormato12CC);
-				//
-				detalleImplementacion.setUsuarioCreacion(formulario.getUsuario());
-				detalleImplementacion.setTerminalCreacion(formulario.getTerminal());
-				detalleImplementacion.setFechaCreacion(hoy);
-				detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
-				detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
-				detalleImplementacion.setFechaActualizacion(hoy);
-				lista.add(detalleImplementacion);
 				
 			}
 			
 			if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == formulario.getEtapaEjecucion() ){
-				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
-				//
-				FiseFormato12CD detalleOperativo = new FiseFormato12CD();
-				//pk
-				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
-				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
-				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
-				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
-				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
-				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
-				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
-				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
-				//obtenemos el ultimo valor del itemetapa del detalle
-				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
-				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
-				detalleOperativo.setId(pkDetalle);
 				
-				detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
-				detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleOperativo.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+					//
+					FiseFormato12CD detalleOperativo = new FiseFormato12CD();
+					//pk
+					FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+					pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+					pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+					pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+					pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+					pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+					pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+					pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+					//obtenemos el ultimo valor del itemetapa del detalle
+					Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+					detalleOperativo.setId(pkDetalle);
+					
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleOperativo.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleOperativo.setNumeroDias(formulario.getNroDias());
+					detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleOperativo.getMontoAlimentacion())
+							.add(detalleOperativo.getMontoAlojamiento())
+							.add(detalleOperativo.getMontoMovilidad());
+					detalleOperativo.setTotalGeneral(total);
+					
+					//
+					detalleOperativo.setFiseFormato12CC(fiseFormato12CC);
+					//
+					detalleOperativo.setUsuarioCreacion(formulario.getUsuario());
+					detalleOperativo.setTerminalCreacion(formulario.getTerminal());
+					detalleOperativo.setFechaCreacion(hoy);
+					detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
+					detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
+					detalleOperativo.setFechaActualizacion(hoy);
+					lista.add(detalleOperativo);
+					
 				}
-				detalleOperativo.setNumeroDias(formulario.getNroDias());
-				detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
-				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleOperativo.getMontoAlimentacion())
-						.add(detalleOperativo.getMontoAlojamiento())
-						.add(detalleOperativo.getMontoMovilidad());
-				detalleOperativo.setTotalGeneral(total);
-				
-				//
-				detalleOperativo.setFiseFormato12CC(fiseFormato12CC);
-				//
-				detalleOperativo.setUsuarioCreacion(formulario.getUsuario());
-				detalleOperativo.setTerminalCreacion(formulario.getTerminal());
-				detalleOperativo.setFechaCreacion(hoy);
-				detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
-				detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
-				detalleOperativo.setFechaActualizacion(hoy);
-				lista.add(detalleOperativo);
-				
+	
 			}
 			
 			fiseFormato12CC.setUsuarioActualizacion(formulario.getUsuario());
@@ -308,112 +354,158 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			List<FiseFormato12CD> lista = new ArrayList<FiseFormato12CD>();
 			
 			if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
-				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
-				//
-				FiseFormato12CD detalleImplementacion = new FiseFormato12CD();
-				//pk
-				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
-				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
-				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
-				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
-				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
-				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
-				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
-				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
-				//obtenemos el ultimo valor del itemetapa del detalle
-				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
-				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
-				detalleImplementacion.setId(pkDetalle);
 				
-				detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
-				detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleImplementacion.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+					//
+					FiseFormato12CD detalleImplementacion = new FiseFormato12CD();
+					//pk
+					FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+					pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+					pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+					pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+					pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+					pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+					pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+					pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+					//obtenemos el ultimo valor del itemetapa del detalle
+					Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+					detalleImplementacion.setId(pkDetalle);
+					
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleImplementacion.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleImplementacion.setNumeroDias(formulario.getNroDias());
+					detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleImplementacion.getMontoAlimentacion())
+							.add(detalleImplementacion.getMontoAlojamiento())
+							.add(detalleImplementacion.getMontoMovilidad());
+					detalleImplementacion.setTotalGeneral(total);
+					
+					//
+					detalleImplementacion.setFiseFormato12CC(fiseFormato12CC);
+					//
+					detalleImplementacion.setUsuarioCreacion(formulario.getUsuario());
+					detalleImplementacion.setTerminalCreacion(formulario.getTerminal());
+					detalleImplementacion.setFechaCreacion(hoy);
+					detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
+					detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
+					detalleImplementacion.setFechaActualizacion(hoy);
+					lista.add(detalleImplementacion);
+					
 				}
-				detalleImplementacion.setNumeroDias(formulario.getNroDias());
-				detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
-				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleImplementacion.getMontoAlimentacion())
-						.add(detalleImplementacion.getMontoAlojamiento())
-						.add(detalleImplementacion.getMontoMovilidad());
-				detalleImplementacion.setTotalGeneral(total);
-				
-				//
-				detalleImplementacion.setFiseFormato12CC(fiseFormato12CC);
-				//
-				detalleImplementacion.setUsuarioCreacion(formulario.getUsuario());
-				detalleImplementacion.setTerminalCreacion(formulario.getTerminal());
-				detalleImplementacion.setFechaCreacion(hoy);
-				detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
-				detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
-				detalleImplementacion.setFechaActualizacion(hoy);
-				lista.add(detalleImplementacion);
 				
 			}
 			
 			if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == formulario.getEtapaEjecucion() ){
-				FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
-				//
-				FiseFormato12CD detalleOperativo = new FiseFormato12CD();
-				//pk
-				FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
-				pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
-				pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
-				pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
-				pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
-				pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
-				pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
-				pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
-				//obtenemos el ultimo valor del itemetapa del detalle
-				Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
-				pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
-				detalleOperativo.setId(pkDetalle);
 				
-				detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
-				detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleOperativo.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					FiseZonaBenef zonaBeneficiario = zonaBenefDao.obtenerFiseZonaBenefByPK(formulario.getZonaBenef());
+					//
+					FiseFormato12CD detalleOperativo = new FiseFormato12CD();
+					//pk
+					FiseFormato12CDPK pkDetalle = new FiseFormato12CDPK();
+					pkDetalle.setCodEmpresa(fiseFormato12CC.getId().getCodEmpresa());
+					pkDetalle.setAnoPresentacion(fiseFormato12CC.getId().getAnoPresentacion());
+					pkDetalle.setMesPresentacion(fiseFormato12CC.getId().getMesPresentacion());
+					pkDetalle.setEtapa(fiseFormato12CC.getId().getEtapa());
+					pkDetalle.setAnoEjecucionGasto(formulario.getAnioEjecucion());
+					pkDetalle.setMesEjecucionGasto(formulario.getMesEjecucion());
+					pkDetalle.setEtapaEjecucion(formulario.getEtapaEjecucion());
+					//obtenemos el ultimo valor del itemetapa del detalle
+					Long nroItemEtapa = formato12CDDao.obtenerMaximoItemEtapa(pkDetalle);
+					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
+					detalleOperativo.setId(pkDetalle);
+					
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
+					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleOperativo.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleOperativo.setNumeroDias(formulario.getNroDias());
+					detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleOperativo.getMontoAlimentacion())
+							.add(detalleOperativo.getMontoAlojamiento())
+							.add(detalleOperativo.getMontoMovilidad());
+					detalleOperativo.setTotalGeneral(total);
+					
+					//
+					detalleOperativo.setFiseFormato12CC(fiseFormato12CC);
+					//
+					detalleOperativo.setUsuarioCreacion(formulario.getUsuario());
+					detalleOperativo.setTerminalCreacion(formulario.getTerminal());
+					detalleOperativo.setFechaCreacion(hoy);
+					detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
+					detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
+					detalleOperativo.setFechaActualizacion(hoy);
+					lista.add(detalleOperativo);
+					
 				}
-				detalleOperativo.setNumeroDias(formulario.getNroDias());
-				detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
-				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleOperativo.getMontoAlimentacion())
-						.add(detalleOperativo.getMontoAlojamiento())
-						.add(detalleOperativo.getMontoMovilidad());
-				detalleOperativo.setTotalGeneral(total);
-				
-				//
-				detalleOperativo.setFiseFormato12CC(fiseFormato12CC);
-				//
-				detalleOperativo.setUsuarioCreacion(formulario.getUsuario());
-				detalleOperativo.setTerminalCreacion(formulario.getTerminal());
-				detalleOperativo.setFechaCreacion(hoy);
-				detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
-				detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
-				detalleOperativo.setFechaActualizacion(hoy);
-				lista.add(detalleOperativo);
 				
 			}
 		
@@ -495,66 +587,116 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			
 			//IMPLEMENTACION
 			if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
-				detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleImplementacion.setIdZonaBenef(formulario.getZonaBenef());
-				detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleImplementacion.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleImplementacion.setIdZonaBenef(formulario.getZonaBenef());
+					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleImplementacion.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleImplementacion.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleImplementacion.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleImplementacion.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleImplementacion.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleImplementacion.setNumeroDias(formulario.getNroDias());
+					detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleImplementacion.getMontoAlimentacion())
+							.add(detalleImplementacion.getMontoAlojamiento())
+							.add(detalleImplementacion.getMontoMovilidad());
+					detalleImplementacion.setTotalGeneral(total);
+					
+					detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
+					detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
+					detalleImplementacion.setFechaActualizacion(hoy);
+					lista.add(detalleImplementacion);
+					
 				}
-				detalleImplementacion.setNumeroDias(formulario.getNroDias());
-				detalleImplementacion.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleImplementacion.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleImplementacion.setMontoMovilidad(formulario.getMontoMovilidad());
 				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleImplementacion.getMontoAlimentacion())
-						.add(detalleImplementacion.getMontoAlojamiento())
-						.add(detalleImplementacion.getMontoMovilidad());
-				detalleImplementacion.setTotalGeneral(total);
 				
-				detalleImplementacion.setUsuarioActualizacion(formulario.getUsuario());
-				detalleImplementacion.setTerminalActualizacion(formulario.getTerminal());
-				detalleImplementacion.setFechaActualizacion(hoy);
-				lista.add(detalleImplementacion);
 			}
 			
 			//OPERATIVA
 			if( FiseConstants.ETAPA_EJECUCION_OPERATIVA_COD == formulario.getEtapaEjecucion() ){
-				detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
-				detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-				detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
-				detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
-				detalleOperativo.setIdZonaBenef(formulario.getZonaBenef());
-				detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
-				detalleOperativo.setDescripcionActividad(formulario.getActividad());
-				if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
-					detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
-					detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
-					detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
-					detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+				
+				if( formulario.getAnioEjecucion() != 0 ||
+						formulario.getMesEjecucion() != 0 ||
+						formulario.getNroItemEtapa() != 0 ||
+						!formulario.getCodUbigeoOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadOrigen().equals(FiseConstants.BLANCO) ||
+						!formulario.getCodUbigeoDestino().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidadDestino().equals(FiseConstants.BLANCO) ||
+						formulario.getZonaBenef() != 0 ||
+						!formulario.getCodCuentaContable().equals(FiseConstants.BLANCO) ||
+						!formulario.getActividad().equals(FiseConstants.BLANCO) ||
+						!formulario.getTipoDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getRucEmpresa().equals(FiseConstants.BLANCO) ||
+						!formulario.getSerieDocumento().equals(FiseConstants.BLANCO) ||
+						!formulario.getNroDocumento().equals(FiseConstants.BLANCO) ||
+						formulario.getNroDias() != 0 ||
+						!formulario.getMontoAlimentacion().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoAlojamiento().equals(BigDecimal.ZERO) ||
+						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
+						){
+					
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
+					detalleOperativo.setIdZonaBenef(formulario.getZonaBenef());
+					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
+					detalleOperativo.setDescripcionActividad(formulario.getActividad());
+					if( !FiseConstants.BLANCO.equals(formulario.getTipoDocumento()) ){
+						detalleOperativo.setIdTipDocRef(formulario.getTipoDocumento());
+						detalleOperativo.setRucEmpresaEmiteDocRef(formulario.getRucEmpresa());
+						detalleOperativo.setSerieDocumentoReferencia(formulario.getSerieDocumento());
+						detalleOperativo.setNumeroDocumentoReferencia(formulario.getNroDocumento());
+					}
+					detalleOperativo.setNumeroDias(formulario.getNroDias());
+					detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
+					detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
+					detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
+					
+					BigDecimal total = new BigDecimal(0);
+					total = total.add(detalleOperativo.getMontoAlimentacion())
+							.add(detalleOperativo.getMontoAlojamiento())
+							.add(detalleOperativo.getMontoMovilidad());
+					detalleOperativo.setTotalGeneral(total);
+					
+					detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
+					detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
+					detalleOperativo.setFechaActualizacion(hoy);
+					lista.add(detalleOperativo);
+					
 				}
-				detalleOperativo.setNumeroDias(formulario.getNroDias());
-				detalleOperativo.setMontoAlimentacion(formulario.getMontoAlimentacion());
-				detalleOperativo.setMontoAlojamiento(formulario.getMontoAlojamiento());
-				detalleOperativo.setMontoMovilidad(formulario.getMontoMovilidad());
 				
-				BigDecimal total = new BigDecimal(0);
-				total = total.add(detalleOperativo.getMontoAlimentacion())
-						.add(detalleOperativo.getMontoAlojamiento())
-						.add(detalleOperativo.getMontoMovilidad());
-				detalleOperativo.setTotalGeneral(total);
 				
-				detalleOperativo.setUsuarioActualizacion(formulario.getUsuario());
-				detalleOperativo.setTerminalActualizacion(formulario.getTerminal());
-				detalleOperativo.setFechaActualizacion(hoy);
-				lista.add(detalleOperativo);
 			}
 		
 			fiseFormato12CC.setUsuarioActualizacion(formulario.getUsuario());

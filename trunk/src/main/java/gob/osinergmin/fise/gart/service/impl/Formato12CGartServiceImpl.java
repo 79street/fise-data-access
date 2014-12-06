@@ -185,9 +185,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
 					detalleImplementacion.setId(pkDetalle);
 					
-					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
 					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
@@ -263,9 +263,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
 					detalleOperativo.setId(pkDetalle);
 					
-					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
 					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
@@ -392,9 +392,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
 					detalleImplementacion.setId(pkDetalle);
 					
-					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleImplementacion.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
 					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
@@ -470,9 +470,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 					pkDetalle.setNumeroItemEtapa(nroItemEtapa+1);
 					detalleOperativo.setId(pkDetalle);
 					
-					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleOperativo.setIdZonaBenef(zonaBeneficiario.getIdZonaBenef());
 					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
@@ -608,9 +608,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
 						){
 					
-					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleImplementacion.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleImplementacion.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleImplementacion.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleImplementacion.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleImplementacion.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleImplementacion.setIdZonaBenef(formulario.getZonaBenef());
 					detalleImplementacion.setCodigoCuentaContaEde(formulario.getCodCuentaContable());
@@ -665,9 +665,9 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 						!formulario.getMontoMovilidad().equals(BigDecimal.ZERO) 
 						){
 					
-					detalleOperativo.setCodUbigeoOrigen(formulario.getCodDistritoOrigen());
+					detalleOperativo.setCodUbigeoOrigen(formulario.getCodUbigeoOrigen());
 					detalleOperativo.setDescripcionLocalidadOrigen(formulario.getLocalidadOrigen());
-					detalleOperativo.setCodUbigeoDestino(formulario.getCodDistritoDestino());
+					detalleOperativo.setCodUbigeoDestino(formulario.getCodUbigeoDestino());
 					detalleOperativo.setDescripcionLocalidadDestino(formulario.getLocalidadDestino());
 					detalleOperativo.setIdZonaBenef(formulario.getZonaBenef());
 					detalleOperativo.setCodigoCuentaContaEde(formulario.getCodCuentaContable());

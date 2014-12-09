@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Autowired
 	@Qualifier("formato14CCDaoImpl")
 	private Formato14CCDao formato14CCDao;
+	
+	
 	
 	
 	
@@ -795,6 +798,106 @@ public class CommonGartServiceImpl implements CommonGartService {
 	  return lista;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public boolean actualizarFechaEnvioGeneral(Map<String, Object> params) throws Exception{
+		boolean valor = true;
+		try {
+			List<EnvioDefinitivoBean> lista =(List<EnvioDefinitivoBean>)params.get("listaEnvio");
+			String f12A = (String)params.get("f12A");
+			String f12B = (String)params.get("f12B");
+			String f12C = (String)params.get("f12C");
+			String f12D = (String)params.get("f12D");
+			String f13A = (String)params.get("f13A");
+			String f14A = (String)params.get("f14A");
+			String f14B = (String)params.get("f14B");
+			String f14C = (String)params.get("f14C");	
+			String usuario = (String)params.get("usuario");
+			String terminal = (String)params.get("terminal");
+			
+			for(EnvioDefinitivoBean envio :lista){
+				if(FiseConstants.NOMBRE_FORMATO_12A.equals(envio.getFormato())&&"1".equals(f12A)){  
+  					FiseFormato12ACPK pk = new FiseFormato12ACPK();
+  	  				pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  	  		        pk.setAnoEjecucionGasto(new Long(envio.getAnioEjec()));
+  	  		        pk.setMesEjecucionGasto(new Long(envio.getMesEjec()));
+  	  		        pk.setEtapa(envio.getEtapa());  	  			        
+  	  		        FiseFormato12AC formato12A = formato12ACDao.obtenerFormato12ACByPK(pk);
+  	  		        formato12A.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  	  		        formato12A.setUsuarioActualizacion(usuario);
+  	  	            formato12A.setTerminalActualizacion(terminal);
+  	                formato12A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  	  		        formato12ACDao.modificarFormato12AC(formato12A); 	  		        
+  				}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(envio.getFormato())&&"1".equals(f12B)){ 
+  				//falta	
+  				}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(envio.getFormato())&&"1".equals(f12C)){ 
+  				//falta	
+  				}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(envio.getFormato())&&"1".equals(f12D)){ 
+  				//falta	
+  				}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(envio.getFormato())&&"1".equals(f13A)){ 
+  					FiseFormato13ACPK pk = new FiseFormato13ACPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  	  		        pk.setEtapa(envio.getEtapa());  	 
+  	  		        FiseFormato13AC formato13A = formato13ACDao.obtenerFormato13ACByPK(pk);	
+  	  		        formato13A.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  	  		        formato13A.setUsuarioActualizacion(usuario);
+  	  	     	    formato13A.setTerminalActualizacion(terminal);
+  	          	    formato13A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  	  		        formato13ACDao.updatecabecera(formato13A);  	  		       
+  				}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(envio.getFormato())&&"1".equals(f14A)){ 
+  					FiseFormato14ACPK pk = new FiseFormato14ACPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  			        pk.setAnoInicioVigencia(new Long(envio.getAnioIniVig()));
+  			        pk.setAnoFinVigencia(new Long(envio.getAnioFinVig()));
+  			        pk.setEtapa(envio.getEtapa());  				        
+  			        FiseFormato14AC formato14A = formato14ACDao.obtenerFormato14ACByPK(pk);	
+  			        formato14A.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  			        formato14A.setUsuarioActualizacion(usuario);
+  			        formato14A.setTerminalActualizacion(terminal);
+  			        formato14A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  			        formato14ACDao.modificarFormato14AC(formato14A);  			       
+  				}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(envio.getFormato())&&"1".equals(f14B)){ 
+  					FiseFormato14BCPK pk = new FiseFormato14BCPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  			        pk.setAnoInicioVigencia(new Long(envio.getAnioIniVig()));
+  			        pk.setAnoFinVigencia(new Long(envio.getAnioFinVig()));
+  			        pk.setEtapa(envio.getEtapa());  						        
+  			        FiseFormato14BC formato14B = formato14BCDao.obtenerFormato14BCByPK(pk);	
+  			        formato14B.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+			        formato14B.setUsuarioActualizacion(usuario);
+			        formato14B.setTerminalActualizacion(terminal);
+			        formato14B.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  			        formato14BCDao.modificarFormato14BC(formato14B);  			       
+  				}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(envio.getFormato())&&"1".equals(f14C)){ 
+  					FiseFormato14CCPK pk = new FiseFormato14CCPK();  					
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  			        pk.setAnoInicioVigencia(new Long(envio.getAnioIniVig()));
+  			        pk.setAnoFinVigencia(new Long(envio.getAnioFinVig()));
+  			        pk.setEtapa(envio.getEtapa()); 
+  					FiseFormato14CC formato14C = formato14CCDao.obtenerFormato14CC(pk);
+  					formato14C.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+			        formato14C.setUsuarioActualizacion(usuario);
+			        formato14C.setTerminalActualizacion(terminal);
+			        formato14C.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+			        formato14CCDao.actualizarFiseFormato14CC(formato14C);
+  				}		
+			}
+		} catch (Exception e) {
+			valor = false;
+			logger.error("Error al actualizar fecha de envio general:  "+e);
+		}
+		return valor;	
+	}
 	
 }

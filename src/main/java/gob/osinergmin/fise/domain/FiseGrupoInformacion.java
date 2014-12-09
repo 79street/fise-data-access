@@ -92,6 +92,10 @@ public class FiseGrupoInformacion implements Serializable {
 	//bi-directional many-to-one association to FiseFormato14CC
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato14CC> fiseFormato14CCs;
+	
+	
+	@OneToMany(mappedBy="fiseGrupoInformacion")
+	private List<FiseFormato12BC> fiseFormato12BCs;
 
 	public FiseGrupoInformacion() {
 	}
@@ -229,6 +233,32 @@ public class FiseGrupoInformacion implements Serializable {
 		return fiseFormato14CC;
 	}
 
+
+	public List<FiseFormato12BC> getFiseFormato12BCs() {
+		return fiseFormato12BCs;
+	}
+
+	public void setFiseFormato12BCs(List<FiseFormato12BC> fiseFormato12BCs) {
+		this.fiseFormato12BCs = fiseFormato12BCs;
+	}
+	
+	
+	public FiseFormato12BC addFiseFormato12BC(FiseFormato12BC fiseFormato12BC) {
+		getFiseFormato12BCs().add(fiseFormato12BC);
+		fiseFormato12BC.setFiseGrupoInformacion(this);
+
+		return fiseFormato12BC;
+	}
+
+	public FiseFormato12BC removeFiseFormato12BC(FiseFormato12BC fiseFormato12BC) {
+		getFiseFormato12BCs().remove(fiseFormato12BC);
+		fiseFormato12BC.setFiseGrupoInformacion(null);
+
+		return fiseFormato12BC;
+	}
+	
+
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -254,5 +284,6 @@ public class FiseGrupoInformacion implements Serializable {
 	}
 	
 	
+
 
 }

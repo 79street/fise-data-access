@@ -104,8 +104,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public int validarFormatos_14(Formato14Generic formato14, String tipoFormato, 
-			String usuario, String terminal) {
+	public int validarFormatos_14(Formato14Generic formato14, String tipoFormato,String usuario, String terminal) {
 		return commonDao.validarFormatos_14(formato14, tipoFormato, usuario, terminal);
 	}
 

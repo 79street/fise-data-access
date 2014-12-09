@@ -128,6 +128,12 @@ public class FormatoUtil {
 		return nombre;
 	}
 	
+	public static String nombreIndividualActaRemisionGeneral(String codEmpresa, String tipoFormato){
+		String nombre = ""+codEmpresa.trim()+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_ACTAREMISION+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
+	}
+	
 	public static String eliminaDecimales(String string){
         if(string != null && string.indexOf(".") > 0){
             return string.substring(0, string.indexOf("."));

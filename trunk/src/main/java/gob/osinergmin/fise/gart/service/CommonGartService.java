@@ -10,6 +10,7 @@ import gob.osinergmin.fise.bean.NotificacionBean;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommonGartService {
 	
@@ -48,6 +49,8 @@ public interface CommonGartService {
 	
 	List<EnvioDefinitivoBean> buscarEnvioDefinitivo(String codEmpresa,
 			String flag,String etapa,Long idGrupoInf) throws Exception;
+	
+	boolean actualizarFechaEnvioGeneral(Map<String, Object> params) throws Exception;
     
 
 }

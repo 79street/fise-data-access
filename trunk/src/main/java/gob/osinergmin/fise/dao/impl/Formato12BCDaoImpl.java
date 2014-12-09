@@ -1,0 +1,247 @@
+package gob.osinergmin.fise.dao.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Query;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import gob.osinergmin.base.dao.impl.GenericDaoImpl;
+import gob.osinergmin.fise.dao.Formato12BCDao;
+import gob.osinergmin.fise.domain.FiseFormato12BC;
+import gob.osinergmin.fise.domain.FiseFormato12BCPK;
+
+
+@Repository(value = "formato12BCDaoImpl")
+public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao {
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FiseFormato12BC> getLstFormatoCabecera(String codemp, Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta, String etapa) {
+		List<FiseFormato12BC> lstReturn=new ArrayList<FiseFormato12BC>();
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("SELECT c FROM FiseFormato12BC c WHERE 1=1 ");
+			
+			if(codemp!=null && !codemp.isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(etapa!=null && !etapa.isEmpty()){
+				sb.append(" AND c.id.etapa =:etp ");
+			}
+			if(anioDesde!=null && anioHasta!=null){
+				sb.append(" AND c.id.anoPresentacion between :inianio AND :finanio ");
+			}else if(anioDesde!=null && anioHasta==null){
+				sb.append(" AND c.id.anoPresentacion >= :inianio ");
+			}else if(anioDesde==null && anioHasta!=null){
+				sb.append(" AND c.id.anoPresentacion <= :finanio ");
+			}
+			if(mesDesde!=null && mesHasta!=null){
+				sb.append(" AND c.id.mesPresentacion between :inimes AND :finmes ");
+			}else if(mesDesde!=null && mesHasta==null){
+				sb.append(" AND c.id.mesPresentacion >= :inimes ");
+			}else if(mesDesde==null && mesHasta!=null){
+				sb.append(" AND c.id.mesPresentacion <= :finmes ");
+			}
+			
+			Query query = em.createQuery(sb.toString());
+			System.out.println("sbBBBBB:::>"+sb.toString());
+			System.out.println("sbBBBBB:::>"+codemp+"/"+anioDesde+"/"+anioHasta+"/"+mesDesde+"/"+mesHasta+"/"+etapa);
+            if(codemp!=null && !codemp.isEmpty()){
+            	query.setParameter("emp", codemp.trim());
+			}
+			if(etapa!=null && !etapa.isEmpty()){
+				query.setParameter("etp", etapa.trim());
+			}
+			if(anioDesde!=null && anioHasta!=null){
+				query.setParameter("inianio", anioDesde);
+				query.setParameter("finanio", anioHasta);
+			}else if(anioDesde!=null && anioHasta==null){
+				query.setParameter("inianio", anioDesde);
+			}else if(anioDesde==null && anioHasta!=null){
+				query.setParameter("finanio", anioHasta);
+			}
+			
+			if(mesDesde!=null && mesHasta!=null){
+				query.setParameter("inimes", mesDesde);
+				query.setParameter("finmes", mesHasta);
+			}else if(mesDesde!=null && mesHasta==null){
+				query.setParameter("inimes", mesDesde);
+			}else if(mesDesde==null && mesHasta!=null){
+				query.setParameter("finmes", mesHasta);
+			}
+			
+			lstReturn= query.getResultList();
+			
+			
+		}catch(Exception e){
+	      e.printStackTrace();
+	     
+		}finally{
+			em.close();
+			
+		}
+		return lstReturn;
+		
+	}
+
+	@Override
+	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {
+		
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("SELECT c FROM FiseFormato12BC c WHERE 1=1 ");
+			
+			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
+				sb.append(" AND c.id.etapa =:etp ");
+			}
+			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
+				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+			}
+			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
+				sb.append(" AND c.id.mesPresentacion =:mespres ");
+			}
+			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
+				sb.append(" AND c.id.anoEjecucionGasto =:anioejec ");
+			}
+			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
+				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
+			}
+			
+			
+			Query query = em.createQuery(sb.toString());
+			
+			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
+				query.setParameter("emp", id.getCodEmpresa().trim());
+			}
+			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
+				query.setParameter("etp", id.getEtapa().trim());
+			}
+			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
+				query.setParameter("aniopres", id.getAnoPresentacion());
+			}
+			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
+				query.setParameter("mespres", id.getMesPresentacion());
+			}
+			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
+				query.setParameter("anioejec", id.getAnoEjecucionGasto());
+			}
+			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
+				query.setParameter("mesejec", id.getMesEjecucionGasto());
+			}
+			
+          
+			
+			FiseFormato12BC bean= (FiseFormato12BC) query.getSingleResult();
+			
+			return bean;
+		}catch(Exception e){
+	      e.printStackTrace();
+	      return null;
+		}finally{
+			em.close();
+			
+		}
+		
+		
+	}
+
+	@Override
+	@Transactional
+	public FiseFormato12BC saveFormatoCabecera(FiseFormato12BC formato) throws DataIntegrityViolationException,Exception{
+		FiseFormato12BC result = null;
+		try {
+				em.persist(formato);
+			result = formato;
+			System.out.println("cabecera persis::=>" + result);
+		} finally {
+			em.close();
+		}
+		return result;
+	}
+
+	@Override
+	@Transactional
+	public Integer updateFormatoCabecera(FiseFormato12BC formato)throws DataIntegrityViolationException,Exception {
+		Integer result = null;
+		try {
+			em.merge(formato);
+			System.out.println("cabecera merge::=>" + formato);
+			result = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
+
+	@Override
+	@Transactional
+	public Integer deleteFormatoCabecera(FiseFormato12BCPK id) throws DataIntegrityViolationException,Exception{
+
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("DELETE  FROM FiseFormato12BC c WHERE 1=1 ");
+			
+			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
+				sb.append(" AND c.id.etapa =:etp ");
+			}
+			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
+				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+			}
+			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
+				sb.append(" AND c.id.mesPresentacion =:mespres ");
+			}
+			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
+				sb.append(" AND c.id.anoEjecucionGasto =:anioejec ");
+			}
+			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
+				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
+			}
+			
+			
+			Query query = em.createQuery(sb.toString());
+			
+			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
+				query.setParameter("emp", id.getCodEmpresa().trim());
+			}
+			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
+				query.setParameter("etp", id.getEtapa().trim());
+			}
+			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
+				query.setParameter("aniopres", id.getAnoPresentacion());
+			}
+			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
+				query.setParameter("mespres", id.getMesPresentacion());
+			}
+			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
+				query.setParameter("anioejec", id.getAnoEjecucionGasto());
+			}
+			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
+				query.setParameter("mesejec", id.getMesEjecucionGasto());
+			}
+			
+          
+			
+			int cant=  query.executeUpdate();
+			
+			return cant;
+		}finally{
+			em.close();
+			
+		}
+	}
+
+	
+}

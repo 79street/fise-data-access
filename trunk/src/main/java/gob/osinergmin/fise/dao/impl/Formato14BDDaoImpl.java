@@ -181,5 +181,134 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			 em.close();
 		 }
 	}
+
+	@Override
+	public FiseFormato14BD getCostoUnitarioByEmpAnioZona(String codEmpresa, Integer anio, Integer mes,Integer idZona, String etp) {
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("SELECT c FROM FiseFormato14BD c WHERE 1=1 ");
+			
+			if(codEmpresa !=null && !codEmpresa.isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(anio!=null &&  anio>0){
+				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				
+			}
+			if(mes!=null &&  mes>0){
+				sb.append(" AND c.id.mesPresentacion =:mespres ");
+				
+			}
+			if(idZona!=null && idZona>0){
+				sb.append(" AND c.id.idZonaBenef =:zna ");
+			}
+			
+			if(etp !=null && !etp.isEmpty()){
+				sb.append(" AND c.id.etapa =:etpa ");
+				
+			}
+			
+			Query query = em.createQuery(sb.toString());
+			System.out.println("codEmpresa::"+codEmpresa);
+			System.out.println("anio::"+anio);
+			System.out.println("mes::"+mes);
+			System.out.println("idZona::"+idZona);
+			System.out.println("etp::"+etp);
+			
+			
+			if(codEmpresa !=null && !codEmpresa.isEmpty()){
+				query.setParameter("emp", codEmpresa.trim());
+			}
+			if(anio!=null &&  anio>0){
+				query.setParameter("aniopres", anio.longValue());
+			}
+			if(mes!=null &&  mes>0){
+				query.setParameter("mespres", mes.longValue());
+				
+			}
+			if(idZona!=null && idZona>0){
+				query.setParameter("zna", idZona.longValue());
+			}
+			if(etp !=null && !etp.isEmpty()){
+				query.setParameter("etpa", etp.trim());
+			}
+			
+			
+          
+			
+			FiseFormato14BD bean= (FiseFormato14BD) query.getSingleResult();
+			
+			return bean;
+		}catch(Exception e){
+	      e.printStackTrace();
+	      return null;
+		}finally{
+			em.close();
+			
+		}
+	}
+
+	@Override
+	public List<FiseFormato14BD> getLstCostoUnitarioByEmpAnio(String codEmpresa, Integer anio,Integer mes, Integer idZona, String etp) {
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("SELECT c FROM FiseFormato14BD c WHERE 1=1 ");
+			
+			if(codEmpresa !=null && !codEmpresa.isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(anio!=null &&  anio>0){
+				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				
+			}
+			if(mes!=null &&  mes>0){
+				sb.append(" AND c.id.mesPresentacion =:mespres ");
+				
+			}
+			if(idZona!=null && idZona>0){
+				sb.append(" AND c.id.idZonaBenef =:zna ");
+			}
+			
+			if(etp !=null && !etp.isEmpty()){
+				sb.append(" AND c.id.etapa =:etpa ");
+				
+			}
+			
+			Query query = em.createQuery(sb.toString());
+			System.out.println("CONSULTA SQL::"+sb.toString());
+			System.out.println("codEmpresa::"+codEmpresa);
+			System.out.println("anio::"+anio);
+			System.out.println("mes::"+mes);
+			System.out.println("idZona::"+idZona);
+			System.out.println("etp::"+etp);
+			
+			
+			if(codEmpresa !=null && !codEmpresa.isEmpty()){
+				query.setParameter("emp", codEmpresa.trim());
+			}
+			if(anio!=null &&  anio>0){
+				query.setParameter("aniopres", anio.longValue());
+			}
+			if(mes!=null &&  mes>0){
+				query.setParameter("mespres", mes.longValue());
+			}
+			if(idZona!=null && idZona>0){
+				query.setParameter("zna", idZona.longValue());
+			}
+			if(etp !=null && !etp.isEmpty()){
+				query.setParameter("etpa", etp.trim());
+			}
+			
+			List<FiseFormato14BD> lst=  query.getResultList();
+			
+			return lst;
+		}catch(Exception e){
+	      e.printStackTrace();
+	      return null;
+		}finally{
+			em.close();
+			
+		}
+	}
 	
 }

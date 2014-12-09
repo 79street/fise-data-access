@@ -12,6 +12,8 @@ import java.util.List;
 public interface Formato14BGartService {
 	
 	FiseFormato14BD obtenerFormato14BDVigente(String codEmpresa, long anioVigencia, long idZonaBenef);
+	FiseFormato14BD getCostoUnitarioByEmpAnioZona(String codEmpresa, Integer anio, Integer mes,Integer idZona,String etp);
+	List<FiseFormato14BD> getLstCostoUnitarioByEmpAnio(String codEmpresa, Integer anio,Integer mes, Integer idZona,String etp);
 	FiseFormato14BC obtenerFormato14BCByPK(FiseFormato14BCPK fiseFormato14BCPK);
 	List<FiseFormato14BC> buscarFormato14BC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa);
 	FiseFormato14BC registrarFormato14BC(Formato14BCBean formato) throws Exception;

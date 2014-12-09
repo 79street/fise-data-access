@@ -774,6 +774,8 @@ public class FiseConstants {
 	public final static int ROW_INFO_RUBRO = 7;
 	public final static int ROW_INFO_FRECUENCIA= 8;
 	public final static int ROW_INIT_DETALLE= 11;
+	
+	
 
 	public final static int COLUMN_B= 1;
 	public final static int COLUMN_C= 2;
@@ -791,7 +793,25 @@ public class FiseConstants {
 	public final static int COLUMN_N= 13;
 	public final static int COLUMN_O= 14;
 		
+
+	//FORMATO 12B
+	public final static int ROW_INFO_EMPRESA_12B = 3;
+	public final static int ROW_INFO_FECHA_12B = 4;
+	public final static int ROW_INFO_RUBRO_12B = 5;
+	public final static int ROW_INFO_FRECUENCIA_12B= 6;
+	public final static int ROW_INIT_DETALLE_12B= 11;
+	public final static int ROW_INIT_VALES_DOM_12B= 15;
+	public final static int ROW_INIT_VALES_ELECT_12B= 19;
+	public final static int ROW_INIT_VALES_FISICO_12B= 23;
+	public final static int ROW_INIT_VALES_DIGITAL_12B= 27;
+	public final static int ROW_INIT_ATENCION_12B= 31;
+	public final static int ROW_INIT_GESTION_12B= 34;
+	public final static int ROW_INIT_DESPLAZAMIENTO_12B= 35;
+    public final static int ROW_FIN_DETALLE_12B= 36;
+	
+
 	public final static String ENVIO_EMAIL_OK_VALIDACION= "0";
+
 	/******varibales para leer exel para el formato 14C****/
 	/****FORMATO 14C****/
 	public final static String ESTADO_ENVIADO_F14C = "Enviado";
@@ -1037,7 +1057,7 @@ public class FiseConstants {
 	public final static String COSTO_INDIRECTO_F14C = "I";
 	public final static String COSTO_D_I_F14C = "A";//ambos
 	
-	public final static int ADD = 2;
+	public final static int ADD = 2;//3delete
 	public final static int UPDATE = 1;
 	public final static int VIEW = 0;
 	
@@ -1066,6 +1086,16 @@ public class FiseConstants {
 	public final static String PARAM_DESC_MES_PRESENTACION= "DESC_MES_PRESENTACION";
 	public final static String PARAM_ETAPA = "ETAPA";
 	
+
+	public final static int ZONA_RURAL = 1;
+	public final static int ZONA_PROVINCIA = 2;
+	public final static int ZONA_LIMA = 3;
+	
+	public final static int ESTADO_ENVIADO = 1;
+	public final static int ESTADO_POR_ENVIAR = 0;
+	
+	
+
 	public final static String MENSUAL = "MENSUAL";
 	public final static String BIENAL = "BIENAL";	
 	public final static String NOMBRE_CONSOLIDADO_EMAIL = "TF";
@@ -1242,5 +1272,104 @@ public class FiseConstants {
 	public final static String COD_ERROR_F14B_3240 = "3240";
 	public final static String COD_ERROR_F14B_3250 = "3250";
 
-	
+	//FORMATO 12 B
+		public final static String PARAM_DESC_EMPRESA_F12B = "DESC_EMPRESA";
+		public final static String PARAM_ANO_PRES_F12B = "ANO_PRESENTACION";
+		public final static String PARAM_DESC_MES_PRES_F12B = "DESC_MES_PRESENTACION";
+		public final static String PARAM_ANO_EJEC_F12B = "ANO_EJECUCION_GASTO";
+		public final static String PARAM_DESC_MES_EJEC_F12B = "DESC_MES_EJECUCION";		
+		
+		public final static String PARAM_NRO_VAL_IMP_R_F12B = "NRO_VAL_IMP_R";
+		public final static String PARAM_NRO_VAL_IMP_P_F12B = "NRO_VAL_IMP_P";
+		public final static String PARAM_NRO_VAL_IMP_L_F12B = "NRO_VAL_IMP_L";
+		
+		public final static String PARAM_COSTO_UNIT_VAL_IMP_R_F12B = "COSTO_UNIT_VAL_IMP_R";
+		public final static String PARAM_COSTO_UNIT_VAL_IMP_P_F12B = "COSTO_UNIT_VAL_IMP_P";
+		public final static String PARAM_COSTO_UNIT_VAL_IMP_L_F12B = "COSTO_UNIT_VAL_IMP_L";
+		
+		
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_R_F12B = "COSTO_UNIT_VAL_IMP_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_P_F12B = "COSTO_UNIT_VAL_IMP_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_L_F12B = "COSTO_UNIT_VAL_IMP_L";
+		
+		public final static String PARAM_NUM_VAL_REPAR_DOMIC_R_F12B = "NUM_VAL_REPAR_DOMIC_R";
+		public final static String PARAM_NUM_VAL_REPAR_DOMIC_P_F12B = "NUM_VAL_REPAR_DOMIC_P";
+		public final static String PARAM_NUM_VAL_REPAR_DOMIC_L_F12B = "NUM_VAL_REPAR_DOMIC_L";
+		
+		public final static String PARAM_COSTO_UNIT_VAL_REPAR_DOMIC_R_F12B = "COSTO_UNIT_VAL_REPAR_DOMIC_R";
+		public final static String PARAM_COSTO_UNIT_VAL_REPAR_DOMIC_P_F12B = "COSTO_UNIT_VAL_REPAR_DOMIC_P";
+		public final static String PARAM_COSTO_UNIT_VAL_REPAR_DOMIC_L_F12B = "COSTO_UNIT_VAL_REPAR_DOMIC_L";
+		
+		public final static String PARAM_COSTO_TOTAL_VAL_REPAR_DOMIC_R_F12B = "COSTO_TOTAL_VAL_REPAR_DOMIC_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_REPAR_DOMIC_P_F12B = "COSTO_TOTAL_VAL_REPAR_DOMIC_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_REPAR_DOMIC_L_F12B = "COSTO_TOTAL_VAL_REPAR_DOMIC_L";
+		
+		public final static String PARAM_NUM_VAL_ENTREG_EDE_R_F12B = "NUM_VAL_ENTREG_EDE_R";
+		public final static String PARAM_NUM_VAL_ENTREG_EDE_P_F12B = "NUM_VAL_ENTREG_EDE_P";
+		public final static String PARAM_NUM_VAL_ENTREG_EDE_L_F12B = "NUM_VAL_ENTREG_EDE_L";
+		
+		public final static String PARAM_COSTO_UNIT_VAL_ENTREG_EDE_R_F12B = "COSTO_UNIT_VAL_ENTREG_EDE_R";
+		public final static String PARAM_COSTO_UNIT_VAL_ENTREG_EDE_P_F12B = "COSTO_UNIT_VAL_ENTREG_EDE_P";
+		public final static String PARAM_COSTO_UNIT_VAL_ENTREG_EDE_L_F12B = "COSTO_UNIT_VAL_ENTREG_EDE_L";
+		
+		public final static String PARAM_COSTO_TOTAL_VAL_ENTREG_EDE_R_F12B = "COSTO_TOTAL_VAL_ENTREG_EDE_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_ENTREG_EDE_P_F12B = "COSTO_TOTAL_VAL_ENTREG_EDE_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_ENTREG_EDE_L_F12B = "COSTO_TOTAL_VAL_ENTREG_EDE_L";
+		
+		public final static String PARAM_NUM_VAL_FISIC_CANJ_R_F12B = "NUM_VAL_FISIC_CANJ_R";
+		public final static String PARAM_NUM_VAL_FISIC_CANJ_P_F12B = "NUM_VAL_FISIC_CANJ_P";
+		public final static String PARAM_NUM_VAL_FISIC_CANJ_L_F12B = "NUM_VAL_FISIC_CANJ_L";
+		
+		public final static String PARAM_COSTO_UNIT_VAL_FISIC_CANJ_R_F12B = "COSTO_UNIT_VAL_FISIC_CANJ_R";
+		public final static String PARAM_COSTO_UNIT_VAL_FISIC_CANJ_P_F12B = "COSTO_UNIT_VAL_FISIC_CANJ_P";
+		public final static String PARAM_COSTO_UNIT_VAL_FISIC_CANJ_L_F12B = "COSTO_UNIT_VAL_FISIC_CANJ_L";
+		
+		public final static String PARAM_COSTO_TOTAL_VAL_FISIC_CANJ_R_F12B = "COSTO_TOTAL_VAL_FISIC_CANJ_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_FISIC_CANJ_P_F12B = "COSTO_TOTAL_VAL_FISIC_CANJ_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_FISIC_CANJ_L_F12B = "COSTO_TOTAL_VAL_FISIC_CANJ_L";
+		
+		public final static String PARAM_NUM_VAL_DIGIT_CANJ_R_F12B = "NUM_VAL_DIGIT_CANJ_R";
+		public final static String PARAM_NUM_VAL_DIGIT_CANJ_P_F12B = "NUM_VAL_DIGIT_CANJ_P";
+		public final static String PARAM_NUM_VAL_DIGIT_CANJ_L_F12B = "NUM_VAL_DIGIT_CANJ_L";
+		
+		public final static String PARAM_COSTO_UNIT_VAL_DIGIT_CANJ_R_F12B = "COSTO_UNIT_VAL_DIGIT_CANJ_R";
+		public final static String PARAM_COSTO_UNIT_VAL_DIGIT_CANJ_P_F12B = "COSTO_UNIT_VAL_DIGIT_CANJ_P";
+		public final static String PARAM_COSTO_UNIT_VAL_DIGIT_CANJ_L_F12B = "COSTO_UNIT_VAL_DIGIT_CANJ_L";
+		
+		public final static String PARAM_COSTO_TOTAL_VAL_DIGIT_CANJ_R_F12B = "COSTO_TOTAL_VAL_DIGIT_CANJ_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_DIGIT_CANJ_P_F12B = "COSTO_TOTAL_VAL_DIGIT_CANJ_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_DIGIT_CANJ_L_F12B = "COSTO_TOTAL_VAL_DIGIT_CANJ_L";
+		
+		public final static String PARAM_NUM_ATENCIONES_R_F12B = "NUM_ATENCIONES_R";
+		public final static String PARAM_NUM_ATENCIONES_P_F12B = "NUM_ATENCIONES_P";
+		public final static String PARAM_NUM_ATENCIONES_L_F12B = "NUM_ATENCIONES_L";
+		
+		public final static String PARAM_GESTION_ADM_R_F12B = "GESTION_ADM_R";
+		public final static String PARAM_GESTION_ADM_P_F12B = "GESTION_ADM_P";
+		public final static String PARAM_GESTION_ADM_L_F12B = "GESTION_ADM_L";
+		
+		public final static String PARAM_DESPL_PERSONAL_R_F12B = "DESPL_PERSONAL_R";
+		public final static String PARAM_DESPL_PERSONAL_P_F12B = "DESPL_PERSONAL_P";
+		public final static String PARAM_DESPL_PERSONAL_L_F12B = "DESPL_PERSONAL_L";
+		
+		public final static String PARAM_ACTIV_EXTRAORD_R_F12B = "ACTIV_EXTRAORD_R";
+		public final static String PARAM_ACTIV_EXTRAORD_P_F12B = "ACTIV_EXTRAORD_P";
+		public final static String PARAM_ACTIV_EXTRAORD_L_F12B = "ACTIV_EXTRAORD_L";
+		
+		public final static String PARAM_TOTAL_VAL_IMP_F12B = "TOTAL_VAL_IMP";
+		public final static String PARAM_TOTAL_VAL_REPAR_DOMIC_F12B = "TOTAL_VAL_REPAR_DOMIC";
+		public final static String PARAM_TOTAL_VAL_ENTREG_EDE_F12B = "TOTAL_VAL_ENTREG_EDE";
+		public final static String PARAM_TOTAL_VAL_FISIC_CANJ_LIQ_F12B = "TOTAL_VAL_FISIC_CANJ_LIQ";
+		public final static String PARAM_TOTAL_VAL_DIGIT_CANJ_LIQ_F12B = "TOTAL_VAL_DIGIT_CANJ_LIQ";
+		public final static String PARAM_TOTAL_SOLICIT_CONSULT_RECLAM_F12B = "TOTAL_SOLICIT_CONSULT_RECLAM";
+		public final static String PARAM_TOTAL_GESTION_ADM_F12B = "TOTAL_GESTION_ADM";
+		public final static String PARAM_TOTAL_DESPL_PERSONAL_F12B = "TOTAL_DESPL_PERSONAL";
+		public final static String PARAM_TOTAL_ACTIV_EXTRAORD_F12B = "TOTAL_ACTIV_EXTRAORD";
+		
+		public final static String PARAM_TOTAL_GENERAL_F12B = "TOTAL_GENERAL";
+		
+		public final static long ZONABENEF_RURAL = 1;
+		public final static long ZONABENEF_PROVINCIA = 2;
+		public final static long ZONABENEF_LIMA = 3;
+
 }

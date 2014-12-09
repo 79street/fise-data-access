@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.bean;
 
 import gob.osinergmin.fise.domain.FiseFormato12AC;
+import gob.osinergmin.fise.domain.FiseFormato12BC;
 
 public class Formato12A12BGeneric {
 	
@@ -20,14 +21,14 @@ public class Formato12A12BGeneric {
 			this.mesEjecucion=((FiseFormato12AC) object).getId().getMesEjecucionGasto();
 			this.codigoEtapa=((FiseFormato12AC) object).getId().getEtapa();
 	    }
-		/*else if(object instanceof FiseFormato12BC){
-			this.codigoEmpresa=((FiseFormato12AC) object).getId().getCodEmpresa();
-			this.anoPresentacion=((FiseFormato12AC) object).getId().getAnoPresentacion();
-			this.mesPresentacion=((FiseFormato12AC) object).getId().getMesPresentacion();
-			this.anoEjecucion=((FiseFormato12AC) object).getId().getAnoEjecucionGasto();
-			this.mesEjecucion=((FiseFormato12AC) object).getId().getMesEjecucionGasto();
-			this.codigoEtapa=((FiseFormato12AC) object).getId().getEtapa();
-	    }*/
+		else if(object instanceof FiseFormato12BC){
+			this.codigoEmpresa=((FiseFormato12BC) object).getId().getCodEmpresa();
+			this.anoPresentacion=((FiseFormato12BC) object).getId().getAnoPresentacion();
+			this.mesPresentacion=((FiseFormato12BC) object).getId().getMesPresentacion();
+			this.anoEjecucion=((FiseFormato12BC) object).getId().getAnoEjecucionGasto();
+			this.mesEjecucion=((FiseFormato12BC) object).getId().getMesEjecucionGasto();
+			this.codigoEtapa=((FiseFormato12BC) object).getId().getEtapa();
+	    }
 	}
 
 	public String getCodigoEmpresa() {

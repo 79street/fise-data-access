@@ -15,5 +15,6 @@ public interface Formato14BDDao extends GenericDao {
 	void registrarFormato14BD(FiseFormato14BD fiseFormato14BD);
 	void modificarFormato14BD(FiseFormato14BD fiseFormato14BD);
 	void eliminarFormato14BD(FiseFormato14BD fiseFormato14BD);
-
+	FiseFormato14BD getCostoUnitarioByEmpAnioZona(String codEmpresa, Integer anio,Integer mes, Integer idZona,String etp);
+	List<FiseFormato14BD> getLstCostoUnitarioByEmpAnio(String codEmpresa, Integer anio, Integer mes,Integer idZona,String etp);
 }

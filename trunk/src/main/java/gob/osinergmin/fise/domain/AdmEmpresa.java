@@ -1,8 +1,11 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -46,6 +49,9 @@ public class AdmEmpresa implements Serializable {
 	private String ruc;
 
 	private String telefonos;
+	
+	@OneToMany(mappedBy="admEmpresa")
+	private List<FiseFormato12BC> fiseFormato12BCs;
 
 	public AdmEmpresa() {
 	}
@@ -144,6 +150,29 @@ public class AdmEmpresa implements Serializable {
 
 	public void setTelefonos(String telefonos) {
 		this.telefonos = telefonos;
+	}
+	
+	public List<FiseFormato12BC> getFiseFormato12BCs() {
+		return fiseFormato12BCs;
+	}
+
+	public void setFiseFormato12BCs(List<FiseFormato12BC> fiseFormato12BCs) {
+		this.fiseFormato12BCs = fiseFormato12BCs;
+	}
+	
+	
+	public FiseFormato12BC addFiseFormato12BC(FiseFormato12BC fiseFormato12BC) {
+		getFiseFormato12BCs().add(fiseFormato12BC);
+		fiseFormato12BC.setAdmEmpresa(this);
+
+		return fiseFormato12BC;
+	}
+
+	public FiseFormato12BC removeFiseFormato12BC(FiseFormato12BC fiseFormato12BC) {
+		getFiseFormato12BCs().remove(fiseFormato12BC);
+		fiseFormato12BC.setAdmEmpresa(null);
+
+		return fiseFormato12BC;
 	}
 
 }

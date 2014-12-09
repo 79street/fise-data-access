@@ -3,7 +3,9 @@ package gob.osinergmin.fise.util;
 import gob.osinergmin.fise.constant.FiseConstants;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class FormatoUtil {
 	
@@ -153,5 +155,11 @@ public class FormatoUtil {
     	numero = numero.replace(".", "");
     	return numero;
     }
+    
+    public static String conversion(double valor){
+        Locale.setDefault(Locale.US);
+        DecimalFormat num = new DecimalFormat("###########.00");
+        return num.format(valor);
+      }
 	
 }

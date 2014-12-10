@@ -14,6 +14,9 @@ public class MensajeErrorBean implements Serializable {
 	private String descripcion;
 	private String descZonaBenef;
 	private String descCodSectorTipico;
+	//
+	private Long nroItemEtapa;
+	private String descEtapaEjecucion;
 	
 	public int getId() {
 		return id;
@@ -44,6 +47,18 @@ public class MensajeErrorBean implements Serializable {
 	}
 	public void setDescCodSectorTipico(String descCodSectorTipico) {
 		this.descCodSectorTipico = descCodSectorTipico;
+	}
+	public Long getNroItemEtapa() {
+		return nroItemEtapa;
+	}
+	public void setNroItemEtapa(Long nroItemEtapa) {
+		this.nroItemEtapa = nroItemEtapa;
+	}
+	public String getDescEtapaEjecucion() {
+		return descEtapaEjecucion;
+	}
+	public void setDescEtapaEjecucion(String descEtapaEjecucion) {
+		this.descEtapaEjecucion = descEtapaEjecucion;
 	}
 
 }

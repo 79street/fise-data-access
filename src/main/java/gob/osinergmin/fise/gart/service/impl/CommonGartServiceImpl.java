@@ -11,6 +11,7 @@ import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
+import gob.osinergmin.fise.dao.Formato12BCDao;
 import gob.osinergmin.fise.dao.Formato12CCDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato14ACDao;
@@ -18,6 +19,8 @@ import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14CCDao;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
+import gob.osinergmin.fise.domain.FiseFormato12BC;
+import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12CC;
 import gob.osinergmin.fise.domain.FiseFormato12CCPK;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
@@ -61,7 +64,11 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Autowired
 	@Qualifier("formato12ACDaoImpl")
-	private Formato12ACDao formato12ACDao;
+	private Formato12ACDao formato12ACDao;	
+	
+	@Autowired
+	@Qualifier("formato12BCDaoImpl")
+	private Formato12BCDao formato12BCDao;
 	
 	@Autowired
 	@Qualifier("formato12CCDaoImpl")
@@ -156,14 +163,16 @@ public class CommonGartServiceImpl implements CommonGartService {
 	}
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public List<AutorizarReenvioBean> buscarFormatoReenvio(String codEmpresa,String anioPres,
 			String mesPres,String formato,String etapa) throws Exception{
 		
 		List<AutorizarReenvioBean> lista = new ArrayList<AutorizarReenvioBean>();
 		try {
 			if(FiseConstants.NOMBRE_FORMATO_12A.equals(formato)){ 
+				
 				List<FiseFormato12AC> lista12A = formato12ACDao.buscarFormato12ACReenvio(codEmpresa,
 						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
 				for(FiseFormato12AC f12A: lista12A){
@@ -178,13 +187,44 @@ public class CommonGartServiceImpl implements CommonGartService {
 					r.setFormato(formato); 
 					lista.add(r);
 				}			
-			}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){			
+			}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){
+				
+				List<FiseFormato12BC> lista12B = formato12BCDao.buscarFormato12BCReenvio(codEmpresa,
+						Integer.valueOf(anioPres), Integer.valueOf(mesPres), etapa);
+				for(FiseFormato12BC f12B: lista12B){
+					AutorizarReenvioBean r = new AutorizarReenvioBean();
+					r.setCodEmpresa(f12B.getId().getCodEmpresa()); 
+					r.setAnioPres(""+f12B.getId().getAnoPresentacion()); 
+					r.setMesPres(""+f12B.getId().getMesPresentacion()); 
+					r.setAnioEjec(""+f12B.getId().getAnoEjecucionGasto());
+					r.setMesEjec(""+f12B.getId().getMesEjecucionGasto());
+					r.setEtapa(f12B.getId().getEtapa()); 
+					r.setEstado(FiseConstants.ESTADO_FECHAENVIO_ENVIADO);
+					r.setFormato(formato); 
+					lista.add(r);
+				}			
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
 				
+				List<FiseFormato12CC> lista12C = formato12CCDao.buscarFormato12CCReenvio(codEmpresa,
+						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
+				for(FiseFormato12CC f12C: lista12C){
+					AutorizarReenvioBean r = new AutorizarReenvioBean();
+					r.setCodEmpresa(f12C.getId().getCodEmpresa()); 
+					r.setAnioPres(""+f12C.getId().getAnoPresentacion()); 
+					r.setMesPres(""+f12C.getId().getMesPresentacion()); 				
+					r.setEtapa(f12C.getId().getEtapa()); 
+					r.setEstado(FiseConstants.ESTADO_FECHAENVIO_ENVIADO);
+					r.setFormato(formato); 
+					lista.add(r);
+				}			
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
 				
+				
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 
+				
 				List<FiseFormato13AC> lista13A = formato13ACDao.buscarFormato13ACReenvio(codEmpresa,
 						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
 				for(FiseFormato13AC f13A: lista13A){
@@ -197,7 +237,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 					r.setFormato(formato); 
 					lista.add(r);
 				}		
-			}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){ 
+			}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){
+				
 				List<FiseFormato14AC> lista14A = formato14ACDao.buscarFormato14ACReenvio(codEmpresa,
 						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
 				for(FiseFormato14AC f14A: lista14A){
@@ -214,6 +255,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				}
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){ 
+				
 				List<FiseFormato14BC> lista14B = formato14BCDao.buscarFormato14BCReenvio(codEmpresa,
 						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
 				for(FiseFormato14BC f14B: lista14B){
@@ -229,6 +271,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 					lista.add(r);
 				}			
 			}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(formato)){ 
+				
 				List<FiseFormato14CC> lista14C = formato14CCDao.buscarFormato14CCReenvio(codEmpresa,
 						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
 				for(FiseFormato14CC f14C: lista14C){
@@ -251,8 +294,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 	}	
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String actualizarFormatoReenvio(AutorizarReenvioBean bean) throws Exception{
 		String valor ="1";
 		try {
@@ -270,11 +314,35 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
 				formato12ACDao.modificarFormato12AC(f); 				
-			}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(bean.getFormato())){			
-				
-			}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(bean.getFormato())){ 
-				
+			}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(bean.getFormato())){	
+				 FiseFormato12BCPK id = new FiseFormato12BCPK();
+				 id.setCodEmpresa(bean.getCodEmpresa());
+				 id.setAnoPresentacion(Integer.valueOf(bean.getAnioPres())); 
+				 id.setMesPresentacion(Integer.valueOf(bean.getMesPres()));
+				 id.setEtapa(bean.getEtapa());
+				 id.setAnoEjecucionGasto(Integer.valueOf(bean.getAnioEjec())); 
+				 id.setMesEjecucionGasto(Integer.valueOf(bean.getMesEjec())); 
+				 FiseFormato12BC f = formato12BCDao.getFormatoCabeceraById(id);
+				 f.setFechaEnvioDefinitivo(null);
+				 f.setUsuarioActualizacion(bean.getUsuario());
+				 f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+				 f.setTerminalActualizacion(bean.getTerminal()); 
+				 formato12BCDao.updateFormatoCabecera(f);
+			}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(bean.getFormato())){
+				FiseFormato12CCPK id = new FiseFormato12CCPK();	
+				id.setCodEmpresa(bean.getCodEmpresa());
+				id.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				id.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				id.setEtapa(bean.getEtapa());	
+				FiseFormato12CC f =  formato12CCDao.obtenerFormato12CCByPK(id);
+				f.setFechaEnvioDefinitivo(null);
+				f.setUsuarioActualizacion(bean.getUsuario());
+				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+				f.setTerminalActualizacion(bean.getTerminal()); 
+				formato12CCDao.modificarFormato12CC(f); 
 			}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(bean.getFormato())){ 
+				
+				
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(bean.getFormato())){ 
 				FiseFormato13ACPK id = new FiseFormato13ACPK();
@@ -340,8 +408,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 	}
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public List<NotificacionBean> buscarNotificacion(String codEmpresa,
 			String flag,String etapa,Long idGrupoInf,String procesar) throws Exception{
 		List<NotificacionBean> lista =null;
@@ -580,16 +649,18 @@ public class CommonGartServiceImpl implements CommonGartService {
 	  return lista;
 	}
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public String notificarValidacionMensual(String codEmpresa, String etapa, 
 			long idGrupoInf, String periodicidad, String user,String terminal) throws Exception{
 		return commonDao.notificarValidacionMensual(codEmpresa, etapa, idGrupoInf, periodicidad, user, terminal);
 	}
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public List<EnvioDefinitivoBean> buscarEnvioDefinitivo(String codEmpresa,
 			String flag,String etapa,Long idGrupoInf) throws Exception{
 		List<EnvioDefinitivoBean> lista =null;
@@ -627,24 +698,24 @@ public class CommonGartServiceImpl implements CommonGartService {
 					lista.add(e);
 				 }				
 			    /**FORMATO 12B*/								
-				 /*lista12B = commonDao.listarEnvioDefinitivo(codEmpresa, 
+				 lista12B = commonDao.listarEnvioDefinitivo(codEmpresa, 
 						 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
 				 
 				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
 				 for(int i = 0; i < lista12B.size(); i++){					
-					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
-					e.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
-					e.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
-					e.setEtapa(etapa);
-					e.setFormato(FiseConstants.NOMBRE_FORMATO_12B);				
-					e.setAnioEjec(String.valueOf(((BigDecimal)lista12B.get(i)[3] == null) ? "---" :lista12B.get(i)[3]));
-					e.setMesEjec(String.valueOf(((BigDecimal)lista12B.get(i)[4] == null) ? "00" :lista12B.get(i)[4]));
-					e.setAnioIniVig("---");
-					e.setAnioFinVig("---");
-					e.setEstado((String)lista12B.get(i)[6] == null ? "---" :lista12B.get(i)[6].toString());
-					lista.add(e);
-				 }	*/	
+					 e = new EnvioDefinitivoBean();
+					 e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					 e.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
+					 e.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
+					 e.setEtapa(etapa);
+					 e.setFormato(FiseConstants.NOMBRE_FORMATO_12B);				
+					 e.setAnioEjec(String.valueOf(((BigDecimal)lista12B.get(i)[3] == null) ? "---" :lista12B.get(i)[3]));
+					 e.setMesEjec(String.valueOf(((BigDecimal)lista12B.get(i)[4] == null) ? "00" :lista12B.get(i)[4]));
+					 e.setAnioIniVig("---");
+					 e.setAnioFinVig("---");
+					 e.setEstado((String)lista12B.get(i)[6] == null ? "---" :lista12B.get(i)[6].toString());
+					 lista.add(e);
+				 }	
 			    /**FORMATO 12C*/						
 				 lista12C = commonDao.listarEnvioDefinitivo(codEmpresa, 
 						 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
@@ -804,9 +875,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 	  return lista;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@SuppressWarnings("unchecked")	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public boolean actualizarFechaEnvioGeneral(Map<String, Object> params) throws Exception{
 		boolean valor = true;
 		try {
@@ -838,7 +909,19 @@ public class CommonGartServiceImpl implements CommonGartService {
   	                formato12A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
   	  		        formato12ACDao.modificarFormato12AC(formato12A); 	  		        
   				}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(envio.getFormato())&&"1".equals(f12B)){ 
-  				//falta	
+  					FiseFormato12BCPK pk = new FiseFormato12BCPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  	  				pk.setAnoPresentacion(new Integer(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Integer(envio.getMesPres()));
+  	  		        pk.setAnoEjecucionGasto(new Integer(envio.getAnioEjec()));
+  	  		        pk.setMesEjecucionGasto(new Integer(envio.getMesEjec()));
+  	  		        pk.setEtapa(envio.getEtapa()); 
+  					FiseFormato12BC formato12B = formato12BCDao.getFormatoCabeceraById(pk);
+  					formato12B.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  					formato12B.setUsuarioActualizacion(usuario);
+  					formato12B.setTerminalActualizacion(terminal);
+  					formato12B.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  					formato12BCDao.updateFormatoCabecera(formato12B);  					
   				}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(envio.getFormato())&&"1".equals(f12C)){ 
   					FiseFormato12CCPK pk = new FiseFormato12CCPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());

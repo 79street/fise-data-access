@@ -1,6 +1,14 @@
 package gob.osinergmin.fise.dao.impl;
 
+import gob.osinergmin.base.dao.impl.GenericDaoImpl;
+import gob.osinergmin.fise.dao.Formato12BCDao;
+import gob.osinergmin.fise.domain.FiseFormato12BC;
+import gob.osinergmin.fise.domain.FiseFormato12BCPK;
+import gob.osinergmin.fise.util.FormatoUtil;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -8,11 +16,6 @@ import javax.persistence.Query;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import gob.osinergmin.base.dao.impl.GenericDaoImpl;
-import gob.osinergmin.fise.dao.Formato12BCDao;
-import gob.osinergmin.fise.domain.FiseFormato12BC;
-import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 
 
 @Repository(value = "formato12BCDaoImpl")
@@ -241,6 +244,48 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			em.close();
 			
 		}
+	}
+	
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato12BC> buscarFormato12BCReenvio(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String etapa) throws SQLException{
+		
+		String q = "SELECT f FROM " + FiseFormato12BC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(anioPres!=0){ 		
+			q = q.concat(" AND f.id.anoPresentacion =:anioPres ");	
+		}
+		if(mesPres!=0){ 
+			q = q.concat(" AND f.id.mesPresentacion = :mesPres ");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		q = q.concat(" AND f.fechaEnvioDefinitivo IS NOT NULL ");		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			query.setParameter("codEmpresa", codEmpresa);
+		}
+		if(anioPres!=0){
+			query.setParameter("anioPres", anioPres);			
+		}
+		if(mesPres!=0){ 
+			query.setParameter("mesPres", mesPres);	
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato12BC> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
 	}
 
 	

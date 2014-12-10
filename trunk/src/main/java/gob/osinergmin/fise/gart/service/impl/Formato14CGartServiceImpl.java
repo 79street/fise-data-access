@@ -2166,6 +2166,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			formato.setListaDetalle14cDs(formato.getFiseFormato14cDs()); 
 			logger.info("Detalle de la lista "+formato.getListaDetalle14cDs().size()); 
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.info("Error al obtener el formato 14C:  "+e); 
 		}finally{
 			if(idCab!=null){

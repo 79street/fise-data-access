@@ -11,12 +11,15 @@ import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
+import gob.osinergmin.fise.dao.Formato12CCDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato14ACDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14CCDao;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
+import gob.osinergmin.fise.domain.FiseFormato12CC;
+import gob.osinergmin.fise.domain.FiseFormato12CCPK;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato14AC;
@@ -59,6 +62,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Autowired
 	@Qualifier("formato12ACDaoImpl")
 	private Formato12ACDao formato12ACDao;
+	
+	@Autowired
+	@Qualifier("formato12CCDaoImpl")
+	private Formato12CCDao formato12CCDao;
 	
 	@Autowired
 	@Qualifier("formato13ACDaoImpl")
@@ -639,7 +646,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 					lista.add(e);
 				 }	*/	
 			    /**FORMATO 12C*/						
-				 /*lista12C = commonDao.listarEnvioDefinitivo(codEmpresa, 
+				 lista12C = commonDao.listarEnvioDefinitivo(codEmpresa, 
 						 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
 				 
 				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
@@ -658,7 +665,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 					e.setAnioFinVig("---");
 					e.setEstado((String)lista12C.get(i)[4] == null ? "---" :lista12C.get(i)[4].toString());
 					lista.add(e);
-				 }	*/	
+				 }		
 				
 			   /**FORMATO 12D*/					 
 				/* lista12D = commonDao.listarEnvioDefinitivo(codEmpresa, 
@@ -833,7 +840,17 @@ public class CommonGartServiceImpl implements CommonGartService {
   				}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(envio.getFormato())&&"1".equals(f12B)){ 
   				//falta	
   				}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(envio.getFormato())&&"1".equals(f12C)){ 
-  				//falta	
+  					FiseFormato12CCPK pk = new FiseFormato12CCPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  					pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  	  		        pk.setEtapa(envio.getEtapa());
+  	  		        FiseFormato12CC formato12C = formato12CCDao.obtenerFormato12CCByPK(pk);
+  	  		        formato12C.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  	  		        formato12C.setUsuarioActualizacion(usuario);
+  	  	            formato12C.setTerminalActualizacion(terminal);
+  	                formato12C.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  	                formato12CCDao.modificarFormato12CC(formato12C);  				
   				}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(envio.getFormato())&&"1".equals(f12D)){ 
   				//falta	
   				}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(envio.getFormato())&&"1".equals(f13A)){ 

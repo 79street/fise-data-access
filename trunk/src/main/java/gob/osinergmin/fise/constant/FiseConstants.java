@@ -138,6 +138,8 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_12A = "F12A";
 	public final static String TIPO_FORMATO_12B = "F12B";
 	public final static String TIPO_FORMATO_12C = "F12C";
+	public final static String TIPO_FORMATO_12CD_IMPLEMENTACION = "F12CDI";
+	public final static String TIPO_FORMATO_12CD_MENSUAL = "F12CDO";
 	public final static String TIPO_FORMATO_12D = "F12D";
 	public final static String TIPO_FORMATO_13A = "F13A";
 	public final static String TIPO_FORMATO_13AD = "F13AD";
@@ -158,6 +160,8 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
 	public final static String NOMBRE_EXCEL_FORMATO12C = "Formatos12C";
+	public final static String NOMBRE_EXCEL_FORMATO12CD_IMPLEMENTACION = "Formatos12Implementacion";
+	public final static String NOMBRE_EXCEL_FORMATO12CD_MENSUAL = "Formatos12Mensual";
 	public final static String NOMBRE_EXCEL_FORMATO12D = "Formatos12D";
 	public final static String NOMBRE_EXCEL_FORMATO13A = "Formatos13A";
 	public final static String NOMBRE_EXCEL_FORMATO13AD = "Formatos13AD";
@@ -176,6 +180,8 @@ public class FiseConstants {
 	
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
 	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";
+	public final static String NOMBRE_HOJA_FORMATO12CD_IMPLEMENTACION = "Implementación";
+	public final static String NOMBRE_HOJA_FORMATO12CD_MENSUAL = "Mensual";
 	public final static String NOMBRE_HOJA_FORMATO12D = "F12D";
 	public final static String NOMBRE_HOJA_FORMATO13A = "F13A";
 	public final static String NOMBRE_HOJA_FORMATO13AD = "F13AD";

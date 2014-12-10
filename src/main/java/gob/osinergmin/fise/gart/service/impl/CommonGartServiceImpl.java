@@ -805,7 +805,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public boolean actualizarFechaEnvioGeneral(Map<String, Object> params) throws Exception{
 		boolean valor = true;

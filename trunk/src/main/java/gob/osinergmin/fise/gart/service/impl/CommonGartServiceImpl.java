@@ -9,6 +9,7 @@ import gob.osinergmin.fise.bean.Formato14Generic;
 import gob.osinergmin.fise.bean.NotificacionBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseControlEnvioDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
 import gob.osinergmin.fise.dao.Formato12BCDao;
@@ -17,6 +18,8 @@ import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato14ACDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14CCDao;
+import gob.osinergmin.fise.domain.FiseControlEnvioPorGrupo;
+import gob.osinergmin.fise.domain.FiseControlEnvioPorGrupoPK;
 import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12BC;
@@ -60,6 +63,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Autowired
 	@Qualifier("fiseGrupoInformacionDaoImpl")
 	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseControlEnvioDaoImpl")
+	private FiseControlEnvioDao fiseControlEnvioDao;
 	
 	
 	@Autowired
@@ -879,7 +886,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public boolean actualizarFechaEnvioGeneral(Map<String, Object> params) throws Exception{
-		boolean valor = true;
+		boolean valor = false;
 		try {
 			List<EnvioDefinitivoBean> lista =(List<EnvioDefinitivoBean>)params.get("listaEnvio");
 			String f12A = (String)params.get("f12A");
@@ -893,6 +900,12 @@ public class CommonGartServiceImpl implements CommonGartService {
 			String usuario = (String)params.get("usuario");
 			String terminal = (String)params.get("terminal");
 			
+			String codEmpresa = (String)params.get("codEmpresa");	
+			String etapa = (String)params.get("etapa");
+			String periocidad = (String)params.get("periocidad");
+			String idGrupoInf = (String)params.get("idGrupo");
+			
+			boolean valorFormato = false;
 			for(EnvioDefinitivoBean envio :lista){
 				if(FiseConstants.NOMBRE_FORMATO_12A.equals(envio.getFormato())&&"1".equals(f12A)){  
   					FiseFormato12ACPK pk = new FiseFormato12ACPK();
@@ -907,7 +920,8 @@ public class CommonGartServiceImpl implements CommonGartService {
   	  		        formato12A.setUsuarioActualizacion(usuario);
   	  	            formato12A.setTerminalActualizacion(terminal);
   	                formato12A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  	  		        formato12ACDao.modificarFormato12AC(formato12A); 	  		        
+  	  		        formato12ACDao.modificarFormato12AC(formato12A); 	
+  	  		        valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(envio.getFormato())&&"1".equals(f12B)){ 
   					FiseFormato12BCPK pk = new FiseFormato12BCPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -921,7 +935,8 @@ public class CommonGartServiceImpl implements CommonGartService {
   					formato12B.setUsuarioActualizacion(usuario);
   					formato12B.setTerminalActualizacion(terminal);
   					formato12B.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  					formato12BCDao.updateFormatoCabecera(formato12B);  					
+  					formato12BCDao.updateFormatoCabecera(formato12B);
+  					valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(envio.getFormato())&&"1".equals(f12C)){ 
   					FiseFormato12CCPK pk = new FiseFormato12CCPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -933,7 +948,8 @@ public class CommonGartServiceImpl implements CommonGartService {
   	  		        formato12C.setUsuarioActualizacion(usuario);
   	  	            formato12C.setTerminalActualizacion(terminal);
   	                formato12C.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  	                formato12CCDao.modificarFormato12CC(formato12C);  				
+  	                formato12CCDao.modificarFormato12CC(formato12C); 
+  	                valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(envio.getFormato())&&"1".equals(f12D)){ 
   				//falta	
   				}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(envio.getFormato())&&"1".equals(f13A)){ 
@@ -947,7 +963,8 @@ public class CommonGartServiceImpl implements CommonGartService {
   	  		        formato13A.setUsuarioActualizacion(usuario);
   	  	     	    formato13A.setTerminalActualizacion(terminal);
   	          	    formato13A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  	  		        formato13ACDao.updatecabecera(formato13A);  	  		       
+  	  		        formato13ACDao.updatecabecera(formato13A);
+  	  		        valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(envio.getFormato())&&"1".equals(f14A)){ 
   					FiseFormato14ACPK pk = new FiseFormato14ACPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -961,7 +978,8 @@ public class CommonGartServiceImpl implements CommonGartService {
   			        formato14A.setUsuarioActualizacion(usuario);
   			        formato14A.setTerminalActualizacion(terminal);
   			        formato14A.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  			        formato14ACDao.modificarFormato14AC(formato14A);  			       
+  			        formato14ACDao.modificarFormato14AC(formato14A); 
+  			        valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(envio.getFormato())&&"1".equals(f14B)){ 
   					FiseFormato14BCPK pk = new FiseFormato14BCPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -975,7 +993,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			        formato14B.setUsuarioActualizacion(usuario);
 			        formato14B.setTerminalActualizacion(terminal);
 			        formato14B.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-  			        formato14BCDao.modificarFormato14BC(formato14B);  			       
+  			        formato14BCDao.modificarFormato14BC(formato14B); 
+  			        valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(envio.getFormato())&&"1".equals(f14C)){ 
   					FiseFormato14CCPK pk = new FiseFormato14CCPK();  					
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -990,13 +1009,46 @@ public class CommonGartServiceImpl implements CommonGartService {
 			        formato14C.setTerminalActualizacion(terminal);
 			        formato14C.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			        formato14CCDao.actualizarFiseFormato14CC(formato14C);
+			        valorFormato = true;
   				}		
 			}
+			/******************Insertamos en la tabla control de envio general********************/
+			if(valorFormato){
+				FiseControlEnvioPorGrupoPK id = new FiseControlEnvioPorGrupoPK();
+				id.setCodEmpresa(codEmpresa);
+				id.setEtapa(etapa);
+				id.setIdGrupoInformacion(new Long(idGrupoInf));
+				id.setPeriodicidad(periocidad); 				
+				FiseGrupoInformacion fiseGrupoInf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(idGrupoInf));
+				FiseControlEnvioPorGrupo grupo = new FiseControlEnvioPorGrupo();
+				grupo.setId(id);
+				grupo.setFechaCreacion(FechaUtil.obtenerFechaActual());
+				grupo.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+				grupo.setFiseGrupoInformacion(fiseGrupoInf);			
+				grupo.setUsuarioCreacion(usuario);
+				grupo.setTerminalCreacion(terminal);
+				fiseControlEnvioDao.insertarFiseControlEnvio(grupo); 
+				valor = true;
+			}			
 		} catch (Exception e) {
 			valor = false;
 			logger.error("Error al actualizar fecha de envio general:  "+e);
 		}
 		return valor;	
 	}
+	
+	@Override
+	@Transactional
+	public FiseControlEnvioPorGrupo obtenerFiseControlEnvioByPK(String codEmpresa,String etapa,
+			Long idGrupoInf,String periocidad) throws Exception{
+		FiseControlEnvioPorGrupoPK id = new FiseControlEnvioPorGrupoPK();
+		id.setCodEmpresa(codEmpresa);
+		id.setEtapa(etapa);
+		id.setIdGrupoInformacion(idGrupoInf);
+		id.setPeriodicidad(periocidad); 
+		return fiseControlEnvioDao.obtenerFiseControlEnvioByPK(id);
+	}
+	
+	
 	
 }

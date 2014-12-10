@@ -93,6 +93,10 @@ public class FiseGrupoInformacion implements Serializable {
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato14CC> fiseFormato14CCs;
 	
+	//bi-directional many-to-one association to FiseControlEnvioPorGrupo
+	@OneToMany(mappedBy="fiseGrupoInformacion")
+	private List<FiseControlEnvioPorGrupo> fiseControlEnvioPorGrupos;
+	
 	
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato12BC> fiseFormato12BCs;
@@ -257,8 +261,6 @@ public class FiseGrupoInformacion implements Serializable {
 		return fiseFormato12BC;
 	}
 	
-
-
 	public String getTipo() {
 		return tipo;
 	}
@@ -266,6 +268,28 @@ public class FiseGrupoInformacion implements Serializable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	public List<FiseControlEnvioPorGrupo> getFiseControlEnvioPorGrupos() {
+		return this.fiseControlEnvioPorGrupos;
+	}
+
+	public void setFiseControlEnvioPorGrupos(List<FiseControlEnvioPorGrupo> fiseControlEnvioPorGrupos) {
+		this.fiseControlEnvioPorGrupos = fiseControlEnvioPorGrupos;
+	}
+
+	public FiseControlEnvioPorGrupo addFiseControlEnvioPorGrupo(FiseControlEnvioPorGrupo fiseControlEnvioPorGrupo) {
+		getFiseControlEnvioPorGrupos().add(fiseControlEnvioPorGrupo);
+		fiseControlEnvioPorGrupo.setFiseGrupoInformacion(this);
+
+		return fiseControlEnvioPorGrupo;
+	}
+
+	public FiseControlEnvioPorGrupo removeFiseControlEnvioPorGrupo(FiseControlEnvioPorGrupo fiseControlEnvioPorGrupo) {
+		getFiseControlEnvioPorGrupos().remove(fiseControlEnvioPorGrupo);
+		fiseControlEnvioPorGrupo.setFiseGrupoInformacion(null);
+
+		return fiseControlEnvioPorGrupo;
+	}	
 
 	public String getDescEstado() {
 		String desEstado;

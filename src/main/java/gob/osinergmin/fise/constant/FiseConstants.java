@@ -8,6 +8,11 @@ public class FiseConstants {
 	public final static String COD_EMPRESA_LUZ_SUR = "LDS";
 	
 	public final static String KEY_CFG_EXCEL_EXPORT = "CFG_XLS_EXPORT";
+	public final static String TIPO_FORMATO_EXCEL_EXPORT = "TIPOFORMATOEXCEL";
+	public final static String LISTA_FORMATO_EXCEL_EXPORT = "LISTAFORMATOEXCEL";
+	public final static String ETAPAEJECUCION_IMPLEMENTACION_EXCEL_EXPORT = "0";
+	public final static String ETAPAEJECUCION_MENSUAL_EXCEL_EXPORT = "1";
+	
 	public final static String BLANCO ="";
 	public final static String SALTO_LINEA = "\n";
 	public final static String UNDERLINE = "_";
@@ -138,6 +143,7 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_12A = "F12A";
 	public final static String TIPO_FORMATO_12B = "F12B";
 	public final static String TIPO_FORMATO_12C = "F12C";
+	public final static String TIPO_FORMATO_12CD = "F12CD";
 	public final static String TIPO_FORMATO_12CD_IMPLEMENTACION = "F12CDI";
 	public final static String TIPO_FORMATO_12CD_MENSUAL = "F12CDO";
 	public final static String TIPO_FORMATO_12D = "F12D";
@@ -160,6 +166,7 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
 	public final static String NOMBRE_EXCEL_FORMATO12C = "Formatos12C";
+	public final static String NOMBRE_EXCEL_FORMATO12CD = "Formatos12CD";
 	public final static String NOMBRE_EXCEL_FORMATO12CD_IMPLEMENTACION = "Formatos12Implementacion";
 	public final static String NOMBRE_EXCEL_FORMATO12CD_MENSUAL = "Formatos12Mensual";
 	public final static String NOMBRE_EXCEL_FORMATO12D = "Formatos12D";
@@ -180,6 +187,7 @@ public class FiseConstants {
 	
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
 	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";
+	public final static String NOMBRE_HOJA_FORMATO12CD = "F12CD";
 	public final static String NOMBRE_HOJA_FORMATO12CD_IMPLEMENTACION = "Implementación";
 	public final static String NOMBRE_HOJA_FORMATO12CD_MENSUAL = "Mensual";
 	public final static String NOMBRE_HOJA_FORMATO12D = "F12D";

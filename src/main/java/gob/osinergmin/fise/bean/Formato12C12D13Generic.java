@@ -1,5 +1,7 @@
 package gob.osinergmin.fise.bean;
 
+import gob.osinergmin.fise.domain.FiseFormato12CC;
+import gob.osinergmin.fise.domain.FiseFormato12DC;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 
 public class Formato12C12D13Generic {
@@ -11,7 +13,7 @@ public class Formato12C12D13Generic {
 
 	//descomentar para cuando esten mapeado los otros dto
 	public Formato12C12D13Generic(Object object){
-		/*if(object instanceof FiseFormato12CC){
+		if(object instanceof FiseFormato12CC){
 			this.codigoEmpresa=((FiseFormato12CC) object).getId().getCodEmpresa();
 			this.anoPresentacion=((FiseFormato12CC) object).getId().getAnoPresentacion();
 			this.mesPresentacion=((FiseFormato12CC) object).getId().getMesPresentacion();
@@ -21,7 +23,7 @@ public class Formato12C12D13Generic {
 			this.anoPresentacion=((FiseFormato12DC) object).getId().getAnoPresentacion();
 			this.mesPresentacion=((FiseFormato12DC) object).getId().getMesPresentacion();
 			this.codigoEtapa=((FiseFormato12DC) object).getId().getEtapa();
-	    }else*/ if(object instanceof FiseFormato13AC){
+	    }else if(object instanceof FiseFormato13AC){
 			this.codigoEmpresa=((FiseFormato13AC) object).getId().getCodEmpresa();
 			this.anoPresentacion=((FiseFormato13AC) object).getId().getAnoPresentacion();
 			this.mesPresentacion=((FiseFormato13AC) object).getId().getMesPresentacion();

@@ -55,7 +55,9 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 
 	@Override
 	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {
-		return formato12BCDao.getFormatoCabeceraById(id);
+		FiseFormato12BC formato = formato12BCDao.getFormatoCabeceraById(id);		
+	    formato.setListaDetalle12BDs(formato.getFiseFormato12BDs()); 	   
+		return formato;
 	}
 
 	@Override

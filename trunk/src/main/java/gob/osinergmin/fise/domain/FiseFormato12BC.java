@@ -22,19 +22,17 @@ public class FiseFormato12BC implements Serializable {
 	@EmbeddedId
 	private FiseFormato12BCPK id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ENVIO_DEFINITIVO")
 	private Date fechaEnvioDefinitivo;
-
-	
 
 	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String nombreArchivoExcel;
@@ -57,6 +55,7 @@ public class FiseFormato12BC implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 	
+	//bi-directional many-to-one association to FiseGrupoInformacion
 	@ManyToOne
 	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
@@ -67,13 +66,14 @@ public class FiseFormato12BC implements Serializable {
 
 	
 	//bi-directional many-to-one association to FiseFormato12bD
-	@Transient
-	@OneToMany(mappedBy="fiseFormato12BC")
-	
+	//@Transient
+	@OneToMany(mappedBy="fiseFormato12BC")	
 	private List<FiseFormato12BD> fiseFormato12BDs;
 	
-	
-	//bi-directional many-to-one association to FiseGrupoInformacion
+	@Transient
+	@OneToMany(mappedBy="fiseFormato12BC")
+	private List<FiseFormato12BD> listaDetalle12BDs;
+
 	
 	
 	public FiseFormato12BC() {
@@ -205,6 +205,14 @@ public class FiseFormato12BC implements Serializable {
 	public void setAdmEmpresa(AdmEmpresa admEmpresa) {
 		this.admEmpresa = admEmpresa;
 	}
+	
+	public List<FiseFormato12BD> getListaDetalle12BDs() {
+		return listaDetalle12BDs;
+	}
+
+	public void setListaDetalle12BDs(List<FiseFormato12BD> listaDetalle12BDs) {
+		this.listaDetalle12BDs = listaDetalle12BDs;
+	}	
 	
 	
 

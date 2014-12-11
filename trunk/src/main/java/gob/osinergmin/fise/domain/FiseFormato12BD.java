@@ -111,20 +111,20 @@ public class FiseFormato12BD implements Serializable {
 	
 	
 	//bi-directional many-to-one association to FiseFormato12bDOb
-	@Transient
+	//@Transient
 	@OneToMany(mappedBy="fiseFormato12BD")
 	private List<FiseFormato12BDOb> fiseFormato12BDObs;
 
 	//bi-directional many-to-one association to FiseFormato12bC
-	@Transient
-	@ManyToOne
+	//@Transient
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO"),
-		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION"),
-		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA"),
-		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA"),
-		@JoinColumn(name="MES_EJECUCION_GASTO", referencedColumnName="MES_EJECUCION_GASTO"),
-		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION")
+		@JoinColumn(name="ANO_EJECUCION_GASTO", referencedColumnName="ANO_EJECUCION_GASTO",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ANO_PRESENTACION", referencedColumnName="ANO_PRESENTACION",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="COD_EMPRESA", referencedColumnName="COD_EMPRESA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="ETAPA", referencedColumnName="ETAPA",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="MES_EJECUCION_GASTO", referencedColumnName="MES_EJECUCION_GASTO",nullable=false, insertable=false, updatable=false),
+		@JoinColumn(name="MES_PRESENTACION", referencedColumnName="MES_PRESENTACION",nullable=false, insertable=false, updatable=false)
 		})
 	private FiseFormato12BC fiseFormato12BC;
 

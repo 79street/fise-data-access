@@ -91,8 +91,7 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 	}
 
 	@Override
-	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {
-		
+	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {		
 		try {
 			StringBuilder sb=new StringBuilder();
 			sb.append("SELECT c FROM FiseFormato12BC c WHERE 1=1 ");
@@ -116,7 +115,6 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
 			}
 			
-			
 			Query query = em.createQuery(sb.toString());
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
@@ -136,22 +134,15 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			}
 			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
 				query.setParameter("mesejec", id.getMesEjecucionGasto());
-			}
-			
-          
-			
-			FiseFormato12BC bean= (FiseFormato12BC) query.getSingleResult();
-			
+			}		
+			FiseFormato12BC bean= (FiseFormato12BC) query.getSingleResult();			
 			return bean;
 		}catch(Exception e){
 	      e.printStackTrace();
 	      return null;
 		}finally{
-			em.close();
-			
-		}
-		
-		
+			em.close();		
+		}	
 	}
 
 	@Override

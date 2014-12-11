@@ -112,8 +112,8 @@ public class FiseFormato12BD implements Serializable {
 	
 	//bi-directional many-to-one association to FiseFormato12bDOb
 	@Transient
-		@OneToMany(mappedBy="fiseFormato12BD")
-		private List<FiseFormato12BDOb> fiseFormato12BDObs;
+	@OneToMany(mappedBy="fiseFormato12BD")
+	private List<FiseFormato12BDOb> fiseFormato12BDObs;
 
 	//bi-directional many-to-one association to FiseFormato12bC
 	@Transient

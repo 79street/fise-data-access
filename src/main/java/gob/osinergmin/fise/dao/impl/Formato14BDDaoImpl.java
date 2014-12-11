@@ -233,9 +233,6 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 				query.setParameter("etpa", etp.trim());
 			}
 			
-			
-          
-			
 			FiseFormato14BD bean= (FiseFormato14BD) query.getSingleResult();
 			
 			return bean;

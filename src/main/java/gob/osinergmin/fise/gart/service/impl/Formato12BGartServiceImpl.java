@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import gob.osinergmin.fise.bean.Formato12BCBean;
-import gob.osinergmin.fise.bean.Formato14BCBean;
+
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato12BCDao;
 import gob.osinergmin.fise.dao.Formato12BDDao;
@@ -28,7 +28,7 @@ import gob.osinergmin.fise.domain.FiseFormato12BC;
 import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
 import gob.osinergmin.fise.domain.FiseFormato12BDOb;
-import gob.osinergmin.fise.domain.FiseFormato14BC;
+
 import gob.osinergmin.fise.gart.service.Formato12BGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
@@ -417,6 +417,15 @@ public FiseFormato12BC modificarEnvioDefinitivoFormato12BC(Formato12BCBean formu
 	}
 	return dto;
 }
+
+@Override
+@Transactional
+public Integer deleteFormatoObs(String emp, Integer anio, Integer mes, String etapa, Integer anioEjec, Integer mesEjec, Integer idzona, Integer item) throws DataIntegrityViolationException, Exception {
+	// TODO Auto-generated method stub
+	return formato12BDObDao.deleteFormatoObs(emp, anio, mes, etapa, anioEjec, mesEjec,idzona,item);
+}
+
+
 
 
 }

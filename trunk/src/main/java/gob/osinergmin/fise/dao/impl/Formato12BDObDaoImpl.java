@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
@@ -81,6 +82,72 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			
 		}
 		return lstReturn;
+	}
+
+	@Override
+	public Integer deleteFormatoObs(String emp, Integer anio, Integer mes, String etapa, Integer anioEjec, Integer mesEjec, Integer idzona, Integer item) throws DataIntegrityViolationException, Exception {
+		try {
+			StringBuilder sb=new StringBuilder();
+			sb.append("DELETE FROM FiseFormato12BDOb c WHERE 1=1 ");
+			
+			if(emp !=null && !emp.isEmpty()){
+				sb.append(" AND c.id.codEmpresa =:emp ");
+			}
+			if(etapa!=null && !etapa.isEmpty()){
+				sb.append(" AND c.id.etapa =:etp ");
+			}
+			if(anio!=null && anio>0){
+				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+			}
+			if(mes!=null && mes>0){
+				sb.append(" AND c.id.mesPresentacion =:mespres ");
+			}
+			if(anioEjec!=null && anioEjec>0){
+				sb.append(" AND c.id.anoEjecucionGasto =:anioejec ");
+			}
+			if(mesEjec!=null && mesEjec>0){
+				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
+			}
+			if(idzona!=null && idzona>0){
+				sb.append(" AND c.id.idZonaBenef =:zona ");
+			}
+			if(item!=null && item>0){
+				sb.append(" AND c.id.itemObservacion =:itm ");
+			}
+			
+			Query query = em.createQuery(sb.toString());
+			
+			if(emp !=null && !emp.isEmpty()){
+				query.setParameter("emp", emp.trim());
+			}
+			if(etapa!=null && !etapa.isEmpty()){
+				query.setParameter("etp", etapa.trim());
+			}
+			if(anio!=null && anio>0){
+				query.setParameter("aniopres", anio);
+			}
+			if(mes!=null && mes>0){
+				query.setParameter("mespres", mes);
+			}
+			if(anioEjec!=null && anioEjec>0){
+				query.setParameter("anioejec", anioEjec);
+			}
+			if(mesEjec!=null && mesEjec>0){
+				query.setParameter("mesejec", mesEjec);
+			}
+			if(idzona!=null && idzona>0){
+				query.setParameter("zona", idzona);
+			}
+			if(item!=null && item>0){
+				query.setParameter("itm",item);
+			}
+			int cant=  query.executeUpdate();
+			
+			return cant;
+		}finally{
+			em.close();
+			
+		}
 	}
 
 	

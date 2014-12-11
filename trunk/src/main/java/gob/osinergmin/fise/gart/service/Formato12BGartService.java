@@ -31,7 +31,8 @@ public interface Formato12BGartService {
 
     //OBS
 	List<FiseFormato12BDOb> getLstFormatoObs(FiseFormato12BD idDetalle);
-	
+	Integer deleteFormatoObs(String emp,Integer anio,Integer mes,String etapa,Integer anioEjec,Integer mesEjec,Integer idzona,Integer item)throws DataIntegrityViolationException,Exception;
+
 	 HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean formato12BBean);
 	 Formato12BCBean estructurarFormato12BBeanByFiseFormato12BC(FiseFormato12BC formato);
 

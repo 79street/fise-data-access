@@ -52,9 +52,7 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			}
 			
 			Query query = em.createQuery(sb.toString());
-			System.out.println("sbBBBBB:::>"+sb.toString());
-			System.out.println("sbBBBBB:::>"+codemp+"/"+anioDesde+"/"+anioHasta+"/"+mesDesde+"/"+mesHasta+"/"+etapa);
-            if(codemp!=null && !codemp.isEmpty()){
+			 if(codemp!=null && !codemp.isEmpty()){
             	query.setParameter("emp", codemp.trim());
 			}
 			if(etapa!=null && !etapa.isEmpty()){
@@ -191,7 +189,8 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 	public Integer deleteFormatoCabecera(FiseFormato12BCPK id) throws DataIntegrityViolationException,Exception{
 
 		try {
-			StringBuilder sb=new StringBuilder();
+				StringBuilder sb=new StringBuilder();
+			
 			sb.append("DELETE  FROM FiseFormato12BC c WHERE 1=1 ");
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){

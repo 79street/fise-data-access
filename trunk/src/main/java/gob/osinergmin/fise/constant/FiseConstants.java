@@ -147,6 +147,9 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_12CD_IMPLEMENTACION = "F12CDI";
 	public final static String TIPO_FORMATO_12CD_MENSUAL = "F12CDO";
 	public final static String TIPO_FORMATO_12D = "F12D";
+	public final static String TIPO_FORMATO_12DD = "F12DD";
+	public final static String TIPO_FORMATO_12DD_IMPLEMENTACION = "F12DDI";
+	public final static String TIPO_FORMATO_12DD_MENSUAL = "F12DDO";
 	public final static String TIPO_FORMATO_13A = "F13A";
 	public final static String TIPO_FORMATO_13AD = "F13AD";
 	public final static String TIPO_FORMATO_14A = "F14A";
@@ -167,8 +170,10 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
 	public final static String NOMBRE_EXCEL_FORMATO12C = "Formatos12C";
 	public final static String NOMBRE_EXCEL_FORMATO12CD = "Formatos12CD";
-	public final static String NOMBRE_EXCEL_FORMATO12CD_IMPLEMENTACION = "Formatos12Implementacion";
-	public final static String NOMBRE_EXCEL_FORMATO12CD_MENSUAL = "Formatos12Mensual";
+	public final static String NOMBRE_EXCEL_FORMATO12CD_IMPLEMENTACION = "Formatos12CImplementacion";
+	public final static String NOMBRE_EXCEL_FORMATO12CD_MENSUAL = "Formatos12CMensual";
+	public final static String NOMBRE_EXCEL_FORMATO12DD_IMPLEMENTACION = "Formatos12DImplementacion";
+	public final static String NOMBRE_EXCEL_FORMATO12DD_MENSUAL = "Formatos12DMensual";
 	public final static String NOMBRE_EXCEL_FORMATO12D = "Formatos12D";
 	public final static String NOMBRE_EXCEL_FORMATO13A = "Formatos13A";
 	public final static String NOMBRE_EXCEL_FORMATO13AD = "Formatos13AD";
@@ -191,6 +196,9 @@ public class FiseConstants {
 	public final static String NOMBRE_HOJA_FORMATO12CD_IMPLEMENTACION = "Implementación";
 	public final static String NOMBRE_HOJA_FORMATO12CD_MENSUAL = "Mensual";
 	public final static String NOMBRE_HOJA_FORMATO12D = "F12D";
+	public final static String NOMBRE_HOJA_FORMATO12DD = "F12DD";
+	public final static String NOMBRE_HOJA_FORMATO12DD_IMPLEMENTACION = "Implementación";
+	public final static String NOMBRE_HOJA_FORMATO12DD_MENSUAL = "Mensual";
 	public final static String NOMBRE_HOJA_FORMATO13A = "F13A";
 	public final static String NOMBRE_HOJA_FORMATO13AD = "F13AD";
 	public final static String NOMBRE_HOJA_FORMATO14A = "F14A";
@@ -231,9 +239,9 @@ public class FiseConstants {
 	//FORMATO 12C
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12C = 2;
 	public final static int NRO_FILA_ANIOMES_FORMATO12C = 3;
-	public final static String DESC_FILA_INICIO_IMPLEMENTACION = "1. Desplazamiento de Personal Implementación";
-	public final static String DESC_FILA_INICIO_OPERATIVO = "2. Desplazamiento de Personal Mensual";
-	public final static String DESC_FILA_FIN_REGISTROS = "TOTAL FISE-12C";
+	public final static String DESC_FILA_INICIO_IMPLEMENTACION_FORMATO12C = "1. Desplazamiento de Personal Implementación";
+	public final static String DESC_FILA_INICIO_OPERATIVO_FORMATO12C = "2. Desplazamiento de Personal Mensual";
+	public final static String DESC_FILA_FIN_REGISTROS_FORMATO12C = "TOTAL FISE-12C";
 	public final static int NRO_CELDA_EMPRESA_FORMATO12C = 3;
 	public final static int NRO_CELDA_ANIO_FORMATO12C = 2;
 	public final static int NRO_CELDA_MES_FORMATO12C = 3;
@@ -256,6 +264,32 @@ public class FiseConstants {
 	public final static int NRO_CELDA_ALOJAMIENTO_FORMATO12C = 16;
 	public final static int NRO_CELDA_MOVILIDAD_FORMATO12C = 17;
 
+	//FORMATO 12D
+	public final static int NRO_FILA_CODEMPRESA_FORMATO12D = 4;
+	public final static int NRO_FILA_ANIOMES_FORMATO12D = 5;
+	public final static String DESC_FILA_INICIO_IMPLEMENTACION_FORMATO12D = "1. Actividades Extraordinarias de Implementación";
+	public final static String DESC_FILA_INICIO_OPERATIVO_FORMATO12D = "2. Actividades Extraordinarias Operativas";
+	public final static String DESC_FILA_FIN_REGISTROS_FORMATO12D = "TOTAL FISE-12D";
+	public final static int NRO_CELDA_EMPRESA_FORMATO12D = 5;
+	public final static int NRO_CELDA_ANIO_FORMATO12D = 4;
+	public final static int NRO_CELDA_MES_FORMATO12D = 5;
+	public final static int NRO_CELDA_ANO_EJECUCION_FORMATO12D = 0;
+	public final static int NRO_CELDA_MES_EJECUCION_FORMATO12D = 1;
+	public final static int NRO_CELDA_ITEM_FORMATO12D = 2;
+	public final static int NRO_CELDA_CODUBIGEO_FORMATO12D = 3;
+	public final static int NRO_CELDA_LOCALIDAD_FORMATO12D = 4;
+	public final static int NRO_CELDA_ZONA_BENEFICIARIO_FORMATO12D = 5;
+	public final static int NRO_CELDA_CTACONTABLE_FORMATO12D = 6;
+	public final static int NRO_CELDA_GASTO_FORMATO12D = 7;
+	public final static int NRO_CELDA_TIPOGASTO_FORMATO12D = 8;
+	public final static int NRO_CELDA_TIPODOCUMENTO_FORMATO12D = 9;
+	public final static int NRO_CELDA_RUC_FORMATO12D = 10;
+	public final static int NRO_CELDA_SERIEDOCUMENTO_FORMATO12D = 11;
+	public final static int NRO_CELDA_NRODOCUMENTO_FORMATO12D = 12;
+	public final static int NRO_CELDA_FECHA_AUTORIZACION_FORMATO12D = 13;
+	public final static int NRO_CELDA_NRODOCUMENTO_AUTORIZACION_FORMATO12D = 14;
+	public final static int NRO_CELDA_CANTIDAD_FORMATO12D = 15;
+	public final static int NRO_CELDA_COSTOUNITARIO_FORMATO12D = 16;
 	
 	//FORMATO 14A
 	public final static int NRO_FILA_CODEMPRESA_FORMATO14A = 5;

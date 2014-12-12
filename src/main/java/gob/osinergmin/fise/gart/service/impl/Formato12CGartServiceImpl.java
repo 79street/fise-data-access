@@ -765,6 +765,8 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		Formato12CCBean formato12CBean = new Formato12CCBean();
 		formato12CBean.setAnioPresentacion(formato.getId().getAnoPresentacion());
 		formato12CBean.setMesPresentacion(formato.getId().getMesPresentacion());
+		formato12CBean.setAnioEjecucion(formato.getAnoEjecucionDetalle());
+		formato12CBean.setMesEjecucion(formato.getMesEjecucionDetalle());
 		return formato12CBean;
 	}
 
@@ -774,6 +776,8 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA, formato12CBean.getDescEmpresa());
 		mapJRParams.put(FiseConstants.PARAM_ANO_PRESENTACION, formato12CBean.getAnioPresentacion());
 		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRESENTACION, formato12CBean.getDescMesPresentacion());
+		mapJRParams.put(FiseConstants.PARAM_ANO_EJECUCION, formato12CBean.getAnioEjecucion());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJECUCION, formato12CBean.getDescMesEjecucion());
 		return mapJRParams;
 	}
 	

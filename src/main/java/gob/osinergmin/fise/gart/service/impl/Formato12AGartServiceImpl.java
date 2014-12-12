@@ -635,8 +635,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA_F12A, formato12ABean.getDescEmpresa());
 		mapJRParams.put(FiseConstants.PARAM_ANO_PRES_F12A, formato12ABean.getAnioPresent());
 		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRES_F12A, formato12ABean.getDescMesPresentacion());
-		//mapJRParams.put(FiseConstants.PARAM_ANO_EJEC_F12A, formato12ABean.getAnioEjecuc());
-		//mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJEC_F12A, formato12ABean.getDescMesEjecucion());
+		mapJRParams.put(FiseConstants.PARAM_ANO_EJEC_F12A, formato12ABean.getAnioEjecuc());
+		mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJEC_F12A, formato12ABean.getDescMesEjecucion());
 		//
 		mapJRParams.put(FiseConstants.PARAM_NRO_EMPAD_R_F12A, formato12ABean.getNroEmpadR());
 		mapJRParams.put(FiseConstants.PARAM_CU_EMPAD_R_F12A, formato12ABean.getCostoUnitEmpadR());

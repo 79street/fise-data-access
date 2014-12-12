@@ -1133,8 +1133,8 @@ public class FiseConstants {
 	public final static String PARAM_DESC_EMPRESA = "DESC_EMPRESA";
 	public final static String PARAM_ANO_PRESENTACION = "ANO_PRESENTACION";
 	public final static String PARAM_DESC_MES_PRESENTACION= "DESC_MES_PRESENTACION";
-	public final static String PARAM_ANO_EJECUCION = "ANO_PRESENTACION";
-	public final static String PARAM_DESC_MES_EJECUCION= "DESC_MES_PRESENTACION";
+	public final static String PARAM_ANO_EJECUCION = "ANO_EJECUCION";
+	public final static String PARAM_DESC_MES_EJECUCION= "DESC_MES_EJECUCION";
 	public final static String PARAM_ETAPA = "ETAPA";
 	
 

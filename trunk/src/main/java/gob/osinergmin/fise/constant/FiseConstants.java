@@ -93,6 +93,7 @@ public class FiseConstants {
 	public final static String FORMATO_EXPORT_PDF = "0";
 	public final static String FORMATO_EXPORT_XLS = "1";
 	public final static String FORMATO_EXPORT_ACTAENVIO = "2";
+	public final static String FORMATO_EXPORT_FORMATO_COMPLETO = "3";
 	
 	public final static long ID_TABLA_FORMATO12A = 100;
 	public final static long ID_TABLA_FORMATO12B = 101;

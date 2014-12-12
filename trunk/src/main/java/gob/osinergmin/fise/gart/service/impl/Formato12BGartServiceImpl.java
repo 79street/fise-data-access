@@ -129,44 +129,45 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 		 BigDecimal totalDesplPersonal = new BigDecimal(0);
 		 BigDecimal totalActiviExtraord = new BigDecimal(0);
 		 
+		 try{
 		 if(formato.getFiseFormato12BDs()!=null){
 			 for (FiseFormato12BD detalle : formato.getFiseFormato12BDs()) {			
 					if( FiseConstants.ZONABENEF_RURAL == detalle.getId().getIdZonaBenef() ){
 						
-					    formato12BBean.setNroValeImpR(detalle.getNumeroValesImpreso());
-					    formato12BBean.setCostoUnitValImpR(detalle.getCostoEstandarUnitValeImpre());
+					    formato12BBean.setNroValeImpR(detalle.getNumeroValesImpreso()!=null ?detalle.getNumeroValesImpreso():0);
+					    formato12BBean.setCostoUnitValImpR(detalle.getCostoEstandarUnitValeImpre()!=null?detalle.getCostoEstandarUnitValeImpre():new BigDecimal(0));
 						BigDecimal costoTotalValImpR = detalle.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalle.getNumeroValesImpreso()));
 						formato12BBean.setCostoTotalValImpR(costoTotalValImpR);
 					
-						formato12BBean.setNroValReparDomicR(detalle.getNumeroValesRepartidosDomi());
-						formato12BBean.setCostoUnitValReparDomicR(detalle.getCostoEstandarUnitValeRepar());
+						formato12BBean.setNroValReparDomicR(detalle.getNumeroValesRepartidosDomi()!=null ?detalle.getNumeroValesRepartidosDomi():0);
+						formato12BBean.setCostoUnitValReparDomicR(detalle.getCostoEstandarUnitValeRepar()!=null?detalle.getCostoEstandarUnitValeRepar():new BigDecimal(0));
 						BigDecimal costoTotalValReparDomicR = detalle.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalle.getNumeroValesRepartidosDomi()));
 						formato12BBean.setCostoTotalValReparDomicR(costoTotalValReparDomicR);
 						
-						formato12BBean.setNroValEntDisElR(detalle.getNumeroValesEntregadoDisEl());
-						formato12BBean.setCostoUnitValEntDisElR(detalle.getCostoEstandarUnitValDisEl());
+						formato12BBean.setNroValEntDisElR(detalle.getNumeroValesEntregadoDisEl()!=null ?detalle.getNumeroValesEntregadoDisEl():0);
+						formato12BBean.setCostoUnitValEntDisElR(detalle.getCostoEstandarUnitValDisEl()!=null?detalle.getCostoEstandarUnitValDisEl():new BigDecimal(0));
 						BigDecimal costoTotalValEntDisElR=detalle.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalle.getNumeroValesEntregadoDisEl()));
 						formato12BBean.setCostoTotalValEntDisElR(costoTotalValEntDisElR);
 						
-						formato12BBean.setNroValFisiCanjR(detalle.getNumeroValesFisicosCanjeados());
-						formato12BBean.setCostoUnitValFisiCanjR(detalle.getCostoEstandarUnitValFiCan());
+						formato12BBean.setNroValFisiCanjR(detalle.getNumeroValesFisicosCanjeados()!=null ?detalle.getNumeroValesFisicosCanjeados():0);
+						formato12BBean.setCostoUnitValFisiCanjR(detalle.getCostoEstandarUnitValFiCan()!=null?detalle.getCostoEstandarUnitValFiCan():new BigDecimal(0));
 						BigDecimal costoTotalValFisiCanjR = detalle.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalle.getNumeroValesFisicosCanjeados()));
 						formato12BBean.setCostoTotalValFisiCanjR(costoTotalValFisiCanjR);
 						
 
-						formato12BBean.setNroValDigitCanjR(detalle.getNumeroValesDigitalCanjeados());
-						formato12BBean.setCostoUnitValDigitCanjR(detalle.getCostoEstandarUnitValDgCan());
+						formato12BBean.setNroValDigitCanjR(detalle.getNumeroValesDigitalCanjeados()!=null ?detalle.getNumeroValesDigitalCanjeados():0);
+						formato12BBean.setCostoUnitValDigitCanjR(detalle.getCostoEstandarUnitValDgCan()!=null?detalle.getCostoEstandarUnitValDgCan():new BigDecimal(0));
 						BigDecimal costoTotalValDigitCanjR = detalle.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalle.getNumeroValesDigitalCanjeados()));
 						formato12BBean.setCostoTotalValDigitCanjR(costoTotalValDigitCanjR);
 						
-						formato12BBean.setNroAtencionesR(detalle.getNumeroAtenciones());
-						formato12BBean.setCostoUnitAtencionesR(detalle.getCostoEstandarUnitAtencion());
+						formato12BBean.setNroAtencionesR(detalle.getNumeroAtenciones()!=null ?detalle.getNumeroAtenciones():0);
+						formato12BBean.setCostoUnitAtencionesR(detalle.getCostoEstandarUnitAtencion()!=null?detalle.getCostoEstandarUnitAtencion():new BigDecimal(0));
 						BigDecimal costoTotalAtencionesR=detalle.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalle.getNumeroAtenciones()));
 						formato12BBean.setCostoTotalAtencionesR(costoTotalAtencionesR);
 						
-						formato12BBean.setGestionAdmR(detalle.getTotalGestionAdministrativa());
-						formato12BBean.setDesplPersonalR(detalle.getTotalDesplazamientoPersonal());
-						formato12BBean.setActivExtraordR(detalle.getTotalActividadesExtraord());
+						formato12BBean.setGestionAdmR(detalle.getTotalGestionAdministrativa()!=null?detalle.getTotalGestionAdministrativa():new BigDecimal(0));
+						formato12BBean.setDesplPersonalR(detalle.getTotalDesplazamientoPersonal()!=null?detalle.getTotalDesplazamientoPersonal():new BigDecimal(0));
+						formato12BBean.setActivExtraordR(detalle.getTotalActividadesExtraord()!=null?detalle.getTotalActividadesExtraord():new BigDecimal(0));
 						
 						//
 						totalImpresionesVal = totalImpresionesVal.add(formato12BBean.getCostoTotalValImpR());
@@ -180,33 +181,33 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 						totalActiviExtraord =totalActiviExtraord.add(formato12BBean.getActivExtraordR());
 						
 						}else if( FiseConstants.ZONABENEF_PROVINCIA == detalle.getId().getIdZonaBenef() ){
-						    formato12BBean.setNroValeImpP(detalle.getNumeroValesImpreso());
+						    formato12BBean.setNroValeImpP(detalle.getNumeroValesImpreso()!=null ?detalle.getNumeroValesImpreso():0);
 						    formato12BBean.setCostoUnitValImpP(detalle.getCostoEstandarUnitValeImpre());
 							BigDecimal costoTotalValImpP = detalle.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalle.getNumeroValesImpreso()));
 							formato12BBean.setCostoTotalValImpP(costoTotalValImpP);
 						
-							formato12BBean.setNroValReparDomicP(detalle.getNumeroValesRepartidosDomi());
+							formato12BBean.setNroValReparDomicP(detalle.getNumeroValesRepartidosDomi()!=null ?detalle.getNumeroValesRepartidosDomi():0);
 							formato12BBean.setCostoUnitValReparDomicP(detalle.getCostoEstandarUnitValeRepar());
 							BigDecimal costoTotalValReparDomicP = detalle.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalle.getNumeroValesRepartidosDomi()));
 							formato12BBean.setCostoTotalValReparDomicP(costoTotalValReparDomicP);
 							
-							formato12BBean.setNroValEntDisElP(detalle.getNumeroValesEntregadoDisEl());
+							formato12BBean.setNroValEntDisElP(detalle.getNumeroValesEntregadoDisEl()!=null ?detalle.getNumeroValesEntregadoDisEl():0);
 							formato12BBean.setCostoUnitValEntDisElP(detalle.getCostoEstandarUnitValDisEl());
 							BigDecimal costoTotalValEntDisElP=detalle.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalle.getNumeroValesEntregadoDisEl()));
 							formato12BBean.setCostoTotalValEntDisElP(costoTotalValEntDisElP);
 							
-							formato12BBean.setNroValFisiCanjP(detalle.getNumeroValesFisicosCanjeados());
+							formato12BBean.setNroValFisiCanjP(detalle.getNumeroValesFisicosCanjeados()!=null ?detalle.getNumeroValesFisicosCanjeados():0);
 							formato12BBean.setCostoUnitValFisiCanjP(detalle.getCostoEstandarUnitValFiCan());
 							BigDecimal costoTotalValFisiCanjP = detalle.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalle.getNumeroValesFisicosCanjeados()));
 							formato12BBean.setCostoTotalValFisiCanjP(costoTotalValFisiCanjP);
 							
 
-							formato12BBean.setNroValDigitCanjP(detalle.getNumeroValesDigitalCanjeados());
+							formato12BBean.setNroValDigitCanjP(detalle.getNumeroValesDigitalCanjeados()!=null ?detalle.getNumeroValesDigitalCanjeados():0);
 							formato12BBean.setCostoUnitValDigitCanjP(detalle.getCostoEstandarUnitValDgCan());
 							BigDecimal costoTotalValDigitCanjP = detalle.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalle.getNumeroValesDigitalCanjeados()));
 							formato12BBean.setCostoTotalValDigitCanjP(costoTotalValDigitCanjP);
 							
-							formato12BBean.setNroAtencionesP(detalle.getNumeroAtenciones());
+							formato12BBean.setNroAtencionesP(detalle.getNumeroAtenciones()!=null ?detalle.getNumeroAtenciones():0);
 							formato12BBean.setCostoUnitAtencionesP(detalle.getCostoEstandarUnitAtencion());
 							BigDecimal costoTotalAtencionesP=detalle.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalle.getNumeroAtenciones()));
 							formato12BBean.setCostoTotalAtencionesP(costoTotalAtencionesP);
@@ -227,33 +228,33 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 							totalActiviExtraord =totalActiviExtraord.add(formato12BBean.getActivExtraordP());
 						
 					}else if( FiseConstants.ZONABENEF_LIMA == detalle.getId().getIdZonaBenef() ){
-						 	formato12BBean.setNroValeImpL(detalle.getNumeroValesImpreso());
+						 	formato12BBean.setNroValeImpL(detalle.getNumeroValesImpreso()!=null ?detalle.getNumeroValesImpreso():0);
 						    formato12BBean.setCostoUnitValImpL(detalle.getCostoEstandarUnitValeImpre());
 							BigDecimal costoTotalValImpL = detalle.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalle.getNumeroValesImpreso()));
 							formato12BBean.setCostoTotalValImpL(costoTotalValImpL);
 						
-							formato12BBean.setNroValReparDomicL(detalle.getNumeroValesRepartidosDomi());
+							formato12BBean.setNroValReparDomicL(detalle.getNumeroValesRepartidosDomi()!=null ?detalle.getNumeroValesRepartidosDomi():0);
 							formato12BBean.setCostoUnitValReparDomicL(detalle.getCostoEstandarUnitValeRepar());
 							BigDecimal costoTotalValReparDomicL = detalle.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalle.getNumeroValesRepartidosDomi()));
 							formato12BBean.setCostoTotalValReparDomicL(costoTotalValReparDomicL);
 							
-							formato12BBean.setNroValEntDisElL(detalle.getNumeroValesEntregadoDisEl());
+							formato12BBean.setNroValEntDisElL(detalle.getNumeroValesEntregadoDisEl()!=null ?detalle.getNumeroValesEntregadoDisEl():0);
 							formato12BBean.setCostoUnitValEntDisElL(detalle.getCostoEstandarUnitValDisEl());
 							BigDecimal costoTotalValEntDisElL=detalle.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalle.getNumeroValesEntregadoDisEl()));
 							formato12BBean.setCostoTotalValEntDisElL(costoTotalValEntDisElL);
 							
-							formato12BBean.setNroValFisiCanjL(detalle.getNumeroValesFisicosCanjeados());
+							formato12BBean.setNroValFisiCanjL(detalle.getNumeroValesFisicosCanjeados()!=null ?detalle.getNumeroValesFisicosCanjeados():0);
 							formato12BBean.setCostoUnitValFisiCanjL(detalle.getCostoEstandarUnitValFiCan());
 							BigDecimal costoTotalValFisiCanjL = detalle.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalle.getNumeroValesFisicosCanjeados()));
 							formato12BBean.setCostoTotalValFisiCanjL(costoTotalValFisiCanjL);
 							
 
-							formato12BBean.setNroValDigitCanjL(detalle.getNumeroValesDigitalCanjeados());
+							formato12BBean.setNroValDigitCanjL(detalle.getNumeroValesDigitalCanjeados()!=null ?detalle.getNumeroValesDigitalCanjeados():0);
 							formato12BBean.setCostoUnitValDigitCanjL(detalle.getCostoEstandarUnitValDgCan());
 							BigDecimal costoTotalValDigitCanjL = detalle.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalle.getNumeroValesDigitalCanjeados()));
 							formato12BBean.setCostoTotalValDigitCanjL(costoTotalValDigitCanjL);
 							
-							formato12BBean.setNroAtencionesL(detalle.getNumeroAtenciones());
+							formato12BBean.setNroAtencionesL(detalle.getNumeroAtenciones()!=null ?detalle.getNumeroAtenciones():0);
 							formato12BBean.setCostoUnitAtencionesL(detalle.getCostoEstandarUnitAtencion());
 							BigDecimal costoTotalAtencionesL=detalle.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalle.getNumeroAtenciones()));
 							formato12BBean.setCostoTotalAtencionesL(costoTotalAtencionesL);
@@ -287,8 +288,17 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	formato12BBean.setTotalDesplPersonal(totalDesplPersonal);
 	formato12BBean.setTotalActivExtraord(totalActiviExtraord);
 	//
-					 
-	formato12BBean.setTotalGeneral(formato.getTotalReconocer());
+	Double total=formato12BBean.getTotalImpVal().doubleValue()+formato12BBean.getTotalValReparDomic().doubleValue()+
+			formato12BBean.getTotalValEntDisEl().doubleValue()+formato12BBean.getTotalValFisiCanjLiq().doubleValue()+
+			formato12BBean.getTotalValDigitCanjLiq().doubleValue()+formato12BBean.getTotalSolictConsultReclam().doubleValue()+
+			formato12BBean.getTotalGestionAdm().doubleValue()+formato12BBean.getTotalDesplPersonal().doubleValue()+
+			formato12BBean.getTotalActivExtraord().doubleValue();			 
+	formato12BBean.setTotalGeneral(new BigDecimal(total));
+	
+	
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
 	
 	return formato12BBean;
 }
@@ -306,6 +316,8 @@ public HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean format
 	mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJEC_F12B, formato12BBean.getDescMesEjecucion());
 	mapJRParams.put(FiseConstants.ETAPA_SOLICITUD, formato12BBean.getEtapa());
 	//
+	System.out.println("des mes ejecucion::"+formato12BBean.getDescMesEjecucion());
+	System.out.println("des mes presentacion::"+formato12BBean.getDescMesPresentacion());
 	
 	mapJRParams.put(FiseConstants.PARAM_NRO_VAL_IMP_R_F12B, formato12BBean.getNroValeImpR());
 	mapJRParams.put(FiseConstants.PARAM_NRO_VAL_IMP_P_F12B, formato12BBean.getNroValeImpP());
@@ -314,6 +326,8 @@ public HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean format
 	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_VAL_IMP_R_F12B, formato12BBean.getCostoUnitValImpR());
 	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_VAL_IMP_P_F12B, formato12BBean.getCostoUnitValImpP());
 	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_VAL_IMP_L_F12B, formato12BBean.getCostoUnitValImpL());
+
+	
 	
 	mapJRParams.put(FiseConstants.PARAM_COSTO_TOTAL_VAL_IMP_R_F12B, formato12BBean.getCostoTotalValImpR());
 	mapJRParams.put(FiseConstants.PARAM_COSTO_TOTAL_VAL_IMP_P_F12B, formato12BBean.getCostoTotalValImpP());

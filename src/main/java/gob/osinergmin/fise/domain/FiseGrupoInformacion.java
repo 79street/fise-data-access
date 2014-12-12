@@ -100,7 +100,10 @@ public class FiseGrupoInformacion implements Serializable {
 	//bi-directional many-to-one association to FiseControlEnvioPorGrupo
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseControlEnvioPorGrupo> fiseControlEnvioPorGrupos;
-	
+
+	//bi-directional many-to-one association to FiseLiquidacione
+	@OneToMany(mappedBy="fiseGrupoInformacion")
+	private List<FiseLiquidacione> fiseLiquidaciones;
 	
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato12BC> fiseFormato12BCs;
@@ -293,7 +296,29 @@ public class FiseGrupoInformacion implements Serializable {
 		fiseControlEnvioPorGrupo.setFiseGrupoInformacion(null);
 
 		return fiseControlEnvioPorGrupo;
-	}	
+	}
+	
+	public List<FiseLiquidacione> getFiseLiquidaciones() {
+		return this.fiseLiquidaciones;
+	}
+
+	public void setFiseLiquidaciones(List<FiseLiquidacione> fiseLiquidaciones) {
+		this.fiseLiquidaciones = fiseLiquidaciones;
+	}
+
+	public FiseLiquidacione addFiseLiquidacione(FiseLiquidacione fiseLiquidacione) {
+		getFiseLiquidaciones().add(fiseLiquidacione);
+		fiseLiquidacione.setFiseGrupoInformacion(this);
+
+		return fiseLiquidacione;
+	}
+
+	public FiseLiquidacione removeFiseLiquidacione(FiseLiquidacione fiseLiquidacione) {
+		getFiseLiquidaciones().remove(fiseLiquidacione);
+		fiseLiquidacione.setFiseGrupoInformacion(null);
+
+		return fiseLiquidacione;
+	}
 
 	public String getDescEstado() {
 		String desEstado;

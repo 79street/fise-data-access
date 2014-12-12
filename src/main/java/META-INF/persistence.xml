@@ -65,8 +65,9 @@
 	<class>gob.osinergmin.fise.domain.FiseFormato12DDObPK</class>	
 	<class>gob.osinergmin.fise.domain.FiseControlEnvioPorGrupo</class>
 	<class>gob.osinergmin.fise.domain.FiseControlEnvioPorGrupoPK</class>
-
-		<properties>
+	<class>gob.osinergmin.fise.domain.FiseLiquidacione</class>
+	
+	<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 	      </properties>
 	</persistence-unit>

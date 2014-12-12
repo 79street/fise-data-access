@@ -28,9 +28,6 @@ public class FiseFormato12DDOb implements Serializable {
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Column(name="ID_OBSERVACION")
-	private String idObservacion;
-
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
 
@@ -58,6 +55,10 @@ public class FiseFormato12DDOb implements Serializable {
 		})
 	private FiseFormato12DD fiseFormato12DD;
 
+	@ManyToOne
+	@JoinColumn(name="ID_OBSERVACION")
+	private FiseObservacion fiseObservacion;
+	
 	public FiseFormato12DDOb() {
 	}
 
@@ -83,14 +84,6 @@ public class FiseFormato12DDOb implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getIdObservacion() {
-		return this.idObservacion;
-	}
-
-	public void setIdObservacion(String idObservacion) {
-		this.idObservacion = idObservacion;
 	}
 
 	public String getTerminalActualizacion() {
@@ -131,6 +124,14 @@ public class FiseFormato12DDOb implements Serializable {
 
 	public void setFiseFormato12DD(FiseFormato12DD fiseFormato12DD) {
 		this.fiseFormato12DD = fiseFormato12DD;
+	}
+
+	public FiseObservacion getFiseObservacion() {
+		return fiseObservacion;
+	}
+
+	public void setFiseObservacion(FiseObservacion fiseObservacion) {
+		this.fiseObservacion = fiseObservacion;
 	}
 
 }

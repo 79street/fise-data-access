@@ -198,6 +198,17 @@ public abstract class FechaUtil {
 		return cadenaFecha.toString();
     }
 	
+	public static Date fechaDate_DD_MM_YYYY_HHMMSS(String fechaCadena){
+		Date fecha = null;
+		DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		try {
+			fecha = formato.parse(fechaCadena);
+		} catch (Exception ex) {
+			System.out.println("Error al parsear la fecha");
+		}
+		return fecha;
+    }
+	
 	public static boolean fechaMayor(String fechaHasta,String fechaAmpl){
 		try {
 			Date fecHasta = format.parse(fechaHasta);

@@ -34,9 +34,6 @@ public class FiseFormato12DC implements Serializable {
 	@Column(name="FECHA_ENVIO_DEFINITIVO")
 	private Date fechaEnvioDefinitivo;
 
-	@Column(name="ID_GRUPO_INFORMACION")
-	private BigDecimal idGrupoInformacion;
-
 	@Column(name="NOMBRE_ARCHIVO_EXCEL")
 	private String nombreArchivoExcel;
 
@@ -63,6 +60,30 @@ public class FiseFormato12DC implements Serializable {
 	@OneToMany(mappedBy="fiseFormato12DC")
 	private List<FiseFormato12DD> fiseFormato12DDs;
 
+	//bi-directional many-to-one association to FiseGrupoInformacion
+	@ManyToOne
+	@JoinColumn(name="ID_GRUPO_INFORMACION")
+	private FiseGrupoInformacion fiseGrupoInformacion;
+	
+	@Transient
+	private String descEmpresa;
+	@Transient
+	private String descEstado;
+	@Transient
+	private String descMesPresentacion;
+	@Transient
+	private String descGrupoInformacion;
+	
+	//guardamos la cabecerta del ultimo detalle registrado
+	@Transient
+	private Long anoEjecucionDetalle;
+	@Transient
+	private Long mesEjecucionDetalle;
+	@Transient
+	private Long etapaEjecucionDetalle;
+	@Transient
+	private Long numeroItemEtapaDetalle;
+	
 	public FiseFormato12DC() {
 	}
 
@@ -96,14 +117,6 @@ public class FiseFormato12DC implements Serializable {
 
 	public void setFechaEnvioDefinitivo(Date fechaEnvioDefinitivo) {
 		this.fechaEnvioDefinitivo = fechaEnvioDefinitivo;
-	}
-
-	public BigDecimal getIdGrupoInformacion() {
-		return this.idGrupoInformacion;
-	}
-
-	public void setIdGrupoInformacion(BigDecimal idGrupoInformacion) {
-		this.idGrupoInformacion = idGrupoInformacion;
 	}
 
 	public String getNombreArchivoExcel() {
@@ -182,6 +195,78 @@ public class FiseFormato12DC implements Serializable {
 		fiseFormato12DD.setFiseFormato12DC(null);
 
 		return fiseFormato12DD;
+	}
+
+	public FiseGrupoInformacion getFiseGrupoInformacion() {
+		return fiseGrupoInformacion;
+	}
+
+	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
+		this.fiseGrupoInformacion = fiseGrupoInformacion;
+	}
+
+	public String getDescEmpresa() {
+		return descEmpresa;
+	}
+
+	public void setDescEmpresa(String descEmpresa) {
+		this.descEmpresa = descEmpresa;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
+	}
+
+	public String getDescGrupoInformacion() {
+		return descGrupoInformacion;
+	}
+
+	public void setDescGrupoInformacion(String descGrupoInformacion) {
+		this.descGrupoInformacion = descGrupoInformacion;
+	}
+
+	public Long getAnoEjecucionDetalle() {
+		return anoEjecucionDetalle;
+	}
+
+	public void setAnoEjecucionDetalle(Long anoEjecucionDetalle) {
+		this.anoEjecucionDetalle = anoEjecucionDetalle;
+	}
+
+	public Long getMesEjecucionDetalle() {
+		return mesEjecucionDetalle;
+	}
+
+	public void setMesEjecucionDetalle(Long mesEjecucionDetalle) {
+		this.mesEjecucionDetalle = mesEjecucionDetalle;
+	}
+
+	public Long getEtapaEjecucionDetalle() {
+		return etapaEjecucionDetalle;
+	}
+
+	public void setEtapaEjecucionDetalle(Long etapaEjecucionDetalle) {
+		this.etapaEjecucionDetalle = etapaEjecucionDetalle;
+	}
+
+	public Long getNumeroItemEtapaDetalle() {
+		return numeroItemEtapaDetalle;
+	}
+
+	public void setNumeroItemEtapaDetalle(Long numeroItemEtapaDetalle) {
+		this.numeroItemEtapaDetalle = numeroItemEtapaDetalle;
 	}
 
 }

@@ -1,12 +1,22 @@
 package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -58,7 +68,7 @@ public class FiseFormato12DD implements Serializable {
 	private String idTipGasto;
 
 	@Column(name="ID_ZONA_BENEF")
-	private BigDecimal idZonaBenef;
+	private Long idZonaBenef;
 
 	@Column(name="NUMERO_DOC_AUTORIZA_GASTO")
 	private String numeroDocAutorizaGasto;
@@ -109,6 +119,31 @@ public class FiseFormato12DD implements Serializable {
 	@OneToMany(mappedBy="fiseFormato12DD")
 	private List<FiseFormato12DDOb> fiseFormato12DDObs;
 
+	@Transient
+	private String descMesEjecucion;
+	@Transient
+	private String descEtapaEjecucion;
+	@Transient
+	private String descZonaBenef;
+	
+	//Se agregó Datos del PK del detalle FiseFormato12DDPK(para tener todos las columnas en un solo objeto para el reporte ireport)
+	@Transient
+	private String codEmpresaReport;
+	@Transient
+	private long anoPresentacionReport;
+	@Transient
+	private long mesPresentacionReport;
+	@Transient
+	private String etapaReport;
+	@Transient
+	private long anoEjecucionGastoReport;
+	@Transient
+	private long mesEjecucionGastoReport;
+	@Transient
+	private long etapaEjecucionReport;
+	@Transient
+	private long numeroItemEtapaReport;
+	
 	public FiseFormato12DD() {
 	}
 
@@ -208,11 +243,11 @@ public class FiseFormato12DD implements Serializable {
 		this.idTipGasto = idTipGasto;
 	}
 
-	public BigDecimal getIdZonaBenef() {
+	public Long getIdZonaBenef() {
 		return this.idZonaBenef;
 	}
 
-	public void setIdZonaBenef(BigDecimal idZonaBenef) {
+	public void setIdZonaBenef(Long idZonaBenef) {
 		this.idZonaBenef = idZonaBenef;
 	}
 
@@ -332,6 +367,94 @@ public class FiseFormato12DD implements Serializable {
 		fiseFormato12DDOb.setFiseFormato12DD(null);
 
 		return fiseFormato12DDOb;
+	}
+
+	public String getCodEmpresaReport() {
+		return codEmpresaReport;
+	}
+
+	public void setCodEmpresaReport(String codEmpresaReport) {
+		this.codEmpresaReport = codEmpresaReport;
+	}
+
+	public long getAnoPresentacionReport() {
+		return anoPresentacionReport;
+	}
+
+	public void setAnoPresentacionReport(long anoPresentacionReport) {
+		this.anoPresentacionReport = anoPresentacionReport;
+	}
+
+	public long getMesPresentacionReport() {
+		return mesPresentacionReport;
+	}
+
+	public void setMesPresentacionReport(long mesPresentacionReport) {
+		this.mesPresentacionReport = mesPresentacionReport;
+	}
+
+	public String getEtapaReport() {
+		return etapaReport;
+	}
+
+	public void setEtapaReport(String etapaReport) {
+		this.etapaReport = etapaReport;
+	}
+
+	public long getAnoEjecucionGastoReport() {
+		return anoEjecucionGastoReport;
+	}
+
+	public void setAnoEjecucionGastoReport(long anoEjecucionGastoReport) {
+		this.anoEjecucionGastoReport = anoEjecucionGastoReport;
+	}
+
+	public long getMesEjecucionGastoReport() {
+		return mesEjecucionGastoReport;
+	}
+
+	public void setMesEjecucionGastoReport(long mesEjecucionGastoReport) {
+		this.mesEjecucionGastoReport = mesEjecucionGastoReport;
+	}
+
+	public long getEtapaEjecucionReport() {
+		return etapaEjecucionReport;
+	}
+
+	public void setEtapaEjecucionReport(long etapaEjecucionReport) {
+		this.etapaEjecucionReport = etapaEjecucionReport;
+	}
+
+	public long getNumeroItemEtapaReport() {
+		return numeroItemEtapaReport;
+	}
+
+	public void setNumeroItemEtapaReport(long numeroItemEtapaReport) {
+		this.numeroItemEtapaReport = numeroItemEtapaReport;
+	}
+
+	public String getDescMesEjecucion() {
+		return descMesEjecucion;
+	}
+
+	public void setDescMesEjecucion(String descMesEjecucion) {
+		this.descMesEjecucion = descMesEjecucion;
+	}
+
+	public String getDescEtapaEjecucion() {
+		return descEtapaEjecucion;
+	}
+
+	public void setDescEtapaEjecucion(String descEtapaEjecucion) {
+		this.descEtapaEjecucion = descEtapaEjecucion;
+	}
+
+	public String getDescZonaBenef() {
+		return descZonaBenef;
+	}
+
+	public void setDescZonaBenef(String descZonaBenef) {
+		this.descZonaBenef = descZonaBenef;
 	}
 
 }

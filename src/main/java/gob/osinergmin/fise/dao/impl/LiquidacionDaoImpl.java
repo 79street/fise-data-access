@@ -73,14 +73,14 @@ public class LiquidacionDaoImpl extends GenericDaoImpl implements LiquidacionDao
 		
 		String q = "SELECT f FROM " + FiseLiquidacione.class.getName()
 				+ " f WHERE 1=1 ";
-		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+		if(FormatoUtil.isNotBlank(codEmpresa) && !"TODO".equals(codEmpresa)){  
 			q = q.concat(" AND f.codEmpresa = :codEmpresa ");
 		}
 		if(idGrupoInf!=0){ 		
 			q = q.concat(" AND f.fiseGrupoInformacion.idGrupoInformacion =:idGrupoInf ");	
 		}		
 		Query query = em.createQuery(q); 
-		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+		if(FormatoUtil.isNotBlank(codEmpresa) && !"TODO".equals(codEmpresa)){ 
 			query.setParameter("codEmpresa", codEmpresa);
 		}
 		if(idGrupoInf!=0){

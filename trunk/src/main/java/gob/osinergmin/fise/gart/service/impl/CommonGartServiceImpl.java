@@ -746,8 +746,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 }		
 				
 			   /**FORMATO 12D*/					 
-				/* lista12D = commonDao.listarEnvioDefinitivo(codEmpresa, 
-						 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
+				 lista12D = commonDao.listarEnvioDefinitivo(codEmpresa, 
+						 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf);  
 				
 				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
 				 for(int i = 0; i < lista12D.size(); i++){					
@@ -765,7 +765,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 					e.setAnioFinVig("---");
 					e.setEstado((String)lista12D.get(i)[4] == null ? "---" :lista12D.get(i)[4].toString());
 					lista.add(e);
-				 }	*/	
+				 }
 			}else if(FiseConstants.BIENAL.equals(flag)){
 				lista = new ArrayList<EnvioDefinitivoBean>();
 				/**FORMATO 13A*/			   

@@ -1328,6 +1328,7 @@ public class FiseConstants {
 		public final static String PARAM_ANO_PRES_F12B = "ANO_PRESENTACION";
 		public final static String PARAM_DESC_MES_PRES_F12B = "DESC_MES_PRESENTACION";
 		public final static String PARAM_ANO_EJEC_F12B = "ANO_EJECUCION_GASTO";
+		public final static String PARAM_ANO_EJEC_F12B_R = "ANO_EJECUCION";
 		public final static String PARAM_DESC_MES_EJEC_F12B = "DESC_MES_EJECUCION";		
 		
 		public final static String PARAM_NRO_VAL_IMP_R_F12B = "NRO_VAL_IMP_R";
@@ -1339,9 +1340,9 @@ public class FiseConstants {
 		public final static String PARAM_COSTO_UNIT_VAL_IMP_L_F12B = "COSTO_UNIT_VAL_IMP_L";
 		
 		
-		public final static String PARAM_COSTO_TOTAL_VAL_IMP_R_F12B = "COSTO_UNIT_VAL_IMP_R";
-		public final static String PARAM_COSTO_TOTAL_VAL_IMP_P_F12B = "COSTO_UNIT_VAL_IMP_P";
-		public final static String PARAM_COSTO_TOTAL_VAL_IMP_L_F12B = "COSTO_UNIT_VAL_IMP_L";
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_R_F12B = "COSTO_TOTAL_VAL_IMP_R";
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_P_F12B = "COSTO_TOTAL_VAL_IMP_P";
+		public final static String PARAM_COSTO_TOTAL_VAL_IMP_L_F12B = "COSTO_TOTAL_VAL_IMP_L";
 		
 		public final static String PARAM_NUM_VAL_REPAR_DOMIC_R_F12B = "NUM_VAL_REPAR_DOMIC_R";
 		public final static String PARAM_NUM_VAL_REPAR_DOMIC_P_F12B = "NUM_VAL_REPAR_DOMIC_P";

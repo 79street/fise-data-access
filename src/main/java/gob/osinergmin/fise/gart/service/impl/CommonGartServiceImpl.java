@@ -14,6 +14,7 @@ import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
 import gob.osinergmin.fise.dao.Formato12BCDao;
 import gob.osinergmin.fise.dao.Formato12CCDao;
+import gob.osinergmin.fise.dao.Formato12DCDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato14ACDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
@@ -26,6 +27,8 @@ import gob.osinergmin.fise.domain.FiseFormato12BC;
 import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12CC;
 import gob.osinergmin.fise.domain.FiseFormato12CCPK;
+import gob.osinergmin.fise.domain.FiseFormato12DC;
+import gob.osinergmin.fise.domain.FiseFormato12DCPK;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato14AC;
@@ -80,6 +83,10 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Autowired
 	@Qualifier("formato12CCDaoImpl")
 	private Formato12CCDao formato12CCDao;
+	
+	@Autowired
+	@Qualifier("formato12DCDaoImpl")
+	private Formato12DCDao formato12DCDao;
 	
 	@Autowired
 	@Qualifier("formato13ACDaoImpl")
@@ -228,7 +235,18 @@ public class CommonGartServiceImpl implements CommonGartService {
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
 				
-				
+				List<FiseFormato12DC> lista12D = formato12DCDao.buscarFormato12DCReenvio(codEmpresa,
+						Long.valueOf(anioPres), Long.valueOf(mesPres), etapa);
+				for(FiseFormato12DC f12D: lista12D){
+					AutorizarReenvioBean r = new AutorizarReenvioBean();
+					r.setCodEmpresa(f12D.getId().getCodEmpresa()); 
+					r.setAnioPres(""+f12D.getId().getAnoPresentacion()); 
+					r.setMesPres(""+f12D.getId().getMesPresentacion()); 				
+					r.setEtapa(f12D.getId().getEtapa()); 
+					r.setEstado(FiseConstants.ESTADO_FECHAENVIO_ENVIADO);
+					r.setFormato(formato); 
+					lista.add(r);
+				}			
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 
 				
@@ -320,7 +338,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setUsuarioActualizacion(bean.getUsuario());
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
-				formato12ACDao.modificarFormato12AC(f); 				
+				formato12ACDao.modificarFormato12AC(f); 	
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(bean.getFormato())){	
 				 FiseFormato12BCPK id = new FiseFormato12BCPK();
 				 id.setCodEmpresa(bean.getCodEmpresa());
@@ -335,6 +354,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				 f.setTerminalActualizacion(bean.getTerminal()); 
 				 formato12BCDao.updateFormatoCabecera(f);
+				 
 			}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(bean.getFormato())){
 				FiseFormato12CCPK id = new FiseFormato12CCPK();	
 				id.setCodEmpresa(bean.getCodEmpresa());
@@ -347,9 +367,19 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
 				formato12CCDao.modificarFormato12CC(f); 
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(bean.getFormato())){ 
-				
-				
+				FiseFormato12DCPK id = new FiseFormato12DCPK();	
+				id.setCodEmpresa(bean.getCodEmpresa());
+				id.setAnoPresentacion(Long.valueOf(bean.getAnioPres())); 
+				id.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				id.setEtapa(bean.getEtapa());	
+				FiseFormato12DC f =  formato12DCDao.obtenerFormato12DCByPK(id);
+				f.setFechaEnvioDefinitivo(null);
+				f.setUsuarioActualizacion(bean.getUsuario());
+				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+				f.setTerminalActualizacion(bean.getTerminal()); 
+				formato12DCDao.modificarFormato12DC(f); 				
 				
 			}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(bean.getFormato())){ 
 				FiseFormato13ACPK id = new FiseFormato13ACPK();
@@ -362,7 +392,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setUsuarioActualizacion(bean.getUsuario());
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
-				formato13ACDao.updatecabecera(f);						
+				formato13ACDao.updatecabecera(f);		
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(bean.getFormato())){ 
 				FiseFormato14ACPK id = new FiseFormato14ACPK();
 				id.setCodEmpresa(bean.getCodEmpresa());
@@ -376,7 +407,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setUsuarioActualizacion(bean.getUsuario());
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
-				formato14ACDao.modificarFormato14AC(f); 			
+				formato14ACDao.modificarFormato14AC(f); 
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(bean.getFormato())){  
 				FiseFormato14BCPK id = new FiseFormato14BCPK();
 				id.setCodEmpresa(bean.getCodEmpresa());
@@ -390,7 +422,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				f.setUsuarioActualizacion(bean.getUsuario());
 				f.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 				f.setTerminalActualizacion(bean.getTerminal()); 
-				formato14BCDao.modificarFormato14BC(f);  				
+				formato14BCDao.modificarFormato14BC(f); 
+				
 			}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(bean.getFormato())){ 
 				FiseFormato14CCPK id = new FiseFormato14CCPK();
 				id.setCodEmpresa(bean.getCodEmpresa());

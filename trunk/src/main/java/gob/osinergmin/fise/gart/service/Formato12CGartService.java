@@ -24,4 +24,5 @@ public interface Formato12CGartService {
 	List<FiseFormato12CDOb> listarFormato12CDObByFormato12CD(FiseFormato12CD formato12CD);
 	FiseFormato12CC modificarEnvioDefinitivoFormato12CC(Formato12CCBean formulario, FiseFormato12CC fiseFormato12CC) throws Exception;
 	
+	void eliminarObservaciones12C(List<FiseFormato12CDOb> listaObs) throws Exception;
 }

@@ -1,11 +1,11 @@
 package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.Formato12BCBean;
-
 import gob.osinergmin.fise.domain.FiseFormato12BC;
 import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
 import gob.osinergmin.fise.domain.FiseFormato12BDOb;
+
 
 
 import java.util.HashMap;
@@ -37,6 +37,8 @@ public interface Formato12BGartService {
 	 Formato12BCBean estructurarFormato12BBeanByFiseFormato12BC(FiseFormato12BC formato);
 
 	 FiseFormato12BC modificarEnvioDefinitivoFormato12BC(Formato12BCBean formulario, FiseFormato12BC fiseFormato12BC) throws Exception;
+	 
+	 void eliminarObservaciones12B(List<FiseFormato12BDOb> listaObs) throws Exception ;
 
 
 }

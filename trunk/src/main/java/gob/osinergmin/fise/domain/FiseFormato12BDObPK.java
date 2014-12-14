@@ -44,7 +44,7 @@ public class FiseFormato12BDObPK implements Serializable {
 	public void setCodEmpresa(String codEmpresa) {
 		this.codEmpresa = codEmpresa;
 	}
-	public long getAnoPresentacion() {
+	public Integer getAnoPresentacion() {
 		return this.anoPresentacion;
 	}
 	public void setAnoPresentacion(Integer anoPresentacion) {
@@ -74,7 +74,7 @@ public class FiseFormato12BDObPK implements Serializable {
 	public void setEtapa(String etapa) {
 		this.etapa = etapa;
 	}
-	public long getIdZonaBenef() {
+	public Integer getIdZonaBenef() {
 		return this.idZonaBenef;
 	}
 	public void setIdZonaBenef(Integer idZonaBenef) {

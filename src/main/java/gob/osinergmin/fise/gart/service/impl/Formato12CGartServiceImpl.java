@@ -804,4 +804,14 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		return dto;
 	}
 	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones12C(List<FiseFormato12CDOb> listaObs) throws Exception {	
+		for (FiseFormato12CDOb observacion : listaObs) {
+			formato12CDObDao.eliminarFormato12CDOb(observacion); 
+		}
+	} 
+	
+	
 }

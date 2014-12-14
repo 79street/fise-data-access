@@ -24,4 +24,5 @@ public interface Formato12DGartService {
 	List<FiseFormato12DDOb> listarFormato12DDObByFormato12DD(FiseFormato12DD formato12DD);
 	FiseFormato12DC modificarEnvioDefinitivoFormato12DC(Formato12DCBean formulario, FiseFormato12DC fiseFormato12DC) throws Exception;
 	
+	void eliminarObservaciones12D(List<FiseFormato12DDOb> listaObs) throws Exception;
 }

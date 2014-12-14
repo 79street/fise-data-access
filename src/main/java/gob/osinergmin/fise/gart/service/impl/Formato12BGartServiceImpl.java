@@ -1,5 +1,17 @@
 package gob.osinergmin.fise.gart.service.impl;
 
+import gob.osinergmin.fise.bean.Formato12BCBean;
+import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.Formato12BCDao;
+import gob.osinergmin.fise.dao.Formato12BDDao;
+import gob.osinergmin.fise.dao.Formato12BDObDao;
+import gob.osinergmin.fise.domain.FiseFormato12BC;
+import gob.osinergmin.fise.domain.FiseFormato12BCPK;
+import gob.osinergmin.fise.domain.FiseFormato12BD;
+import gob.osinergmin.fise.domain.FiseFormato12BDOb;
+import gob.osinergmin.fise.gart.service.Formato12BGartService;
+import gob.osinergmin.fise.util.FechaUtil;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,28 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-
-
-
-
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import gob.osinergmin.fise.bean.Formato12BCBean;
-
-import gob.osinergmin.fise.constant.FiseConstants;
-import gob.osinergmin.fise.dao.Formato12BCDao;
-import gob.osinergmin.fise.dao.Formato12BDDao;
-import gob.osinergmin.fise.dao.Formato12BDObDao;
-import gob.osinergmin.fise.domain.FiseFormato12BC;
-import gob.osinergmin.fise.domain.FiseFormato12BCPK;
-import gob.osinergmin.fise.domain.FiseFormato12BD;
-import gob.osinergmin.fise.domain.FiseFormato12BDOb;
-
-import gob.osinergmin.fise.gart.service.Formato12BGartService;
-import gob.osinergmin.fise.util.FechaUtil;
 
 
 @Service(value="formato12BGartServiceImpl")
@@ -434,14 +426,23 @@ public FiseFormato12BC modificarEnvioDefinitivoFormato12BC(Formato12BCBean formu
 	return dto;
 }
 
-@Override
-@Transactional
-public Integer deleteFormatoObs(String emp, Integer anio, Integer mes, String etapa, Integer anioEjec, Integer mesEjec, Integer idzona, Integer item) throws DataIntegrityViolationException, Exception {
-	// TODO Auto-generated method stub
-	return formato12BDObDao.deleteFormatoObs(emp, anio, mes, etapa, anioEjec, mesEjec,idzona,item);
-}
+	@Override
+	@Transactional
+	public Integer deleteFormatoObs(String emp, Integer anio, Integer mes, String etapa, Integer anioEjec, Integer mesEjec, Integer idzona, Integer item) throws DataIntegrityViolationException, Exception {
+		// TODO Auto-generated method stub
+		return formato12BDObDao.deleteFormatoObs(emp, anio, mes, etapa, anioEjec, mesEjec,idzona,item);
+	}
 
 
-
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void eliminarObservaciones12B(List<FiseFormato12BDOb> listaObs) throws Exception {	
+		for (FiseFormato12BDOb o : listaObs) {
+			formato12BDObDao.deleteFormatoObs(o.getId().getCodEmpresa(),o.getId().getAnoPresentacion(),
+					o.getId().getMesPresentacion(),o.getId().getEtapa(),o.getId().getAnoEjecucionGasto(),
+					o.getId().getMesEjecucionGasto(),o.getId().getIdZonaBenef()
+					,o.getId().getItemObservacion());
+		}
+	} 
 
 }

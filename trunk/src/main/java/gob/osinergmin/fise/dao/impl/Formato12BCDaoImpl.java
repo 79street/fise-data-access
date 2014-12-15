@@ -97,6 +97,12 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {		
 		try {
 			StringBuilder sb=new StringBuilder();
+			System.out.println(id.getCodEmpresa().trim());
+			System.out.println(id.getEtapa().trim());
+			System.out.println(id.getAnoPresentacion());
+			System.out.println(id.getMesPresentacion());
+			System.out.println(id.getAnoEjecucionGasto());
+			System.out.println(id.getMesEjecucionGasto());
 			sb.append("SELECT c FROM FiseFormato12BC c WHERE 1=1 ");
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
@@ -179,56 +185,80 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 	}
 
 	@Override
-	@Transactional
+	
 	public Integer deleteFormatoCabecera(FiseFormato12BCPK id) throws DataIntegrityViolationException,Exception{
 
 		try {
 				StringBuilder sb=new StringBuilder();
 			
-			sb.append("DELETE  FROM FiseFormato12BC c WHERE 1=1 ");
+			//sb.append("DELETE FROM FiseFormato12BC c WHERE 1=1 ");
+			sb.append("DELETE FROM FISE_FORMATO_12B_C  WHERE 1=1 ");
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
-				sb.append(" AND c.id.codEmpresa =:emp ");
+				//sb.append(" AND c.id.codEmpresa =:emp ");
+				sb.append(" AND COD_EMPRESA = ? ");
 			}
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
-				sb.append(" AND c.id.etapa =:etp ");
+				//sb.append(" AND c.id.etapa =:etp ");
+				sb.append(" AND ETAPA = ? ");
 			}
 			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
-				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				//sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				sb.append(" AND ANO_PRESENTACION = ? ");
 			}
 			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
-				sb.append(" AND c.id.mesPresentacion =:mespres ");
+				//sb.append(" AND c.id.mesPresentacion =:mespres ");
+				sb.append(" AND MES_PRESENTACION = ? ");
 			}
 			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
-				sb.append(" AND c.id.anoEjecucionGasto =:anioejec ");
+				//sb.append(" AND c.id.anoEjecucionGasto =:anioejec ");
+				sb.append(" AND ANO_EJECUCION_GASTO = ? ");
 			}
 			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
-				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
+				//sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
+				sb.append(" AND MES_EJECUCION_GASTO = ? ");
 			}
 			
 			
-			Query query = em.createQuery(sb.toString());
-			
+			Query query = em.createNativeQuery(sb.toString());
+			int param=1;
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
-				query.setParameter("emp", id.getCodEmpresa().trim());
+				//query.setParameter("emp", id.getCodEmpresa().trim());
+				query.setParameter(param, id.getCodEmpresa().trim());
+				param++;
 			}
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
-				query.setParameter("etp", id.getEtapa().trim());
+				//query.setParameter("etp", id.getEtapa().trim());
+				query.setParameter(param, id.getEtapa().trim());
+				param++;
 			}
 			if(id.getAnoPresentacion()!=null && id.getAnoPresentacion()>0){
-				query.setParameter("aniopres", id.getAnoPresentacion());
+				//query.setParameter("aniopres", id.getAnoPresentacion());
+				query.setParameter(param, id.getAnoPresentacion());
+				param++;
 			}
 			if(id.getMesPresentacion()!=null && id.getMesPresentacion()>0){
-				query.setParameter("mespres", id.getMesPresentacion());
+				//query.setParameter("mespres", id.getMesPresentacion());
+				query.setParameter(param, id.getMesPresentacion());
+				param++;
 			}
 			if(id.getAnoEjecucionGasto()!=null && id.getAnoEjecucionGasto()>0){
-				query.setParameter("anioejec", id.getAnoEjecucionGasto());
+				//query.setParameter("anioejec", id.getAnoEjecucionGasto());
+				query.setParameter(param, id.getAnoEjecucionGasto());
+				param++;
 			}
 			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
-				query.setParameter("mesejec", id.getMesEjecucionGasto());
+				//query.setParameter("mesejec", id.getMesEjecucionGasto());
+				query.setParameter(param, id.getMesEjecucionGasto());
+				param++;
 			}
 			
-          
+          System.out.println("EMPRESA ELIMINANDO CABECERA::"+id.getCodEmpresa().trim());
+          System.out.println("ANO ELIMINANDO CABECERA::"+id.getAnoPresentacion());
+          System.out.println("MES ELIMINANDO CABECERA::"+id.getMesPresentacion());
+          System.out.println("ANIO EJEC ELIMINANDO CABECERA::"+id.getAnoEjecucionGasto());
+          System.out.println("MES EJEC ELIMINANDO CABECERA::"+id.getAnoEjecucionGasto());
+          System.out.println("ETAPA ELIMINANDO CABECERA::"+id.getEtapa().trim());
 			
 			int cant=  query.executeUpdate();
 			

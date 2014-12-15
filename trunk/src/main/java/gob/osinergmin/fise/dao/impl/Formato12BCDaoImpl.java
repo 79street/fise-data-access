@@ -59,6 +59,7 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 				query.setParameter("etp", etapa.trim());
 			}
 			if(anioDesde!=null && anioHasta!=null){
+				
 				query.setParameter("inianio", anioDesde);
 				query.setParameter("finanio", anioHasta);
 			}else if(anioDesde!=null && anioHasta==null){
@@ -78,7 +79,9 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			
 			lstReturn= query.getResultList();
 			
-			
+			System.out.println("ANIO SELECCION"+anioDesde);
+			System.out.println("ANIO HASTA"+anioDesde);
+			System.out.println("cant::"+lstReturn.size());
 		}catch(Exception e){
 	      e.printStackTrace();
 	     

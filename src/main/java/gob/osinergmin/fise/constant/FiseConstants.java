@@ -1423,5 +1423,7 @@ public class FiseConstants {
 		public final static long ZONABENEF_RURAL = 1;
 		public final static long ZONABENEF_PROVINCIA = 2;
 		public final static long ZONABENEF_LIMA = 3;
+		public final static long TYPE_FILE_XLS = 1;
+		public final static long TYPE_FILE_TXT = 2;
 
 }

@@ -88,4 +88,21 @@ public class FiseObservacionDaoImpl extends GenericDaoImpl implements FiseObserv
 	}
 	
 	
+	@Override
+	public String obtenerIdObservacion() throws SQLException{
+		String idObservacion="";
+		try {			
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE_GEN_PKG.FISE_ID_OBSERVACION_FUN() FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());			
+			idObservacion = (String)query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		}
+		return idObservacion;
+	}
+	
+	
 }

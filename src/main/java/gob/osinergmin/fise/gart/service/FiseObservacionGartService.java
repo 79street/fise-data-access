@@ -22,4 +22,6 @@ public interface FiseObservacionGartService {
 	List<FiseObservacion> buscarFiseObservacion(String id, String descripcion)
 			throws Exception;
 	
+	String obtenerIdObservacion() throws Exception;
+	
 }

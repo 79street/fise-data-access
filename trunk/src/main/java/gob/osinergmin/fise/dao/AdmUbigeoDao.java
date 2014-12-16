@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface AdmUbigeoDao extends GenericDao {
 
+	List<AdmUbigeo> listarAdmUbigeo();
+	
 	List<AdmUbigeo> listarDepartamentos();
 	List<AdmUbigeo> listarProvincias(String codDepartamento);
 	List<AdmUbigeo> listarDistritos(String codProvincia);

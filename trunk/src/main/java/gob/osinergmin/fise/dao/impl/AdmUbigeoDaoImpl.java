@@ -13,6 +13,21 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "admUbigeoDaoImpl")
 public class AdmUbigeoDaoImpl extends GenericDaoImpl implements AdmUbigeoDao {
 
+	public List<AdmUbigeo> listarAdmUbigeo() {
+		List<AdmUbigeo> lst = null;
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append(" SELECT f FROM AdmUbigeo f ");
+			Query query = em.createQuery(jql.toString());
+			System.out.println(query.toString());
+			lst = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return lst;
+	}
 	
 	public List<AdmUbigeo> listarDepartamentos() {
 		List<AdmUbigeo> lst = null;

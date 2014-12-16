@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="admUbigeoGartServiceImpl")
 public class AdmUbigeoGartServiceImpl implements AdmUbigeoGartService{
@@ -17,6 +18,12 @@ public class AdmUbigeoGartServiceImpl implements AdmUbigeoGartService{
 	@Qualifier("admUbigeoDaoImpl")
 	private AdmUbigeoDao admUbigeoDao;
 
+	@Override
+	@Transactional
+	public List<AdmUbigeo> listarAdmUbigeo() {
+		return admUbigeoDao.listarAdmUbigeo();
+	}
+	
 	public List<AdmUbigeo> listarDepartamentos() {
 		return admUbigeoDao.listarDepartamentos();
 	}

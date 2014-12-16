@@ -30,6 +30,7 @@ public class CfgCampoDaoImpl extends GenericDaoImpl implements CfgCampoDao {
 			}
 			lista= query.getResultList();
 			System.out.println("SQL   > " + query.toString());
+			System.out.println("cantidad de campos   > " + lista.size());
 			
 		}catch (Exception e) {
 			e.printStackTrace();

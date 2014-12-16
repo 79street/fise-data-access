@@ -136,5 +136,12 @@ public class FiseObservacionGartServiceImpl implements FiseObservacionGartServic
 			throws Exception{
 		return fiseObservacionDao.buscarFiseObservacion(id, descripcion);
 	}
+	
+	
+	@Override
+	@Transactional
+	public String obtenerIdObservacion() throws Exception{
+		return fiseObservacionDao.obtenerIdObservacion();
+	}
 
 }

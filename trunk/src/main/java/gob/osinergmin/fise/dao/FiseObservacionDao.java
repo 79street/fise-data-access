@@ -24,5 +24,7 @@ public interface FiseObservacionDao extends GenericDao {
 	
 	List<FiseObservacion> buscarFiseObservacion(String id, String descripcion ) 
 			throws SQLException;
+	
+	String obtenerIdObservacion() throws SQLException;
 
 }

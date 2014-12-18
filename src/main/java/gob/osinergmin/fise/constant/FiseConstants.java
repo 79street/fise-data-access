@@ -915,7 +915,11 @@ public class FiseConstants {
 	
 
 	public final static String ENVIO_EMAIL_OK_VALIDACION= "0";
-
+	
+	public final static String OBSERVACIONES_EXPORT_EXEL = "OBS";
+	
+	public final static String CARGO_FIJO_EXPORT_EXEL = "CARGOFIJO";
+	
 	/******varibales para leer exel para el formato 14C****/
 	/****FORMATO 14C****/
 	public final static String ESTADO_ENVIADO_F14C = "Enviado";

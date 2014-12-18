@@ -136,6 +136,13 @@ public class FormatoUtil {
 		return nombre;
 	}
 	
+	//nombre txt
+	public static String nombreArchivoCargaTxt(Long anoPresentacion, Long mesPresentacion, String codEmpresa, String tipoFormato){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.EXTENSIONARCHIVO_TXT;
+		return nombre;
+	}
+	
 	public static String eliminaDecimales(String string){
         if(string != null && string.indexOf(".") > 0){
             return string.substring(0, string.indexOf("."));

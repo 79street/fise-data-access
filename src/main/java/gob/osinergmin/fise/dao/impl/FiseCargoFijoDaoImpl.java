@@ -55,8 +55,9 @@ public class FiseCargoFijoDaoImpl extends GenericDaoImpl implements FiseCargoFij
 			q = q.concat(" AND m.id.fmesrep =:mes ");
 		}	
 		Query query = em.createQuery(q); 
-		if(FormatoUtil.isNotBlank(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
 		}			
 		if(anioRep !=0){ 			
 			query.setParameter("anio", anioRep);

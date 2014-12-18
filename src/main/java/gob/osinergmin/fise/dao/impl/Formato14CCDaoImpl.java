@@ -79,7 +79,8 @@ public class Formato14CCDaoImpl extends GenericDaoImpl implements Formato14CCDao
 		}
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);			
 		}
 		if(anioDesde!=0 && anioHasta!=0){
 			query.setParameter("anioDesde", anioDesde);
@@ -122,7 +123,8 @@ public class Formato14CCDaoImpl extends GenericDaoImpl implements Formato14CCDao
 		q = q.concat(" AND f.fechaEnvioDefinitivo IS NOT NULL ");
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
 		}
 		if(anioPres!=0){
 			query.setParameter("anioPres", anioPres);			

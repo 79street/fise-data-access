@@ -158,7 +158,8 @@ public class Formato12CCDaoImpl extends GenericDaoImpl implements Formato12CCDao
 		q = q.concat(" AND f.fechaEnvioDefinitivo IS NOT NULL ");		
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
 		}
 		if(anioPres!=0){
 			query.setParameter("anioPres", anioPres);			

@@ -131,7 +131,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 		}
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
 		}
 		if(anioPres!=0){
 			query.setParameter("anioPres", anioPres);			

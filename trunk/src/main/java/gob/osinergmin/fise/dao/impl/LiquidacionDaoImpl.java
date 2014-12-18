@@ -81,7 +81,8 @@ public class LiquidacionDaoImpl extends GenericDaoImpl implements LiquidacionDao
 		}		
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codEmpresa) && !"TODO".equals(codEmpresa)){ 
-			query.setParameter("codEmpresa", codEmpresa);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
 		}
 		if(idGrupoInf!=0){
 			query.setParameter("idGrupoInf", idGrupoInf);			

@@ -95,14 +95,15 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			//id.setMesEjecucionGasto(Long.parseLong(FechaUtil.obtenerNroMesFechaActual()));
 			id.setAnoEjecucionGasto(formulario.getAnioEjecuc());
 			id.setMesEjecucionGasto(formulario.getMesEjecuc());
-			id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			//id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			id.setEtapa(formulario.getEtapa());
 			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
 			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
-			}else{
+			}/*else{
 				id.setEtapa(formulario.getEtapa());
-			}
+			}*/
 			
 			fiseFormato12AC.setId(id);
 			

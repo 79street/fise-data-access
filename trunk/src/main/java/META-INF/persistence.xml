@@ -66,6 +66,8 @@
 	<class>gob.osinergmin.fise.domain.FiseControlEnvioPorGrupo</class>
 	<class>gob.osinergmin.fise.domain.FiseControlEnvioPorGrupoPK</class>
 	<class>gob.osinergmin.fise.domain.FiseLiquidacione</class>
+	<class>gob.osinergmin.fise.domain.FiseMcargofijo</class>
+	<class>gob.osinergmin.fise.domain.FiseMcargofijoPK</class>
 	
 	<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>

@@ -233,7 +233,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12B,");
 			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12C',");
 			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12C,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12F',");
+			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12D',");
 			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12D,");
 			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F13A',");
 			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F13A,");

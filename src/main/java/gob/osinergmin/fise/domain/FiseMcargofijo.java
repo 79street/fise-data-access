@@ -85,6 +85,18 @@ public class FiseMcargofijo implements Serializable {
 	@Transient
 	private String descEstado;	
 	
+	@Transient
+	private String codEmpresa;
+	
+	@Transient
+	private long anioRep;
+
+	@Transient
+	private long mesRep;
+	
+	@Transient
+	private String aplicaIgv;
+	
 
 	public FiseMcargofijo() {
 	}
@@ -303,6 +315,38 @@ public class FiseMcargofijo implements Serializable {
 
 	public void setDescEstado(String descEstado) {
 		this.descEstado = descEstado;
+	}
+
+	public String getCodEmpresa() {
+		return codEmpresa;
+	}
+
+	public void setCodEmpresa(String codEmpresa) {
+		this.codEmpresa = codEmpresa;
+	}
+
+	public long getAnioRep() {
+		return anioRep;
+	}
+
+	public void setAnioRep(long anioRep) {
+		this.anioRep = anioRep;
+	}
+
+	public long getMesRep() {
+		return mesRep;
+	}
+
+	public void setMesRep(long mesRep) {
+		this.mesRep = mesRep;
+	}
+
+	public String getAplicaIgv() {
+		return aplicaIgv;
+	}
+
+	public void setAplicaIgv(String aplicaIgv) {
+		this.aplicaIgv = aplicaIgv;
 	}
 	
 	

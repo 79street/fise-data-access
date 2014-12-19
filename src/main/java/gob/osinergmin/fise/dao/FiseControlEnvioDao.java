@@ -12,5 +12,8 @@ public interface FiseControlEnvioDao {
 	
 	FiseControlEnvioPorGrupo obtenerFiseControlEnvioByPK(FiseControlEnvioPorGrupoPK id)
 			throws SQLException;
+	
+	void actualizarFiseControlEnvio(FiseControlEnvioPorGrupo FiseControlEnvioPorGrupo) 
+			throws SQLException;
 
 }

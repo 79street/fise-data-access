@@ -2,7 +2,6 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato13ACDao;
-import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,37 +27,35 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 			if (FormatoUtil.isNotBlank(codEmpresa)) {
 				q = q + " AND t.id.codEmpresa = :codEmpresa ";
 			}
-			if (anioDesde != 0) {
-				q = q + " AND t.id.anoPresentacion >= :anioDesde ";
+			if(anioDesde!=0 && mesDesde!=0){ 
+				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion >= :fechaDesde ";
 			}
-			if (mesDesde != 0) {
-				q = q + " AND t.id.mesPresentacion >= :mesDesde ";
+			if(anioHasta!=0 && mesHasta!=0){ 
+				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion <= :fechaHasta ";
 			}
-			if (anioHasta != 0) {
-				q = q + " AND t.id.anoPresentacion <= :anioHasta ";
-			}
-			if (mesHasta != 0) {
-				q = q + " AND t.id.mesPresentacion <= :mesHasta ";
-			}
-			if (FormatoUtil.isNotBlank(etapa)) {
+			if(FormatoUtil.isNotBlank(etapa)){ 
 				q = q + " AND t.id.etapa = :etapa ";
 			}
-			Query query = em.createQuery(q);
-			if (FormatoUtil.isNotBlank(codEmpresa)) {
+			Query query = em.createQuery(q); 
+			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				query.setParameter("codEmpresa", codEmpresa);
 			}
-			if (anioDesde != 0) {
-				query.setParameter("anioDesde", anioDesde);
+			long fechaDesde=0;
+			if(anioDesde!=0){
+				fechaDesde=anioDesde*100;
 			}
-			if (mesDesde != 0) {
-				query.setParameter("mesDesde", mesDesde);
+			if(mesDesde!=0){ 
+				fechaDesde=fechaDesde+mesDesde;
 			}
-			if (anioHasta != 0) {
-				query.setParameter("anioHasta", anioHasta);
+			long fechaHasta=0;
+			if(anioHasta!=0){
+				fechaHasta=anioHasta*100;
 			}
-			if (mesHasta != 0) {
-				query.setParameter("mesHasta", mesHasta);
+			if(mesHasta!=0){ 
+				fechaHasta=fechaHasta+mesHasta;
 			}
+			query.setParameter("fechaDesde", fechaDesde);
+			query.setParameter("fechaHasta", fechaHasta);
 			if (FormatoUtil.isNotBlank(etapa)) {
 				query.setParameter("etapa", etapa);
 			}

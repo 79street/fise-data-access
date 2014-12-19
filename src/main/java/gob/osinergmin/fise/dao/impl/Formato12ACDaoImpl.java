@@ -148,10 +148,10 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 			}
 			long fechaHasta=0;
 			if(anioHasta!=0){
-				fechaDesde=anioHasta*100;
+				fechaHasta=anioHasta*100;
 			}
 			if(mesHasta!=0){ 
-				fechaDesde=fechaDesde+mesHasta;
+				fechaHasta=fechaHasta+mesHasta;
 			}
 			query.setParameter("fechaDesde", fechaDesde);
 			query.setParameter("fechaHasta", fechaHasta);

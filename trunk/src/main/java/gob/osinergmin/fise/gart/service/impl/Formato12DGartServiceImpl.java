@@ -555,7 +555,7 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 			if( fiseFormato12DC.getFiseFormato12DDs()!=null ){
 				for (FiseFormato12DD detalle : fiseFormato12DC.getFiseFormato12DDs()) {
 					
-					if( formulario.getCodigoEmpresa().equals(detalle.getId().getCodEmpresa()) &&
+					if( formulario.getCodigoEmpresa().trim().equals(detalle.getId().getCodEmpresa().trim()) &&
 							formulario.getAnioPresentacion() == detalle.getId().getAnoPresentacion() &&
 							formulario.getMesPresentacion() == detalle.getId().getMesPresentacion() &&
 							formulario.getEtapa().equals(detalle.getId().getEtapa()) &&
@@ -565,6 +565,8 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 							formulario.getNroItemEtapa() == detalle.getId().getNumeroItemEtapa()
 						){
 					
+						logger.info("entro");
+						
 						if( FiseConstants.ETAPA_EJECUCION_IMPLEMENTACION_COD == formulario.getEtapaEjecucion() ){
 							detalleImplementacion = detalle;
 							break;
@@ -573,6 +575,8 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 							break;
 						}
 						
+					}else{
+						logger.info("no entro");
 					}
 
 				}

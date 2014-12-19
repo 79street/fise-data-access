@@ -114,7 +114,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			q = q + " AND t.id.etapa = :etapa ";
 			Query query = em.createQuery(q); 
 			if(FormatoUtil.isNotBlank(codEmpresa)){ 
-				query.setParameter("codEmpresa", codEmpresa);
+				query.setParameter("codEmpresa", FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4));
 			}
 			//if(anioVigencia!=0){ 
 				query.setParameter("anioVigencia", anioVigencia);

@@ -21,6 +21,12 @@ public class FiseControlEnvioDaoImpl extends GenericDaoImpl implements FiseContr
 	}
 	
 	@Override
+	public void actualizarFiseControlEnvio(FiseControlEnvioPorGrupo fiseControlEnvioPorGrupo) 
+			throws SQLException{
+		em.merge(fiseControlEnvioPorGrupo);		
+	}
+	
+	@Override
 	public FiseControlEnvioPorGrupo obtenerFiseControlEnvioByPK(FiseControlEnvioPorGrupoPK id)
 			throws SQLException {		
 		return em.find(FiseControlEnvioPorGrupo.class, id);

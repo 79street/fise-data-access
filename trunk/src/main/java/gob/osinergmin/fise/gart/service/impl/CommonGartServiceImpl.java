@@ -984,7 +984,18 @@ public class CommonGartServiceImpl implements CommonGartService {
   	                formato12CCDao.modificarFormato12CC(formato12C); 
   	                valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(envio.getFormato())&&"1".equals(f12D)){ 
-  				//falta	
+  					FiseFormato12DCPK pk = new FiseFormato12DCPK();
+  					pk.setCodEmpresa(envio.getCodEmpresa());
+  					pk.setAnoPresentacion(new Long(envio.getAnioPres()));
+  	  		        pk.setMesPresentacion(new Long(envio.getMesPres()));
+  	  		        pk.setEtapa(envio.getEtapa());
+  	  		        FiseFormato12DC formato12D= formato12DCDao.obtenerFormato12DCByPK(pk);
+  	  		        formato12D.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+  	  		        formato12D.setUsuarioActualizacion(usuario);
+  	  		        formato12D.setTerminalActualizacion(terminal);
+  	  	            formato12D.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+  	  	            formato12DCDao.modificarFormato12DC(formato12D);
+  	  	            valorFormato = true;
   				}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(envio.getFormato())&&"1".equals(f13A)){ 
   					FiseFormato13ACPK pk = new FiseFormato13ACPK();
   					pk.setCodEmpresa(envio.getCodEmpresa());
@@ -1052,16 +1063,27 @@ public class CommonGartServiceImpl implements CommonGartService {
 				id.setEtapa(etapa);
 				id.setIdGrupoInformacion(new Long(idGrupoInf));
 				id.setPeriodicidad(periocidad); 				
+				FiseControlEnvioPorGrupo fiseControl = fiseControlEnvioDao.obtenerFiseControlEnvioByPK(id);
 				FiseGrupoInformacion fiseGrupoInf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(idGrupoInf));
-				FiseControlEnvioPorGrupo grupo = new FiseControlEnvioPorGrupo();
-				grupo.setId(id);
-				grupo.setFechaCreacion(FechaUtil.obtenerFechaActual());
-				grupo.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
-				grupo.setFiseGrupoInformacion(fiseGrupoInf);			
-				grupo.setUsuarioCreacion(usuario);
-				grupo.setTerminalCreacion(terminal);
-				fiseControlEnvioDao.insertarFiseControlEnvio(grupo); 
-				valor = true;
+				if(fiseControl ==null){					
+					FiseControlEnvioPorGrupo grupo = new FiseControlEnvioPorGrupo();
+					grupo.setId(id);
+					grupo.setFechaCreacion(FechaUtil.obtenerFechaActual());
+					grupo.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+					grupo.setFiseGrupoInformacion(fiseGrupoInf);			
+					grupo.setUsuarioCreacion(usuario);
+					grupo.setTerminalCreacion(terminal);
+					fiseControlEnvioDao.insertarFiseControlEnvio(grupo); 
+					valor = true;	
+				}else{
+					fiseControl.setFechaCreacion(FechaUtil.obtenerFechaActual());
+					fiseControl.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+					fiseControl.setFiseGrupoInformacion(fiseGrupoInf);			
+					fiseControl.setUsuarioCreacion(usuario);
+					fiseControl.setTerminalCreacion(terminal);
+					fiseControlEnvioDao.actualizarFiseControlEnvio(fiseControl); 
+					valor = true;		
+				}
 			}			
 		} catch (Exception e) {
 			valor = false;

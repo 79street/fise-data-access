@@ -2,7 +2,6 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14ACDao;
-import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato14AC;
 import gob.osinergmin.fise.domain.FiseFormato14ACPK;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -44,17 +43,11 @@ public class Formato14ACDaoImpl extends GenericDaoImpl implements Formato14ACDao
 			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				q = q  + " AND t.id.codEmpresa = :codEmpresa ";
 			}
-			if(anioDesde!=0){ 
-				q = q  + " AND t.id.anoPresentacion >= :anioDesde ";
+			if(anioDesde!=0 && mesDesde!=0){ 
+				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion >= :fechaDesde ";
 			}
-			if(mesDesde!=0){ 
-				q = q + " AND t.id.mesPresentacion >= :mesDesde ";
-			}
-			if(anioHasta!=0){ 
-				q = q + " AND t.id.anoPresentacion <= :anioHasta ";
-			}
-			if(mesHasta!=0){ 
-				q = q + " AND t.id.mesPresentacion <= :mesHasta ";
+			if(anioHasta!=0 && mesHasta!=0){ 
+				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion <= :fechaHasta ";
 			}
 			if(FormatoUtil.isNotBlank(etapa)){ 
 				q = q + " AND t.id.etapa = :etapa ";
@@ -63,18 +56,22 @@ public class Formato14ACDaoImpl extends GenericDaoImpl implements Formato14ACDao
 			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				query.setParameter("codEmpresa", codEmpresa);
 			}
+			long fechaDesde=0;
 			if(anioDesde!=0){
-				query.setParameter("anioDesde", anioDesde);
+				fechaDesde=anioDesde*100;
 			}
 			if(mesDesde!=0){ 
-				query.setParameter("mesDesde", mesDesde);
+				fechaDesde=fechaDesde+mesDesde;
 			}
-			if(anioHasta!=0){ 
-				query.setParameter("anioHasta", anioHasta);
+			long fechaHasta=0;
+			if(anioHasta!=0){
+				fechaDesde=anioHasta*100;
 			}
 			if(mesHasta!=0){ 
-				query.setParameter("mesHasta", mesHasta);
+				fechaDesde=fechaDesde+mesHasta;
 			}
+			query.setParameter("fechaDesde", fechaDesde);
+			query.setParameter("fechaHasta", fechaHasta);
 			if(FormatoUtil.isNotBlank(etapa)){ 
 				query.setParameter("etapa", etapa);
 			}

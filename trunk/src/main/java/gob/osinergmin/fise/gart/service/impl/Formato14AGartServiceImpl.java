@@ -106,14 +106,15 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			id.setMesPresentacion(formulario.getMesPresent());
 			id.setAnoInicioVigencia(formulario.getAnioInicioVigencia());
 			id.setAnoFinVigencia(formulario.getAnioFinVigencia());
-			id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			//id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			id.setEtapa(formulario.getEtapa());
 			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
 				fiseFormato14AC.setArchivoExcel(formulario.getNombreArchivo());
 			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
 				fiseFormato14AC.setArchivoTexto(formulario.getNombreArchivo());
-			}else{
+			}/*else{
 				id.setEtapa(formulario.getEtapa());
-			}
+			}*/
 			
 			fiseFormato14AC.setId(id);
 			

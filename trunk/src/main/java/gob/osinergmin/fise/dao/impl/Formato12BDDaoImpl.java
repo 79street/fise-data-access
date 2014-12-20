@@ -30,7 +30,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			sb.append("SELECT d FROM FiseFormato12BD d WHERE 1=1 ");
 			
 			if(idcabecera.getCodEmpresa() !=null && !idcabecera.getCodEmpresa().isEmpty()){
-				sb.append(" AND d.id.codEmpresa =:emp ");
+				sb.append(" AND d.id.codEmpresa ='"+idcabecera.getCodEmpresa().trim()+"'");
 			}
 			if(idcabecera.getEtapa()!=null && !idcabecera.getEtapa().isEmpty()){
 				sb.append(" AND d.id.etapa =:etp ");
@@ -51,9 +51,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			
 			Query query = em.createQuery(sb.toString());
 			
-			if(idcabecera.getCodEmpresa() !=null && !idcabecera.getCodEmpresa().isEmpty()){
-				query.setParameter("emp", idcabecera.getCodEmpresa().trim());
-			}
+			
 			if(idcabecera.getEtapa()!=null && !idcabecera.getEtapa().isEmpty()){
 				query.setParameter("etp", idcabecera.getEtapa().trim());
 			}

@@ -310,8 +310,7 @@ public HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean format
 	mapJRParams.put(FiseConstants.PARAM_DESC_MES_EJEC_F12B, formato12BBean.getDescMesEjecucion());
 	mapJRParams.put(FiseConstants.ETAPA_SOLICITUD, formato12BBean.getEtapa());
 	//
-	System.out.println("des mes ejecucion::"+formato12BBean.getDescMesEjecucion());
-	System.out.println("des mes presentacion::"+formato12BBean.getDescMesPresentacion());
+	
 	
 	mapJRParams.put(FiseConstants.PARAM_NRO_VAL_IMP_R_F12B, formato12BBean.getNroValeImpR());
 	mapJRParams.put(FiseConstants.PARAM_NRO_VAL_IMP_P_F12B, formato12BBean.getNroValeImpP());
@@ -379,6 +378,17 @@ public HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean format
 	mapJRParams.put(FiseConstants.PARAM_NUM_ATENCIONES_R_F12B, formato12BBean.getNroAtencionesR());
 	mapJRParams.put(FiseConstants.PARAM_NUM_ATENCIONES_P_F12B, formato12BBean.getNroAtencionesP());
 	mapJRParams.put(FiseConstants.PARAM_NUM_ATENCIONES_L_F12B, formato12BBean.getNroAtencionesL());
+	
+	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_ATENCIONES_R_F12B, formato12BBean.getCostoUnitAtencionesR());
+	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_ATENCIONES_P_F12B, formato12BBean.getCostoUnitAtencionesP());
+	mapJRParams.put(FiseConstants.PARAM_COSTO_UNIT_ATENCIONES_L_F12B, formato12BBean.getCostoUnitAtencionesL());
+	
+	mapJRParams.put(FiseConstants.PARAM_COSTO_TOTAL_ATENCIONES_R_F12B, formato12BBean.getCostoTotalAtencionesR());
+	mapJRParams.put(FiseConstants.PARAM_COSTO_TOTAL_ATENCIONES_P_F12B, formato12BBean.getCostoTotalAtencionesP());
+	mapJRParams.put(FiseConstants.PARAM_COSTO_TOTAL_ATENCIONES_L_F12B, formato12BBean.getCostoTotalAtencionesL());
+	
+	System.out.println("costos unitarios ::"+formato12BBean.getCostoUnitAtencionesL());
+	System.out.println("des mes presentacion::"+formato12BBean.getCostoUnitAtencionesP());
 	
 	mapJRParams.put(FiseConstants.PARAM_GESTION_ADM_R_F12B, formato12BBean.getGestionAdmR());
 	mapJRParams.put(FiseConstants.PARAM_GESTION_ADM_P_F12B, formato12BBean.getGestionAdmP());

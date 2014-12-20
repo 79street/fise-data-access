@@ -1712,6 +1712,15 @@ public class FiseConstants {
 		public final static String PARAM_NUM_ATENCIONES_P_F12B = "NUM_ATENCIONES_P";
 		public final static String PARAM_NUM_ATENCIONES_L_F12B = "NUM_ATENCIONES_L";
 		
+		public final static String PARAM_COSTO_UNIT_ATENCIONES_R_F12B = "COSTO_UNIT_ATENCIONES_R";
+		public final static String PARAM_COSTO_UNIT_ATENCIONES_P_F12B = "COSTO_UNIT_ATENCIONES_P";
+		public final static String PARAM_COSTO_UNIT_ATENCIONES_L_F12B = "COSTO_UNIT_ATENCIONES_L";
+		
+		public final static String PARAM_COSTO_TOTAL_ATENCIONES_R_F12B = "COSTO_TOTAL_ATENCIONES_R";
+		public final static String PARAM_COSTO_TOTAL_ATENCIONES_P_F12B = "COSTO_TOTAL_ATENCIONES_P";
+		public final static String PARAM_COSTO_TOTAL_ATENCIONES_L_F12B = "COSTO_TOTAL_ATENCIONES_L";
+		
+		
 		public final static String PARAM_GESTION_ADM_R_F12B = "GESTION_ADM_R";
 		public final static String PARAM_GESTION_ADM_P_F12B = "GESTION_ADM_P";
 		public final static String PARAM_GESTION_ADM_L_F12B = "GESTION_ADM_L";

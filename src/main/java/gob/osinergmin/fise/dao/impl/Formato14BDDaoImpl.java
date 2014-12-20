@@ -189,10 +189,11 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			sb.append("SELECT c FROM FiseFormato14BD c WHERE 1=1 ");
 			
 			if(codEmpresa !=null && !codEmpresa.isEmpty()){
-				sb.append(" AND c.id.codEmpresa =:emp ");
+				sb.append(" AND c.id.codEmpresa = '"+codEmpresa.trim()+"'");
 			}
 			if(anio!=null &&  anio>0){
-				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				sb.append(" AND c.id.anoInicioVigencia <= "+anio.longValue());
+				sb.append(" AND c.id.anoFinVigencia >= "+anio.longValue());
 				
 			}
 			if(mes!=null &&  mes>0){
@@ -216,12 +217,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			System.out.println("etp::"+etp);
 			
 			
-			if(codEmpresa !=null && !codEmpresa.isEmpty()){
-				query.setParameter("emp", codEmpresa.trim());
-			}
-			if(anio!=null &&  anio>0){
-				query.setParameter("aniopres", anio.longValue());
-			}
+		
 			if(mes!=null &&  mes>0){
 				query.setParameter("mespres", mes.longValue());
 				
@@ -233,7 +229,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 				query.setParameter("etpa", etp.trim());
 			}
 			
-			FiseFormato14BD bean= (FiseFormato14BD) query.getSingleResult();
+			FiseFormato14BD bean= (FiseFormato14BD) query.setMaxResults(1).getSingleResult();
 			
 			return bean;
 		}catch(Exception e){
@@ -247,15 +243,18 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 
 	@Override
 	public List<FiseFormato14BD> getLstCostoUnitarioByEmpAnio(String codEmpresa, Integer anio,Integer mes, Integer idZona, String etp) {
+		List<FiseFormato14BD> lst=null;
 		try {
 			StringBuilder sb=new StringBuilder();
 			sb.append("SELECT c FROM FiseFormato14BD c WHERE 1=1 ");
 			
-			if(codEmpresa !=null && !codEmpresa.isEmpty()){
-				sb.append(" AND c.id.codEmpresa =:emp ");
+		if(codEmpresa !=null && !codEmpresa.isEmpty()){ 
+				sb.append(" AND c.id.codEmpresa = '"+codEmpresa.trim()+"'");
 			}
 			if(anio!=null &&  anio>0){
-				sb.append(" AND c.id.anoPresentacion =:aniopres ");
+				sb.append(" AND c.id.anoInicioVigencia <= "+anio.longValue());
+				sb.append(" AND c.id.anoFinVigencia >= "+anio.longValue());
+				
 				
 			}
 			if(mes!=null &&  mes>0){
@@ -274,18 +273,17 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			Query query = em.createQuery(sb.toString());
 			System.out.println("CONSULTA SQL::"+sb.toString());
 			System.out.println("codEmpresa::"+codEmpresa);
+			System.out.println("codEmpresa::"+codEmpresa.length());
 			System.out.println("anio::"+anio);
 			System.out.println("mes::"+mes);
 			System.out.println("idZona::"+idZona);
 			System.out.println("etp::"+etp);
 			
 			
-			if(codEmpresa !=null && !codEmpresa.isEmpty()){
-				query.setParameter("emp", codEmpresa.trim());
-			}
-			if(anio!=null &&  anio>0){
+			
+		/*		if(anio!=null &&  anio>0){
 				query.setParameter("aniopres", anio.longValue());
-			}
+			}*/
 			if(mes!=null &&  mes>0){
 				query.setParameter("mespres", mes.longValue());
 			}
@@ -296,16 +294,20 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 				query.setParameter("etpa", etp.trim());
 			}
 			
-			List<FiseFormato14BD> lst=  query.getResultList();
+			 lst=  query.setMaxResults(3).getResultList();
+			// lst=  query.getResultList();
+			System.out.println("LISTA DE COSTOS :::::"+lst.size());
 			
-			return lst;
+			
 		}catch(Exception e){
 	      e.printStackTrace();
-	      return null;
+	      
 		}finally{
 			em.close();
 			
 		}
+		
+		return lst;
 	}
 	
 }

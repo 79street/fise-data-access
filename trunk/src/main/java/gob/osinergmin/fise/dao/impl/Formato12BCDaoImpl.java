@@ -31,7 +31,7 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			sb.append("SELECT c FROM FiseFormato12BC c WHERE 1=1 ");
 			
 			if(codemp!=null && !codemp.isEmpty()){
-				sb.append(" AND c.id.codEmpresa =:emp ");
+				sb.append(" AND c.id.codEmpresa = '"+codemp.trim()+"'");
 			}
 			if(etapa!=null && !etapa.isEmpty()){
 				sb.append(" AND c.id.etapa =:etp ");
@@ -52,9 +52,9 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			}
 			
 			Query query = em.createQuery(sb.toString());
-			 if(codemp!=null && !codemp.isEmpty()){
+			/* if(codemp!=null && !codemp.isEmpty()){
             	query.setParameter("emp", codemp.trim());
-			}
+			}*/
 			if(etapa!=null && !etapa.isEmpty()){
 				query.setParameter("etp", etapa.trim());
 			}

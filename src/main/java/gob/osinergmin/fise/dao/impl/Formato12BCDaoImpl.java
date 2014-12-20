@@ -38,18 +38,26 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			}
 			if(anioDesde!=null && anioHasta!=null){
 				sb.append(" AND c.id.anoPresentacion between :inianio AND :finanio ");
+				/*if(anioDesde<=anioHasta){///2014-2018
+					
+				}*/
+				
 			}else if(anioDesde!=null && anioHasta==null){
 				sb.append(" AND c.id.anoPresentacion >= :inianio ");
 			}else if(anioDesde==null && anioHasta!=null){
 				sb.append(" AND c.id.anoPresentacion <= :finanio ");
 			}
+			
+			
 			if(mesDesde!=null && mesHasta!=null){
 				sb.append(" AND c.id.mesPresentacion between :inimes AND :finmes ");
 			}else if(mesDesde!=null && mesHasta==null){
 				sb.append(" AND c.id.mesPresentacion >= :inimes ");
 			}else if(mesDesde==null && mesHasta!=null){
 				sb.append(" AND c.id.mesPresentacion <= :finmes ");
-			}
+			}	
+			
+			
 			
 			Query query = em.createQuery(sb.toString());
 			/* if(codemp!=null && !codemp.isEmpty()){

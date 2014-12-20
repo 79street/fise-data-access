@@ -90,7 +90,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			sb.append("SELECT d FROM FiseFormato12BD d WHERE 1=1 ");
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
-				sb.append(" AND d.id.codEmpresa =:emp ");
+				sb.append(" AND d.id.codEmpresa ='"+id.getCodEmpresa().trim()+"'");
 			}
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
 				sb.append(" AND d.id.etapa =:etp ");
@@ -111,9 +111,9 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			
 			Query query = em.createQuery(sb.toString());
 			
-			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
+			/*if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
 				query.setParameter("emp", id.getCodEmpresa().trim());
-			}
+			}*/
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
 				query.setParameter("etp", id.getEtapa().trim());
 			}
@@ -163,9 +163,45 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 	public Integer updateFormatoDetalle(FiseFormato12BD formato) throws DataIntegrityViolationException, Exception {
 		Integer result = null;
 		try {
-			em.merge(formato);
-			System.out.println("cabecera merge::=>" + formato);
-			result = 1;
+			StringBuilder sb=new StringBuilder();
+			sb.append("UPDATE FISE_FORMATO_12B_D SET ");
+			sb.append(" NUMERO_VALES_IMPRESO = "+formato.getNumeroValesImpreso());
+			sb.append(" ,NUMERO_VALES_REPARTIDOS_DOMI ="+formato.getNumeroValesRepartidosDomi());
+			sb.append(" ,NUMERO_VALES_ENTREGADO_DIS_EL ="+formato.getNumeroValesEntregadoDisEl());
+			sb.append(" ,NUMERO_VALES_FISICOS_CANJEADOS ="+formato.getNumeroValesFisicosCanjeados());
+			sb.append(" ,NUMERO_VALES_DIGITAL_CANJEADOS ="+formato.getNumeroValesDigitalCanjeados());
+			sb.append(" ,NUMERO_ATENCIONES ="+formato.getNumeroAtenciones());
+			
+			sb.append(" ,COSTO_TOTAL_IMPRESION_VALE = "+formato.getCostoTotalImpresionVale());
+			sb.append(" ,COSTO_TOTAL_REPARTO_VALES_DOMI ="+formato.getCostoTotalRepartoValesDomi());
+			sb.append(" ,COSTO_TOTAL_ENTREGA_VAL_DIS_EL ="+formato.getCostoTotalEntregaValDisEl());
+			sb.append(" ,COSTO_TOTAL_CANJE_LIQ_VALE_FIS ="+formato.getCostoTotalCanjeLiqValeFis());
+			sb.append(" ,COSTO_TOTAL_CANJE_LIQ_VALE_DIG ="+formato.getCostoTotalCanjeLiqValeDig());
+			sb.append(" ,COSTO_TOTAL_ATENCION_CONS_RECL ="+formato.getCostoTotalAtencionConsRecl());
+			
+			sb.append(" ,TOTAL_GESTION_ADMINISTRATIVA ="+formato.getTotalGestionAdministrativa());
+			sb.append(" ,TOTAL_DESPLAZAMIENTO_PERSONAL ="+formato.getTotalDesplazamientoPersonal());
+			sb.append(" ,TOTAL_ACTIVIDADES_EXTRAORD ="+formato.getTotalActividadesExtraord());
+			sb.append(" ,TOTAL_RECONOCER ="+formato.getTotalReconocer());
+			sb.append(" ,USUARIO_ACTUALIZACION ='"+formato.getUsuarioActualizacion()+"'");
+			sb.append(" ,TERMINAL_ACTUALIZACION ='"+formato.getTerminalActualizacion()+"'");
+			sb.append(" ,FECHA_ACTUALIZACION = ?");
+			sb.append(" WHERE ");
+			sb.append(" COD_EMPRESA = '"+formato.getId().getCodEmpresa().trim()+"'");
+			sb.append(" AND ANO_PRESENTACION ="+formato.getId().getAnoPresentacion());
+			sb.append(" AND MES_PRESENTACION ="+formato.getId().getMesPresentacion());
+			sb.append(" AND ANO_EJECUCION_GASTO ="+formato.getId().getAnoEjecucionGasto());
+			sb.append(" AND MES_EJECUCION_GASTO ="+formato.getId().getMesEjecucionGasto());
+			sb.append(" AND ETAPA ='"+formato.getId().getEtapa()+"'");
+			sb.append(" AND ID_ZONA_BENEF ="+formato.getId().getIdZonaBenef());
+			
+			
+			System.out.println("SQL ::=>" + sb.toString()); 
+			Query query = em.createNativeQuery(sb.toString());
+			query.setParameter(1, formato.getFechaActualizacion());
+			result = query.executeUpdate();
+			System.out.println("cabecera merge::=>" + result); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

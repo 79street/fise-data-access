@@ -40,6 +40,7 @@ import gob.osinergmin.fise.domain.FiseFormato14CCPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.gart.service.CommonGartService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -479,7 +480,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12A:  "+lista12A.size()); 
 				 for(int i = 0; i < lista12A.size(); i++){					
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 					
 					n.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -501,7 +503,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
 				 for(int i = 0; i < lista12B.size(); i++){					
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
 					n.setEtapa(etapa);
@@ -523,7 +526,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
 				 for(int i = 0; i < lista12C.size(); i++){					
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12C.get(i)[2]));
 					n.setEtapa(etapa);
@@ -548,7 +552,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
 				 for(int i = 0; i < lista12D.size(); i++){					
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista12D.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista12D.get(i)[2]));
 					n.setEtapa(etapa);
@@ -574,7 +579,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista13A:  "+lista13A.size()); 
 			   for(int i = 0; i < lista13A.size(); i++){				
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -596,7 +602,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14A:  "+lista14A.size()); 
 			   for(int i = 0; i < lista14A.size(); i++){
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
 					n.setEtapa(etapa);
@@ -618,7 +625,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14B:  "+lista14B.size()); 
 			   for(int i = 0; i < lista14B.size(); i++){
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
 					n.setEtapa(etapa);
@@ -640,7 +648,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14C:  "+lista14C.size());
 			   for(int i = 0; i < lista14C.size(); i++){
 					n = new NotificacionBean();
-					n.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					n.setCodEmpresa(codEmpreCompleta); 
 					n.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
 					n.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
 					n.setEtapa(etapa);
@@ -725,7 +734,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12A:  "+lista12A.size()); 
 				 for(int i = 0; i < lista12A.size(); i++){					
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta); 
 					e.setAnioPres(String.valueOf((BigDecimal)lista12A.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista12A.get(i)[2]));
 					e.setEtapa(etapa);
@@ -744,7 +754,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12B :  "+lista12B.size()); 
 				 for(int i = 0; i < lista12B.size(); i++){					
 					 e = new EnvioDefinitivoBean();
-					 e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					 String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					 e.setCodEmpresa(codEmpreCompleta);
 					 e.setAnioPres(String.valueOf((BigDecimal)lista12B.get(i)[1])); 
 					 e.setMesPres(String.valueOf((BigDecimal)lista12B.get(i)[2]));
 					 e.setEtapa(etapa);
@@ -763,7 +774,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12C:  "+lista12C.size()); 
 				 for(int i = 0; i < lista12C.size(); i++){					
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta);
 					e.setAnioPres(String.valueOf((BigDecimal)lista12C.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista12C.get(i)[2]));
 					e.setEtapa(etapa);
@@ -785,7 +797,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 logger.info("Tamanio de la lista lista12D :  "+lista12D.size()); 
 				 for(int i = 0; i < lista12D.size(); i++){					
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta); 
 					e.setAnioPres(String.valueOf((BigDecimal)lista12D.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista12D.get(i)[2]));
 					e.setEtapa(etapa);
@@ -808,7 +821,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista13A:  "+lista13A.size()); 
 			   for(int i = 0; i < lista13A.size(); i++){				
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta);
 					e.setAnioPres(String.valueOf((BigDecimal)lista13A.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista13A.get(i)[2]));
 					e.setEtapa(etapa);
@@ -827,7 +841,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14A:  "+lista14A.size()); 
 			   for(int i = 0; i < lista14A.size(); i++){
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta);
 					e.setAnioPres(String.valueOf((BigDecimal)lista14A.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista14A.get(i)[2]));
 					e.setEtapa(etapa);
@@ -846,7 +861,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14B:  "+lista14B.size()); 
 			   for(int i = 0; i < lista14B.size(); i++){
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta);
 					e.setAnioPres(String.valueOf((BigDecimal)lista14B.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista14B.get(i)[2]));
 					e.setEtapa(etapa);
@@ -865,7 +881,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   logger.info("Tamanio de la lista lista14C:  "+lista14C.size());
 			   for(int i = 0; i < lista14C.size(); i++){
 					e = new EnvioDefinitivoBean();
-					e.setCodEmpresa(codEmpresa.length()==3 ? codEmpresa+" ":codEmpresa); 
+					String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+					e.setCodEmpresa(codEmpreCompleta);
 					e.setAnioPres(String.valueOf((BigDecimal)lista14C.get(i)[1])); 
 					e.setMesPres(String.valueOf((BigDecimal)lista14C.get(i)[2]));
 					e.setEtapa(etapa);

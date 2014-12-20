@@ -20,6 +20,8 @@ public class FiseCargoFijoBean {
 	private String desMesRep;
 	
 	private boolean admin;	
+	private String flagEditar;//para saber si esta editando o visualizando
+	
 	
 	private String codEmpresa;
 	private String anioRep;//ano reporte
@@ -224,6 +226,12 @@ public class FiseCargoFijoBean {
 	}
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	public String getFlagEditar() {
+		return flagEditar;
+	}
+	public void setFlagEditar(String flagEditar) {
+		this.flagEditar = flagEditar;
 	}  
     
     

@@ -91,7 +91,7 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			sb.append("DELETE FROM FiseFormato12BDOb c WHERE 1=1 ");
 			
 			if(emp !=null && !emp.isEmpty()){
-				sb.append(" AND c.id.codEmpresa =:emp ");
+				sb.append(" AND c.id.codEmpresa = '"+emp.trim()+"'");
 			}
 			if(etapa!=null && !etapa.isEmpty()){
 				sb.append(" AND c.id.etapa =:etp ");
@@ -117,9 +117,9 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			
 			Query query = em.createQuery(sb.toString());
 			
-			if(emp !=null && !emp.isEmpty()){
+			/*if(emp !=null && !emp.isEmpty()){
 				query.setParameter("emp", emp.trim());
-			}
+			}*/
 			if(etapa!=null && !etapa.isEmpty()){
 				query.setParameter("etp", etapa.trim());
 			}

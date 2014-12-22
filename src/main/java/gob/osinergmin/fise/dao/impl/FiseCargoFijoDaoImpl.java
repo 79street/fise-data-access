@@ -47,7 +47,7 @@ public class FiseCargoFijoDaoImpl extends GenericDaoImpl implements FiseCargoFij
 		String q = "SELECT m FROM " + FiseMcargofijo.class.getName()
 				+ " m WHERE 1=1 ";
 		
-		q = q.concat(" AND m.scficod = 1 ");
+		//q = q.concat(" AND m.scficod = 1 ");
 		
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
 			q = q.concat(" AND m.id.empcod =:codEmpresa ");

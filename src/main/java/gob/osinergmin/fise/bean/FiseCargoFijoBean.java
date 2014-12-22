@@ -18,14 +18,14 @@ public class FiseCargoFijoBean {
 	
 	private String desEmpresa;	
 	private String desMesRep;
+	private String desEstado;
 	
 	private boolean admin;	
-	private String flagEditar;//para saber si esta editando o visualizando
 	
 	
-	private String codEmpresa;
-	private String anioRep;//ano reporte
-	private String mesRep;//mes reporte
+	private String codigoEmpresa;
+	private String anioReporte;//ano reporte
+	private String mesReporte;//mes reporte
 	private String aplicaIgv;
 	private String gloza;//gloza
 	private String numDoc;//numero de docuemnto del informe de sustento
@@ -35,7 +35,7 @@ public class FiseCargoFijoBean {
 	private String igv;
 	private String montoMes;//monto cargo fijo al mes
 	private String montoCanje;//monto transferido por canje
-	private String numAgen;//numero de agentes
+	private String numAgente;//numero de agentes
 	private String numUsuBenef;//numero de usuarios beneficiarios
 	private String numUsuEmp;//numero de usuarios empadronados
 	private String numValDCan;//numero de vales digitales cangeados
@@ -88,24 +88,25 @@ public class FiseCargoFijoBean {
 	}
 	public void setDesMesRep(String desMesRep) {
 		this.desMesRep = desMesRep;
+	}	
+	
+	public String getCodigoEmpresa() {
+		return codigoEmpresa;
 	}
-	public String getCodEmpresa() {
-		return codEmpresa;
+	public void setCodigoEmpresa(String codigoEmpresa) {
+		this.codigoEmpresa = codigoEmpresa;
 	}
-	public void setCodEmpresa(String codEmpresa) {
-		this.codEmpresa = codEmpresa;
+	public String getAnioReporte() {
+		return anioReporte;
 	}
-	public String getAnioRep() {
-		return anioRep;
+	public void setAnioReporte(String anioReporte) {
+		this.anioReporte = anioReporte;
 	}
-	public void setAnioRep(String anioRep) {
-		this.anioRep = anioRep;
+	public String getMesReporte() {
+		return mesReporte;
 	}
-	public String getMesRep() {
-		return mesRep;
-	}
-	public void setMesRep(String mesRep) {
-		this.mesRep = mesRep;
+	public void setMesReporte(String mesReporte) {
+		this.mesReporte = mesReporte;
 	}
 	public String getAplicaIgv() {
 		return aplicaIgv;
@@ -161,11 +162,11 @@ public class FiseCargoFijoBean {
 	public void setMontoCanje(String montoCanje) {
 		this.montoCanje = montoCanje;
 	}
-	public String getNumAgen() {
-		return numAgen;
+	public String getNumAgente() {
+		return numAgente;
 	}
-	public void setNumAgen(String numAgen) {
-		this.numAgen = numAgen;
+	public void setNumAgente(String numAgente) {
+		this.numAgente = numAgente;
 	}
 	public String getNumUsuBenef() {
 		return numUsuBenef;
@@ -226,13 +227,14 @@ public class FiseCargoFijoBean {
 	}
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}	
+	public String getDesEstado() {
+		return desEstado;
 	}
-	public String getFlagEditar() {
-		return flagEditar;
+	public void setDesEstado(String desEstado) {
+		this.desEstado = desEstado;
 	}
-	public void setFlagEditar(String flagEditar) {
-		this.flagEditar = flagEditar;
-	}  
+	
     
     
 

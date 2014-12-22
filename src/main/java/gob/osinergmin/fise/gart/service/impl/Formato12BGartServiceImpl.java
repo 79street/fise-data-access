@@ -13,6 +13,7 @@ import gob.osinergmin.fise.gart.service.Formato12BGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,7 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	@Transactional
 	public FiseFormato12BC getFormatoCabeceraById(FiseFormato12BCPK id) {
 		FiseFormato12BC formato = formato12BCDao.getFormatoCabeceraById(id);		
-	    formato.setListaDetalle12BDs(formato.getFiseFormato12BDs()); 
+	    formato.setListaDetalle12BDs(formato!=null?formato.getFiseFormato12BDs():new ArrayList<FiseFormato12BD>()); 
 	    System.out.println("detalle observacion 12B  :"+formato.getListaDetalle12BDs()); 
 		return formato;
 	}

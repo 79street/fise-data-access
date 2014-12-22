@@ -20,7 +20,7 @@ public interface FiseCargoFijoService {
 	FiseCargoFijoBean buscarFiseCargoFijoEditar(String codEmpresa,
 			String anio,String mes) throws Exception;
 	
-	List<FiseMcargofijo> buscarFiseCargoFijo(String codEmpresa, Long anioRep,Long mesRep)
+	List<FiseCargoFijoBean> buscarFiseCargoFijo(String codEmpresa, Long anioRep,Long mesRep)
 			throws Exception;
 
 }

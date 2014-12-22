@@ -6,8 +6,10 @@ import gob.osinergmin.fise.domain.FiseMcargofijo;
 import gob.osinergmin.fise.domain.FiseMcargofijoPK;
 import gob.osinergmin.fise.gart.service.FiseCargoFijoService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -37,16 +39,16 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 		String valor="1";
 		try {
 			pk = new FiseMcargofijoPK();
-			pk.setEmpcod(bean.getCodEmpresa());
-			pk.setFaniorep(Long.valueOf(bean.getAnioRep())); 
-			pk.setFmesrep(Long.valueOf(bean.getMesRep()));	 
+			pk.setEmpcod(bean.getCodigoEmpresa());
+			pk.setFaniorep(Long.valueOf(bean.getAnioReporte())); 
+			pk.setFmesrep(Long.valueOf(bean.getMesReporte()));	 
 			
 			cargo = fiseCargoFijoDao.obtenerFiseCargoFijo(pk);
 			
 			if(cargo==null){
 				cargo = new FiseMcargofijo();
 				cargo.setId(pk);
-				cargo.setCfinumage(Long.valueOf(bean.getNumAgen()));
+				cargo.setCfinumage(Long.valueOf(bean.getNumAgente()));
 				cargo.setCfinumusuben(Long.valueOf(bean.getNumUsuBenef()));
 				cargo.setCfinumusuemp(Long.valueOf(bean.getNumUsuEmp()));
 				cargo.setCfinumvaldcan(Long.valueOf(bean.getNumValDCan()));
@@ -98,13 +100,12 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 		String valor ="1";
 		try {			
 			pk = new FiseMcargofijoPK();
-			pk.setEmpcod(bean.getCodEmpresa());
-			pk.setFaniorep(Long.valueOf(bean.getAnioRep())); 
-			pk.setFmesrep(Long.valueOf(bean.getMesRep()));	
+			pk.setEmpcod(bean.getCodigoEmpresa());
+			pk.setFaniorep(Long.valueOf(bean.getAnioReporte())); 
+			pk.setFmesrep(Long.valueOf(bean.getMesReporte()));	
 			
 			cargo = fiseCargoFijoDao.obtenerFiseCargoFijo(pk);	
-			
-			cargo.setCfinumage(Long.valueOf(bean.getNumAgen()));
+			cargo.setCfinumage(Long.valueOf(bean.getNumAgente()));
 			cargo.setCfinumusuben(Long.valueOf(bean.getNumUsuBenef()));
 			cargo.setCfinumusuemp(Long.valueOf(bean.getNumUsuEmp()));
 			cargo.setCfinumvaldcan(Long.valueOf(bean.getNumValDCan()));
@@ -132,6 +133,7 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 			
 			fiseCargoFijoDao.actualizarFiseObservacion(cargo); 
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.info("Error al actualizar en fise cargo fijo: "+e); 
 			valor = "0";
 		}finally{
@@ -210,32 +212,34 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 			pk.setFmesrep(Long.valueOf(mes));
 			
 			c= fiseCargoFijoDao.obtenerFiseCargoFijo(pk);	
-			
-			bean.setCodEmpresa(codEmpresa);
-			bean.setAnioRep(""+anio);
-			bean.setMesRep(""+mes);
-			bean.setNumAgen(""+c.getCfinumage());
-			bean.setNumUsuBenef(""+c.getCfinumusuben());
-			bean.setNumUsuEmp(""+c.getCfinumusuemp());
-			bean.setNumValDCan(""+c.getCfinumvaldcan());
-			bean.setNumValDEmi(""+c.getCfinumvaldemi());
-			bean.setNumValFCan(""+c.getCfinumvalfcan());
-			bean.setNumValFEmi(""+c.getCfinumvalfemi());
-			bean.setMontoCanje(""+c.getCfimontracan());
-			bean.setMontoMes(""+c.getCfimon());
-			bean.setIgv(""+c.getCfiigv());
-			bean.setAplicaIgv(""+c.getCfiapliigv());		
-			//opcionales
-			bean.setGloza(c.getCficom()==null? "":c.getCficom());
-			bean.setFechaSustento(c.getCfifecinf()==null? "":
-				FechaUtil.getFechaDateToString(c.getCfifecinf())); 
-			bean.setNumDoc(c.getCfidoc()==null ? "":c.getCfidoc());
-			bean.setEstado(c.getScficod()==null?"": ""+c.getScficod());
-			bean.setFechaRecepcion(c.getCfifecrec()==null? "" :
-				FechaUtil.getFechaDateToString(c.getCfifecrec()) );
-			bean.setNumDocRecepcion(c.getCfidocrec()==null ? "" : c.getCfidocrec());		
-			
+			if(c!=null){
+				String codEmpreCompleta = FormatoUtil.rellenaDerecha(c.getId().getEmpcod(), ' ', 4);
+				bean.setCodigoEmpresa(codEmpreCompleta);
+				bean.setAnioReporte(""+c.getId().getFaniorep());
+				bean.setMesReporte(""+c.getId().getFmesrep());
+				bean.setNumAgente(""+c.getCfinumage());
+				bean.setNumUsuBenef(""+c.getCfinumusuben());
+				bean.setNumUsuEmp(""+c.getCfinumusuemp());
+				bean.setNumValDCan(""+c.getCfinumvaldcan());
+				bean.setNumValDEmi(""+c.getCfinumvaldemi());
+				bean.setNumValFCan(""+c.getCfinumvalfcan());
+				bean.setNumValFEmi(""+c.getCfinumvalfemi());
+				bean.setMontoCanje(""+c.getCfimontracan());
+				bean.setMontoMes(""+c.getCfimon());
+				bean.setIgv(""+c.getCfiigv());
+				bean.setAplicaIgv(""+c.getCfiapliigv());		
+				//opcionales
+				bean.setGloza(c.getCficom()==null? "":c.getCficom());
+				bean.setFechaSustento(c.getCfifecinf()==null? "":
+					FechaUtil.getFechaDateToString(c.getCfifecinf())); 
+				bean.setNumDoc(c.getCfidoc()==null ? "":c.getCfidoc());
+				bean.setEstado(c.getScficod()==null?"": ""+c.getScficod());
+				bean.setFechaRecepcion(c.getCfifecrec()==null? "" :
+					FechaUtil.getFechaDateToString(c.getCfifecrec()) );
+				bean.setNumDocRecepcion(c.getCfidocrec()==null ? "" : c.getCfidocrec());
+			}		
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.info("Error al buscar datos para editar:  "+e); 
 		}finally{
 			if(c !=null){
@@ -250,9 +254,61 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 	
 	@Override
 	@Transactional
-	public List<FiseMcargofijo> buscarFiseCargoFijo(String codEmpresa, Long anioRep,Long mesRep)
+	public List<FiseCargoFijoBean> buscarFiseCargoFijo(String codEmpresa, Long anioRep,Long mesRep)
 			throws Exception{
-		return fiseCargoFijoDao.buscarFiseCargoFijo(codEmpresa, anioRep, mesRep);
+		
+		List<FiseCargoFijoBean> listaCargosFijos= new ArrayList<FiseCargoFijoBean>();
+		FiseCargoFijoBean bean=null;
+		try {
+			List<FiseMcargofijo> lista = fiseCargoFijoDao.buscarFiseCargoFijo(codEmpresa, anioRep, mesRep);
+			
+			for(FiseMcargofijo cargo : lista){ 
+					bean = new FiseCargoFijoBean();
+					bean.setCodigoEmpresa(cargo.getId().getEmpcod()); 
+	  				bean.setAnioReporte(""+cargo.getId().getFaniorep());
+	  				bean.setMesReporte(""+cargo.getId().getFmesrep());   
+					bean.setNumAgente(""+cargo.getCfinumage());
+					bean.setNumUsuBenef(""+cargo.getCfinumusuben());
+					bean.setNumUsuEmp(""+cargo.getCfinumusuemp());
+					bean.setNumValDCan(""+cargo.getCfinumvaldcan());
+					bean.setNumValDEmi(""+cargo.getCfinumvaldemi());
+					bean.setNumValFCan(""+cargo.getCfinumvalfcan());
+					bean.setNumValFEmi(""+cargo.getCfinumvalfemi());
+					bean.setMontoCanje(""+cargo.getCfimontracan());
+					bean.setMontoMes(""+cargo.getCfimon());
+					bean.setIgv(""+cargo.getCfiigv());
+					//bean.setAplicaIgv(""+cargo.getCfiapliigv());		
+					//opcionales
+					bean.setGloza(cargo.getCficom()==null? "":cargo.getCficom());
+					bean.setFechaSustento(cargo.getCfifecinf()==null? "":
+						FechaUtil.getFechaDateToString(cargo.getCfifecinf())); 
+					bean.setNumDoc(cargo.getCfidoc()==null ? "":cargo.getCfidoc());					
+					bean.setFechaRecepcion(cargo.getCfifecrec()==null? "" :
+						FechaUtil.getFechaDateToString(cargo.getCfifecrec()) );
+					bean.setNumDocRecepcion(cargo.getCfidocrec()==null ? "" : cargo.getCfidocrec());
+					
+					if(1==cargo.getScficod()){ 
+						bean.setDesEstado("Activo");			
+					}else{
+						bean.setDesEstado("Inactivo");			
+					}
+
+					if(1==cargo.getCfiapliigv()){ 
+						bean.setAplicaIgv("SI");			
+					}else{
+						bean.setAplicaIgv("NO");			
+					}
+					
+					listaCargosFijos.add(bean);
+				}   			
+		} catch (Exception e) {
+			logger.info("Error al listar cargos fijos:  "+e); 
+		}finally{
+			if(bean!=null){
+				bean =null;
+			}
+		}
+		return listaCargosFijos;
 	}
 	
 

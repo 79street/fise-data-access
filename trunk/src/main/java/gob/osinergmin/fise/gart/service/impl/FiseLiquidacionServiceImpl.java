@@ -73,6 +73,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 							l.getMesEjecucionGasto()==null? 0:l.getMesEjecucionGasto(),
 							l.getAnoInicioVigencia()==null? 0:l.getAnoInicioVigencia(), 
 							l.getAnoFinVigencia()==null? 0:l.getAnoFinVigencia());
+					logger.info("ultima etapa de liquidacion:  "+ultimaEtapa); 
 					liq.setEtapaReconocido(ultimaEtapa); 
 					liq.setFormato(l.getFormato()); 
 					lista.add(liq);

@@ -4,6 +4,7 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.FiseControlEnvioDao;
 import gob.osinergmin.fise.domain.FiseControlEnvioPorGrupo;
 import gob.osinergmin.fise.domain.FiseControlEnvioPorGrupoPK;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
 
@@ -28,7 +29,8 @@ public class FiseControlEnvioDaoImpl extends GenericDaoImpl implements FiseContr
 	
 	@Override
 	public FiseControlEnvioPorGrupo obtenerFiseControlEnvioByPK(FiseControlEnvioPorGrupoPK id)
-			throws SQLException {		
+			throws SQLException {	
+		id.setCodEmpresa(FormatoUtil.rellenaDerecha(id.getCodEmpresa(), ' ', 4));
 		return em.find(FiseControlEnvioPorGrupo.class, id);
 	}
 

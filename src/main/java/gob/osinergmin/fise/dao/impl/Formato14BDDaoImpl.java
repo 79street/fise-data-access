@@ -192,7 +192,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 				sb.append(" AND c.id.codEmpresa = '"+codEmpresa.trim()+"'");
 			}
 			if(anio!=null &&  anio>0){
-				sb.append(" AND c.id.anoInicioVigencia <= "+anio.longValue());
+				sb.append(" AND c.id.anoInicioVigencia >= "+anio.longValue());
 				sb.append(" AND c.id.anoFinVigencia >= "+anio.longValue());
 				
 			}

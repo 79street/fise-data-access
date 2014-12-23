@@ -1082,6 +1082,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 				id.setPeriodicidad(periocidad); 				
 				FiseControlEnvioPorGrupo fiseControl = fiseControlEnvioDao.obtenerFiseControlEnvioByPK(id);
 				FiseGrupoInformacion fiseGrupoInf = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(new Long(idGrupoInf));
+				logger.info("objeto control envio:  "+fiseControl); 
 				if(fiseControl ==null){					
 					FiseControlEnvioPorGrupo grupo = new FiseControlEnvioPorGrupo();
 					grupo.setId(id);
@@ -1104,6 +1105,7 @@ public class CommonGartServiceImpl implements CommonGartService {
 			}			
 		} catch (Exception e) {
 			valor = false;
+			e.printStackTrace();
 			logger.error("Error al actualizar fecha de envio general:  "+e);
 		}
 		return valor;	

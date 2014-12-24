@@ -43,12 +43,8 @@ public class Formato14ACDaoImpl extends GenericDaoImpl implements Formato14ACDao
 			if(FormatoUtil.isNotBlank(codEmpresa)){ 
 				q = q  + " AND t.id.codEmpresa = :codEmpresa ";
 			}
-			if(anioDesde!=0 && mesDesde!=0){ 
-				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion >= :fechaDesde ";
-			}
-			if(anioHasta!=0 && mesHasta!=0){ 
-				q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion <= :fechaHasta ";
-			}
+			q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion >= :fechaDesde ";
+			q = q  + " AND t.id.anoPresentacion*100+t.id.mesPresentacion <= :fechaHasta ";
 			if(FormatoUtil.isNotBlank(etapa)){ 
 				q = q + " AND t.id.etapa = :etapa ";
 			}

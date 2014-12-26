@@ -122,7 +122,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			if(idZonaBenef!=0){ 
 				query.setParameter("idZonaBenef", idZonaBenef);
 			}
-			query.setParameter("etapa", FiseConstants.ETAPA_RECONOCIDO);
+			query.setParameter("etapa", FiseConstants.ETAPA_ESTABLECIDO);
 			
 			lista= query.getResultList();
 			System.out.println("SQL   > " + query.toString());

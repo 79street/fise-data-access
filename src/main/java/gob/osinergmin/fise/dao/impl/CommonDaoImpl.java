@@ -357,6 +357,10 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
 			sb.append(" AND o.ETAPA = c.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
+			/***/
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//6
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'),  ");//6
+			/***/
 			sb.append(" c.ETAPA ");//3				
 			sb.append(" FROM FISE_FORMATO_13A_C c , FISE_FORMATO_13A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
@@ -452,6 +456,10 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" FROM FISE_FORMATO_12D_C c ");		
 			sb.append(" WHERE 1=1 ");			
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
+			/***/
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//6
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'), ");//6
+			/***/
 			sb.append(" c.ETAPA ");//3				
 			sb.append(" FROM FISE_FORMATO_13A_C c ");		
 			sb.append(" WHERE 1=1 ");					

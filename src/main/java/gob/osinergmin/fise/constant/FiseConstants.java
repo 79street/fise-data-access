@@ -34,6 +34,7 @@ public class FiseConstants {
 	public final static String ETAPA_LEVOBS= "LEV.OBS";
 	public final static String ETAPA_RECONSIDERACION= "RECONSIDERACION";
 	public final static String ETAPA_RECONOCIDO= "RECONOCIDO";
+	public final static String ETAPA_ESTABLECIDO= "ESTABLECIDO";
 	
 	public final static String MSG_OBSERVACION_REPORTE_VACIO = "Ninguno";
 	public final static String MSG_OBSERVACION_REPORTE_LLENO ="Observaciones de validación. Ver reporte adjunto";

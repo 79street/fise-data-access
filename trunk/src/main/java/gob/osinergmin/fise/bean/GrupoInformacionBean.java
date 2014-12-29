@@ -1,16 +1,21 @@
 package gob.osinergmin.fise.bean;
 
+import java.util.Map;
+
 public class GrupoInformacionBean {
+	
+	private Map<Long,String> listaMes;
 	
 	private String estadoBusq;
 	private String tipoBusq;
-	private String descripcionBusq;
-	
+	private String descripcionBusq;	
 	
 	private String idGrupoInf;
     private String descripcion;
     private String estado;
 	private String tipo;
+	private String anioPres;
+	private String mesPres;
     
     private String usuario;
     private String terminal;   
@@ -70,6 +75,26 @@ public class GrupoInformacionBean {
 	}
 	public void setTerminal(String terminal) {
 		this.terminal = terminal;
-	}   
+	}
+	public Map<Long, String> getListaMes() {
+		return listaMes;
+	}
+	public void setListaMes(Map<Long, String> listaMes) {
+		this.listaMes = listaMes;
+	}
+	public String getAnioPres() {
+		return anioPres;
+	}
+	public void setAnioPres(String anioPres) {
+		this.anioPres = anioPres;
+	}
+	public String getMesPres() {
+		return mesPres;
+	}
+	public void setMesPres(String mesPres) {
+		this.mesPres = mesPres;
+	}
+	
+	
 
 }

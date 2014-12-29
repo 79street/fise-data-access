@@ -46,6 +46,8 @@ public class FiseGrupoInformacionGartServiceImpl implements
 			grupo.setDescripcion(bean.getDescripcion());
 			grupo.setTipo(bean.getTipo());
 			grupo.setEstado(Integer.valueOf(bean.getEstado()));  
+			grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
+			grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
 			//auditoria
 			grupo.setUsuarioCreacion(bean.getUsuario());
 			grupo.setTerminalCreacion(bean.getTerminal()); 
@@ -73,7 +75,9 @@ public class FiseGrupoInformacionGartServiceImpl implements
 			grupo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(Long.valueOf(bean.getIdGrupoInf())); 		
 			grupo.setDescripcion(bean.getDescripcion());
 			grupo.setTipo(bean.getTipo());
-			grupo.setEstado(Integer.valueOf(bean.getEstado()));  		
+			grupo.setEstado(Integer.valueOf(bean.getEstado()));
+			grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
+			grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
 			//auditoria
 			grupo.setUsuarioActualizacion(bean.getUsuario());
 			grupo.setTerminalActualizacion(bean.getTerminal()); 
@@ -131,6 +135,8 @@ public class FiseGrupoInformacionGartServiceImpl implements
 			bean.setIdGrupoInf(""+g.getIdGrupoInformacion()); 
 			bean.setDescripcion(g.getDescripcion()); 
 			bean.setEstado(""+g.getEstado()); 
+			bean.setAnioPres(""+g.getAnoPresentacion());
+			bean.setMesPres(""+g.getMesPresentacion());
 			bean.setTipo(g.getTipo()); 
 		} catch (Exception e) {
 			logger.info("Error al buscar datos para editar:  "+e); 

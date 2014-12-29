@@ -43,6 +43,9 @@ public class FiseGrupoInformacion implements Serializable {
 	
 	@Transient
 	private String descEstado;
+	
+	@Transient
+	private String descMesPresentacion;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -334,6 +337,14 @@ public class FiseGrupoInformacion implements Serializable {
 
 	public void setDescEstado(String descEstado) {
 		this.descEstado = descEstado;
+	}
+
+	public String getDescMesPresentacion() {
+		return descMesPresentacion;
+	}
+
+	public void setDescMesPresentacion(String descMesPresentacion) {
+		this.descMesPresentacion = descMesPresentacion;
 	}
 	
 	

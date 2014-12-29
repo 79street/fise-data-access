@@ -833,9 +833,11 @@ public class CommonGartServiceImpl implements CommonGartService {
 					e.setFormato(FiseConstants.NOMBRE_FORMATO_13A); 
 					e.setAnioEjec("---");
 					e.setMesEjec("00");
-					e.setAnioIniVig("---");
-					e.setAnioFinVig("---");
-					e.setEstado((String)lista13A.get(i)[4] == null ? "---" :lista13A.get(i)[4].toString());
+					//e.setAnioIniVig("---");
+					//e.setAnioFinVig("---");
+					e.setAnioIniVig(String.valueOf(((BigDecimal)lista13A.get(i)[3] == null) ? "---" :lista13A.get(i)[3]));
+					e.setAnioFinVig(String.valueOf(((BigDecimal)lista13A.get(i)[4] == null) ? "---" :lista13A.get(i)[4]));	
+					e.setEstado((String)lista13A.get(i)[6] == null ? "---" :lista13A.get(i)[6].toString());
 					lista.add(e);
 				}				
 				/**FORMATO 14A*/				  

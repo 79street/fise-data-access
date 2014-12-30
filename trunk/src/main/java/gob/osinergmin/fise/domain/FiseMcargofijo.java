@@ -35,24 +35,88 @@ public class FiseMcargofijo implements Serializable {
 	private Date cfifecrec;
 
 	private BigDecimal cfiigv;
+	
+	@Column(name="CFIMON_RURAL")
+	private BigDecimal cfimonRural;	
 
-	private BigDecimal cfimon;
+	@Column(name="CFIMON_URB_PROV")
+	private BigDecimal cfimonUrbProv;
+	
+	@Column(name="CFIMON_URB_LIMA")
+	private BigDecimal cfimonUrbLima;
+	
 
 	private BigDecimal cfimontracan;
 
-	private Long cfinumage;
+	@Column(name="CFINUMAGE_RURAL")
+	private Long cfinumageRural;
+	
+	@Column(name="CFINUMAGE_URB_PROV")
+	private Long cfinumageUrbProv;
+	
+	@Column(name="CFINUMAGE_URB_LIMA")
+	private Long cfinumageUrbLima;
 
-	private Long cfinumusuben;
+	
+	@Column(name="CFINUMUSUBEN_RURAL")
+	private Long cfinumusubenRural;
+	
+	@Column(name="CFINUMUSUBEN_URB_PROV")
+	private Long cfinumusubenUrbProv;
+	
+	@Column(name="CFINUMUSUBEN_URB_LIMA")
+	private Long cfinumusubenUrbLima;
+	
+	
+	@Column(name="CFINUMUSUEMP_RURAL")
+	private Long cfinumusuempRural;
+	
+	@Column(name="CFINUMUSUEMP_URB_PROV")
+	private Long cfinumusuempUrbProv;
+	
+	@Column(name="CFINUMUSUEMP_URB_LIMA")
+	private Long cfinumusuempUrbLima;
+	
 
-	private Long cfinumusuemp;
+	@Column(name="CFINUMVALDCAN_RURAL")
+	private Long cfinumvaldcanRural;
+	
+	@Column(name="CFINUMVALDCAN_URB_PROV")
+	private Long cfinumvaldcanUrbProv;
+	
+	@Column(name="CFINUMVALDCAN_URB_LIMA")
+	private Long cfinumvaldcanUrbLima;
 
-	private Long cfinumvaldcan;
+	
+	@Column(name="CFINUMVALDEMI_RURAL")
+	private Long cfinumvaldemiRural;
+	
+	@Column(name="CFINUMVALDEMI_URB_PROV")
+	private Long cfinumvaldemiUrbProv;
+	
+	@Column(name="CFINUMVALDEMI_URB_LIMA")
+	private Long cfinumvaldemiUrbLima;
 
-	private Long cfinumvaldemi;
-
-	private Long cfinumvalfcan;
-
-	private Long cfinumvalfemi;
+	
+	@Column(name="CFINUMVALFCAN_RURAL")
+	private Long cfinumvalfcanRural;
+	
+	@Column(name="CFINUMVALFCAN_URB_PROV")
+	private Long cfinumvalfcanUrbProv;
+	
+	@Column(name="CFINUMVALFCAN_URB_LIMA")
+	private Long cfinumvalfcanUrbLima;
+	
+	
+	@Column(name="CFINUMVALFEMI_RURAL")
+	private Long cfinumvalfemiRural;
+	
+	@Column(name="CFINUMVALFEMI_URB_PROV")
+	private Long cfinumvalfemiUrbProv;
+	
+	@Column(name="CFINUMVALFEMI_URB_LIMA")
+	private Long cfinumvalfemiUrbLima;
+	
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -144,14 +208,6 @@ public class FiseMcargofijo implements Serializable {
 		this.cfiigv = cfiigv;
 	}
 
-	public BigDecimal getCfimon() {
-		return this.cfimon;
-	}
-
-	public void setCfimon(BigDecimal cfimon) {
-		this.cfimon = cfimon;
-	}
-
 	public BigDecimal getCfimontracan() {
 		return this.cfimontracan;
 	}
@@ -160,60 +216,196 @@ public class FiseMcargofijo implements Serializable {
 		this.cfimontracan = cfimontracan;
 	}
 
-	public Long getCfinumage() {
-		return this.cfinumage;
+	public Long getCfinumusubenRural() {
+		return cfinumusubenRural;
 	}
 
-	public void setCfinumage(Long cfinumage) {
-		this.cfinumage = cfinumage;
+	public void setCfinumusubenRural(Long cfinumusubenRural) {
+		this.cfinumusubenRural = cfinumusubenRural;
+	}	
+
+	public BigDecimal getCfimonRural() {
+		return cfimonRural;
 	}
 
-	public Long getCfinumusuben() {
-		return this.cfinumusuben;
+	public void setCfimonRural(BigDecimal cfimonRural) {
+		this.cfimonRural = cfimonRural;
 	}
 
-	public void setCfinumusuben(Long cfinumusuben) {
-		this.cfinumusuben = cfinumusuben;
+	public Long getCfinumageRural() {
+		return cfinumageRural;
 	}
 
-	public Long getCfinumusuemp() {
-		return this.cfinumusuemp;
+	public void setCfinumageRural(Long cfinumageRural) {
+		this.cfinumageRural = cfinumageRural;
 	}
 
-	public void setCfinumusuemp(Long cfinumusuemp) {
-		this.cfinumusuemp = cfinumusuemp;
+	public Long getCfinumusuempRural() {
+		return cfinumusuempRural;
 	}
 
-	public Long getCfinumvaldcan() {
-		return this.cfinumvaldcan;
+	public void setCfinumusuempRural(Long cfinumusuempRural) {
+		this.cfinumusuempRural = cfinumusuempRural;
 	}
 
-	public void setCfinumvaldcan(Long cfinumvaldcan) {
-		this.cfinumvaldcan = cfinumvaldcan;
+	public Long getCfinumvaldcanRural() {
+		return cfinumvaldcanRural;
 	}
 
-	public Long getCfinumvaldemi() {
-		return this.cfinumvaldemi;
+	public void setCfinumvaldcanRural(Long cfinumvaldcanRural) {
+		this.cfinumvaldcanRural = cfinumvaldcanRural;
 	}
 
-	public void setCfinumvaldemi(Long cfinumvaldemi) {
-		this.cfinumvaldemi = cfinumvaldemi;
+	public Long getCfinumvaldemiRural() {
+		return cfinumvaldemiRural;
 	}
 
-	public Long getCfinumvalfcan() {
-		return this.cfinumvalfcan;
+	public void setCfinumvaldemiRural(Long cfinumvaldemiRural) {
+		this.cfinumvaldemiRural = cfinumvaldemiRural;
 	}
 
-	public void setCfinumvalfcan(Long cfinumvalfcan) {
-		this.cfinumvalfcan = cfinumvalfcan;
+	public Long getCfinumvalfcanRural() {
+		return cfinumvalfcanRural;
 	}
 
-	public Long getCfinumvalfemi() {
-		return this.cfinumvalfemi;
+	public void setCfinumvalfcanRural(Long cfinumvalfcanRural) {
+		this.cfinumvalfcanRural = cfinumvalfcanRural;
 	}
 
-	public void setCfinumvalfemi(Long cfinumvalfemi) {
-		this.cfinumvalfemi = cfinumvalfemi;
+	public Long getCfinumvalfemiRural() {
+		return cfinumvalfemiRural;
+	}
+
+	public void setCfinumvalfemiRural(Long cfinumvalfemiRural) {
+		this.cfinumvalfemiRural = cfinumvalfemiRural;
+	}	
+
+	public BigDecimal getCfimonUrbProv() {
+		return cfimonUrbProv;
+	}
+
+	public void setCfimonUrbProv(BigDecimal cfimonUrbProv) {
+		this.cfimonUrbProv = cfimonUrbProv;
+	}
+
+	public BigDecimal getCfimonUrbLima() {
+		return cfimonUrbLima;
+	}
+
+	public void setCfimonUrbLima(BigDecimal cfimonUrbLima) {
+		this.cfimonUrbLima = cfimonUrbLima;
+	}
+
+	public Long getCfinumageUrbProv() {
+		return cfinumageUrbProv;
+	}
+
+	public void setCfinumageUrbProv(Long cfinumageUrbProv) {
+		this.cfinumageUrbProv = cfinumageUrbProv;
+	}
+
+	public Long getCfinumageUrbLima() {
+		return cfinumageUrbLima;
+	}
+
+	public void setCfinumageUrbLima(Long cfinumageUrbLima) {
+		this.cfinumageUrbLima = cfinumageUrbLima;
+	}
+
+	public Long getCfinumusubenUrbProv() {
+		return cfinumusubenUrbProv;
+	}
+
+	public void setCfinumusubenUrbProv(Long cfinumusubenUrbProv) {
+		this.cfinumusubenUrbProv = cfinumusubenUrbProv;
+	}
+
+	public Long getCfinumusubenUrbLima() {
+		return cfinumusubenUrbLima;
+	}
+
+	public void setCfinumusubenUrbLima(Long cfinumusubenUrbLima) {
+		this.cfinumusubenUrbLima = cfinumusubenUrbLima;
+	}
+
+	public Long getCfinumusuempUrbProv() {
+		return cfinumusuempUrbProv;
+	}
+
+	public void setCfinumusuempUrbProv(Long cfinumusuempUrbProv) {
+		this.cfinumusuempUrbProv = cfinumusuempUrbProv;
+	}
+
+	public Long getCfinumusuempUrbLima() {
+		return cfinumusuempUrbLima;
+	}
+
+	public void setCfinumusuempUrbLima(Long cfinumusuempUrbLima) {
+		this.cfinumusuempUrbLima = cfinumusuempUrbLima;
+	}
+
+	public Long getCfinumvaldcanUrbProv() {
+		return cfinumvaldcanUrbProv;
+	}
+
+	public void setCfinumvaldcanUrbProv(Long cfinumvaldcanUrbProv) {
+		this.cfinumvaldcanUrbProv = cfinumvaldcanUrbProv;
+	}
+
+	public Long getCfinumvaldcanUrbLima() {
+		return cfinumvaldcanUrbLima;
+	}
+
+	public void setCfinumvaldcanUrbLima(Long cfinumvaldcanUrbLima) {
+		this.cfinumvaldcanUrbLima = cfinumvaldcanUrbLima;
+	}
+
+	public Long getCfinumvaldemiUrbProv() {
+		return cfinumvaldemiUrbProv;
+	}
+
+	public void setCfinumvaldemiUrbProv(Long cfinumvaldemiUrbProv) {
+		this.cfinumvaldemiUrbProv = cfinumvaldemiUrbProv;
+	}
+
+	public Long getCfinumvaldemiUrbLima() {
+		return cfinumvaldemiUrbLima;
+	}
+
+	public void setCfinumvaldemiUrbLima(Long cfinumvaldemiUrbLima) {
+		this.cfinumvaldemiUrbLima = cfinumvaldemiUrbLima;
+	}
+
+	public Long getCfinumvalfcanUrbProv() {
+		return cfinumvalfcanUrbProv;
+	}
+
+	public void setCfinumvalfcanUrbProv(Long cfinumvalfcanUrbProv) {
+		this.cfinumvalfcanUrbProv = cfinumvalfcanUrbProv;
+	}
+
+	public Long getCfinumvalfcanUrbLima() {
+		return cfinumvalfcanUrbLima;
+	}
+
+	public void setCfinumvalfcanUrbLima(Long cfinumvalfcanUrbLima) {
+		this.cfinumvalfcanUrbLima = cfinumvalfcanUrbLima;
+	}
+
+	public Long getCfinumvalfemiUrbProv() {
+		return cfinumvalfemiUrbProv;
+	}
+
+	public void setCfinumvalfemiUrbProv(Long cfinumvalfemiUrbProv) {
+		this.cfinumvalfemiUrbProv = cfinumvalfemiUrbProv;
+	}
+
+	public Long getCfinumvalfemiUrbLima() {
+		return cfinumvalfemiUrbLima;
+	}
+
+	public void setCfinumvalfemiUrbLima(Long cfinumvalfemiUrbLima) {
+		this.cfinumvalfemiUrbLima = cfinumvalfemiUrbLima;
 	}
 
 	public Date getFechaActualizacion() {

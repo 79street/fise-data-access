@@ -48,25 +48,57 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 			if(cargo==null){
 				cargo = new FiseMcargofijo();
 				cargo.setId(pk);
-				cargo.setCfinumage(Long.valueOf(bean.getNumAgente()));
-				cargo.setCfinumusuben(Long.valueOf(bean.getNumUsuBenef()));
-				cargo.setCfinumusuemp(Long.valueOf(bean.getNumUsuEmp()));
-				cargo.setCfinumvaldcan(Long.valueOf(bean.getNumValDCan()));
-				cargo.setCfinumvaldemi(Long.valueOf(bean.getNumValDEmi()));
-				cargo.setCfinumvalfcan(Long.valueOf(bean.getNumValFCan()));
-				cargo.setCfinumvalfemi(Long.valueOf(bean.getNumValFEmi()));
+				
+				cargo.setCfinumageRural(Long.valueOf(bean.getNumAgente()));
+				cargo.setCfinumageUrbProv(Long.valueOf(bean.getNumAgente()));
+				cargo.setCfinumageUrbLima(Long.valueOf(bean.getNumAgente()));
+				
+				cargo.setCfinumusubenRural(Long.valueOf(bean.getNumUsuBenef()));
+				cargo.setCfinumusubenUrbProv(Long.valueOf(bean.getNumUsuBenef()));
+				cargo.setCfinumusubenUrbLima(Long.valueOf(bean.getNumUsuBenef()));
+				
+				cargo.setCfinumusuempRural(Long.valueOf(bean.getNumUsuEmp()));
+				cargo.setCfinumusuempUrbProv(Long.valueOf(bean.getNumUsuEmp()));
+				cargo.setCfinumusuempUrbLima(Long.valueOf(bean.getNumUsuEmp()));
+				
+				cargo.setCfinumvaldcanRural(Long.valueOf(bean.getNumValDCan()));
+				cargo.setCfinumvaldcanUrbProv(Long.valueOf(bean.getNumValDCan()));
+				cargo.setCfinumvaldcanUrbLima(Long.valueOf(bean.getNumValDCan()));
+				
+				cargo.setCfinumvaldemiRural(Long.valueOf(bean.getNumValDEmi()));
+				cargo.setCfinumvaldemiUrbProv(Long.valueOf(bean.getNumValDEmi()));
+				cargo.setCfinumvaldemiUrbLima(Long.valueOf(bean.getNumValDEmi()));
+				
+				cargo.setCfinumvalfcanRural(Long.valueOf(bean.getNumValFCan()));
+				cargo.setCfinumvalfcanUrbProv(Long.valueOf(bean.getNumValFCan()));
+				cargo.setCfinumvalfcanUrbLima(Long.valueOf(bean.getNumValFCan()));
+				
+				cargo.setCfinumvalfemiRural(Long.valueOf(bean.getNumValFEmi()));
+				cargo.setCfinumvalfemiUrbProv(Long.valueOf(bean.getNumValFEmi()));
+				cargo.setCfinumvalfemiUrbLima(Long.valueOf(bean.getNumValFEmi()));
+				
 				cargo.setCfimontracan(new BigDecimal(bean.getMontoCanje()));
-				cargo.setCfimon(new BigDecimal(bean.getMontoMes()));
+			
+				cargo.setCfimonRural(new BigDecimal(bean.getMontoMes()));
+				cargo.setCfimonUrbProv(new BigDecimal(bean.getMontoMes()));
+				cargo.setCfimonUrbLima(new BigDecimal(bean.getMontoMes()));			
+				
+				
 				cargo.setCfiigv(new BigDecimal(bean.getIgv()));
 				cargo.setCfiapliigv(Integer.valueOf(bean.getAplicaIgv())); 
 				//opcionales
 				cargo.setCficom(bean.getGloza());
+				
 				cargo.setCfifecinf(bean.getFechaSustento()==null? null:
-					FechaUtil.getFechaStringToDate(bean.getFechaSustento())); 
+					FechaUtil.getFechaStringToDateDDMMYYY(bean.getFechaSustento()));
+				
 				cargo.setCfidoc(bean.getNumDoc());
+				
 				cargo.setScficod(bean.getEstado()==null? 1: Integer.valueOf(bean.getEstado())); 
+				
 				cargo.setCfifecrec(bean.getFechaRecepcion()==null? null:
-					FechaUtil.getFechaStringToDate(bean.getFechaRecepcion()));
+					FechaUtil.getFechaStringToDateDDMMYYY(bean.getFechaRecepcion()));
+				
 				cargo.setCfidocrec(bean.getNumDocRecepcion());
 				//auditoria
 				cargo.setUsuarioCreacion(bean.getUsuario());
@@ -104,26 +136,58 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 			pk.setFaniorep(Long.valueOf(bean.getAnioReporte())); 
 			pk.setFmesrep(Long.valueOf(bean.getMesReporte()));	
 			
-			cargo = fiseCargoFijoDao.obtenerFiseCargoFijo(pk);	
-			cargo.setCfinumage(Long.valueOf(bean.getNumAgente()));
-			cargo.setCfinumusuben(Long.valueOf(bean.getNumUsuBenef()));
-			cargo.setCfinumusuemp(Long.valueOf(bean.getNumUsuEmp()));
-			cargo.setCfinumvaldcan(Long.valueOf(bean.getNumValDCan()));
-			cargo.setCfinumvaldemi(Long.valueOf(bean.getNumValDEmi()));
-			cargo.setCfinumvalfcan(Long.valueOf(bean.getNumValFCan()));
-			cargo.setCfinumvalfemi(Long.valueOf(bean.getNumValFEmi()));
+			cargo = fiseCargoFijoDao.obtenerFiseCargoFijo(pk);			
+			
+			cargo.setCfinumageRural(Long.valueOf(bean.getNumAgente()));
+			cargo.setCfinumageUrbProv(Long.valueOf(bean.getNumAgente()));
+			cargo.setCfinumageUrbLima(Long.valueOf(bean.getNumAgente()));
+			
+			cargo.setCfinumusubenRural(Long.valueOf(bean.getNumUsuBenef()));
+			cargo.setCfinumusubenUrbProv(Long.valueOf(bean.getNumUsuBenef()));
+			cargo.setCfinumusubenUrbLima(Long.valueOf(bean.getNumUsuBenef()));
+			
+			cargo.setCfinumusuempRural(Long.valueOf(bean.getNumUsuEmp()));
+			cargo.setCfinumusuempUrbProv(Long.valueOf(bean.getNumUsuEmp()));
+			cargo.setCfinumusuempUrbLima(Long.valueOf(bean.getNumUsuEmp()));
+			
+			cargo.setCfinumvaldcanRural(Long.valueOf(bean.getNumValDCan()));
+			cargo.setCfinumvaldcanUrbProv(Long.valueOf(bean.getNumValDCan()));
+			cargo.setCfinumvaldcanUrbLima(Long.valueOf(bean.getNumValDCan()));
+			
+			cargo.setCfinumvaldemiRural(Long.valueOf(bean.getNumValDEmi()));
+			cargo.setCfinumvaldemiUrbProv(Long.valueOf(bean.getNumValDEmi()));
+			cargo.setCfinumvaldemiUrbLima(Long.valueOf(bean.getNumValDEmi()));
+			
+			cargo.setCfinumvalfcanRural(Long.valueOf(bean.getNumValFCan()));
+			cargo.setCfinumvalfcanUrbProv(Long.valueOf(bean.getNumValFCan()));
+			cargo.setCfinumvalfcanUrbLima(Long.valueOf(bean.getNumValFCan()));
+			
+			cargo.setCfinumvalfemiRural(Long.valueOf(bean.getNumValFEmi()));
+			cargo.setCfinumvalfemiUrbProv(Long.valueOf(bean.getNumValFEmi()));
+			cargo.setCfinumvalfemiUrbLima(Long.valueOf(bean.getNumValFEmi()));
+			
 			cargo.setCfimontracan(new BigDecimal(bean.getMontoCanje()));
-			cargo.setCfimon(new BigDecimal(bean.getMontoMes()));
+		
+			cargo.setCfimonRural(new BigDecimal(bean.getMontoMes()));
+			cargo.setCfimonUrbProv(new BigDecimal(bean.getMontoMes()));
+			cargo.setCfimonUrbLima(new BigDecimal(bean.getMontoMes()));	
+			
+			
 			cargo.setCfiigv(new BigDecimal(bean.getIgv()));
 			cargo.setCfiapliigv(Integer.valueOf(bean.getAplicaIgv())); 
 			//opcionales
 			cargo.setCficom(bean.getGloza());
+			
 			cargo.setCfifecinf(bean.getFechaSustento()==null? null:
-				FechaUtil.getFechaStringToDate(bean.getFechaSustento())); 
+				FechaUtil.getFechaStringToDateDDMMYYY(bean.getFechaSustento())); 
+			
 			cargo.setCfidoc(bean.getNumDoc());
+			
 			cargo.setScficod(bean.getEstado()==null? 1: Integer.valueOf(bean.getEstado())); 
+			
 			cargo.setCfifecrec(bean.getFechaRecepcion()==null? null:
-				FechaUtil.getFechaStringToDate(bean.getFechaRecepcion()));
+				FechaUtil.getFechaStringToDateDDMMYYY(bean.getFechaRecepcion()));
+			
 			cargo.setCfidocrec(bean.getNumDocRecepcion());
 			
 			//datos de auditoria
@@ -217,15 +281,15 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 				bean.setCodigoEmpresa(codEmpreCompleta);
 				bean.setAnioReporte(""+c.getId().getFaniorep());
 				bean.setMesReporte(""+c.getId().getFmesrep());
-				bean.setNumAgente(""+c.getCfinumage());
-				bean.setNumUsuBenef(""+c.getCfinumusuben());
-				bean.setNumUsuEmp(""+c.getCfinumusuemp());
-				bean.setNumValDCan(""+c.getCfinumvaldcan());
-				bean.setNumValDEmi(""+c.getCfinumvaldemi());
-				bean.setNumValFCan(""+c.getCfinumvalfcan());
-				bean.setNumValFEmi(""+c.getCfinumvalfemi());
+				bean.setNumAgente(""+c.getCfinumageRural());
+				bean.setNumUsuBenef(""+c.getCfinumusubenRural());
+				bean.setNumUsuEmp(""+c.getCfinumusuempRural());
+				bean.setNumValDCan(""+c.getCfinumvaldcanRural());
+				bean.setNumValDEmi(""+c.getCfinumvaldemiRural());
+				bean.setNumValFCan(""+c.getCfinumvalfcanRural());
+				bean.setNumValFEmi(""+c.getCfinumvalfemiRural());
 				bean.setMontoCanje(""+c.getCfimontracan());
-				bean.setMontoMes(""+c.getCfimon());
+				bean.setMontoMes(""+c.getCfimonRural());
 				bean.setIgv(""+c.getCfiigv());
 				bean.setAplicaIgv(""+c.getCfiapliigv());		
 				//opcionales
@@ -267,15 +331,15 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 					bean.setCodigoEmpresa(cargo.getId().getEmpcod()); 
 	  				bean.setAnioReporte(""+cargo.getId().getFaniorep());
 	  				bean.setMesReporte(""+cargo.getId().getFmesrep());   
-					bean.setNumAgente(""+cargo.getCfinumage());
-					bean.setNumUsuBenef(""+cargo.getCfinumusuben());
-					bean.setNumUsuEmp(""+cargo.getCfinumusuemp());
-					bean.setNumValDCan(""+cargo.getCfinumvaldcan());
-					bean.setNumValDEmi(""+cargo.getCfinumvaldemi());
-					bean.setNumValFCan(""+cargo.getCfinumvalfcan());
-					bean.setNumValFEmi(""+cargo.getCfinumvalfemi());
+					bean.setNumAgente(""+cargo.getCfinumageRural());
+					bean.setNumUsuBenef(""+cargo.getCfinumusubenRural());
+					bean.setNumUsuEmp(""+cargo.getCfinumusuempRural());
+					bean.setNumValDCan(""+cargo.getCfinumvaldcanRural());
+					bean.setNumValDEmi(""+cargo.getCfinumvaldemiRural());
+					bean.setNumValFCan(""+cargo.getCfinumvalfcanRural());
+					bean.setNumValFEmi(""+cargo.getCfinumvalfemiRural());
 					bean.setMontoCanje(""+cargo.getCfimontracan());
-					bean.setMontoMes(""+cargo.getCfimon());
+					bean.setMontoMes(""+cargo.getCfimonRural());
 					bean.setIgv(""+cargo.getCfiigv());
 					//bean.setAplicaIgv(""+cargo.getCfiapliigv());		
 					//opcionales

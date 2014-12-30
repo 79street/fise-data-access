@@ -148,6 +148,17 @@ public abstract class FechaUtil {
 		}
 	}
 	
+	public static Date getFechaStringToDateDDMMYYY(String date) {
+		Date fecha = null;
+		try {
+			fecha = format.parse(date);
+			return fecha;
+		} catch (Exception ex) {
+			System.out.println("Error al parsear la fecha");
+			return null;
+		}
+	}
+	
 	public static String getFechaDateToString(Date date) {
 		String fecha = null;
 		try {

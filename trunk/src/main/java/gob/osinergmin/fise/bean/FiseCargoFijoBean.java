@@ -32,16 +32,41 @@ public class FiseCargoFijoBean {
 	private String numDocRecepcion;	//numero de documento recepcion
 	private String fechaSustento;//fecha informe sustento	
 	private String fechaRecepcion;//fecha de recepcion
-	private String igv;
-	private String montoMes;//monto cargo fijo al mes
+	private String igv;	
 	private String montoCanje;//monto transferido por canje
-	private String numAgente;//numero de agentes
-	private String numUsuBenef;//numero de usuarios beneficiarios
-	private String numUsuEmp;//numero de usuarios empadronados
-	private String numValDCan;//numero de vales digitales cangeados
-	private String numValDEmi;//numero de vales digitales emitidos
-	private String numValFCan;//numero de vales fisicos cangeados
-	private String numValFEmi;//numero de vales fisicos emitidos
+	
+	private String montoMesR;//monto cargo fijo al mes rural
+	private String montoMesP;//monto cargo fijo al mes provincias
+	private String montoMesL;//monto cargo fijo al mes lima
+	
+	private String numAgenteR;//numero de agentes rural
+	private String numAgenteP;//numero de agentes provincias
+	private String numAgenteL;//numero de agentes lima
+	
+	private String numUsuBenefR;//numero de usuarios beneficiarios rural
+	private String numUsuBenefP;//numero de usuarios beneficiarios provincias
+	private String numUsuBenefL;//numero de usuarios beneficiarios lima
+	
+	private String numUsuEmpR;//numero de usuarios empadronados rural
+	private String numUsuEmpP;//numero de usuarios empadronados provincias
+	private String numUsuEmpL;//numero de usuarios empadronados lima
+	
+	private String numValDCanR;//numero de vales digitales cangeados rural
+	private String numValDCanP;//numero de vales digitales cangeados provincias
+	private String numValDCanL;//numero de vales digitales cangeados lima
+	
+	private String numValDEmiR;//numero de vales digitales emitidos rural
+	private String numValDEmiP;//numero de vales digitales emitidos provincias
+	private String numValDEmiL;//numero de vales digitales emitidos lima
+	
+	private String numValFCanR;//numero de vales fisicos cangeados rural
+	private String numValFCanP;//numero de vales fisicos cangeados provincias
+	private String numValFCanL;//numero de vales fisicos cangeados lima
+	
+	private String numValFEmiR;//numero de vales fisicos emitidos rural
+	private String numValFEmiP;//numero de vales fisicos emitidos provincias
+	private String numValFEmiL;//numero de vales fisicos emitidos lima
+	
 	private String estado;//estado de registro
 	private String usuario;
     private String terminal;
@@ -150,59 +175,157 @@ public class FiseCargoFijoBean {
 	public void setIgv(String igv) {
 		this.igv = igv;
 	}
-	public String getMontoMes() {
-		return montoMes;
-	}
-	public void setMontoMes(String montoMes) {
-		this.montoMes = montoMes;
-	}
+	
 	public String getMontoCanje() {
 		return montoCanje;
 	}
 	public void setMontoCanje(String montoCanje) {
 		this.montoCanje = montoCanje;
 	}
-	public String getNumAgente() {
-		return numAgente;
+	
+	public String getMontoMesR() {
+		return montoMesR;
 	}
-	public void setNumAgente(String numAgente) {
-		this.numAgente = numAgente;
+	public void setMontoMesR(String montoMesR) {
+		this.montoMesR = montoMesR;
 	}
-	public String getNumUsuBenef() {
-		return numUsuBenef;
+	public String getMontoMesP() {
+		return montoMesP;
 	}
-	public void setNumUsuBenef(String numUsuBenef) {
-		this.numUsuBenef = numUsuBenef;
+	public void setMontoMesP(String montoMesP) {
+		this.montoMesP = montoMesP;
 	}
-	public String getNumUsuEmp() {
-		return numUsuEmp;
+	public String getMontoMesL() {
+		return montoMesL;
 	}
-	public void setNumUsuEmp(String numUsuEmp) {
-		this.numUsuEmp = numUsuEmp;
+	public void setMontoMesL(String montoMesL) {
+		this.montoMesL = montoMesL;
 	}
-	public String getNumValDCan() {
-		return numValDCan;
+	public String getNumAgenteR() {
+		return numAgenteR;
 	}
-	public void setNumValDCan(String numValDCan) {
-		this.numValDCan = numValDCan;
+	public void setNumAgenteR(String numAgenteR) {
+		this.numAgenteR = numAgenteR;
 	}
-	public String getNumValDEmi() {
-		return numValDEmi;
+	public String getNumAgenteP() {
+		return numAgenteP;
 	}
-	public void setNumValDEmi(String numValDEmi) {
-		this.numValDEmi = numValDEmi;
+	public void setNumAgenteP(String numAgenteP) {
+		this.numAgenteP = numAgenteP;
 	}
-	public String getNumValFCan() {
-		return numValFCan;
+	public String getNumAgenteL() {
+		return numAgenteL;
 	}
-	public void setNumValFCan(String numValFCan) {
-		this.numValFCan = numValFCan;
+	public void setNumAgenteL(String numAgenteL) {
+		this.numAgenteL = numAgenteL;
 	}
-	public String getNumValFEmi() {
-		return numValFEmi;
+	public String getNumUsuBenefR() {
+		return numUsuBenefR;
 	}
-	public void setNumValFEmi(String numValFEmi) {
-		this.numValFEmi = numValFEmi;
+	public void setNumUsuBenefR(String numUsuBenefR) {
+		this.numUsuBenefR = numUsuBenefR;
+	}
+	public String getNumUsuBenefP() {
+		return numUsuBenefP;
+	}
+	public void setNumUsuBenefP(String numUsuBenefP) {
+		this.numUsuBenefP = numUsuBenefP;
+	}
+	public String getNumUsuBenefL() {
+		return numUsuBenefL;
+	}
+	public void setNumUsuBenefL(String numUsuBenefL) {
+		this.numUsuBenefL = numUsuBenefL;
+	}
+	public String getNumUsuEmpR() {
+		return numUsuEmpR;
+	}
+	public void setNumUsuEmpR(String numUsuEmpR) {
+		this.numUsuEmpR = numUsuEmpR;
+	}
+	public String getNumUsuEmpP() {
+		return numUsuEmpP;
+	}
+	public void setNumUsuEmpP(String numUsuEmpP) {
+		this.numUsuEmpP = numUsuEmpP;
+	}
+	public String getNumUsuEmpL() {
+		return numUsuEmpL;
+	}
+	public void setNumUsuEmpL(String numUsuEmpL) {
+		this.numUsuEmpL = numUsuEmpL;
+	}
+	public String getNumValDCanR() {
+		return numValDCanR;
+	}
+	public void setNumValDCanR(String numValDCanR) {
+		this.numValDCanR = numValDCanR;
+	}
+	public String getNumValDCanP() {
+		return numValDCanP;
+	}
+	public void setNumValDCanP(String numValDCanP) {
+		this.numValDCanP = numValDCanP;
+	}
+	public String getNumValDCanL() {
+		return numValDCanL;
+	}
+	public void setNumValDCanL(String numValDCanL) {
+		this.numValDCanL = numValDCanL;
+	}
+	public String getNumValDEmiR() {
+		return numValDEmiR;
+	}
+	public void setNumValDEmiR(String numValDEmiR) {
+		this.numValDEmiR = numValDEmiR;
+	}
+	public String getNumValDEmiP() {
+		return numValDEmiP;
+	}
+	public void setNumValDEmiP(String numValDEmiP) {
+		this.numValDEmiP = numValDEmiP;
+	}
+	public String getNumValDEmiL() {
+		return numValDEmiL;
+	}
+	public void setNumValDEmiL(String numValDEmiL) {
+		this.numValDEmiL = numValDEmiL;
+	}
+	public String getNumValFCanR() {
+		return numValFCanR;
+	}
+	public void setNumValFCanR(String numValFCanR) {
+		this.numValFCanR = numValFCanR;
+	}
+	public String getNumValFCanP() {
+		return numValFCanP;
+	}
+	public void setNumValFCanP(String numValFCanP) {
+		this.numValFCanP = numValFCanP;
+	}
+	public String getNumValFCanL() {
+		return numValFCanL;
+	}
+	public void setNumValFCanL(String numValFCanL) {
+		this.numValFCanL = numValFCanL;
+	}
+	public String getNumValFEmiR() {
+		return numValFEmiR;
+	}
+	public void setNumValFEmiR(String numValFEmiR) {
+		this.numValFEmiR = numValFEmiR;
+	}
+	public String getNumValFEmiP() {
+		return numValFEmiP;
+	}
+	public void setNumValFEmiP(String numValFEmiP) {
+		this.numValFEmiP = numValFEmiP;
+	}
+	public String getNumValFEmiL() {
+		return numValFEmiL;
+	}
+	public void setNumValFEmiL(String numValFEmiL) {
+		this.numValFEmiL = numValFEmiL;
 	}
 	public String getEstado() {
 		return estado;

@@ -879,6 +879,8 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		mapJRParams.put(FiseConstants.PARAM_DESC_EMPRESA_F14A, formato14ABean.getDescEmpresa());
 		mapJRParams.put(FiseConstants.PARAM_ANO_PRES_F14A, formato14ABean.getAnioPresent());
 		mapJRParams.put(FiseConstants.PARAM_DESC_MES_PRES_F14A, formato14ABean.getDescMesPresentacion());
+		mapJRParams.put(FiseConstants.PARAM_ANO_INICIO_VIGENCIA, formato14ABean.getAnioInicioVigencia());
+		mapJRParams.put(FiseConstants.PARAM_ANO_FIN_VIGENCIA, formato14ABean.getAnioFinVigencia());
 		
 		////----RURAL
 		mapJRParams.put(FiseConstants.PARAM_SUM_EMP_SUMI_R_F14A,formato14ABean.getSumEmpadDifusionR());

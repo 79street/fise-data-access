@@ -37,4 +37,7 @@ public interface Formato13AGartService {
 	
 	void eliminarObservaciones13A(List<FiseFormato13ADOb> listaObs) throws Exception;
 	
+	boolean existeFormato13AC(FiseFormato13AC fiseFormato13AC);
+	boolean existeFormatoDetalleSectorTipico(FiseFormato13AC fiseFormato13AC, String codUbigeo, Long idZonaBenef);
+	
 }

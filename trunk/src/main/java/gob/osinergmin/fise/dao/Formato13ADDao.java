@@ -17,4 +17,6 @@ public interface Formato13ADDao extends GenericDao {
 	FiseFormato13AD updatedetalle(FiseFormato13AD fiseD);
 	Integer deletedetalle(String emp,Long anio,Long mes,String etapa);
 	void eliminarFormato13AD(FiseFormato13AD fiseFormato13AD);
+	
+	boolean existeFormatoDetalleSectorTipico(FiseFormato13AC fiseFormato13AC, String codUbigeo, Long idZonaBenef);
 }

@@ -24,6 +24,6 @@ public interface FisePeriodoEnvioGartService {
 	
 	PeriodoEnvioBean buscarFisePeriodoEnvioEditar(String id) throws Exception;
 	
-	List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento();
+	List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(String frecuenciaFormato);
 
 }

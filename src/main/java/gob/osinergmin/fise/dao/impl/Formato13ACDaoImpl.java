@@ -215,4 +215,22 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		 }	
 	}
 	
+	//add
+	@Override
+	public boolean existeFormato13AC(FiseFormato13AC fiseFormato13AC){
+		boolean existe = false;
+		try{
+			fiseFormato13AC.getId().setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato13AC.getId().getCodEmpresa(), ' ', 4));
+			FiseFormato13AC formato = em.find(FiseFormato13AC.class, fiseFormato13AC.getId());
+			if( formato != null ){
+		    	existe = true;
+		    }
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return existe;
+	}
+	
 }

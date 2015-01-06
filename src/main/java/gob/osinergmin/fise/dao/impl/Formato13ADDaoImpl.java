@@ -2,6 +2,7 @@ package gob.osinergmin.fise.dao.impl;
 
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
@@ -221,6 +222,70 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 		 }
 	}
 
+	//ADD
+	public boolean existeFormatoDetalleSectorTipico(FiseFormato13AC formato13AC, String codUbigeo, Long idZonaBenef) {
+		List<FiseFormato13AD> lista = null;
+		boolean existe = false;
+		try {
+			String q = "SELECT t FROM FiseFormato13AD t WHERE 1=1 ";
+			if (FormatoUtil.isNotBlank(formato13AC.getId().getCodEmpresa())) {
+				q = q + " AND t.id.codEmpresa = :codEmpresa ";
+			}
+			if (formato13AC.getId().getAnoPresentacion() != 0) {
+				q = q + " AND t.id.anoPresentacion = :anioPresentacion ";
+			}
+			if (formato13AC.getId().getMesPresentacion() != 0) {
+				q = q + " AND t.id.mesPresentacion = :mesPresentacion ";
+			}
+			if (FormatoUtil.isNotBlank(formato13AC.getId().getEtapa())) {
+				q = q + " AND t.id.etapa = :etapa ";
+			}
+			if (FormatoUtil.isNotBlank(codUbigeo)) {
+				q = q + " AND t.id.codUbigeo = :codUbigeo ";
+			}
+			if (idZonaBenef != 0) {
+				q = q + " AND t.id.idZonaBenef = :idZonaBenef ";
+			}
+			q = q + " AND t.id.codSectorTipico in ('"+
+					FiseConstants.SECTOR_TIPICO_1_COD+"','"+FiseConstants.SECTOR_TIPICO_2_COD+"','"+
+					FiseConstants.SECTOR_TIPICO_3_COD+"','"+FiseConstants.SECTOR_TIPICO_4_COD+"','"+
+					FiseConstants.SECTOR_TIPICO_5_COD+"','"+FiseConstants.SECTOR_TIPICO_6_COD+"','"+
+					FiseConstants.SECTOR_TIPICO_SER_COD+"','"+FiseConstants.SECTOR_TIPICO_ESP_COD+"')";
+			
+			Query query = em.createQuery(q);
+			if (FormatoUtil.isNotBlank(formato13AC.getId().getCodEmpresa())) {
+				query.setParameter("codEmpresa", formato13AC.getId().getCodEmpresa());
+			}
+			if (formato13AC.getId().getAnoPresentacion() != 0) {
+				query.setParameter("anioPresentacion", formato13AC.getId().getAnoPresentacion());
+			}
+			if (formato13AC.getId().getMesPresentacion() != 0) {
+				query.setParameter("mesPresentacion", formato13AC.getId().getMesPresentacion());
+			}
+			if (FormatoUtil.isNotBlank(formato13AC.getId().getEtapa())) {
+				query.setParameter("etapa", formato13AC.getId().getEtapa());
+			}
+			if (FormatoUtil.isNotBlank(codUbigeo)) {
+				query.setParameter("codUbigeo", codUbigeo);
+			}
+			if (idZonaBenef != 0) {
+				query.setParameter("idZonaBenef", idZonaBenef);
+			}
+
+			lista = query.getResultList();
+			System.out.println("SQL   > " + q);
+			
+			if( lista != null  && lista.size()==8 ){
+				existe = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return existe;
+	}
 	
 
 }

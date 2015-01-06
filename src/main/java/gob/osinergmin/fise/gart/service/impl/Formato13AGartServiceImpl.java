@@ -176,5 +176,16 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		}			
 	}
 	
+	@Override
+	@Transactional
+	public boolean existeFormato13AC(FiseFormato13AC fiseFormato13AC){
+		return formato13ACDao.existeFormato13AC(fiseFormato13AC);
+	}
+	
+	@Override
+	@Transactional
+	public boolean existeFormatoDetalleSectorTipico(FiseFormato13AC fiseFormato13AC, String codUbigeo, Long idZonaBenef){
+		return formato13ADDao.existeFormatoDetalleSectorTipico(fiseFormato13AC, codUbigeo, idZonaBenef);
+	}
 	
 }

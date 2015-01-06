@@ -210,8 +210,8 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 	}
 	
 	@Transactional
-	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(){
-		return fisePeriodoEnvioDao.listarFisePeriodoEnvioMesAnioEtapaCumplimiento();
+	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(String frecuenciaFormato){
+		return fisePeriodoEnvioDao.listarFisePeriodoEnvioMesAnioEtapaCumplimiento(frecuenciaFormato);
 	}
 	
 	

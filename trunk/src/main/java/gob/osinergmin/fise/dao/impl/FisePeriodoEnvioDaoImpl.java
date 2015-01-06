@@ -162,7 +162,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 		 }	
 	}
 	
-	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(){
+	//MENSUAL
+	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(String frecuenciaFormato){
 		
 		List<FisePeriodoEnvio> lst = new ArrayList<FisePeriodoEnvio>();
 		try {
@@ -172,8 +173,14 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			sql.append(" DECODE(MES_PRESENTACION,1,'Ene',2,'Feb',3,'Mar',4,'Abr',5,'May',6,'Jun',7,'Jul',8,'Ago',9,'Set',10,'Oct',11,'Nov',12,'Dic')");
 			sql.append(" || '-' || ANO_PRESENTACION || ' / ' || ETAPA DESCRIPCION");
 			sql.append(" FROM FISE_PERIODO_ENVIO t");
-			//sql.append(" WHERE 1=1 ");
+			sql.append(" WHERE 1=1 ");
 			
+			if( FiseConstants.FRECUENCIA_MENSUAL_DESCRIPCION.equals(frecuenciaFormato) ){
+				sql.append(" AND FORMATO IN ('F12A', 'F12B','F12C','F12D') ");
+			}else if( FiseConstants.FRECUENCIA_BIENAL_DESCRIPCION.equals(frecuenciaFormato) ){
+				sql.append(" AND FORMATO IN ('F13A', 'F14A','F14B','F14C') ");
+			}
+
 			sql.append(" order by 1 desc");
 			Query query = em.createNativeQuery(sql.toString());
 			

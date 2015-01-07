@@ -3,6 +3,8 @@ package gob.osinergmin.fise.dao.impl;
 import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.LiquidacionDao;
 import gob.osinergmin.fise.domain.FiseLiquidacione;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
@@ -147,6 +149,69 @@ public class LiquidacionDaoImpl extends GenericDaoImpl implements LiquidacionDao
 			em.close();
 		}
 		return result;
+	}
+	
+	/*****Motivos de la liquidacion****/
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseLiquidacionesMotivosNo> buscarFiseLiquidacionesMotivosNo(long correlativo,
+			long item) throws SQLException{
+		
+		String q = "SELECT m FROM " + FiseLiquidacionesMotivosNo.class.getName()
+				+ " m WHERE 1=1 ";		
+		if(correlativo!=0){ 		
+			q = q.concat(" AND m.id.correlativo =:correlativo ");	
+		}
+		if(item!=0){ 		
+			q = q.concat(" AND m.id.item =:item ");	
+		}
+		Query query = em.createQuery(q); 
+		if(correlativo!=0){
+			query.setParameter("correlativo", correlativo);			
+		}
+		if(item!=0){
+			query.setParameter("item", item);			
+		}		
+		List<FiseLiquidacionesMotivosNo> lista= query.getResultList();
+		if(lista==null){
+			return Collections.EMPTY_LIST;
+		}else{
+			return lista;
+		}	
+	}
+	
+	@Override
+	public FiseLiquidacionesMotivosNo obtenerFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNoPK id) 
+			throws SQLException{
+		return em.find(FiseLiquidacionesMotivosNo.class, id);		
+	}
+	
+	@Override
+	public void insertarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException{
+		em.persist(liquidacionMotivosNo);
+		
+	}
+
+	@Override
+	public void actualizarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException{
+		em.merge(liquidacionMotivosNo);		
+	}
+	
+	
+	@Override
+	public long buscarMaximoMotivo() throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(m.id.item) FROM " + FiseLiquidacionesMotivosNo.class.getName()
+				+ " m  ";
+		Query query = em.createQuery(q); 		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
 	}
 	
 

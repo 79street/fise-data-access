@@ -3,7 +3,10 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.LiquidacionBean;
 import gob.osinergmin.fise.dao.LiquidacionDao;
 import gob.osinergmin.fise.domain.FiseLiquidacione;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK;
 import gob.osinergmin.fise.gart.service.FiseLiquidacionService;
+import gob.osinergmin.fise.util.FechaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +157,160 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 	}
 	
 	
+	/*****Metodos para registrar el motivo de la liquidacion*****/
+	
+	@Override
+	@Transactional
+	public String insertarDatosLiquidacionesMotivosNo(LiquidacionBean bean) throws Exception{
+		FiseLiquidacionesMotivosNo motivo =null;
+		FiseLiquidacionesMotivosNoPK pk = null;
+		String valor="1";
+		try {
+			long idItem = liquidacionDao.buscarMaximoMotivo();
+			logger.info("Maximo de id item  de motivo:  "+idItem);
+			pk =  new FiseLiquidacionesMotivosNoPK();
+			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 			
+			pk.setItem(idItem); 
+			motivo =  new FiseLiquidacionesMotivosNo();
+			motivo.setId(pk);
+			motivo.setDescripcionMotivo(bean.getDescMotivo());
+			motivo.setEstado("1"); 
+			motivo.setFechaCreacion(FechaUtil.obtenerFechaActual());
+			motivo.setUsuarioCreacion(bean.getUsuario());
+			motivo.setTerminalCreacion(bean.getTerminal());
+			liquidacionDao.insertarFiseLiquidacionesMotivosNo(motivo);	
+		} catch (Exception e) {
+			logger.info("Error al grabar datos de los motivos de la liquidacion: "+e); 
+			valor = "0";
+		}finally{
+			if(pk !=null){
+				pk =null;
+			}
+			if(motivo !=null){
+				motivo =null;
+			}
+		}
+		return valor;		
+	}
+	
+	@Override
+	@Transactional
+	public String actualizarDatosLiquidacionesMotivosNo(LiquidacionBean bean) throws Exception{
+		FiseLiquidacionesMotivosNo motivo =null;
+		FiseLiquidacionesMotivosNoPK pk = null;
+		String valor ="1";
+		try {			
+			pk =  new FiseLiquidacionesMotivosNoPK();
+			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 
+			pk.setItem(Long.valueOf(bean.getItemMotivo())); 
+			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);			
+			motivo.setDescripcionMotivo(bean.getDescMotivo());
+			motivo.setEstado("1"); //ojo
+			motivo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+			motivo.setUsuarioActualizacion(bean.getUsuario());
+			motivo.setTerminalActualizacion(bean.getTerminal());
+			liquidacionDao.actualizarFiseLiquidacionesMotivosNo(motivo); 	
+		} catch (Exception e) {
+			logger.info("Error al actualizar datos del motivo de la liquidacion: "+e); 
+			valor = "0";
+		}finally{
+			if(pk !=null){
+				pk =null;
+			}
+			if(motivo !=null){
+				motivo =null;
+			}
+		}
+		return valor;		
+	}
+	
+	@Override
+	@Transactional
+	public String eliminarDatosLiquidacionesMotivosNo(LiquidacionBean bean) throws Exception{
+		FiseLiquidacionesMotivosNo motivo =null;
+		FiseLiquidacionesMotivosNoPK pk = null;
+		String valor ="1";
+		try {			
+			pk =  new FiseLiquidacionesMotivosNoPK();
+			pk.setCorrelativo(Long.valueOf(bean.getCorrelativoEdit())); 
+			pk.setItem(Long.valueOf(bean.getItemMotivoEdit())); 
+			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);				
+			motivo.setEstado("0"); 
+			motivo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+			motivo.setUsuarioActualizacion(bean.getUsuario());
+			motivo.setTerminalActualizacion(bean.getTerminal());
+			liquidacionDao.actualizarFiseLiquidacionesMotivosNo(motivo); 	
+		} catch (Exception e) {
+			logger.info("Error al eliminar motivos de  la liquidacion: "+e); 
+			valor = "0";
+		}finally{
+			if(pk !=null){
+				pk =null;
+			}
+			if(motivo !=null){
+				motivo =null;
+			}
+		}
+		return valor;
+	}
+	
+	@Override
+	@Transactional
+	public List<LiquidacionBean> buscarDatosLiquidacionesMotivosNo(long correlativo, long item) 
+			throws Exception{
+		List<LiquidacionBean> listaMotivo = null;
+		try {
+			listaMotivo = new ArrayList<LiquidacionBean>();			
+			List<FiseLiquidacionesMotivosNo> lista = liquidacionDao.buscarFiseLiquidacionesMotivosNo(correlativo, item);
+			for(FiseLiquidacionesMotivosNo m :lista){
+				LiquidacionBean bean = new LiquidacionBean();
+				bean.setCoMotivo(""+m.getId().getCorrelativo());
+				bean.setItemMotivo(""+m.getId().getItem());
+				bean.setDescMotivo(m.getDescripcionMotivo());	
+				if(m.getEstado().equals("1")){
+					bean.setEstadoMotivo("Activo");  	
+				}else{
+					bean.setEstadoMotivo("Inactivo");  
+				}				
+				listaMotivo.add(bean);
+			}			
+		} catch (Exception e) {
+			logger.info("Error buscar datos del motivo de la liquidacion: "+e); 			
+		}		
+		return listaMotivo;
+	}
+	
+	
+	@Override
+	@Transactional
+	public LiquidacionBean obtenerDatosLiquidacionesMotivosNo(long correlativo, long item) 
+			throws Exception{
+		FiseLiquidacionesMotivosNo motivo =null;
+		FiseLiquidacionesMotivosNoPK pk = null;	
+		LiquidacionBean bean = new LiquidacionBean();
+		try {			
+			pk =  new FiseLiquidacionesMotivosNoPK();
+			pk.setCorrelativo(correlativo); 
+			pk.setItem(item); 
+			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);
+			if(motivo!=null){				
+				bean.setCoMotivo(""+motivo.getId().getCorrelativo());
+				bean.setItemMotivo(""+motivo.getId().getItem());
+				bean.setDescMotivo(motivo.getDescripcionMotivo()==null?"":motivo.getDescripcionMotivo());
+				bean.setEstadoMotivo(motivo.getEstado()=="0"?"Inactivo":"Activo");	
+			}			
+		} catch (Exception e) {
+			logger.info("Error al obtener datos del motivo de la liquidacion: "+e); 			
+		}finally{
+			if(pk !=null){
+				pk =null;
+			}
+			if(motivo !=null){
+				motivo =null;
+			}
+		}
+		return bean;		
+	}
 	
 
 }

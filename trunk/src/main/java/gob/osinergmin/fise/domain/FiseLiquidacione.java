@@ -2,6 +2,7 @@ package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -79,6 +81,10 @@ public class FiseLiquidacione implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_GRUPO_INFORMACION")
 	private FiseGrupoInformacion fiseGrupoInformacion;
+	
+	//bi-directional many-to-one association to FiseLiquidacionesMotivosNo
+	@OneToMany(mappedBy="fiseLiquidacione")
+	private List<FiseLiquidacionesMotivosNo> fiseLiquidacionesMotivosNos;
 
 	public FiseLiquidacione() {
 	}
@@ -225,6 +231,28 @@ public class FiseLiquidacione implements Serializable {
 
 	public void setFiseGrupoInformacion(FiseGrupoInformacion fiseGrupoInformacion) {
 		this.fiseGrupoInformacion = fiseGrupoInformacion;
+	}
+	
+	public List<FiseLiquidacionesMotivosNo> getFiseLiquidacionesMotivosNos() {
+		return this.fiseLiquidacionesMotivosNos;
+	}
+
+	public void setFiseLiquidacionesMotivosNos(List<FiseLiquidacionesMotivosNo> fiseLiquidacionesMotivosNos) {
+		this.fiseLiquidacionesMotivosNos = fiseLiquidacionesMotivosNos;
+	}
+
+	public FiseLiquidacionesMotivosNo addFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo fiseLiquidacionesMotivosNo) {
+		getFiseLiquidacionesMotivosNos().add(fiseLiquidacionesMotivosNo);
+		fiseLiquidacionesMotivosNo.setFiseLiquidacione(this);
+
+		return fiseLiquidacionesMotivosNo;
+	}
+
+	public FiseLiquidacionesMotivosNo removeFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo fiseLiquidacionesMotivosNo) {
+		getFiseLiquidacionesMotivosNos().remove(fiseLiquidacionesMotivosNo);
+		fiseLiquidacionesMotivosNo.setFiseLiquidacione(null);
+
+		return fiseLiquidacionesMotivosNo;
 	}
 
 }

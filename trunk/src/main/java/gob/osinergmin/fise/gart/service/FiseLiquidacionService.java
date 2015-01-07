@@ -17,5 +17,20 @@ public interface FiseLiquidacionService {
 	
 	String liquidarFormatos(List<LiquidacionBean> lista, 
 			String usuario,String terminal) throws Exception;
+	
+	String insertarDatosLiquidacionesMotivosNo(LiquidacionBean bean) 
+			throws Exception;
+	
+	String actualizarDatosLiquidacionesMotivosNo(LiquidacionBean bean) 
+			throws Exception;
+	
+	String eliminarDatosLiquidacionesMotivosNo(LiquidacionBean bean) 
+			throws Exception;
+	
+	List<LiquidacionBean> buscarDatosLiquidacionesMotivosNo(long correlativo, long item) 
+			throws Exception;
+	
+	LiquidacionBean obtenerDatosLiquidacionesMotivosNo(long correlativo, long item) 
+			throws Exception;
 
 }

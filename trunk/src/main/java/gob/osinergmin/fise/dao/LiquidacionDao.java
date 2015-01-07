@@ -1,6 +1,8 @@
 package gob.osinergmin.fise.dao;
 
 import gob.osinergmin.fise.domain.FiseLiquidacione;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo;
+import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,5 +29,19 @@ public interface LiquidacionDao {
 	
 	int liquidarFormato(long correlativo, 
 			String usuario, String terminal) throws SQLException;
+	
+	List<FiseLiquidacionesMotivosNo> buscarFiseLiquidacionesMotivosNo(long correlativo,
+			long item) throws SQLException;
+	
+	FiseLiquidacionesMotivosNo obtenerFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNoPK id) 
+			throws SQLException;
+	
+	void insertarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException;
+	
+	void actualizarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException;
+	
+	long buscarMaximoMotivo() throws SQLException;
 
 }

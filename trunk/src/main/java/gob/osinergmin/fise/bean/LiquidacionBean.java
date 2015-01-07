@@ -45,6 +45,15 @@ public class LiquidacionBean {
 	
 	private String flagBusq;//para refrescar la grilla de la busqueda luedo de eliminar, liquiday y generar etapa
 	
+	/***para motivos de la liquidacion**/
+	private String itemMotivo;//item del motivo 
+	private String coMotivo;//correlativo del motivo
+	private String descMotivo;//descripcion del motivo
+	private String estadoMotivo;//estado del motivo
+	private String itemMotivoEdit;
+	private String correlativoEdit;
+	
+	
 	/*****Metodos get y set****/	
 	
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -197,5 +206,43 @@ public class LiquidacionBean {
 	public void setFlagBusq(String flagBusq) {
 		this.flagBusq = flagBusq;
 	}
+	public String getItemMotivo() {
+		return itemMotivo;
+	}
+	public void setItemMotivo(String itemMotivo) {
+		this.itemMotivo = itemMotivo;
+	}
+	public String getCoMotivo() {
+		return coMotivo;
+	}
+	public void setCoMotivo(String coMotivo) {
+		this.coMotivo = coMotivo;
+	}
+	public String getDescMotivo() {
+		return descMotivo;
+	}
+	public void setDescMotivo(String descMotivo) {
+		this.descMotivo = descMotivo;
+	}
+	public String getEstadoMotivo() {
+		return estadoMotivo;
+	}
+	public void setEstadoMotivo(String estadoMotivo) {
+		this.estadoMotivo = estadoMotivo;
+	}
+	public String getItemMotivoEdit() {
+		return itemMotivoEdit;
+	}
+	public void setItemMotivoEdit(String itemMotivoEdit) {
+		this.itemMotivoEdit = itemMotivoEdit;
+	}
+	public String getCorrelativoEdit() {
+		return correlativoEdit;
+	}
+	public void setCorrelativoEdit(String correlativoEdit) {
+		this.correlativoEdit = correlativoEdit;
+	}
+	
+	
 	
 }

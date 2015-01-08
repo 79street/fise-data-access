@@ -21,6 +21,7 @@ public class PeriodoEnvioBean {
 	
 	private boolean admin;	
 	
+	
 	/**DATOS PARA NUEVO REGISTRO*****/	
 	private String secuencial;
 	private String codEmpresa;
@@ -298,10 +299,6 @@ public class PeriodoEnvioBean {
 	}
 	public void setFechaAmpl(String fechaAmpl) {
 		this.fechaAmpl = fechaAmpl;
-	}	
-		
-	
-	
-	
+	}
 	
 }

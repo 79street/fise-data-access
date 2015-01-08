@@ -1811,4 +1811,9 @@ public class FiseConstants {
 	public final static String CAMPO_NUMERO_TOTAL_BENEF_POTE_LOCAL = "NUMERO_TOTAL_BENEF_POTE_LOCAL";
 	public final static String CAMPO_NUMERO_TOTAL_BENEF_POTENCIAL = "NUMERO_TOTAL_BENEF_POTENCIAL";
 
+	
+	/****resumen de costos****/	
+	public final static String NOMBRE_F12A = "FORMATO 12A: RESUMEN DE COSTOS OPERATIVOS-IMPLEMENTACIÓN";
+	public final static String NOMBRE_F12B = "FORMATO 12B: RESUMEN DE COSTOS OPERATIVOS";
+	
 }

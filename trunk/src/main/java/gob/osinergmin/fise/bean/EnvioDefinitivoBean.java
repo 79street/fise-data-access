@@ -44,6 +44,8 @@ public class EnvioDefinitivoBean {
 	private String anioIniVig;
 	private String anioFinVig;
 	
+	private String flagExiteData;//verifica si existe datos en la grilla
+	
 	
 	/*****Metodos get y set****/
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -191,5 +193,12 @@ public class EnvioDefinitivoBean {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public String getFlagExiteData() {
+		return flagExiteData;
+	}
+	public void setFlagExiteData(String flagExiteData) {
+		this.flagExiteData = flagExiteData;
+	}
+	
 	
 }

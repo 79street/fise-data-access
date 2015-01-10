@@ -200,13 +200,19 @@ public class LiquidacionDaoImpl extends GenericDaoImpl implements LiquidacionDao
 		em.merge(liquidacionMotivosNo);		
 	}
 	
+	@Override
+	public void eliminarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException{
+		em.remove(liquidacionMotivosNo);		
+	}
 	
 	@Override
-	public long buscarMaximoMotivo() throws SQLException{		
+	public long buscarMaximoMotivo(long correlativo) throws SQLException{		
 		long maxId = 1;		
 		String q = "SELECT MAX(m.id.item) FROM " + FiseLiquidacionesMotivosNo.class.getName()
-				+ " m  ";
-		Query query = em.createQuery(q); 		
+				+ " m WHERE m.id.correlativo = :correlativo ";
+		Query query = em.createQuery(q); 	
+		query.setParameter("correlativo", correlativo);
 		Long verifica = (Long)query.getSingleResult();
 		if(verifica!=null){
 			maxId = verifica +1;

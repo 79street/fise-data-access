@@ -166,7 +166,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		FiseLiquidacionesMotivosNoPK pk = null;
 		String valor="1";
 		try {
-			long idItem = liquidacionDao.buscarMaximoMotivo();
+			long idItem = liquidacionDao.buscarMaximoMotivo(Long.valueOf(bean.getCoMotivo()));
 			logger.info("Maximo de id item  de motivo:  "+idItem);
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 			
@@ -234,12 +234,8 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCorrelativoEdit())); 
 			pk.setItem(Long.valueOf(bean.getItemMotivoEdit())); 
-			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);				
-			motivo.setEstado("0"); 
-			motivo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
-			motivo.setUsuarioActualizacion(bean.getUsuario());
-			motivo.setTerminalActualizacion(bean.getTerminal());
-			liquidacionDao.actualizarFiseLiquidacionesMotivosNo(motivo); 	
+			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);			
+			liquidacionDao.eliminarFiseLiquidacionesMotivosNo(motivo); 	
 		} catch (Exception e) {
 			logger.info("Error al eliminar motivos de  la liquidacion: "+e); 
 			valor = "0";

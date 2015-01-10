@@ -42,6 +42,9 @@ public interface LiquidacionDao {
 	void actualizarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
 			throws SQLException;
 	
-	long buscarMaximoMotivo() throws SQLException;
+	long buscarMaximoMotivo(long correlativo) throws SQLException;
+	
+	void eliminarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
+			throws SQLException;
 
 }

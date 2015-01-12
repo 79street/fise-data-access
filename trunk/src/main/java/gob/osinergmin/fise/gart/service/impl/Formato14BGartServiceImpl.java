@@ -161,7 +161,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotalImpresion(totalImpresion);
 				detalleRural.setNumeroValesImpreso(formulario.getNroValesImpR());
 				if( formulario.getNroValesImpR() !=0 ){
-					detalleRural.setCostoUnitarioImpresionVales(detalleRural.getCostoTotalImpresion().divide(new BigDecimal(detalleRural.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioImpresionVales(detalleRural.getCostoTotalImpresion().divide(new BigDecimal(detalleRural.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -169,7 +169,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoR());
 				detalleRural.setNumeroValesRepartidos(formulario.getNroValesReptR());
 				if( formulario.getNroValesReptR() !=0 ){
-					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -177,7 +177,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficR());
 				detalleRural.setNumeroValesEntregados(formulario.getNroValesEntrR());
 				if( formulario.getNroValesEntrR() !=0 ){
-					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -185,7 +185,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronR());
 				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisR());
 				if( formulario.getNroValesFisR() !=0 ){
-					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -201,7 +201,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotalAtencion(totalAtencion);
 				detalleRural.setNumeroTotalAtencion(formulario.getNroTotalAtenR());
 				if( formulario.getNroTotalAtenR() !=0 ){
-					detalleRural.setCostoUnitarioPorAtencion(detalleRural.getCostoTotalAtencion().divide(new BigDecimal(detalleRural.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioPorAtencion(detalleRural.getCostoTotalAtencion().divide(new BigDecimal(detalleRural.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}
@@ -260,7 +260,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotalImpresion(totalImpresion);
 				detalleProvincia.setNumeroValesImpreso(formulario.getNroValesImpP());
 				if( formulario.getNroValesImpP() !=0 ){
-					detalleProvincia.setCostoUnitarioImpresionVales(detalleProvincia.getCostoTotalImpresion().divide(new BigDecimal(detalleProvincia.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitarioImpresionVales(detalleProvincia.getCostoTotalImpresion().divide(new BigDecimal(detalleProvincia.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -268,7 +268,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoP());
 				detalleProvincia.setNumeroValesRepartidos(formulario.getNroValesReptP());
 				if( formulario.getNroValesReptP() !=0 ){
-					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -276,7 +276,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficP());
 				detalleProvincia.setNumeroValesEntregados(formulario.getNroValesEntrP());
 				if( formulario.getNroValesEntrP() !=0 ){
-					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -284,7 +284,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronP());
 				detalleProvincia.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
 				if( formulario.getNroValesFisP() !=0 ){
-					detalleProvincia.setCostoUnitCanjeLiqValFisi(detalleProvincia.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleProvincia.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitCanjeLiqValFisi(detalleProvincia.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleProvincia.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -300,7 +300,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotalAtencion(totalAtencion);
 				detalleProvincia.setNumeroTotalAtencion(formulario.getNroTotalAtenP());
 				if( formulario.getNroTotalAtenP() !=0 ){
-					detalleProvincia.setCostoUnitarioPorAtencion(detalleProvincia.getCostoTotalAtencion().divide(new BigDecimal(detalleProvincia.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitarioPorAtencion(detalleProvincia.getCostoTotalAtencion().divide(new BigDecimal(detalleProvincia.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}
@@ -359,7 +359,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotalImpresion(totalImpresion);
 				detalleLima.setNumeroValesImpreso(formulario.getNroValesImpL());
 				if( formulario.getNroValesImpL() !=0 ){
-					detalleLima.setCostoUnitarioImpresionVales(detalleLima.getCostoTotalImpresion().divide(new BigDecimal(detalleLima.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitarioImpresionVales(detalleLima.getCostoTotalImpresion().divide(new BigDecimal(detalleLima.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -367,7 +367,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoL());
 				detalleLima.setNumeroValesRepartidos(formulario.getNroValesReptL());
 				if( formulario.getNroValesReptL() !=0 ){
-					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -375,7 +375,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficL());
 				detalleLima.setNumeroValesEntregados(formulario.getNroValesEntrL());
 				if( formulario.getNroValesEntrL() !=0 ){
-					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -383,7 +383,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronL());
 				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisL());
 				if( formulario.getNroValesFisL() !=0 ){
-					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -399,7 +399,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotalAtencion(totalAtencion);
 				detalleLima.setNumeroTotalAtencion(formulario.getNroTotalAtenL());
 				if( formulario.getNroTotalAtenL() !=0 ){
-					detalleLima.setCostoUnitarioPorAtencion(detalleLima.getCostoTotalAtencion().divide(new BigDecimal(detalleLima.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitarioPorAtencion(detalleLima.getCostoTotalAtencion().divide(new BigDecimal(detalleLima.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}
@@ -503,7 +503,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotalImpresion(totalImpresion);
 				detalleRural.setNumeroValesImpreso(formulario.getNroValesImpR());
 				if( formulario.getNroValesImpR() !=0 ){
-					detalleRural.setCostoUnitarioImpresionVales(detalleRural.getCostoTotalImpresion().divide(new BigDecimal(detalleRural.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioImpresionVales(detalleRural.getCostoTotalImpresion().divide(new BigDecimal(detalleRural.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -511,7 +511,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoR());
 				detalleRural.setNumeroValesRepartidos(formulario.getNroValesReptR());
 				if( formulario.getNroValesReptR() !=0 ){
-					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitReprtoValeDomici(detalleRural.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleRural.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -519,7 +519,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficR());
 				detalleRural.setNumeroValesEntregados(formulario.getNroValesEntrR());
 				if( formulario.getNroValesEntrR() !=0 ){
-					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitEntregaValDisEl(detalleRural.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleRural.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -527,7 +527,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronR());
 				detalleRural.setNumeroValesFisicosEmitidos(formulario.getNroValesFisR());
 				if( formulario.getNroValesFisR() !=0 ){
-					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitCanjeLiqValFisi(detalleRural.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleRural.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -543,7 +543,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleRural.setCostoTotalAtencion(totalAtencion);
 				detalleRural.setNumeroTotalAtencion(formulario.getNroTotalAtenR());
 				if( formulario.getNroTotalAtenR() !=0 ){
-					detalleRural.setCostoUnitarioPorAtencion(detalleRural.getCostoTotalAtencion().divide(new BigDecimal(detalleRural.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioPorAtencion(detalleRural.getCostoTotalAtencion().divide(new BigDecimal(detalleRural.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}
@@ -583,7 +583,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotalImpresion(totalImpresion);
 				detalleProvincia.setNumeroValesImpreso(formulario.getNroValesImpP());
 				if( formulario.getNroValesImpP() !=0 ){
-					detalleProvincia.setCostoUnitarioImpresionVales(detalleProvincia.getCostoTotalImpresion().divide(new BigDecimal(detalleProvincia.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitarioImpresionVales(detalleProvincia.getCostoTotalImpresion().divide(new BigDecimal(detalleProvincia.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -591,7 +591,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoP());
 				detalleProvincia.setNumeroValesRepartidos(formulario.getNroValesReptP());
 				if( formulario.getNroValesReptP() !=0 ){
-					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitReprtoValeDomici(detalleProvincia.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleProvincia.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -599,7 +599,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficP());
 				detalleProvincia.setNumeroValesEntregados(formulario.getNroValesEntrP());
 				if( formulario.getNroValesEntrP() !=0 ){
-					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitEntregaValDisEl(detalleProvincia.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleProvincia.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -607,7 +607,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronP());
 				detalleProvincia.setNumeroValesFisicosEmitidos(formulario.getNroValesFisP());
 				if( formulario.getNroValesFisP() !=0 ){
-					detalleProvincia.setCostoUnitCanjeLiqValFisi(detalleProvincia.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleProvincia.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitCanjeLiqValFisi(detalleProvincia.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleProvincia.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -623,7 +623,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleProvincia.setCostoTotalAtencion(totalAtencion);
 				detalleProvincia.setNumeroTotalAtencion(formulario.getNroTotalAtenP());
 				if( formulario.getNroTotalAtenP() !=0 ){
-					detalleProvincia.setCostoUnitarioPorAtencion(detalleProvincia.getCostoTotalAtencion().divide(new BigDecimal(detalleProvincia.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleProvincia.setCostoUnitarioPorAtencion(detalleProvincia.getCostoTotalAtencion().divide(new BigDecimal(detalleProvincia.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}
@@ -663,7 +663,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotalImpresion(totalImpresion);
 				detalleLima.setNumeroValesImpreso(formulario.getNroValesImpL());
 				if( formulario.getNroValesImpL() !=0 ){
-					detalleLima.setCostoUnitarioImpresionVales(detalleLima.getCostoTotalImpresion().divide(new BigDecimal(detalleLima.getNumeroValesImpreso()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitarioImpresionVales(detalleLima.getCostoTotalImpresion().divide(new BigDecimal(detalleLima.getNumeroValesImpreso()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioImpresionVales(BigDecimal.ZERO);
 				}
@@ -671,7 +671,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoRepartoValesDescuento(formulario.getCostoTotalValDesctoL());
 				detalleLima.setNumeroValesRepartidos(formulario.getNroValesReptL());
 				if( formulario.getNroValesReptL() !=0 ){
-					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitReprtoValeDomici(detalleLima.getCostoRepartoValesDescuento().divide(new BigDecimal(detalleLima.getNumeroValesRepartidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitReprtoValeDomici(BigDecimal.ZERO);
 				}
@@ -679,7 +679,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotReprtoValDisEl(formulario.getCostoTotalValOficL());
 				detalleLima.setNumeroValesEntregados(formulario.getNroValesEntrL());
 				if( formulario.getNroValesEntrL() !=0 ){
-					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitEntregaValDisEl(detalleLima.getCostoTotReprtoValDisEl().divide(new BigDecimal(detalleLima.getNumeroValesEntregados()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitEntregaValDisEl(BigDecimal.ZERO);
 				}
@@ -687,7 +687,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoEnviarPadronValCanje(formulario.getCostoEnvPadronL());
 				detalleLima.setNumeroValesFisicosEmitidos(formulario.getNroValesFisL());
 				if( formulario.getNroValesFisL() !=0 ){
-					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitCanjeLiqValFisi(detalleLima.getCostoEnviarPadronValCanje().divide(new BigDecimal(detalleLima.getNumeroValesFisicosEmitidos()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitCanjeLiqValFisi(BigDecimal.ZERO);
 				}
@@ -703,7 +703,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				detalleLima.setCostoTotalAtencion(totalAtencion);
 				detalleLima.setNumeroTotalAtencion(formulario.getNroTotalAtenL());
 				if( formulario.getNroTotalAtenL() !=0 ){
-					detalleLima.setCostoUnitarioPorAtencion(detalleLima.getCostoTotalAtencion().divide(new BigDecimal(detalleLima.getNumeroTotalAtencion()),4,RoundingMode.HALF_UP));
+					detalleLima.setCostoUnitarioPorAtencion(detalleLima.getCostoTotalAtencion().divide(new BigDecimal(detalleLima.getNumeroTotalAtencion()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioPorAtencion(BigDecimal.ZERO);
 				}

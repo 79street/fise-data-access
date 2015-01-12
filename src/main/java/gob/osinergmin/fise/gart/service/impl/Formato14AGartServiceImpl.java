@@ -185,7 +185,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleRural.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadR());
 				//costo
 				if( formulario.getNroBenefEmpadR() !=0 ){
-					detalleRural.setCostoUnitarioEmpadronamiento(sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+					detalleRural.setCostoUnitarioEmpadronamiento(sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -204,7 +204,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentR() !=0 ){
 					detalleRural.setCostoUntitarioAgenteGlp(
-							detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -280,7 +280,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroBenefEmpadP() !=0 ){
 					detalleProvincia.setCostoUnitarioEmpadronamiento(
-							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -299,7 +299,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentP() !=0 ){
 					detalleProvincia.setCostoUntitarioAgenteGlp(
-							detalleProvincia.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleProvincia.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleProvincia.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleProvincia.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -375,7 +375,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroBenefEmpadL() !=0 ){
 					detalleLima.setCostoUnitarioEmpadronamiento(
-							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -394,7 +394,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentL() !=0 ){
 					detalleLima.setCostoUntitarioAgenteGlp(
-							detalleLima.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleLima.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleLima.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleLima.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -515,7 +515,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroBenefEmpadR() !=0 ){
 					detalleRural.setCostoUnitarioEmpadronamiento(
-							sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleRural.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -534,7 +534,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentR() !=0 ){
 					detalleRural.setCostoUntitarioAgenteGlp(
-							detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleRural.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleRural.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleRural.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -591,7 +591,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroBenefEmpadP() !=0 ){
 					detalleProvincia.setCostoUnitarioEmpadronamiento(
-							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleProvincia.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -610,7 +610,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentP() !=0 ){
 					detalleProvincia.setCostoUntitarioAgenteGlp(
-							detalleProvincia.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleProvincia.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleProvincia.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleProvincia.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleProvincia.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}
@@ -667,7 +667,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroBenefEmpadL() !=0 ){
 					detalleLima.setCostoUnitarioEmpadronamiento(
-							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),4,RoundingMode.HALF_UP));
+							sumaEmpadDifusion.divide(new BigDecimal(detalleLima.getNumeroBenefEmpadroMesDic()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUnitarioEmpadronamiento(BigDecimal.ZERO);
 				}
@@ -686,7 +686,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				//costo
 				if( formulario.getNroAgentL() !=0 ){
 					detalleLima.setCostoUntitarioAgenteGlp(
-							detalleLima.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleLima.getNumeroAgentes()),4,RoundingMode.HALF_UP));
+							detalleLima.getTotalCostoGestionRedAgGlp().divide(new BigDecimal(detalleLima.getNumeroAgentes()),2,RoundingMode.HALF_UP));
 				}else{
 					detalleLima.setCostoUntitarioAgenteGlp(BigDecimal.ZERO);
 				}

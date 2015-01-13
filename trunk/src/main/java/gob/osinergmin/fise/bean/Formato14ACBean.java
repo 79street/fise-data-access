@@ -35,7 +35,26 @@ private static final long serialVersionUID = 1L;
 	private String periodoEnvio;
 	private String flagPeriodoEjecucion;
 	
+	private String anioInicioVigenciaHidden;
+	private String anioFinVigenciaHidden;
+	
 	//private long idZonaBnfcio = 0;
+
+	public String getAnioInicioVigenciaHidden() {
+		return anioInicioVigenciaHidden;
+	}
+
+	public void setAnioInicioVigenciaHidden(String anioInicioVigenciaHidden) {
+		this.anioInicioVigenciaHidden = anioInicioVigenciaHidden;
+	}
+
+	public String getAnioFinVigenciaHidden() {
+		return anioFinVigenciaHidden;
+	}
+
+	public void setAnioFinVigenciaHidden(String anioFinVigenciaHidden) {
+		this.anioFinVigenciaHidden = anioFinVigenciaHidden;
+	}
 
 	private BigDecimal sumEmpadDifusionR = new BigDecimal(0); // campo no existente en la tabla
 	

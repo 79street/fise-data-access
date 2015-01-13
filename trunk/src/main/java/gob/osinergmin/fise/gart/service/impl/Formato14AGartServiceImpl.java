@@ -585,7 +585,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleProvincia.setTotalDifusionInicioPrgFise(totalDifusion);
 				
 				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
-				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleProvincia.getTotalEmpadronamiento()).add(detalleProvincia.getTotalDifusionInicioPrgFise());
 				
 				detalleProvincia.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadP());
 				//costo
@@ -661,7 +661,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				detalleLima.setTotalDifusionInicioPrgFise(totalDifusion);
 				
 				BigDecimal sumaEmpadDifusion = new BigDecimal(0);
-				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleRural.getTotalEmpadronamiento()).add(detalleRural.getTotalDifusionInicioPrgFise());
+				sumaEmpadDifusion = sumaEmpadDifusion.add(detalleLima.getTotalEmpadronamiento()).add(detalleLima.getTotalDifusionInicioPrgFise());
 				
 				detalleLima.setNumeroBenefEmpadroMesDic(formulario.getNroBenefEmpadL());
 				//costo

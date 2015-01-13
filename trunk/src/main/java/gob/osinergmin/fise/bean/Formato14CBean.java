@@ -28,6 +28,9 @@ public class Formato14CBean {
 	private String anoIniVigencia;
 	private String anoFinVigencia; 
 	
+	private String anioInicioVigenciaHidden;
+	private String anioFinVigenciaHidden;
+	
 	private String etapa;	
 	private String nombreSede;
 	private String nombreExel;
@@ -950,6 +953,18 @@ public class Formato14CBean {
 	}
 	public void setCodLuzSur(String codLuzSur) {
 		this.codLuzSur = codLuzSur;
+	}
+	public String getAnioInicioVigenciaHidden() {
+		return anioInicioVigenciaHidden;
+	}
+	public void setAnioInicioVigenciaHidden(String anioInicioVigenciaHidden) {
+		this.anioInicioVigenciaHidden = anioInicioVigenciaHidden;
+	}
+	public String getAnioFinVigenciaHidden() {
+		return anioFinVigenciaHidden;
+	}
+	public void setAnioFinVigenciaHidden(String anioFinVigenciaHidden) {
+		this.anioFinVigenciaHidden = anioFinVigenciaHidden;
 	}
 	
 	

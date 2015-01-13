@@ -32,6 +32,9 @@ public class Formato14BCBean  implements Serializable {
 	private Long anioInicioVigencia = 0L;
 	private Long anioFinVigencia = 0L;
 	
+	private String anioInicioVigenciaHidden;
+	private String anioFinVigenciaHidden;
+	
 	private String periodoEnvio;
 	private String flagPeriodoEjecucion;
 	
@@ -961,6 +964,22 @@ public class Formato14BCBean  implements Serializable {
 
 	public void setCodLuzSur(String codLuzSur) {
 		this.codLuzSur = codLuzSur;
+	}
+
+	public String getAnioInicioVigenciaHidden() {
+		return anioInicioVigenciaHidden;
+	}
+
+	public void setAnioInicioVigenciaHidden(String anioInicioVigenciaHidden) {
+		this.anioInicioVigenciaHidden = anioInicioVigenciaHidden;
+	}
+
+	public String getAnioFinVigenciaHidden() {
+		return anioFinVigenciaHidden;
+	}
+
+	public void setAnioFinVigenciaHidden(String anioFinVigenciaHidden) {
+		this.anioFinVigenciaHidden = anioFinVigenciaHidden;
 	}
 
 	

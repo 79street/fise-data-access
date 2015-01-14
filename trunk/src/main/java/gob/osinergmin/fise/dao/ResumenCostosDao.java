@@ -14,5 +14,8 @@ public interface ResumenCostosDao {
 	 
 	 List<Object[]> listarResumenCostosF12B(String codEmpresa,
 				Long idGrupoInf) throws SQLException;
+	 
+	 List<Object[]> listarResumenCostosF14B(String codEmpresa,
+				Long idGrupoInf) throws SQLException;
 
 }

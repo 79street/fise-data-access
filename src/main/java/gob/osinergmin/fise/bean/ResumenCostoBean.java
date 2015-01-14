@@ -28,6 +28,8 @@ public class ResumenCostoBean {
 	private String optionBienal;
 	private String optionZona;
 	
+	private String optionMensual;
+	
 	
 	//F14A
 	private BigDecimal empSolicitadoR;
@@ -530,6 +532,12 @@ public class ResumenCostoBean {
 	}
 	public void setOptionZona(String optionZona) {
 		this.optionZona = optionZona;
+	}
+	public String getOptionMensual() {
+		return optionMensual;
+	}
+	public void setOptionMensual(String optionMensual) {
+		this.optionMensual = optionMensual;
 	}
 	
 	

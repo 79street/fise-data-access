@@ -67,7 +67,88 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 			}	
 		}
 		return lista;
+	}
+	
+	@Override
+	@Transactional
+	public List<ResumenCostoBean> buscarResumenCostoF14B(String codEmpresa,
+			Long idGrupoInf) throws Exception{
+		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
+		ResumenCostoBean r =null;
+		List<Object[]> listaF14B =null;
+		try {
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			listaF14B = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
+			for(int i = 0; i < listaF14B.size(); i++){					
+				r = new ResumenCostoBean();					
+				r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
+				r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));			
+				
+				r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[2]);			   
+				r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[3]);		   
+				r.setCosImpValSoliP(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[4]);	
+				r.setCosImpValAprobP(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[5]);
+				r.setCosImpValSoliL(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[6]);		  
+			    r.setCosImpValAprobL(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[7]);		   
+			    
+			    r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[8]);    
+			    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[9]);		    
+			    r.setCosDomValSoliP(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[10]);	   
+			    r.setCosDomValAprobP(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[11]);			   
+			    r.setCosDomValSoliL(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[12]);		   
+			    r.setCosDomValAprobL(((BigDecimal)listaF14B.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[13]);		    
+			    
+			    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[14]);	
+				r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[15]);
+				r.setCosEntDisEleSoliP(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[16]);		  
+			    r.setCosEntDisEleAprobP(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[17]);		   
+			    r.setCosEntDisEleSoliL(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[18]);    
+			    r.setCosEntDisEleAprobL(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[19]);		    
+			    
+			    r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[20]);	   
+			    r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[21]);			   
+			    r.setCosValFisSoliP(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[22]);		   
+			    r.setCosValFisAprobP(((BigDecimal)listaF14B.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[23]);		    
+			    r.setCosValFisSoliL(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[24]);	
+				r.setCosValFisAprobL(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[25]);
+				
+				r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[26]);		  
+			    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[27]);		   
+			    r.setCosValDigSoliP(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[28]);    
+			    r.setCosValDigAprobP(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[29]);		    
+			    r.setCosValDigSoliL(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[30]);	   
+			    r.setCosValDigAprobL(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[31]);			   
+			   
+			    r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[32]);		   
+			    r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[33]);		    
+			    r.setCosAteSoliP(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[34]);	
+				r.setCosAteAprobP(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[35]);
+				r.setCosAteSoliL(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[36]);	
+				r.setCosAteAprobL(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[37]);		  
+			    
+				r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[38]);		   
+			    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[39]);    
+			    r.setCosGestAdmSoliP(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[40]);		    
+			    r.setCosGestAdmAprobP(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[41]);	   
+			    r.setCosGestAdmSoliL(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[42]);			   
+			    r.setCosGestAdmAprobL(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[43]); 
+			    
+				lista.add(r);
+			 }			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.info("Error al listar resumen de costos de F14B:  "+e); 
+		}finally{
+			if(r!=null){
+				r=null;
+			}
+			if(listaF14B!=null){
+				listaF14B=null;
+			}	
+		}
+		return lista;
 	}	
+	
 	
 	@Override
 	@Transactional

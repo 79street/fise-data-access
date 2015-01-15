@@ -60,35 +60,34 @@ public class Formato14CCDaoImpl extends GenericDaoImpl implements Formato14CCDao
 	
 	@SuppressWarnings("unchecked")	
 	@Override
-	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
-			long anioHasta, long mesDesde, long mesHasta, String etapa) throws SQLException{
+	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long fechaDesde,
+			long fechaHasta, String etapa) throws SQLException{
 		
 		String q = "SELECT f FROM " + FiseFormato14CC.class.getName()
 				+ " f WHERE 1=1 ";
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
 			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}		
+		if(fechaDesde!=0){ 		
+			q = q  + " AND f.id.anoPresentacion*100 + f.id.mesPresentacion >= :fechaDesde ";
 		}
-		if(anioDesde!=0 && anioHasta!=0){ 		
-			q = q.concat(" AND f.id.anoPresentacion BETWEEN :anioDesde AND :anioHasta ");	
-		}
-		if(mesDesde!=0 && mesHasta!=0 ){ 
-			q = q.concat(" AND f.id.mesPresentacion BETWEEN :mesDesde AND :mesHasta ");				
+		if(fechaHasta!=0 ){ 		
+			q = q  + " AND f.id.anoPresentacion*100 + f.id.mesPresentacion <= :fechaHasta ";
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){ 
 			q = q.concat(" AND f.id.etapa = :etapa ");
 		}
 		Query query = em.createQuery(q); 
+		
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
 			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
 			query.setParameter("codEmpresa", codEmpreCompleta);			
 		}
-		if(anioDesde!=0 && anioHasta!=0){
-			query.setParameter("anioDesde", anioDesde);
-			query.setParameter("anioHasta", anioHasta);
+		if(fechaDesde!=0){			
+			query.setParameter("fechaDesde", fechaDesde);
 		}
-		if(mesDesde!=0 && mesHasta!=0){ 
-			query.setParameter("mesDesde", mesDesde);
-			query.setParameter("mesHasta", mesHasta);
+		if(fechaHasta!=0){ 			
+			query.setParameter("fechaHasta", fechaHasta);
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){ 
 			query.setParameter("etapa", etapa);

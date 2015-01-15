@@ -29,9 +29,8 @@ public interface Formato14CGartService {
     String eliminarDatosFormato14C(Formato14CBean bean) 
     		throws Exception;
     
-    List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
-			long anioHasta, long mesDesde, long mesHasta, String etapa) 
-					throws Exception;    
+    public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa,
+			long fechaDesde, long fechaHasta,String etapa) throws Exception;
     
     Formato14CBean buscarFormato14CEditar(String codEmpresa,String anioPres,String mesPres,
 			String anioIniVig,String anioFinVig,String etapa) 

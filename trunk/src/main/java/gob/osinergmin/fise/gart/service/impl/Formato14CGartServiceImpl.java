@@ -2189,11 +2189,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Override
 	@Transactional
 	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa,
-			long anioDesde, long anioHasta, long mesDesde, long mesHasta,
-			String etapa) throws Exception {
+			long fechaDesde, long fechaHasta,String etapa) throws Exception {
 		List<FiseFormato14CC> lista = new ArrayList<FiseFormato14CC>();
 		List<FiseFormato14CC> listDatos = formato14CCDao.buscarFiseFormato14CC(codEmpresa, 
-				anioDesde, anioHasta, mesDesde, mesHasta, etapa); 
+				fechaDesde, fechaHasta, etapa); 
 		for(FiseFormato14CC f :listDatos){
 			FiseFormato14CC f14c = new	FiseFormato14CC();
 			if(f.getFiseGrupoInformacion()!=null){

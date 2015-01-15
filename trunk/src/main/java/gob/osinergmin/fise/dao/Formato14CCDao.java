@@ -25,8 +25,8 @@ public interface Formato14CCDao extends GenericDao {
 	FiseFormato14CC obtenerFormato14CC(FiseFormato14CCPK id) 
 			throws SQLException;
 	
-	List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long anioDesde, 
-			long anioHasta, long mesDesde, long mesHasta, String etapa) throws SQLException;
+	public List<FiseFormato14CC> buscarFiseFormato14CC(String codEmpresa, long fechaDesde,
+			long fechaHasta, String etapa) throws SQLException;
 	
 	List<FiseFormato14CC> buscarFormato14CCReenvio(String codEmpresa, long anioPres, 
 			long mesPres, String etapa) throws SQLException;

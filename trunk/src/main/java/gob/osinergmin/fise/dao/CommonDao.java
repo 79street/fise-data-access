@@ -42,5 +42,9 @@ public interface CommonDao {
 	
 	List<Object[]> listarEnvioDefinitivo(String codEmpresa,
 			String etapa,String formato,Long idGrupoInf) throws SQLException;
+	
+	List<CorreoBean> obtenerListaCorreosDestinatariosByEmpresa(String codEmpresa);
+	
+	boolean esAdministradorFise(String userName);
 			
 }

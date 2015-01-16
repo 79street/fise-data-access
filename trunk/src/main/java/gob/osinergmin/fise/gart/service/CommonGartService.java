@@ -27,6 +27,9 @@ public interface CommonGartService {
 	
 	List<CorreoBean> obtenerListaCorreosDestinatarios();
 	
+	List<CorreoBean> obtenerListaCorreosDestinatariosByEmpresa(String codEmpresa) 
+			throws Exception;
+	
 	String obtenerEstadoProceso(String codEmpresa, String tipoFormato,
 			long anoPresentacion, long mesPresentacion, String codEtapa);
 	
@@ -55,6 +58,8 @@ public interface CommonGartService {
 	
 	FiseControlEnvioPorGrupo obtenerFiseControlEnvioByPK(String codEmpresa,String etapa,
 			Long idGrupoInf,String periocidad) throws Exception;
+	
+	boolean esAdministradorFise(String userName) throws Exception;
     
 
 }

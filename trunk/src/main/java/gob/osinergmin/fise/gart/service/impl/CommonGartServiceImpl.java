@@ -145,6 +145,12 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Override
 	@Transactional
+	public List<CorreoBean> obtenerListaCorreosDestinatariosByEmpresa(String codEmpresa) throws Exception{
+		return commonDao.obtenerListaCorreosDestinatariosByEmpresa(codEmpresa);
+	}
+	
+	@Override
+	@Transactional
 	public String obtenerEstadoProceso(String codEmpresa, String tipoFormato, 
 			long anoPresentacion, long mesPresentacion, String codEtapa) {
 		return commonDao.obtenerEstadoProceso(codEmpresa, tipoFormato, 
@@ -1129,6 +1135,11 @@ public class CommonGartServiceImpl implements CommonGartService {
 		return fiseControlEnvioDao.obtenerFiseControlEnvioByPK(id);
 	}
 	
-	
+	/***Metodo para obtener si un usuario es administrador */	
+	@Override
+	@Transactional
+	public boolean esAdministradorFise(String userName) throws Exception{
+	  return commonDao.esAdministradorFise(userName);
+	}
 	
 }

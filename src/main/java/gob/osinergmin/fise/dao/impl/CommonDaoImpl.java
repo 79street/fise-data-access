@@ -170,6 +170,41 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 
 	}
 	
+	@Override
+	public List<CorreoBean> obtenerListaCorreosDestinatariosByEmpresa(String codEmpresa){
+		
+		List<CorreoBean> listaCorreo = new ArrayList<CorreoBean>();
+		try {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" SELECT EMAILADDRESS CORREO, FIRSTNAME || ' ' || LASTNAME NOMBRE ");
+			sql.append(" FROM USER_ T ");
+			sql.append(" WHERE USERID IN (SELECT USERID FROM USERS_GROUPS WHERE GROUPID IN ");
+			sql.append(" (SELECT GROUPID FROM GROUP_ WHERE ACTIVE_= 1 AND SITE = 1 AND UPPER(NAME) LIKE '%FISE%')) ");
+			sql.append(" AND LTRIM(EMAILADDRESS) IS NOT NULL ");
+			sql.append("  AND USERID IN (SELECT USERID FROM USERS_ORGS T WHERE ORGANIZATIONID IN ");
+			sql.append(" (SELECT CLASSPK FROM EXPANDOVALUE T WHERE UPPER(RTRIM(DATA_)) = UPPER(RTRIM('"+codEmpresa+"')))) ");
+			
+			Query query = em.createNativeQuery(sql.toString());
+			
+			List resultado = query.getResultList();
+			Iterator it=resultado.iterator();
+			while(it.hasNext()){
+				Object[] valor=(Object[] )it.next();
+				CorreoBean correo=new CorreoBean();
+				correo.setDireccionCorreo((String)valor[0]);
+				correo.setUsuarioCorreo((String)valor[1]);
+				listaCorreo.add(correo);
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return listaCorreo;
+
+	}
+	
 	/**Para obtener el id del grupo de informacion**/
 	
 	@Override
@@ -615,6 +650,30 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			return lista;
 		}		
 	}
+	
+	/***Metodo para obtener si un usuario es administrador */	
+	@Override
+	public boolean esAdministradorFise(String userName){
+     	boolean admin = false; 
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE_GEN_PKG.FISE_ES_ADM_FISE_FUN (?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1,userName);			
+			if(query.getSingleResult()!=null){
+			 String respuesta = (String)query.getSingleResult();
+			 if("SI".equals(respuesta)){
+				 admin = true;  
+			 }
+			}			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return admin;
+	}	
+	
 	
 	
 }

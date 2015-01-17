@@ -334,6 +334,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public FiseFormato12AC modificarFormato12AC(Formato12ACBean formulario, FiseFormato12AC fiseFormato12AC) throws Exception {
 		
+		/***tomar en cuenta que para la carga de excel hacer otro metodo***/
+		
 		FiseFormato12AC dto = null;
 		
 		try {
@@ -359,27 +361,27 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			
 			//RURAL
-			if( detalleRural != null &&
+			/*if( detalleRural != null &&
 					formulario.getNroEmpadR() != 0 &&
 					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentR() != 0 //&&
 					//!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
-					){
+					){*/
 				logger.info("se modificara RURAL");
 				detalleRural.setNumeroEmpadronados(formulario.getNroEmpadR());
 				detalleRural.setCostoEstandarUnitarioEmpad(formulario.getCostoUnitEmpadR());
-				BigDecimal costoTotalEmpad = detalleRural.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleRural.getNumeroEmpadronados()));
-				detalleRural.setCostoTotalEmpadronamiento(costoTotalEmpad);
+				BigDecimal costoTotalEmpadR = detalleRural.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleRural.getNumeroEmpadronados()));
+				detalleRural.setCostoTotalEmpadronamiento(costoTotalEmpadR);
 				detalleRural.setNumeroAgentesAutorizGlp(formulario.getNroAgentR());
 				detalleRural.setCostoEstandarUnitAgAutGlp(formulario.getCostoUnitAgentR());
-				BigDecimal costoTotalAgent = detalleRural.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleRural.getNumeroAgentesAutorizGlp()));
-				detalleRural.setCostoTotalGestRedAgGlp(costoTotalAgent);
-				BigDecimal totalDespl = formulario.getDesplPersonalR();
-				detalleRural.setTotalDesplazamientoPersonal(totalDespl);
-				BigDecimal totalActiv = formulario.getActivExtraordR();
-				detalleRural.setTotalActividadesExtraord(totalActiv);
+				BigDecimal costoTotalAgentR = detalleRural.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleRural.getNumeroAgentesAutorizGlp()));
+				detalleRural.setCostoTotalGestRedAgGlp(costoTotalAgentR);
+				BigDecimal totalDesplR = formulario.getDesplPersonalR();
+				detalleRural.setTotalDesplazamientoPersonal(totalDesplR);
+				BigDecimal totalActivR = formulario.getActivExtraordR();
+				detalleRural.setTotalActividadesExtraord(totalActivR);
 				BigDecimal totalRural = detalleRural.getCostoTotalEmpadronamiento()
 						.add(detalleRural.getCostoTotalGestRedAgGlp())
 						.add(detalleRural.getTotalDesplazamientoPersonal())
@@ -397,29 +399,29 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta rural modifica"+total);
 				//TrimUtil.trimAll(detalleRural);
 				lista.add(detalleRural);
-			}
+			/*}*/
 			//PROVINCIA
-			if( detalleProvincia != null &&
+			/*if( detalleProvincia != null &&
 					formulario.getNroEmpadP() != 0 &&
 					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentP() != 0 //&&
 					//!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
-					){
+					){*/
 				logger.info("se modificara PROVINCIA");
 				detalleProvincia.setNumeroEmpadronados(formulario.getNroEmpadP());
 				detalleProvincia.setCostoEstandarUnitarioEmpad(formulario.getCostoUnitEmpadP());
-				BigDecimal costoTotalEmpad = detalleProvincia.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleProvincia.getNumeroEmpadronados()));
-				detalleProvincia.setCostoTotalEmpadronamiento(costoTotalEmpad);
+				BigDecimal costoTotalEmpadP = detalleProvincia.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleProvincia.getNumeroEmpadronados()));
+				detalleProvincia.setCostoTotalEmpadronamiento(costoTotalEmpadP);
 				detalleProvincia.setNumeroAgentesAutorizGlp(formulario.getNroAgentP());
 				detalleProvincia.setCostoEstandarUnitAgAutGlp(formulario.getCostoUnitAgentP());
-				BigDecimal costoTotalAgent = detalleProvincia.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleProvincia.getNumeroAgentesAutorizGlp()));
-				detalleProvincia.setCostoTotalGestRedAgGlp(costoTotalAgent);
-				BigDecimal totalDespl = formulario.getDesplPersonalP();
-				detalleProvincia.setTotalDesplazamientoPersonal(totalDespl);
-				BigDecimal totalActiv = formulario.getActivExtraordP();
-				detalleProvincia.setTotalActividadesExtraord(totalActiv);
+				BigDecimal costoTotalAgentP = detalleProvincia.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleProvincia.getNumeroAgentesAutorizGlp()));
+				detalleProvincia.setCostoTotalGestRedAgGlp(costoTotalAgentP);
+				BigDecimal totalDesplP = formulario.getDesplPersonalP();
+				detalleProvincia.setTotalDesplazamientoPersonal(totalDesplP);
+				BigDecimal totalActivP = formulario.getActivExtraordP();
+				detalleProvincia.setTotalActividadesExtraord(totalActivP);
 				BigDecimal totalProvincia = detalleProvincia.getCostoTotalEmpadronamiento()
 						.add(detalleProvincia.getCostoTotalGestRedAgGlp())
 						.add(detalleProvincia.getTotalDesplazamientoPersonal())
@@ -437,29 +439,29 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta provincia modificar"+total);
 				//TrimUtil.trimAll(detalleProvincia);
 				lista.add(detalleProvincia);
-			}
+			/*}*/
 			//LIMA
-			if( detalleLima != null &&
+			/*if( detalleLima != null &&
 					formulario.getNroEmpadL() != 0 &&
 					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentL() != 0 //&&
 					//!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
-					){
+					){*/
 				logger.info("se modificara LIMA");
 				detalleLima.setNumeroEmpadronados(formulario.getNroEmpadL());
 				detalleLima.setCostoEstandarUnitarioEmpad(formulario.getCostoUnitEmpadL());
-				BigDecimal costoTotalEmpad = detalleLima.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleLima.getNumeroEmpadronados()));
-				detalleLima.setCostoTotalEmpadronamiento(costoTotalEmpad);
+				BigDecimal costoTotalEmpadL = detalleLima.getCostoEstandarUnitarioEmpad().multiply(new BigDecimal(detalleLima.getNumeroEmpadronados()));
+				detalleLima.setCostoTotalEmpadronamiento(costoTotalEmpadL);
 				detalleLima.setNumeroAgentesAutorizGlp(formulario.getNroAgentL());
 				detalleLima.setCostoEstandarUnitAgAutGlp(formulario.getCostoUnitAgentL());
-				BigDecimal costoTotalAgent = detalleLima.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleLima.getNumeroAgentesAutorizGlp()));
-				detalleLima.setCostoTotalGestRedAgGlp(costoTotalAgent);
-				BigDecimal totalDespl = formulario.getDesplPersonalL();
-				detalleLima.setTotalDesplazamientoPersonal(totalDespl);
-				BigDecimal totalActiv = formulario.getActivExtraordL();
-				detalleLima.setTotalActividadesExtraord(totalActiv);
+				BigDecimal costoTotalAgentL = detalleLima.getCostoEstandarUnitAgAutGlp().multiply(new BigDecimal(detalleLima.getNumeroAgentesAutorizGlp()));
+				detalleLima.setCostoTotalGestRedAgGlp(costoTotalAgentL);
+				BigDecimal totalDesplL = formulario.getDesplPersonalL();
+				detalleLima.setTotalDesplazamientoPersonal(totalDesplL);
+				BigDecimal totalActivL = formulario.getActivExtraordL();
+				detalleLima.setTotalActividadesExtraord(totalActivL);
 				BigDecimal totalLima = detalleLima.getCostoTotalEmpadronamiento()
 						.add(detalleLima.getCostoTotalGestRedAgGlp())
 						.add(detalleLima.getTotalDesplazamientoPersonal())
@@ -476,7 +478,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta lima modificar"+total);
 				//TrimUtil.trimAll(detalleLima);
 				lista.add(detalleLima);
-			}
+			/*}*/
 			logger.info("total de total"+total);
 			fiseFormato12AC.setTotalAReconocer(total);
 		

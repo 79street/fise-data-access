@@ -102,6 +102,7 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	}
 
 	@Override
+	@Transactional
 	public List<FiseFormato12BDOb> getLstFormatoObs(FiseFormato12BD idDetalle) {
 		return formato12BDObDao.getLstFormatoObs(idDetalle);
 	}

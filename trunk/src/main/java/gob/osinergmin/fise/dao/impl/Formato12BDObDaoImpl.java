@@ -1,5 +1,11 @@
 package gob.osinergmin.fise.dao.impl;
 
+import gob.osinergmin.base.dao.impl.GenericDaoImpl;
+import gob.osinergmin.fise.dao.Formato12BDObDao;
+import gob.osinergmin.fise.domain.FiseFormato12BD;
+import gob.osinergmin.fise.domain.FiseFormato12BDOb;
+import gob.osinergmin.fise.util.FormatoUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +13,6 @@ import javax.persistence.Query;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
-
-import gob.osinergmin.base.dao.impl.GenericDaoImpl;
-import gob.osinergmin.fise.dao.Formato12BDObDao;
-import gob.osinergmin.fise.domain.FiseFormato12BD;
-import gob.osinergmin.fise.domain.FiseFormato12BDOb;
 
 @Repository(value = "formato12BDObDaoImpl")
 public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDObDao{
@@ -50,7 +51,8 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			Query query = em.createQuery(sb.toString());
 			
 			if(idDetalle.getId().getCodEmpresa() !=null && !idDetalle.getId().getCodEmpresa().isEmpty()){
-				query.setParameter("emp", idDetalle.getId().getCodEmpresa().trim());
+				// String codEmpreCompleta = FormatoUtil.rellenaDerecha(idDetalle.getId().getCodEmpresa(), ' ', 4);
+				query.setParameter("emp", idDetalle.getId().getCodEmpresa());
 			}
 			if(idDetalle.getId().getEtapa()!=null && !idDetalle.getId().getEtapa().isEmpty()){
 				query.setParameter("etp", idDetalle.getId().getEtapa().trim());

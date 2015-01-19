@@ -2019,7 +2019,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	public String actualizarDatosEnvioFormato14C(Formato14CBean bean) throws Exception{
 		FiseFormato14CC cab = null;
 		FiseFormato14CCPK idCab = null;		
-		String valor ="1";
+		String valor ="0";
 		try {
 			 /*Actualizando en la cabecera*/		
 			idCab = new FiseFormato14CCPK();
@@ -2037,6 +2037,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			cab.setTerminalActualizacion(bean.getTerminal());
 			cab.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			formato14CCDao.actualizarFiseFormato14CC(cab); 
+			valor ="1";
 		} catch (Exception e) {
 			valor = "0";
 			logger.info("Error al actualizar los datos de envio: "+e); 

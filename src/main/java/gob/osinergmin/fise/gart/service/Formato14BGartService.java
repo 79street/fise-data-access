@@ -22,7 +22,7 @@ public interface Formato14BGartService {
 	Formato14BCBean estructurarFormato14BBeanByFiseFormato14BC(FiseFormato14BC formato);
 	HashMap<String, Object> mapearParametrosFormato14B(Formato14BCBean formato14BCBean);
 	List<FiseFormato14BDOb> listarFormato14BDObByFormato14BD(FiseFormato14BD formato14BD);
-	FiseFormato14BC modificarEnvioDefinitivoFormato14BC(Formato14BCBean formulario, FiseFormato14BC fiseFormato14BC) throws Exception;
+	String modificarEnvioDefinitivoFormato14BC(String user,String terminal, FiseFormato14BC fiseFormato14BC) throws Exception;
 
 	void eliminarObservaciones14B(List<FiseFormato14BDOb> listaObs) throws Exception;
 }

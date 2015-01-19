@@ -14,7 +14,6 @@ import gob.osinergmin.fise.util.FechaUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -421,23 +420,21 @@ public HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean format
 
 @Override
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public FiseFormato12BC modificarEnvioDefinitivoFormato12BC(Formato12BCBean formulario, FiseFormato12BC fiseFormato12BC) throws Exception {
-	
-	FiseFormato12BC dto = null;
-	Date hoy = FechaUtil.obtenerFechaActual();
+public String modificarEnvioDefinitivoFormato12BC(String user,String terminal, 
+		FiseFormato12BC fiseFormato12BC) throws Exception {	
+	String valor = "0";	
 	try{
-		fiseFormato12BC.setFechaEnvioDefinitivo(hoy);
-		fiseFormato12BC.setUsuarioActualizacion(formulario.getUsuario());
-		fiseFormato12BC.setTerminalActualizacion(formulario.getTerminal());
-		fiseFormato12BC.setFechaActualizacion(hoy);
+		fiseFormato12BC.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+		fiseFormato12BC.setUsuarioActualizacion(user);
+		fiseFormato12BC.setTerminalActualizacion(terminal);
+		fiseFormato12BC.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 		formato12BCDao.updateFormatoCabecera(fiseFormato12BC);
-		dto= fiseFormato12BC;
+		valor = "1";
 	} catch (Exception e) {
-		
-		e.printStackTrace();
-		throw e;
+		valor = "0";
+		e.printStackTrace();		
 	}
-	return dto;
+	return valor;
 }
 
 	@Override

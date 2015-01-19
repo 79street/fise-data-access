@@ -1199,23 +1199,22 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato14BC modificarEnvioDefinitivoFormato14BC(Formato14BCBean formulario, FiseFormato14BC fiseFormato14BC) throws Exception {
-		
-		FiseFormato14BC dto = null;
-		Date hoy = FechaUtil.obtenerFechaActual();
+	public String modificarEnvioDefinitivoFormato14BC(String user,String terminal, 
+			FiseFormato14BC fiseFormato14BC) throws Exception {		
+		String valor = "0";
 		try{
-			fiseFormato14BC.setFechaEnvioDefinitivo(hoy);
-			fiseFormato14BC.setUsuarioActualizacion(formulario.getUsuario());
-			fiseFormato14BC.setTerminalActualizacion(formulario.getTerminal());
-			fiseFormato14BC.setFechaActualizacion(hoy);
+			fiseFormato14BC.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+			fiseFormato14BC.setUsuarioActualizacion(user);
+			fiseFormato14BC.setTerminalActualizacion(terminal);
+			fiseFormato14BC.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			formato14BCDao.modificarFormato14BC(fiseFormato14BC);
-			dto= fiseFormato14BC;
+			valor = "1";
 		} catch (Exception e) {
+			valor = "0";
 			logger.error("--error"+e.getMessage());
-			e.printStackTrace();
-			throw e;
+			e.printStackTrace();			
 		}
-		return dto;
+		return valor;
 	}
 
 	@Override

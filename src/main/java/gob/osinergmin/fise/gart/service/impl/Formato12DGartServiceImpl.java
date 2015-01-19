@@ -776,23 +776,23 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato12DC modificarEnvioDefinitivoFormato12DC(Formato12DCBean formulario, FiseFormato12DC fiseFormato12DC) throws Exception {
+	public String modificarEnvioDefinitivoFormato12DC(String user,String terminal,
+			FiseFormato12DC fiseFormato12DC) throws Exception {
 		
-		FiseFormato12DC dto = null;
-		Date hoy = FechaUtil.obtenerFechaActual();
+		String valor ="0";		
 		try{
-			fiseFormato12DC.setFechaEnvioDefinitivo(hoy);
-			fiseFormato12DC.setUsuarioActualizacion(formulario.getUsuario());
-			fiseFormato12DC.setTerminalActualizacion(formulario.getTerminal());
-			fiseFormato12DC.setFechaActualizacion(hoy);
+			fiseFormato12DC.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+			fiseFormato12DC.setUsuarioActualizacion(user);
+			fiseFormato12DC.setTerminalActualizacion(terminal);
+			fiseFormato12DC.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			formato12DCDao.modificarFormato12DC(fiseFormato12DC);
-			dto= fiseFormato12DC;
+			valor = "1";
 		} catch (Exception e) {
+			valor = "0";
 			logger.error("--error"+e.getMessage());
-			e.printStackTrace();
-			throw e;
+			e.printStackTrace();			
 		}
-		return dto;
+		return valor;
 	}
 	
 	

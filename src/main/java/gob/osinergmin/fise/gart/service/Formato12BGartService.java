@@ -36,7 +36,7 @@ public interface Formato12BGartService {
 	 HashMap<String, Object> mapearParametrosFormato12B(Formato12BCBean formato12BBean);
 	 Formato12BCBean estructurarFormato12BBeanByFiseFormato12BC(FiseFormato12BC formato);
 
-	 FiseFormato12BC modificarEnvioDefinitivoFormato12BC(Formato12BCBean formulario, FiseFormato12BC fiseFormato12BC) throws Exception;
+	 String modificarEnvioDefinitivoFormato12BC(String user,String terminal, FiseFormato12BC fiseFormato12BC) throws Exception;
 	 
 	 void eliminarObservaciones12B(List<FiseFormato12BDOb> listaObs) throws Exception ;
 

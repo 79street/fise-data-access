@@ -972,23 +972,22 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato14AC modificarEnvioDefinitivoFormato14AC(Formato14ACBean formulario, FiseFormato14AC fiseFormato14AC) throws Exception {
-		
-		FiseFormato14AC dto = null;
-		Date hoy = FechaUtil.obtenerFechaActual();
+	public String modificarEnvioDefinitivoFormato14AC(String user,String terminal, 
+			 FiseFormato14AC fiseFormato14AC) throws Exception {		
+		String valor = "0";		
 		try{
-			fiseFormato14AC.setFechaEnvioDefinitivo(hoy);
-			fiseFormato14AC.setUsuarioActualizacion(formulario.getUsuario());
-			fiseFormato14AC.setTerminalActualizacion(formulario.getTerminal());
-			fiseFormato14AC.setFechaActualizacion(hoy);
+			fiseFormato14AC.setFechaEnvioDefinitivo(FechaUtil.obtenerFechaActual());
+			fiseFormato14AC.setUsuarioActualizacion(user);
+			fiseFormato14AC.setTerminalActualizacion(terminal);
+			fiseFormato14AC.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			formato14ACDao.modificarFormato14AC(fiseFormato14AC);
-			dto= fiseFormato14AC;
+			valor = "1";
 		} catch (Exception e) {
+			valor = "0";
 			logger.error("--error"+e.getMessage());
-			e.printStackTrace();
-			throw e;
+			e.printStackTrace();			
 		}
-		return dto;
+		return valor;
 	}
 	
 	

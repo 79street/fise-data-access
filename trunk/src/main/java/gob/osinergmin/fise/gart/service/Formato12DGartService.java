@@ -22,7 +22,7 @@ public interface Formato12DGartService {
 	Formato12DCBean estructurarFormato12DBeanByFiseFormato12DC(FiseFormato12DC formato);
 	HashMap<String, Object> mapearParametrosFormato12D(Formato12DCBean formato12DBean);
 	List<FiseFormato12DDOb> listarFormato12DDObByFormato12DD(FiseFormato12DD formato12DD);
-	FiseFormato12DC modificarEnvioDefinitivoFormato12DC(Formato12DCBean formulario, FiseFormato12DC fiseFormato12DC) throws Exception;
+	String modificarEnvioDefinitivoFormato12DC(String user,String terminal, FiseFormato12DC fiseFormato12DC) throws Exception;
 	
 	void eliminarObservaciones12D(List<FiseFormato12DDOb> listaObs) throws Exception;
 }

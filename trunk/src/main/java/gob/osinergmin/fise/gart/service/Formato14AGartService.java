@@ -20,7 +20,7 @@ public interface Formato14AGartService {
 	Formato14ACBean estructurarFormato14ABeanByFiseFormato14AC(FiseFormato14AC formato);
 	HashMap<String, Object> mapearParametrosFormato14A(Formato14ACBean formato14ACBean);
 	List<FiseFormato14ADOb> listarFormato14ADObByFormato14AD(FiseFormato14AD formato14AD);
-	FiseFormato14AC modificarEnvioDefinitivoFormato14AC(Formato14ACBean formulario, FiseFormato14AC fiseFormato14AC) throws Exception;
+	String modificarEnvioDefinitivoFormato14AC(String user,String terminal, FiseFormato14AC fiseFormato14AC) throws Exception;
 	
 	void eliminarObservaciones14A(List<FiseFormato14ADOb> listaObs) throws Exception;
 	

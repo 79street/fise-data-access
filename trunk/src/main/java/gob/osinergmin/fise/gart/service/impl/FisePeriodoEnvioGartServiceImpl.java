@@ -43,7 +43,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
 			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
 			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
-				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getHasta())); 
+				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
 			}			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
@@ -94,7 +94,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
 			
 			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
-				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getHasta())); 
+				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
 			}	
 			
 			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 

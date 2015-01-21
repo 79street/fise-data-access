@@ -138,7 +138,7 @@ public class FormatoUtil {
 	
 	//nombre txt
 	public static String nombreArchivoCargaTxt(Long anoPresentacion, Long mesPresentacion, String codEmpresa, String tipoFormato){
-		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+tipoFormato
+		String nombre = ""+anoPresentacion+FormatoUtil.rellenaIzquierda(""+mesPresentacion, '0', 2)+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+tipoFormato
 				+FiseConstants.EXTENSIONARCHIVO_TXT;
 		return nombre;
 	}

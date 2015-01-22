@@ -67,6 +67,7 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		formato = formato12CCDao.obtenerFormato12CCByPK(fiseFormato12CCPK);
 		if(formato != null){
 			List<FiseFormato12CD> lista = formato12CDDao.listarFormato12CDByFormato12CC(formato);
+			long periodoEjecucion=0;
 			for (FiseFormato12CD fiseFormato12CD : lista) {
 				fiseFormato12CD.setCodEmpresaReport(fiseFormato12CD.getId().getCodEmpresa());
 				fiseFormato12CD.setAnoPresentacionReport(fiseFormato12CD.getId().getAnoPresentacion());
@@ -76,6 +77,15 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 				fiseFormato12CD.setMesEjecucionGastoReport(fiseFormato12CD.getId().getMesEjecucionGasto());
 				fiseFormato12CD.setNumeroItemEtapaReport(fiseFormato12CD.getId().getNumeroItemEtapa());
 				fiseFormato12CD.setEtapaEjecucionReport(fiseFormato12CD.getId().getEtapaEjecucion());
+				if( periodoEjecucion==0 ){
+					periodoEjecucion = fiseFormato12CD.getId().getAnoEjecucionGasto()*100+fiseFormato12CD.getId().getMesEjecucionGasto();
+					formato.setAnoEjecucionView(fiseFormato12CD.getId().getAnoEjecucionGasto());
+					formato.setMesEjecucionView(fiseFormato12CD.getId().getMesEjecucionGasto());
+				}else if( fiseFormato12CD.getId().getAnoEjecucionGasto()*100+fiseFormato12CD.getId().getMesEjecucionGasto() > periodoEjecucion ){
+					periodoEjecucion = fiseFormato12CD.getId().getAnoEjecucionGasto()*100+fiseFormato12CD.getId().getMesEjecucionGasto();
+					formato.setAnoEjecucionView(fiseFormato12CD.getId().getAnoEjecucionGasto());
+					formato.setMesEjecucionView(fiseFormato12CD.getId().getMesEjecucionGasto());
+				}
 			}
 			formato.setFiseFormato12CDs(lista);
 		}

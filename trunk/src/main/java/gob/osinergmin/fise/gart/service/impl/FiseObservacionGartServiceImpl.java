@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.FiseObservacionBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.gart.service.FiseObservacionGartService;
@@ -40,7 +41,8 @@ public class FiseObservacionGartServiceImpl implements FiseObservacionGartServic
 			if(obs==null){
 				obs = new FiseObservacion();
 				obs.setIdObservacion(bean.getId()); 
-				obs.setDescripcion(bean.getDescripcion());		
+				obs.setDescripcion(bean.getDescripcion());	
+				obs.setOrigen(FiseConstants.OBSERVACION_AUTOMATICO); 
 				//auditoria
 				obs.setUsuarioCreacion(bean.getUsuario());
 				obs.setTerminalCreacion(bean.getTerminal()); 

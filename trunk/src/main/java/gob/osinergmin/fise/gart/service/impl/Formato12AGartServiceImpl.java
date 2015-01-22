@@ -353,9 +353,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			BigDecimal total = new BigDecimal(0);
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
 			
-			FiseFormato12AD detalleRural = new FiseFormato12AD();
-			FiseFormato12AD detalleProvincia = new FiseFormato12AD();
-			FiseFormato12AD detalleLima = new FiseFormato12AD();
+			//FiseFormato12AD detalleRural = new FiseFormato12AD();
+			//FiseFormato12AD detalleProvincia = new FiseFormato12AD();
+			//FiseFormato12AD detalleLima = new FiseFormato12AD();
+			
+			FiseFormato12AD detalleRural = null;
+			FiseFormato12AD detalleProvincia = null;
+			FiseFormato12AD detalleLima = null;
+			
 			if( fiseFormato12AC.getFiseFormato12ADs()!=null ){
 				for (FiseFormato12AD detalle : fiseFormato12AC.getFiseFormato12ADs()) {
 					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
@@ -369,6 +374,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			
 			//RURAL
+			if( detalleRural != null ){
 			/*if( detalleRural != null &&
 					formulario.getNroEmpadR() != 0 &&
 					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
@@ -407,8 +413,9 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta rural modifica"+total);
 				//TrimUtil.trimAll(detalleRural);
 				lista.add(detalleRural);
-			/*}*/
+			}
 			//PROVINCIA
+			if( detalleProvincia != null ){
 			/*if( detalleProvincia != null &&
 					formulario.getNroEmpadP() != 0 &&
 					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
@@ -447,8 +454,9 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta provincia modificar"+total);
 				//TrimUtil.trimAll(detalleProvincia);
 				lista.add(detalleProvincia);
-			/*}*/
+			}
 			//LIMA
+			if( detalleLima != null ){
 			/*if( detalleLima != null &&
 					formulario.getNroEmpadL() != 0 &&
 					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
@@ -486,7 +494,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("total hasta lima modificar"+total);
 				//TrimUtil.trimAll(detalleLima);
 				lista.add(detalleLima);
-			/*}*/
+			}
 			logger.info("total de total"+total);
 			fiseFormato12AC.setTotalAReconocer(total);
 		

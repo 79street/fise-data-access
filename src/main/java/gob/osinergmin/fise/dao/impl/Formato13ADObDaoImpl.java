@@ -4,8 +4,10 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato13ADObDao;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
+import gob.osinergmin.fise.domain.FiseFormato13ADObPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -87,5 +89,46 @@ public class Formato13ADObDaoImpl extends GenericDaoImpl implements Formato13ADO
 		 }
 		return lista;
 	}
+	
+	
+	
+	@Override
+	public long buscarMaximoItemObs13A(String codEmpresa,long anioPres,long mesPres,
+			String ubigeo,String sector,String etapa,long idZona) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato13ADOb.class.getName()
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.codUbigeo= :ubigeo  AND f.id.codSectorTipico= :sector AND"
+				+ " f.id.etapa= :etapa AND f.id.idZonaBenef= :zona";
+		Query query = em.createQuery(q); 	
+		query.setParameter("empresa", codEmpresa);
+		query.setParameter("anioPres", anioPres);
+		query.setParameter("mesPres", mesPres);
+		query.setParameter("ubigeo", ubigeo);
+		query.setParameter("sector", sector);
+		query.setParameter("etapa", etapa);
+		query.setParameter("zona", idZona);
+		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
+	@Override
+	public void insertarFiseFormato13AObs(FiseFormato13ADOb fiseFormato13ADOb) 
+			throws SQLException{
+		em.persist(fiseFormato13ADOb);	 		
+	}
+	
+	
+	@Override
+	public FiseFormato13ADOb obtenerFiseFormato13ADOb(FiseFormato13ADObPK id) 
+			throws SQLException{
+		return em.find(FiseFormato13ADOb.class, id);		
+	}	
+	
 
 }

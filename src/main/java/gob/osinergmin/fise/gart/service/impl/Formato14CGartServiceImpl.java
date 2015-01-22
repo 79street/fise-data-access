@@ -5,6 +5,7 @@ import gob.osinergmin.fise.bean.Formato14CReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
+import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.dao.FiseTipPersonalDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato14CCDao;
@@ -17,6 +18,7 @@ import gob.osinergmin.fise.domain.FiseFormato14CDOb;
 import gob.osinergmin.fise.domain.FiseFormato14CDObPK;
 import gob.osinergmin.fise.domain.FiseFormato14CDPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.gart.service.Formato14CGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -68,6 +70,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Autowired
 	@Qualifier("commonDaoImpl")
 	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseObservacionDaoImpl")
+	private FiseObservacionDao fiseObservacionDao;
 	
 	
 	
@@ -3189,6 +3195,129 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			}
 		}
 	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String insertarObservacion14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
+			String desObservacion,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato14CDObPK pk = null;
+		FiseFormato14CDOb obs = null;
+		FiseFormato14CD detalle = null;
+		FiseFormato14CDPK pkDetalle= null;
+		try {
+			long maxItemObs = formato14CDObDao.buscarMaximoItemObs14C(codEmpresa, anioPres, mesPres,
+					anioIniVig, anioFinVig, etapa, idZona,idPersonal);			
+			String idObservacion = fiseObservacionDao.obtenerIdObservacion();	
+			logger.info("Id observacion:  "+idObservacion); 
+			observacion = new FiseObservacion();
+			observacion.setIdObservacion(idObservacion); 
+			observacion.setDescripcion(desObservacion);
+			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
+			observacion.setUsuarioCreacion(user);
+			observacion.setTerminalCreacion(terminal); 
+			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+			fiseObservacionDao.insertarFiseObservacion(observacion);
+			
+			pkDetalle = new  FiseFormato14CDPK();
+			pkDetalle.setCodEmpresa(codEmpresa);
+			pkDetalle.setAnoPresentacion(anioPres);
+			pkDetalle.setMesPresentacion(mesPres);
+			pkDetalle.setAnoInicioVigencia(anioIniVig);
+			pkDetalle.setAnoFinVigencia(anioFinVig); 
+			pkDetalle.setEtapa(etapa);
+			pkDetalle.setIdZonaBenef(idZona); 
+			pkDetalle.setIdTipPersonal(idPersonal);			
+			detalle = new FiseFormato14CD();
+			detalle.setId(pkDetalle);			
+			pk = new FiseFormato14CDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoInicioVigencia(anioIniVig);
+			pk.setAnoFinVigencia(anioFinVig); 
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona); 
+			pk.setIdTipPersonal(idPersonal); 
+			pk.setItemObservacion(maxItemObs);			
+			obs = new FiseFormato14CDOb();
+			obs.setId(pk);
+			obs.setFiseFormato14cD(detalle); 
+			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());
+			logger.info("objeto observacion:  "+observacion.getIdObservacion()); 
+			obs.setFiseObservacion(observacion);
+			obs.setUsuarioCreacion(user);
+			obs.setTerminalCreacion(terminal);		
+			formato14CDObDao.insertarFiseFormato14CDOb(obs);  
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+			if(pkDetalle!=null){
+				pkDetalle=null;
+			}
+			if(detalle!=null){
+				detalle=null;
+			}
+		}
+		return valor;
+	}	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String eliminarObservacion14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
+			String idObservacion,long itemObservacion) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato14CDObPK pk = null;
+		FiseFormato14CDOb obs = null;		
+		try {								
+			pk = new FiseFormato14CDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoInicioVigencia(anioIniVig);
+			pk.setAnoFinVigencia(anioFinVig); 
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona); 
+			pk.setIdTipPersonal(idPersonal); 
+			pk.setItemObservacion(itemObservacion);  	
+			obs = formato14CDObDao.obtenerFiseFormato14CDOb(pk);				
+			formato14CDObDao.eliminarFiseFormato14CDOb(obs); 
+			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}			
+		}
+		return valor;
+	}
+	
 	
 
 }

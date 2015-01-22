@@ -25,5 +25,8 @@ public interface Formato14CDObDao {
 	List<FiseFormato14CDOb> buscarFiseFormato14CDOb(String codEmpresa, long anioPresentaion, 
 			long mesPresentacion, long anioInicioVige, long anioFinVige, 
 			String etapa,long idZonaBenef,long idTipoPersonal) throws SQLException;
+	
+	long buscarMaximoItemObs14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal) throws SQLException;
 
 }

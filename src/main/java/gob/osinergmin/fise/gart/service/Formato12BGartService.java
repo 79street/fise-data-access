@@ -8,6 +8,8 @@ import gob.osinergmin.fise.domain.FiseFormato12BDOb;
 
 
 
+
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,6 +41,14 @@ public interface Formato12BGartService {
 	 String modificarEnvioDefinitivoFormato12BC(String user,String terminal, FiseFormato12BC fiseFormato12BC) throws Exception;
 	 
 	 void eliminarObservaciones12B(List<FiseFormato12BDOb> listaObs) throws Exception ;
+	 
+	 String insertarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
+				Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 
+				String desObservacion,String user,String terminal) throws Exception;
+	 
+	 String eliminarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
+				Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 
+				String idObservacion,Integer itemObservacion) throws Exception;
 
 
 }

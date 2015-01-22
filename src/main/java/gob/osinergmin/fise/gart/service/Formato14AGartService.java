@@ -24,4 +24,12 @@ public interface Formato14AGartService {
 	
 	void eliminarObservaciones14A(List<FiseFormato14ADOb> listaObs) throws Exception;
 	
+	String insertarObservacion14A(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String desObservacion,String user,String terminal) throws Exception;
+	
+	String eliminarObservacion14A(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String idObservacion,long itemObservacion) throws Exception;
+	
 }

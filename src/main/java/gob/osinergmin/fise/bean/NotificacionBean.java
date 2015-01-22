@@ -43,6 +43,23 @@ public class NotificacionBean {
 	private String anioIniVig;
 	private String anioFinVig;
 	
+	/**para las pk de los detalles de cada formato*/
+	private String idZona;
+	private String desZona;
+	private String etapaEjec;
+	private String desEstapaEjec;
+	private String itemEtapa;
+	private String codUbigeo;
+	private String codSector;
+	private String desSector;
+	private String idPersonal;
+	private String desPersonal;
+	
+	/***para las pk de las observaciones de los formatos***/
+	private String itemObs;
+	private String idObservacion; //fk de la tabla observaciones
+	private String desObservacion;//descripcion de la observacion
+	private String origenObs;//si es manual o es automatico
 	
 	/*****Metodos get y set****/
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -184,7 +201,89 @@ public class NotificacionBean {
 	public void setDescGrupoInf(String descGrupoInf) {
 		this.descGrupoInf = descGrupoInf;
 	}
-	
-	
+	public String getIdZona() {
+		return idZona;
+	}
+	public void setIdZona(String idZona) {
+		this.idZona = idZona;
+	}
+	public String getEtapaEjec() {
+		return etapaEjec;
+	}
+	public void setEtapaEjec(String etapaEjec) {
+		this.etapaEjec = etapaEjec;
+	}
+	public String getItemEtapa() {
+		return itemEtapa;
+	}
+	public void setItemEtapa(String itemEtapa) {
+		this.itemEtapa = itemEtapa;
+	}
+	public String getCodUbigeo() {
+		return codUbigeo;
+	}
+	public void setCodUbigeo(String codUbigeo) {
+		this.codUbigeo = codUbigeo;
+	}
+	public String getCodSector() {
+		return codSector;
+	}
+	public void setCodSector(String codSector) {
+		this.codSector = codSector;
+	}
+	public String getIdPersonal() {
+		return idPersonal;
+	}
+	public void setIdPersonal(String idPersonal) {
+		this.idPersonal = idPersonal;
+	}
+	public String getDesZona() {
+		return desZona;
+	}
+	public void setDesZona(String desZona) {
+		this.desZona = desZona;
+	}
+	public String getDesSector() {
+		return desSector;
+	}
+	public void setDesSector(String desSector) {
+		this.desSector = desSector;
+	}
+	public String getDesPersonal() {
+		return desPersonal;
+	}
+	public void setDesPersonal(String desPersonal) {
+		this.desPersonal = desPersonal;
+	}
+	public String getDesEstapaEjec() {
+		return desEstapaEjec;
+	}
+	public void setDesEstapaEjec(String desEstapaEjec) {
+		this.desEstapaEjec = desEstapaEjec;
+	}
+	public String getItemObs() {
+		return itemObs;
+	}
+	public void setItemObs(String itemObs) {
+		this.itemObs = itemObs;
+	}
+	public String getIdObservacion() {
+		return idObservacion;
+	}
+	public void setIdObservacion(String idObservacion) {
+		this.idObservacion = idObservacion;
+	}
+	public String getDesObservacion() {
+		return desObservacion;
+	}
+	public void setDesObservacion(String desObservacion) {
+		this.desObservacion = desObservacion;
+	}
+	public String getOrigenObs() {
+		return origenObs;
+	}
+	public void setOrigenObs(String origenObs) {
+		this.origenObs = origenObs;
+	}	
 	
 }

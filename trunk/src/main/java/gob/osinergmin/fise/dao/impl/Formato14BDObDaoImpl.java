@@ -4,8 +4,10 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato14BDObDao;
 import gob.osinergmin.fise.domain.FiseFormato14BD;
 import gob.osinergmin.fise.domain.FiseFormato14BDOb;
+import gob.osinergmin.fise.domain.FiseFormato14BDObPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -91,5 +93,47 @@ public class Formato14BDObDaoImpl extends GenericDaoImpl implements Formato14BDO
 		 }
 		return lista;
 	}
+	
+	
+	
+	@Override
+	public long buscarMaximoItemObs14B(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato14BDOb.class.getName()
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.anoInicioVigencia= :anioIniVig  AND f.id.anoFinVigencia= :anioFinVig AND"
+				+ " f.id.etapa= :etapa AND f.id.idZonaBenef= :zona";
+		Query query = em.createQuery(q); 	
+		query.setParameter("empresa", codEmpresa);
+		query.setParameter("anioPres", anioPres);
+		query.setParameter("mesPres", mesPres);
+		query.setParameter("anioIniVig", anioIniVig);
+		query.setParameter("anioFinVig", anioFinVig);
+		query.setParameter("etapa", etapa);
+		query.setParameter("zona", idZona);
+		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
+	@Override
+	public void insertarFiseFormato14BObs(FiseFormato14BDOb fiseFormato14BDOb) 
+			throws SQLException{
+		em.persist(fiseFormato14BDOb);	 		
+	}
+	
+	
+	@Override
+	public FiseFormato14BDOb obtenerFiseFormato14BDOb(FiseFormato14BDObPK id) 
+			throws SQLException{
+		return em.find(FiseFormato14BDOb.class, id);		
+	}	
+	
+	
 
 }

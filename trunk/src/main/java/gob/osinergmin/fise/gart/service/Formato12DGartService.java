@@ -25,4 +25,12 @@ public interface Formato12DGartService {
 	String modificarEnvioDefinitivoFormato12DC(String user,String terminal, FiseFormato12DC fiseFormato12DC) throws Exception;
 	
 	void eliminarObservaciones12D(List<FiseFormato12DDOb> listaObs) throws Exception;
+	
+	String insertarObservacion12D(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String desObservacion,String user,String terminal) throws Exception;
+	
+	String eliminarObservacion12D(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String idObservacion,long itemObservacion) throws Exception;
 }

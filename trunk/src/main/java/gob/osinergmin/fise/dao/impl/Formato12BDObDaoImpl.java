@@ -4,8 +4,9 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato12BDObDao;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
 import gob.osinergmin.fise.domain.FiseFormato12BDOb;
-import gob.osinergmin.fise.util.FormatoUtil;
+import gob.osinergmin.fise.domain.FiseFormato12BDObPK;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,6 +152,51 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			
 		}
 	}
+	
+	
+	@Override
+	public long buscarMaximoItemObs12B(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long idZona) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato12BDOb.class.getName()
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.anoEjecucionGasto= :anioEjec  AND f.id.mesEjecucionGasto= :mesEjec AND"
+				+ " f.id.etapa= :etapa AND f.id.idZonaBenef= :zona";
+		Query query = em.createQuery(q); 	
+		query.setParameter("empresa", codEmpresa);
+		query.setParameter("anioPres", anioPres);
+		query.setParameter("mesPres", mesPres);
+		query.setParameter("anioEjec", anioEjec);
+		query.setParameter("mesEjec", mesEjec);
+		query.setParameter("etapa", etapa);
+		query.setParameter("zona", idZona);
+		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
+	@Override
+	public void insertarFiseFormato12BObs(FiseFormato12BDOb fiseFormato12BDOb) 
+			throws SQLException{
+		em.persist(fiseFormato12BDOb);	 		
+	}
+	
+	@Override
+	public FiseFormato12BDOb obtenerFiseFormato12BDOb(FiseFormato12BDObPK id) 
+			throws SQLException{
+		return em.find(FiseFormato12BDOb.class, id);		
+	}	
+	
+	
+	@Override
+	public void eliminarFiseFormato12BDOb(FiseFormato12BDOb fiseFormato12BDOb) 
+			throws SQLException{
+		 em.remove(fiseFormato12BDOb); 		
+	}	
 
 	
 

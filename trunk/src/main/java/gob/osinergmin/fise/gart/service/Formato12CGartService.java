@@ -25,4 +25,12 @@ public interface Formato12CGartService {
 	String modificarEnvioDefinitivoFormato12CC(String user,String terminal, FiseFormato12CC fiseFormato12CC) throws Exception;
 	
 	void eliminarObservaciones12C(List<FiseFormato12CDOb> listaObs) throws Exception;
+	
+	String insertarObservacion12C(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String desObservacion,String user,String terminal) throws Exception;
+	
+	String eliminarObservacion12C(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String idObservacion,long itemObservacion) throws Exception;
 }

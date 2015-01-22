@@ -40,4 +40,13 @@ public interface Formato13AGartService {
 	boolean existeFormato13AC(FiseFormato13AC fiseFormato13AC);
 	boolean existeFormatoDetalleSectorTipico(FiseFormato13AC fiseFormato13AC, String codUbigeo, Long idZonaBenef);
 	
+	
+	String insertarObservacion13A(String codEmpresa,long anioPres,long mesPres,
+			String ubigeo,String sector,String etapa,long idZona,
+			String desObservacion,String user,String terminal) throws Exception;
+	
+	String eliminarObservacion13A(String codEmpresa,long anioPres,long mesPres,
+			String ubigeo,String sector,String etapa,long idZona,
+			String idObservacion,long itemObservacion) throws Exception;
+	
 }

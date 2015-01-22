@@ -4,6 +4,7 @@ import gob.osinergmin.fise.bean.Formato12ACBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
+import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12ACDao;
 import gob.osinergmin.fise.dao.Formato12ADDao;
@@ -12,8 +13,10 @@ import gob.osinergmin.fise.domain.FiseFormato12AC;
 import gob.osinergmin.fise.domain.FiseFormato12ACPK;
 import gob.osinergmin.fise.domain.FiseFormato12AD;
 import gob.osinergmin.fise.domain.FiseFormato12ADOb;
+import gob.osinergmin.fise.domain.FiseFormato12ADObPK;
 import gob.osinergmin.fise.domain.FiseFormato12ADPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato12AGartService;
 import gob.osinergmin.fise.util.FechaUtil;
@@ -61,6 +64,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Autowired
 	@Qualifier("fiseGrupoInformacionDaoImpl")
 	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseObservacionDaoImpl")
+	private FiseObservacionDao fiseObservacionDao;
+	
 	
 	//@Override
 	public List<FiseFormato12AC> listarFormato12AC() {
@@ -724,6 +732,108 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			formato12AObsDao.eliminarFormato12ADOb(observacion);
 		}
 	} 
+	
+		
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String insertarObservacion12A(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long idZona, 
+			String desObservacion,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato12ADObPK pk = null;
+		FiseFormato12ADOb obs = null;
+		try {
+			long maxItemObs = formato12AObsDao.buscarMaximoItemObs12A(codEmpresa, anioPres, 
+					mesPres, anioEjec, mesEjec, etapa, idZona);
+			logger.info("maximo item observacion:  "+maxItemObs); 
+			String idObservacion = fiseObservacionDao.obtenerIdObservacion();
+			logger.info("id observacion:  "+idObservacion); 
+			observacion = new FiseObservacion();
+			observacion.setIdObservacion(idObservacion); 
+			observacion.setDescripcion(desObservacion);
+			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
+			observacion.setUsuarioCreacion(user);
+			observacion.setTerminalCreacion(terminal); 
+			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+			fiseObservacionDao.insertarFiseObservacion(observacion);
+			pk = new FiseFormato12ADObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoEjecucionGasto(anioEjec);
+			pk.setMesEjecucionGasto(mesEjec);
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona);		
+			pk.setItemObservacion(maxItemObs); 	
+			obs = new FiseFormato12ADOb();
+			obs.setId(pk);
+			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());			
+			obs.setFiseObservacion(observacion);
+			obs.setUsuarioCreacion(user);
+			obs.setTerminalCreacion(terminal);		
+			formato12AObsDao.insertarFiseFormato12AObs(obs); 
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String eliminarObservacion12A(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long idZona, 
+			String idObservacion,long itemObservacion) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato12ADObPK pk = null;	
+		FiseFormato12ADOb obs = null;
+		try {						
+			pk = new FiseFormato12ADObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoEjecucionGasto(anioEjec);
+			pk.setMesEjecucionGasto(mesEjec);
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona);		
+			pk.setItemObservacion(itemObservacion); 	
+			obs = formato12AObsDao.obtenerFiseFormato12ADOb(pk);					
+			formato12AObsDao.eliminarFormato12ADOb(obs); 
+			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
+	
+	
 	
 	
 }

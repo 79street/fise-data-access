@@ -53,7 +53,7 @@ public class Formato14CDObDaoImpl extends GenericDaoImpl implements Formato14CDO
 
 	@Override
 	public FiseFormato14CDOb obtenerFiseFormato14CDOb(FiseFormato14CDObPK id)
-			throws SQLException {		
+			throws SQLException {	
 		id.setCodEmpresa(FormatoUtil.rellenaDerecha(id.getCodEmpresa(), ' ', 4));
 		return em.find(FiseFormato14CDOb.class, id); 
 	}
@@ -106,5 +106,33 @@ public class Formato14CDObDaoImpl extends GenericDaoImpl implements Formato14CDO
 			 return lista;
 		 }	
 	}
+	
+	
+	@Override
+	public long buscarMaximoItemObs14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato14CDOb.class.getName()
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.anoInicioVigencia= :anioIniVig  AND f.id.anoFinVigencia= :anioFinVig AND"
+				+ " f.id.etapa= :etapa AND f.id.idZonaBenef= :zona AND f.id.idTipPersonal= :personal";
+		Query query = em.createQuery(q); 	
+		query.setParameter("empresa", codEmpresa);
+		query.setParameter("anioPres", anioPres);
+		query.setParameter("mesPres", mesPres);
+		query.setParameter("anioIniVig", anioIniVig);
+		query.setParameter("anioFinVig", anioFinVig);
+		query.setParameter("etapa", etapa);
+		query.setParameter("zona", idZona);
+		query.setParameter("personal", idPersonal);
+		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
 
 }

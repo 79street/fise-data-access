@@ -3,6 +3,7 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.Formato13ACBean;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.dao.Formato13ADObDao;
@@ -10,7 +11,10 @@ import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
+import gob.osinergmin.fise.domain.FiseFormato13ADObPK;
+import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
+import gob.osinergmin.fise.util.FechaUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +40,10 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Autowired
 	@Qualifier("formato13ADObDaoImpl")
 	private Formato13ADObDao formato13ADObDao;
+	
+	@Autowired
+	@Qualifier("fiseObservacionDaoImpl")
+	private FiseObservacionDao fiseObservacionDao;
 	
 	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa,
 			long anioDesde, long mesDesde, long anioHasta, long mesHasta,
@@ -186,6 +194,107 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Transactional
 	public boolean existeFormatoDetalleSectorTipico(FiseFormato13AC fiseFormato13AC, String codUbigeo, Long idZonaBenef){
 		return formato13ADDao.existeFormatoDetalleSectorTipico(fiseFormato13AC, codUbigeo, idZonaBenef);
+	}
+	
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String insertarObservacion13A(String codEmpresa,long anioPres,long mesPres,
+			String ubigeo,String sector,String etapa,long idZona,
+			String desObservacion,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato13ADObPK pk = null;
+		FiseFormato13ADOb obs = null;
+		try {
+			long maxItemObs = formato13ADObDao.buscarMaximoItemObs13A(codEmpresa, anioPres,
+					mesPres, ubigeo, sector, etapa, idZona);
+			 
+			String idObservacion = fiseObservacionDao.obtenerIdObservacion();
+			
+			observacion = new FiseObservacion();
+			observacion.setIdObservacion(idObservacion); 
+			observacion.setDescripcion(desObservacion);
+			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
+			observacion.setUsuarioCreacion(user);
+			observacion.setTerminalCreacion(terminal); 
+			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+			fiseObservacionDao.insertarFiseObservacion(observacion);
+			pk = new FiseFormato13ADObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setCodUbigeo(ubigeo);
+			pk.setCodSectorTipico(sector);			
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona);		
+			pk.setItemObservacion(maxItemObs); 	
+			obs = new FiseFormato13ADOb();
+			obs.setId(pk);
+			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());			
+			obs.setFiseObservacion(observacion);
+			obs.setUsuarioCreacion(user);
+			obs.setTerminalCreacion(terminal);		
+			formato13ADObDao.insertarFiseFormato13AObs(obs); 
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String eliminarObservacion13A(String codEmpresa,long anioPres,long mesPres,
+			String ubigeo,String sector,String etapa,long idZona,
+			String idObservacion,long itemObservacion) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato13ADObPK pk = null;
+		FiseFormato13ADOb obs = null;
+		try {			
+			pk = new FiseFormato13ADObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setCodUbigeo(ubigeo);
+			pk.setCodSectorTipico(sector);			
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona);		
+			pk.setItemObservacion(itemObservacion); 	
+			obs = formato13ADObDao.obtenerFiseFormato13ADOb(pk);		
+			formato13ADObDao.eliminarFormato13ADOb(obs); 
+			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
 	}
 	
 }

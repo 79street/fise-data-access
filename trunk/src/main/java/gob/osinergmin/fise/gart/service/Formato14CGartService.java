@@ -50,5 +50,13 @@ public interface Formato14CGartService {
     
     void eliminarObservaciones14C(List<FiseFormato14CDOb> listObs) throws Exception;
     
+    String insertarObservacion14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
+			String desObservacion,String user,String terminal) throws Exception;
+    
+    String eliminarObservacion14C(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
+			String idObservacion,long itemObservacion) throws Exception;
+    
 
 }

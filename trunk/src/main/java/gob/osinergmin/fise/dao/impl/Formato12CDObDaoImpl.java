@@ -4,8 +4,10 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.Formato12CDObDao;
 import gob.osinergmin.fise.domain.FiseFormato12CD;
 import gob.osinergmin.fise.domain.FiseFormato12CDOb;
+import gob.osinergmin.fise.domain.FiseFormato12CDObPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -92,5 +94,46 @@ public class Formato12CDObDaoImpl extends GenericDaoImpl implements Formato12CDO
 		 }
 		return lista;
 	}
+	
+	
+	@Override
+	public long buscarMaximoItemObs12C(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato12CDOb.class.getName()
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.anoEjecucionGasto= :anioEjec  AND f.id.mesEjecucionGasto= :mesEjec AND"
+				+ " f.id.etapa= :etapa AND  f.id.etapaEjecucion= :etapaEjec AND f.id.numeroItemEtapa= :itemEtapa";
+		Query query = em.createQuery(q); 	
+		query.setParameter("empresa", codEmpresa);
+		query.setParameter("anioPres", anioPres);
+		query.setParameter("mesPres", mesPres);
+		query.setParameter("anioEjec", anioEjec);
+		query.setParameter("mesEjec", mesEjec);
+		query.setParameter("etapa", etapa);
+		query.setParameter("etapaEjec", etapaEjec);
+		query.setParameter("itemEtapa", itemEtapa);
+		
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
+	@Override
+	public void insertarFiseFormato12CObs(FiseFormato12CDOb fiseFormato12CDOb) 
+			throws SQLException{
+		em.persist(fiseFormato12CDOb);	 		
+	}
+	
+	
+	@Override
+	public FiseFormato12CDOb obtenerFiseFormato12CDOb(FiseFormato12CDObPK id) 
+			throws SQLException{
+		return em.find(FiseFormato12CDOb.class, id);		
+	}	
+	
 
 }

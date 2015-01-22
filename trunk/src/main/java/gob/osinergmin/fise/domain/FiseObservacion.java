@@ -51,6 +51,8 @@ public class FiseObservacion implements Serializable {
 
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
+	
+	private String origen;
 
 	//bi-directional many-to-one association to FiseFormato12aDOb
 	@OneToMany(mappedBy="fiseObservacion")
@@ -342,5 +344,16 @@ public class FiseObservacion implements Serializable {
 
 		return fiseFormato14cDOb;
 	}
+
+	public String getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
+	}
+	
+	
+	
 
 }

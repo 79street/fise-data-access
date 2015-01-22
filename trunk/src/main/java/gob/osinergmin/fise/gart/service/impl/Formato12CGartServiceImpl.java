@@ -4,6 +4,7 @@ import gob.osinergmin.fise.bean.Formato12CCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
+import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12CCDao;
 import gob.osinergmin.fise.dao.Formato12CDDao;
@@ -12,8 +13,10 @@ import gob.osinergmin.fise.domain.FiseFormato12CC;
 import gob.osinergmin.fise.domain.FiseFormato12CCPK;
 import gob.osinergmin.fise.domain.FiseFormato12CD;
 import gob.osinergmin.fise.domain.FiseFormato12CDOb;
+import gob.osinergmin.fise.domain.FiseFormato12CDObPK;
 import gob.osinergmin.fise.domain.FiseFormato12CDPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato12CGartService;
 import gob.osinergmin.fise.util.FechaUtil;
@@ -59,6 +62,10 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	@Autowired
 	@Qualifier("fiseGrupoInformacionDaoImpl")
 	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseObservacionDaoImpl")
+	private FiseObservacionDao fiseObservacionDao;
 	
 	@Override
 	@Transactional
@@ -826,6 +833,106 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			formato12CDObDao.eliminarFormato12CDOb(observacion); 
 		}
 	} 
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String insertarObservacion12C(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String desObservacion,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato12CDObPK pk = null;
+		FiseFormato12CDOb obs = null;
+		try {
+			long maxItemObs = formato12CDObDao.buscarMaximoItemObs12C(codEmpresa, anioPres, mesPres, 
+					anioEjec, mesEjec, etapa, etapaEjec, itemEtapa);			
+			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+			observacion = new FiseObservacion();
+			observacion.setIdObservacion(idObservacion); 
+			observacion.setDescripcion(desObservacion);
+			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
+			observacion.setUsuarioCreacion(user);
+			observacion.setTerminalCreacion(terminal); 
+			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+			fiseObservacionDao.insertarFiseObservacion(observacion);
+			pk = new FiseFormato12CDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoEjecucionGasto(anioEjec);
+			pk.setMesEjecucionGasto(mesEjec);
+			pk.setEtapa(etapa);
+			pk.setEtapaEjecucion(etapaEjec);
+			pk.setNumeroItemEtapa(itemEtapa); 
+			pk.setItemObservacion(maxItemObs);  	
+			obs = new FiseFormato12CDOb();
+			obs.setId(pk);
+			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());			
+			obs.setFiseObservacion(observacion);
+			obs.setUsuarioCreacion(user);
+			obs.setTerminalCreacion(terminal);		
+			formato12CDObDao.insertarFiseFormato12CObs(obs); 
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String eliminarObservacion12C(String codEmpresa,long anioPres,long mesPres,
+			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
+			String idObservacion,long itemObservacion) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato12CDObPK pk = null;
+		FiseFormato12CDOb obs = null;
+		try {			
+			pk = new FiseFormato12CDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoEjecucionGasto(anioEjec);
+			pk.setMesEjecucionGasto(mesEjec);
+			pk.setEtapa(etapa);
+			pk.setEtapaEjecucion(etapaEjec);
+			pk.setNumeroItemEtapa(itemEtapa); 
+			pk.setItemObservacion(itemObservacion);  	
+			obs = formato12CDObDao.obtenerFiseFormato12CDOb(pk);			
+			formato12CDObDao.eliminarFormato12CDOb(obs); 
+			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
 	
 	
 }

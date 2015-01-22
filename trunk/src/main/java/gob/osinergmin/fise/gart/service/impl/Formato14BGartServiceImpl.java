@@ -4,6 +4,7 @@ import gob.osinergmin.fise.bean.Formato14BCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
+import gob.osinergmin.fise.dao.FiseObservacionDao;
 import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14BDDao;
@@ -12,8 +13,10 @@ import gob.osinergmin.fise.domain.FiseFormato14BC;
 import gob.osinergmin.fise.domain.FiseFormato14BCPK;
 import gob.osinergmin.fise.domain.FiseFormato14BD;
 import gob.osinergmin.fise.domain.FiseFormato14BDOb;
+import gob.osinergmin.fise.domain.FiseFormato14BDObPK;
 import gob.osinergmin.fise.domain.FiseFormato14BDPK;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato14BGartService;
 import gob.osinergmin.fise.util.FechaUtil;
@@ -60,6 +63,10 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 	@Autowired
 	@Qualifier("fiseGrupoInformacionDaoImpl")
 	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseObservacionDaoImpl")
+	private FiseObservacionDao fiseObservacionDao;
 	
 	@Override
 	@Transactional
@@ -1236,6 +1243,105 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 		for (FiseFormato14BDOb observacion : listaObs) {
 			formato14BObsDao.eliminarFormato14BDOb(observacion);
 		}	
+	}
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String insertarObservacion14B(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String desObservacion,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato14BDObPK pk = null;
+		FiseFormato14BDOb obs = null;
+		try {
+			long maxItemObs = formato14BObsDao.buscarMaximoItemObs14B(codEmpresa, anioPres, mesPres,
+					anioIniVig, anioFinVig, etapa, idZona);			
+			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+			observacion = new FiseObservacion();
+			observacion.setIdObservacion(idObservacion); 
+			observacion.setDescripcion(desObservacion);
+			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
+			observacion.setUsuarioCreacion(user);
+			observacion.setTerminalCreacion(terminal); 
+			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+			fiseObservacionDao.insertarFiseObservacion(observacion);
+			pk = new FiseFormato14BDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoInicioVigencia(anioIniVig);
+			pk.setAnoFinVigencia(anioFinVig); 
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona); 
+			pk.setItemObservacion(maxItemObs);  	
+			obs = new FiseFormato14BDOb();
+			obs.setId(pk);
+			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());			
+			obs.setFiseObservacion(observacion);
+			obs.setUsuarioCreacion(user);
+			obs.setTerminalCreacion(terminal);		
+			formato14BObsDao.insertarFiseFormato14BObs(obs); 
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
+	}
+	
+	
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public String eliminarObservacion14B(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String idObservacion,long itemObservacion) throws Exception{
+		String valor = "0";
+		FiseObservacion observacion = null;
+		FiseFormato14BDObPK pk = null;
+		FiseFormato14BDOb obs = null;
+		try {			
+			pk = new FiseFormato14BDObPK();
+			pk.setCodEmpresa(codEmpresa);
+			pk.setAnoPresentacion(anioPres);
+			pk.setMesPresentacion(mesPres);
+			pk.setAnoInicioVigencia(anioIniVig);
+			pk.setAnoFinVigencia(anioFinVig); 
+			pk.setEtapa(etapa);
+			pk.setIdZonaBenef(idZona); 
+			pk.setItemObservacion(itemObservacion);  	
+			obs = formato14BObsDao.obtenerFiseFormato14BDOb(pk);			
+			formato14BObsDao.eliminarFormato14BDOb(obs); 
+			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			valor = "1";
+		} catch (Exception e) {
+			valor = "0";
+			e.printStackTrace();
+		}finally{
+			if(observacion!=null){
+				observacion=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}
+			if(obs!=null){
+				obs=null;
+			}
+		}
+		return valor;
 	}
 	
 

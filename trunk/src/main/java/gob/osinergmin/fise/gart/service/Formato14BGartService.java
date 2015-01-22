@@ -25,4 +25,12 @@ public interface Formato14BGartService {
 	String modificarEnvioDefinitivoFormato14BC(String user,String terminal, FiseFormato14BC fiseFormato14BC) throws Exception;
 
 	void eliminarObservaciones14B(List<FiseFormato14BDOb> listaObs) throws Exception;
+	
+	String insertarObservacion14B(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String desObservacion,String user,String terminal) throws Exception;
+	
+	String eliminarObservacion14B(String codEmpresa,long anioPres,long mesPres,
+			long anioIniVig,long anioFinVig,String etapa,long idZona, 
+			String idObservacion,long itemObservacion) throws Exception;
 }

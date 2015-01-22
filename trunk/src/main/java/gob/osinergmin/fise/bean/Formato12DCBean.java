@@ -106,6 +106,10 @@ public class Formato12DCBean implements Serializable {
 	private boolean readOnly;
 	private boolean readonlyFlagPeriodo;
 	private boolean readonlyEdit;
+	
+	private String anioEjecucionDetalle;
+	private String mesEjecucionDetalle;
+	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}
@@ -537,6 +541,18 @@ public class Formato12DCBean implements Serializable {
 	}
 	public void setListaTipoGasto(Map<String, String> listaTipoGasto) {
 		this.listaTipoGasto = listaTipoGasto;
+	}
+	public String getAnioEjecucionDetalle() {
+		return anioEjecucionDetalle;
+	}
+	public void setAnioEjecucionDetalle(String anioEjecucionDetalle) {
+		this.anioEjecucionDetalle = anioEjecucionDetalle;
+	}
+	public String getMesEjecucionDetalle() {
+		return mesEjecucionDetalle;
+	}
+	public void setMesEjecucionDetalle(String mesEjecucionDetalle) {
+		this.mesEjecucionDetalle = mesEjecucionDetalle;
 	}
 	
 		

@@ -84,6 +84,12 @@ public class FiseFormato12DC implements Serializable {
 	@Transient
 	private Long numeroItemEtapaDetalle;
 	
+	//
+	@Transient
+	private long anoEjecucionView;
+	@Transient
+	private long mesEjecucionView;
+	
 	public FiseFormato12DC() {
 	}
 
@@ -267,6 +273,22 @@ public class FiseFormato12DC implements Serializable {
 
 	public void setNumeroItemEtapaDetalle(Long numeroItemEtapaDetalle) {
 		this.numeroItemEtapaDetalle = numeroItemEtapaDetalle;
+	}
+
+	public long getAnoEjecucionView() {
+		return anoEjecucionView;
+	}
+
+	public void setAnoEjecucionView(long anoEjecucionView) {
+		this.anoEjecucionView = anoEjecucionView;
+	}
+
+	public long getMesEjecucionView() {
+		return mesEjecucionView;
+	}
+
+	public void setMesEjecucionView(long mesEjecucionView) {
+		this.mesEjecucionView = mesEjecucionView;
 	}
 
 }

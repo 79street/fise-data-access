@@ -114,6 +114,9 @@ public class Formato12CCBean implements Serializable {
 	private boolean readonlyFlagPeriodo;
 	private boolean readonlyEdit;
 	
+	private String anioEjecucionDetalle;
+	private String mesEjecucionDetalle;
+	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}
@@ -605,6 +608,18 @@ public class Formato12CCBean implements Serializable {
 	}
 	public void setTipoOperacion(String tipoOperacion) {
 		this.tipoOperacion = tipoOperacion;
+	}
+	public String getAnioEjecucionDetalle() {
+		return anioEjecucionDetalle;
+	}
+	public void setAnioEjecucionDetalle(String anioEjecucionDetalle) {
+		this.anioEjecucionDetalle = anioEjecucionDetalle;
+	}
+	public String getMesEjecucionDetalle() {
+		return mesEjecucionDetalle;
+	}
+	public void setMesEjecucionDetalle(String mesEjecucionDetalle) {
+		this.mesEjecucionDetalle = mesEjecucionDetalle;
 	}
 	
 	

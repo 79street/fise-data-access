@@ -83,6 +83,33 @@ public class FormatoUtil {
 		return val;
 	}
 	
+	//validar positivos
+	public static boolean validarCampoLongEnteroPositivoTxt(String valor){
+		boolean val=false;
+		try {
+			long m = Long.parseLong(valor);
+			if( m>=0 ){
+				val = true;
+			}
+		} catch (Exception e) {
+			val = false;
+		}
+		return val;
+	}
+	
+	public static boolean validarCampoBigDecimalPositivoTxt(String valor){
+		boolean val=false;
+		try {
+			BigDecimal m = new BigDecimal(valor);
+			if( m.compareTo(BigDecimal.ZERO) >=0 ){
+				val = true;
+			}
+		} catch (Exception e) {
+			val = false;
+		}
+		return val;
+	}
+	
 	//concatenar n arrays
 	public static <T> T[] concatAll(T[] first, T[]... rest) {
 		  int totalLength = first.length;

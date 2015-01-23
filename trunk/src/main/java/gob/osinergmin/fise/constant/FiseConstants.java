@@ -1814,8 +1814,8 @@ public class FiseConstants {
 
 	
 	/****resumen de costos****/	
-	public final static String NOMBRE_F12A = "FORMATO 12A: RESUMEN DE COSTOS OPERATIVOS-IMPLEMENTACIÓN";
-	public final static String NOMBRE_F12B = "FORMATO 12B: RESUMEN DE COSTOS OPERATIVOS";
+	public final static String NOMBRE_F12A = "FORMATO 12A: Resumen de Gastos Operativos - Implentación";
+	public final static String NOMBRE_F12B = "FORMATO 12B: Resumen de Gastos Operativos - Mensual";
 	
 	
 	public final static String OBSERVACION_MANUAL = "M";

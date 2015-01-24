@@ -343,7 +343,119 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		}		
 	}
 	
+	/**metodo para implementar reportes de 14A y 14B comparativos de costos*/
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarResumenCostosF14AComp(String codEmpresa,
+			Long idGrupoInf,Long idZona) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT");
+		sb.append(" EMP.COD_EMPRESA AS cod_empresa, ");//0	
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");//1
+		sb.append(" F14A.ANO_PRESENTACION || '-' || FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(F14A.MES_PRESENTACION) AS periodo ,  ");//2
+		sb.append(" A.DESCRIPCION AS des_actividad, ");//3	
+		sb.append(" Z.DESCRIPCION AS des_zona, ");//4	
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14A.COD_EMPRESA,F14A.ANO_PRESENTACION,"
+				+ " F14A.MES_PRESENTACION,F14A.ANO_INICIO_VIGENCIA,"
+				+ " F14A.ANO_FIN_VIGENCIA,'SOLICITUD',A.ITEM,Z.ID_ZONA_BENEF) AS monto_solicitud, ");//5		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14A.COD_EMPRESA,F14A.ANO_PRESENTACION,"
+				+ " F14A.MES_PRESENTACION,F14A.ANO_INICIO_VIGENCIA,"
+				+ " F14A.ANO_FIN_VIGENCIA,'LEV.OBS',A.ITEM,Z.ID_ZONA_BENEF) AS monto_lev_Obs, ");//6			
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14A.COD_EMPRESA,F14A.ANO_PRESENTACION,"
+				+ " F14A.MES_PRESENTACION,F14A.ANO_INICIO_VIGENCIA,"
+				+ " F14A.ANO_FIN_VIGENCIA,'HISTORICO',A.ITEM,Z.ID_ZONA_BENEF) AS monto_historico, ");//7		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14A.COD_EMPRESA,F14A.ANO_PRESENTACION,"
+				+ " F14A.MES_PRESENTACION,F14A.ANO_INICIO_VIGENCIA,"
+				+ " F14A.ANO_FIN_VIGENCIA,'ESTABLECIDO',A.ITEM,Z.ID_ZONA_BENEF) AS monto_establecido, ");//8
+		sb.append(" A.ITEM AS item ");//9	
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_14A_C F14A,");
+		sb.append(" FISE_DESCRIPCION_ACTIVIDADES A, FISE_ZONA_BENEF Z");		
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F14A.COD_EMPRESA = EMP.COD_EMPRESA ");		
+		sb.append(" AND F14A.ETAPA = 'SOLICITUD' ");
+		sb.append(" AND A.FORMATO = 'F14A' ");		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F14A.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F14A.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}		
+		if(idGrupoInf!=0){			
+			sb.append(" AND F14A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}
+		if(idZona!=0){			
+			sb.append(" AND Z.ID_ZONA_BENEF = "+idZona+" ");			
+		}
+		sb.append(" ORDER BY EMP.COD_EMPRESA,A.ITEM ASC ");	
+		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarResumenCostosF14BComp(String codEmpresa,
+			Long idGrupoInf,Long idZona) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT");
+		sb.append(" EMP.COD_EMPRESA AS cod_empresa, ");//0	
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");//1
+		sb.append(" F14B.ANO_PRESENTACION || '-' || FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(F14B.MES_PRESENTACION) AS periodo ,  ");//1
+		sb.append(" A.DESCRIPCION AS des_actividad, ");//3	
+		sb.append(" Z.DESCRIPCION AS des_zona, ");//4		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14B.COD_EMPRESA,F14B.ANO_PRESENTACION,"
+				+ " F14B.MES_PRESENTACION,F14B.ANO_INICIO_VIGENCIA,"
+				+ " F14B.ANO_FIN_VIGENCIA,'SOLICITUD',A.ITEM,Z.ID_ZONA_BENEF) AS monto_solicitud, ");//5		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14B.COD_EMPRESA,F14B.ANO_PRESENTACION,"
+				+ " F14B.MES_PRESENTACION,F14B.ANO_INICIO_VIGENCIA,"
+				+ " F14B.ANO_FIN_VIGENCIA,'LEV.OBS',A.ITEM,Z.ID_ZONA_BENEF) AS monto_levObs, ");//6		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14B.COD_EMPRESA,F14B.ANO_PRESENTACION,"
+				+ " F14B.MES_PRESENTACION,F14B.ANO_INICIO_VIGENCIA,"
+				+ " F14B.ANO_FIN_VIGENCIA,'HISTORICO',A.ITEM,Z.ID_ZONA_BENEF) AS monto_historico, ");//7		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_COMP_FUN(A.FORMATO,F14B.COD_EMPRESA,F14B.ANO_PRESENTACION,"
+				+ " F14B.MES_PRESENTACION,F14B.ANO_INICIO_VIGENCIA,"
+				+ " F14B.ANO_FIN_VIGENCIA,'ESTABLECIDO',A.ITEM,Z.ID_ZONA_BENEF) AS monto_establecido, ");//8
+		sb.append(" A.ITEM AS item ");//9	
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_14B_C F14B,");
+		sb.append(" FISE_DESCRIPCION_ACTIVIDADES A, FISE_ZONA_BENEF Z");
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F14B.COD_EMPRESA = EMP.COD_EMPRESA ");
+		sb.append(" AND F14B.ETAPA = 'SOLICITUD' ");
+		sb.append(" AND A.FORMATO = 'F14B' ");
+		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F14B.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F14B.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}		
+		if(idGrupoInf!=0){			
+			sb.append(" AND F14B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}
+		if(idZona!=0){			
+			sb.append(" AND Z.ID_ZONA_BENEF = "+idZona+" ");			
+		}
+		sb.append(" ORDER BY EMP.COD_EMPRESA,A.ITEM ASC ");	
+		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}
+	
+	/** fin metodo para implementar reportes de 14A y 14B comparativos de costos*/
 	
 	
 }

@@ -98,6 +98,17 @@ public class ResumenCostoBean {
 	private BigDecimal aprobadoP;
 	private BigDecimal aprobadoL;
 	
+	
+	//para reporte de formatos 14A y 14B comparativos de costos	
+	private String codEmpresa;
+	private String item;
+	private String actividad;
+	private String desZona;//descripcion de la zona de beneficiarios
+	private BigDecimal montoSolicitud;	
+	private BigDecimal montoLevObs;
+	private BigDecimal montoHistorico;
+	private BigDecimal montoEstablecido;//o tambien monto final
+	
 		
 	/*****Metodos get y set****/	
 	
@@ -539,8 +550,53 @@ public class ResumenCostoBean {
 	public void setOptionMensual(String optionMensual) {
 		this.optionMensual = optionMensual;
 	}
-	
-	
-	
+	public String getCodEmpresa() {
+		return codEmpresa;
+	}
+	public void setCodEmpresa(String codEmpresa) {
+		this.codEmpresa = codEmpresa;
+	}
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String item) {
+		this.item = item;
+	}
+	public String getActividad() {
+		return actividad;
+	}
+	public void setActividad(String actividad) {
+		this.actividad = actividad;
+	}
+	public String getDesZona() {
+		return desZona;
+	}
+	public void setDesZona(String desZona) {
+		this.desZona = desZona;
+	}
+	public BigDecimal getMontoSolicitud() {
+		return montoSolicitud;
+	}
+	public void setMontoSolicitud(BigDecimal montoSolicitud) {
+		this.montoSolicitud = montoSolicitud;
+	}
+	public BigDecimal getMontoLevObs() {
+		return montoLevObs;
+	}
+	public void setMontoLevObs(BigDecimal montoLevObs) {
+		this.montoLevObs = montoLevObs;
+	}
+	public BigDecimal getMontoHistorico() {
+		return montoHistorico;
+	}
+	public void setMontoHistorico(BigDecimal montoHistorico) {
+		this.montoHistorico = montoHistorico;
+	}
+	public BigDecimal getMontoEstablecido() {
+		return montoEstablecido;
+	}
+	public void setMontoEstablecido(BigDecimal montoEstablecido) {
+		this.montoEstablecido = montoEstablecido;
+	}	
 	
 }

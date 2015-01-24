@@ -195,6 +195,7 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_VALIDACION_F14C = "ValidacionesF14C";
 	public final static String TIPO_FORMATO_CUMPLIMIENTO = "CUMPLIMIENTO";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS = "RESUMEN_COSTO";
+	public final static String TIPO_FORMATO_RESUMEN_COSTOS_COMP = "RESUMEN_COSTO_COMP";
 
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
 	public final static String NOMBRE_HOJA_FORMATO12C = "F12C";
@@ -1816,6 +1817,9 @@ public class FiseConstants {
 	/****resumen de costos****/	
 	public final static String NOMBRE_F12A = "FORMATO 12A: Resumen de Gastos Operativos - Implentación";
 	public final static String NOMBRE_F12B = "FORMATO 12B: Resumen de Gastos Operativos - Mensual";
+	
+	public final static String NOMBRE_F14A_COMP = "FORMATO 14A: Comparativo de Costos";
+	public final static String NOMBRE_F14B_COMP = "FORMATO 14B: Comparativo de Costos";
 	
 	
 	public final static String OBSERVACION_MANUAL = "M";

@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.ResumenCostoBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.ResumenCostosDao;
 import gob.osinergmin.fise.gart.service.ResumenCostosService;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -189,5 +190,51 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 		}
 		return lista;
 	}
+	
+	
+	/**metodo para implementar reportes de 14A y 14B comparativos de costos*/
+	
+	@Override
+	@Transactional
+	public List<ResumenCostoBean> buscarResumenCostoCompF14AB(String codEmpresa,
+			Long idGrupoInf,Long idZona, String formato) throws Exception{
+		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
+		ResumenCostoBean r =null;
+		List<Object[]> listaComp =null;
+		try {
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){ 
+				listaComp = resumenCostosDao.listarResumenCostosF14AComp(codEmpreCompleta, idGrupoInf, idZona);	
+			}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){
+				listaComp = resumenCostosDao.listarResumenCostosF14BComp(codEmpreCompleta, idGrupoInf, idZona);		
+			}			
+			for(int i = 0; i < listaComp.size(); i++){					
+				r = new ResumenCostoBean();	
+				r.setCodEmpresa(String.valueOf(((String)listaComp.get(i)[0] == null) ? "--" :listaComp.get(i)[0])); 
+				r.setDesEmpresa(String.valueOf(((String)listaComp.get(i)[1] == null) ? "--" :listaComp.get(i)[1]));				
+				r.setPeriodo(String.valueOf(((String)listaComp.get(i)[2] == null) ? "--" :listaComp.get(i)[2]));
+				r.setActividad(String.valueOf(((String)listaComp.get(i)[3] == null) ? "--" :listaComp.get(i)[3]));
+				r.setDesZona(String.valueOf(((String)listaComp.get(i)[4] == null) ? "--" :listaComp.get(i)[4]));
+				r.setMontoSolicitud(((BigDecimal)listaComp.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[5]);
+				r.setMontoLevObs(((BigDecimal)listaComp.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[6]);
+				r.setMontoHistorico(((BigDecimal)listaComp.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[7]);
+				r.setMontoEstablecido(((BigDecimal)listaComp.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[8]);
+				r.setItem(String.valueOf(((String)listaComp.get(i)[9] == null) ? "--" :listaComp.get(i)[9]));
+				lista.add(r);
+			 }			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.info("Error al listar resumen de costos comparativos formatos 14A y 14B:  "+e); 
+		}finally{
+			if(r!=null){
+				r=null;
+			}
+			if(listaComp!=null){
+				listaComp=null;
+			}	
+		}
+		return lista;
+	}
+	
 
 }

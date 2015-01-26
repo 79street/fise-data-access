@@ -1825,4 +1825,72 @@ public class FiseConstants {
 	public final static String OBSERVACION_MANUAL = "M";
 	public final static String OBSERVACION_AUTOMATICO = "A";
 	
+	/**conceptos F14a y F14B*/
+	public final static String CONCEPTO_EMP_VALUE = "EMP";
+	public final static String CONCEPTO_GLP_VALUE = "GLP";
+	
+	public final static String SUFIJO_CONCEPTO_RURAL_F14A = "_RURAL_APROB";
+	public final static String SUFIJO_CONCEPTO_PROVINCIA_F14A = "_PROV_APROB";
+	public final static String SUFIJO_CONCEPTO_LIMA_F14A = "_LIMA_APROB";
+	/*public final static String CONCEPTO_EMP_PROVINCIA_VALUE = "EMP_PROV_APROB";
+	public final static String CONCEPTO_GLP_PROVINCIA_VALUE = "GLP_PROV_APROB";
+	public final static String CONCEPTO_EMP_LIMA_VALUE = "EMP_LIMA_APROB";
+	public final static String CONCEPTO_GLP_LIMA_VALUE = "GLP_LIMA_APROB";*/
+	
+	public final static String CONCEPTO_EMP_DESCRIPCION = "Costo Unitario por Empadronamiento";
+	public final static String CONCEPTO_GLP_DESCRIPCION = "Costo Unitario por Agente GLP";
+	/*public final static String CONCEPTO_EMP_PROVINCIA_DESCRIPCION = "COSTOS DE EMPADRONAMIENTO PROVINCIA";
+	public final static String CONCEPTO_GLP_PROVINCIA_DESCRIPCION = "COSTOS DE AGENTES PROVINCIA";
+	public final static String CONCEPTO_EMP_LIMA_DESCRIPCION = "COSTO DE EMPADRONAMIENTO LIMA";
+	public final static String CONCEPTO_GLP_LIMA_DESCRIPCION = "COSTOS DE AGENTES LIMA";*/
+	//
+	public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_VALUE = "COST_UNI_IMP_VAL";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_VALUE = "COST_UNI_VAL_DOMIC";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_VALUE = "COST_UNI_VAL_DIS_ELE";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_VALUE = "COST_UNI_CANJ_VAL_FIS";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_VALUE = "COST_UNI_CANJ_VAL_DIG";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_VALUE = "COST_UNI_ATENCION";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_VALUE = "COST_TOTAL_GEST_ADM";
+	
+	public final static String SUFIJO_CONCEPTO_RURAL_F14B = "_R_APRO";
+	public final static String SUFIJO_CONCEPTO_PROVINCIA_F14B = "_P_APRO";
+	public final static String SUFIJO_CONCEPTO_LIMA_F14B = "_L_APRO";
+	/*public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_PROVINCIA_VALUE = "COST_UNI_IMP_VAL_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_PROVINCIA_VALUE = "COST_UNI_VAL_DOMIC_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_PROVINCIA_VALUE = "COST_UNI_VAL_DIS_ELE_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_PROVINCIA_VALUE = "COST_UNI_CANJ_VAL_FIS_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_PROVINCIA_VALUE = "COST_UNI_CANJ_VAL_DIG_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_PROVINCIA_VALUE = "COST_UNI_ATENCION_P_APRO";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_PROVINCIA_VALUE = "COST_TOTAL_GEST_ADM_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_LIMA_VALUE = "COST_UNI_IMP_VAL_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_LIMA_VALUE = "COST_UNI_VAL_DOMIC_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_LIMA_VALUE = "COST_UNI_VAL_DIS_ELE_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_LIMA_VALUE = "COST_UNI_CANJ_VAL_FIS_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_LIMA_VALUE = "COST_UNI_CANJ_VAL_DIG_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_LIMA_VALUE = "COST_UNI_ATENCION_L_APRO";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_LIMA_VALUE = "COST_TOTAL_GEST_ADM_L_APRO";*/
+	
+	public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_DESCRIPCION = "Costo Unitario por Impresión de Vales";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_DESCRIPCION = "Costo Unitario por Reparto de Vales a Domicilio";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_DESCRIPCION = "Costo Unitario por Entrega de Vales en la Distribuidora Eléctrica";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_DESCRIPCION = "Costo Unitario por Canje y Liquidación de Vales Físicos";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_DESCRIPCION = "Costo Unitario por Canje de Vales Digitales mediante Banca Celular";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_DESCRIPCION = "Costo Unitario por Atención";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_DESCRIPCION = "Costo Total por Gestión Administrativa";
+	/*public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_PROVINCIA_DESCRIPCION = "COST_UNI_IMP_VAL_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_PROVINCIA_DESCRIPCION = "COST_UNI_VAL_DOMIC_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_PROVINCIA_DESCRIPCION = "COST_UNI_VAL_DIS_ELE_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_PROVINCIA_DESCRIPCION = "COST_UNI_CANJ_VAL_FIS_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_PROVINCIA_DESCRIPCION = "COST_UNI_CANJ_VAL_DIG_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_PROVINCIA_DESCRIPCION = "COST_UNI_ATENCION_P_APRO";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_PROVINCIA_DESCRIPCION = "COST_TOTAL_GEST_ADM_P_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_IMP_VAL_LIMA_DESCRIPCION = "COST_UNI_IMP_VAL_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DOMIC_LIMA_DESCRIPCION = "COST_UNI_VAL_DOMIC_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_VAL_DIS_ELE_LIMA_DESCRIPCION = "COST_UNI_VAL_DIS_ELE_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_FIS_LIMA_DESCRIPCION = "COST_UNI_CANJ_VAL_FIS_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_CANJ_VAL_DIG_LIMA_DESCRIPCION = "COST_UNI_CANJ_VAL_DIG_L_APRO";
+	public final static String CONCEPTO_COSTO_UNIT_ATENCION_LIMA_DESCRIPCION = "COST_UNI_ATENCION_L_APRO";
+	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_LIMA_DESCRIPCION = "COST_TOTAL_GEST_ADM_L_APRO";*/
+	
+	
 }

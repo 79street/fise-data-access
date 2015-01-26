@@ -6,11 +6,13 @@ import gob.osinergmin.fise.bean.CumplimientoReportBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
+import gob.osinergmin.fise.bean.VariacionCostosBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -674,6 +676,49 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		return admin;
 	}	
 	
+	//OBTENER VARIACION DE COSTOS
+	@Override
+	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal){
+		
+		List<VariacionCostosBean> listaCostos = new ArrayList<VariacionCostosBean>();
+		try {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" SELECT EMP.COD_EMPRESA, EMP.DSC_CORTA_EMPRESA, ");
+			sql.append("  FISE_GEN_PKG.FISE_GET_COSTO_F14AB_FUN('" + formato
+					+ "',F14AB.COD_EMPRESA,F14AB.ANO_PRESENTACION,F14AB.MES_PRESENTACION,F14AB.ANO_INICIO_VIGENCIA,F14AB.ANO_FIN_VIGENCIA,F14AB.ETAPA,'" + conceptoFinal
+					+ "') VALOR ");
+			sql.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, ");
+			if(FiseConstants.TIPO_FORMATO_14A.equals(formato)){
+				sql.append(" FISE_FORMATO_14A_C F14AB ");
+			}else if(FiseConstants.TIPO_FORMATO_14B.equals(formato)){
+				sql.append(" FISE_FORMATO_14B_C F14AB ");
+			}
+			sql.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");
+			sql.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION'  ");
+			sql.append(" AND F14AB.COD_EMPRESA = EMP.COD_EMPRESA AND F14AB.ETAPA = 'ESTABLECIDO' ");
+			sql.append(" AND F14AB.ID_GRUPO_INFORMACION = " + idGrupoInfo );
+			
+			Query query = em.createNativeQuery(sql.toString());
+			
+			List resultado = query.getResultList();
+			Iterator it=resultado.iterator();
+			while(it.hasNext()){
+				Object[] valor=(Object[] )it.next();
+				VariacionCostosBean variacion=new VariacionCostosBean();
+				variacion.setCodEmpresa((String)valor[0]);
+				variacion.setDescEmpresa((String)valor[1]);
+				variacion.setValor(((BigDecimal)valor[2]).setScale(2, RoundingMode.HALF_UP).toString());
+				listaCostos.add(variacion);
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return listaCostos;
+
+	}
 	
 	
 }

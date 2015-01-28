@@ -731,7 +731,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			
 			sql.append(" SELECT ANO_PRESENTACION || '-' || LPAD(MES_PRESENTACION, 2, '0') PERIODO, ");
 			
-			sql.append(" " + ("NAC".equals(codEmpresa)?"":"SUM(")
+			sql.append(" " + ("NAC".equals(codEmpresa)?"SUM(":"")
 					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
 					+ formato
 					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'RURAL_APROB') + "
@@ -741,9 +741,9 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
 					+ formato
 					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'LIMA_APROB')"
-					+ ("NAC".equals(codEmpresa)?"":")")+" COSTO,  ");
+					+ ("NAC".equals(codEmpresa)?")":"")+" COSTO,  ");
 			
-			sql.append(" " + ("NAC".equals(codEmpresa)?"":"SUM(")
+			sql.append(" " + ("NAC".equals(codEmpresa)?"SUM(":"")
 					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
 					+ formato
 					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,	F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'RURAL_APROB_NB') + "
@@ -753,7 +753,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
 					+ formato
 					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'LIMA_APROB_NB')"
-					+ ("NAC".equals(codEmpresa)?"":")") +" NUM_BENEFICIARIOS  ");
+					+ ("NAC".equals(codEmpresa)?")":"") +" NUM_BENEFICIARIOS  ");
 			
 			sql.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, ");
 			if(FiseConstants.TIPO_FORMATO_12A.equals(formato)){

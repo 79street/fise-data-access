@@ -6,6 +6,7 @@ import gob.osinergmin.fise.bean.EnvioDefinitivoBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
+import gob.osinergmin.fise.bean.HistoricoCostosBean;
 import gob.osinergmin.fise.bean.NotificacionBean;
 import gob.osinergmin.fise.bean.VariacionCostosBean;
 import gob.osinergmin.fise.constant.FiseConstants;
@@ -1147,6 +1148,12 @@ public class CommonGartServiceImpl implements CommonGartService {
 	@Transactional
 	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal) throws Exception{
 		return commonDao.obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(idGrupoInfo,formato,conceptoFinal);
+	}
+	
+	@Override
+	@Transactional
+	public List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato) throws Exception{
+		return commonDao.obtenerHistoricoCostosByCodempresaFormato(codEmpresa, formato);
 	}
 	
 }

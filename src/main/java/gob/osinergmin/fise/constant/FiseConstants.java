@@ -1892,5 +1892,7 @@ public class FiseConstants {
 	public final static String CONCEPTO_COSTO_UNIT_ATENCION_LIMA_DESCRIPCION = "COST_UNI_ATENCION_L_APRO";
 	public final static String CONCEPTO_COSTO_TOTAL_GEST_ADM_LIMA_DESCRIPCION = "COST_TOTAL_GEST_ADM_L_APRO";*/
 	
+	public final static String NACIONAL_VALUE = "NAC";
+	public final static String NACIONAL_DESCRIPCION = "Nacional";
 	
 }

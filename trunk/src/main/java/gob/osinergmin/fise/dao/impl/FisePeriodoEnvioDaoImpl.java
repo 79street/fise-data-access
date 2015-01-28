@@ -29,7 +29,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append(" SELECT DISTINCT ANO_PRESENTACION || LPAD(MES_PRESENTACION, 2, '0') || ETAPA CODIGO,");
-			sql.append(" DECODE(MES_PRESENTACION,1,'Ene',2,'Feb',3,'Mar',4,'Abr',5,'May',6,'Jun',7,'Jul',8,'Ago',9,'Set',10,'Oct',11,'Nov',12,'Dic')");
+			//sql.append(" DECODE(MES_PRESENTACION,1,'Ene',2,'Feb',3,'Mar',4,'Abr',5,'May',6,'Jun',7,'Jul',8,'Ago',9,'Set',10,'Oct',11,'Nov',12,'Dic')");
+			sql.append(" SUBSTR(FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(MES_PRESENTACION),1,3)");
 			sql.append(" || '-' || ANO_PRESENTACION || ' / ' || ETAPA DESCRIPCION, ");
 			sql.append(" FLAG_MOSTRAR_ANO_MES_EJEC FLAG_PERIODO_EJEC, ");
 			sql.append(" ANO_INICIO_VIGENCIA ANO_INICIO_VIGENCIA, ");
@@ -43,7 +44,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			if(FormatoUtil.isNotBlank(nombreFormato))
 				sql.append(" AND FORMATO = '").append(nombreFormato.trim()).append("' ");
 			System.out.println("FechaUtil.fechaHoyYYYYMMDD().trim()"+FechaUtil.fechaHoyYYYYMMDD().trim());
-			sql.append(" AND '").append(FechaUtil.fechaHoyYYYYMMDD().trim()).append("' BETWEEN TO_CHAR(DESDE, 'YYYYMMDD') AND TO_CHAR(hasta, 'YYYYMMDD') ");
+			sql.append(" AND '").append(FechaUtil.fechaHoyYYYYMMDD().trim()).append("' BETWEEN TO_CHAR(DESDE, 'YYYYMMDD') AND TO_CHAR(NVL(FECHA_AMPLIADA, HASTA), 'YYYYMMDD') ");
 			
 			sql.append(" ORDER BY CODIGO DESC");
 			//System.out.println("QUERY:"+sql.toString());

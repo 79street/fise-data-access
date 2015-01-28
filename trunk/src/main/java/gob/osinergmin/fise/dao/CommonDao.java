@@ -5,6 +5,7 @@ import gob.osinergmin.fise.bean.CumplimientoReportBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
+import gob.osinergmin.fise.bean.HistoricoCostosBean;
 import gob.osinergmin.fise.bean.VariacionCostosBean;
 
 import java.sql.SQLException;
@@ -49,5 +50,6 @@ public interface CommonDao {
 	boolean esAdministradorFise(String userName);
 	
 	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal);
+	List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato);
 			
 }

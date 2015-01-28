@@ -6,6 +6,7 @@ import gob.osinergmin.fise.bean.CumplimientoReportBean;
 import gob.osinergmin.fise.bean.Formato12A12BGeneric;
 import gob.osinergmin.fise.bean.Formato12C12D13Generic;
 import gob.osinergmin.fise.bean.Formato14Generic;
+import gob.osinergmin.fise.bean.HistoricoCostosBean;
 import gob.osinergmin.fise.bean.VariacionCostosBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.CommonDao;
@@ -720,5 +721,78 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 
 	}
 	
+	//OBTENER VARIACION DE COSTOS
+	@Override
+	public List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato){
+		
+		List<HistoricoCostosBean> listaCostos = new ArrayList<HistoricoCostosBean>();
+		try {
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" SELECT ANO_PRESENTACION || '-' || LPAD(MES_PRESENTACION, 2, '0') PERIODO, ");
+			
+			sql.append(" " + ("NAC".equals(codEmpresa)?"":"SUM(")
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'RURAL_APROB') + "
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'PROV_APROB') + "
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'LIMA_APROB')"
+					+ ("NAC".equals(codEmpresa)?"":")")+" COSTO,  ");
+			
+			sql.append(" " + ("NAC".equals(codEmpresa)?"":"SUM(")
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,	F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'RURAL_APROB_NB') + "
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'PROV_APROB_NB') + "
+					+ "FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('"
+					+ formato
+					+ "',F12AB.COD_EMPRESA,F12AB.ANO_PRESENTACION,F12AB.MES_PRESENTACION,F12AB.ANO_EJECUCION_GASTO,F12AB.MES_EJECUCION_GASTO,F12AB.ETAPA,'LIMA_APROB_NB')"
+					+ ("NAC".equals(codEmpresa)?"":")") +" NUM_BENEFICIARIOS  ");
+			
+			sql.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, ");
+			if(FiseConstants.TIPO_FORMATO_12A.equals(formato)){
+				sql.append(" FISE_FORMATO_12A_C F12AB ");
+			}else if(FiseConstants.TIPO_FORMATO_12B.equals(formato)){
+				sql.append(" FISE_FORMATO_12B_C F12AB ");
+			}
+					   
+			sql.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");
+			sql.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION'  ");
+			sql.append(" AND F12AB.COD_EMPRESA = EMP.COD_EMPRESA AND F12AB.ETAPA = 'RECONOCIDO'  ");
+			if( "NAC".equals(codEmpresa) ){
+				sql.append(" GROUP BY ANO_PRESENTACION || '-' || LPAD(mes_PRESENTACION, 2, '0') " );
+			}else{
+				sql.append(" AND F12AB.COD_EMPRESA = '" + FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4) + "' " );
+			}
+			sql.append(" ORDER BY 1" );
+			
+			
+			Query query = em.createNativeQuery(sql.toString());
+			
+			List resultado = query.getResultList();
+			Iterator it=resultado.iterator();
+			while(it.hasNext()){
+				Object[] valor=(Object[] )it.next();
+				HistoricoCostosBean historico=new HistoricoCostosBean();
+				//por ahora ya no obtiene el cod y descripcion de la empresa
+				historico.setPeriodo((String)valor[0]);
+				historico.setValor(((BigDecimal)valor[1]).setScale(2, RoundingMode.HALF_UP).toString());
+				historico.setNroBeneficiarios(String.valueOf(((BigDecimal)valor[2]).longValue()));
+				listaCostos.add(historico);
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return listaCostos;
+
+	}
 	
 }

@@ -35,7 +35,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			sql.append(" FLAG_MOSTRAR_ANO_MES_EJEC FLAG_PERIODO_EJEC, ");
 			sql.append(" ANO_INICIO_VIGENCIA ANO_INICIO_VIGENCIA, ");
 			sql.append(" ANO_FIN_VIGENCIA ANO_FIN_VIGENCIA, ");
-			sql.append(" FLAG_HABILITA_COSTOS_D_I_F14C FLAG_HABILITA_COSTOS");
+			sql.append(" FLAG_HABILITA_COSTOS_D_I_F14C FLAG_HABILITA_COSTOS,");
+			sql.append(" FLAG_ENVIO_CON_OBSERVACIONES FLAG_ENVIO_OBS ");			
 			sql.append(" FROM FISE_PERIODO_ENVIO t");
 			sql.append(" WHERE 1=1 ");
 			
@@ -62,6 +63,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 				periodoEnvio.setAnioInicioVig(((BigDecimal)valor[3])!=null?((BigDecimal)valor[3]).toString():FiseConstants.BLANCO);
 				periodoEnvio.setAnioFinVig(((BigDecimal)valor[4])!=null?((BigDecimal)valor[4]).toString():FiseConstants.BLANCO);
 				periodoEnvio.setFlagHabilitaCostos((String)valor[5]);
+				periodoEnvio.setFlagEnvioConObservaciones((String)valor[6]);
 				lst.add(periodoEnvio);
 			}
 		} catch (Exception e) {

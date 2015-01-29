@@ -97,6 +97,8 @@ public class Formato13ADDaoImpl extends GenericDaoImpl implements Formato13ADDao
 
 			sql.append(" GROUP BY COD_UBIGEO, ID_ZONA_BENEF, ANO_ALTA,MES_ALTA,DESCRIPCION_LOCALIDAD,NOMBRE_SEDE_ATIENDE, ");
 			sql.append(" ANO_INICIO_VIGENCIA, ANO_FIN_VIGENCIA ");
+			
+			sql.append(" ORDER BY ID_ZONA_BENEF,ANO_ALTA,MES_ALTA ");
 
 			Query query = em.createNativeQuery(sql.toString());
 

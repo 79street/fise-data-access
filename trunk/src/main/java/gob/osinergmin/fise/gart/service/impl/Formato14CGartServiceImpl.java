@@ -137,25 +137,30 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				}	
 				cab.setFiseGrupoInformacion(inf);  				
 				cab.setNombreArchivoExcel(bean.getNombreExel());
-				cab.setNombreArchivoTexto(bean.getNombreText());								
-                if(validarDato(bean.getNumRural())){
-                	cab.setNumBenefEmpPerAntRural(Long.valueOf(bean.getNumRural()));	
+				cab.setNombreArchivoTexto(bean.getNombreText());
+				
+				if(validarDato(bean.getNumRural())){
+					cab.setNumBenefEmpPerAntRural(Long.valueOf(bean.getNumRural()));	
 				}			
 				if(validarDato(bean.getNumUrbProv())){
 					cab.setNumBenefEmpPerAntUrbProv(Long.valueOf(bean.getNumUrbProv()));	
-				}				
-				if(validarDato(bean.getNumUrbLima())){
-					cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));	
-				}				
-				if(validarDato(bean.getCostoPromUrbLima())){
-					cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima())); 	
-				}				
+				}	
 				if(validarDato(bean.getCostoPromRural())){
 					cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));	
 				}				
 				if(validarDato(bean.getCostoPromUrbProv())){
 					cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));	
-				}				
+				}
+				if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+				{
+					if(validarDato(bean.getNumUrbLima())){
+						cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));	
+					}				
+					if(validarDato(bean.getCostoPromUrbLima())){
+						cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima())); 	
+					}	
+				}					
 				cab.setUsuarioCreacion(bean.getUsuario());
 				cab.setTerminalCreacion(bean.getTerminal());
 				cab.setFechaCreacion(FechaUtil.obtenerFechaActual());	
@@ -1118,18 +1123,22 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			}			
 			if(validarDato(bean.getNumUrbProv())){
 				cab.setNumBenefEmpPerAntUrbProv(Long.valueOf(bean.getNumUrbProv()));	
-			}				
-			if(validarDato(bean.getNumUrbLima())){
-				cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));	
-			}				
-			if(validarDato(bean.getCostoPromUrbLima())){
-				cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima())); 	
-			}				
+			}					
 			if(validarDato(bean.getCostoPromRural())){
 				cab.setCostoPromMenRural(new BigDecimal(bean.getCostoPromRural()));	
 			}				
 			if(validarDato(bean.getCostoPromUrbProv())){
 				cab.setCostoPromMenUrbProv(new BigDecimal(bean.getCostoPromUrbProv()));	
+			}	
+			if(FiseConstants.COD_EMPRESA_EDELNOR.equals(bean.getCodEmpresa()) || 
+					FiseConstants.COD_EMPRESA_LUZ_SUR.equals(bean.getCodEmpresa()))
+			{
+				if(validarDato(bean.getNumUrbLima())){
+					cab.setNumBenefEmpPerAntUrbLima(Long.valueOf(bean.getNumUrbLima()));	
+				}				
+				if(validarDato(bean.getCostoPromUrbLima())){
+					cab.setCostoPromMenUrbLima(new BigDecimal(bean.getCostoPromUrbLima())); 	
+				}		
 			}			
 			cab.setUsuarioActualizacion(bean.getUsuario()); 
 			cab.setTerminalActualizacion(bean.getTerminal()); 

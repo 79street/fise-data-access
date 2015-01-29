@@ -218,7 +218,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			sb.append("DELETE FROM FiseFormato12BD c WHERE 1=1 ");
 			
 			if(emp !=null && !emp.isEmpty()){
-				sb.append(" AND c.id.codEmpresa ='"+emp.trim()+"'");
+				sb.append(" AND c.id.codEmpresa ='"+emp+"'");
 			}
 			if(etapa!=null && !etapa.isEmpty()){
 				sb.append(" AND c.id.etapa =:etp ");

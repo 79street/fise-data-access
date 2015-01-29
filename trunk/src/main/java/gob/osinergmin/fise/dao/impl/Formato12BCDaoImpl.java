@@ -284,7 +284,7 @@ return bean;
 			
 			if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
 				//sb.append(" AND c.id.codEmpresa =:emp ");
-				sb.append(" AND COD_EMPRESA = '"+id.getCodEmpresa().trim()+"'");
+				sb.append(" AND COD_EMPRESA = '"+id.getCodEmpresa()+"'");
 			}
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
 				//sb.append(" AND c.id.etapa =:etp ");

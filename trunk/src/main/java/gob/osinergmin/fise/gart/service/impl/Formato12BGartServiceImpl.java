@@ -447,7 +447,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 	@Override
 	@Transactional
 	public Integer deleteFormatoObs(String emp, Integer anio, Integer mes, String etapa, Integer anioEjec, Integer mesEjec, Integer idzona, Integer item) throws DataIntegrityViolationException, Exception {
-		// TODO Auto-generated method stub
+		
 		return formato12BDObDao.deleteFormatoObs(emp, anio, mes, etapa, anioEjec, mesEjec,idzona,item);
 	}
 

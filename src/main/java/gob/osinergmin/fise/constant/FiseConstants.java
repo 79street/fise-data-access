@@ -1895,4 +1895,7 @@ public class FiseConstants {
 	public final static String NACIONAL_VALUE = "NAC";
 	public final static String NACIONAL_DESCRIPCION = "Nacional";
 	
+	public final static String PERIODO_CON_ENVIO_OBS_NO = "N";
+	public final static String PERIODO_CON_ENVIO_OBS_SI = "S";
+	
 }

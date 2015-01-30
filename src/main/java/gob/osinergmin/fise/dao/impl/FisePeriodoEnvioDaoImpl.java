@@ -106,7 +106,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 	public List<FisePeriodoEnvio> buscarFisePeriodoEnvio(String codEmpresa, Integer anioPres, 
 			Integer mesPres, String formato,String etapa,
 			String flagEnvio,String estado,Date fechaActual) throws SQLException{
-		
+		System.out.println("Ingresando a buscar periodo envio"); 
 		String q = "SELECT p FROM " + FisePeriodoEnvio.class.getName()
 				+ " p WHERE 1=1 ";
 		if(FormatoUtil.isNotBlank(codEmpresa)){ 
@@ -119,7 +119,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			q = q.concat(" AND p.mesPresentacion =:mesPres");				
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){ 
-			q = q.concat(" AND p.id.etapa = :etapa ");
+			q = q.concat(" AND p.etapa = :etapa ");
 		}
 		if(FormatoUtil.isNotBlank(formato)){ 
 			q = q.concat(" AND p.formato = :formato ");
@@ -203,6 +203,115 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 
 		return lst;
 	}
+	
+	/***Metodo verficar si existe un registro existente con estado vigente para una empresa*/
+	@SuppressWarnings("unchecked")	
+	@Override
+	public boolean verificarPeridoEnvioEmpresa(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,String estado) throws SQLException{
+		
+		String q = "SELECT p FROM " + FisePeriodoEnvio.class.getName()
+				+ " p WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND p.codEmpresa = :codEmpresa ");
+		}
+		if(anioPres!=0){ 		
+			q = q.concat(" AND p.anoPresentacion =:anioPres");	
+		}
+		if(mesPres!=0){ 
+			q = q.concat(" AND p.mesPresentacion =:mesPres");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND p.etapa = :etapa ");
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			q = q.concat(" AND p.formato = :formato ");
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			q = q.concat(" AND p.estado = :estado ");
+		}		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
+		}
+		if(anioPres!=0){
+			query.setParameter("anioPres", anioPres);			
+		}
+		if(mesPres!=0){ 
+			query.setParameter("mesPres", mesPres);			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			query.setParameter("formato", formato);
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			query.setParameter("estado", estado);
+		}		
+		 List<FisePeriodoEnvio> lista= query.getResultList();
+		 if(lista!=null && lista.size()>0){
+			 return true;
+		 }else{
+			 return false;
+		 }	
+	}
+	
+	/***Metodo para obtener el flag envio con observaciones de un periodo para una determinada empresa*/
+	@SuppressWarnings("unchecked")	
+	@Override
+	public String obtenerFlagEnvioConObs(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,String estado) throws SQLException{
+		
+		String q = "SELECT p FROM " + FisePeriodoEnvio.class.getName()
+				+ " p WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND p.codEmpresa = :codEmpresa ");
+		}
+		if(anioPres!=0){ 		
+			q = q.concat(" AND p.anoPresentacion =:anioPres");	
+		}
+		if(mesPres!=0){ 
+			q = q.concat(" AND p.mesPresentacion =:mesPres");				
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND p.etapa = :etapa ");
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			q = q.concat(" AND p.formato = :formato ");
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			q = q.concat(" AND p.estado = :estado ");
+		}		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
+		}
+		if(anioPres!=0){
+			query.setParameter("anioPres", anioPres);			
+		}
+		if(mesPres!=0){ 
+			query.setParameter("mesPres", mesPres);			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		if(FormatoUtil.isNotBlank(formato)){ 
+			query.setParameter("formato", formato);
+		}
+		if(FormatoUtil.isNotBlank(estado)){ 
+			query.setParameter("estado", estado);
+		}		
+		 List<FisePeriodoEnvio> lista= query.getResultList();
+		 if(lista==null){
+			 return "";
+		 }else{
+			 return lista.get(0).getFlagEnvioConObservaciones();
+		 }	
+	}
+	
 	
 
 }

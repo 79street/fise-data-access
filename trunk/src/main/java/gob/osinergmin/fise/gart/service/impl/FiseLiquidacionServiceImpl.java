@@ -276,7 +276,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		return listaMotivo;
 	}
 	
-	
+	/***Metodo para obtener los motivos de la liquidacion*/
 	@Override
 	@Transactional
 	public LiquidacionBean obtenerDatosLiquidacionesMotivosNo(long correlativo, long item) 
@@ -306,6 +306,18 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			}
 		}
 		return bean;		
+	}
+	
+	
+	/****Metodo para obtener la ultima etapa de 
+	 * cada formato pra utilizar en Autorizar Reenvio***/	
+	@Override
+	@Transactional
+	public String  obtenerUltimaEtapa(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig)throws Exception{
+		return liquidacionDao.obtenerUltimaEtapa(formato, codEmpresa, 
+				anioPres, mesPres, anioEjec, mesEjec, anioIniVig, anioFinVig);
 	}
 	
 

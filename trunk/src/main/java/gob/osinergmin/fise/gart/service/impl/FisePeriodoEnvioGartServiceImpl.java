@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.PeriodoEnvioBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.FisePeriodoEnvioDao;
 import gob.osinergmin.fise.domain.FisePeriodoEnvio;
 import gob.osinergmin.fise.gart.service.FisePeriodoEnvioGartService;
@@ -31,38 +32,48 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 	public String insertarDatosFisePeriodoEnvio(PeriodoEnvioBean bean) throws Exception{
 		FisePeriodoEnvio periodo =null;
 		String valor;
-		try {			
+		try {	
+			boolean verificar= false;
 			periodo = new FisePeriodoEnvio();
 			periodo.setCodEmpresa(bean.getCodEmpresa());
 			periodo.setAnoPresentacion(Integer.valueOf(bean.getAnioPres())); 
 			periodo.setMesPresentacion(Integer.valueOf(bean.getMesPres())); 
 			periodo.setFormato(bean.getFormato());
-			periodo.setEtapa(bean.getEtapa()); 	
-			logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
-			logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
-			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
-			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
-			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
-				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
+			periodo.setEtapa(bean.getEtapa()); 
+			if(FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE.equals(bean.getEstado())){ 
+			    verificar = fisePeriodoEnvioDao.verificarPeridoEnvioEmpresa(periodo.getCodEmpresa(),
+							periodo.getAnoPresentacion(), periodo.getMesPresentacion(),
+							periodo.getFormato(), periodo.getEtapa(), FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE);	
 			}			
-			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
-			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
-			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec());
-			if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
-				periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
-			}
-			if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
-				periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
-			}			
-			periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
-			periodo.setEstado(bean.getEstado()); 
-			//auditoria
-			periodo.setUsuarioCreacion(bean.getUsuario());
-			periodo.setTerminalCreacion(bean.getTerminal()); 
-			periodo.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fisePeriodoEnvioDao.insertarFisePeriodoEnvio(periodo);	
-			logger.info("Secuencial obtenido del insert:  "+periodo.getSecuencia());
-			valor = ""+periodo.getSecuencia();
+			if(!verificar){
+				logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
+				logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
+				periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
+				periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
+				if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
+					periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
+				}			
+				periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
+				periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
+				periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec());
+				if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
+					periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
+				}
+				if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
+					periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
+				}			
+				periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
+				periodo.setEstado(bean.getEstado()); 
+				//auditoria
+				periodo.setUsuarioCreacion(bean.getUsuario());
+				periodo.setTerminalCreacion(bean.getTerminal()); 
+				periodo.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fisePeriodoEnvioDao.insertarFisePeriodoEnvio(periodo);	
+				logger.info("Secuencial obtenido del insert:  "+periodo.getSecuencia());
+				valor = ""+periodo.getSecuencia();
+			}else{
+				valor = "D";//D = duplicado
+			}		
 		} catch (Exception e) {
 			logger.info("Error al grabar en periodo envio: "+e); 
 			valor = "0";
@@ -79,40 +90,46 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 	@Transactional
 	public String actualizarDatosFisePeriodoEnvio(PeriodoEnvioBean bean) throws Exception{
 		FisePeriodoEnvio periodo =null;
-		String valor ="1";
-		try {			
-			periodo = fisePeriodoEnvioDao.obtenerFisePeriodoEnvio(Long.valueOf(bean.getSecuencial())); 
-			//periodo.setCodEmpresa(bean.getCodEmpresa());
-			//periodo.setAnoPresentacion(Integer.valueOf(bean.getAnioPres())); 
-			//periodo.setMesPresentacion(Integer.valueOf(bean.getMesPres())); 
-			//periodo.setFormato(bean.getFormato());
-			//periodo.setEtapa(bean.getEtapa()); 
-			
-			logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
-			logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
-			periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
-			periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
-			
-			if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
-				periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
-			}	
-			
-			periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
-			periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
-			periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 
-			if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
-				periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
-			}
-			if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
-				periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
+		String valor ="0";		
+		try {	
+			boolean verificar= false;
+			if(FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE.equals(bean.getEstado())){ 
+				 verificar = fisePeriodoEnvioDao.verificarPeridoEnvioEmpresa(bean.getCodEmpresa(),
+						Integer.valueOf(bean.getAnioPres()), Integer.valueOf(bean.getMesPres()),
+						bean.getFormato(), bean.getEtapa(), bean.getEstado());
 			}			
-			periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
-			periodo.setEstado(bean.getEstado()); 
-			//auditoria
-			periodo.setUsuarioActualizacion(bean.getUsuario());
-			periodo.setTerminalActualizacion(bean.getTerminal()); 
-			periodo.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			fisePeriodoEnvioDao.actualizarFisePeriodoEnvio(periodo); 
+			if(!verificar){
+				periodo = fisePeriodoEnvioDao.obtenerFisePeriodoEnvio(Long.valueOf(bean.getSecuencial())); 		
+				
+				logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
+				logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
+				periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));
+				periodo.setHasta(FechaUtil.getFechaStringToDate(bean.getHasta()));
+				
+				if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
+					periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
+				}	
+				
+				periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
+				periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
+				periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 
+				if(FormatoUtil.isNotBlank(bean.getAnoIniVigencia())){ 
+					periodo.setAnoInicioVigencia(Integer.valueOf(bean.getAnoIniVigencia())); 	
+				}
+				if(FormatoUtil.isNotBlank(bean.getAnoFinVigencia())){ 
+					periodo.setAnoFinVigencia(Integer.valueOf(bean.getAnoFinVigencia())); 	
+				}			
+				periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
+				periodo.setEstado(bean.getEstado()); 
+				//auditoria
+				periodo.setUsuarioActualizacion(bean.getUsuario());
+				periodo.setTerminalActualizacion(bean.getTerminal()); 
+				periodo.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				fisePeriodoEnvioDao.actualizarFisePeriodoEnvio(periodo);
+				valor = "1";
+			}else{
+				valor ="D";//D= duplicado
+			}			
 		} catch (Exception e) {
 			logger.info("Error al actualizar en periodo envio: "+e); 
 			valor = "0";
@@ -121,8 +138,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 				periodo =null;
 			}
 		}
-		return valor;
-		
+		return valor;		
 	}
 	
 	@Override
@@ -212,6 +228,13 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 	@Transactional
 	public List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(String frecuenciaFormato){
 		return fisePeriodoEnvioDao.listarFisePeriodoEnvioMesAnioEtapaCumplimiento(frecuenciaFormato);
+	}
+	
+	@Transactional
+	@Override
+	public String obtenerFlagEnvioConObs(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,String estado)  throws Exception{
+		return fisePeriodoEnvioDao.obtenerFlagEnvioConObs(codEmpresa, anioPres, mesPres, formato, etapa, estado);
 	}
 	
 	

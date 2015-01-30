@@ -28,5 +28,11 @@ public interface FisePeriodoEnvioDao {
 			String flagEnvio,String estado,Date fechaActual) throws SQLException;
 	
 	List<FisePeriodoEnvio> listarFisePeriodoEnvioMesAnioEtapaCumplimiento(String frecuenciaFormato);
+	
+	String obtenerFlagEnvioConObs(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,String estado) throws SQLException;
+	
+	boolean verificarPeridoEnvioEmpresa(String codEmpresa, Integer anioPres, 
+			Integer mesPres, String formato,String etapa,String estado) throws SQLException;
 
 }

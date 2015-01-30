@@ -1916,4 +1916,7 @@ public class FiseConstants {
 	public final static String PERIODO_CON_ENVIO_OBS_NO = "N";
 	public final static String PERIODO_CON_ENVIO_OBS_SI = "S";
 	
+	public final static String PERIODO_ENVIO_ESTADO_VIGENTE = "V";
+	public final static String PERIODO_ENVIO_ESTADO_ANULADO= "A";
+	
 }

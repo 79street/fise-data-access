@@ -93,14 +93,17 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 		String valor ="0";		
 		try {	
 			boolean verificar= false;
-			if(FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE.equals(bean.getEstado())){ 
-				 verificar = fisePeriodoEnvioDao.verificarPeridoEnvioEmpresa(bean.getCodEmpresa(),
-						Integer.valueOf(bean.getAnioPres()), Integer.valueOf(bean.getMesPres()),
-						bean.getFormato(), bean.getEtapa(), bean.getEstado());
+			periodo = fisePeriodoEnvioDao.obtenerFisePeriodoEnvio(Long.valueOf(bean.getSecuencial())); 
+			
+			if(periodo!=null && FiseConstants.PERIODO_ENVIO_ESTADO_ANULADO.equals(periodo.getEstado())){				
+				  if(FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE.equals(bean.getEstado())){
+					  verificar = fisePeriodoEnvioDao.verificarPeridoEnvioEmpresa(bean.getCodEmpresa(),
+								Integer.valueOf(bean.getAnioPres()), Integer.valueOf(bean.getMesPres()),
+								bean.getFormato(), bean.getEtapa(), FiseConstants.PERIODO_ENVIO_ESTADO_VIGENTE);
+				  }		
 			}			
 			if(!verificar){
-				periodo = fisePeriodoEnvioDao.obtenerFisePeriodoEnvio(Long.valueOf(bean.getSecuencial())); 		
-				
+				//periodo = fisePeriodoEnvioDao.obtenerFisePeriodoEnvio(Long.valueOf(bean.getSecuencial())); 			
 				logger.info("Fecha desde:  "+FechaUtil.getFechaStringToDate(bean.getDesde())); 
 				logger.info("Fecha hasta:  "+FechaUtil.getFechaStringToDate(bean.getHasta())); 
 				periodo.setDesde(FechaUtil.getFechaStringToDate(bean.getDesde()));

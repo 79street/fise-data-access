@@ -32,5 +32,9 @@ public interface FiseLiquidacionService {
 	
 	LiquidacionBean obtenerDatosLiquidacionesMotivosNo(long correlativo, long item) 
 			throws Exception;
+	
+	String  obtenerUltimaEtapa(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig)throws Exception;
 
 }

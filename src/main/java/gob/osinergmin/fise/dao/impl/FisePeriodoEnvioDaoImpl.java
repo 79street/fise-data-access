@@ -46,7 +46,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 				sql.append(" AND FORMATO = '").append(nombreFormato.trim()).append("' ");
 			System.out.println("FechaUtil.fechaHoyYYYYMMDD().trim()"+FechaUtil.fechaHoyYYYYMMDD().trim());
 			sql.append(" AND '").append(FechaUtil.fechaHoyYYYYMMDD().trim()).append("' BETWEEN TO_CHAR(DESDE, 'YYYYMMDD') AND TO_CHAR(NVL(FECHA_AMPLIADA, HASTA), 'YYYYMMDD') ");
-			
+			sql.append(" AND ESTADO='V' ");
 			sql.append(" ORDER BY CODIGO DESC");
 			//System.out.println("QUERY:"+sql.toString());
 			

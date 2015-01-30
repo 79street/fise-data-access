@@ -111,8 +111,9 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 				
 				if(FormatoUtil.isNotBlank(bean.getFechaAmpl())){ 
 					periodo.setFechaAmpliada(FechaUtil.getFechaStringToDate(bean.getFechaAmpl())); 
-				}	
-				
+				}else{
+					periodo.setFechaAmpliada(null); 
+				}				
 				periodo.setDiasNotificacionAntesCierre(Integer.valueOf(bean.getDiasNotifCierre())); 
 				periodo.setFlagEnvioConObservaciones(bean.getFlagEnvioObs());			
 				periodo.setFlagMostrarAnoMesEjec(bean.getFlagAnioMesEjec()); 

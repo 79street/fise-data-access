@@ -152,6 +152,8 @@ private static final long serialVersionUID = 1L;
 	private String  codEdelnor;
 	private String  codLuzSur;
 	
+	private String idGrupoInfo;
+	
 	public Formato14ACBean(){
 		
 	}
@@ -986,6 +988,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setNroAgentL(Long nroAgentL) {
 		this.nroAgentL = nroAgentL;
+	}
+
+	public String getIdGrupoInfo() {
+		return idGrupoInfo;
+	}
+
+	public void setIdGrupoInfo(String idGrupoInfo) {
+		this.idGrupoInfo = idGrupoInfo;
 	}
 
 	

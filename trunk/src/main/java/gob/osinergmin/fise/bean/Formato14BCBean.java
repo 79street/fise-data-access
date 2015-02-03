@@ -150,6 +150,8 @@ public class Formato14BCBean  implements Serializable {
 	private String  codEdelnor;
 	private String  codLuzSur;
 	
+	private String idGrupoInfo;
+	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}
@@ -980,6 +982,14 @@ public class Formato14BCBean  implements Serializable {
 
 	public void setAnioFinVigenciaHidden(String anioFinVigenciaHidden) {
 		this.anioFinVigenciaHidden = anioFinVigenciaHidden;
+	}
+
+	public String getIdGrupoInfo() {
+		return idGrupoInfo;
+	}
+
+	public void setIdGrupoInfo(String idGrupoInfo) {
+		this.idGrupoInfo = idGrupoInfo;
 	}
 
 	

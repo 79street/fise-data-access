@@ -195,5 +195,17 @@ public class FormatoUtil {
         DecimalFormat num = new DecimalFormat("###########.00");
         return num.format(valor);
       }
+    
+    public static String cambiaTextoAMinusculas(String cadena, int tipo){
+    	//tipo: 0 - Titulo
+    	//tipo: 1 - Subtitulo
+    	String cadenaRetorno = "";
+    	if(tipo==0){
+    		cadenaRetorno = cadena.substring(0,1)+cadena.substring(1,cadena.length()).toLowerCase();
+    	}else if(tipo==1){
+    		cadenaRetorno = cadena.toLowerCase();
+    	}
+    	return cadenaRetorno;
+    }
 	
 }

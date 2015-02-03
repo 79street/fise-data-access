@@ -315,7 +315,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			boolean existe = false;
 			existe = formato12ACDao.existeFormato12AC(fiseFormato12AC);
 			if(existe){
-				throw new Exception("Ya existe un registro con la misma clave.");
+				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
 			}else{
 				formato12ACDao.registrarFormato12AC(fiseFormato12AC);
 			}
@@ -333,7 +333,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw e;
+			throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
 		}
 		return dto;
 	}

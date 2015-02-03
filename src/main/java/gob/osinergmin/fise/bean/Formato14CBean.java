@@ -190,7 +190,7 @@ public class Formato14CBean {
 	private String  codEdelnor;//cod empresa edelnor constante
 	private String  codLuzSur;//cod empresa luz del sur constante
 	
-	
+	private String idGrupoInfo;
 	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
@@ -965,6 +965,12 @@ public class Formato14CBean {
 	}
 	public void setAnioFinVigenciaHidden(String anioFinVigenciaHidden) {
 		this.anioFinVigenciaHidden = anioFinVigenciaHidden;
+	}
+	public String getIdGrupoInfo() {
+		return idGrupoInfo;
+	}
+	public void setIdGrupoInfo(String idGrupoInfo) {
+		this.idGrupoInfo = idGrupoInfo;
 	}
 	
 	

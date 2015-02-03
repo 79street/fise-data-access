@@ -331,7 +331,7 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 			boolean existe = false;
 			existe = formato12CCDao.existeFormato12CC(fiseFormato12CC);
 			if(existe){
-				throw new Exception("Ya existe un registro con la misma clave.");
+				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
 			}else{
 				formato12CCDao.registrarFormato12CC(fiseFormato12CC);
 			}
@@ -354,7 +354,7 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw e;
+			throw new Exception("Se produjo un error al guardar los datos del Formato 12C");
 		}
 		return dto;
 	}

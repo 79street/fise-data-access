@@ -429,7 +429,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			boolean existe = false;
 			existe = formato14ACDao.existeFormato14AC(fiseFormato14AC);
 			if(existe){
-				throw new Exception("Ya existe un registro con la misma clave.");
+				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
 			}else{
 				formato14ACDao.registrarFormato14AC(fiseFormato14AC);
 			}
@@ -445,7 +445,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw e;
+			throw new Exception("Se produjo un error al guardar los datos del Formato 14A");
 		}
 		return dto;
 	}

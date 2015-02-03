@@ -2250,11 +2250,14 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		}else{
 			bean.setGrupoInformacion("---");	
 		}
-		if(f.getFechaEnvioDefinitivo()!=null){
+		/*if(f.getFechaEnvioDefinitivo()!=null){
 			bean.setEstado(FiseConstants.ESTADO_ENVIADO_F14C);
 		}else{
 			bean.setEstado(FiseConstants.ESTADO_POR_ENVIAR_F14C);
-		}		
+		}*/
+		String flagOper = commonDao.obtenerEstadoProceso(f.getId().getCodEmpresa(),FiseConstants.TIPO_FORMATO_14C,f.getId().getAnoPresentacion(),f.getId().getMesPresentacion(), f.getId().getEtapa());
+		bean.setEstado(FormatoUtil.cambiaTextoAMinusculas(flagOper, 0));
+		
 		///////////////////////////////////////
 		bean.setNombreSede(f.getNombreSede()); 
 		bean.setNumRural(""+f.getNumBenefEmpPerAntRural());

@@ -364,6 +364,7 @@ public class FiseConstants {
 	public final static String NOMBRE_COD_EMPRESA = "COD_EMPRESA";
 	public final static String NOMBRE_ANO_PRESENTACION = "ANO_PRESENTACION";
 	public final static String NOMBRE_MES_PRESENTACION = "MES_PRESENTACION";
+	public final static String NOMBRE_ANO_EJECUCION = "ANO_EJECUCION_GASTO";
 	public final static String NOMBRE_MES_EJECUCION = "MES_EJECUCION_GASTO";
 	public final static String NOMBRE_ZONA_BENEFICIARIO = "ID_ZONA_BENEF";
 
@@ -1494,6 +1495,9 @@ public class FiseConstants {
 	public static final String COD_ERROR_F12D_3600 = "3600";
 	public static final String COD_ERROR_F12D_3601 = "3601";
 	public static final String COD_ERROR_F12D_3602 = "3602";
+	
+	public static final String COD_ERROR_F12C_3631 = "3631";
+	public static final String COD_ERROR_F12D_3632 = "3632";
 
 	// F14A
 	public final static String COD_ERROR_F14A_1620 = "1620";

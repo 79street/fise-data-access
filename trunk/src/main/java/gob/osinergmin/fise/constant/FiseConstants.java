@@ -1574,6 +1574,9 @@ public class FiseConstants {
 	public final static String COD_ERROR_F14A_2240 = "2240";
 	public final static String COD_ERROR_F14A_2250 = "2250";
 	public final static String COD_ERROR_F14A_2260 = "2260";
+	
+	public final static String COD_ERROR_F14A_2261 = "2261";
+	
 	public final static String COD_ERROR_F14A_2270 = "2270";
 	public final static String COD_ERROR_F14A_2280 = "2280";
 	public final static String COD_ERROR_F14A_2290 = "2290";
@@ -1657,6 +1660,9 @@ public class FiseConstants {
 	public final static String COD_ERROR_F14B_3030 = "3030";
 	public final static String COD_ERROR_F14B_3040 = "3040";
 	public final static String COD_ERROR_F14B_3050 = "3050";
+	
+	public final static String COD_ERROR_F14B_3051 = "3051";
+	
 	public final static String COD_ERROR_F14B_3060 = "3060";
 	public final static String COD_ERROR_F14B_3070 = "3070";
 	public final static String COD_ERROR_F14B_3080 = "3080";

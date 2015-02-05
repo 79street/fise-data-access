@@ -431,11 +431,20 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			if(existe){
 				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
 			}else{
-				formato14ACDao.registrarFormato14AC(fiseFormato14AC);
+				try{
+					formato14ACDao.registrarFormato14AC(fiseFormato14AC);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 14A");
+				}
 			}
 			//add
 			for (FiseFormato14AD detalle : lista) {
-				formato14ADDao.registrarFormato14AD(detalle);
+				try{
+					formato14ADDao.registrarFormato14AD(detalle);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 14A");
+				}
+				
 			}
 			if( lista != null && lista.size()>0 ){
 				fiseFormato14AC.setFiseFormato14ADs(lista);
@@ -445,7 +454,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw new Exception("Se produjo un error al guardar los datos del Formato 14A");
+			throw new Exception(e.getMessage());
 		}
 		return dto;
 	}
@@ -726,7 +735,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 		}	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw e;
+			throw new Exception("Se produjo un error al actualizar los datos del Formato 14A");
 		}
 		//
 		return dto;

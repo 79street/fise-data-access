@@ -317,12 +317,21 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			if(existe){
 				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
 			}else{
-				formato12ACDao.registrarFormato12AC(fiseFormato12AC);
+				try{
+					formato12ACDao.registrarFormato12AC(fiseFormato12AC);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
+				}
+				
 			}
 			
 			//add
 			for (FiseFormato12AD detalle : lista) {
-				formato12ADDao.registrarFormato12AD(detalle);
+				try{
+					formato12ADDao.registrarFormato12AD(detalle);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
+				}
 			}
 			
 			if( lista != null && lista.size()>0 ){
@@ -333,7 +342,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
+			throw new Exception(e.getMessage());
 		}
 		return dto;
 	}
@@ -519,7 +528,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		}	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw e;
+			throw new Exception("Se produjo un error al actualizar los datos del Formato 12A");
 		}
 		//
 		return dto;

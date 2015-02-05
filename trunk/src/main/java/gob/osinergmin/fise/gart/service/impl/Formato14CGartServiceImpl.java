@@ -185,7 +185,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 		            det.setId(idDet);
 		            if(validarDato(bean.getCanDRCoord())){
-		            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));		
+		            	det.setCantCostDirecto(Long.valueOf(bean.getCanDRCoord()));		
 					}	            	
 	            	if(validarDato(bean.getCostDRCoord())){
 	            		det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 		
@@ -207,7 +207,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDRSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRSupe()));	
 					}					
 					if(validarDato(bean.getCostDRSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 	
@@ -229,7 +229,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDRGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRGest()));
 					}					
 					if(validarDato(bean.getCostDRGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));			
@@ -251,7 +251,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDRAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRAsist()));	
 					}					
 					if(validarDato(bean.getCostDRAsist())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 				
@@ -274,7 +274,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet);	
 					if(validarDato(bean.getCanDPCoord())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));		
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPCoord()));		
 					}					
 					if(validarDato(bean.getCostDPCoord())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 	
@@ -296,7 +296,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet);
 					if(validarDato(bean.getCanDPSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPSupe()));	
 					}					
 					if(validarDato(bean.getCostDPSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 	
@@ -318,7 +318,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDPGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));		
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPGest()));		
 					}					
 					if(validarDato(bean.getCostDPGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 		
@@ -340,7 +340,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDPAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));		
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPAsist()));		
 					}					
 					if(validarDato(bean.getCostDPAsist())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 	
@@ -367,7 +367,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 	
 						if(validarDato(bean.getCanDLCoord())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLCoord()));	
 						}						
 						if(validarDato(bean.getCostDLCoord())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 		
@@ -389,7 +389,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet); 	
 						if(validarDato(bean.getCanDLSupe())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLSupe()));	
 						}						
 						if(validarDato(bean.getCostDLSupe())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 		
@@ -411,7 +411,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 	
 						if(validarDato(bean.getCanDLGest())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLGest()));	
 						}						
 						if(validarDato(bean.getCostDLGest())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLGest()));				
@@ -433,7 +433,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet); 
 						if(validarDato(bean.getCanDLAsist())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLAsist()));	
 						}						
 						if(validarDato(bean.getCostDLAsist())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 			
@@ -461,7 +461,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 		            det.setId(idDet); 	
 		            if(validarDato(bean.getCanIRCoord())){
-		            	det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 	
+		            	det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 	
 					}					
 					if(validarDato(bean.getCostIRCoord())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  	
@@ -483,7 +483,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanIRSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe())); 	
 					}					
 					if(validarDato(bean.getCostIRSupe())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  	
@@ -505,7 +505,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 					det.setId(idDet);
 					if(validarDato(bean.getCanIRGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 	
 					}					
 					if(validarDato(bean.getCostIRGest())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  	
@@ -527,7 +527,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanIRAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist())); 
 					}					
 					if(validarDato(bean.getCostIRAsist())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  	
@@ -550,7 +550,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanIPCoord())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord()));	
 					}					
 					if(validarDato(bean.getCostIPCoord())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  	
@@ -572,7 +572,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanIPSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe()));	
 					}					
 					if(validarDato(bean.getCostIPSupe())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
@@ -594,7 +594,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanIPGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest())));
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest()));
 					}					
 					if(validarDato(bean.getCostIPGest())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
@@ -616,7 +616,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
 					det.setId(idDet); 
 					if(validarDato(bean.getCanIPAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist()));
 					}					
 					if(validarDato(bean.getCostIPAsist())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  	
@@ -643,7 +643,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 
 						if(validarDato(bean.getCanILCoord())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));	
 						}						
 						if(validarDato(bean.getCostILCoord())){
 							det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  	
@@ -665,7 +665,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet); 
 						if(validarDato(bean.getCanILSupe())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe())));	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe()));	
 						}						
 						if(validarDato(bean.getCostILSupe())){
 							det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  	
@@ -687,7 +687,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 
 						if(validarDato(bean.getCanILGest())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILGest())); 	
 						}						
 						if(validarDato(bean.getCostILGest())){
 							det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  	
@@ -709,7 +709,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet); 	
 						if(validarDato(bean.getCanILAsist())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist()));	
 						}						
 						if(validarDato(bean.getCostILAsist())){
 							det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  	
@@ -736,10 +736,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 		            det.setId(idDet); 
 		            if(validarDato(bean.getCanDRCoord())){
-		            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));	
+		            	det.setCantCostDirecto(Long.valueOf(bean.getCanDRCoord()));	
 					}	            	
 	            	if(validarDato(bean.getCanIRCoord())){
-	            		det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 	
+	            		det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 	
 					}					
 					if(validarDato(bean.getCostDRCoord())){ 
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord()));	
@@ -764,10 +764,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDRSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRSupe()));
 					}					
 					if(validarDato(bean.getCanIRSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe())); 	
 					}					
 					if(validarDato(bean.getCostDRSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 	
@@ -792,10 +792,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDRGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRGest()));	
 					}					
 					if(validarDato(bean.getCanIRGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 
 					}					
 					if(validarDato(bean.getCostDRGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));	
@@ -820,10 +820,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDRAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDRAsist()));	
 					}					
 					if(validarDato(bean.getCanIRAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist()));	
 					}					
 					if(validarDato(bean.getCostDRAsist())){ 
 						det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 	
@@ -849,10 +849,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 
 					if(validarDato(bean.getCanDPCoord())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPCoord()));	
 					}					
 					if(validarDato(bean.getCanIPCoord())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord()));	
 					}					
 					if(validarDato(bean.getCostDPCoord())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 	
@@ -877,10 +877,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDPSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPSupe()));
 					}					
 					if(validarDato(bean.getCanIPSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe())); 	
 					}					
 					if(validarDato(bean.getCostDPSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 	
@@ -905,10 +905,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDPGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPGest()));	
 					}					
 					if(validarDato(bean.getCanIPGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest())); 	
 					}					
 					if(validarDato(bean.getCostDPGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 	
@@ -933,10 +933,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
 					det.setId(idDet); 	
 					if(validarDato(bean.getCanDPAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDPAsist()));	
 					}					
 					if(validarDato(bean.getCanIPAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist()));	
 					}					
 					if(validarDato(bean.getCostDPAsist())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 	
@@ -965,10 +965,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 
 						if(validarDato(bean.getCanDLCoord())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));		
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLCoord()));		
 						}						
 						if(validarDato(bean.getCanILCoord())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));	
 						}						
 						if(validarDato(bean.getCostDLCoord())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 	
@@ -993,10 +993,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet);
 						if(validarDato(bean.getCanDLSupe())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLSupe()));	
 						}						
 						if(validarDato(bean.getCanILSupe())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe())); 
 						}						
 						if(validarDato(bean.getCostDLSupe())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 	
@@ -1021,10 +1021,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 						det.setId(idDet); 	
 						if(validarDato(bean.getCanDLGest())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLGest()));	
 						}						
 						if(validarDato(bean.getCanILGest())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILGest())); 	
 						}						
 						if(validarDato(bean.getCostDLGest())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 	
@@ -1049,10 +1049,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 						idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 						det.setId(idDet); 
 						if(validarDato(bean.getCanDLAsist())){
-							det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));	
+							det.setCantCostDirecto(Long.valueOf(bean.getCanDLAsist()));	
 						}						
 						if(validarDato(bean.getCanILAsist())){
-							det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
+							det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist()));	
 						}						
 						if(validarDato(bean.getCostDLAsist())){
 							det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 	
@@ -1161,7 +1161,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDRCoord())){
-		            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));		
+		            	det.setCantCostDirecto(Long.valueOf(bean.getCanDRCoord()));		
 				}	            	
 	            if(validarDato(bean.getCostDRCoord())){
 	            		det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord())); 		
@@ -1182,7 +1182,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDRSupe())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDRSupe()));	
 				}					
 				if(validarDato(bean.getCostDRSupe())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 	
@@ -1203,7 +1203,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDRGest())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));
+					det.setCantCostDirecto(Long.valueOf((bean.getCanDRGest())));
 				}					
 				if(validarDato(bean.getCostDRGest())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));			
@@ -1224,7 +1224,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDRAsist())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDRAsist()));	
 				}					
 				if(validarDato(bean.getCostDRAsist())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 				
@@ -1246,7 +1246,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDPCoord())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));		
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPCoord()));		
 				}					
 				if(validarDato(bean.getCostDPCoord())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 	
@@ -1267,7 +1267,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDPSupe())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPSupe()));	
 				}					
 				if(validarDato(bean.getCostDPSupe())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 	
@@ -1288,7 +1288,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDPGest())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));		
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPGest()));		
 				}					
 				if(validarDato(bean.getCostDPGest())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 		
@@ -1309,7 +1309,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanDPAsist())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));		
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPAsist()));		
 				}					
 				if(validarDato(bean.getCostDPAsist())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 	
@@ -1334,7 +1334,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 					if(validarDato(bean.getCanDLCoord())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLCoord()));	
 					}						
 					if(validarDato(bean.getCostDLCoord())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 		
@@ -1355,7 +1355,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 					if(validarDato(bean.getCanDLSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLSupe()));	
 					}						
 					if(validarDato(bean.getCostDLSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 		
@@ -1376,7 +1376,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 					if(validarDato(bean.getCanDLGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLGest()));	
 					}						
 					if(validarDato(bean.getCostDLGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLGest()));				
@@ -1397,7 +1397,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 					if(validarDato(bean.getCanDLAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLAsist()));	
 					}						
 					if(validarDato(bean.getCostDLAsist())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 			
@@ -1423,7 +1423,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);       	
 				if(validarDato(bean.getCanIRCoord())){
-	            	det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 	
+	            	det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 	
 				}					
 				if(validarDato(bean.getCostIRCoord())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIRCoord()));  	
@@ -1444,7 +1444,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 				if(validarDato(bean.getCanIRSupe())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe())); 	
 				}					
 				if(validarDato(bean.getCostIRSupe())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIRSupe()));  	
@@ -1465,7 +1465,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD);
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);	
 				if(validarDato(bean.getCanIRGest())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 	
 				}					
 				if(validarDato(bean.getCostIRGest())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIRGest()));  	
@@ -1486,7 +1486,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);	
 				if(validarDato(bean.getCanIRAsist())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist()))); 
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist())); 
 				}					
 				if(validarDato(bean.getCostIRAsist())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIRAsist()));  	
@@ -1508,7 +1508,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);				
 				if(validarDato(bean.getCanIPCoord())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord())));	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord()));	
 				}					
 				if(validarDato(bean.getCostIPCoord())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIPCoord()));  	
@@ -1529,7 +1529,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
 				if(validarDato(bean.getCanIPSupe())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe())));	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe()));	
 				}					
 				if(validarDato(bean.getCostIPSupe())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIPSupe()));  
@@ -1550,7 +1550,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
 				if(validarDato(bean.getCanIPGest())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest())));
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest()));
 				}					
 				if(validarDato(bean.getCostIPGest())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIPGest()));  
@@ -1571,7 +1571,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD);
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
 				if(validarDato(bean.getCanIPAsist())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist()));
 				}					
 				if(validarDato(bean.getCostIPAsist())){
 					det.setCostoIndirecto(new BigDecimal(bean.getCostIPAsist()));  	
@@ -1596,7 +1596,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);				
 					if(validarDato(bean.getCanILCoord())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));	
 					}						
 					if(validarDato(bean.getCostILCoord())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILCoord()));  	
@@ -1617,7 +1617,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);					
 					if(validarDato(bean.getCanILSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe()));	
 					}						
 					if(validarDato(bean.getCostILSupe())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILSupe()));  	
@@ -1638,7 +1638,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);			
 					if(validarDato(bean.getCanILGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILGest())); 	
 					}						
 					if(validarDato(bean.getCostILGest())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILGest()));  	
@@ -1659,7 +1659,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD);
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);		
 					if(validarDato(bean.getCanILAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist()));	
 					}						
 					if(validarDato(bean.getCostILAsist())){
 						det.setCostoIndirecto(new BigDecimal(bean.getCostILAsist()));  	
@@ -1685,10 +1685,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDRCoord())){
-	            	det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRCoord())));	
+	            	det.setCantCostDirecto(Long.valueOf(bean.getCanDRCoord()));	
 				}	            	
             	if(validarDato(bean.getCanIRCoord())){
-            		det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRCoord()))); 	
+            		det.setCantCostIndirecto(Long.valueOf(bean.getCanIRCoord())); 	
 				}					
 				if(validarDato(bean.getCostDRCoord())){ 
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRCoord()));	
@@ -1712,10 +1712,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDRSupe())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRSupe())));
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDRSupe()));
 				}					
 				if(validarDato(bean.getCanIRSupe())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRSupe()))); 	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRSupe())); 	
 				}					
 				if(validarDato(bean.getCostDRSupe())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRSupe())); 	
@@ -1739,10 +1739,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDRGest())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRGest())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDRGest()));	
 				}					
 				if(validarDato(bean.getCanIRGest())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRGest()))); 
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRGest())); 
 				}					
 				if(validarDato(bean.getCostDRGest())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRGest()));	
@@ -1766,10 +1766,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_RURAL_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDRAsist())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDRAsist())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDRAsist()));	
 				}					
 				if(validarDato(bean.getCanIRAsist())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIRAsist())));	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIRAsist()));	
 				}					
 				if(validarDato(bean.getCostDRAsist())){ 
 					det.setCostoDirecto(new BigDecimal(bean.getCostDRAsist())); 	
@@ -1794,10 +1794,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDPCoord())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPCoord())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPCoord()));	
 				}					
 				if(validarDato(bean.getCanIPCoord())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPCoord())));	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPCoord()));	
 				}					
 				if(validarDato(bean.getCostDPCoord())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPCoord())); 	
@@ -1821,10 +1821,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDPSupe())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPSupe())));
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPSupe()));
 				}					
 				if(validarDato(bean.getCanIPSupe())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPSupe()))); 	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPSupe())); 	
 				}					
 				if(validarDato(bean.getCostDPSupe())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPSupe())); 	
@@ -1848,10 +1848,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDPGest())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPGest())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPGest()));	
 				}					
 				if(validarDato(bean.getCanIPGest())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPGest()))); 	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPGest())); 	
 				}					
 				if(validarDato(bean.getCostDPGest())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPGest())); 	
@@ -1875,10 +1875,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				idDet.setIdZonaBenef(FiseConstants.ZONABENEF_PROVINCIA_COD); 		
 				det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 				if(validarDato(bean.getCanDPAsist())){
-					det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDPAsist())));	
+					det.setCantCostDirecto(Long.valueOf(bean.getCanDPAsist()));	
 				}					
 				if(validarDato(bean.getCanIPAsist())){
-					det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanIPAsist())));	
+					det.setCantCostIndirecto(Long.valueOf(bean.getCanIPAsist()));	
 				}					
 				if(validarDato(bean.getCostDPAsist())){
 					det.setCostoDirecto(new BigDecimal(bean.getCostDPAsist())); 	
@@ -1906,10 +1906,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 					if(validarDato(bean.getCanDLCoord())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLCoord())));		
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLCoord()));		
 					}						
 					if(validarDato(bean.getCanILCoord())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILCoord())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILCoord()));	
 					}						
 					if(validarDato(bean.getCostDLCoord())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLCoord())); 	
@@ -1933,10 +1933,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 					if(validarDato(bean.getCanDLSupe())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLSupe())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLSupe()));	
 					}						
 					if(validarDato(bean.getCanILSupe())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILSupe()))); 
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILSupe())); 
 					}						
 					if(validarDato(bean.getCostDLSupe())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLSupe())); 	
@@ -1960,10 +1960,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 					if(validarDato(bean.getCanDLGest())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLGest())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLGest()));	
 					}						
 					if(validarDato(bean.getCanILGest())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILGest()))); 	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILGest())); 	
 					}						
 					if(validarDato(bean.getCostDLGest())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLGest())); 	
@@ -1987,10 +1987,10 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 					idDet.setIdZonaBenef(FiseConstants.ZONABENEF_LIMA_COD); 		
 					det = formato14CDDao.obtenerFiseFormato14CD(idDet);
 					if(validarDato(bean.getCanDLAsist())){
-						det.setCantCostDirecto(Long.valueOf(valorCantidad(bean.getCanDLAsist())));	
+						det.setCantCostDirecto(Long.valueOf(bean.getCanDLAsist()));	
 					}						
 					if(validarDato(bean.getCanILAsist())){
-						det.setCantCostIndirecto(Long.valueOf(valorCantidad(bean.getCanILAsist())));	
+						det.setCantCostIndirecto(Long.valueOf(bean.getCanILAsist()));	
 					}						
 					if(validarDato(bean.getCostDLAsist())){
 						det.setCostoDirecto(new BigDecimal(bean.getCostDLAsist())); 	
@@ -2025,9 +2025,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		return valor;
 	}
 	
-	private int valorCantidad(String valor){
-		return new BigDecimal(valor).byteValue();
-	}
+//	private int valorCantidad(String valor){
+//		return new BigDecimal(valor).byteValue();
+//	}
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

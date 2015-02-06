@@ -1929,4 +1929,6 @@ public class FiseConstants {
 	public final static String PERIODO_ENVIO_ESTADO_VIGENTE = "V";
 	public final static String PERIODO_ENVIO_ESTADO_ANULADO= "A";
 	
+	public final static int TAMANIO_COLUMNA_CANTIDAD_COSTO_D_I_F14C= 5;//tamaño de la columna en la bd f14C detalle
+	
 }

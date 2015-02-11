@@ -3,6 +3,7 @@ package gob.osinergmin.fise.util;
 import gob.osinergmin.fise.constant.FiseConstants;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Locale;
@@ -211,5 +212,48 @@ public class FormatoUtil {
     	}
     	return cadenaRetorno;
     }
+    
+    //validaciones de estructura de campos
+    public static boolean validaCampoNumeroDecimal(BigDecimal campo, int longitudEnteraMax, int longitudDecimalMax ){
+		boolean retorno=false;
+		String parteEntera = "";
+		String parteDecimal = "";
+		if( campo!=null ){
+			parteEntera = parteEntera+campo.setScale(0,RoundingMode.DOWN);
+			parteDecimal = parteDecimal+campo.subtract(campo.setScale(0, RoundingMode.FLOOR)).movePointRight(campo.scale());
+			if( parteEntera.length()<=longitudEnteraMax && parteDecimal.length()<=longitudDecimalMax ){
+				retorno = true;
+			}else{
+				retorno = false;
+			}
+		}
+		return retorno;
+	}
+	
+	public static boolean validaCampoNumeroEntero(Long campo, int longitudEntera){
+		boolean retorno=false;
+		String parteEntera = "";
+		if( campo!=null ){
+			parteEntera = parteEntera+campo;
+			if( parteEntera.length()<=longitudEntera ){
+				retorno = true;
+			}else{
+				retorno = false;
+			}
+		}
+		return retorno;
+	}
+	
+	public static boolean validaCampoString(String campo, int longitudMax){
+		boolean retorno=false;
+		if( campo!=null ){
+			if( campo.length()<=longitudMax ){
+				retorno = true;
+			}else{
+				retorno = false;
+			}
+		}
+		return retorno;
+	}
 	
 }

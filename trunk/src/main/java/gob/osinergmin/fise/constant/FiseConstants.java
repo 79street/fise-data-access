@@ -1498,6 +1498,8 @@ public class FiseConstants {
 	
 	public static final String COD_ERROR_F12C_3631 = "3631";
 	public static final String COD_ERROR_F12D_3632 = "3632";
+	
+	public static final String COD_ERROR_3633 = "3633";
 
 	// F14A
 	public final static String COD_ERROR_F14A_1620 = "1620";
@@ -1843,7 +1845,7 @@ public class FiseConstants {
 
 	
 	/****resumen de costos****/	
-	public final static String NOMBRE_F12A = "FORMATO 12A: Resumen de Gastos Operativos - Implentación";
+	public final static String NOMBRE_F12A = "FORMATO 12A: Resumen de Gastos Operativos - Implementación";
 	public final static String NOMBRE_F12B = "FORMATO 12B: Resumen de Gastos Operativos - Mensual";
 	
 	public final static String NOMBRE_F14A_COMP = "FORMATO 14A: Comparativo de Costos";

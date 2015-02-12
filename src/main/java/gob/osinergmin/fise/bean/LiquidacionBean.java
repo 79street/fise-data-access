@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.bean;
 
 import gob.osinergmin.fise.domain.AdmEmpresa;
+import gob.osinergmin.fise.domain.FiseDescripcionActividade;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 
 import java.util.List;
@@ -52,6 +53,14 @@ public class LiquidacionBean {
 	private String estadoMotivo;//estado del motivo
 	private String itemMotivoEdit;
 	private String correlativoEdit;
+	
+	
+	/***para actividades  y poder listar motivos de la liquidacion**/
+	private List<FiseDescripcionActividade> listaActividades;
+	private String itemActividad;//item en la tabla fisedescripcionActividades
+	private String formatoActividad;//formato de la actividad
+	private String desActividad;//descripcion de la actividad
+	
 	
 	
 	/*****Metodos get y set****/	
@@ -242,7 +251,30 @@ public class LiquidacionBean {
 	public void setCorrelativoEdit(String correlativoEdit) {
 		this.correlativoEdit = correlativoEdit;
 	}
-	
+	public String getItemActividad() {
+		return itemActividad;
+	}
+	public void setItemActividad(String itemActividad) {
+		this.itemActividad = itemActividad;
+	}
+	public String getFormatoActividad() {
+		return formatoActividad;
+	}
+	public void setFormatoActividad(String formatoActividad) {
+		this.formatoActividad = formatoActividad;
+	}
+	public String getDesActividad() {
+		return desActividad;
+	}
+	public void setDesActividad(String desActividad) {
+		this.desActividad = desActividad;
+	}
+	public List<FiseDescripcionActividade> getListaActividades() {
+		return listaActividades;
+	}
+	public void setListaActividades(List<FiseDescripcionActividade> listaActividades) {
+		this.listaActividades = listaActividades;
+	}	
 	
 	
 }

@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.LiquidacionBean;
+import gob.osinergmin.fise.domain.FiseDescripcionActividade;
 
 import java.util.List;
 
@@ -36,5 +37,8 @@ public interface FiseLiquidacionService {
 	String  obtenerUltimaEtapa(String formato,String codEmpresa, 
 			long anioPres, long mesPres, long anioEjec,
 			long mesEjec,long anioIniVig,long anioFinVig)throws Exception;
+	
+	List<FiseDescripcionActividade> listarDescripcionActividades(String formato) 
+			throws Exception;
 
 }

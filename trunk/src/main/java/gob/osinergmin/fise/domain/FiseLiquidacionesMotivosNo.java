@@ -46,6 +46,15 @@ public class FiseLiquidacionesMotivosNo implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CORRELATIVO",nullable=false, insertable=false, updatable=false)
 	private FiseLiquidacione fiseLiquidacione;
+		
+	//bi-directional many-to-one association to FiseDescripcionActividade
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumns({
+		@JoinColumn(name="FORMATO", referencedColumnName="FORMATO"/*,nullable=false, insertable=false, updatable=false*/),
+		@JoinColumn(name="ITEM_FORMATO", referencedColumnName="ITEM" /*,nullable=false, insertable=false, updatable=false*/)
+	})
+	private FiseDescripcionActividade fiseDescripcionActividade;
+	
 
 	public FiseLiquidacionesMotivosNo() {
 	}
@@ -128,6 +137,14 @@ public class FiseLiquidacionesMotivosNo implements Serializable {
 
 	public void setFiseLiquidacione(FiseLiquidacione fiseLiquidacione) {
 		this.fiseLiquidacione = fiseLiquidacione;
+	}
+	
+	public FiseDescripcionActividade getFiseDescripcionActividade() {
+		return this.fiseDescripcionActividade;
+	}
+
+	public void setFiseDescripcionActividade(FiseDescripcionActividade fiseDescripcionActividade) {
+		this.fiseDescripcionActividade = fiseDescripcionActividade;
 	}
 
 }

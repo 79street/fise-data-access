@@ -1,12 +1,16 @@
 package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.LiquidacionBean;
+import gob.osinergmin.fise.dao.FiseActividadesDao;
 import gob.osinergmin.fise.dao.LiquidacionDao;
+import gob.osinergmin.fise.domain.FiseDescripcionActividade;
+import gob.osinergmin.fise.domain.FiseDescripcionActividadePK;
 import gob.osinergmin.fise.domain.FiseLiquidacione;
 import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo;
 import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK;
 import gob.osinergmin.fise.gart.service.FiseLiquidacionService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,10 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 	@Autowired
 	@Qualifier("liquidacionDaoImpl")
 	private LiquidacionDao liquidacionDao;
+	
+	@Autowired
+	@Qualifier("fiseActividadesDaoImpl")
+	private FiseActividadesDao fiseActividadesDao;
 	
 	
 	/*****Implementacion de metodos********/
@@ -164,10 +172,23 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 	public String insertarDatosLiquidacionesMotivosNo(LiquidacionBean bean) throws Exception{
 		FiseLiquidacionesMotivosNo motivo =null;
 		FiseLiquidacionesMotivosNoPK pk = null;
+		FiseDescripcionActividade actividad =null;
+		FiseDescripcionActividadePK idActividad=null;
 		String valor="1";
 		try {
 			long idItem = liquidacionDao.buscarMaximoMotivo(Long.valueOf(bean.getCoMotivo()));
 			logger.info("Maximo de id item  de motivo:  "+idItem);
+			
+			if(FormatoUtil.isNotBlank(bean.getItemActividad())){ 
+				String[] mensaje = bean.getItemActividad().split("/");
+				idActividad = new FiseDescripcionActividadePK();
+				idActividad.setFormato(mensaje[0]);
+				idActividad.setItem(mensaje[1]);
+				logger.info("entrando a obtener el objeto actividad item : "+idActividad.getItem());
+				logger.info("entrando a obtener el objeto actividad formato:  "+idActividad.getFormato());
+				actividad = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(idActividad);
+				logger.info("obtener el objeto actividad:  "+actividad);
+			}			
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 			
 			pk.setItem(idItem); 
@@ -175,6 +196,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			motivo.setId(pk);
 			motivo.setDescripcionMotivo(bean.getDescMotivo());
 			motivo.setEstado("1"); 
+			motivo.setFiseDescripcionActividade(actividad); 
 			motivo.setFechaCreacion(FechaUtil.obtenerFechaActual());
 			motivo.setUsuarioCreacion(bean.getUsuario());
 			motivo.setTerminalCreacion(bean.getTerminal());
@@ -189,6 +211,12 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			if(motivo !=null){
 				motivo =null;
 			}
+			if(actividad !=null){
+				actividad =null;
+			}
+			if(idActividad !=null){
+				idActividad =null;
+			}
 		}
 		return valor;		
 	}
@@ -198,14 +226,29 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 	public String actualizarDatosLiquidacionesMotivosNo(LiquidacionBean bean) throws Exception{
 		FiseLiquidacionesMotivosNo motivo =null;
 		FiseLiquidacionesMotivosNoPK pk = null;
+		FiseDescripcionActividade actividad =null;
+		FiseDescripcionActividadePK idActividad=null;
 		String valor ="1";
-		try {			
+		try {	
+			
+			if(FormatoUtil.isNotBlank(bean.getItemActividad())){ 
+				String[] mensaje = bean.getItemActividad().split("/");
+				idActividad = new FiseDescripcionActividadePK();
+				idActividad.setFormato(mensaje[0]);
+				idActividad.setItem(mensaje[1]);
+				logger.info("entrando a obtener el objeto actividad item : "+idActividad.getItem());
+				logger.info("entrando a obtener el objeto actividad formato:  "+idActividad.getFormato());
+				actividad = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(idActividad);
+				logger.info("obtener el objeto actividad:  "+actividad);
+			}	
+			
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 
 			pk.setItem(Long.valueOf(bean.getItemMotivo())); 
 			motivo = liquidacionDao.obtenerFiseLiquidacionesMotivosNo(pk);			
 			motivo.setDescripcionMotivo(bean.getDescMotivo());
-			motivo.setEstado("1"); //ojo
+			motivo.setEstado("1"); 
+			motivo.setFiseDescripcionActividade(actividad); 
 			motivo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			motivo.setUsuarioActualizacion(bean.getUsuario());
 			motivo.setTerminalActualizacion(bean.getTerminal());
@@ -219,6 +262,12 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			}
 			if(motivo !=null){
 				motivo =null;
+			}
+			if(actividad !=null){
+				actividad =null;
+			}
+			if(idActividad !=null){
+				idActividad =null;
 			}
 		}
 		return valor;		
@@ -262,7 +311,9 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				LiquidacionBean bean = new LiquidacionBean();
 				bean.setCoMotivo(""+m.getId().getCorrelativo());
 				bean.setItemMotivo(""+m.getId().getItem());
-				bean.setDescMotivo(m.getDescripcionMotivo());	
+				bean.setDescMotivo(m.getDescripcionMotivo());
+				bean.setDesActividad(m.getFiseDescripcionActividade()==null?" "
+						 :m.getFiseDescripcionActividade().getId().getItem());//muestro el item pero lo asigno a desactividad
 				if(m.getEstado().equals("1")){
 					bean.setEstadoMotivo("Activo");  	
 				}else{
@@ -293,7 +344,9 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				bean.setCoMotivo(""+motivo.getId().getCorrelativo());
 				bean.setItemMotivo(""+motivo.getId().getItem());
 				bean.setDescMotivo(motivo.getDescripcionMotivo()==null?"":motivo.getDescripcionMotivo());
-				bean.setEstadoMotivo(motivo.getEstado()=="0"?"Inactivo":"Activo");	
+				bean.setItemActividad(motivo.getFiseDescripcionActividade()==null? " ":
+					motivo.getFiseDescripcionActividade().getId().getFormato()+"/"+motivo.getFiseDescripcionActividade().getId().getItem());
+				bean.setEstadoMotivo(motivo.getEstado().equals("0")?"Inactivo":"Activo");	
 			}			
 		} catch (Exception e) {
 			logger.info("Error al obtener datos del motivo de la liquidacion: "+e); 			
@@ -318,6 +371,18 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			long mesEjec,long anioIniVig,long anioFinVig)throws Exception{
 		return liquidacionDao.obtenerUltimaEtapa(formato, codEmpresa, 
 				anioPres, mesPres, anioEjec, mesEjec, anioIniVig, anioFinVig);
+	}
+	
+	
+	
+	/*****Metodos para listar las actividades para los formatos 14A y 14B para registrar
+	 * un nuevo motivo de la liquidacion****/
+	
+	@Override
+	@Transactional
+	public List<FiseDescripcionActividade> listarDescripcionActividades(String formato) 
+			throws Exception{		
+		return fiseActividadesDao.listarDescripcionActividade(formato); 
 	}
 	
 

@@ -70,6 +70,8 @@
 	<class>gob.osinergmin.fise.domain.FiseMcargofijoPK</class>
 	<class>gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo</class>
 	<class>gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK</class>
+	<class>gob.osinergmin.fise.domain.FiseDescripcionActividade</class>
+	<class>gob.osinergmin.fise.domain.FiseDescripcionActividadePK</class>
 	
 	<properties>
 	         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>

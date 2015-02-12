@@ -3,7 +3,10 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.Formato13ACBean;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
+import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.dao.Formato13ADObDao;
@@ -12,13 +15,18 @@ import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
 import gob.osinergmin.fise.domain.FiseFormato13ADOb;
 import gob.osinergmin.fise.domain.FiseFormato13ADObPK;
+import gob.osinergmin.fise.domain.FiseFormato13ADPK;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,6 +36,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service(value="formato13AGartServiceImpl")
 public class Formato13AGartServiceImpl implements Formato13AGartService {
+	
+	Logger logger=Logger.getLogger(Formato13AGartServiceImpl.class);
 
 	@Autowired
 	@Qualifier("formato13ACDaoImpl")
@@ -44,6 +54,18 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Autowired
 	@Qualifier("fiseObservacionDaoImpl")
 	private FiseObservacionDao fiseObservacionDao;
+	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseGrupoInformacionDaoImpl")
+	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseZonaBenefDaoImpl")
+	private FiseZonaBenefDao zonaBenefDao;
 	
 	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa,
 			long anioDesde, long mesDesde, long anioHasta, long mesHasta,
@@ -295,6 +317,254 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			}
 		}
 		return valor;
+	}
+	
+	
+	/*******************************************/
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato13AC registrarFormato13ACregistrarFormato13AD(Formato13ACBean formulario) throws Exception {
+		
+		FiseFormato13AC dto = null;
+		
+		try {
+			Date hoy = FechaUtil.obtenerFechaActual();
+			FiseFormato13AC fiseFormato13AC = new FiseFormato13AC();
+			//guardar el pk
+			FiseFormato13ACPK id = new FiseFormato13ACPK();
+			id.setCodEmpresa(formulario.getCodigoEmpresa());
+			id.setAnoPresentacion(formulario.getAnioPresent());
+			id.setMesPresentacion(formulario.getMesPresent());
+			id.setEtapa(formulario.getEtapa());
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato13AC.setNombreArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato13AC.setNombreArchivoTexto(formulario.getNombreArchivo());
+			}
+			
+			fiseFormato13AC.setId(id);
+			
+			FiseGrupoInformacion grupoInfo = null;
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent(), FiseConstants.FRECUENCIA_BIENAL_DESCRIPCION); 
+			if(idGrupoInf!=0){
+				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+			}	
+			fiseFormato13AC.setFiseGrupoInformacion(grupoInfo);
+			
+			List<FiseFormato13AD> lista = new ArrayList<FiseFormato13AD>();
+			
+				
+			if( formulario.getAnioAlta() != 0 ||
+					formulario.getMesAlta() != 0 ||
+					!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
+					!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
+					formulario.getIdZonaBenef() != 0 ||
+					formulario.getSt1() != 0 ||
+					formulario.getSt2() != 0 ||
+					formulario.getSt3() != 0 ||
+					formulario.getSt4() != 0 ||
+					formulario.getSt5() != 0 ||
+					formulario.getSt6() != 0 ||
+					formulario.getStSer() != 0 ||
+					formulario.getStEsp() != 0 ||
+					!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
+					){
+				
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
+				
+			}
+
+			
+			fiseFormato13AC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato13AC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato13AC.setFechaActualizacion(hoy);
+			fiseFormato13AC.setUsuarioCreacion(formulario.getUsuario());
+			fiseFormato13AC.setTerminalCreacion(formulario.getTerminal());
+			fiseFormato13AC.setFechaCreacion(hoy);
+			
+			logger.info("aca se va  a guardar"+fiseFormato13AC);
+			boolean existe = false;
+			existe = formato13ACDao.existeFormato13AC(fiseFormato13AC);
+			if(existe){
+				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
+			}else{
+				formato13ACDao.savecabecera(fiseFormato13AC);
+			}
+			//add
+			for (FiseFormato13AD detalle : lista) {
+				formato13ADDao.savedetalle(detalle);
+			}
+			if( lista != null && lista.size()>0 ){
+				fiseFormato13AC.setFiseFormato13ADs(lista);
+				/*if( lista.size()==1 ){
+					//enviamos la cabecera de informacion
+					fiseFormato13AC.setAnoEjecucionDetalle(lista.get(0).getId().getAnoEjecucionGasto());
+					fiseFormato13AC.setMesEjecucionDetalle(lista.get(0).getId().getMesEjecucionGasto());
+					fiseFormato13AC.setEtapaEjecucionDetalle(lista.get(0).getId().getEtapaEjecucion());
+					fiseFormato13AC.setNumeroItemEtapaDetalle(lista.get(0).getId().getNumeroItemEtapa());
+				}*/
+			}
+			dto = fiseFormato13AC;
+			
+		} 	catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw new Exception("Se produjo un error al guardar los datos del Formato 12C");
+		}
+		return dto;
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato13AC modificarFormato13ACregistrarFormato13AD(Formato13ACBean formulario, FiseFormato13AC fiseFormato13AC) throws Exception {
+		
+		FiseFormato13AC dto = null;
+		
+		try {
+			
+			Date hoy = FechaUtil.obtenerFechaActual();
+	
+			List<FiseFormato13AD> lista = new ArrayList<FiseFormato13AD>();
+			
+			
+			if( formulario.getAnioAlta() != 0 ||
+					formulario.getMesAlta() != 0 ||
+					!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
+					!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
+					formulario.getIdZonaBenef() != 0 ||
+					formulario.getSt1() != 0 ||
+					formulario.getSt2() != 0 ||
+					formulario.getSt3() != 0 ||
+					formulario.getSt4() != 0 ||
+					formulario.getSt5() != 0 ||
+					formulario.getSt6() != 0 ||
+					formulario.getStSer() != 0 ||
+					formulario.getStEsp() != 0 ||
+					!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
+					){
+				
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
+				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
+				
+			}
+				
+
+		
+			fiseFormato13AC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato13AC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato13AC.setFechaActualizacion(hoy);
+		
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato13AC.setNombreArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato13AC.setNombreArchivoTexto(formulario.getNombreArchivo());
+			}
+			
+			formato13ACDao.updatecabecera(fiseFormato13AC);
+			//add
+			for (FiseFormato13AD detalle : lista) {
+				formato13ADDao.savedetalle(detalle);
+			}
+			if( lista != null && lista.size()>0 ){
+				/*if( lista.size()==1 ){
+					//enviamos la cabecera de informacion
+					fiseFormato13AC.setAnoEjecucionDetalle(lista.get(0).getId().getAnoEjecucionGasto());
+					fiseFormato13AC.setMesEjecucionDetalle(lista.get(0).getId().getMesEjecucionGasto());
+					fiseFormato13AC.setEtapaEjecucionDetalle(lista.get(0).getId().getEtapaEjecucion());
+					fiseFormato13AC.setNumeroItemEtapaDetalle(lista.get(0).getId().getNumeroItemEtapa());
+				}*/
+			}
+			dto= fiseFormato13AC;
+			
+		}	catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
+		//
+		return dto;
+
+	}
+	
+	
+	
+	//------------------------------------------//
+	public void agregarSectorTipico(String sectorTipico, Formato13ACBean bean, List<FiseFormato13AD> listaDetalle) {
+
+		Date hoy = FechaUtil.obtenerFechaActual();
+
+		try {
+			
+			/*if( bean.getAnioInicioVigencia()==null || bean.getAnioInicioVigencia().equals(new Long(0)) ){
+				bean.setAnioInicioVigencia(bean.getAnoInicioVigenciaHidden());
+			}
+			if( bean.getAnioFinVigencia()==null || bean.getAnioFinVigencia().equals(new Long(0)) ){
+				bean.setAnioFinVigencia(bean.getAnoFinVigenciaHidden());
+			}*/
+
+			FiseFormato13AD detalle = new FiseFormato13AD();
+			FiseFormato13ADPK pk = new FiseFormato13ADPK();
+			pk.setCodEmpresa(bean.getCodigoEmpresa());
+			pk.setAnoPresentacion(bean.getAnioPresent());
+			pk.setMesPresentacion(bean.getMesPresent());
+			pk.setEtapa(bean.getEtapa());
+			pk.setCodUbigeo(bean.getCodUbigeo());
+			pk.setCodSectorTipico(sectorTipico);
+			pk.setIdZonaBenef(bean.getIdZonaBenef());
+			detalle.setId(pk);
+			detalle.setAnoAlta(bean.getAnioAlta());
+			detalle.setMesAlta(bean.getMesAlta());
+			// luego verificar de donde se obtendra los valores de ano e inicio
+			// de vigencia
+			detalle.setAnoInicioVigencia(bean.getAnioInicioVigencia());
+			detalle.setAnoFinVigencia(bean.getAnioFinVigencia());
+			//
+			detalle.setDescripcionLocalidad(bean.getLocalidad());
+			detalle.setNombreSedeAtiende(bean.getSede());
+			if (FiseConstants.SECTOR_TIPICO_1_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt1());
+			} else if (FiseConstants.SECTOR_TIPICO_2_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt2());
+			} else if (FiseConstants.SECTOR_TIPICO_3_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt3());
+			} else if (FiseConstants.SECTOR_TIPICO_4_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt4());
+			} else if (FiseConstants.SECTOR_TIPICO_5_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt5());
+			} else if (FiseConstants.SECTOR_TIPICO_6_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt6());
+			} else if (FiseConstants.SECTOR_TIPICO_SER_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getStSer());
+			} else if (FiseConstants.SECTOR_TIPICO_ESP_COD.equals(sectorTipico.trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getStEsp());
+			}
+			detalle.setUsuarioCreacion(bean.getUsuario());
+			detalle.setTerminalCreacion(bean.getTerminal());
+			detalle.setFechaCreacion(hoy);
+			detalle.setUsuarioActualizacion(bean.getUsuario());
+			detalle.setTerminalActualizacion(bean.getTerminal());
+			detalle.setFechaActualizacion(hoy);
+			listaDetalle.add(detalle);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
 	}
 	
 }

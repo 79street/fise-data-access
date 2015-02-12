@@ -302,7 +302,29 @@ public class FiseConstants {
 	public final static int NRO_CELDA_NRODOCUMENTO_AUTORIZACION_FORMATO12D = 14;
 	public final static int NRO_CELDA_CANTIDAD_FORMATO12D = 15;
 	public final static int NRO_CELDA_COSTOUNITARIO_FORMATO12D = 16;
-
+	
+	//FORMATO 13A
+	public final static int NRO_FILA_CODEMPRESA_FORMATO13A = 5;
+	public final static int NRO_FILA_ANIOMES_FORMATO13A = 6;
+	public final static int NRO_INICIO_REGISTROS_FORMATO13A = 11;
+	public final static String DESC_FILA_FIN_REGISTROS_FORMATO13A = "Total";
+	public final static int NRO_CELDA_EMPRESA_FORMATO13A = 4;
+	public final static int NRO_CELDA_ANIO_FORMATO13A = 3;
+	public final static int NRO_CELDA_MES_FORMATO13A = 4;
+	public final static int NRO_CELDA_ANOMES_ALTA_FORMATO13A = 1;
+	public final static int NRO_CELDA_CODUBIGEO_FORMATO13A = 2;
+	public final static int NRO_CELDA_LOCALIDAD_FORMATO13A = 3;
+	public final static int NRO_CELDA_ST1_FORMATO13A = 4;
+	public final static int NRO_CELDA_ST2_FORMATO13A = 5;
+	public final static int NRO_CELDA_ST3_FORMATO13A = 6;
+	public final static int NRO_CELDA_ST4_FORMATO13A = 7;
+	public final static int NRO_CELDA_ST5_FORMATO13A = 8;
+	public final static int NRO_CELDA_ST6_FORMATO13A = 9;
+	public final static int NRO_CELDA_STSER_FORMATO13A = 10;
+	public final static int NRO_CELDA_STESPECIAL_FORMATO13A = 11;
+	public final static int NRO_CELDA_ZONA_BENEFICIARIO_FORMATO13A = 13;
+	public final static int NRO_CELDA_SEDE_FORMATO13A = 14;
+	
 	// FORMATO 14A
 	public final static int NRO_FILA_CODEMPRESA_FORMATO14A = 5;
 	public final static int NRO_FILA_ANIOMES_FORMATO14A = 6;

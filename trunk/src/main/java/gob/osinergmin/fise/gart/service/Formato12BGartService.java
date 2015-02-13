@@ -6,10 +6,6 @@ import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
 import gob.osinergmin.fise.domain.FiseFormato12BDOb;
 
-
-
-
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,6 +45,9 @@ public interface Formato12BGartService {
 	 String eliminarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
 				Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 
 				String idObservacion,Integer itemObservacion) throws Exception;
+	 
+	 FiseFormato12BC registrarFormato12BC(Formato12BCBean formato) throws Exception;
+	 FiseFormato12BC modificarFormato12BC(Formato12BCBean formato, FiseFormato12BC fiseFormato12BC) throws Exception;
 
 
 }

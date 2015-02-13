@@ -2,7 +2,10 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato12BCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
+import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12BCDao;
 import gob.osinergmin.fise.dao.Formato12BDDao;
 import gob.osinergmin.fise.dao.Formato12BDObDao;
@@ -11,15 +14,20 @@ import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
 import gob.osinergmin.fise.domain.FiseFormato12BDOb;
 import gob.osinergmin.fise.domain.FiseFormato12BDObPK;
+import gob.osinergmin.fise.domain.FiseFormato12BDPK;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.domain.FiseObservacion;
+import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.Formato12BGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +39,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service(value="formato12BGartServiceImpl")
 public class Formato12BGartServiceImpl implements Formato12BGartService {
 
+	Logger logger=Logger.getLogger(Formato12BGartServiceImpl.class);
+	
 	@Autowired
 	@Qualifier("formato12BCDaoImpl")
 	private Formato12BCDao formato12BCDao;
@@ -46,6 +56,18 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	@Autowired
 	@Qualifier("fiseObservacionDaoImpl")
 	private FiseObservacionDao fiseObservacionDao;
+	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseGrupoInformacionDaoImpl")
+	private FiseGrupoInformacionDao fiseGrupoInformacionDao;
+	
+	@Autowired
+	@Qualifier("fiseZonaBenefDaoImpl")
+	private FiseZonaBenefDao zonaBenefDao;
 	
 	@Override
 	public List<FiseFormato12BC> getLstFormatoCabecera(String codemp, Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta, String etapa) {
@@ -561,5 +583,587 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 		return valor;
 	}
 	
+	
+	/***************************/
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato12BC registrarFormato12BC(Formato12BCBean formulario) throws Exception {
+		
+		FiseFormato12BC dto = null;
+		
+		try {
+			Date hoy = FechaUtil.obtenerFechaActual();
+			FiseFormato12BC fiseFormato12BC = new FiseFormato12BC();
+			//guardar el pk
+			FiseFormato12BCPK id = new FiseFormato12BCPK();
+			id.setCodEmpresa(formulario.getCodigoEmpresa());
+			id.setAnoPresentacion((int)formulario.getAnioPresent());
+			id.setMesPresentacion((int)formulario.getMesPresent());
+			id.setAnoEjecucionGasto(id.getAnoPresentacion());
+			id.setMesEjecucionGasto(id.getMesPresentacion());
+			//id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			id.setEtapa(formulario.getEtapa());
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12BC.setNombreArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12BC.setNombreArchivoTexto(formulario.getNombreArchivo());
+			}/*else{
+				id.setEtapa(formulario.getEtapa());
+			}*/
+			
+			fiseFormato12BC.setId(id);
+			
+			FiseGrupoInformacion grupoInfo = null;
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(formulario.getAnioPresent(), formulario.getMesPresent(), FiseConstants.FRECUENCIA_MENSUAL_DESCRIPCION); 
+			if(idGrupoInf!=0){
+				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+			}	
+			fiseFormato12BC.setFiseGrupoInformacion(grupoInfo);  
+			
+			
+			List<FiseFormato12BD> lista = new ArrayList<FiseFormato12BD>();
+			
+			//RURAL
+			if( formulario.getNroValeImpR() != 0 ||
+					formulario.getNroValReparDomicR() != 0 ||
+					formulario.getNroValEntDisElR() != 0 ||
+					formulario.getNroValFisiCanjR() != 0 ||
+					formulario.getNroValDigitCanjR() != 0 ||
+					formulario.getNroAtencionesR() != 0
+					){
+				logger.info("entro a RURAL");
+				FiseZonaBenef zonaBenef = new FiseZonaBenef();
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
+				//
+				FiseFormato12BD detalleRural = new FiseFormato12BD();
+				//pk
+				FiseFormato12BDPK pkDetalle = new FiseFormato12BDPK();
+				pkDetalle.setCodEmpresa(fiseFormato12BC.getId().getCodEmpresa());
+				pkDetalle.setAnoPresentacion(fiseFormato12BC.getId().getAnoPresentacion());
+				pkDetalle.setMesPresentacion(fiseFormato12BC.getId().getMesPresentacion());
+				pkDetalle.setAnoEjecucionGasto(fiseFormato12BC.getId().getAnoEjecucionGasto());
+				pkDetalle.setMesEjecucionGasto(fiseFormato12BC.getId().getMesEjecucionGasto());
+				pkDetalle.setIdZonaBenef((int)zonaBenef.getIdZonaBenef());
+				pkDetalle.setEtapa(fiseFormato12BC.getId().getEtapa());
+				detalleRural.setId(pkDetalle);
+				
+				//impresion vales
+				detalleRural.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleRural.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleRural.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleRural.getNumeroValesImpreso()));
+				detalleRural.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleRural.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleRural.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleRural.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleRural.getNumeroValesRepartidosDomi()));
+				detalleRural.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleRural.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleRural.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleRural.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleRural.getNumeroValesEntregadoDisEl()));
+				detalleRural.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleRural.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleRural.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleRural.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleRural.getNumeroValesFisicosCanjeados()));
+				detalleRural.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleRural.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleRural.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleRural.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleRural.getNumeroValesDigitalCanjeados()));
+				detalleRural.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleRural.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleRural.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleRural.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleRural.getNumeroAtenciones()));
+				detalleRural.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleRural.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleRural.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleRural.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalRural = new BigDecimal(0);
+				totalRural = totalRural.add(detalleRural.getCostoTotalImpresionVale())
+						.add(detalleRural.getCostoTotalRepartoValesDomi())
+						.add(detalleRural.getCostoTotalEntregaValDisEl())
+						.add(detalleRural.getCostoTotalCanjeLiqValeFis())
+						.add(detalleRural.getCostoTotalCanjeLiqValeDig())
+						.add(detalleRural.getCostoTotalAtencionConsRecl())
+						.add(detalleRural.getTotalGestionAdministrativa())
+						.add(detalleRural.getTotalDesplazamientoPersonal())
+						.add(detalleRural.getTotalActividadesExtraord());
+				detalleRural.setTotalReconocer(totalRural);
+				//
+				detalleRural.setFiseFormato12BC(fiseFormato12BC);
+				//detalleRural.setFiseZonaBenef(zonaBenef);
+				//
+				detalleRural.setUsuarioCreacion(formulario.getUsuario());
+				detalleRural.setTerminalCreacion(formulario.getTerminal());
+				detalleRural.setFechaCreacion(hoy);
+				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
+				detalleRural.setTerminalActualizacion(formulario.getTerminal());
+				detalleRural.setFechaActualizacion(hoy);
+				lista.add(detalleRural);
+			}
+			//PROVINCIA
+			if( formulario.getNroValeImpP() != 0 ||
+					formulario.getNroValReparDomicP() != 0 ||
+					formulario.getNroValEntDisElP() != 0 ||
+					formulario.getNroValFisiCanjP() != 0 ||
+					formulario.getNroValDigitCanjP() != 0 ||
+					formulario.getNroAtencionesP() != 0
+					){
+				logger.info("entro a PROVINCIA");
+				FiseZonaBenef zonaBenef = new FiseZonaBenef();
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
+				//
+				FiseFormato12BD detalleProvincia = new FiseFormato12BD();
+				//pk
+				FiseFormato12BDPK pkDetalle = new FiseFormato12BDPK();
+				pkDetalle.setCodEmpresa(fiseFormato12BC.getId().getCodEmpresa());
+				pkDetalle.setAnoPresentacion(fiseFormato12BC.getId().getAnoPresentacion());
+				pkDetalle.setMesPresentacion(fiseFormato12BC.getId().getMesPresentacion());
+				pkDetalle.setAnoEjecucionGasto(fiseFormato12BC.getId().getAnoEjecucionGasto());
+				pkDetalle.setMesEjecucionGasto(fiseFormato12BC.getId().getMesEjecucionGasto());
+				pkDetalle.setIdZonaBenef((int)zonaBenef.getIdZonaBenef());
+				pkDetalle.setEtapa(fiseFormato12BC.getId().getEtapa());
+				detalleProvincia.setId(pkDetalle);
+				
+				//impresion vales
+				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleProvincia.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleProvincia.getNumeroValesImpreso()));
+				detalleProvincia.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleProvincia.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleProvincia.getNumeroValesRepartidosDomi()));
+				detalleProvincia.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleProvincia.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleProvincia.getNumeroValesEntregadoDisEl()));
+				detalleProvincia.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleProvincia.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesFisicosCanjeados()));
+				detalleProvincia.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleProvincia.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesDigitalCanjeados()));
+				detalleProvincia.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleProvincia.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleProvincia.getNumeroAtenciones()));
+				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalProvincia = new BigDecimal(0);
+				totalProvincia = totalProvincia.add(detalleProvincia.getCostoTotalImpresionVale())
+						.add(detalleProvincia.getCostoTotalRepartoValesDomi())
+						.add(detalleProvincia.getCostoTotalEntregaValDisEl())
+						.add(detalleProvincia.getCostoTotalCanjeLiqValeFis())
+						.add(detalleProvincia.getCostoTotalCanjeLiqValeDig())
+						.add(detalleProvincia.getCostoTotalAtencionConsRecl())
+						.add(detalleProvincia.getTotalGestionAdministrativa())
+						.add(detalleProvincia.getTotalDesplazamientoPersonal())
+						.add(detalleProvincia.getTotalActividadesExtraord());
+				detalleProvincia.setTotalReconocer(totalProvincia);
+				//
+				detalleProvincia.setFiseFormato12BC(fiseFormato12BC);
+				//detalleProvincia.setFiseZonaBenef(zonaBenef);
+				//
+				detalleProvincia.setUsuarioCreacion(formulario.getUsuario());
+				detalleProvincia.setTerminalCreacion(formulario.getTerminal());
+				detalleProvincia.setFechaCreacion(hoy);
+				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
+				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
+				detalleProvincia.setFechaActualizacion(hoy);
+				lista.add(detalleProvincia);
+			}
+			//LIMA
+			if( formulario.getNroValeImpR() != 0 ||
+					formulario.getNroValReparDomicR() != 0 ||
+					formulario.getNroValEntDisElR() != 0 ||
+					formulario.getNroValFisiCanjR() != 0 ||
+					formulario.getNroValDigitCanjR() != 0 ||
+					formulario.getNroAtencionesR() != 0
+					){
+				logger.info("entro a LIMA");
+				FiseZonaBenef zonaBenef = new FiseZonaBenef();
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
+				//
+				FiseFormato12BD detalleLima = new FiseFormato12BD();
+				//pk
+				FiseFormato12BDPK pkDetalle = new FiseFormato12BDPK();
+				pkDetalle.setCodEmpresa(fiseFormato12BC.getId().getCodEmpresa());
+				pkDetalle.setAnoPresentacion(fiseFormato12BC.getId().getAnoPresentacion());
+				pkDetalle.setMesPresentacion(fiseFormato12BC.getId().getMesPresentacion());
+				pkDetalle.setAnoEjecucionGasto(fiseFormato12BC.getId().getAnoEjecucionGasto());
+				pkDetalle.setMesEjecucionGasto(fiseFormato12BC.getId().getMesEjecucionGasto());
+				pkDetalle.setIdZonaBenef((int)zonaBenef.getIdZonaBenef());
+				pkDetalle.setEtapa(fiseFormato12BC.getId().getEtapa());
+				detalleLima.setId(pkDetalle);
+				
+				//impresion vales
+				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleLima.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleLima.getNumeroValesImpreso()));
+				detalleLima.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleLima.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleLima.getNumeroValesRepartidosDomi()));
+				detalleLima.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleLima.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleLima.getNumeroValesEntregadoDisEl()));
+				detalleLima.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleLima.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleLima.getNumeroValesFisicosCanjeados()));
+				detalleLima.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleLima.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleLima.getNumeroValesDigitalCanjeados()));
+				detalleLima.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleLima.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleLima.getNumeroAtenciones()));
+				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalLima = new BigDecimal(0);
+				totalLima = totalLima.add(detalleLima.getCostoTotalImpresionVale())
+						.add(detalleLima.getCostoTotalRepartoValesDomi())
+						.add(detalleLima.getCostoTotalEntregaValDisEl())
+						.add(detalleLima.getCostoTotalCanjeLiqValeFis())
+						.add(detalleLima.getCostoTotalCanjeLiqValeDig())
+						.add(detalleLima.getCostoTotalAtencionConsRecl())
+						.add(detalleLima.getTotalGestionAdministrativa())
+						.add(detalleLima.getTotalDesplazamientoPersonal())
+						.add(detalleLima.getTotalActividadesExtraord());
+				detalleLima.setTotalReconocer(totalLima);
+				//
+				detalleLima.setFiseFormato12BC(fiseFormato12BC);
+				//detalleLima.setFiseZonaBenef(zonaBenef);
+				//
+				detalleLima.setUsuarioCreacion(formulario.getUsuario());
+				detalleLima.setTerminalCreacion(formulario.getTerminal());
+				detalleLima.setFechaCreacion(hoy);
+				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
+				detalleLima.setTerminalActualizacion(formulario.getTerminal());
+				detalleLima.setFechaActualizacion(hoy);
+				lista.add(detalleLima);
+			}
+			
+			fiseFormato12BC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato12BC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato12BC.setFechaActualizacion(hoy);
+			fiseFormato12BC.setUsuarioCreacion(formulario.getUsuario());
+			fiseFormato12BC.setTerminalCreacion(formulario.getTerminal());
+			fiseFormato12BC.setFechaCreacion(hoy);
+			
+			logger.info("aca se va  a guardar"+fiseFormato12BC);
+			boolean existe = false;
+			existe = formato12BCDao.existeFormato12BC(fiseFormato12BC);
+			if(existe){
+				throw new Exception("El Formato ya existe para la Distribuidora Eléctrica y Periodo a Declarar seleccionado");
+			}else{
+				try{
+					formato12BCDao.saveFormatoCabecera(fiseFormato12BC);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 12B");
+				}
+				
+			}
+			//add
+			for (FiseFormato12BD detalle : lista) {
+				try{
+					formato12BDDao.saveFormatoDetalle(detalle);
+				}catch(Exception e){
+					throw new Exception("Se produjo un error al guardar los datos del Formato 12B");
+				}
+				
+			}
+			if( lista != null && lista.size()>0 ){
+				fiseFormato12BC.setFiseFormato12BDs(lista);
+			}
+			dto = fiseFormato12BC;
+			
+		} 	catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+		return dto;
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public FiseFormato12BC modificarFormato12BC(Formato12BCBean formulario, FiseFormato12BC fiseFormato12BC) throws Exception {
+		
+		FiseFormato12BC dto = null;
+		
+		try {
+			
+			Date hoy = FechaUtil.obtenerFechaActual();
+	
+			List<FiseFormato12BD> lista = new ArrayList<FiseFormato12BD>();
+			
+			FiseFormato12BD detalleRural = new FiseFormato12BD();
+			FiseFormato12BD detalleProvincia = new FiseFormato12BD();
+			FiseFormato12BD detalleLima = new FiseFormato12BD();
+			if( fiseFormato12BC.getFiseFormato12BDs()!=null ){
+				for (FiseFormato12BD detalle : fiseFormato12BC.getFiseFormato12BDs()) {
+					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
+						detalleRural = detalle;
+					}else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
+						detalleProvincia = detalle;
+					} else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
+						detalleLima = detalle;
+					}
+				}
+			}
+			
+			//RURAL
+			if( formulario.getNroValeImpR() != 0 ||
+					formulario.getNroValReparDomicR() != 0 ||
+					formulario.getNroValEntDisElR() != 0 ||
+					formulario.getNroValFisiCanjR() != 0 ||
+					formulario.getNroValDigitCanjR() != 0 ||
+					formulario.getNroAtencionesR() != 0
+					){
+				logger.info("entro a RURAL");
+				//
+				
+				//impresion vales
+				detalleRural.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleRural.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleRural.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleRural.getNumeroValesImpreso()));
+				detalleRural.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleRural.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleRural.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleRural.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleRural.getNumeroValesRepartidosDomi()));
+				detalleRural.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleRural.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleRural.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleRural.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleRural.getNumeroValesEntregadoDisEl()));
+				detalleRural.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleRural.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleRural.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleRural.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleRural.getNumeroValesFisicosCanjeados()));
+				detalleRural.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleRural.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleRural.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleRural.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleRural.getNumeroValesDigitalCanjeados()));
+				detalleRural.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleRural.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleRural.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleRural.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleRural.getNumeroAtenciones()));
+				detalleRural.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleRural.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleRural.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleRural.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalRural = new BigDecimal(0);
+				totalRural = totalRural.add(detalleRural.getCostoTotalImpresionVale())
+						.add(detalleRural.getCostoTotalRepartoValesDomi())
+						.add(detalleRural.getCostoTotalEntregaValDisEl())
+						.add(detalleRural.getCostoTotalCanjeLiqValeFis())
+						.add(detalleRural.getCostoTotalCanjeLiqValeDig())
+						.add(detalleRural.getCostoTotalAtencionConsRecl())
+						.add(detalleRural.getTotalGestionAdministrativa())
+						.add(detalleRural.getTotalDesplazamientoPersonal())
+						.add(detalleRural.getTotalActividadesExtraord());
+				detalleRural.setTotalReconocer(totalRural);
+				//
+				detalleRural.setFiseFormato12BC(fiseFormato12BC);
+				//detalleRural.setFiseZonaBenef(zonaBenef);
+				//
+				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
+				detalleRural.setTerminalActualizacion(formulario.getTerminal());
+				detalleRural.setFechaActualizacion(hoy);
+				lista.add(detalleRural);
+			}
+			//PROVINCIA
+			if( formulario.getNroValeImpP() != 0 ||
+					formulario.getNroValReparDomicP() != 0 ||
+					formulario.getNroValEntDisElP() != 0 ||
+					formulario.getNroValFisiCanjP() != 0 ||
+					formulario.getNroValDigitCanjP() != 0 ||
+					formulario.getNroAtencionesP() != 0
+					){
+				logger.info("entro a PROVINCIA");
+				//
+				
+				//impresion vales
+				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleProvincia.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleProvincia.getNumeroValesImpreso()));
+				detalleProvincia.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleProvincia.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleProvincia.getNumeroValesRepartidosDomi()));
+				detalleProvincia.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleProvincia.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleProvincia.getNumeroValesEntregadoDisEl()));
+				detalleProvincia.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleProvincia.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesFisicosCanjeados()));
+				detalleProvincia.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleProvincia.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesDigitalCanjeados()));
+				detalleProvincia.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleProvincia.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleProvincia.getNumeroAtenciones()));
+				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalProvincia = new BigDecimal(0);
+				totalProvincia = totalProvincia.add(detalleProvincia.getCostoTotalImpresionVale())
+						.add(detalleProvincia.getCostoTotalRepartoValesDomi())
+						.add(detalleProvincia.getCostoTotalEntregaValDisEl())
+						.add(detalleProvincia.getCostoTotalCanjeLiqValeFis())
+						.add(detalleProvincia.getCostoTotalCanjeLiqValeDig())
+						.add(detalleProvincia.getCostoTotalAtencionConsRecl())
+						.add(detalleProvincia.getTotalGestionAdministrativa())
+						.add(detalleProvincia.getTotalDesplazamientoPersonal())
+						.add(detalleProvincia.getTotalActividadesExtraord());
+				detalleProvincia.setTotalReconocer(totalProvincia);
+				//
+				detalleProvincia.setFiseFormato12BC(fiseFormato12BC);
+				//detalleProvincia.setFiseZonaBenef(zonaBenef);
+				//
+				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
+				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
+				detalleProvincia.setFechaActualizacion(hoy);
+				lista.add(detalleProvincia);
+			}
+			//LIMA
+			if( formulario.getNroValeImpR() != 0 ||
+					formulario.getNroValReparDomicR() != 0 ||
+					formulario.getNroValEntDisElR() != 0 ||
+					formulario.getNroValFisiCanjR() != 0 ||
+					formulario.getNroValDigitCanjR() != 0 ||
+					formulario.getNroAtencionesR() != 0
+					){
+				logger.info("entro a LIMA");
+				//
+				
+				//impresion vales
+				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpR());
+				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				BigDecimal totalImpresion = detalleLima.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleLima.getNumeroValesImpreso()));
+				detalleLima.setCostoTotalImpresionVale(totalImpresion);
+				//reparto vales
+				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
+				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				BigDecimal totalReparto = detalleLima.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleLima.getNumeroValesRepartidosDomi()));
+				detalleLima.setCostoTotalRepartoValesDomi(totalReparto);
+				//entrega vales
+				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
+				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				BigDecimal totalEntregados = detalleLima.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleLima.getNumeroValesEntregadoDisEl()));
+				detalleLima.setCostoTotalEntregaValDisEl(totalEntregados);
+				//vales fisicos
+				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
+				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				BigDecimal totalFisicos = detalleLima.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleLima.getNumeroValesFisicosCanjeados()));
+				detalleLima.setCostoTotalCanjeLiqValeFis(totalFisicos);
+				//vales digitales
+				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
+				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				BigDecimal totalDigitales = detalleLima.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleLima.getNumeroValesDigitalCanjeados()));
+				detalleLima.setCostoTotalCanjeLiqValeDig(totalDigitales);
+				//atencion
+				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesR());
+				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				BigDecimal totalAtenciones = detalleLima.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleLima.getNumeroAtenciones()));
+				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
+				//gestion administrativa
+				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				
+				BigDecimal totalLima = new BigDecimal(0);
+				totalLima = totalLima.add(detalleLima.getCostoTotalImpresionVale())
+						.add(detalleLima.getCostoTotalRepartoValesDomi())
+						.add(detalleLima.getCostoTotalEntregaValDisEl())
+						.add(detalleLima.getCostoTotalCanjeLiqValeFis())
+						.add(detalleLima.getCostoTotalCanjeLiqValeDig())
+						.add(detalleLima.getCostoTotalAtencionConsRecl())
+						.add(detalleLima.getTotalGestionAdministrativa())
+						.add(detalleLima.getTotalDesplazamientoPersonal())
+						.add(detalleLima.getTotalActividadesExtraord());
+				detalleLima.setTotalReconocer(totalLima);
+				//
+				detalleLima.setFiseFormato12BC(fiseFormato12BC);
+				//detalleLima.setFiseZonaBenef(zonaBenef);
+				//
+				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
+				detalleLima.setTerminalActualizacion(formulario.getTerminal());
+				detalleLima.setFechaActualizacion(hoy);
+				lista.add(detalleLima);
+			}
+		
+			fiseFormato12BC.setUsuarioActualizacion(formulario.getUsuario());
+			fiseFormato12BC.setTerminalActualizacion(formulario.getTerminal());
+			fiseFormato12BC.setFechaActualizacion(hoy);
+		
+			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12BC.setNombreArchivoExcel(formulario.getNombreArchivo());
+			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
+				fiseFormato12BC.setNombreArchivoTexto(formulario.getNombreArchivo());
+			}
+			
+			formato12BCDao.updateFormatoCabecera(fiseFormato12BC);
+			//add
+			for (FiseFormato12BD detalle : lista) {
+				formato12BDDao.updateFormatoDetalle(detalle);
+			}
+			dto= fiseFormato12BC;
+			
+		}	catch (Exception e) {
+			logger.error("--error"+e.getMessage());
+			e.printStackTrace();
+			throw new Exception("Se produjo un error al actualizar los datos del Formato 12B");
+		}
+		//
+		return dto;
+
+	}
 
 }

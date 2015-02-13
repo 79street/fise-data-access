@@ -154,8 +154,22 @@ public class FormatoUtil {
 		return nombre;
 	}
 	
+	public static String nombreReporteGeneralFormato(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoReporte,String formato){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+formato+
+				 FiseConstants.UNDERLINE+tipoReporte
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_FORMATO+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
+	}
+	
 	public static String nombreIndividualAnexoObs(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoFormato){
 		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+tipoFormato
+				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_ANEXOOBS+FiseConstants.EXTENSIONARCHIVO_PDF;
+		return nombre;
+	}
+	
+	public static String nombreReporteGeneralAnexoObs(String codEmpresa, Long anoPresentacion, Long mesPresentacion, String tipoReporte,String formato ){
+		String nombre = ""+anoPresentacion+mesPresentacion+FiseConstants.UNDERLINE+codEmpresa.trim()+FiseConstants.UNDERLINE+
+				 formato+FiseConstants.UNDERLINE+tipoReporte
 				+FiseConstants.UNDERLINE+FiseConstants.SUFIJO_NOMBRE_INDIVIDUAL_ANEXOOBS+FiseConstants.EXTENSIONARCHIVO_PDF;
 		return nombre;
 	}

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FiseGrupoInformacionGartService {
 	
-	List<FiseGrupoInformacion> listarGrupoInformacion(String tipo) throws Exception;
+	List<FiseGrupoInformacion> listarGrupoInformacion(String tipo,String flag) throws Exception;
 	
 	String insertarDatosGrupoInf(GrupoInformacionBean bean) throws Exception;
 	

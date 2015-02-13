@@ -220,6 +220,7 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 				r.setMontoHistorico(((BigDecimal)listaComp.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[7]);
 				r.setMontoEstablecido(((BigDecimal)listaComp.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaComp.get(i)[8]);
 				r.setItem(String.valueOf(((String)listaComp.get(i)[9] == null) ? "--" :listaComp.get(i)[9]));
+				r.setDesActividad(String.valueOf(((String)listaComp.get(i)[10] == null) ? "--" :listaComp.get(i)[10]));				
 				lista.add(r);
 			 }			
 		} catch (Exception e) { 

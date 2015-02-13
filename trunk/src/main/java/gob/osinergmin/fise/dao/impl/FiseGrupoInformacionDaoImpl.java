@@ -24,12 +24,16 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FiseGrupoInformacion> listarGrupoInformacion(String tipo) throws SQLException{
+	public List<FiseGrupoInformacion> listarGrupoInformacion(String tipo,String flag) throws SQLException{
 		
 		String q = "SELECT g FROM " + FiseGrupoInformacion.class.getName()
-				+ " g WHERE g.tipo = :tipo AND g.estado = 1 ";			
+				+ " g WHERE g.tipo = :tipo  ";
+		if(FormatoUtil.isBlank(flag)){ 
+			System.out.println("Entro a estado grupo de informacion estado =1"); 
+			q = q.concat(" AND g.estado = 1 ");	
+		}		
 		Query query = em.createQuery(q); 
-		query.setParameter("tipo", tipo);
+		query.setParameter("tipo", tipo); 
 		List<FiseGrupoInformacion> lista= query.getResultList();
 		 if(lista==null){
 			 return Collections.EMPTY_LIST;

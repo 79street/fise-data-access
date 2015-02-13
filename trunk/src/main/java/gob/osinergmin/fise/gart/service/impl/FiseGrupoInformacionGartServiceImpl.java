@@ -31,8 +31,8 @@ public class FiseGrupoInformacionGartServiceImpl implements
 	
 	@Transactional
 	@Override
-	public List<FiseGrupoInformacion> listarGrupoInformacion(String tipo) throws Exception{
-		return fiseGrupoInformacionDao.listarGrupoInformacion(tipo);
+	public List<FiseGrupoInformacion> listarGrupoInformacion(String tipo,String flag) throws Exception{
+		return fiseGrupoInformacionDao.listarGrupoInformacion(tipo,flag);
 	}
 	
 	

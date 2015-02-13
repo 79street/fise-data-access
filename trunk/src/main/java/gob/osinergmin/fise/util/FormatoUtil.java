@@ -5,6 +5,8 @@ import gob.osinergmin.fise.constant.FiseConstants;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -255,5 +257,21 @@ public class FormatoUtil {
 		}
 		return retorno;
 	}
+	
+	public static boolean validarFechaFormato_YYYY_MM(String fecha) {  
+		  
+		if (fecha == null)  
+			return false;  
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM"); //año-mes
+		if (fecha.trim().length() != dateFormat.toPattern().length())  
+			return false;  
+		dateFormat.setLenient(false);  
+		try {  
+			dateFormat.parse(fecha.trim());  
+		}catch (ParseException pe) {  
+			return false;  
+		}  
+		return true;  
+	}  
 	
 }

@@ -22,6 +22,7 @@ public class VariacionCostosBean implements Serializable {
 	private String formatoBusq;
 	private String zonaBusq;
 	private String conceptoBusq;
+	private String etapaBusq;
 	
 	private boolean admin;	
 	
@@ -117,6 +118,12 @@ public class VariacionCostosBean implements Serializable {
 	}
 	public void setCadenaValorVariacion(String cadenaValorVariacion) {
 		this.cadenaValorVariacion = cadenaValorVariacion;
+	}
+	public String getEtapaBusq() {
+		return etapaBusq;
+	}
+	public void setEtapaBusq(String etapaBusq) {
+		this.etapaBusq = etapaBusq;
 	}
 	
 	

@@ -679,7 +679,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 	
 	//OBTENER VARIACION DE COSTOS
 	@Override
-	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal){
+	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal, String etapa){
 		
 		List<VariacionCostosBean> listaCostos = new ArrayList<VariacionCostosBean>();
 		try {
@@ -697,7 +697,8 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			}
 			sql.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");
 			sql.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION'  ");
-			sql.append(" AND F14AB.COD_EMPRESA = EMP.COD_EMPRESA AND F14AB.ETAPA = 'ESTABLECIDO' ");
+			//--sql.append(" AND F14AB.COD_EMPRESA = EMP.COD_EMPRESA AND F14AB.ETAPA = 'ESTABLECIDO' ");
+			sql.append(" AND F14AB.COD_EMPRESA = EMP.COD_EMPRESA AND F14AB.ETAPA = '"+etapa+"' ");
 			sql.append(" AND F14AB.ID_GRUPO_INFORMACION = " + idGrupoInfo );
 			
 			Query query = em.createNativeQuery(sql.toString());

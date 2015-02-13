@@ -49,7 +49,7 @@ public interface CommonDao {
 	
 	boolean esAdministradorFise(String userName);
 	
-	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal);
+	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal, String etapa);
 	List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato);
 			
 }

@@ -71,7 +71,9 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		}		
 		if(idGrupoInf!=0){			
 			sb.append(" AND F14A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
-		}		
+		}	
+		sb.append(" ORDER BY F14A.COD_EMPRESA ASC ");
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -229,7 +231,9 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		}		
 		if(idGrupoInf!=0){			
 			sb.append(" AND F14B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
-		}		
+		}	
+		sb.append(" ORDER BY F14B.COD_EMPRESA ASC ");
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -280,7 +284,9 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		}
 		if(idGrupoInf!=0){			
 			sb.append(" AND F12A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
-		}		
+		}
+		sb.append(" ORDER BY F12A.COD_EMPRESA ASC ");
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -331,7 +337,9 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		}
 		if(idGrupoInf!=0){			
 			sb.append(" AND F12B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
-		}		
+		}
+		sb.append(" ORDER BY F12B.COD_EMPRESA ASC ");
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		

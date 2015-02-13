@@ -731,39 +731,39 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleProvincia.setId(pkDetalle);
 				
 				//impresion vales
-				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpR());
-				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpP());
+				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpP());
 				BigDecimal totalImpresion = detalleProvincia.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleProvincia.getNumeroValesImpreso()));
 				detalleProvincia.setCostoTotalImpresionVale(totalImpresion);
 				//reparto vales
-				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
-				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicP());
+				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicP());
 				BigDecimal totalReparto = detalleProvincia.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleProvincia.getNumeroValesRepartidosDomi()));
 				detalleProvincia.setCostoTotalRepartoValesDomi(totalReparto);
 				//entrega vales
-				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
-				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElP());
+				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElP());
 				BigDecimal totalEntregados = detalleProvincia.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleProvincia.getNumeroValesEntregadoDisEl()));
 				detalleProvincia.setCostoTotalEntregaValDisEl(totalEntregados);
 				//vales fisicos
-				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
-				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjP());
+				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjP());
 				BigDecimal totalFisicos = detalleProvincia.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesFisicosCanjeados()));
 				detalleProvincia.setCostoTotalCanjeLiqValeFis(totalFisicos);
 				//vales digitales
-				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
-				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjP());
+				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjP());
 				BigDecimal totalDigitales = detalleProvincia.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesDigitalCanjeados()));
 				detalleProvincia.setCostoTotalCanjeLiqValeDig(totalDigitales);
 				//atencion
-				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesR());
-				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesP());
+				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesP());
 				BigDecimal totalAtenciones = detalleProvincia.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleProvincia.getNumeroAtenciones()));
 				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
-				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmR());
-				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
-				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmP());
+				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalP());
+				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordP());
 				
 				BigDecimal totalProvincia = new BigDecimal(0);
 				totalProvincia = totalProvincia.add(detalleProvincia.getCostoTotalImpresionVale())
@@ -789,12 +789,12 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroValeImpR() != 0 ||
-					formulario.getNroValReparDomicR() != 0 ||
-					formulario.getNroValEntDisElR() != 0 ||
-					formulario.getNroValFisiCanjR() != 0 ||
-					formulario.getNroValDigitCanjR() != 0 ||
-					formulario.getNroAtencionesR() != 0
+			if( formulario.getNroValeImpL() != 0 ||
+					formulario.getNroValReparDomicL() != 0 ||
+					formulario.getNroValEntDisElL() != 0 ||
+					formulario.getNroValFisiCanjL() != 0 ||
+					formulario.getNroValDigitCanjL() != 0 ||
+					formulario.getNroAtencionesL() != 0
 					){
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
@@ -813,39 +813,39 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleLima.setId(pkDetalle);
 				
 				//impresion vales
-				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpR());
-				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpL());
+				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpL());
 				BigDecimal totalImpresion = detalleLima.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleLima.getNumeroValesImpreso()));
 				detalleLima.setCostoTotalImpresionVale(totalImpresion);
 				//reparto vales
-				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
-				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicL());
+				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicL());
 				BigDecimal totalReparto = detalleLima.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleLima.getNumeroValesRepartidosDomi()));
 				detalleLima.setCostoTotalRepartoValesDomi(totalReparto);
 				//entrega vales
-				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
-				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElL());
+				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElL());
 				BigDecimal totalEntregados = detalleLima.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleLima.getNumeroValesEntregadoDisEl()));
 				detalleLima.setCostoTotalEntregaValDisEl(totalEntregados);
 				//vales fisicos
-				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
-				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjL());
+				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjL());
 				BigDecimal totalFisicos = detalleLima.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleLima.getNumeroValesFisicosCanjeados()));
 				detalleLima.setCostoTotalCanjeLiqValeFis(totalFisicos);
 				//vales digitales
-				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
-				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjL());
+				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjL());
 				BigDecimal totalDigitales = detalleLima.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleLima.getNumeroValesDigitalCanjeados()));
 				detalleLima.setCostoTotalCanjeLiqValeDig(totalDigitales);
 				//atencion
-				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesR());
-				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesL());
+				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesL());
 				BigDecimal totalAtenciones = detalleLima.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleLima.getNumeroAtenciones()));
 				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
-				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmR());
-				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
-				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmL());
+				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalL());
+				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordL());
 				
 				BigDecimal totalLima = new BigDecimal(0);
 				totalLima = totalLima.add(detalleLima.getCostoTotalImpresionVale())
@@ -1018,39 +1018,39 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				//
 				
 				//impresion vales
-				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpR());
-				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpP());
+				detalleProvincia.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpP());
 				BigDecimal totalImpresion = detalleProvincia.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleProvincia.getNumeroValesImpreso()));
 				detalleProvincia.setCostoTotalImpresionVale(totalImpresion);
 				//reparto vales
-				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
-				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				detalleProvincia.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicP());
+				detalleProvincia.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicP());
 				BigDecimal totalReparto = detalleProvincia.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleProvincia.getNumeroValesRepartidosDomi()));
 				detalleProvincia.setCostoTotalRepartoValesDomi(totalReparto);
 				//entrega vales
-				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
-				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				detalleProvincia.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElP());
+				detalleProvincia.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElP());
 				BigDecimal totalEntregados = detalleProvincia.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleProvincia.getNumeroValesEntregadoDisEl()));
 				detalleProvincia.setCostoTotalEntregaValDisEl(totalEntregados);
 				//vales fisicos
-				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
-				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				detalleProvincia.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjP());
+				detalleProvincia.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjP());
 				BigDecimal totalFisicos = detalleProvincia.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesFisicosCanjeados()));
 				detalleProvincia.setCostoTotalCanjeLiqValeFis(totalFisicos);
 				//vales digitales
-				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
-				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				detalleProvincia.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjP());
+				detalleProvincia.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjP());
 				BigDecimal totalDigitales = detalleProvincia.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleProvincia.getNumeroValesDigitalCanjeados()));
 				detalleProvincia.setCostoTotalCanjeLiqValeDig(totalDigitales);
 				//atencion
-				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesR());
-				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				detalleProvincia.setNumeroAtenciones((int)formulario.getNroAtencionesP());
+				detalleProvincia.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesP());
 				BigDecimal totalAtenciones = detalleProvincia.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleProvincia.getNumeroAtenciones()));
 				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
-				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmR());
-				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
-				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmP());
+				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalP());
+				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordP());
 				
 				BigDecimal totalProvincia = new BigDecimal(0);
 				totalProvincia = totalProvincia.add(detalleProvincia.getCostoTotalImpresionVale())
@@ -1073,50 +1073,50 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroValeImpR() != 0 ||
-					formulario.getNroValReparDomicR() != 0 ||
-					formulario.getNroValEntDisElR() != 0 ||
-					formulario.getNroValFisiCanjR() != 0 ||
-					formulario.getNroValDigitCanjR() != 0 ||
-					formulario.getNroAtencionesR() != 0
+			if( formulario.getNroValeImpL() != 0 ||
+					formulario.getNroValReparDomicL() != 0 ||
+					formulario.getNroValEntDisElL() != 0 ||
+					formulario.getNroValFisiCanjL() != 0 ||
+					formulario.getNroValDigitCanjL() != 0 ||
+					formulario.getNroAtencionesL() != 0
 					){
 				logger.info("entro a LIMA");
 				//
 				
 				//impresion vales
-				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpR());
-				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpR());
+				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpL());
+				detalleLima.setCostoEstandarUnitValeImpre(formulario.getCostoUnitValImpL());
 				BigDecimal totalImpresion = detalleLima.getCostoEstandarUnitValeImpre().multiply(new BigDecimal(detalleLima.getNumeroValesImpreso()));
 				detalleLima.setCostoTotalImpresionVale(totalImpresion);
 				//reparto vales
-				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicR());
-				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicR());
+				detalleLima.setNumeroValesRepartidosDomi((int)formulario.getNroValReparDomicL());
+				detalleLima.setCostoEstandarUnitValeRepar(formulario.getCostoUnitValReparDomicL());
 				BigDecimal totalReparto = detalleLima.getCostoEstandarUnitValeRepar().multiply(new BigDecimal(detalleLima.getNumeroValesRepartidosDomi()));
 				detalleLima.setCostoTotalRepartoValesDomi(totalReparto);
 				//entrega vales
-				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElR());
-				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElR());
+				detalleLima.setNumeroValesEntregadoDisEl((int)formulario.getNroValEntDisElL());
+				detalleLima.setCostoEstandarUnitValDisEl(formulario.getCostoUnitValEntDisElL());
 				BigDecimal totalEntregados = detalleLima.getCostoEstandarUnitValDisEl().multiply(new BigDecimal(detalleLima.getNumeroValesEntregadoDisEl()));
 				detalleLima.setCostoTotalEntregaValDisEl(totalEntregados);
 				//vales fisicos
-				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjR());
-				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjR());
+				detalleLima.setNumeroValesFisicosCanjeados((int)formulario.getNroValFisiCanjL());
+				detalleLima.setCostoEstandarUnitValFiCan(formulario.getCostoUnitValFisiCanjL());
 				BigDecimal totalFisicos = detalleLima.getCostoEstandarUnitValFiCan().multiply(new BigDecimal(detalleLima.getNumeroValesFisicosCanjeados()));
 				detalleLima.setCostoTotalCanjeLiqValeFis(totalFisicos);
 				//vales digitales
-				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjR());
-				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjR());
+				detalleLima.setNumeroValesDigitalCanjeados((int)formulario.getNroValDigitCanjL());
+				detalleLima.setCostoEstandarUnitValDgCan(formulario.getCostoUnitValDigitCanjL());
 				BigDecimal totalDigitales = detalleLima.getCostoEstandarUnitValDgCan().multiply(new BigDecimal(detalleLima.getNumeroValesDigitalCanjeados()));
 				detalleLima.setCostoTotalCanjeLiqValeDig(totalDigitales);
 				//atencion
-				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesR());
-				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesR());
+				detalleLima.setNumeroAtenciones((int)formulario.getNroAtencionesL());
+				detalleLima.setCostoEstandarUnitAtencion(formulario.getCostoUnitAtencionesL());
 				BigDecimal totalAtenciones = detalleLima.getCostoEstandarUnitAtencion().multiply(new BigDecimal(detalleLima.getNumeroAtenciones()));
 				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
-				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmR());
-				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
-				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordR());
+				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmL());
+				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalL());
+				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordL());
 				
 				BigDecimal totalLima = new BigDecimal(0);
 				totalLima = totalLima.add(detalleLima.getCostoTotalImpresionVale())

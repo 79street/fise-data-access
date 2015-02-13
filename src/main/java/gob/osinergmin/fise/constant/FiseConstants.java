@@ -35,6 +35,7 @@ public class FiseConstants {
 	public final static String ETAPA_RECONSIDERACION= "RECONSIDERACION";
 	public final static String ETAPA_RECONOCIDO= "RECONOCIDO";
 	public final static String ETAPA_ESTABLECIDO= "ESTABLECIDO";
+	public final static String ETAPA_HISTORICO= "HISTORICO";
 
 	public final static String MSG_OBSERVACION_REPORTE_VACIO = "Ninguno";
 	public final static String MSG_OBSERVACION_REPORTE_LLENO = "Observaciones de validación. Ver reporte adjunto";
@@ -252,9 +253,9 @@ public class FiseConstants {
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12B =3;
 	public final static int NRO_FILA_ANIOMES_FORMATO12B = 4;
 	public final static int NRO_FILA_NROVALESIMP_FORMATO12B = 11;
-	public final static int NRO_FILA_NROVALESREP_FORMATO12B = 16;
+	public final static int NRO_FILA_NROVALESREP_FORMATO12B = 15;
 	public final static int NRO_FILA_NROVALESENTR_FORMATO12B = 19;
-	public final static int NRO_FILA_NROVALESFIS_FORMATO12B = 24;
+	public final static int NRO_FILA_NROVALESFIS_FORMATO12B = 23;
 	public final static int NRO_FILA_NROVALESDIGIT_FORMATO12B = 27;
 	public final static int NRO_FILA_NROTOTALATEN_FORMATO12B = 31;
 	public final static int NRO_FILA_GESTADM_FORMATO12B = 34;

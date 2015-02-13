@@ -1146,8 +1146,8 @@ public class CommonGartServiceImpl implements CommonGartService {
 	
 	@Override
 	@Transactional
-	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal) throws Exception{
-		return commonDao.obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(idGrupoInfo,formato,conceptoFinal);
+	public List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal, String etapa) throws Exception{
+		return commonDao.obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(idGrupoInfo,formato,conceptoFinal, etapa);
 	}
 	
 	@Override

@@ -104,7 +104,7 @@ public class ResumenCostoBean {
 	private String item;
 	private String actividad;
 	private String desZona;//descripcion de la zona de beneficiarios
-	private String desActividad;
+	private String desMotivo;
 	private BigDecimal montoSolicitud;	
 	private BigDecimal montoLevObs;
 	private BigDecimal montoHistorico;
@@ -599,11 +599,12 @@ public class ResumenCostoBean {
 	public void setMontoEstablecido(BigDecimal montoEstablecido) {
 		this.montoEstablecido = montoEstablecido;
 	}
-	public String getDesActividad() {
-		return desActividad;
+	public String getDesMotivo() {
+		return desMotivo;
 	}
-	public void setDesActividad(String desActividad) {
-		this.desActividad = desActividad;
+	public void setDesMotivo(String desMotivo) {
+		this.desMotivo = desMotivo;
 	}
+	
 	
 }

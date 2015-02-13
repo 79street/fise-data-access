@@ -247,6 +247,25 @@ public class FiseConstants {
 	public final static int NRO_CELDA_LIMA_FORMATO12A = 9;
 	public final static int NRO_MAX_FILAS_FORMATO12A = 3;
 	public final static int TAMANIO_MAX_FILA_FORMATO12A = 159;
+	
+	//FORMATO 12B
+	public final static int NRO_FILA_CODEMPRESA_FORMATO12B =3;
+	public final static int NRO_FILA_ANIOMES_FORMATO12B = 4;
+	public final static int NRO_FILA_NROVALESIMP_FORMATO12B = 11;
+	public final static int NRO_FILA_NROVALESREP_FORMATO12B = 16;
+	public final static int NRO_FILA_NROVALESENTR_FORMATO12B = 19;
+	public final static int NRO_FILA_NROVALESFIS_FORMATO12B = 24;
+	public final static int NRO_FILA_NROVALESDIGIT_FORMATO12B = 27;
+	public final static int NRO_FILA_NROTOTALATEN_FORMATO12B = 31;
+	public final static int NRO_FILA_GESTADM_FORMATO12B = 34;
+	public final static int NRO_FILA_DESPLPERSON_FORMATO12B = 35;
+	public final static int NRO_FILA_ACTIVEXTR_FORMATO12B = 36;
+	public final static int NRO_CELDA_EMPRESA_FORMATO12B = 5;
+	public final static int NRO_CELDA_ANIO_FORMATO12B = 4;
+	public final static int NRO_CELDA_MES_FORMATO12B = 5;
+	public final static int NRO_CELDA_RURAL_FORMATO12B = 6;
+	public final static int NRO_CELDA_PROVINCIA_FORMATO12B = 7;
+	public final static int NRO_CELDA_LIMA_FORMATO12B = 8;
 
 	// FORMATO 12C
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12C = 2;

@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -400,5 +399,24 @@ return bean;
 		 }	
 	}
 
+	@Override
+	public boolean existeFormato12BC(FiseFormato12BC fiseFormato12BC){
+		boolean existe = false;
+		try{
+			//em.getTransaction().begin();
+			fiseFormato12BC.getId().setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato12BC.getId().getCodEmpresa(), ' ', 4));
+			FiseFormato12BC formato = em.find(FiseFormato12BC.class, fiseFormato12BC.getId());
+			if( formato != null ){
+		    	existe = true;
+		    }
+			//em.persist(fiseFormato12A);
+			//em.getTransaction().commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return existe;
+	}
 	
 }

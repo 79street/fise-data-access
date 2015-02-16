@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.GrupoInformacionBean;
+import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.gart.service.FiseGrupoInformacionGartService;
@@ -41,20 +42,30 @@ public class FiseGrupoInformacionGartServiceImpl implements
 	public String insertarDatosGrupoInf(GrupoInformacionBean bean) throws Exception{
 		FiseGrupoInformacion grupo =null;
 		String valor;
+		boolean verificar = true;
 		try {			
-			grupo = new FiseGrupoInformacion();			
-			grupo.setDescripcion(bean.getDescripcion());
-			grupo.setTipo(bean.getTipo());
-			grupo.setEstado(Integer.valueOf(bean.getEstado()));  
-			grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
-			grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
-			//auditoria
-			grupo.setUsuarioCreacion(bean.getUsuario());
-			grupo.setTerminalCreacion(bean.getTerminal()); 
-			grupo.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseGrupoInformacionDao.insertarGrupoInformacion(grupo);
-			logger.info("Id de Grupo inf. al grabar:  "+grupo.getIdGrupoInformacion()); 
-			valor = ""+grupo.getIdGrupoInformacion();
+			grupo = new FiseGrupoInformacion();	
+			if(FiseConstants.BIENAL.equals(bean.getTipo()) && 
+					FiseConstants.ESTADO_ACTIVO_GRUPO_INF==Integer.valueOf(bean.getEstado())){ 
+				verificar = fiseGrupoInformacionDao.verificarGrupoInfBienal(bean.getTipo(),
+						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);		 		
+			}
+			if(verificar){
+				grupo.setDescripcion(bean.getDescripcion());
+				grupo.setTipo(bean.getTipo());
+				grupo.setEstado(Integer.valueOf(bean.getEstado()));  
+				grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
+				grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				//auditoria
+				grupo.setUsuarioCreacion(bean.getUsuario());
+				grupo.setTerminalCreacion(bean.getTerminal()); 
+				grupo.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseGrupoInformacionDao.insertarGrupoInformacion(grupo);
+				logger.info("Id de Grupo inf. al grabar:  "+grupo.getIdGrupoInformacion()); 
+				valor = ""+grupo.getIdGrupoInformacion();
+			}else{
+				valor = "-1";//grupo de informacion bienal ya existe con estado activado
+			}
 		} catch (Exception e) {
 			logger.info("Error al grabar en grupo informacion: "+e); 
 			valor = "0";
@@ -70,19 +81,33 @@ public class FiseGrupoInformacionGartServiceImpl implements
 	@Transactional
 	public String actualizarDatosGrupoInf(GrupoInformacionBean bean) throws Exception{
 		FiseGrupoInformacion grupo =null;
-		String valor ="1";
-		try {			
-			grupo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(Long.valueOf(bean.getIdGrupoInf())); 		
-			grupo.setDescripcion(bean.getDescripcion());
-			grupo.setTipo(bean.getTipo());
-			grupo.setEstado(Integer.valueOf(bean.getEstado()));
-			grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
-			grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
-			//auditoria
-			grupo.setUsuarioActualizacion(bean.getUsuario());
-			grupo.setTerminalActualizacion(bean.getTerminal()); 
-			grupo.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
-			fiseGrupoInformacionDao.actualizarGrupoInformacion(grupo); 
+		String valor ="0";
+		boolean verificar = true;
+		try {
+			grupo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(Long.valueOf(bean.getIdGrupoInf())); 			
+			if(FiseConstants.BIENAL.equals(bean.getTipo()) && 
+					FiseConstants.ESTADO_ACTIVO_GRUPO_INF==Integer.valueOf(bean.getEstado()) &&
+					FiseConstants.ESTADO_INACTIVO_GRUPO_INF == grupo.getEstado()){ 
+				verificar = fiseGrupoInformacionDao.verificarGrupoInfBienal(bean.getTipo(),
+						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);		 		
+			}
+			if(verificar && grupo!=null){						
+				grupo.setDescripcion(bean.getDescripcion());
+				grupo.setTipo(bean.getTipo());
+				grupo.setEstado(Integer.valueOf(bean.getEstado()));
+				grupo.setAnoPresentacion(Long.valueOf(bean.getAnioPres()));
+				grupo.setMesPresentacion(Long.valueOf(bean.getMesPres()));
+				//auditoria
+				grupo.setUsuarioActualizacion(bean.getUsuario());
+				grupo.setTerminalActualizacion(bean.getTerminal()); 
+				grupo.setFechaActualizacion(FechaUtil.obtenerFechaActual()); 
+				fiseGrupoInformacionDao.actualizarGrupoInformacion(grupo);
+				valor = "1";
+			}else if(!verificar){
+				valor = "-1";//grupo de informacion bienal ya existe con estado activado
+			}else{
+				valor = "0";
+			}
 		} catch (Exception e) {
 			logger.info("Error al actualizar en grupo informacion: "+e); 
 			valor = "0";

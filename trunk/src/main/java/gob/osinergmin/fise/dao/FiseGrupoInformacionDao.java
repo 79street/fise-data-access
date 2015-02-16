@@ -23,6 +23,8 @@ public interface FiseGrupoInformacionDao {
 	List<FiseGrupoInformacion> buscarGrupoInformacion(String descripcion,String tipo,Integer estado ) 
 			throws SQLException;
 	
+	boolean verificarGrupoInfBienal(String tipo,Integer estado) throws SQLException;
+	
 	
 
 }

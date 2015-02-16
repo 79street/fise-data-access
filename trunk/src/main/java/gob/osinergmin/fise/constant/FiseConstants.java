@@ -1975,4 +1975,7 @@ public class FiseConstants {
 	
 	public final static int TAMANIO_COLUMNA_CANTIDAD_COSTO_D_I_F14C= 5;//tamaño de la columna en la bd f14C detalle
 	
+	public final static int ESTADO_ACTIVO_GRUPO_INF= 1;
+	public final static int ESTADO_INACTIVO_GRUPO_INF= 0;
+	
 }

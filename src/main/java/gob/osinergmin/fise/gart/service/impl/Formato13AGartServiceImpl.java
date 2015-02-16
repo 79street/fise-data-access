@@ -324,7 +324,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato13AC registrarFormato13ACregistrarFormato13AD(Formato13ACBean formulario) throws Exception {
+	public FiseFormato13AC registrarFormato13ACregistrarFormato13AD(Formato13ACBean formulario, List<Formato13ACBean> listaDetalleCarga) throws Exception {
 		
 		FiseFormato13AC dto = null;
 		
@@ -354,33 +354,38 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			
 			List<FiseFormato13AD> lista = new ArrayList<FiseFormato13AD>();
 			
-				
-			if( formulario.getAnioAlta() != 0 ||
-					formulario.getMesAlta() != 0 ||
-					!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
-					!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
-					formulario.getIdZonaBenef() != 0 ||
-					formulario.getSt1() != 0 ||
-					formulario.getSt2() != 0 ||
-					formulario.getSt3() != 0 ||
-					formulario.getSt4() != 0 ||
-					formulario.getSt5() != 0 ||
-					formulario.getSt6() != 0 ||
-					formulario.getStSer() != 0 ||
-					formulario.getStEsp() != 0 ||
-					!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
-					){
-				
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
-				
+			if( listaDetalleCarga==null ){
+				if( formulario.getAnioAlta() != 0 ||
+						formulario.getMesAlta() != 0 ||
+						!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
+						formulario.getIdZonaBenef() != 0 ||
+						formulario.getSt1() != 0 ||
+						formulario.getSt2() != 0 ||
+						formulario.getSt3() != 0 ||
+						formulario.getSt4() != 0 ||
+						formulario.getSt5() != 0 ||
+						formulario.getSt6() != 0 ||
+						formulario.getStSer() != 0 ||
+						formulario.getStEsp() != 0 ||
+						!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
+						){
+					
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
+					
+				}
+			}else{
+				lista = convertirBeanADtoFormato13AD(listaDetalleCarga);
 			}
+				
+			
 
 			
 			fiseFormato13AC.setUsuarioActualizacion(formulario.getUsuario());
@@ -424,7 +429,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public FiseFormato13AC modificarFormato13ACregistrarFormato13AD(Formato13ACBean formulario, FiseFormato13AC fiseFormato13AC) throws Exception {
+	public FiseFormato13AC modificarFormato13ACregistrarFormato13AD(Formato13ACBean formulario, FiseFormato13AC fiseFormato13AC, List<Formato13ACBean> listaDetalleCarga) throws Exception {
 		
 		FiseFormato13AC dto = null;
 		
@@ -434,33 +439,38 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	
 			List<FiseFormato13AD> lista = new ArrayList<FiseFormato13AD>();
 			
-			
-			if( formulario.getAnioAlta() != 0 ||
-					formulario.getMesAlta() != 0 ||
-					!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
-					!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
-					formulario.getIdZonaBenef() != 0 ||
-					formulario.getSt1() != 0 ||
-					formulario.getSt2() != 0 ||
-					formulario.getSt3() != 0 ||
-					formulario.getSt4() != 0 ||
-					formulario.getSt5() != 0 ||
-					formulario.getSt6() != 0 ||
-					formulario.getStSer() != 0 ||
-					formulario.getStEsp() != 0 ||
-					!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
-					){
-				
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
-				agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
-				
+			if( listaDetalleCarga==null ){
+				if( formulario.getAnioAlta() != 0 ||
+						formulario.getMesAlta() != 0 ||
+						!formulario.getCodUbigeo().equals(FiseConstants.BLANCO) ||
+						!formulario.getLocalidad().equals(FiseConstants.BLANCO) ||
+						formulario.getIdZonaBenef() != 0 ||
+						formulario.getSt1() != 0 ||
+						formulario.getSt2() != 0 ||
+						formulario.getSt3() != 0 ||
+						formulario.getSt4() != 0 ||
+						formulario.getSt5() != 0 ||
+						formulario.getSt6() != 0 ||
+						formulario.getStSer() != 0 ||
+						formulario.getStEsp() != 0 ||
+						!formulario.getLocalidad().equals(FiseConstants.BLANCO) 
+						){
+					
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_1_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_2_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_3_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_4_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_5_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_6_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_SER_COD, formulario, lista);
+					agregarSectorTipico(FiseConstants.SECTOR_TIPICO_ESP_COD, formulario, lista);
+					
+				}
+			}else{
+				lista=convertirBeanADtoFormato13AD(listaDetalleCarga);
 			}
+			
+			
 				
 
 		
@@ -565,6 +575,59 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public List<FiseFormato13AD> convertirBeanADtoFormato13AD(List<Formato13ACBean> listaCarga){
+		List<FiseFormato13AD> listaFinal = new ArrayList<FiseFormato13AD>();
+		
+		Date hoy = FechaUtil.obtenerFechaActual();
+		
+		for (Formato13ACBean bean : listaCarga) {
+			FiseFormato13AD detalle = new FiseFormato13AD();
+			FiseFormato13ADPK pk = new FiseFormato13ADPK();
+			pk.setCodEmpresa(bean.getCodigoEmpresa());
+			pk.setAnoPresentacion(bean.getAnioPresent());
+			pk.setMesPresentacion(bean.getMesPresent());
+			pk.setEtapa(bean.getEtapa());
+			pk.setCodUbigeo(bean.getCodUbigeo());
+			pk.setCodSectorTipico(bean.getCodSectorTipico());
+			pk.setIdZonaBenef(bean.getIdZonaBenef());
+			detalle.setId(pk);
+			detalle.setAnoAlta(bean.getAnioAlta());
+			detalle.setMesAlta(bean.getMesAlta());
+
+			detalle.setAnoInicioVigencia(bean.getAnioInicioVigencia());
+			detalle.setAnoFinVigencia(bean.getAnioFinVigencia());
+			//
+			detalle.setDescripcionLocalidad(bean.getLocalidad());
+			detalle.setNombreSedeAtiende(bean.getSede());
+			if (FiseConstants.SECTOR_TIPICO_1_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt1());
+			} else if (FiseConstants.SECTOR_TIPICO_2_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt2());
+			} else if (FiseConstants.SECTOR_TIPICO_3_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt3());
+			} else if (FiseConstants.SECTOR_TIPICO_4_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt4());
+			} else if (FiseConstants.SECTOR_TIPICO_5_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt5());
+			} else if (FiseConstants.SECTOR_TIPICO_6_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getSt6());
+			} else if (FiseConstants.SECTOR_TIPICO_SER_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getStSer());
+			} else if (FiseConstants.SECTOR_TIPICO_ESP_COD.equals(bean.getCodSectorTipico().trim())) {
+				detalle.setNumeroBenefiPoteSectTipico(bean.getStEsp());
+			}
+			detalle.setUsuarioCreacion(bean.getUsuario());
+			detalle.setTerminalCreacion(bean.getTerminal());
+			detalle.setFechaCreacion(hoy);
+			detalle.setUsuarioActualizacion(bean.getUsuario());
+			detalle.setTerminalActualizacion(bean.getTerminal());
+			detalle.setFechaActualizacion(hoy);
+			listaFinal.add(detalle);
+		}
+		
+		return listaFinal;
 	}
 	
 }

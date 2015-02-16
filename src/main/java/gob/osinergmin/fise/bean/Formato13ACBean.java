@@ -41,6 +41,8 @@ public class Formato13ACBean implements Serializable {
 	private Long stSer= 0L;
 	private Long stEsp= 0L;
 	
+	private Long nroBenef=0L;
+	
 	
 	public String getCodigoEmpresa() {
 		return codigoEmpresa;
@@ -209,6 +211,12 @@ public class Formato13ACBean implements Serializable {
 	}
 	public void setStEsp(Long stEsp) {
 		this.stEsp = stEsp;
+	}
+	public Long getNroBenef() {
+		return nroBenef;
+	}
+	public void setNroBenef(Long nroBenef) {
+		this.nroBenef = nroBenef;
 	}
 	
 	

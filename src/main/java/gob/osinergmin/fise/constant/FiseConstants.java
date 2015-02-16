@@ -177,6 +177,8 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_VAL_14A = "VAL14A";
 	public final static String TIPO_FORMATO_VAL_14B = "VAL14B";
 	public final static String TIPO_FORMATO_VAL_14C = "VAL14C";
+	
+	public final static String TIPO_FORMATO_VARIACION = "VARIACION";
 
 	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
@@ -200,6 +202,8 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_VALIDACION_F14A = "ValidacionesF14A";
 	public final static String NOMBRE_EXCEL_VALIDACION_F14B = "ValidacionesF14B";
 	public final static String NOMBRE_EXCEL_VALIDACION_F14C = "ValidacionesF14C";
+	public final static String NOMBRE_EXCEL_VARIACION = "VariacionCostos";
+	
 	public final static String TIPO_FORMATO_CUMPLIMIENTO = "CUMPLIMIENTO";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS = "RESUMEN_COSTO";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS_COMP = "RESUMEN_COSTO_COMP";
@@ -219,6 +223,7 @@ public class FiseConstants {
 	public final static String NOMBRE_HOJA_FORMATO14B = "F14B";
 	public final static String NOMBRE_HOJA_FORMATO14C = "F14C";
 	public final static String NOMBRE_HOJA_VALIDACION = "Validacion";
+	public final static String NOMBRE_HOJA_VARIACION = "Variacion";
 
 	public final static String EXTENSIONARCHIVO_XSL = ".xls";
 	public final static String EXTENSIONARCHIVO_TXT = ".txt";
@@ -418,6 +423,32 @@ public class FiseConstants {
 	public final static String NOMBRE_DESPLAZ_PERSONAL_F12A = "TOTAL_DESPLAZAMIENTO_PERSONAL";
 	public final static String NOMBRE_ACTIVID_EXTRAORD_F12A = "TOTAL_ACTIVIDADES_EXTRAORD";
 
+	//FORMATO 12B
+	public final static String NOMBRE_NUMERO_VALES_IMPRESO_F12B = "NUMERO_VALES_IMPRESO";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_VALE_IMPRE_F12B = "COSTO_ESTANDAR_UNIT_VALE_IMPRE";
+	public final static String NOMBRE_COSTO_TOTAL_IMPRESION_VALE_F12B = "COSTO_TOTAL_IMPRESION_VALE";
+	public final static String NOMBRE_NUMERO_VALES_REPARTIDOS_DOMI_F12B = "NUMERO_VALES_REPARTIDOS_DOMI";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_VALE_REPAR_F12B = "COSTO_ESTANDAR_UNIT_VALE_REPAR";
+	public final static String NOMBRE_COSTO_TOTAL_REPARTO_VALES_DOMI_F12B = "COSTO_TOTAL_REPARTO_VALES_DOMI";
+	public final static String NOMBRE_NUMERO_VALES_ENTREGADO_DIS_EL_F12B = "NUMERO_VALES_ENTREGADO_DIS_EL";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_VAL_DIS_EL_F12B = "COSTO_ESTANDAR_UNIT_VAL_DIS_EL";
+	public final static String NOMBRE_COSTO_TOTAL_ENTREGA_VAL_DIS_EL_F12B = "COSTO_TOTAL_ENTREGA_VAL_DIS_EL";
+	public final static String NOMBRE_NUMERO_VALES_FISICOS_CANJEADOS_F12B = "NUMERO_VALES_FISICOS_CANJEADOS";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_VAL_FI_CAN_F12B = "COSTO_ESTANDAR_UNIT_VAL_FI_CAN";
+	public final static String NOMBRE_COSTO_TOTAL_CANJE_LIQ_VALE_FIS_F12B = "COSTO_TOTAL_CANJE_LIQ_VALE_FIS";
+	public final static String NOMBRE_NUMERO_VALES_DIGITAL_CANJEADOS_F12B = "NUMERO_VALES_DIGITAL_CANJEADOS";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_VAL_DG_CAN_F12B = "COSTO_ESTANDAR_UNIT_VAL_DG_CAN";
+	public final static String NOMBRE_COSTO_TOTAL_CANJE_LIQ_VALE_DIG_F12B = "COSTO_TOTAL_CANJE_LIQ_VALE_DIG";
+	public final static String NOMBRE_NUMERO_ATENCIONES_F12B = "NUMERO_ATENCIONES";
+	public final static String NOMBRE_COSTO_ESTANDAR_UNIT_ATENCION_F12B = "COSTO_ESTANDAR_UNIT_ATENCION";
+	public final static String NOMBRE_COSTO_TOTAL_ATENCION_CONS_RECL_F12B = "COSTO_TOTAL_ATENCION_CONS_RECL";
+	public final static String NOMBRE_TOTAL_GESTION_ADMINISTRATIVA_F12B = "TOTAL_GESTION_ADMINISTRATIVA";
+	public final static String NOMBRE_TOTAL_DESPLAZAMIENTO_PERSONAL_F12B = "TOTAL_DESPLAZAMIENTO_PERSONAL";
+	public final static String NOMBRE_TOTAL_ACTIVIDADES_EXTRAORD_F12B = "TOTAL_ACTIVIDADES_EXTRAORD";
+	public final static String NOMBRE_TOTAL_RECONOCER_F12B = "TOTAL_RECONOCER";
+
+	
+	
 	// FORMATO 12C
 	public static final String NOMBRE_ANO_EJECUCION_GASTO_F12C = "ANO_EJECUCION_GASTO";
 	public static final String NOMBRE_MES_EJECUCION_GASTO_F12C = "MES_EJECUCION_GASTO";
@@ -464,6 +495,21 @@ public class FiseConstants {
 	public static final String NOMBRE_TOTAL_GASTO_F12D = "TOTAL_GASTO";
 	public static final String NOMBRE_SUB_TOTAL_ETAPA_F12D = "SUB_TOTAL_ETAPA";
 	public static final String NOMBRE_TOTAL_GENERAL_F12D = "TOTAL_GENERAL";
+	
+	//FORMATO 13A
+	public static final String NOMBRE_ANO_ALTA_F13A = "ANO_ALTA";
+	public static final String NOMBRE_MES_ALTA_F13A = "MES_ALTA";
+	public static final String NOMBRE_ANO_INICIO_VIGENCIA_F13A = "ANO_INICIO_VIGENCIA";
+	public static final String NOMBRE_ANO_FIN_VIGENCIA_F13A = "ANO_FIN_VIGENCIA";
+	public static final String NOMBRE_ID_UBIGEO_F13A = "ID_UBIGEO";
+	public static final String NOMBRE_DESCRIPCION_LOCALIDAD_F13A = "DESCRIPCION_LOCALIDAD";
+	public static final String NOMBRE_COD_SECTOR_TIPICO_F13A = "COD_SECTOR_TIPICO";
+	public static final String NOMBRE_ID_ZONA_BENEF_F13A = "ID_ZONA_BENEF";
+	public static final String NOMBRE_NOMBRE_SEDE_ATIENDE_F13A = "NOMBRE_SEDE_ATIENDE";
+	public static final String NOMBRE_NUMERO_BENEFI_POTE_SECT_TIPICO_F13A = "NUMERO_BENEFI_POTE_SECT_TIPICO";
+	//public static final String NOMBRE_NUMERO_TOTAL_BENEF_POTE_LOCAL_F13A = "NUMERO_TOTAL_BENEF_POTE_LOCAL";
+	//public static final String NOMBRE_NUMERO_TOTAL_BENEF_POTENCIAL_F13A = "NUMERO_TOTAL_BENEF_POTENCIAL";
+
 
 	// Basicamente usados para el formato 14A, se reutilizan los campos que ya
 	// han sido mapeados en otros formatos
@@ -1281,6 +1327,61 @@ public class FiseConstants {
 	public final static String PROCESO_ENVIO_EMAIL_ERROR = "0";
 
 	// CODIGO DE ERRORES
+	//F12B
+	public static final String COD_ERROR_F12B_3672 = "3672";
+	public static final String COD_ERROR_F12B_3673 = "3673";
+	public static final String COD_ERROR_F12B_3674 = "3674";
+	public static final String COD_ERROR_F12B_3675 = "3675";
+	public static final String COD_ERROR_F12B_3676 = "3676";
+	public static final String COD_ERROR_F12B_3677 = "3677";
+	public static final String COD_ERROR_F12B_3678 = "3678";
+	public static final String COD_ERROR_F12B_3679 = "3679";
+	public static final String COD_ERROR_F12B_3680 = "3680";
+	public static final String COD_ERROR_F12B_3681 = "3681";
+	public static final String COD_ERROR_F12B_3682 = "3682";
+	public static final String COD_ERROR_F12B_3683 = "3683";
+	public static final String COD_ERROR_F12B_3684 = "3684";
+	public static final String COD_ERROR_F12B_3685 = "3685";
+	public static final String COD_ERROR_F12B_3686 = "3686";
+	public static final String COD_ERROR_F12B_3687 = "3687";
+	public static final String COD_ERROR_F12B_3688 = "3688";
+	public static final String COD_ERROR_F12B_3689 = "3689";
+	public static final String COD_ERROR_F12B_3690 = "3690";
+	public static final String COD_ERROR_F12B_3691 = "3691";
+	public static final String COD_ERROR_F12B_3692 = "3692";
+	public static final String COD_ERROR_F12B_3693 = "3693";
+	public static final String COD_ERROR_F12B_3694 = "3694";
+	public static final String COD_ERROR_F12B_3695 = "3695";
+	public static final String COD_ERROR_F12B_3696 = "3696";
+	public static final String COD_ERROR_F12B_3697 = "3697";
+	public static final String COD_ERROR_F12B_3698 = "3698";
+	public static final String COD_ERROR_F12B_3699 = "3699";
+	public static final String COD_ERROR_F12B_3700 = "3700";
+	public static final String COD_ERROR_F12B_3701 = "3701";
+	public static final String COD_ERROR_F12B_3702 = "3702";
+	public static final String COD_ERROR_F12B_3703 = "3703";
+	public static final String COD_ERROR_F12B_3704 = "3704";
+	public static final String COD_ERROR_F12B_3705 = "3705";
+	public static final String COD_ERROR_F12B_3706 = "3706";
+	public static final String COD_ERROR_F12B_3707 = "3707";
+	public static final String COD_ERROR_F12B_3708 = "3708";
+	public static final String COD_ERROR_F12B_3709 = "3709";
+	public static final String COD_ERROR_F12B_3710 = "3710";
+	public static final String COD_ERROR_F12B_3711 = "3711";
+	public static final String COD_ERROR_F12B_3712 = "3712";
+	public static final String COD_ERROR_F12B_3713 = "3713";
+	public static final String COD_ERROR_F12B_3714 = "3714";
+	public static final String COD_ERROR_F12B_3715 = "3715";
+	public static final String COD_ERROR_F12B_3716 = "3716";
+	public static final String COD_ERROR_F12B_3717 = "3717";
+	public static final String COD_ERROR_F12B_3718 = "3718";
+	public static final String COD_ERROR_F12B_3719 = "3719";
+	public static final String COD_ERROR_F12B_3720 = "3720";
+	
+	public static final String COD_ERROR_F12B_3721 = "3721";
+	public static final String COD_ERROR_F12B_3722 = "3722";
+
+	
 	// F12C
 	public static final String COD_ERROR_F12C_3350 = "3350";
 	public static final String COD_ERROR_F12C_3351 = "3351";
@@ -1542,7 +1643,54 @@ public class FiseConstants {
 	public static final String COD_ERROR_F12D_3632 = "3632";
 	
 	public static final String COD_ERROR_3633 = "3633";
+	
+	public static final String COD_ERROR_3666 = "3666";
+	public static final String COD_ERROR_3667 = "3667";
+	public static final String COD_ERROR_3668 = "3668";
+	public static final String COD_ERROR_3669 = "3669";
+	public static final String COD_ERROR_3670 = "3670";
+	public static final String COD_ERROR_3671 = "3671";
 
+
+	//F13A
+	public static final String COD_ERROR_F13A_3634 = "3634";
+	public static final String COD_ERROR_F13A_3635 = "3635";
+	public static final String COD_ERROR_F13A_3636 = "3636";
+	public static final String COD_ERROR_F13A_3637 = "3637";
+	public static final String COD_ERROR_F13A_3638 = "3638";
+	public static final String COD_ERROR_F13A_3639 = "3639";
+	public static final String COD_ERROR_F13A_3640 = "3640";
+	public static final String COD_ERROR_F13A_3641 = "3641";
+	public static final String COD_ERROR_F13A_3642 = "3642";
+	public static final String COD_ERROR_F13A_3643 = "3643";
+	public static final String COD_ERROR_F13A_3644 = "3644";
+	public static final String COD_ERROR_F13A_3645 = "3645";
+	public static final String COD_ERROR_F13A_3646 = "3646";
+	public static final String COD_ERROR_F13A_3647 = "3647";
+	public static final String COD_ERROR_F13A_3648 = "3648";
+	public static final String COD_ERROR_F13A_3649 = "3649";
+	public static final String COD_ERROR_F13A_3650 = "3650";
+	public static final String COD_ERROR_F13A_3651 = "3651";
+	public static final String COD_ERROR_F13A_3652 = "3652";
+	public static final String COD_ERROR_F13A_3653 = "3653";
+	public static final String COD_ERROR_F13A_3654 = "3654";
+	public static final String COD_ERROR_F13A_3655 = "3655";
+	public static final String COD_ERROR_F13A_3656 = "3656";
+	public static final String COD_ERROR_F13A_3657 = "3657";
+	public static final String COD_ERROR_F13A_3658 = "3658";
+	public static final String COD_ERROR_F13A_3659 = "3659";
+	public static final String COD_ERROR_F13A_3660 = "3660";
+	public static final String COD_ERROR_F13A_3661 = "3661";
+	public static final String COD_ERROR_F13A_3662 = "3662";
+	public static final String COD_ERROR_F13A_3663 = "3663";
+	public static final String COD_ERROR_F13A_3664 = "3664";
+	public static final String COD_ERROR_F13A_3665 = "3665";
+
+	public static final String COD_ERROR_F13A_3723 = "3723";
+	public static final String COD_ERROR_F13A_3724 = "3724";
+	public static final String COD_ERROR_F13A_3725 = "3725";
+	public static final String COD_ERROR_F13A_3726 = "3726";
+	
 	// F14A
 	public final static String COD_ERROR_F14A_1620 = "1620";
 	public final static String COD_ERROR_F14A_1630 = "1630";

@@ -31,7 +31,8 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 		if(FormatoUtil.isBlank(flag)){ 
 			System.out.println("Entro a estado grupo de informacion estado =1"); 
 			q = q.concat(" AND g.estado = 1 ");	
-		}		
+		}
+		q = q.concat(" ORDER BY g.anoPresentacion,g.mesPresentacion DESC ");	
 		Query query = em.createQuery(q); 
 		query.setParameter("tipo", tipo); 
 		List<FiseGrupoInformacion> lista= query.getResultList();
@@ -96,7 +97,20 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 		 }	
 	}
 	
-	
-	
+	@Override
+	public boolean verificarGrupoInfBienal(String tipo,Integer estado) throws SQLException{		
+		String q = "SELECT COUNT(g.idGrupoInformacion) FROM " + FiseGrupoInformacion.class.getName()
+				+ " g WHERE g.tipo = :tipo AND g.estado = :estado";		
+		Query query = em.createQuery(q); 
+		query.setParameter("tipo", tipo);
+		query.setParameter("estado", estado);
+		long countGrupoInf = (Long)query.getSingleResult();
+		System.out.println("COUNT grupo de informacion bienal :  "+countGrupoInf); 
+		if(countGrupoInf !=0){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 }

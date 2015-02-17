@@ -32,7 +32,7 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 			System.out.println("Entro a estado grupo de informacion estado =1"); 
 			q = q.concat(" AND g.estado = 1 ");	
 		}
-		q = q.concat(" ORDER BY g.anoPresentacion,g.mesPresentacion DESC ");	
+		q = q.concat(" ORDER BY g.anoPresentacion DESC, g.mesPresentacion DESC ");	
 		Query query = em.createQuery(q); 
 		query.setParameter("tipo", tipo); 
 		List<FiseGrupoInformacion> lista= query.getResultList();

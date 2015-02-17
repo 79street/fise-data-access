@@ -181,6 +181,7 @@ public class FiseConstants {
 	public final static String TIPO_FORMATO_VAL_14C = "VAL14C";
 	
 	public final static String TIPO_FORMATO_VARIACION = "VARIACION";
+	public final static String TIPO_FORMATO_HISTORICO = "HISTORICO";
 
 	public final static String NOMBRE_EXCEL_FORMATO12A = "Formatos12A";
 	public final static String NOMBRE_EXCEL_FORMATO12B = "Formatos12B";
@@ -205,6 +206,7 @@ public class FiseConstants {
 	public final static String NOMBRE_EXCEL_VALIDACION_F14B = "ValidacionesF14B";
 	public final static String NOMBRE_EXCEL_VALIDACION_F14C = "ValidacionesF14C";
 	public final static String NOMBRE_EXCEL_VARIACION = "VariacionCostos";
+	public final static String NOMBRE_EXCEL_HISTORICO = "HistoricoCostos";
 	
 	public final static String TIPO_FORMATO_CUMPLIMIENTO = "CUMPLIMIENTO";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS = "RESUMEN_COSTO";
@@ -226,6 +228,7 @@ public class FiseConstants {
 	public final static String NOMBRE_HOJA_FORMATO14C = "F14C";
 	public final static String NOMBRE_HOJA_VALIDACION = "Validacion";
 	public final static String NOMBRE_HOJA_VARIACION = "Variacion";
+	public final static String NOMBRE_HOJA_HISTORICO = "Historico";
 
 	public final static String EXTENSIONARCHIVO_XSL = ".xls";
 	public final static String EXTENSIONARCHIVO_TXT = ".txt";

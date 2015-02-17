@@ -11,6 +11,7 @@ public class FiseConstants {
 	public final static String LISTA_FORMATO_EXCEL_EXPORT = "LISTAFORMATOEXCEL";
 	public final static String ETAPAEJECUCION_IMPLEMENTACION_EXCEL_EXPORT = "0";
 	public final static String ETAPAEJECUCION_MENSUAL_EXCEL_EXPORT = "1";
+	
 
 	public final static String BLANCO = "";
 	public final static String SALTO_LINEA = "\n";
@@ -97,6 +98,7 @@ public class FiseConstants {
 
 	public final static String FORMATO_EXPORT_PDF = "0";
 	public final static String FORMATO_EXPORT_XLS = "1";
+	public final static String FORMATO_EXPORT_XLS_SIN_LISTA = "5";
 	public final static String FORMATO_EXPORT_ACTAENVIO = "2";
 	public final static String FORMATO_EXPORT_FORMATO_COMPLETO = "3";
 

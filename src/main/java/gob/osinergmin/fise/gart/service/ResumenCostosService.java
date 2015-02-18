@@ -1,8 +1,8 @@
 package gob.osinergmin.fise.gart.service;
 
+import gob.osinergmin.fise.bean.ResumenCostoActividadBean;
 import gob.osinergmin.fise.bean.ResumenCostoBean;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface ResumenCostosService {
@@ -17,9 +17,9 @@ public interface ResumenCostosService {
 			Long idGrupoInf) throws Exception;
 	
 	List<ResumenCostoBean> buscarResumenCostoCompF14AB(String codEmpresa,
-			Long idGrupoInf,Long idZona, String formato) throws Exception;
-	
-	HashMap<String, Object> buscarResumenCostoActividadF14AB(String codEmpresa,
+			Long idGrupoInf,Long idZona, String formato) throws Exception;	
+		
+	List<ResumenCostoActividadBean> buscarResumenCostoActividadF14AB(String codEmpresa,
 			Long idGrupoInf) throws Exception;
 
 }

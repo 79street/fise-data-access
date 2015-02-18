@@ -97,6 +97,7 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 		 }	
 	}
 	
+	/**Verificar si existe un grupo de informacion bienal activo**/
 	@Override
 	public boolean verificarGrupoInfBienal(String tipo,Integer estado) throws SQLException{		
 		String q = "SELECT COUNT(g.idGrupoInformacion) FROM " + FiseGrupoInformacion.class.getName()
@@ -106,6 +107,25 @@ public class FiseGrupoInformacionDaoImpl extends GenericDaoImpl implements FiseG
 		query.setParameter("estado", estado);
 		long countGrupoInf = (Long)query.getSingleResult();
 		System.out.println("COUNT grupo de informacion bienal :  "+countGrupoInf); 
+		if(countGrupoInf !=0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	/**Verificar si existe un grupo de informacion mensual activo con el mismo anio, mes y estado activo**/
+	@Override
+	public boolean verificarGrupoInfMensual(String tipo,Long anio,Long mes,Integer estado) throws SQLException{		
+		String q = "SELECT COUNT(g.idGrupoInformacion) FROM " + FiseGrupoInformacion.class.getName()
+				+ " g WHERE g.tipo = :tipo AND g.anoPresentacion = :anio AND g.mesPresentacion = :mes AND g.estado = :estado";		
+		Query query = em.createQuery(q); 
+		query.setParameter("tipo", tipo);
+		query.setParameter("anio", anio);
+		query.setParameter("mes", mes);
+		query.setParameter("estado", estado);
+		long countGrupoInf = (Long)query.getSingleResult();
+		System.out.println("COUNT grupo de informacion mensual :  "+countGrupoInf); 
 		if(countGrupoInf !=0){
 			return false;
 		}else{

@@ -25,6 +25,8 @@ public interface FiseGrupoInformacionDao {
 	
 	boolean verificarGrupoInfBienal(String tipo,Integer estado) throws SQLException;
 	
+	boolean verificarGrupoInfMensual(String tipo,Long anio,Long mes,Integer estado) throws SQLException;
+	
 	
 
 }

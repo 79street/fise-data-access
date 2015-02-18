@@ -49,6 +49,11 @@ public class FiseGrupoInformacionGartServiceImpl implements
 					FiseConstants.ESTADO_ACTIVO_GRUPO_INF==Integer.valueOf(bean.getEstado())){ 
 				verificar = fiseGrupoInformacionDao.verificarGrupoInfBienal(bean.getTipo(),
 						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);		 		
+			}else if(FiseConstants.MENSUAL.equals(bean.getTipo()) && 
+					FiseConstants.ESTADO_ACTIVO_GRUPO_INF==Integer.valueOf(bean.getEstado())){
+				verificar = fiseGrupoInformacionDao.verificarGrupoInfMensual(bean.getTipo(), 
+						Long.valueOf(bean.getAnioPres()), Long.valueOf(bean.getMesPres()), 
+						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);
 			}
 			if(verificar){
 				grupo.setDescripcion(bean.getDescripcion());
@@ -90,6 +95,12 @@ public class FiseGrupoInformacionGartServiceImpl implements
 					FiseConstants.ESTADO_INACTIVO_GRUPO_INF == grupo.getEstado()){ 
 				verificar = fiseGrupoInformacionDao.verificarGrupoInfBienal(bean.getTipo(),
 						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);		 		
+			}else if(FiseConstants.MENSUAL.equals(bean.getTipo()) && 
+					FiseConstants.ESTADO_ACTIVO_GRUPO_INF==Integer.valueOf(bean.getEstado()) &&
+					FiseConstants.ESTADO_INACTIVO_GRUPO_INF == grupo.getEstado()){
+				verificar = fiseGrupoInformacionDao.verificarGrupoInfMensual(bean.getTipo(), 
+						Long.valueOf(bean.getAnioPres()), Long.valueOf(bean.getMesPres()), 
+						FiseConstants.ESTADO_ACTIVO_GRUPO_INF);
 			}
 			if(verificar && grupo!=null){						
 				grupo.setDescripcion(bean.getDescripcion());

@@ -74,7 +74,8 @@ public class FiseFormato12BC implements Serializable {
 	@OneToMany(mappedBy="fiseFormato12BC")
 	private List<FiseFormato12BD> listaDetalle12BDs;
 
-	
+	@Transient
+	private String descEstado;
 	
 	public FiseFormato12BC() {
 	}
@@ -212,6 +213,14 @@ public class FiseFormato12BC implements Serializable {
 
 	public void setListaDetalle12BDs(List<FiseFormato12BD> listaDetalle12BDs) {
 		this.listaDetalle12BDs = listaDetalle12BDs;
+	}
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		this.descEstado = descEstado;
 	}	
 	
 	

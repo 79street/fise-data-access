@@ -28,6 +28,11 @@ public class HistoricoCostosBean implements Serializable {
 	//datos de auditoria
 	private String usuario;
 	private String terminal;
+	
+	private String titulo1;
+	private String titulo2;
+	private String formato;
+	
 	public List<AdmEmpresa> getListaEmpresas() {
 		return listaEmpresas;
 	}
@@ -87,6 +92,24 @@ public class HistoricoCostosBean implements Serializable {
 	}
 	public void setTerminal(String terminal) {
 		this.terminal = terminal;
+	}
+	public String getTitulo1() {
+		return titulo1;
+	}
+	public void setTitulo1(String titulo1) {
+		this.titulo1 = titulo1;
+	}
+	public String getTitulo2() {
+		return titulo2;
+	}
+	public void setTitulo2(String titulo2) {
+		this.titulo2 = titulo2;
+	}
+	public String getFormato() {
+		return formato;
+	}
+	public void setFormato(String formato) {
+		this.formato = formato;
 	}
 	
 	

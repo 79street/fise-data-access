@@ -35,6 +35,10 @@ public class VariacionCostosBean implements Serializable {
 	private String usuario;
 	private String terminal;
 	
+	private String titulo1;
+	private String titulo2;
+	private String titulo3;
+	
 	public List<FiseGrupoInformacion> getListaGrupoInfo() {
 		return listaGrupoInfo;
 	}
@@ -124,6 +128,24 @@ public class VariacionCostosBean implements Serializable {
 	}
 	public void setEtapaBusq(String etapaBusq) {
 		this.etapaBusq = etapaBusq;
+	}
+	public String getTitulo1() {
+		return titulo1;
+	}
+	public void setTitulo1(String titulo1) {
+		this.titulo1 = titulo1;
+	}
+	public String getTitulo2() {
+		return titulo2;
+	}
+	public void setTitulo2(String titulo2) {
+		this.titulo2 = titulo2;
+	}
+	public String getTitulo3() {
+		return titulo3;
+	}
+	public void setTitulo3(String titulo3) {
+		this.titulo3 = titulo3;
 	}
 	
 	

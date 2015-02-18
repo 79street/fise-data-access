@@ -22,6 +22,7 @@ public class ResumenCostoBean {
 	
 	
 	//varibales para los reportes
+	private String desGrupoInf;//descripcion del grupo de informacion para el reporte
 	private String desEmpresa;	
 	private String periodo;
 	
@@ -605,6 +606,14 @@ public class ResumenCostoBean {
 	public void setDesMotivo(String desMotivo) {
 		this.desMotivo = desMotivo;
 	}
+	public String getDesGrupoInf() {
+		return desGrupoInf;
+	}
+	public void setDesGrupoInf(String desGrupoInf) {
+		this.desGrupoInf = desGrupoInf;
+	}
+	
+	
 	
 	
 }

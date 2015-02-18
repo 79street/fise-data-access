@@ -2,6 +2,7 @@ package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.ResumenCostoActividadBean;
 import gob.osinergmin.fise.bean.ResumenCostoBean;
+import gob.osinergmin.fise.domain.AdmEmpresa;
 
 import java.util.List;
 
@@ -20,6 +21,6 @@ public interface ResumenCostosService {
 			Long idGrupoInf,Long idZona, String formato) throws Exception;	
 		
 	List<ResumenCostoActividadBean> buscarResumenCostoActividadF14AB(String codEmpresa,
-			Long idGrupoInf) throws Exception;
+			Long idGrupoInf,List<AdmEmpresa> listaEmpresas) throws Exception;
 
 }

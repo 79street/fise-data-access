@@ -23,6 +23,7 @@ public class ResumenCostoActividadBean {
 	private String desEmpresa;	
 	private String periodo;
 	private String tipoFormato;
+	private String desGrupoInf;//descripcion del grupo de informacion para el reporte
 	
 	//F14A
 	private String itemA;
@@ -176,5 +177,11 @@ public class ResumenCostoActividadBean {
 	public void setTipoFormato(String tipoFormato) {
 		this.tipoFormato = tipoFormato;
 	}
+	public String getDesGrupoInf() {
+		return desGrupoInf;
+	}
+	public void setDesGrupoInf(String desGrupoInf) {
+		this.desGrupoInf = desGrupoInf;
+	}	
 	
 }

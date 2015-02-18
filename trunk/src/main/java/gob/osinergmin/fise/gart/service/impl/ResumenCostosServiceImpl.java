@@ -4,6 +4,7 @@ import gob.osinergmin.fise.bean.ResumenCostoActividadBean;
 import gob.osinergmin.fise.bean.ResumenCostoBean;
 import gob.osinergmin.fise.constant.FiseConstants;
 import gob.osinergmin.fise.dao.ResumenCostosDao;
+import gob.osinergmin.fise.domain.AdmEmpresa;
 import gob.osinergmin.fise.gart.service.ResumenCostosService;
 import gob.osinergmin.fise.util.FormatoUtil;
 
@@ -243,130 +244,253 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 	@Override
 	@Transactional
 	public List<ResumenCostoActividadBean> buscarResumenCostoActividadF14AB(String codEmpresa,
-			Long idGrupoInf) throws Exception{
+			Long idGrupoInf,List<AdmEmpresa> listaEmp) throws Exception{
 		List<ResumenCostoActividadBean> lista = new ArrayList<ResumenCostoActividadBean>();
 		ResumenCostoActividadBean r =null;
 		List<Object[]> listaF14A =null;
 		List<Object[]> listaF14B =null;
 		try {
-			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
-			listaF14A = resumenCostosDao.listarResumenCostosActividadF14A(codEmpreCompleta, idGrupoInf);
-			for(int i = 0; i < listaF14A.size(); i++){	
-				String empresaDes = String.valueOf(((String)listaF14A.get(i)[0] == null) ? "--" :listaF14A.get(i)[0]);
-			    String periodo = String.valueOf(((String)listaF14A.get(i)[1] == null) ? "--" :listaF14A.get(i)[1]);
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("1"); 
-				r.setTipoFormato("F14A"); 
-				r.setDesCostoA("Costo de Empadronamiento"); 
-				r.setDesCostoUnitA("Costo Unitario por Empadronamiento");				
-				r.setCostUniAR(((BigDecimal)listaF14A.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[2]);
-				r.setCostUniAP(((BigDecimal)listaF14A.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[3]);		  
-			    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[4]);		   
-			    lista.add(r);
-			    r = new ResumenCostoActividadBean();				
-			    r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("2"); 
-				r.setTipoFormato("F14A"); 
-				r.setDesCostoA("Costo de Gestión de red de Agentes GLP"); 
-				r.setDesCostoUnitA("Costo Unitario por Agente GLP");	
-			    r.setCostUniAR(((BigDecimal)listaF14A.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[5]);			   
-			    r.setCostUniAP(((BigDecimal)listaF14A.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[6]);		   
-			    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[7]);
-				lista.add(r);
-			 }//fin de la lista del formato 14A
-			
-			listaF14B = resumenCostosDao.listarResumenCostosActividadF14B(codEmpreCompleta, idGrupoInf);
-			for(int j = 0; j < listaF14B.size(); j++){	
-				String empresaDes = String.valueOf(((String)listaF14B.get(j)[0] == null) ? "--" :listaF14B.get(j)[0]);
-				String periodo = String.valueOf(((String)listaF14B.get(j)[1] == null) ? "--" :listaF14B.get(j)[1]);
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);			
+			if("TODOS".equals(codEmpresa) && listaEmp !=null){				
+				for(AdmEmpresa e: listaEmp){
+					String codEmpreComTodos = FormatoUtil.rellenaDerecha(e.getCodEmpresa(), ' ', 4);	
+					listaF14A = resumenCostosDao.listarResumenCostosActividadF14A(codEmpreComTodos, idGrupoInf);
+					for(int i = 0; i < listaF14A.size(); i++){	
+						String empresaDes = String.valueOf(((String)listaF14A.get(i)[0] == null) ? "--" :listaF14A.get(i)[0]);
+					    String periodo = String.valueOf(((String)listaF14A.get(i)[1] == null) ? "--" :listaF14A.get(i)[1]);
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("1"); 
+						r.setTipoFormato("F14A"); 
+						r.setDesCostoA("Costo de Empadronamiento"); 
+						r.setDesCostoUnitA("Costo Unitario por Empadronamiento");				
+						r.setCostUniAR(((BigDecimal)listaF14A.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[2]);
+						r.setCostUniAP(((BigDecimal)listaF14A.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[3]);		  
+					    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[4]);		   
+					    lista.add(r);
+					    r = new ResumenCostoActividadBean();				
+					    r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("2"); 
+						r.setTipoFormato("F14A"); 
+						r.setDesCostoA("Costo de Gestión de red de Agentes GLP"); 
+						r.setDesCostoUnitA("Costo Unitario por Agente GLP");	
+					    r.setCostUniAR(((BigDecimal)listaF14A.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[5]);			   
+					    r.setCostUniAP(((BigDecimal)listaF14A.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[6]);		   
+					    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[7]);
+						lista.add(r);
+					 }//fin de la lista del formato 14A
+					
+					listaF14B = resumenCostosDao.listarResumenCostosActividadF14B(codEmpreComTodos, idGrupoInf);
+					for(int j = 0; j < listaF14B.size(); j++){	
+						String empresaDes = String.valueOf(((String)listaF14B.get(j)[0] == null) ? "--" :listaF14B.get(j)[0]);
+						String periodo = String.valueOf(((String)listaF14B.get(j)[1] == null) ? "--" :listaF14B.get(j)[1]);
 
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("1"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Impresión de Vales"); 
-				r.setDesCostoUnitA("Costo Unitario por Impresión de Vales");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[2]);			   
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[3]);		   
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[4]);
-				lista.add(r);
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("1"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Impresión de Vales"); 
+						r.setDesCostoUnitA("Costo Unitario por Impresión de Vales");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[2]);			   
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[3]);		   
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[4]);
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("2");
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Reparto de Vales a Domicilio"); 
+						r.setDesCostoUnitA("Costo Unitario por Reparto de Vales a Domicilio");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[5]);
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[6]);		  
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[7]);		   
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("3"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Entrega de Vales en la Distribuidora Eléctrica"); 
+						r.setDesCostoUnitA("Costo Unitario por Entrega de Vales en la Distribuidora Eléctrica");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[8]);    
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[9]);		    
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[10]);
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("4"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Canje y Liquidación de Vales Físicos"); 
+						r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Físicos");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[11]);			   
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[12]);		   
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[13]);		    
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("5"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Canje y Liquidación de Vales Digitales"); 
+						r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Digitales mediante Banca Celular");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[14]);	
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[15]);
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[16]);
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("6"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Atención de Solicitudes, Consultas y/o Reclamos"); 
+						r.setDesCostoUnitA("Costo Unitario por Atención");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[17]);		   
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[18]);    
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[19]);		    
+						lista.add(r);
+						
+						r = new ResumenCostoActividadBean();					
+						r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+						r.setPeriodo(periodo);
+						r.setItemA("7"); 
+						r.setTipoFormato("F14B"); 
+						r.setDesCostoA("Gestión Administrativa"); 
+						r.setDesCostoUnitA("Costo Total por Gestión Administrativa");
+						r.setCostUniAR(((BigDecimal)listaF14B.get(j)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[20]);	   
+						r.setCostUniAP(((BigDecimal)listaF14B.get(j)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[21]);			   
+						r.setCostUniAL(((BigDecimal)listaF14B.get(j)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[22]);
+						lista.add(r);
+					}			
+				}			
+			}else{
+				listaF14A = resumenCostosDao.listarResumenCostosActividadF14A(codEmpreCompleta, idGrupoInf);
+				for(int i = 0; i < listaF14A.size(); i++){	
+					String empresaDes = String.valueOf(((String)listaF14A.get(i)[0] == null) ? "--" :listaF14A.get(i)[0]);
+				    String periodo = String.valueOf(((String)listaF14A.get(i)[1] == null) ? "--" :listaF14A.get(i)[1]);
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("1"); 
+					r.setTipoFormato("F14A"); 
+					r.setDesCostoA("Costo de Empadronamiento"); 
+					r.setDesCostoUnitA("Costo Unitario por Empadronamiento");				
+					r.setCostUniAR(((BigDecimal)listaF14A.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[2]);
+					r.setCostUniAP(((BigDecimal)listaF14A.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[3]);		  
+				    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[4]);		   
+				    lista.add(r);
+				    r = new ResumenCostoActividadBean();				
+				    r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("2"); 
+					r.setTipoFormato("F14A"); 
+					r.setDesCostoA("Costo de Gestión de red de Agentes GLP"); 
+					r.setDesCostoUnitA("Costo Unitario por Agente GLP");	
+				    r.setCostUniAR(((BigDecimal)listaF14A.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[5]);			   
+				    r.setCostUniAP(((BigDecimal)listaF14A.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[6]);		   
+				    r.setCostUniAL(((BigDecimal)listaF14A.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14A.get(i)[7]);
+					lista.add(r);
+				 }//fin de la lista del formato 14A
 				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("2");
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Reparto de Vales a Domicilio"); 
-				r.setDesCostoUnitA("Costo Unitario por Reparto de Vales a Domicilio");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[5]);
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[6]);		  
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[7]);		   
-				lista.add(r);
-				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("3"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Entrega de Vales en la Distribuidora Eléctrica"); 
-				r.setDesCostoUnitA("Costo Unitario por Entrega de Vales en la Distribuidora Eléctrica");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[8]);    
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[9]);		    
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[10]);
-				lista.add(r);
-				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("4"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Canje y Liquidación de Vales Físicos"); 
-				r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Físicos");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[11]);			   
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[12]);		   
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[13]);		    
-				lista.add(r);
-				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("5"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Canje y Liquidación de Vales Digitales"); 
-				r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Digitales mediante Banca Celular");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[14]);	
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[15]);
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[16]);
-				lista.add(r);
-				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("6"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Atención de Solicitudes, Consultas y/o Reclamos"); 
-				r.setDesCostoUnitA("Costo Unitario por Atención");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[17]);		   
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[18]);    
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[19]);		    
-				lista.add(r);
-				
-				r = new ResumenCostoActividadBean();					
-				r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
-				r.setPeriodo(periodo);
-				r.setItemA("7"); 
-				r.setTipoFormato("F14B"); 
-				r.setDesCostoA("Gestión Administrativa"); 
-				r.setDesCostoUnitA("Costo Total por Gestión Administrativa");
-				r.setCostUniAR(((BigDecimal)listaF14B.get(j)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[20]);	   
-				r.setCostUniAP(((BigDecimal)listaF14B.get(j)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[21]);			   
-				r.setCostUniAL(((BigDecimal)listaF14B.get(j)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[22]);
-				lista.add(r);
-			}				
+				listaF14B = resumenCostosDao.listarResumenCostosActividadF14B(codEmpreCompleta, idGrupoInf);
+				for(int j = 0; j < listaF14B.size(); j++){	
+					String empresaDes = String.valueOf(((String)listaF14B.get(j)[0] == null) ? "--" :listaF14B.get(j)[0]);
+					String periodo = String.valueOf(((String)listaF14B.get(j)[1] == null) ? "--" :listaF14B.get(j)[1]);
+
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("1"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Impresión de Vales"); 
+					r.setDesCostoUnitA("Costo Unitario por Impresión de Vales");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[2]);			   
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[3]);		   
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[4]);
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("2");
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Reparto de Vales a Domicilio"); 
+					r.setDesCostoUnitA("Costo Unitario por Reparto de Vales a Domicilio");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[5]);
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[6]);		  
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[7]);		   
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("3"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Entrega de Vales en la Distribuidora Eléctrica"); 
+					r.setDesCostoUnitA("Costo Unitario por Entrega de Vales en la Distribuidora Eléctrica");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[8]);    
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[9]);		    
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[10]);
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("4"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Canje y Liquidación de Vales Físicos"); 
+					r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Físicos");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[11]);			   
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[12]);		   
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[13]);		    
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("5"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Canje y Liquidación de Vales Digitales"); 
+					r.setDesCostoUnitA("Costo Unitario por Canje y Liquidación de Vales Digitales mediante Banca Celular");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[14]);	
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[15]);
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[16]);
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("6"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Atención de Solicitudes, Consultas y/o Reclamos"); 
+					r.setDesCostoUnitA("Costo Unitario por Atención");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[17]);		   
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[18]);    
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[19]);		    
+					lista.add(r);
+					
+					r = new ResumenCostoActividadBean();					
+					r.setDesEmpresa(FormatoUtil.cambiaTextoAMinusculas(empresaDes, 0));
+					r.setPeriodo(periodo);
+					r.setItemA("7"); 
+					r.setTipoFormato("F14B"); 
+					r.setDesCostoA("Gestión Administrativa"); 
+					r.setDesCostoUnitA("Costo Total por Gestión Administrativa");
+					r.setCostUniAR(((BigDecimal)listaF14B.get(j)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[20]);	   
+					r.setCostUniAP(((BigDecimal)listaF14B.get(j)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[21]);			   
+					r.setCostUniAL(((BigDecimal)listaF14B.get(j)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(j)[22]);
+					lista.add(r);
+				}			
+			}					
 		} catch (Exception e) { 
 			e.printStackTrace();
 			logger.info("Error al listar resumen de costos por actividad de F14A y F14B:  "+e); 

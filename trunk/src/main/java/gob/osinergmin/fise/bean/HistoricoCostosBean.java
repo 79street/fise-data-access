@@ -31,6 +31,7 @@ public class HistoricoCostosBean implements Serializable {
 	
 	private String titulo1;
 	private String titulo2;
+	private String titulo3;
 	private String formato;
 	
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -110,6 +111,12 @@ public class HistoricoCostosBean implements Serializable {
 	}
 	public void setFormato(String formato) {
 		this.formato = formato;
+	}
+	public String getTitulo3() {
+		return titulo3;
+	}
+	public void setTitulo3(String titulo3) {
+		this.titulo3 = titulo3;
 	}
 	
 	

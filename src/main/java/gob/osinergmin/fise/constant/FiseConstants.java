@@ -37,6 +37,13 @@ public class FiseConstants {
 	public final static String ETAPA_RECONOCIDO= "RECONOCIDO";
 	public final static String ETAPA_ESTABLECIDO= "ESTABLECIDO";
 	public final static String ETAPA_HISTORICO= "HISTORICO";
+	
+	public final static String ETAPA_SOLICITUD_DESC= "SOLICITUD";
+	public final static String ETAPA_LEVOBS_DESC= "LEVANTAMIENTO OBSERVACIONES";
+	public final static String ETAPA_RECONSIDERACION_DESC= "RECONSIDERACION";
+	public final static String ETAPA_RECONOCIDO_DESC= "RECONOCIDO";
+	public final static String ETAPA_ESTABLECIDO_DESC= "ESTABLECIDO";
+	public final static String ETAPA_HISTORICO_DESC= "HISTORICO";
 
 	public final static String MSG_OBSERVACION_REPORTE_VACIO = "Ninguno";
 	public final static String MSG_OBSERVACION_REPORTE_LLENO = "Observaciones de validación. Ver reporte adjunto";

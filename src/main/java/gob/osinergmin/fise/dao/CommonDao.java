@@ -49,7 +49,13 @@ public interface CommonDao {
 	
 	boolean esAdministradorFise(String userName);
 	
-	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal, String etapa);
+	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, 
+			String formato, String conceptoFinal, String etapa);
+	
 	List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato);
+	
+	String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig) throws SQLException;
 			
 }

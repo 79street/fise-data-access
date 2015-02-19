@@ -1156,4 +1156,17 @@ public class CommonGartServiceImpl implements CommonGartService {
 		return commonDao.obtenerHistoricoCostosByCodempresaFormato(codEmpresa, formato);
 	}
 	
+	
+
+	/****Metodo para verificar si realizamos la carga de información de un formato 
+	 * para eso es necesario obtenerla ultima etapa y que esta etapa diferente a RECONOCIDO o ESTABLECIDO******/
+	@Override
+	public String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig) throws Exception{
+		return commonDao.obtenerUltimaEtapaFormato(formato, codEmpresa, anioPres, 
+				mesPres, anioEjec, mesEjec, anioIniVig, anioFinVig);
+	}
+	
+	
 }

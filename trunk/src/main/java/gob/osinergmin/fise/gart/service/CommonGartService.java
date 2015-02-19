@@ -63,7 +63,14 @@ public interface CommonGartService {
 	
 	boolean esAdministradorFise(String userName) throws Exception;
 	
-	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, String conceptoFinal, String etapa) throws Exception;
-	List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato) throws Exception;
+	List<VariacionCostosBean> obtenerVariacionCostosByGrupoinfoFormatoConceptofinal(Long idGrupoInfo, String formato, 
+			String conceptoFinal, String etapa) throws Exception;
+	
+	List<HistoricoCostosBean> obtenerHistoricoCostosByCodempresaFormato(String codEmpresa, String formato) 
+			throws Exception;
+	
+	String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig) throws Exception;
 
 }

@@ -794,6 +794,35 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		 }
 		return listaCostos;
 
+	}	
+	
+	/****Metodo para verificar si realizamos la carga de información de un formato 
+	 * para eso es necesario obtenerla ultima etapa y que esta etapa diferente a RECONOCIDO o ESTABLECIDO******/
+	@Override
+	public String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
+			long anioPres, long mesPres, long anioEjec,
+			long mesEjec,long anioIniVig,long anioFinVig) throws SQLException{
+		String etapa="";
+		try {			
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE_GEN_PKG.FISE_GET_ULT_ETAPA_LIQUID_FUN(?,?,?,?,?,?,?,?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1, formato);
+			query.setParameter(2, codEmpresa);
+			query.setParameter(3, anioPres);
+			query.setParameter(4, mesPres);
+			query.setParameter(5, anioEjec);
+			query.setParameter(6, mesEjec);
+			query.setParameter(7, anioIniVig);
+			query.setParameter(8, anioFinVig);
+			etapa = (String)query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		}
+		return etapa;
 	}
+	
 	
 }

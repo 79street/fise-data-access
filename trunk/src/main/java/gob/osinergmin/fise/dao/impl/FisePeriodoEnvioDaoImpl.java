@@ -32,6 +32,17 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			//sql.append(" DECODE(MES_PRESENTACION,1,'Ene',2,'Feb',3,'Mar',4,'Abr',5,'May',6,'Jun',7,'Jul',8,'Ago',9,'Set',10,'Oct',11,'Nov',12,'Dic')");
 			sql.append(" SUBSTR(FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(MES_PRESENTACION),1,3)");
 			sql.append(" || '-' || ANO_PRESENTACION || ' / ' || ETAPA DESCRIPCION, ");
+			
+			/*sql.append(" || '-' || ANO_PRESENTACION || ' / ' || (CASE ETAPA "
+					+ "WHEN 'SOLICITUD' THEN 'SOLICITUD' "
+					+ "WHEN 'LEV.OBS' THEN 'LEVANTAMIENTO OBSERVACIONES' "
+					+ "WHEN 'RECONSIDERACION' THEN 'RECONSIDERACION' "
+					+ "WHEN 'HISTORICO' THEN 'HISTORICO' "
+					+ "WHEN 'RECONOCIDO' THEN 'RECONOCIDO' "
+					+ "WHEN 'ESTABLECIDO' THEN 'ESTABLECIDO' "
+					+ "ELSE '' "
+					+ "END) DESCRIPCION, ");*/
+
 			sql.append(" FLAG_MOSTRAR_ANO_MES_EJEC FLAG_PERIODO_EJEC, ");
 			sql.append(" ANO_INICIO_VIGENCIA ANO_INICIO_VIGENCIA, ");
 			sql.append(" ANO_FIN_VIGENCIA ANO_FIN_VIGENCIA, ");

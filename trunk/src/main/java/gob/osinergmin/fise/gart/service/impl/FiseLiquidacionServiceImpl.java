@@ -385,5 +385,22 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		return fiseActividadesDao.listarDescripcionActividade(formato); 
 	}
 	
+	@Override
+	@Transactional
+	public String revertirLiquidacion(Long correlativo, String usuario,String terminal) throws Exception{
+		
+		String valor ="1";
+		int valorRevertir;
+		try {			
+			valorRevertir = liquidacionDao.revertirLiquidacionFormato(correlativo,usuario, terminal);			
+			if(valorRevertir!=0){
+				valor ="0";
+			}
+		} catch (Exception e) {
+			logger.info("Error al revertir  liquidacion: "+e); 
+			valor = "0";
+		}
+		return valor;
+	}
 
 }

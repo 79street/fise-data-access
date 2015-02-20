@@ -40,5 +40,7 @@ public interface FiseLiquidacionService {
 	
 	List<FiseDescripcionActividade> listarDescripcionActividades(String formato) 
 			throws Exception;
+	
+	String revertirLiquidacion(Long correlativo, String usuario,String terminal) throws Exception;
 
 }

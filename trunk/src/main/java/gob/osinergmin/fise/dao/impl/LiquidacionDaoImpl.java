@@ -220,5 +220,23 @@ public class LiquidacionDaoImpl extends GenericDaoImpl implements LiquidacionDao
 		return maxId;
 	}
 	
+	@Override
+	public int revertirLiquidacionFormato(Long correlativo, String usuario, String terminal) throws SQLException{
+		int result = -1;
+		try {	
+			StringBuffer jql = new StringBuffer();
+			jql.append("CALL FISE_GEN_PKG.FISE_REVIERTE_LIQUIDA_PRC(?,?,?)");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1, correlativo);								
+			query.setParameter(2, usuario);
+			query.setParameter(3, terminal);			
+			result = query.executeUpdate();		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return result;
+	}
 
 }

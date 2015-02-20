@@ -38,6 +38,7 @@ public class VariacionCostosBean implements Serializable {
 	private String titulo1;
 	private String titulo2;
 	private String titulo3;
+	private String titulo4;
 	
 	public List<FiseGrupoInformacion> getListaGrupoInfo() {
 		return listaGrupoInfo;
@@ -146,6 +147,12 @@ public class VariacionCostosBean implements Serializable {
 	}
 	public void setTitulo3(String titulo3) {
 		this.titulo3 = titulo3;
+	}
+	public String getTitulo4() {
+		return titulo4;
+	}
+	public void setTitulo4(String titulo4) {
+		this.titulo4 = titulo4;
 	}
 	
 	

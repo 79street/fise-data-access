@@ -154,6 +154,8 @@ private static final long serialVersionUID = 1L;
 	
 	private String idGrupoInfo;
 	
+	private String etapaFinal;//para controlar si el formato esta en etapa reconocido, establecido y bloque la carga de data
+	
 	public Formato14ACBean(){
 		
 	}
@@ -996,6 +998,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setIdGrupoInfo(String idGrupoInfo) {
 		this.idGrupoInfo = idGrupoInfo;
+	}
+
+	public String getEtapaFinal() {
+		return etapaFinal;
+	}
+
+	public void setEtapaFinal(String etapaFinal) {
+		this.etapaFinal = etapaFinal;
 	}
 
 	

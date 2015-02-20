@@ -151,6 +151,7 @@ public class Formato14BCBean  implements Serializable {
 	private String  codLuzSur;
 	
 	private String idGrupoInfo;
+	private String etapaFinal;//para controlar si el formato esta en etapa reconocido, establecido y bloque la carga de data
 	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
@@ -990,6 +991,14 @@ public class Formato14BCBean  implements Serializable {
 
 	public void setIdGrupoInfo(String idGrupoInfo) {
 		this.idGrupoInfo = idGrupoInfo;
+	}
+
+	public String getEtapaFinal() {
+		return etapaFinal;
+	}
+
+	public void setEtapaFinal(String etapaFinal) {
+		this.etapaFinal = etapaFinal;
 	}
 
 	

@@ -190,8 +190,17 @@ public class Formato14CBean {
 	private String  codEdelnor;//cod empresa edelnor constante
 	private String  codLuzSur;//cod empresa luz del sur constante
 	
-	private String idGrupoInfo;
+	private String idGrupoInfo;//para controlar si existe un grupo de informacion caso contrario no dejar cargar data
+	private String etapaFinal;//para controlar si el formato esta en etapa reconocido, establecido y bloque la carga de data
 	
+	
+	
+	public String getEtapaFinal() {
+		return etapaFinal;
+	}
+	public void setEtapaFinal(String etapaFinal) {
+		this.etapaFinal = etapaFinal;
+	}
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}
@@ -972,8 +981,5 @@ public class Formato14CBean {
 	public void setIdGrupoInfo(String idGrupoInfo) {
 		this.idGrupoInfo = idGrupoInfo;
 	}
-	
-	
-	
 	
 }

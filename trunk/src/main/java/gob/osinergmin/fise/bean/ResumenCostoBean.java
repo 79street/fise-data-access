@@ -48,6 +48,7 @@ public class ResumenCostoBean {
 	private BigDecimal glpAprobadoL;	
 	
 	//F14B
+	private String tresZonas;//para agrupar en el  reporte por RURAL, PROVINCIA y LIMA
 	private BigDecimal cosImpValSoliR;//costo unitario por impresion de vales solicitado rural
 	private BigDecimal cosImpValAprobR;//costo unitario por impresion de vales aprobado rural
 	private BigDecimal cosImpValSoliP;//costo unitario por impresion de vales solicitado provincia
@@ -612,8 +613,11 @@ public class ResumenCostoBean {
 	public void setDesGrupoInf(String desGrupoInf) {
 		this.desGrupoInf = desGrupoInf;
 	}
-	
-	
-	
+	public String getTresZonas() {
+		return tresZonas;
+	}
+	public void setTresZonas(String tresZonas) {
+		this.tresZonas = tresZonas;
+	}	
 	
 }

@@ -118,7 +118,14 @@ public class Formato12CCBean implements Serializable {
 	private String mesEjecucionDetalle;
 	
 	private String idGrupoInfo;
+	private String etapaFinal;
 	
+	public String getEtapaFinal() {
+		return etapaFinal;
+	}
+	public void setEtapaFinal(String etapaFinal) {
+		this.etapaFinal = etapaFinal;
+	}
 	public Map<Long, String> getListaMes() {
 		return listaMes;
 	}

@@ -47,4 +47,6 @@ public interface LiquidacionDao {
 	void eliminarFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo liquidacionMotivosNo) 
 			throws SQLException;
 
+	int revertirLiquidacionFormato(Long correlativo, String usuario, String terminal) throws SQLException;
+	
 }

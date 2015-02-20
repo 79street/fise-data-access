@@ -111,6 +111,7 @@ public class Formato12DCBean implements Serializable {
 	private String mesEjecucionDetalle;
 	
 	private String idGrupoInfo;
+	private String etapaFinal;
 	
 	public Map<Long, String> getListaMes() {
 		return listaMes;
@@ -561,6 +562,12 @@ public class Formato12DCBean implements Serializable {
 	}
 	public void setIdGrupoInfo(String idGrupoInfo) {
 		this.idGrupoInfo = idGrupoInfo;
+	}
+	public String getEtapaFinal() {
+		return etapaFinal;
+	}
+	public void setEtapaFinal(String etapaFinal) {
+		this.etapaFinal = etapaFinal;
 	}
 	
 		

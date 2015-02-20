@@ -162,8 +162,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 				correo.setUsuarioCorreo((String)valor[1]);
 				listaCorreo.add(correo);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e) {			
 			e.printStackTrace();
 		} finally {
 			 em.close();
@@ -264,23 +263,24 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		List<CumplimientoReportBean> lista = new ArrayList<CumplimientoReportBean>();
 		try{
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT trim(EMP.COD_EMPRESA) AS COD_EMPRESA,trim(EMP.DSC_CORTA_EMPRESA) AS DSC_CORTA_EMPRESA,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12A',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12A,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12B',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12B,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12C',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12C,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F12D',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12D,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F13A',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F13A,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14A',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14A,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14B',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14B,");
-			sql.append("fise_gen_pkg.fise_enviado_fun(EMP.COD_EMPRESA,'F14C',");
-			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14C");
+			sql.append("SELECT trim(EMP.COD_EMPRESA) AS COD_EMPRESA, ");//0
+			sql.append(" trim(EMP.DSC_CORTA_EMPRESA) AS DSC_CORTA_EMPRESA,");//1
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F12A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12A,");//2
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F12B',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12B,");//3
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F12C',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12C,");//4
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F12D',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F12D,");//5
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F13A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F13A,");//6
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F14A',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14A,");//7
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F14B',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14B,");//8
+			sql.append("FISE_GEN_PKG.FISE_ENVIADO_FUN(EMP.COD_EMPRESA,'F14C',");
+			sql.append(p_ano).append(",").append(p_mes).append(",'").append(p_etapa).append("') F14C");//9
 			sql.append(" FROM ADMIN_GART.ADM_EMPRESA EMP");
 			sql.append(" JOIN ADMIN_GART.ADM_PROC_EMPRESA PEMP");
 			sql.append(" ON EMP.COD_EMPRESA = PEMP.COD_EMPRESA");
@@ -297,18 +297,17 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 				CumplimientoReportBean cumplimiento=new CumplimientoReportBean();
 				cumplimiento.setCodigoEmpresa((String)valor[0]);
 				cumplimiento.setDescipcionCortaEmpresa((String)valor[1]);
-				cumplimiento.setFormat12A((String)valor[2]);
-				cumplimiento.setFormat12B((String)valor[3]);
-				cumplimiento.setFormat12C((String)valor[4]);
-				cumplimiento.setFormat12D((String)valor[5]);
-				cumplimiento.setFormat13A((String)valor[6]);
-				cumplimiento.setFormat14A((String)valor[7]);
-				cumplimiento.setFormat14B((String)valor[8]);
-				cumplimiento.setFormat14C((String)valor[9]);
+				cumplimiento.setFormat12A(((String)valor[2]==null)? " ": (String)valor[2]);
+				cumplimiento.setFormat12B(((String)valor[3]==null)? " ": (String)valor[3]);
+				cumplimiento.setFormat12C(((String)valor[4]==null)? " ": (String)valor[4]);
+				cumplimiento.setFormat12D(((String)valor[5]==null)? " ": (String)valor[5]);
+				cumplimiento.setFormat13A(((String)valor[6]==null)? " ": (String)valor[6]);
+				cumplimiento.setFormat14A(((String)valor[7]==null)? " ": (String)valor[7]);
+				cumplimiento.setFormat14B(((String)valor[8]==null)? " ": (String)valor[8]);
+				cumplimiento.setFormat14C(((String)valor[9]==null)? " ": (String)valor[9]);
 				lista.add(cumplimiento);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 

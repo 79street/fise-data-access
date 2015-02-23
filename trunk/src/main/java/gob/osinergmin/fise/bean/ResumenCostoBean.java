@@ -27,7 +27,8 @@ public class ResumenCostoBean {
 	private String periodo;
 	
 	private String optionBienal;
-	private String optionZona;
+	private String optionZona;//zonas no incluye para comparativos incluye todos
+	private String optionZonaComp;//zonas solo para costos comparativos no incluye todos
 	
 	private String optionMensual;
 	
@@ -618,6 +619,12 @@ public class ResumenCostoBean {
 	}
 	public void setTresZonas(String tresZonas) {
 		this.tresZonas = tresZonas;
-	}	
+	}
+	public String getOptionZonaComp() {
+		return optionZonaComp;
+	}
+	public void setOptionZonaComp(String optionZonaComp) {
+		this.optionZonaComp = optionZonaComp;
+	}		
 	
 }

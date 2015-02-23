@@ -140,7 +140,7 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 			 }			
 		} catch (Exception e) { 
 			e.printStackTrace();
-			logger.info("Error al listar resumen de costos de F14B:  "+e); 
+			logger.info("Error al listar resumen de costos de F14B segun zona:  "+e); 
 		}finally{
 			if(r!=null){
 				r=null;
@@ -152,213 +152,7 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 		return lista;
 	}
 	
-	/***metodo para mostrar reporte de resumen de costos F14B las tres zonas juntas****/	
-	//@Override
-	@Transactional
-	public List<ResumenCostoBean> buscarResumenCostoF14BRPL_copia(String codEmpresa,
-			Long idGrupoInf,List<AdmEmpresa> listaEmpresas) throws Exception{
-		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
-		ResumenCostoBean r =null;
-		List<Object[]> listaF14B =null;
-		try {	
-			if("TODOS".equals(codEmpresa) && listaEmpresas !=null){				
-				for(AdmEmpresa e: listaEmpresas){
-					String codEmpreCompleta = FormatoUtil.rellenaDerecha(e.getCodEmpresa(), ' ', 4);
-					listaF14B = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
-					for(int i = 0; i < listaF14B.size(); i++){						
-						//RURAL
-						r = new ResumenCostoBean();	
-						r.setTresZonas("R");//Rural 
-						r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-						r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-						
-						r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[2]);			   
-						r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[3]);		   
-						
-						r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[8]);    
-					    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[9]);		    
-					    
-					    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[14]);	
-						r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[15]);
-						
-						r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[20]);	   
-					    r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[21]);			   
-					    
-					    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[26] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[26]);		  
-					    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[27] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[27]);		   
-					    
-					    r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[32] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[32]);		   
-					    r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[33] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[33]);		    
-					    
-					    r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[38] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[38]);		   
-					    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[39] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[39]);    
-					    
-					    lista.add(r);
-					    
-					    //PROVINCIA
-					    r = new ResumenCostoBean();	
-					    r.setTresZonas("P"); //provincia
-						r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-						r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-						
-						r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[4]);	
-						r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[5]);
-						
-						r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[10]);	   
-					    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[11]);			   
-					   
-					    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[16]);		  
-					    r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[17]);		   
-					    
-					    r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[22]);		   
-					    r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[23] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[23]);		    
-					    
-					    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[28] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[28]);    
-					    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[29] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[29]);		    
-					    
-					    r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[34] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[34]);	
-						r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[35] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[35]);
-						
-						r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[40] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[40]);		    
-					    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[41] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[41]);	   
-					    
-					    lista.add(r);
-					    //LIMA	
-					    r = new ResumenCostoBean();	
-					    r.setTresZonas("L"); //lima
-						r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-						r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-						
-						r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[6]);		  
-					    r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[7]);		   
-					    	    
-					    r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[12]);		   
-					    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[13]);		    
-					    
-					    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[18]);    
-					    r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[19]);		    
-					    		    
-					    r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[24] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[24]);	
-						r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[25] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[25]);
-						    
-					    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[30] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[30]);	   
-					    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[31] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[31]);			   
-					       
-						r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[36] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[36]);	
-						r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[37] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[37]);		  
-					    	    
-					    r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[42] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[42]);			   
-					    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[43] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[43]); 
-					    
-						lista.add(r);
-					 }		
-				}
-			}else{
-				String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
-				listaF14B = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
-				for(int i = 0; i < listaF14B.size(); i++){						
-					//RURAL
-					r = new ResumenCostoBean();	
-					r.setTresZonas("R");//Rural 
-					r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-					r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-					
-					r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[2]);			   
-					r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[3]);		   
-					
-					r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[8]);    
-				    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[9]);		    
-				    
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[14]);	
-					r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[15]);
-					
-					r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[20]);	   
-				    r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[21]);			   
-				    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[26] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[26]);		  
-				    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[27] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[27]);		   
-				    
-				    r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[32] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[32]);		   
-				    r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[33] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[33]);		    
-				    
-				    r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[38] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[38]);		   
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[39] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[39]);    
-				    
-				    lista.add(r);
-				    
-				    //PROVINCIA
-				    r = new ResumenCostoBean();	
-				    r.setTresZonas("P"); //provincia
-					r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-					r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-					
-					r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[4]);	
-					r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[5]);
-					
-					r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[10]);	   
-				    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[11]);			   
-				   
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[16]);		  
-				    r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[17]);		   
-				    
-				    r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[22]);		   
-				    r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[23] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[23]);		    
-				    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[28] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[28]);    
-				    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[29] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[29]);		    
-				    
-				    r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[34] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[34]);	
-					r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[35] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[35]);
-					
-					r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[40] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[40]);		    
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[41] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[41]);	   
-				    
-				    lista.add(r);
-				    //LIMA	
-				    r = new ResumenCostoBean();	
-				    r.setTresZonas("L"); //lima
-					r.setDesEmpresa(String.valueOf(((String)listaF14B.get(i)[0] == null) ? "--" :listaF14B.get(i)[0]));
-					r.setPeriodo(String.valueOf(((String)listaF14B.get(i)[1] == null) ? "--" :listaF14B.get(i)[1]));
-					
-					r.setCosImpValSoliR(((BigDecimal)listaF14B.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[6]);		  
-				    r.setCosImpValAprobR(((BigDecimal)listaF14B.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[7]);		   
-				    	    
-				    r.setCosDomValSoliR(((BigDecimal)listaF14B.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[12]);		   
-				    r.setCosDomValAprobR(((BigDecimal)listaF14B.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[13]);		    
-				    
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14B.get(i)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[18]);    
-				    r.setCosEntDisEleAprobR(((BigDecimal)listaF14B.get(i)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[19]);		    
-				    		    
-				    r.setCosValFisSoliR(((BigDecimal)listaF14B.get(i)[24] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[24]);	
-					r.setCosValFisAprobR(((BigDecimal)listaF14B.get(i)[25] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[25]);
-					    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14B.get(i)[30] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[30]);	   
-				    r.setCosValDigAprobR(((BigDecimal)listaF14B.get(i)[31] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[31]);			   
-				       
-					r.setCosAteSoliR(((BigDecimal)listaF14B.get(i)[36] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[36]);	
-					r.setCosAteAprobR(((BigDecimal)listaF14B.get(i)[37] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[37]);		  
-				    	    
-				    r.setCosGestAdmSoliR(((BigDecimal)listaF14B.get(i)[42] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[42]);			   
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14B.get(i)[43] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14B.get(i)[43]); 
-				    
-					lista.add(r);
-				 }		
-			}				
-		} catch (Exception e) { 
-			e.printStackTrace();
-			logger.info("Error al listar resumen de costos de F14B:  "+e); 
-		}finally{
-			if(r!=null){
-				r=null;
-			}
-			if(listaF14B!=null){
-				listaF14B=null;
-			}	
-		}
-		return lista;
-	}
-	
-	
+	/***metodo para mostrar reporte de resumen de costos F14B las tres zonas juntas****/
 	@Override
 	@Transactional
 	public List<ResumenCostoBean> buscarResumenCostoF14BRPL(String codEmpresa,
@@ -371,103 +165,102 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 		try {			
 				String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);				
 				//RURAL				
-				listaF14BR = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
+				listaF14BR = resumenCostosDao.listarResumenCostosF14BRural(codEmpreCompleta, idGrupoInf);
 				for(int i = 0; i < listaF14BR.size(); i++){					
 					r = new ResumenCostoBean();	
-					r.setTresZonas("FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Rural");//Rural titulo 
+					r.setTresZonas(FiseConstants.TITULO_RESUMEN_COSTO_F14B_RURAL);//Rural titulo  
 					r.setDesEmpresa(String.valueOf(((String)listaF14BR.get(i)[0] == null) ? "--" :listaF14BR.get(i)[0]));
 					r.setPeriodo(String.valueOf(((String)listaF14BR.get(i)[1] == null) ? "--" :listaF14BR.get(i)[1]));
 					
 					r.setCosImpValSoliR(((BigDecimal)listaF14BR.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[2]);			   
 					r.setCosImpValAprobR(((BigDecimal)listaF14BR.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[3]);		   
 					
-					r.setCosDomValSoliR(((BigDecimal)listaF14BR.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[8]);    
-				    r.setCosDomValAprobR(((BigDecimal)listaF14BR.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[9]);		    
+					r.setCosDomValSoliR(((BigDecimal)listaF14BR.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[4]);    
+				    r.setCosDomValAprobR(((BigDecimal)listaF14BR.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[5]);		    
 				    
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BR.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[14]);	
-					r.setCosEntDisEleAprobR(((BigDecimal)listaF14BR.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[15]);
+				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BR.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[6]);	
+					r.setCosEntDisEleAprobR(((BigDecimal)listaF14BR.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[7]);
 					
-					r.setCosValFisSoliR(((BigDecimal)listaF14BR.get(i)[20] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[20]);	   
-				    r.setCosValFisAprobR(((BigDecimal)listaF14BR.get(i)[21] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[21]);			   
+					r.setCosValFisSoliR(((BigDecimal)listaF14BR.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[8]);	   
+				    r.setCosValFisAprobR(((BigDecimal)listaF14BR.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[9]);			   
 				    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14BR.get(i)[26] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[26]);		  
-				    r.setCosValDigAprobR(((BigDecimal)listaF14BR.get(i)[27] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[27]);		   
+				    r.setCosValDigSoliR(((BigDecimal)listaF14BR.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[10]);		  
+				    r.setCosValDigAprobR(((BigDecimal)listaF14BR.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[11]);		   
 				    
-				    r.setCosAteSoliR(((BigDecimal)listaF14BR.get(i)[32] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[32]);		   
-				    r.setCosAteAprobR(((BigDecimal)listaF14BR.get(i)[33] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[33]);		    
+				    r.setCosAteSoliR(((BigDecimal)listaF14BR.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[12]);		   
+				    r.setCosAteAprobR(((BigDecimal)listaF14BR.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[13]);		    
 				    
-				    r.setCosGestAdmSoliR(((BigDecimal)listaF14BR.get(i)[38] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[38]);		   
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BR.get(i)[39] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[39]);    
+				    r.setCosGestAdmSoliR(((BigDecimal)listaF14BR.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[14]);		   
+				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BR.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[15]);    
 				    
 				    lista.add(r);		
 				 }
 				 //PROVINCIA
-				listaF14BP = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
+				listaF14BP = resumenCostosDao.listarResumenCostosF14BProvincia(codEmpreCompleta, idGrupoInf);
 				for(int i = 0; i < listaF14BP.size(); i++){				   
 				    r = new ResumenCostoBean();	
-				    r.setTresZonas("FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Provincia"); //provincia titulo
+				    r.setTresZonas(FiseConstants.TITULO_RESUMEN_COSTO_F14B_PROV); //provincia titulo
 				    r.setDesEmpresa(String.valueOf(((String)listaF14BP.get(i)[0] == null) ? "--" :listaF14BP.get(i)[0]));
 					r.setPeriodo(String.valueOf(((String)listaF14BP.get(i)[1] == null) ? "--" :listaF14BP.get(i)[1]));
 					
-					r.setCosImpValSoliR(((BigDecimal)listaF14BP.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[4]);	
-					r.setCosImpValAprobR(((BigDecimal)listaF14BP.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[5]);
+					r.setCosImpValSoliR(((BigDecimal)listaF14BR.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[2]);			   
+					r.setCosImpValAprobR(((BigDecimal)listaF14BR.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[3]);		   
 					
-					r.setCosDomValSoliR(((BigDecimal)listaF14BP.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[10]);	   
-				    r.setCosDomValAprobR(((BigDecimal)listaF14BP.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[11]);			   
-				   
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BP.get(i)[16] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[16]);		  
-				    r.setCosEntDisEleAprobR(((BigDecimal)listaF14BP.get(i)[17] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[17]);		   
+					r.setCosDomValSoliR(((BigDecimal)listaF14BR.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[4]);    
+				    r.setCosDomValAprobR(((BigDecimal)listaF14BR.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[5]);		    
 				    
-				    r.setCosValFisSoliR(((BigDecimal)listaF14BP.get(i)[22] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[22]);		   
-				    r.setCosValFisAprobR(((BigDecimal)listaF14BP.get(i)[23] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[23]);		    
-				    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14BP.get(i)[28] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[28]);    
-				    r.setCosValDigAprobR(((BigDecimal)listaF14BP.get(i)[29] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[29]);		    
-				    
-				    r.setCosAteSoliR(((BigDecimal)listaF14BP.get(i)[34] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[34]);	
-					r.setCosAteAprobR(((BigDecimal)listaF14BP.get(i)[35] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[35]);
+				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BR.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[6]);	
+					r.setCosEntDisEleAprobR(((BigDecimal)listaF14BR.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[7]);
 					
-					r.setCosGestAdmSoliR(((BigDecimal)listaF14BP.get(i)[40] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[40]);		    
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BP.get(i)[41] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BP.get(i)[41]);	
+					r.setCosValFisSoliR(((BigDecimal)listaF14BR.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[8]);	   
+				    r.setCosValFisAprobR(((BigDecimal)listaF14BR.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[9]);			   
+				    
+				    r.setCosValDigSoliR(((BigDecimal)listaF14BR.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[10]);		  
+				    r.setCosValDigAprobR(((BigDecimal)listaF14BR.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[11]);		   
+				    
+				    r.setCosAteSoliR(((BigDecimal)listaF14BR.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[12]);		   
+				    r.setCosAteAprobR(((BigDecimal)listaF14BR.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[13]);		    
+				    
+				    r.setCosGestAdmSoliR(((BigDecimal)listaF14BR.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[14]);		   
+				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BR.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[15]);	
 				    
 				    lista.add(r);			   
 				 }	
 				
 				 //LIMA	
-				listaF14BL = resumenCostosDao.listarResumenCostosF14B(codEmpreCompleta, idGrupoInf);
+				listaF14BL = resumenCostosDao.listarResumenCostosF14BLima(codEmpreCompleta, idGrupoInf);
 				for(int i = 0; i < listaF14BL.size(); i++){		   
 				    r = new ResumenCostoBean();	
-				    r.setTresZonas("FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Lima"); //lima titulo
+				    r.setTresZonas(FiseConstants.TITULO_RESUMEN_COSTO_F14B_LIMA); //lima titulo
 				    r.setDesEmpresa(String.valueOf(((String)listaF14BL.get(i)[0] == null) ? "--" :listaF14BL.get(i)[0]));
 					r.setPeriodo(String.valueOf(((String)listaF14BL.get(i)[1] == null) ? "--" :listaF14BL.get(i)[1]));
 					
-					r.setCosImpValSoliR(((BigDecimal)listaF14BL.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[6]);		  
-				    r.setCosImpValAprobR(((BigDecimal)listaF14BL.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[7]);		   
-				    	    
-				    r.setCosDomValSoliR(((BigDecimal)listaF14BL.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[12]);		   
-				    r.setCosDomValAprobR(((BigDecimal)listaF14BL.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[13]);		    
+					r.setCosImpValSoliR(((BigDecimal)listaF14BR.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[2]);			   
+					r.setCosImpValAprobR(((BigDecimal)listaF14BR.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[3]);		   
+					
+					r.setCosDomValSoliR(((BigDecimal)listaF14BR.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[4]);    
+				    r.setCosDomValAprobR(((BigDecimal)listaF14BR.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[5]);		    
 				    
-				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BL.get(i)[18] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[18]);    
-				    r.setCosEntDisEleAprobR(((BigDecimal)listaF14BL.get(i)[19] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[19]);		    
-				    		    
-				    r.setCosValFisSoliR(((BigDecimal)listaF14BL.get(i)[24] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[24]);	
-					r.setCosValFisAprobR(((BigDecimal)listaF14BL.get(i)[25] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[25]);
-					    
-				    r.setCosValDigSoliR(((BigDecimal)listaF14BL.get(i)[30] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[30]);	   
-				    r.setCosValDigAprobR(((BigDecimal)listaF14BL.get(i)[31] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[31]);			   
-				       
-					r.setCosAteSoliR(((BigDecimal)listaF14BL.get(i)[36] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[36]);	
-					r.setCosAteAprobR(((BigDecimal)listaF14BL.get(i)[37] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[37]);		  
-				    	    
-				    r.setCosGestAdmSoliR(((BigDecimal)listaF14BL.get(i)[42] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[42]);			   
-				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BL.get(i)[43] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BL.get(i)[43]);  
+				    r.setCosEntDisEleSoliR(((BigDecimal)listaF14BR.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[6]);	
+					r.setCosEntDisEleAprobR(((BigDecimal)listaF14BR.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[7]);
+					
+					r.setCosValFisSoliR(((BigDecimal)listaF14BR.get(i)[8] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[8]);	   
+				    r.setCosValFisAprobR(((BigDecimal)listaF14BR.get(i)[9] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[9]);			   
+				    
+				    r.setCosValDigSoliR(((BigDecimal)listaF14BR.get(i)[10] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[10]);		  
+				    r.setCosValDigAprobR(((BigDecimal)listaF14BR.get(i)[11] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[11]);		   
+				    
+				    r.setCosAteSoliR(((BigDecimal)listaF14BR.get(i)[12] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[12]);		   
+				    r.setCosAteAprobR(((BigDecimal)listaF14BR.get(i)[13] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[13]);		    
+				    
+				    r.setCosGestAdmSoliR(((BigDecimal)listaF14BR.get(i)[14] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[14]);		   
+				    r.setCosGestAdmAprobR(((BigDecimal)listaF14BR.get(i)[15] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF14BR.get(i)[15]);  
 				    
 					lista.add(r);
-				 }	
-			
+				 }				
 		} catch (Exception e) { 
 			e.printStackTrace();
-			logger.info("Error al listar resumen de costos de F14B:  "+e); 
+			logger.info("Error al listar resumen de costos de F14B por las tres zonas:  "+e); 
 		}finally{
 			if(r!=null){
 				r=null;

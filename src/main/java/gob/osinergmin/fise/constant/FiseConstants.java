@@ -2138,4 +2138,12 @@ public class FiseConstants {
 	public final static int ESTADO_ACTIVO_GRUPO_INF= 1;
 	public final static int ESTADO_INACTIVO_GRUPO_INF= 0;
 	
+	
+	/**PARA REPORTES DE RESUMEN DE COSTOS*/
+	public final static String TITULO_RESUMEN_COSTO_F14B_RURAL= "FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Rural";
+	public final static String TITULO_RESUMEN_COSTO_F14B_PROV= "FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Provincia";
+	public final static String TITULO_RESUMEN_COSTO_F14B_LIMA= "FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Lima";
+	
+	
+	
 }

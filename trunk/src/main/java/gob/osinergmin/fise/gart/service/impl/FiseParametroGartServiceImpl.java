@@ -42,6 +42,7 @@ public class FiseParametroGartServiceImpl implements FiseParametroGartService {
 				param.setCodigo(bean.getCodigo()); 
 				param.setNombre(bean.getNombre());	
 				param.setValor(bean.getValor()); 
+				param.setOrden(Long.parseLong(bean.getOrden()));
 				//auditoria
 				param.setUsuarioCreacion(bean.getUsuario());
 				param.setTerminalCreacion(bean.getTerminal()); 
@@ -74,7 +75,8 @@ public class FiseParametroGartServiceImpl implements FiseParametroGartService {
 		try {			
 			param = fiseParametroDao.obtenerFiseParametro(bean.getCodigo());			
 			param.setNombre(bean.getNombre());		
-			param.setValor(bean.getValor());		
+			param.setValor(bean.getValor());	
+			param.setOrden(Long.parseLong(bean.getOrden()));
 			//auditoria
 			param.setUsuarioActualizacion(bean.getUsuario());
 			param.setTerminalActualizacion(bean.getTerminal()); 

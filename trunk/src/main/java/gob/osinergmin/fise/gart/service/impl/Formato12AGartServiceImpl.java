@@ -126,7 +126,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			BigDecimal total = new BigDecimal(0);
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
 			//RURAL
-			if( formulario.getNroEmpadR() != 0 &&
+			if( formulario.getNroEmpadR() != 0 ||
 					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentR() != 0 //&&
 					//!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
@@ -184,7 +184,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroEmpadP() != 0 &&
+			if( formulario.getNroEmpadP() != 0 ||
 					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentP() != 0 //&&
 					//!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
@@ -242,7 +242,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroEmpadL() != 0 &&
+			if( formulario.getNroEmpadL() != 0 ||
 					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentL() != 0 //&&
 					//!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&

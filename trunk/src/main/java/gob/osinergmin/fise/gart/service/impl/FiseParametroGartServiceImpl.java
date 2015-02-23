@@ -130,6 +130,8 @@ public class FiseParametroGartServiceImpl implements FiseParametroGartService {
 			bean.setCodigo(p.getCodigo());
 			bean.setNombre(p.getNombre()); 
 			bean.setValor(p.getValor());
+			bean.setOrden(p.getOrden().toString());
+			
 		} catch (Exception e) {
 			logger.info("Error al buscar datos para editar:  "+e); 
 		}finally{

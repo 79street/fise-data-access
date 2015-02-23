@@ -134,7 +134,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			
 			List<FiseFormato14AD> lista = new ArrayList<FiseFormato14AD>();
 			//RURAL
-			if( formulario.getNroBenefEmpadR() != 0 &&
+			if( formulario.getNroBenefEmpadR() != 0 ||
 					formulario.getNroAgentR() != 0 
 					){
 				logger.info("entro a RURAL");
@@ -228,7 +228,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroBenefEmpadP() != 0 &&
+			if( formulario.getNroBenefEmpadP() != 0 ||
 					formulario.getNroAgentP() != 0 
 					){
 				logger.info("entro a PROVINCIA");
@@ -323,7 +323,7 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroBenefEmpadL() != 0 &&
+			if( formulario.getNroBenefEmpadL() != 0 ||
 					formulario.getNroAgentL() != 0 
 					){
 				logger.info("entro a LIMA");
@@ -487,9 +487,10 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			}
 			
 			//RURAL
-			if( formulario.getNroBenefEmpadR() != 0 &&
+			if( detalleRural != null ){
+			/*if( formulario.getNroBenefEmpadR() != 0 ||
 					formulario.getNroAgentR() != 0 
-					){
+					){*/
 				logger.info("se modificara RURAL");
 				//empadronamiento
 				detalleRural.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitR());
@@ -563,9 +564,10 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroBenefEmpadP() != 0 &&
+			if( detalleProvincia != null ){
+			/*if( formulario.getNroBenefEmpadP() != 0 ||
 					formulario.getNroAgentP() != 0 
-					){
+					){*/
 				logger.info("se modificara PROVINCIA");
 				//empadronamiento
 				detalleProvincia.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitP());
@@ -639,9 +641,10 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroBenefEmpadL() != 0 &&
+			if( detalleLima != null ){
+			/*if( formulario.getNroBenefEmpadL() != 0 ||
 					formulario.getNroAgentL() != 0 
-					){
+					){*/
 				logger.info("se modificara LIMA");
 				//empadronamiento
 				detalleLima.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitL());

@@ -65,6 +65,8 @@ public class FiseParametroDaoImpl extends GenericDaoImpl implements FiseParametr
 		if(FormatoUtil.isNotBlank(nombre)){ 
 			q = q.concat(" AND o.nombre LIKE :nombre ");
 		}		
+		q = q.concat(" ORDER BY o.orden ");
+		
 		Query query = em.createQuery(q); 
 		if(FormatoUtil.isNotBlank(codigo)){ 
 			query.setParameter("codigo", codigo);

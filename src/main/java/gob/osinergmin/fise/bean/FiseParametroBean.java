@@ -9,9 +9,11 @@ public class FiseParametroBean {
     private String codigo;
     private String nombre;
     private String valor;
+    private String orden;
     
     private String usuario;
     private String terminal;
+    
 	public String getCodigoBusq() {
 		return codigoBusq;
 	}
@@ -53,6 +55,12 @@ public class FiseParametroBean {
 	}
 	public void setTerminal(String terminal) {
 		this.terminal = terminal;
+	}
+	public String getOrden() {
+		return orden;
+	}
+	public void setOrden(String orden) {
+		this.orden = orden;
 	}
     
     

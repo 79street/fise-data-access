@@ -700,6 +700,8 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sql.append(" AND F14AB.COD_EMPRESA = EMP.COD_EMPRESA AND F14AB.ETAPA = '"+etapa+"' ");
 			sql.append(" AND F14AB.ID_GRUPO_INFORMACION = " + idGrupoInfo );
 			
+			sql.append(" ORDER BY 1" );
+			
 			Query query = em.createNativeQuery(sql.toString());
 			
 			List resultado = query.getResultList();

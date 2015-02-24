@@ -2,12 +2,14 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.LiquidacionBean;
 import gob.osinergmin.fise.dao.FiseActividadesDao;
+import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.LiquidacionDao;
 import gob.osinergmin.fise.domain.FiseDescripcionActividade;
 import gob.osinergmin.fise.domain.FiseDescripcionActividadePK;
 import gob.osinergmin.fise.domain.FiseLiquidacione;
 import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNo;
 import gob.osinergmin.fise.domain.FiseLiquidacionesMotivosNoPK;
+import gob.osinergmin.fise.domain.FiseZonaBenef;
 import gob.osinergmin.fise.gart.service.FiseLiquidacionService;
 import gob.osinergmin.fise.util.FechaUtil;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -36,6 +38,10 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 	@Autowired
 	@Qualifier("fiseActividadesDaoImpl")
 	private FiseActividadesDao fiseActividadesDao;
+	
+	@Autowired
+	@Qualifier("fiseZonaBenefDaoImpl")
+	private FiseZonaBenefDao fiseZonaBenefDao;
 	
 	
 	/*****Implementacion de metodos********/
@@ -174,6 +180,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		FiseLiquidacionesMotivosNoPK pk = null;
 		FiseDescripcionActividade actividad =null;
 		FiseDescripcionActividadePK idActividad=null;
+		FiseZonaBenef zona = null;
 		String valor="1";
 		try {
 			long idItem = liquidacionDao.buscarMaximoMotivo(Long.valueOf(bean.getCoMotivo()));
@@ -188,7 +195,10 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				logger.info("entrando a obtener el objeto actividad formato:  "+idActividad.getFormato());
 				actividad = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(idActividad);
 				logger.info("obtener el objeto actividad:  "+actividad);
-			}			
+			}	
+			if(FormatoUtil.isNotBlank(bean.getCodigoZona())){ 
+				zona = fiseZonaBenefDao.obtenerFiseZonaBenefByPK(Long.valueOf(bean.getCodigoZona())); 
+			}
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 			
 			pk.setItem(idItem); 
@@ -197,6 +207,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			motivo.setDescripcionMotivo(bean.getDescMotivo());
 			motivo.setEstado("1"); 
 			motivo.setFiseDescripcionActividade(actividad); 
+			motivo.setFiseZonaBenef(zona); 
 			motivo.setFechaCreacion(FechaUtil.obtenerFechaActual());
 			motivo.setUsuarioCreacion(bean.getUsuario());
 			motivo.setTerminalCreacion(bean.getTerminal());
@@ -228,6 +239,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		FiseLiquidacionesMotivosNoPK pk = null;
 		FiseDescripcionActividade actividad =null;
 		FiseDescripcionActividadePK idActividad=null;
+		FiseZonaBenef zona = null;
 		String valor ="1";
 		try {	
 			
@@ -241,7 +253,9 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				actividad = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(idActividad);
 				logger.info("obtener el objeto actividad:  "+actividad);
 			}	
-			
+			if(FormatoUtil.isNotBlank(bean.getCodigoZona())){ 
+				zona = fiseZonaBenefDao.obtenerFiseZonaBenefByPK(Long.valueOf(bean.getCodigoZona())); 
+			}
 			pk =  new FiseLiquidacionesMotivosNoPK();
 			pk.setCorrelativo(Long.valueOf(bean.getCoMotivo())); 
 			pk.setItem(Long.valueOf(bean.getItemMotivo())); 
@@ -249,6 +263,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 			motivo.setDescripcionMotivo(bean.getDescMotivo());
 			motivo.setEstado("1"); 
 			motivo.setFiseDescripcionActividade(actividad); 
+			motivo.setFiseZonaBenef(zona); 
 			motivo.setFechaActualizacion(FechaUtil.obtenerFechaActual());
 			motivo.setUsuarioActualizacion(bean.getUsuario());
 			motivo.setTerminalActualizacion(bean.getTerminal());
@@ -314,6 +329,8 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				bean.setDescMotivo(m.getDescripcionMotivo());
 				bean.setDesActividad(m.getFiseDescripcionActividade()==null?" "
 						 :m.getFiseDescripcionActividade().getId().getItem());//muestro el item pero lo asigno a desactividad
+				bean.setDesZona(m.getFiseZonaBenef()==null?" "
+						 :m.getFiseZonaBenef().getDescripcion());//muestra la descripcion de la zona beneficiaria
 				if(m.getEstado().equals("1")){
 					bean.setEstadoMotivo("Activo");  	
 				}else{
@@ -346,6 +363,8 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				bean.setDescMotivo(motivo.getDescripcionMotivo()==null?"":motivo.getDescripcionMotivo());
 				bean.setItemActividad(motivo.getFiseDescripcionActividade()==null? " ":
 					motivo.getFiseDescripcionActividade().getId().getFormato()+"/"+motivo.getFiseDescripcionActividade().getId().getItem());
+				bean.setCodigoZona(motivo.getFiseZonaBenef()==null? " ":
+					""+motivo.getFiseZonaBenef().getIdZonaBenef());
 				bean.setEstadoMotivo(motivo.getEstado().equals("0")?"Inactivo":"Activo");	
 			}			
 		} catch (Exception e) {

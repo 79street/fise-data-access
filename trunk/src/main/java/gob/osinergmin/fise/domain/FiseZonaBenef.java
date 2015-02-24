@@ -2,11 +2,13 @@ package gob.osinergmin.fise.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,6 +53,10 @@ public class FiseZonaBenef implements Serializable {
 	//bi-directional many-to-one association to FiseFormato12AD
 	/*@OneToMany(mappedBy="fiseZonaBenef")
 	private List<FiseFormato12AD> fiseFormato12ADs;*/
+	
+	//bi-directional many-to-one association to FiseLiquidacionesMotivosNo
+	@OneToMany(mappedBy="fiseZonaBenef")
+	private List<FiseLiquidacionesMotivosNo> fiseLiquidacionesMotivosNos;
 
 	public FiseZonaBenef() {
 	}
@@ -140,5 +146,27 @@ public class FiseZonaBenef implements Serializable {
 
 		return fiseFormato12AD;
 	}*/
+	
+	public List<FiseLiquidacionesMotivosNo> getFiseLiquidacionesMotivosNos() {
+		return this.fiseLiquidacionesMotivosNos;
+	}
+
+	public void setFiseLiquidacionesMotivosNos(List<FiseLiquidacionesMotivosNo> fiseLiquidacionesMotivosNos) {
+		this.fiseLiquidacionesMotivosNos = fiseLiquidacionesMotivosNos;
+	}
+
+	public FiseLiquidacionesMotivosNo addFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo fiseLiquidacionesMotivosNo) {
+		getFiseLiquidacionesMotivosNos().add(fiseLiquidacionesMotivosNo);
+		fiseLiquidacionesMotivosNo.setFiseZonaBenef(this);
+
+		return fiseLiquidacionesMotivosNo;
+	}
+
+	public FiseLiquidacionesMotivosNo removeFiseLiquidacionesMotivosNo(FiseLiquidacionesMotivosNo fiseLiquidacionesMotivosNo) {
+		getFiseLiquidacionesMotivosNos().remove(fiseLiquidacionesMotivosNo);
+		fiseLiquidacionesMotivosNo.setFiseZonaBenef(null);
+
+		return fiseLiquidacionesMotivosNo;
+	}
 
 }

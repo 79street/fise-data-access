@@ -3,6 +3,7 @@ package gob.osinergmin.fise.bean;
 import gob.osinergmin.fise.domain.AdmEmpresa;
 import gob.osinergmin.fise.domain.FiseDescripcionActividade;
 import gob.osinergmin.fise.domain.FiseGrupoInformacion;
+import gob.osinergmin.fise.domain.FiseZonaBenef;
 
 import java.util.List;
 
@@ -60,6 +61,12 @@ public class LiquidacionBean {
 	private String itemActividad;//item en la tabla fisedescripcionActividades
 	private String formatoActividad;//formato de la actividad
 	private String desActividad;//descripcion de la actividad
+	
+	/***para zonas  y poder listar motivos de la liquidacion**/
+	private List<FiseZonaBenef> listaZonas;
+	private String codigoZona;//
+	private String desZona;
+	
 	
 	
 	
@@ -274,7 +281,27 @@ public class LiquidacionBean {
 	}
 	public void setListaActividades(List<FiseDescripcionActividade> listaActividades) {
 		this.listaActividades = listaActividades;
+	}
+	public List<FiseZonaBenef> getListaZonas() {
+		return listaZonas;
+	}
+	public void setListaZonas(List<FiseZonaBenef> listaZonas) {
+		this.listaZonas = listaZonas;
+	}
+	public String getCodigoZona() {
+		return codigoZona;
+	}
+	public void setCodigoZona(String codigoZona) {
+		this.codigoZona = codigoZona;
+	}
+	public String getDesZona() {
+		return desZona;
+	}
+	public void setDesZona(String desZona) {
+		this.desZona = desZona;
 	}	
+	
+	
 	
 	
 }

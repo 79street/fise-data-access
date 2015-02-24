@@ -53,7 +53,12 @@ public class FiseLiquidacionesMotivosNo implements Serializable {
 		@JoinColumn(name="FORMATO", referencedColumnName="FORMATO"/*,nullable=false, insertable=false, updatable=false*/),
 		@JoinColumn(name="ITEM_FORMATO", referencedColumnName="ITEM" /*,nullable=false, insertable=false, updatable=false*/)
 	})
-	private FiseDescripcionActividade fiseDescripcionActividade;
+	private FiseDescripcionActividade fiseDescripcionActividade;	
+	
+	//bi-directional many-to-one association to FiseZonaBenef
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ID_ZONA_BENEF")
+	private FiseZonaBenef fiseZonaBenef;
 	
 
 	public FiseLiquidacionesMotivosNo() {
@@ -145,6 +150,14 @@ public class FiseLiquidacionesMotivosNo implements Serializable {
 
 	public void setFiseDescripcionActividade(FiseDescripcionActividade fiseDescripcionActividade) {
 		this.fiseDescripcionActividade = fiseDescripcionActividade;
+	}
+	
+	public FiseZonaBenef getFiseZonaBenef() {
+		return this.fiseZonaBenef;
+	}
+
+	public void setFiseZonaBenef(FiseZonaBenef fiseZonaBenef) {
+		this.fiseZonaBenef = fiseZonaBenef;
 	}
 
 }

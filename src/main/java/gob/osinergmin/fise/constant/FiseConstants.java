@@ -1020,6 +1020,7 @@ public class FiseConstants {
 	public final static String ENVIO_EMAIL_OK_VALIDACION = "0";
 
 	public final static String OBSERVACIONES_EXPORT_EXEL = "OBS";
+	public final static String PARAMETROS_EXPORT_EXCEL = "PARAM";
 
 	public final static String CARGO_FIJO_EXPORT_EXEL = "CARGOFIJO";
 

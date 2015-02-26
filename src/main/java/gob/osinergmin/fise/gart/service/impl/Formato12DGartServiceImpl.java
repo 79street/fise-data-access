@@ -86,7 +86,7 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 				fiseFormato12DD.setEtapaEjecucionReport(fiseFormato12DD.getId().getEtapaEjecucion());
 				if( periodoEjecucion==0 ){
 					periodoEjecucion = fiseFormato12DD.getId().getAnoEjecucionGasto()*100+fiseFormato12DD.getId().getMesEjecucionGasto();
-					formato.setAnoEjecucionDetalle(fiseFormato12DD.getId().getAnoEjecucionGasto());
+					formato.setAnoEjecucionView(fiseFormato12DD.getId().getAnoEjecucionGasto());
 					formato.setMesEjecucionView(fiseFormato12DD.getId().getMesEjecucionGasto());
 				}else if( fiseFormato12DD.getId().getAnoEjecucionGasto()*100+fiseFormato12DD.getId().getMesEjecucionGasto() > periodoEjecucion ){
 					periodoEjecucion = fiseFormato12DD.getId().getAnoEjecucionGasto()*100+fiseFormato12DD.getId().getMesEjecucionGasto();

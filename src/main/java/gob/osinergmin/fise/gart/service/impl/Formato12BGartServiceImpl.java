@@ -630,7 +630,8 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroValEntDisElR() != 0 ||
 					formulario.getNroValFisiCanjR() != 0 ||
 					formulario.getNroValDigitCanjR() != 0 ||
-					formulario.getNroAtencionesR() != 0
+					formulario.getNroAtencionesR() != 0 
+		
 					){
 				logger.info("entro a RURAL");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
@@ -712,7 +713,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroValEntDisElP() != 0 ||
 					formulario.getNroValFisiCanjP() != 0 ||
 					formulario.getNroValDigitCanjP() != 0 ||
-					formulario.getNroAtencionesP() != 0
+					formulario.getNroAtencionesP() != 0 
 					){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
@@ -794,7 +795,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroValEntDisElL() != 0 ||
 					formulario.getNroValFisiCanjL() != 0 ||
 					formulario.getNroValDigitCanjL() != 0 ||
-					formulario.getNroAtencionesL() != 0
+					formulario.getNroAtencionesL() != 0 
 					){
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
@@ -941,13 +942,14 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			}
 			
 			//RURAL
-			if( formulario.getNroValeImpR() != 0 ||
+			if( detalleRural != null ){
+			/*if( formulario.getNroValeImpR() != 0 ||
 					formulario.getNroValReparDomicR() != 0 ||
 					formulario.getNroValEntDisElR() != 0 ||
 					formulario.getNroValFisiCanjR() != 0 ||
 					formulario.getNroValDigitCanjR() != 0 ||
 					formulario.getNroAtencionesR() != 0
-					){
+					){*/
 				logger.info("entro a RURAL");
 				//
 				
@@ -1007,13 +1009,14 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroValeImpP() != 0 ||
+			if( detalleProvincia != null ){
+			/*if( formulario.getNroValeImpP() != 0 ||
 					formulario.getNroValReparDomicP() != 0 ||
 					formulario.getNroValEntDisElP() != 0 ||
 					formulario.getNroValFisiCanjP() != 0 ||
 					formulario.getNroValDigitCanjP() != 0 ||
 					formulario.getNroAtencionesP() != 0
-					){
+					){*/
 				logger.info("entro a PROVINCIA");
 				//
 				
@@ -1073,13 +1076,14 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroValeImpL() != 0 ||
+			if( detalleLima != null ){
+			/*if( formulario.getNroValeImpL() != 0 ||
 					formulario.getNroValReparDomicL() != 0 ||
 					formulario.getNroValEntDisElL() != 0 ||
 					formulario.getNroValFisiCanjL() != 0 ||
 					formulario.getNroValDigitCanjL() != 0 ||
 					formulario.getNroAtencionesL() != 0
-					){
+					){*/
 				logger.info("entro a LIMA");
 				//
 				

@@ -474,24 +474,29 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			FiseFormato14AD detalleRural = new FiseFormato14AD();
 			FiseFormato14AD detalleProvincia = new FiseFormato14AD();
 			FiseFormato14AD detalleLima = new FiseFormato14AD();
+			
 			if( fiseFormato14AC.getFiseFormato14ADs()!=null ){
-				for (FiseFormato14AD detalle : fiseFormato14AC.getFiseFormato14ADs()) {
-					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
-						detalleRural = detalle;
-					}else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
-						detalleProvincia = detalle;
-					} else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
-						detalleLima = detalle;
+				logger.info("Entro de detalle si existe: "+fiseFormato14AC.getFiseFormato14ADs().size()); 
+				for (FiseFormato14AD detalleF : fiseFormato14AC.getFiseFormato14ADs()) {
+					if( detalleF.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
+						logger.info("Detalle rural");
+						detalleRural = detalleF;
+					}else if( detalleF.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
+						logger.info("Detalle provincia");
+						detalleProvincia = detalleF;
+					} else if( detalleF.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
+						logger.info("Detalle lima");
+						detalleLima = detalleF;
 					}
 				}
 			}
 			
 			//RURAL
-			if( detalleRural != null ){
+			if(detalleRural != null && detalleRural.getId()!=null){
 			/*if( formulario.getNroBenefEmpadR() != 0 ||
 					formulario.getNroAgentR() != 0 
 					){*/
-				logger.info("se modificara RURAL");
+				logger.info("se modificara RURAL:  ");
 				//empadronamiento
 				detalleRural.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitR());
 				detalleRural.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaR());
@@ -564,11 +569,11 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( detalleProvincia != null ){
+			if( detalleProvincia != null && detalleProvincia.getId()!=null ){
 			/*if( formulario.getNroBenefEmpadP() != 0 ||
 					formulario.getNroAgentP() != 0 
 					){*/
-				logger.info("se modificara PROVINCIA");
+				logger.info("se modificara PROVINCIA:  ");
 				//empadronamiento
 				detalleProvincia.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitP());
 				detalleProvincia.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaP());
@@ -641,11 +646,11 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( detalleLima != null ){
+			if( detalleLima != null && detalleLima.getId()!=null){
 			/*if( formulario.getNroBenefEmpadL() != 0 ||
 					formulario.getNroAgentL() != 0 
 					){*/
-				logger.info("se modificara LIMA");
+				logger.info("se modificara LIMA:  ");
 				//empadronamiento
 				detalleLima.setImpresionEsquelaInvitacion(formulario.getImprEsqInvitL());
 				detalleLima.setImpresionDeclaracionJurada(formulario.getImprDeclaJuradaL());
@@ -729,8 +734,13 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 			}
 			
 			formato14ACDao.modificarFormato14AC(fiseFormato14AC);
-			//add
+			//add 
+			logger.info("Ingresando a grbrar detalle del formato 14A: "+lista.size());
 			for (FiseFormato14AD detalle : lista) {
+				logger.info("Detalle 1:  "+detalle.getId().getCodEmpresa());
+				logger.info("Detalle 1:  "+detalle.getId().getIdZonaBenef());
+				logger.info("Detalle 1:  "+detalle.getId().getEtapa());
+				logger.info("Detalle 1:  "+detalle.getId().getAnoInicioVigencia());
 				formato14ADDao.modificarFormato14AD(detalle);
 			}
 			dto= fiseFormato14AC;

@@ -114,6 +114,17 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 
 	@Transactional
 	public FiseFormato13AC savecabecera(FiseFormato13AC fiseC) throws DataIntegrityViolationException {
+		FiseGrupoInformacion grupoInfo = null;
+		try {
+			long idGrupoInf = commonDao.obtenerIdGrupoInformacion(fiseC.getId().getAnoPresentacion(), fiseC.getId().getMesPresentacion(), FiseConstants.FRECUENCIA_BIENAL_DESCRIPCION); 
+			if(idGrupoInf!=0){
+				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
+			}	
+			logger.info("Grupo de irfomacion:  "+grupoInfo); 
+			fiseC.setFiseGrupoInformacion(grupoInfo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 		return formato13ACDao.savecabecera(fiseC);
 	}
 
@@ -350,6 +361,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			if(idGrupoInf!=0){
 				grupoInfo = fiseGrupoInformacionDao.obtenerFiseGrupoInformacionByPK(idGrupoInf);	
 			}	
+			logger.info("Grupo de irfomacion:  "+grupoInfo); 
 			fiseFormato13AC.setFiseGrupoInformacion(grupoInfo);
 			
 			List<FiseFormato13AD> lista = new ArrayList<FiseFormato13AD>();

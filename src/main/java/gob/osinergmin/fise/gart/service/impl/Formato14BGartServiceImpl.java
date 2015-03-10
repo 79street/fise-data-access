@@ -503,7 +503,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 			}
 			
 			//RURAL
-			if( detalleRural != null ){
+			if( detalleRural != null && detalleRural.getId()!=null){
 			/*if( formulario.getNroValesImpR() != 0 ||
 					formulario.getNroValesReptR() != 0 ||
 					formulario.getNroValesEntrR() != 0 ||
@@ -584,7 +584,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( detalleProvincia != null ){
+			if( detalleProvincia != null && detalleProvincia.getId()!=null){
 			/*if( formulario.getNroValesImpP() != 0 ||
 					formulario.getNroValesReptP() != 0 ||
 					formulario.getNroValesEntrP() != 0 ||
@@ -665,7 +665,7 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( detalleLima != null ){
+			if( detalleLima != null && detalleLima.getId()!=null){
 			/*if( formulario.getNroValesImpL() != 0 ||
 					formulario.getNroValesReptL() != 0 ||
 					formulario.getNroValesEntrL() != 0 ||

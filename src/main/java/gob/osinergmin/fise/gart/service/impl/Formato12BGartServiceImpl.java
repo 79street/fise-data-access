@@ -302,22 +302,22 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 		 }
 		 
 		
-	formato12BBean.setTotalImpVal(totalImpresionesVal);
-	formato12BBean.setTotalValReparDomic(totalRepartValDomic);		
-	formato12BBean.setTotalValEntDisEl(totalEntregaValDisEl);
-	formato12BBean.setTotalValFisiCanjLiq(totalCanjeLiqValFisic);
-	formato12BBean.setTotalValDigitCanjLiq(totalCanjeLiqValDigit);
-	formato12BBean.setTotalSolictConsultReclam(totalAtencionSolic);
-	formato12BBean.setTotalGestionAdm(totalGestionAdm);
-	formato12BBean.setTotalDesplPersonal(totalDesplPersonal);
-	formato12BBean.setTotalActivExtraord(totalActiviExtraord);
-	//
-	Double total=formato12BBean.getTotalImpVal().doubleValue()+formato12BBean.getTotalValReparDomic().doubleValue()+
-			formato12BBean.getTotalValEntDisEl().doubleValue()+formato12BBean.getTotalValFisiCanjLiq().doubleValue()+
-			formato12BBean.getTotalValDigitCanjLiq().doubleValue()+formato12BBean.getTotalSolictConsultReclam().doubleValue()+
-			formato12BBean.getTotalGestionAdm().doubleValue()+formato12BBean.getTotalDesplPersonal().doubleValue()+
-			formato12BBean.getTotalActivExtraord().doubleValue();			 
-	formato12BBean.setTotalGeneral(new BigDecimal(total));
+		 formato12BBean.setTotalImpVal(totalImpresionesVal);
+		 formato12BBean.setTotalValReparDomic(totalRepartValDomic);		
+		 formato12BBean.setTotalValEntDisEl(totalEntregaValDisEl);
+		 formato12BBean.setTotalValFisiCanjLiq(totalCanjeLiqValFisic);
+		 formato12BBean.setTotalValDigitCanjLiq(totalCanjeLiqValDigit);
+		 formato12BBean.setTotalSolictConsultReclam(totalAtencionSolic);
+		 formato12BBean.setTotalGestionAdm(totalGestionAdm);
+		 formato12BBean.setTotalDesplPersonal(totalDesplPersonal);
+		 formato12BBean.setTotalActivExtraord(totalActiviExtraord);
+		 //
+		 Double total=formato12BBean.getTotalImpVal().doubleValue()+formato12BBean.getTotalValReparDomic().doubleValue()+
+				 formato12BBean.getTotalValEntDisEl().doubleValue()+formato12BBean.getTotalValFisiCanjLiq().doubleValue()+
+				 formato12BBean.getTotalValDigitCanjLiq().doubleValue()+formato12BBean.getTotalSolictConsultReclam().doubleValue()+
+				 formato12BBean.getTotalGestionAdm().doubleValue()+formato12BBean.getTotalDesplPersonal().doubleValue()+
+				 formato12BBean.getTotalActivExtraord().doubleValue();			 
+		 formato12BBean.setTotalGeneral(new BigDecimal(total));
 	
 	
 		 }catch(Exception e){

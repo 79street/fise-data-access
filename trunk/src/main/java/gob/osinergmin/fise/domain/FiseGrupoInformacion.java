@@ -110,6 +110,10 @@ public class FiseGrupoInformacion implements Serializable {
 	
 	@OneToMany(mappedBy="fiseGrupoInformacion")
 	private List<FiseFormato12BC> fiseFormato12BCs;
+	
+	//bi-directional many-to-one association to FiseArchivosCab
+	@OneToMany(mappedBy="fiseGrupoInformacion")
+	private List<FiseArchivosCab> fiseArchivosCabs;
 
 	public FiseGrupoInformacion() {
 	}
@@ -347,6 +351,28 @@ public class FiseGrupoInformacion implements Serializable {
 		this.descMesPresentacion = descMesPresentacion;
 	}
 	
+	
+	public List<FiseArchivosCab> getFiseArchivosCabs() {
+		return this.fiseArchivosCabs;
+	}
+
+	public void setFiseArchivosCabs(List<FiseArchivosCab> fiseArchivosCabs) {
+		this.fiseArchivosCabs = fiseArchivosCabs;
+	}
+
+	public FiseArchivosCab addFiseArchivosCab(FiseArchivosCab fiseArchivosCab) {
+		getFiseArchivosCabs().add(fiseArchivosCab);
+		fiseArchivosCab.setFiseGrupoInformacion(this);
+
+		return fiseArchivosCab;
+	}
+
+	public FiseArchivosCab removeFiseArchivosCab(FiseArchivosCab fiseArchivosCab) {
+		getFiseArchivosCabs().remove(fiseArchivosCab);
+		fiseArchivosCab.setFiseGrupoInformacion(null);
+
+		return fiseArchivosCab;
+	}
 	
 
 

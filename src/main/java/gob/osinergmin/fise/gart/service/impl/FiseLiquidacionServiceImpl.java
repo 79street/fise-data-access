@@ -55,7 +55,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 		try {	
 			int resultadoProceso = 1;
 			int resultadoBusq = 1;
-			
+			/** P = proceso llamando a un procedimiento para poblar la entidad fiseliquidacion y despues busco.**/
 			if("P".equals(flagBusq)){ 
 				resultadoProceso = liquidacionDao.llenarDatosFiseLiquidacion(codEmpresa,
 						idGrupoInf, usuario, terminal);
@@ -70,6 +70,7 @@ public class FiseLiquidacionServiceImpl implements FiseLiquidacionService {
 				String ultimaEtapa = "---";
 				
 				List<FiseLiquidacione> listaLiq = liquidacionDao.buscarFiseLiquidacion(codEmpresa, idGrupoInf);	
+				
 				lista = new ArrayList<LiquidacionBean>();
 				
 				for(FiseLiquidacione l : listaLiq){

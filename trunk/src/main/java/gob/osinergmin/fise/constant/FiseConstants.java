@@ -108,6 +108,7 @@ public class FiseConstants {
 	public final static String FORMATO_EXPORT_XLS_SIN_LISTA = "5";
 	public final static String FORMATO_EXPORT_ACTAENVIO = "2";
 	public final static String FORMATO_EXPORT_FORMATO_COMPLETO = "3";
+	public final static String FORMATO_EXPORT_ARCHIVOSUSTENTO = "10";
 
 	public final static long ID_TABLA_FORMATO12A = 100;
 	public final static long ID_TABLA_FORMATO12B = 101;
@@ -2145,6 +2146,9 @@ public class FiseConstants {
 	public final static String TITULO_RESUMEN_COSTO_F14B_PROV= "FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Provincia";
 	public final static String TITULO_RESUMEN_COSTO_F14B_LIMA= "FORMATO 14B: Resumen de Costos Estándares Unitarios Zona Urbano Lima";
 	
+	/**PARA ARCHIVOS DE SUSTENTOS*/
 	
+	public final static String FLAG_CARGA_ARCHIVO_NUEVO = "2";
+	public final static String FLAG_CARGA_ARCHIVO_ACTUALIZAR = "3";
 	
 }

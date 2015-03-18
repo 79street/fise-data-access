@@ -4,7 +4,9 @@ import gob.osinergmin.fise.bean.ArchivoSustentoBean;
 import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.domain.FiseArchivosCab;
 import gob.osinergmin.fise.domain.FiseArchivosDet;
+import gob.osinergmin.fise.domain.FiseArchivosDetPK;
 import gob.osinergmin.fise.gart.service.ArchivoSustentoService;
+import gob.osinergmin.fise.util.FechaUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +94,8 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 				objeto.setItemArchivo(""+d.getId().getItem());
 				objeto.setCorrArchivo(""+d.getId().getCorrelativo());
 				objeto.setNombreArchivo(d.getNombreArchivoFisico()==null? "---": ""+d.getNombreArchivoFisico());
-				objeto.setEstadoArchivo(d.getEstado().equals("A")? "Activo": "Inactivo");				
+				objeto.setEstadoArchivo(d.getEstado().equals("A")? "Activo": "Inactivo");
+				objeto.setIdFileEntry(""+d.getIdFileLiferay()); 
 				lista.add(objeto);
 			}		
 		} catch (Exception e) {
@@ -103,6 +106,104 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	}
 		
 	
+	@Override
+	@Transactional
+	public String guardarArchivoSustento(String correlativoF,String nombreArchivo,long idFileEntry,
+			String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseArchivosDet archivoDet = null;
+		FiseArchivosDetPK pk = null;			
+		try {			
+			archivoDet = new FiseArchivosDet();
+			pk = new FiseArchivosDetPK();
+			long itemArchivo = archivoSustentoDao.buscarMaximoItemArchivo(Long.valueOf(correlativoF));
+			logger.info("Item archivo:   "+itemArchivo); 
+			pk.setItem(itemArchivo);
+			pk.setCorrelativo(Long.valueOf(correlativoF));		
+			archivoDet.setId(pk);			 
+			archivoDet.setNombreArchivoFisico(nombreArchivo);
+			archivoDet.setEstado("A");
+			archivoDet.setIdFileLiferay(idFileEntry); 
+			archivoDet.setUsuarioCreacion(user);
+			archivoDet.setTerminalCreacion(terminal);
+			archivoDet.setFechaCreacion(FechaUtil.obtenerFechaActual());
+			archivoSustentoDao.insertarFiseArchivosDet(archivoDet); 
+			valor = "1";
+		} catch (Exception e) {
+			e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(archivoDet!=null){
+				archivoDet=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}			
+		}
+		return valor;
+	}
+	
+	
+	@Override
+	@Transactional
+	public String actualizarArchivoSustento(String itemArchivo,String correlativoArchivo,String nombreArchivo,
+			long idFileEntry,String user,String terminal) throws Exception{
+		String valor = "0";
+		FiseArchivosDet archivoDet = null;
+		FiseArchivosDetPK pk = null;		
+		try {
+			pk = new FiseArchivosDetPK();
+			pk.setItem(Long.valueOf(itemArchivo)); 	
+			pk.setCorrelativo(Long.valueOf(correlativoArchivo));		
+			archivoDet = archivoSustentoDao.obtenerFiseArchivosDet(pk);	
+			archivoDet.setNombreArchivoFisico(nombreArchivo);
+			archivoDet.setIdFileLiferay(idFileEntry); 
+			archivoDet.setUsuarioActualizacion(user);
+			archivoDet.setTerminalActualizacion(terminal);
+			archivoDet.setFechaActualizacion(FechaUtil.obtenerFechaActual());
+			archivoSustentoDao.actualizarFiseArchivosDet(archivoDet); 
+			valor = "1";
+		} catch (Exception e) {
+			e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(archivoDet!=null){
+				archivoDet=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}			
+		}
+		return valor;
+	}
+	
+	
+	@Override
+	@Transactional
+	public String eliminarArchivoSustento(String itemArchivo,String correlativoArchivo) throws Exception{
+		String valor = "0";
+		FiseArchivosDet archivoDet = null;
+		FiseArchivosDetPK pk = null;		
+		try {
+			pk = new FiseArchivosDetPK();
+			pk.setItem(Long.valueOf(itemArchivo)); 	
+			pk.setCorrelativo(Long.valueOf(correlativoArchivo));			
+			archivoDet = archivoSustentoDao.obtenerFiseArchivosDet(pk);				
+			archivoSustentoDao.eliminarFiseArchivosDet(archivoDet); 
+			valor = "1";
+		} catch (Exception e) {
+			e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(archivoDet!=null){
+				archivoDet=null;
+			}
+			if(pk!=null){
+				pk=null;
+			}			
+		}
+		return valor;
+	}
 	
 	
 }

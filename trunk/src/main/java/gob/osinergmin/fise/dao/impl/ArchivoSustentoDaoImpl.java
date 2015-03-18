@@ -4,6 +4,7 @@ import gob.osinergmin.base.dao.impl.GenericDaoImpl;
 import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.domain.FiseArchivosCab;
 import gob.osinergmin.fise.domain.FiseArchivosDet;
+import gob.osinergmin.fise.domain.FiseArchivosDetPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.sql.SQLException;
@@ -105,6 +106,48 @@ public class ArchivoSustentoDaoImpl extends GenericDaoImpl implements ArchivoSus
 	public FiseArchivosCab obtenerFiseArchivosCab(Long id) throws SQLException{
 		return em.find(FiseArchivosCab.class, id);		
 	}
+	
+	
+	@Override
+	public void insertarFiseArchivosDet(FiseArchivosDet fiseArchivosDet) 
+			throws SQLException{
+		em.persist(fiseArchivosDet);
+	}
+	
+	@Override
+	public void actualizarFiseArchivosDet(FiseArchivosDet fiseArchivosDet) 
+			throws SQLException{
+		em.merge(fiseArchivosDet);
+	}
+	
+	
+	@Override
+	public FiseArchivosDet obtenerFiseArchivosDet(FiseArchivosDetPK id) 
+			throws SQLException{
+		return em.find(FiseArchivosDet.class, id);
+	}
+	
+	@Override
+	public void eliminarFiseArchivosDet(FiseArchivosDet fiseArchivosDet) 
+			throws SQLException{
+		em.remove(fiseArchivosDet);
+	}
+	
+	
+	@Override
+	public long buscarMaximoItemArchivo(long correlativo) throws SQLException{		
+		long maxId = 1;		
+		String q = "SELECT MAX(d.id.item) FROM " + FiseArchivosDet.class.getName()
+				+ " d WHERE d.id.correlativo = :correlativo ";
+		Query query = em.createQuery(q); 	
+		query.setParameter("correlativo", correlativo);
+		Long verifica = (Long)query.getSingleResult();
+		if(verifica!=null){
+			maxId = verifica +1;
+		}
+		return maxId;
+	}
+	
 	
 	
 }

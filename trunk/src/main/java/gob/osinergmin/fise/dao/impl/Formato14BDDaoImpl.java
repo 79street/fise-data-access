@@ -247,43 +247,25 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 		try {
 			StringBuilder sb=new StringBuilder();
 			sb.append("SELECT c FROM FiseFormato14BD c WHERE 1=1 ");
-			
-		if(codEmpresa !=null && !codEmpresa.isEmpty()){ 
-				sb.append(" AND c.id.codEmpresa = '"+codEmpresa.trim()+"'");
+				
+			if(codEmpresa !=null && !codEmpresa.isEmpty()){ 
+					sb.append(" AND c.id.codEmpresa = '"+codEmpresa.trim()+"'");
 			}
 			if(anio!=null &&  anio>0){
-				sb.append(" AND c.id.anoInicioVigencia <= "+anio.longValue());
-				sb.append(" AND c.id.anoFinVigencia >= "+anio.longValue());
-				
-				
+					sb.append(" AND c.id.anoInicioVigencia <= "+anio.longValue());
+					sb.append(" AND c.id.anoFinVigencia >= "+anio.longValue());	
 			}
 			if(mes!=null &&  mes>0){
-				sb.append(" AND c.id.mesPresentacion =:mespres ");
-				
+					sb.append(" AND c.id.mesPresentacion =:mespres ");				
 			}
 			if(idZona!=null && idZona>0){
-				sb.append(" AND c.id.idZonaBenef =:zna ");
-			}
-			
+					sb.append(" AND c.id.idZonaBenef =:zna ");
+			}			
 			if(etp !=null && !etp.isEmpty()){
-				sb.append(" AND c.id.etapa =:etpa ");
-				
-			}
-			
+					sb.append(" AND c.id.etapa =:etpa ");				
+			}			
 			Query query = em.createQuery(sb.toString());
-			System.out.println("CONSULTA SQL::"+sb.toString());
-			System.out.println("codEmpresa::"+codEmpresa);
-			System.out.println("codEmpresa::"+codEmpresa.length());
-			System.out.println("anio::"+anio);
-			System.out.println("mes::"+mes);
-			System.out.println("idZona::"+idZona);
-			System.out.println("etp::"+etp);
-			
-			
-			
-		/*		if(anio!=null &&  anio>0){
-				query.setParameter("aniopres", anio.longValue());
-			}*/
+	
 			if(mes!=null &&  mes>0){
 				query.setParameter("mespres", mes.longValue());
 			}
@@ -293,20 +275,15 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 			if(etp !=null && !etp.isEmpty()){
 				query.setParameter("etpa", etp.trim());
 			}
-			
-			 lst=  query.setMaxResults(3).getResultList();
-			// lst=  query.getResultList();
-			System.out.println("LISTA DE COSTOS :::::"+lst.size());
-			
-			
+	
+			lst=  query.setMaxResults(3).getResultList();		
+			System.out.println("LISTA DE COSTOS :::::"+lst.size());			
 		}catch(Exception e){
 	      e.printStackTrace();
 	      
 		}finally{
-			em.close();
-			
-		}
-		
+			em.close();			
+		}		
 		return lst;
 	}
 	

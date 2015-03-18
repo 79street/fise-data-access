@@ -49,6 +49,12 @@ public class ArchivoSustentoBean {
 	private String corrArchivo;//correlativo del detalle del archivo
 	private String nombreArchivo;
 	private String estadoArchivo;
+	private String idFileEntry;
+	
+	//para mensajes
+	private String mensajeError;
+	private String mensajeInfo;
+	private String flag;
 	
 	
 	/*****Metodos get y set****/	
@@ -220,8 +226,31 @@ public class ArchivoSustentoBean {
 	}
 	public void setEstadoArchivo(String estadoArchivo) {
 		this.estadoArchivo = estadoArchivo;
+	}
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	public String getMensajeInfo() {
+		return mensajeInfo;
+	}
+	public void setMensajeInfo(String mensajeInfo) {
+		this.mensajeInfo = mensajeInfo;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public String getIdFileEntry() {
+		return idFileEntry;
+	}
+	public void setIdFileEntry(String idFileEntry) {
+		this.idFileEntry = idFileEntry;
 	}	
-	
 	
 	
 	

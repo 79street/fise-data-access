@@ -11,5 +11,13 @@ public interface ArchivoSustentoService {
 				throws Exception;
 	 
 	 List<ArchivoSustentoBean> listarArchivosSustentoFormato(long correlativo) throws Exception;
+	 
+	 String guardarArchivoSustento(String correlativoF,String nombreArchivo,long idFileEntry,
+				String user,String terminal) throws Exception;
+	 
+	 String actualizarArchivoSustento(String itemArchivo,String correlativoArchivo,String nombreArchivo,
+				long idFileEntry,String user,String terminal) throws Exception;
+	 
+	 String eliminarArchivoSustento(String itemArchivo,String correlativoArchivo) throws Exception;
 
 }

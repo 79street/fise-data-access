@@ -18,6 +18,9 @@ public class FiseArchivosDet implements Serializable {
 	private FiseArchivosDetPK id;
 
 	private String estado;
+	
+	@Column(name="ID_FILE_LIFERAY")
+	private long idFileLiferay;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
@@ -44,7 +47,7 @@ public class FiseArchivosDet implements Serializable {
 
 	//bi-directional many-to-one association to FiseArchivosCab
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="CORRELATIVO")
+	@JoinColumn(name="CORRELATIVO",nullable=false, insertable=false, updatable=false)
 	private FiseArchivosCab fiseArchivosCab;
 
 	public FiseArchivosDet() {
@@ -129,5 +132,16 @@ public class FiseArchivosDet implements Serializable {
 	public void setFiseArchivosCab(FiseArchivosCab fiseArchivosCab) {
 		this.fiseArchivosCab = fiseArchivosCab;
 	}
+
+	public long getIdFileLiferay() {
+		return idFileLiferay;
+	}
+
+	public void setIdFileLiferay(long idFileLiferay) {
+		this.idFileLiferay = idFileLiferay;
+	}
+	
+	
+	
 
 }

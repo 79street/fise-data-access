@@ -2,11 +2,13 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.ArchivoSustentoBean;
 import gob.osinergmin.fise.dao.ArchivoSustentoDao;
+import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.domain.FiseArchivosCab;
 import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseArchivosDetPK;
 import gob.osinergmin.fise.gart.service.ArchivoSustentoService;
 import gob.osinergmin.fise.util.FechaUtil;
+import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,10 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	@Qualifier("archivoSustentoDaoImpl")
 	private ArchivoSustentoDao archivoSustentoDao;
 	
+	
+	@Autowired
+	@Qualifier("commonDaoImpl")
+	private CommonDao commonDao;
 	
 /*****Implementacion de metodos********/
 	
@@ -59,6 +65,11 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 				
 				for(FiseArchivosCab a : listaFormatos){
 					ArchivoSustentoBean objeto = new ArchivoSustentoBean();
+					/**Obteniendo el flag de la operacion*/
+	  				String estado = commonDao.obtenerEstadoProceso(a.getCodEmpresa(),
+	  						a.getFormato(),a.getAnoPresentacion().longValue(),
+	  						a.getMesPresentacion().longValue(), a.getEtapa());
+	  				logger.info("flag operacion:  "+estado);
 					objeto.setCorrelativo(""+a.getCorrelativo()); 
 					objeto.setCodEmpresa(a.getCodEmpresa());
 					objeto.setAnioPres(""+a.getAnoPresentacion());
@@ -69,6 +80,8 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 					objeto.setAnioFinVig(a.getAnoFinVigencia()==null? "---" : ""+a.getAnoFinVigencia()); 
 					objeto.setEtapa(a.getEtapa()==null? "---":a.getEtapa()); 					
 					objeto.setFormato(a.getFormato()); 
+					objeto.setEstadoFormato(FormatoUtil.cambiaTextoAMinusculas(estado, 0));
+					objeto.setFlagOperacion(estado); 
 					lista.add(objeto);
 				}		
 			}				

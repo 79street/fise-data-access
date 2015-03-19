@@ -28,7 +28,6 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	private ArchivoSustentoDao archivoSustentoDao;
 	
 	
-	
 /*****Implementacion de metodos********/
 	
 	
@@ -86,16 +85,18 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	@Transactional
 	public List<ArchivoSustentoBean> listarArchivosSustentoFormato(long correlativo)
 			throws Exception {
-		List<ArchivoSustentoBean> lista = new ArrayList<ArchivoSustentoBean>();	
+		List<ArchivoSustentoBean> lista = new ArrayList<ArchivoSustentoBean>();			
 		try {
+			logger.info("codigo correlativo:  "+correlativo);
 			List<FiseArchivosDet> listaArchivos = archivoSustentoDao.buscarFiseArchivosDet(correlativo);
+			logger.info("Tamanio lista de archivos service:  "+listaArchivos.size()); 
 			for(FiseArchivosDet d : listaArchivos){
 				ArchivoSustentoBean objeto = new ArchivoSustentoBean();
 				objeto.setItemArchivo(""+d.getId().getItem());
 				objeto.setCorrArchivo(""+d.getId().getCorrelativo());
 				objeto.setNombreArchivo(d.getNombreArchivoFisico()==null? "---": ""+d.getNombreArchivoFisico());
 				objeto.setEstadoArchivo(d.getEstado().equals("A")? "Activo": "Inactivo");
-				objeto.setIdFileEntry(""+d.getIdFileLiferay()); 
+				objeto.setIdFileEntry(""+d.getIdFileLiferay()); 				
 				lista.add(objeto);
 			}		
 		} catch (Exception e) {

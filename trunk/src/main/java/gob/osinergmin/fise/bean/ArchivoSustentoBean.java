@@ -58,6 +58,7 @@ public class ArchivoSustentoBean {
 	
 	//para ver si esta abierto, cerrado o enviado el formato
 	private String flagOperacion;
+	private String estadoFormato;
 	
 	/*****Metodos get y set****/	
 	
@@ -253,13 +254,17 @@ public class ArchivoSustentoBean {
 	public void setIdFileEntry(String idFileEntry) {
 		this.idFileEntry = idFileEntry;
 	}
+	public String getEstadoFormato() {
+		return estadoFormato;
+	}
+	public void setEstadoFormato(String estadoFormato) {
+		this.estadoFormato = estadoFormato;
+	}
 	public String getFlagOperacion() {
 		return flagOperacion;
 	}
 	public void setFlagOperacion(String flagOperacion) {
 		this.flagOperacion = flagOperacion;
-	}	
-	
-	
+	}
 	
 }

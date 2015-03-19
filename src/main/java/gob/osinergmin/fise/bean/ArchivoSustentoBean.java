@@ -29,7 +29,7 @@ public class ArchivoSustentoBean {
 	private String usuario;
 	private String terminal;
 	
-	/*******Datos de liquidacion*************/
+	/*******Datos de archivo de sustento*************/
 	private String correlativo;//correlativo de la cabecera del archivo de sustento
 	private String codEmpresa;
 	private String anioPres;
@@ -56,6 +56,8 @@ public class ArchivoSustentoBean {
 	private String mensajeInfo;
 	private String flag;
 	
+	//para ver si esta abierto, cerrado o enviado el formato
+	private String flagOperacion;
 	
 	/*****Metodos get y set****/	
 	
@@ -250,6 +252,12 @@ public class ArchivoSustentoBean {
 	}
 	public void setIdFileEntry(String idFileEntry) {
 		this.idFileEntry = idFileEntry;
+	}
+	public String getFlagOperacion() {
+		return flagOperacion;
+	}
+	public void setFlagOperacion(String flagOperacion) {
+		this.flagOperacion = flagOperacion;
 	}	
 	
 	

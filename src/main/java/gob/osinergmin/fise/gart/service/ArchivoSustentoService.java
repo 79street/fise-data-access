@@ -10,7 +10,8 @@ public interface ArchivoSustentoService {
 				long idGrupoInf,String etapa,String usuario,String terminal,String flagBusq)
 				throws Exception;
 	 
-	 List<ArchivoSustentoBean> listarArchivosSustentoFormato(long correlativo) throws Exception;
+	 List<ArchivoSustentoBean> listarArchivosSustentoFormato(long correlativo)
+			 throws Exception;
 	 
 	 String guardarArchivoSustento(String correlativoF,String nombreArchivo,long idFileEntry,
 				String user,String terminal) throws Exception;

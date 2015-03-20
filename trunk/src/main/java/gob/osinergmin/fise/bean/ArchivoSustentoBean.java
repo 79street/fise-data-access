@@ -60,6 +60,9 @@ public class ArchivoSustentoBean {
 	private String flagOperacion;
 	private String estadoFormato;
 	
+	//para actividades por formato
+	private String itemActividad;
+	
 	/*****Metodos get y set****/	
 	
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -265,6 +268,12 @@ public class ArchivoSustentoBean {
 	}
 	public void setFlagOperacion(String flagOperacion) {
 		this.flagOperacion = flagOperacion;
+	}
+	public String getItemActividad() {
+		return itemActividad;
+	}
+	public void setItemActividad(String itemActividad) {
+		this.itemActividad = itemActividad;
 	}
 	
 }

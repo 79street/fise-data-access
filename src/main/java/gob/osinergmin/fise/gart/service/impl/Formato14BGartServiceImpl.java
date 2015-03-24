@@ -2,6 +2,7 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato14BCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
@@ -9,6 +10,8 @@ import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato14BCDao;
 import gob.osinergmin.fise.dao.Formato14BDDao;
 import gob.osinergmin.fise.dao.Formato14BDObDao;
+import gob.osinergmin.fise.domain.FiseArchivosCab;
+import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseFormato14BC;
 import gob.osinergmin.fise.domain.FiseFormato14BCPK;
 import gob.osinergmin.fise.domain.FiseFormato14BD;
@@ -67,6 +70,12 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 	@Autowired
 	@Qualifier("fiseObservacionDaoImpl")
 	private FiseObservacionDao fiseObservacionDao;
+	
+	
+	@Autowired
+	@Qualifier("archivoSustentoDaoImpl")
+	private ArchivoSustentoDao archivoSustentoDao;
+	
 	
 	@Override
 	@Transactional
@@ -789,7 +798,54 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 			formato14BDDao.eliminarFormato14BD(detalle);
 		}
 		formato14BCDao.eliminarFormato14BC(fiseFormato14BC);
+		//cambios elozano eliminar fiseArchivoCab y su detalle
+		String valor = eliminarArchivoSustentoCab(fiseFormato14BC);
+		logger.info("Valor al eliminar archivos de sustento si es 1= OK caso contrario error:  "+valor);
+		
 	}
+	
+	//@Transactional
+	private String eliminarArchivoSustentoCab(FiseFormato14BC f){
+		String valor = "0";
+		List<FiseArchivosCab> listaCab =null;
+		List<FiseArchivosDet> listaDet = null;
+		try {
+			BigDecimal anioInicioVig = null;
+			BigDecimal anioFinVig = null;
+			if(f.getId().getAnoInicioVigencia()!=0){
+				anioInicioVig = new BigDecimal(f.getId().getAnoInicioVigencia());
+			}
+			if(f.getId().getAnoFinVigencia()!=0){
+				anioFinVig = new BigDecimal(f.getId().getAnoFinVigencia());
+			}			
+			listaCab = archivoSustentoDao.listaFiseArchivosCabBienal(f.getId().getCodEmpresa(),
+					f.getId().getAnoPresentacion(), f.getId().getMesPresentacion(),
+					anioInicioVig, anioFinVig, f.getId().getEtapa(),FiseConstants.NOMBRE_FORMATO_14B);
+			logger.info("tamaño de lista cabecera por formato a borrar:  "+listaCab.size());
+			if(listaCab!=null && listaCab.size()>0){				
+				listaDet = archivoSustentoDao.buscarFiseArchivosDet(listaCab.get(0).getCorrelativo());
+				for(FiseArchivosDet d: listaDet){					
+					archivoSustentoDao.eliminarFiseArchivosDet(d);
+				}
+				archivoSustentoDao.eliminarFiseArchivosCab(listaCab.get(0)); 
+				valor = "1";
+			}		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(listaCab!=null){
+				listaCab = null;	
+			}
+			if(listaDet!=null){
+				listaDet = null;	
+			}
+		}
+		return valor;
+	}
+	
+	
+	
 	
 	//reporte
 	@Override

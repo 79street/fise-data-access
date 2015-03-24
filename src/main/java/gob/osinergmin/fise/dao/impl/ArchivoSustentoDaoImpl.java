@@ -7,6 +7,7 @@ import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseArchivosDetPK;
 import gob.osinergmin.fise.util.FormatoUtil;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
@@ -128,6 +129,11 @@ public class ArchivoSustentoDaoImpl extends GenericDaoImpl implements ArchivoSus
 	}
 	
 	@Override
+	public void eliminarFiseArchivosCab(FiseArchivosCab id) throws SQLException{
+		em.remove(id);
+	}
+	
+	@Override
 	public void eliminarFiseArchivosDet(FiseArchivosDet fiseArchivosDet) 
 			throws SQLException{
 		em.remove(fiseArchivosDet);
@@ -147,6 +153,97 @@ public class ArchivoSustentoDaoImpl extends GenericDaoImpl implements ArchivoSus
 		}
 		return maxId;
 	}
+	
+	
+	/******metodos para eliminar datos de la tabla fiseArchivoCab*****/
+	
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseArchivosCab> listaFiseArchivosCabMensual(String codEmpresa,
+			long anioPres,long mesPres,BigDecimal anioEjec,BigDecimal mesEjec,String etapa,String formato) 
+					throws SQLException{
+		
+		String q = "SELECT a FROM " + FiseArchivosCab.class.getName()
+				+ " a WHERE  a.codEmpresa = :codEmpresa ";				
+		q = q.concat(" AND a.anoPresentacion =:anioPres ");	
+		q = q.concat(" AND a.mesPresentacion =:mesPres ");
+		q = q.concat(" AND a.etapa = :etapa ");	
+		q = q.concat(" AND a.formato = :formato ");	
+		if(anioEjec!=null){ 		
+			q = q.concat(" AND a.anoEjecucionGasto =:anioEjec ");	
+		}
+		if(mesEjec!=null){ 		
+			q = q.concat(" AND a.mesEjecucionGasto =:mesEjec ");	
+		}			
+		Query query = em.createQuery(q); 
+		
+		String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+		
+		query.setParameter("codEmpresa", codEmpreCompleta);
+		query.setParameter("anioPres", anioPres);			
+		query.setParameter("mesPres", mesPres);			
+		query.setParameter("etapa", etapa);			
+		query.setParameter("formato", formato);		
+		if(anioEjec!=null){
+			query.setParameter("anioEjec", anioEjec);			
+		}
+		if(mesEjec!=null){
+			query.setParameter("mesEjec", mesEjec);			
+		}
+		
+		List<FiseArchivosCab> lista= query.getResultList();
+		if(lista==null){
+			return Collections.EMPTY_LIST;
+		}else{
+			return lista;
+		}	
+	}	
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseArchivosCab> listaFiseArchivosCabBienal(String codEmpresa,
+			long anioPres,long mesPres,BigDecimal anioInioVig,BigDecimal anioFinVig,String etapa,String formato) 
+					throws SQLException{
+		
+		String q = "SELECT a FROM " + FiseArchivosCab.class.getName()
+				+ " a WHERE  a.codEmpresa = :codEmpresa ";				
+		q = q.concat(" AND a.anoPresentacion =:anioPres ");	
+		q = q.concat(" AND a.mesPresentacion =:mesPres ");
+		q = q.concat(" AND a.etapa = :etapa ");		
+		q = q.concat(" AND a.formato = :formato ");	
+		
+		if(anioInioVig!=null){ 		
+			q = q.concat(" AND a.anoInicioVigencia =:anioInioVig ");	
+		}
+		if(anioFinVig!=null){ 		
+			q = q.concat(" AND a.anoFinVigencia =:anioFinVig ");	
+		}			
+		Query query = em.createQuery(q); 
+		
+		String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+		
+		query.setParameter("codEmpresa", codEmpreCompleta);
+		query.setParameter("anioPres", anioPres);			
+		query.setParameter("mesPres", mesPres);			
+		query.setParameter("etapa", etapa);			
+		query.setParameter("formato", formato);		
+		
+		if(anioInioVig!=null){
+			query.setParameter("anioInioVig", anioInioVig);			
+		}
+		if(anioFinVig!=null){
+			query.setParameter("anioFinVig", anioFinVig);			
+		}
+		
+		List<FiseArchivosCab> lista= query.getResultList();
+		if(lista==null){
+			return Collections.EMPTY_LIST;
+		}else{
+			return lista;
+		}	
+	}
+	
 	
 	
 	

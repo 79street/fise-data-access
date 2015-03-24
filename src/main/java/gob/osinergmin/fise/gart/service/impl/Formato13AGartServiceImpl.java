@@ -3,6 +3,7 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.Formato13ACBean;
 import gob.osinergmin.fise.bean.Formato13ADReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
@@ -10,6 +11,8 @@ import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato13ACDao;
 import gob.osinergmin.fise.dao.Formato13ADDao;
 import gob.osinergmin.fise.dao.Formato13ADObDao;
+import gob.osinergmin.fise.domain.FiseArchivosCab;
+import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseFormato13AC;
 import gob.osinergmin.fise.domain.FiseFormato13ACPK;
 import gob.osinergmin.fise.domain.FiseFormato13AD;
@@ -21,6 +24,7 @@ import gob.osinergmin.fise.domain.FiseObservacion;
 import gob.osinergmin.fise.gart.service.Formato13AGartService;
 import gob.osinergmin.fise.util.FechaUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -66,6 +70,10 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Autowired
 	@Qualifier("fiseZonaBenefDaoImpl")
 	private FiseZonaBenefDao zonaBenefDao;
+	
+	@Autowired
+	@Qualifier("archivoSustentoDaoImpl")
+	private ArchivoSustentoDao archivoSustentoDao;
 	
 	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa,
 			long anioDesde, long mesDesde, long anioHasta, long mesHasta,
@@ -190,8 +198,47 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			}
 			formato13ADDao.eliminarFormato13AD(detalle);
 		}
-		formato13ACDao.eliminarFormato13AC(fiseFormato13AC);
+		formato13ACDao.eliminarFormato13AC(fiseFormato13AC);		
+		//cambios elozano eliminar fiseArchivoCab y su detalle
+		String valor = eliminarArchivoSustentoCab(fiseFormato13AC);
+		logger.info("Valor al eliminar archivos de sustento si es 1= OK caso contrario error:  "+valor); 
 	}
+
+	//@Transactional
+	private String eliminarArchivoSustentoCab(FiseFormato13AC f){
+		String valor = "0";
+		List<FiseArchivosCab> listaCab =null;
+		List<FiseArchivosDet> listaDet = null;
+		try {
+			BigDecimal anioInioVig = null;
+			BigDecimal anioFinVig = null;					
+			listaCab = archivoSustentoDao.listaFiseArchivosCabBienal(f.getId().getCodEmpresa(),
+					f.getId().getAnoPresentacion(), f.getId().getMesPresentacion(),
+					anioInioVig, anioFinVig, f.getId().getEtapa(),FiseConstants.NOMBRE_FORMATO_13A);
+			logger.info("tamaño de lista cabecera por formato a borrar:  "+listaCab.size());
+			if(listaCab!=null && listaCab.size()>0){				
+				listaDet = archivoSustentoDao.buscarFiseArchivosDet(listaCab.get(0).getCorrelativo());
+				for(FiseArchivosDet d: listaDet){					
+					archivoSustentoDao.eliminarFiseArchivosDet(d);
+				}
+				archivoSustentoDao.eliminarFiseArchivosCab(listaCab.get(0)); 
+				valor = "1";
+			}		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(listaCab!=null){
+				listaCab = null;	
+			}
+			if(listaDet!=null){
+				listaDet = null;	
+			}
+		}
+		return valor;
+	}
+	
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

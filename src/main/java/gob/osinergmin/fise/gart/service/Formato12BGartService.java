@@ -48,6 +48,8 @@ public interface Formato12BGartService {
 	 
 	 FiseFormato12BC registrarFormato12BC(Formato12BCBean formato) throws Exception;
 	 FiseFormato12BC modificarFormato12BC(Formato12BCBean formato, FiseFormato12BC fiseFormato12BC) throws Exception;
+	 
+	 String eliminarArchivoSustentoCab(FiseFormato12BCPK f) throws Exception;
 
 
 }

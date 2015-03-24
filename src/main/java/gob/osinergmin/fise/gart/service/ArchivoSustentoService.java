@@ -1,6 +1,7 @@
 package gob.osinergmin.fise.gart.service;
 
 import gob.osinergmin.fise.bean.ArchivoSustentoBean;
+import gob.osinergmin.fise.domain.FiseDescripcionActividade;
 
 import java.util.List;
 
@@ -14,11 +15,14 @@ public interface ArchivoSustentoService {
 			 throws Exception;
 	 
 	 String guardarArchivoSustento(String correlativoF,String nombreArchivo,long idFileEntry,
-				String user,String terminal) throws Exception;
+			 String formatoActiv,String itemActiv,String user,String terminal) throws Exception;
 	 
 	 String actualizarArchivoSustento(String itemArchivo,String correlativoArchivo,String nombreArchivo,
-				long idFileEntry,String user,String terminal) throws Exception;
+				long idFileEntry,String formatoActiv,String itemActiv,String user,String terminal) throws Exception;
 	 
 	 String eliminarArchivoSustento(String itemArchivo,String correlativoArchivo) throws Exception;
+	 
+	 List<FiseDescripcionActividade> listarDescripcionActividades(String formato) 
+				throws Exception;
 
 }

@@ -61,7 +61,14 @@ public class ArchivoSustentoBean {
 	private String estadoFormato;
 	
 	//para actividades por formato
-	private String itemActividad;
+	private String itemActividad;//item en la tabla fisedescripcionActividades
+	private String descripcionActiv;
+	private String formatoActiv;
+	/*private List<FiseDescripcionActividade> listaActividades;
+	
+	private String formatoActividad;//formato de la actividad
+	private String desActividad;//descripcion de la actividad*/
+	
 	
 	/*****Metodos get y set****/	
 	
@@ -275,5 +282,20 @@ public class ArchivoSustentoBean {
 	public void setItemActividad(String itemActividad) {
 		this.itemActividad = itemActividad;
 	}
+	public String getDescripcionActiv() {
+		return descripcionActiv;
+	}
+	public void setDescripcionActiv(String descripcionActiv) {
+		this.descripcionActiv = descripcionActiv;
+	}
+	public String getFormatoActiv() {
+		return formatoActiv;
+	}
+	public void setFormatoActiv(String formatoActiv) {
+		this.formatoActiv = formatoActiv;
+	}
+	
+	
+	
 	
 }

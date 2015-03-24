@@ -29,7 +29,7 @@ public class FiseArchivosCab implements Serializable {
 	private BigDecimal anoInicioVigencia;
 
 	@Column(name="ANO_PRESENTACION")
-	private BigDecimal anoPresentacion;
+	private long anoPresentacion;
 
 	@Column(name="COD_EMPRESA")
 	private String codEmpresa;
@@ -50,7 +50,7 @@ public class FiseArchivosCab implements Serializable {
 	private BigDecimal mesEjecucionGasto;
 
 	@Column(name="MES_PRESENTACION")
-	private BigDecimal mesPresentacion;
+	private long mesPresentacion;
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -108,11 +108,11 @@ public class FiseArchivosCab implements Serializable {
 		this.anoInicioVigencia = anoInicioVigencia;
 	}
 
-	public BigDecimal getAnoPresentacion() {
+	public long getAnoPresentacion() {
 		return this.anoPresentacion;
 	}
 
-	public void setAnoPresentacion(BigDecimal anoPresentacion) {
+	public void setAnoPresentacion(long anoPresentacion) {
 		this.anoPresentacion = anoPresentacion;
 	}
 
@@ -164,11 +164,11 @@ public class FiseArchivosCab implements Serializable {
 		this.mesEjecucionGasto = mesEjecucionGasto;
 	}
 
-	public BigDecimal getMesPresentacion() {
+	public long getMesPresentacion() {
 		return this.mesPresentacion;
 	}
 
-	public void setMesPresentacion(BigDecimal mesPresentacion) {
+	public void setMesPresentacion(long mesPresentacion) {
 		this.mesPresentacion = mesPresentacion;
 	}
 

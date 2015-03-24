@@ -2,6 +2,7 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato12BCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
@@ -9,6 +10,8 @@ import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12BCDao;
 import gob.osinergmin.fise.dao.Formato12BDDao;
 import gob.osinergmin.fise.dao.Formato12BDObDao;
+import gob.osinergmin.fise.domain.FiseArchivosCab;
+import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseFormato12BC;
 import gob.osinergmin.fise.domain.FiseFormato12BCPK;
 import gob.osinergmin.fise.domain.FiseFormato12BD;
@@ -69,6 +72,12 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	@Qualifier("fiseZonaBenefDaoImpl")
 	private FiseZonaBenefDao zonaBenefDao;
 	
+	@Autowired
+	@Qualifier("archivoSustentoDaoImpl")
+	private ArchivoSustentoDao archivoSustentoDao;
+	
+	
+	
 	@Override
 	public List<FiseFormato12BC> getLstFormatoCabecera(String codemp, Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta, String etapa) {
 		return formato12BCDao.getLstFormatoCabecera(codemp, anioDesde, mesDesde, anioHasta, mesHasta, etapa);
@@ -99,6 +108,47 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	@Transactional
 	public Integer deleteFormatoCabecera(FiseFormato12BCPK id) throws DataIntegrityViolationException,Exception{
 		return formato12BCDao.deleteFormatoCabecera(id);
+	}
+	
+	//cambios elozano
+	@Transactional
+	public String eliminarArchivoSustentoCab(FiseFormato12BCPK f) throws Exception{
+		String valor = "0";
+		List<FiseArchivosCab> listaCab =null;
+		List<FiseArchivosDet> listaDet = null;
+		try {
+			BigDecimal anioEjec = null;
+			BigDecimal mesEjec = null;
+			if(f.getAnoEjecucionGasto()!=0){
+				anioEjec = new 	BigDecimal(f.getAnoEjecucionGasto());
+			}
+			if(f.getMesEjecucionGasto()!=0){
+				mesEjec = new BigDecimal(f.getMesEjecucionGasto());
+			}			
+			listaCab = archivoSustentoDao.listaFiseArchivosCabMensual(f.getCodEmpresa(),
+					Long.valueOf(f.getAnoPresentacion()), Long.valueOf(f.getMesPresentacion()),
+					anioEjec, mesEjec, f.getEtapa(),FiseConstants.NOMBRE_FORMATO_12B);
+			logger.error("tamaño de lista cabecera por formato a borrar:  "+listaCab.size());
+			if(listaCab!=null && listaCab.size()>0){				
+				listaDet = archivoSustentoDao.buscarFiseArchivosDet(listaCab.get(0).getCorrelativo());
+				for(FiseArchivosDet d: listaDet){					
+					archivoSustentoDao.eliminarFiseArchivosDet(d);
+				}
+				archivoSustentoDao.eliminarFiseArchivosCab(listaCab.get(0)); 
+				valor = "1";
+			}		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(listaCab!=null){
+				listaCab = null;	
+			}
+			if(listaDet!=null){
+				listaDet = null;	
+			}
+		}
+		return valor;
 	}
 
 	@Override

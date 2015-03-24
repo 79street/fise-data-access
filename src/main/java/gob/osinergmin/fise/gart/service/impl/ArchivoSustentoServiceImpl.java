@@ -3,9 +3,12 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.ArchivoSustentoBean;
 import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
+import gob.osinergmin.fise.dao.FiseActividadesDao;
 import gob.osinergmin.fise.domain.FiseArchivosCab;
 import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseArchivosDetPK;
+import gob.osinergmin.fise.domain.FiseDescripcionActividade;
+import gob.osinergmin.fise.domain.FiseDescripcionActividadePK;
 import gob.osinergmin.fise.gart.service.ArchivoSustentoService;
 import gob.osinergmin.fise.util.FechaUtil;
 import gob.osinergmin.fise.util.FormatoUtil;
@@ -33,6 +36,10 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	@Autowired
 	@Qualifier("commonDaoImpl")
 	private CommonDao commonDao;
+	
+	@Autowired
+	@Qualifier("fiseActividadesDaoImpl")
+	private FiseActividadesDao fiseActividadesDao;
 	
 /*****Implementacion de metodos********/
 	
@@ -67,8 +74,8 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 					ArchivoSustentoBean objeto = new ArchivoSustentoBean();
 					/**Obteniendo el flag de la operacion*/
 	  				String estado = commonDao.obtenerEstadoProceso(a.getCodEmpresa(),
-	  						a.getFormato(),a.getAnoPresentacion().longValue(),
-	  						a.getMesPresentacion().longValue(), a.getEtapa());
+	  						a.getFormato(),a.getAnoPresentacion(),
+	  						a.getMesPresentacion(), a.getEtapa());
 	  				logger.info("flag operacion:  "+estado);
 					objeto.setCorrelativo(""+a.getCorrelativo()); 
 					objeto.setCodEmpresa(a.getCodEmpresa());
@@ -110,6 +117,10 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 				objeto.setNombreArchivo(d.getNombreArchivoFisico()==null? "---": ""+d.getNombreArchivoFisico());
 				objeto.setEstadoArchivo(d.getEstado().equals("A")? "Activo": "Inactivo");
 				objeto.setIdFileEntry(""+d.getIdFileLiferay()); 				
+				objeto.setItemActividad(d.getFiseDescripcionActividade()==null? " ":
+					d.getFiseDescripcionActividade().getId().getFormato()+"/"+d.getFiseDescripcionActividade().getId().getItem());				
+				objeto.setDescripcionActiv(d.getFiseDescripcionActividade()==null ? 
+						" ": d.getFiseDescripcionActividade().getDescripcion());
 				lista.add(objeto);
 			}		
 		} catch (Exception e) {
@@ -123,14 +134,24 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	@Override
 	@Transactional
 	public String guardarArchivoSustento(String correlativoF,String nombreArchivo,long idFileEntry,
-			String user,String terminal) throws Exception{
+			String formatoActiv,String itemActiv,String user,String terminal) throws Exception{
 		String valor = "0";
 		FiseArchivosDet archivoDet = null;
-		FiseArchivosDetPK pk = null;			
+		FiseArchivosDetPK pk = null;	
+		FiseDescripcionActividadePK pkAct= null;
+		FiseDescripcionActividade objActiv =null;
 		try {			
 			archivoDet = new FiseArchivosDet();
-			pk = new FiseArchivosDetPK();
+			pk = new FiseArchivosDetPK();		
 			long itemArchivo = archivoSustentoDao.buscarMaximoItemArchivo(Long.valueOf(correlativoF));
+			//para actividades			
+			if(FormatoUtil.isNotBlank(formatoActiv) && 
+					FormatoUtil.isNotBlank(itemActiv)){
+				pkAct = new FiseDescripcionActividadePK();
+				pkAct.setFormato(formatoActiv);
+				pkAct.setItem(itemActiv);
+				objActiv = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(pkAct);
+			}						
 			logger.info("Item archivo:   "+itemArchivo); 
 			pk.setItem(itemArchivo);
 			pk.setCorrelativo(Long.valueOf(correlativoF));		
@@ -138,6 +159,7 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 			archivoDet.setNombreArchivoFisico(nombreArchivo);
 			archivoDet.setEstado("A");
 			archivoDet.setIdFileLiferay(idFileEntry); 
+			archivoDet.setFiseDescripcionActividade(objActiv); 
 			archivoDet.setUsuarioCreacion(user);
 			archivoDet.setTerminalCreacion(terminal);
 			archivoDet.setFechaCreacion(FechaUtil.obtenerFechaActual());
@@ -152,7 +174,13 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 			}
 			if(pk!=null){
 				pk=null;
-			}			
+			}
+			if(pkAct!=null){
+				pkAct=null;
+			}
+			if(objActiv!=null){
+				objActiv=null;
+			}	
 		}
 		return valor;
 	}
@@ -161,17 +189,28 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 	@Override
 	@Transactional
 	public String actualizarArchivoSustento(String itemArchivo,String correlativoArchivo,String nombreArchivo,
-			long idFileEntry,String user,String terminal) throws Exception{
+			long idFileEntry,String formatoActiv,String itemActiv,String user,String terminal) throws Exception{
 		String valor = "0";
 		FiseArchivosDet archivoDet = null;
-		FiseArchivosDetPK pk = null;		
+		FiseArchivosDetPK pk = null;	
+		FiseDescripcionActividadePK pkAct= null;
+		FiseDescripcionActividade objActiv =null;
 		try {
 			pk = new FiseArchivosDetPK();
-			pk.setItem(Long.valueOf(itemArchivo)); 	
+			pk.setItem(Long.valueOf(itemArchivo));			
+			//para actividades			
+			if(FormatoUtil.isNotBlank(formatoActiv) && 
+					FormatoUtil.isNotBlank(itemActiv)){
+				pkAct = new FiseDescripcionActividadePK();
+				pkAct.setFormato(formatoActiv);
+				pkAct.setItem(itemActiv);
+				objActiv = fiseActividadesDao.obtenerFiseDescripcionActividadeByPK(pkAct);
+			}	
 			pk.setCorrelativo(Long.valueOf(correlativoArchivo));		
 			archivoDet = archivoSustentoDao.obtenerFiseArchivosDet(pk);	
 			archivoDet.setNombreArchivoFisico(nombreArchivo);
 			archivoDet.setIdFileLiferay(idFileEntry); 
+			archivoDet.setFiseDescripcionActividade(objActiv); 
 			archivoDet.setUsuarioActualizacion(user);
 			archivoDet.setTerminalActualizacion(terminal);
 			archivoDet.setFechaActualizacion(FechaUtil.obtenerFechaActual());
@@ -186,7 +225,13 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 			}
 			if(pk!=null){
 				pk=null;
-			}			
+			}	
+			if(pkAct!=null){
+				pkAct=null;
+			}
+			if(objActiv!=null){
+				objActiv=null;
+			}	
 		}
 		return valor;
 	}
@@ -217,6 +262,17 @@ public class ArchivoSustentoServiceImpl implements ArchivoSustentoService {
 			}			
 		}
 		return valor;
+	}
+	
+	
+	/*****Metodos para listar las actividades 
+	 *  para la carga de un archivo de sustento* * **/
+	
+	@Override
+	@Transactional
+	public List<FiseDescripcionActividade> listarDescripcionActividades(String formato) 
+			throws Exception{		
+		return fiseActividadesDao.listarDescripcionActividade(formato); 
 	}
 	
 	

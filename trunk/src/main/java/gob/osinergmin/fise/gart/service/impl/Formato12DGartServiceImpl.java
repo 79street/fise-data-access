@@ -2,6 +2,7 @@ package gob.osinergmin.fise.gart.service.impl;
 
 import gob.osinergmin.fise.bean.Formato12DCBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
@@ -9,6 +10,8 @@ import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato12DCDao;
 import gob.osinergmin.fise.dao.Formato12DDDao;
 import gob.osinergmin.fise.dao.Formato12DDObDao;
+import gob.osinergmin.fise.domain.FiseArchivosCab;
+import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseFormato12DC;
 import gob.osinergmin.fise.domain.FiseFormato12DCPK;
 import gob.osinergmin.fise.domain.FiseFormato12DD;
@@ -66,6 +69,10 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 	@Autowired
 	@Qualifier("fiseObservacionDaoImpl")
 	private FiseObservacionDao fiseObservacionDao;
+	
+	@Autowired
+	@Qualifier("archivoSustentoDaoImpl")
+	private ArchivoSustentoDao archivoSustentoDao;
 	
 	@Override
 	@Transactional
@@ -756,7 +763,46 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 			formato12DDDao.eliminarFormato12DD(detalle);
 		}
 		formato12DCDao.eliminarFormato12DC(fiseFormato12DC);
+		//cambios elozano eliminar fiseArchivoCab y su detalle
+		String valor = eliminarArchivoSustentoCab(fiseFormato12DC);
+		logger.info("Valor al eliminar archivos de sustento si es 1= OK caso contrario error:  "+valor); 
 	}
+	
+	//@Transactional
+	private String eliminarArchivoSustentoCab(FiseFormato12DC f){
+		String valor = "0";
+		List<FiseArchivosCab> listaCab =null;
+		List<FiseArchivosDet> listaDet = null;
+		try {
+			BigDecimal anioEjec = null;
+			BigDecimal mesEjec = null;					
+			listaCab = archivoSustentoDao.listaFiseArchivosCabMensual(f.getId().getCodEmpresa(),
+					f.getId().getAnoPresentacion(), f.getId().getMesPresentacion(),
+					anioEjec, mesEjec, f.getId().getEtapa(),FiseConstants.NOMBRE_FORMATO_12D);
+			logger.info("tamaño de lista cabecera por formato a borrar:  "+listaCab.size());
+			if(listaCab!=null && listaCab.size()>0){				
+				listaDet = archivoSustentoDao.buscarFiseArchivosDet(listaCab.get(0).getCorrelativo());
+				for(FiseArchivosDet d: listaDet){					
+					archivoSustentoDao.eliminarFiseArchivosDet(d);
+				}
+				archivoSustentoDao.eliminarFiseArchivosCab(listaCab.get(0)); 
+				valor = "1";
+			}		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(listaCab!=null){
+				listaCab = null;	
+			}
+			if(listaDet!=null){
+				listaDet = null;	
+			}
+		}
+		return valor;
+	}
+	
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

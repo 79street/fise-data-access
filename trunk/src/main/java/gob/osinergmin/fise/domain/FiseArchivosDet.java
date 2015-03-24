@@ -49,6 +49,16 @@ public class FiseArchivosDet implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CORRELATIVO",nullable=false, insertable=false, updatable=false)
 	private FiseArchivosCab fiseArchivosCab;
+	
+	//bi-directional many-to-one association to FiseDescripcionActividade	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumns({
+		@JoinColumn(name="FORMATO", referencedColumnName="FORMATO",nullable=true,insertable=true, updatable=true),
+		@JoinColumn(name="ITEM_FORMATO", referencedColumnName="ITEM",nullable=true,insertable=true, updatable=true)
+	})
+	private FiseDescripcionActividade fiseDescripcionActividade;
+		
+		
 
 	public FiseArchivosDet() {
 	}
@@ -141,7 +151,13 @@ public class FiseArchivosDet implements Serializable {
 		this.idFileLiferay = idFileLiferay;
 	}
 	
-	
+	public FiseDescripcionActividade getFiseDescripcionActividade() {
+		return this.fiseDescripcionActividade;
+	}
+
+	public void setFiseDescripcionActividade(FiseDescripcionActividade fiseDescripcionActividade) {
+		this.fiseDescripcionActividade = fiseDescripcionActividade;
+	}
 	
 
 }

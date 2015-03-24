@@ -3,6 +3,7 @@ package gob.osinergmin.fise.gart.service.impl;
 import gob.osinergmin.fise.bean.Formato14CBean;
 import gob.osinergmin.fise.bean.Formato14CReportBean;
 import gob.osinergmin.fise.constant.FiseConstants;
+import gob.osinergmin.fise.dao.ArchivoSustentoDao;
 import gob.osinergmin.fise.dao.CommonDao;
 import gob.osinergmin.fise.dao.FiseGrupoInformacionDao;
 import gob.osinergmin.fise.dao.FiseObservacionDao;
@@ -11,6 +12,8 @@ import gob.osinergmin.fise.dao.FiseZonaBenefDao;
 import gob.osinergmin.fise.dao.Formato14CCDao;
 import gob.osinergmin.fise.dao.Formato14CDDao;
 import gob.osinergmin.fise.dao.Formato14CDObDao;
+import gob.osinergmin.fise.domain.FiseArchivosCab;
+import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseFormato14CC;
 import gob.osinergmin.fise.domain.FiseFormato14CCPK;
 import gob.osinergmin.fise.domain.FiseFormato14CD;
@@ -38,9 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service(value="formato14CGartServiceImpl")
 public class Formato14CGartServiceImpl implements Formato14CGartService {
 	
-    Logger logger=Logger.getLogger(Formato14CGartServiceImpl.class);
-   
-    
+    Logger logger=Logger.getLogger(Formato14CGartServiceImpl.class);   
     
 	@Autowired
 	@Qualifier("formato14CCDaoImpl")
@@ -75,6 +76,9 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Qualifier("fiseObservacionDaoImpl")
 	private FiseObservacionDao fiseObservacionDao;
 	
+	@Autowired
+	@Qualifier("archivoSustentoDaoImpl")
+	private ArchivoSustentoDao archivoSustentoDao;
 	
 	
 	/**Metodo para listar el formato 14C*/
@@ -2140,7 +2144,11 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 				formato14CDDao.eliminarFiseFormato14CD(det); 
 			}//fin del for de detalle
 			/****Tercero  elimino los detalles*****/
-			formato14CCDao.eliminarFiseFormato14CC(cab); 
+			formato14CCDao.eliminarFiseFormato14CC(cab); 			
+			//cambios elozano eliminar fiseArchivoCab y su detalle
+			String valorArchi = eliminarArchivoSustentoCab(cab);
+			logger.info("Valor al eliminar archivos de sustento si es 1= OK caso contrario error:  "+valorArchi);
+			
 		} catch (Exception e) {
 			logger.info("Error al eliminar el formato 14C:  "+e);
 			e.printStackTrace();
@@ -2167,6 +2175,49 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		}
 		return valor;
 	}
+	
+	//@Transactional
+	private String eliminarArchivoSustentoCab(FiseFormato14CC f){
+		String valor = "0";
+		List<FiseArchivosCab> listaCab =null;
+		List<FiseArchivosDet> listaDet = null;
+		try {
+			BigDecimal anioInicioVig = null;
+			BigDecimal anioFinVig = null;
+			if(f.getId().getAnoInicioVigencia()!=0){
+				anioInicioVig = new BigDecimal(f.getId().getAnoInicioVigencia());
+			}
+			if(f.getId().getAnoFinVigencia()!=0){
+				anioFinVig = new BigDecimal(f.getId().getAnoFinVigencia());
+			}			
+			listaCab = archivoSustentoDao.listaFiseArchivosCabBienal(f.getId().getCodEmpresa(),
+					f.getId().getAnoPresentacion(), f.getId().getMesPresentacion(),
+					anioInicioVig, anioFinVig, f.getId().getEtapa(),FiseConstants.NOMBRE_FORMATO_14C);
+			logger.info("tamaño de lista cabecera por formato a borrar:  "+listaCab.size());
+			if(listaCab!=null && listaCab.size()>0){				
+				listaDet = archivoSustentoDao.buscarFiseArchivosDet(listaCab.get(0).getCorrelativo());
+				for(FiseArchivosDet d: listaDet){					
+					archivoSustentoDao.eliminarFiseArchivosDet(d);
+				}
+				archivoSustentoDao.eliminarFiseArchivosCab(listaCab.get(0)); 
+				valor = "1";
+			}		
+		} catch (Exception e) {
+			//e.printStackTrace();
+			valor = "0";
+		}finally{
+			if(listaCab!=null){
+				listaCab = null;	
+			}
+			if(listaDet!=null){
+				listaDet = null;	
+			}
+		}
+		return valor;
+	}
+	
+	
+	
 	
 	@Override
 	@Transactional

@@ -43,6 +43,11 @@ public class FiseDescripcionActividade implements Serializable {
 	//bi-directional many-to-one association to FiseLiquidacionesMotivosNo
 	@OneToMany(mappedBy="fiseDescripcionActividade")
 	private List<FiseLiquidacionesMotivosNo> fiseLiquidacionesMotivosNos;
+	
+	//bi-directional many-to-one association to FiseArchivosDet	
+	@OneToMany(mappedBy="fiseDescripcionActividade")
+	private List<FiseArchivosDet> fiseArchivosDets;
+
 
 	public FiseDescripcionActividade() {
 	}
@@ -132,5 +137,28 @@ public class FiseDescripcionActividade implements Serializable {
 
 		return fiseLiquidacionesMotivosNo;
 	}	
+	
+	
+	public List<FiseArchivosDet> getFiseArchivosDets() {
+		return this.fiseArchivosDets;
+	}
+
+	public void setFiseArchivosDets(List<FiseArchivosDet> fiseArchivosDets) {
+		this.fiseArchivosDets = fiseArchivosDets;
+	}
+
+	public FiseArchivosDet addFiseArchivosDet(FiseArchivosDet fiseArchivosDet) {
+		getFiseArchivosDets().add(fiseArchivosDet);
+		fiseArchivosDet.setFiseDescripcionActividade(this);
+
+		return fiseArchivosDet;
+	}
+
+	public FiseArchivosDet removeFiseArchivosDet(FiseArchivosDet fiseArchivosDet) {
+		getFiseArchivosDets().remove(fiseArchivosDet);
+		fiseArchivosDet.setFiseDescripcionActividade(null);
+
+		return fiseArchivosDet;
+	}
 
 }

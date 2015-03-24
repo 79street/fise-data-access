@@ -4,6 +4,7 @@ import gob.osinergmin.fise.domain.FiseArchivosCab;
 import gob.osinergmin.fise.domain.FiseArchivosDet;
 import gob.osinergmin.fise.domain.FiseArchivosDetPK;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,5 +33,15 @@ public interface ArchivoSustentoDao {
 			throws SQLException;
 	
 	long buscarMaximoItemArchivo(long correlativo) throws SQLException;
+	
+	void eliminarFiseArchivosCab(FiseArchivosCab id) throws SQLException;
+	
+	List<FiseArchivosCab> listaFiseArchivosCabMensual(String codEmpresa,
+			long anioPres,long mesPres,BigDecimal anioEjec,BigDecimal mesEjec,String etapa,String formato) 
+					throws SQLException;
+	
+	List<FiseArchivosCab> listaFiseArchivosCabBienal(String codEmpresa,
+			long anioPres,long mesPres,BigDecimal anioInioVig,BigDecimal anioFinVig,String etapa,String formato) 
+					throws SQLException;
 
 }

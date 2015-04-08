@@ -133,13 +133,17 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			BigDecimal total = new BigDecimal(0);
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
 			//RURAL
-			if( formulario.getNroEmpadR() != 0 ||
+			
+			boolean cambio = true; //cambio elozano
+			
+			/*if( formulario.getNroEmpadR() != 0 ||
 					//!formulario.getCostoUnitEmpadR().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentR() != 0 //&&
 					//!formulario.getCostoUnitAgentR().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalR().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordR().equals(BigDecimal.ZERO) 
-					){
+					){*/
+			  if(cambio){
 				logger.info("entro a RURAL");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
@@ -191,13 +195,14 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroEmpadP() != 0 ||
+			/*if( formulario.getNroEmpadP() != 0 ||
 					//!formulario.getCostoUnitEmpadP().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentP() != 0 //&&
 					//!formulario.getCostoUnitAgentP().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalP().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordP().equals(BigDecimal.ZERO) 
-					){
+					){*/
+			  if(cambio){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
@@ -249,13 +254,16 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroEmpadL() != 0 ||
+			/*if( formulario.getNroEmpadL() != 0 ||
 					//!formulario.getCostoUnitEmpadL().equals(BigDecimal.ZERO) &&
 					formulario.getNroAgentL() != 0 //&&
 					//!formulario.getCostoUnitAgentL().equals(BigDecimal.ZERO) &&
 					//!formulario.getDesplPersonalL().equals(BigDecimal.ZERO) &&
 					//!formulario.getActivExtraordL().equals(BigDecimal.ZERO) 
-					){
+					){*/
+			  if(FiseConstants.COD_EMPRESA_EDELNOR.equals(formulario.getCodigoEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(formulario.getCodigoEmpresa().trim()))
+				{
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
@@ -314,8 +322,6 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setTerminalCreacion(formulario.getTerminal());
 			fiseFormato12AC.setFechaCreacion(hoy);
 			
-			
-			
 			logger.info("aca se va  a guardar"+fiseFormato12AC);
 			//fiseFormato12AC = (FiseFormato12AC) TrimUtil.trimReflective(fiseFormato12AC);
 			
@@ -328,10 +334,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 					formato12ACDao.registrarFormato12AC(fiseFormato12AC);
 				}catch(Exception e){
 					throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
-				}
-				
-			}
-			
+				}				
+			}			
 			//add
 			for (FiseFormato12AD detalle : lista) {
 				try{

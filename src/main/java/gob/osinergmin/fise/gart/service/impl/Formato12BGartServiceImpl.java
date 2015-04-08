@@ -651,16 +651,13 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			id.setAnoPresentacion((int)formulario.getAnioPresent());
 			id.setMesPresentacion((int)formulario.getMesPresent());
 			id.setAnoEjecucionGasto(id.getAnoPresentacion());
-			id.setMesEjecucionGasto(id.getMesPresentacion());
-			//id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
+			id.setMesEjecucionGasto(id.getMesPresentacion());			
 			id.setEtapa(formulario.getEtapa());
 			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12BC.setNombreArchivoExcel(formulario.getNombreArchivo());
 			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12BC.setNombreArchivoTexto(formulario.getNombreArchivo());
-			}/*else{
-				id.setEtapa(formulario.getEtapa());
-			}*/
+			}
 			
 			fiseFormato12BC.setId(id);
 			
@@ -675,14 +672,15 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			List<FiseFormato12BD> lista = new ArrayList<FiseFormato12BD>();
 			
 			//RURAL
-			if( formulario.getNroValeImpR() != 0 ||
+			boolean cambio = true; //cambio elozano
+			
+			/*if( formulario.getNroValeImpR() != 0 ||
 					formulario.getNroValReparDomicR() != 0 ||
 					formulario.getNroValEntDisElR() != 0 ||
 					formulario.getNroValFisiCanjR() != 0 ||
 					formulario.getNroValDigitCanjR() != 0 ||
-					formulario.getNroAtencionesR() != 0 
-		
-					){
+					formulario.getNroAtencionesR() != 0 ){*/
+			 if(cambio){ 	
 				logger.info("entro a RURAL");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
@@ -758,13 +756,13 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
-			if( formulario.getNroValeImpP() != 0 ||
+			/*if( formulario.getNroValeImpP() != 0 ||
 					formulario.getNroValReparDomicP() != 0 ||
 					formulario.getNroValEntDisElP() != 0 ||
 					formulario.getNroValFisiCanjP() != 0 ||
 					formulario.getNroValDigitCanjP() != 0 ||
-					formulario.getNroAtencionesP() != 0 
-					){
+					formulario.getNroAtencionesP() != 0 ){*/
+			 if(cambio){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
@@ -840,13 +838,15 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( formulario.getNroValeImpL() != 0 ||
+			/*if( formulario.getNroValeImpL() != 0 ||
 					formulario.getNroValReparDomicL() != 0 ||
 					formulario.getNroValEntDisElL() != 0 ||
 					formulario.getNroValFisiCanjL() != 0 ||
 					formulario.getNroValDigitCanjL() != 0 ||
-					formulario.getNroAtencionesL() != 0 
-					){
+					formulario.getNroAtencionesL() != 0){*/
+			 if(FiseConstants.COD_EMPRESA_EDELNOR.equals(formulario.getCodigoEmpresa()) || 
+						FiseConstants.COD_EMPRESA_LUZ_SUR.equals(formulario.getCodigoEmpresa().trim()))
+				{
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);

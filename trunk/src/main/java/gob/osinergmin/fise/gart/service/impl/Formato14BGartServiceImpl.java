@@ -1295,14 +1295,12 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 
 	@Override
 	public FiseFormato14BD getCostoUnitarioByEmpAnioZona(String codEmpresa, Integer anio,Integer mes, Integer idZona, String etp) {
-		// TODO Auto-generated method stub
-		return formato14BDDao.getCostoUnitarioByEmpAnioZona(codEmpresa, anio,mes, idZona, etp);
+			return formato14BDDao.getCostoUnitarioByEmpAnioZona(codEmpresa, anio,mes, idZona, etp);
 	}
 
 	@Override
 	public List<FiseFormato14BD> getLstCostoUnitarioByEmpAnio(String codEmpresa, Integer anio,Integer mes, Integer idZona, String etp) {
-		// TODO Auto-generated method stub
-		return formato14BDDao.getLstCostoUnitarioByEmpAnio(codEmpresa, anio,mes, idZona, etp);
+			return formato14BDDao.getLstCostoUnitarioByEmpAnio(codEmpresa, anio,mes, idZona, etp);
 	}
 
 	

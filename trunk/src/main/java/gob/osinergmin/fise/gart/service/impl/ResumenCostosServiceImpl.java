@@ -633,7 +633,5 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 		}
 		return lista;
 	}
-	
-	
 
 }

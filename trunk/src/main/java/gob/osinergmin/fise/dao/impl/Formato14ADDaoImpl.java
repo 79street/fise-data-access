@@ -6,6 +6,7 @@ import gob.osinergmin.fise.dao.Formato14ADDao;
 import gob.osinergmin.fise.domain.FiseFormato14AC;
 import gob.osinergmin.fise.domain.FiseFormato14AD;
 import gob.osinergmin.fise.domain.FiseFormato14ADPK;
+import gob.osinergmin.fise.domain.FiseGrupoInformacion;
 import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.util.List;
@@ -94,9 +95,9 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 		return lista;
 	}
 	
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	//@Override
-	public FiseFormato14AD obtenerFormato14ADVigente(String codEmpresa, long anioVigencia, long idZonaBenef) {
+	public FiseFormato14AD obtenerFormato14ADVigente_original(String codEmpresa, long anioVigencia, long idZonaBenef) {
 		List<FiseFormato14AD> lista = null;
 		FiseFormato14AD objeto = null;
 		try{
@@ -136,7 +137,64 @@ public class Formato14ADDaoImpl extends GenericDaoImpl implements Formato14ADDao
 			 em.close();
 		 }
 		return objeto;
+	}*/
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public FiseFormato14AD obtenerFormato14ADVigente(String codEmpresa, long anioVigencia, long idZonaBenef) {
+		List<FiseFormato14AD> lista = null;
+		FiseFormato14AD objeto = null;
+		try{			
+			
+			String q =  "SELECT t from " + FiseFormato14AD.class.getName()
+					+ " t,  " + FiseFormato14AC.class.getName() 
+					+ " d, "+ FiseGrupoInformacion.class.getName() + " g  WHERE ";				
+			
+			if(FormatoUtil.isNotBlank(codEmpresa)){ 
+				q = q  + " t.id.codEmpresa = :codEmpresa ";
+			}			
+			q = q + " AND t.id.anoInicioVigencia <= :anioVigencia ";
+			q = q + " AND t.id.anoFinVigencia >= :anioVigencia ";
+		
+			if(idZonaBenef!=0){ 
+				q = q + " AND t.id.idZonaBenef = :idZonaBenef ";
+			}
+			q = q + " AND t.id.etapa = :etapa ";
+			
+			q = q + " AND t.id.codEmpresa = d.id.codEmpresa ";		
+			q = q + " AND t.id.anoPresentacion = d.id.anoPresentacion ";		
+			q = q + " AND t.id.mesPresentacion = d.id.mesPresentacion";		
+			q = q + " AND t.id.anoInicioVigencia = d.id.anoInicioVigencia ";		
+			q = q + " AND t.id.anoFinVigencia = d.id.anoFinVigencia ";		
+			q = q + " AND t.id.etapa = d.id.etapa ";		
+			q = q + " AND d.fiseGrupoInformacion.idGrupoInformacion = g.idGrupoInformacion ";		
+			q = q + " AND g.estado = 1 ";				
+			
+			Query query = em.createQuery(q); 
+			if(FormatoUtil.isNotBlank(codEmpresa)){ 
+				query.setParameter("codEmpresa", FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4));
+			}			
+			query.setParameter("anioVigencia", anioVigencia);
+			
+			if(idZonaBenef!=0){ 
+				query.setParameter("idZonaBenef", idZonaBenef);
+			}			
+			query.setParameter("etapa", FiseConstants.ETAPA_ESTABLECIDO);
+			
+			lista= query.getResultList();			
+			
+			if(lista!=null && lista.size()>0){
+				objeto = lista.get(0);
+			}			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return objeto;
 	}
+	
+	
 	
 	@Override
 	public void registrarFormato14AD(FiseFormato14AD fiseFormato14AD){

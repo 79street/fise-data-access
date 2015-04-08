@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "admUbigeoDaoImpl")
 public class AdmUbigeoDaoImpl extends GenericDaoImpl implements AdmUbigeoDao {
 
+	@SuppressWarnings("unchecked")
 	public List<AdmUbigeo> listarAdmUbigeo() {
 		List<AdmUbigeo> lst = null;
 		try {
@@ -29,6 +30,7 @@ public class AdmUbigeoDaoImpl extends GenericDaoImpl implements AdmUbigeoDao {
 		return lst;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<AdmUbigeo> listarDepartamentos() {
 		List<AdmUbigeo> lst = null;
 		try {
@@ -45,6 +47,7 @@ public class AdmUbigeoDaoImpl extends GenericDaoImpl implements AdmUbigeoDao {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<AdmUbigeo> listarProvincias(String codDepartamento) {
 		List<AdmUbigeo> lst = null;
 		try {
@@ -62,6 +65,7 @@ public class AdmUbigeoDaoImpl extends GenericDaoImpl implements AdmUbigeoDao {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<AdmUbigeo> listarDistritos(String codProvincia) {
 		List<AdmUbigeo> lst = null;
 		try {

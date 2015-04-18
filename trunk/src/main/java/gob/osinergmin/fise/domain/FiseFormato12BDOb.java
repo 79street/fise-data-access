@@ -20,16 +20,16 @@ public class FiseFormato12BDOb implements Serializable {
 	@EmbeddedId
 	private FiseFormato12BDObPK id;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 
-	@Column(name="ID_OBSERVACION")
-	private String idObservacion;
+	/*@Column(name="ID_OBSERVACION")
+	private String idObservacion;*/
 
 	@Column(name="TERMINAL_ACTUALIZACION")
 	private String terminalActualizacion;
@@ -57,9 +57,10 @@ public class FiseFormato12BDOb implements Serializable {
 		})
 	private FiseFormato12BD fiseFormato12BD;
 	
+	//bi-directional many-to-one association to FiseObservacion
 	@ManyToOne
-	@JoinColumn(name="ID_OBSERVACION", insertable=false, updatable=false)
-	private FiseObservacion fiseObservacion;
+	@JoinColumn(name="ID_OBSERVACION")//insertable=false, updatable=false
+	private FiseObservacion fiseObservacion; 
 
 	public FiseFormato12BDOb() {
 	}
@@ -86,14 +87,6 @@ public class FiseFormato12BDOb implements Serializable {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getIdObservacion() {
-		return this.idObservacion;
-	}
-
-	public void setIdObservacion(String idObservacion) {
-		this.idObservacion = idObservacion;
 	}
 
 	public String getTerminalActualizacion() {

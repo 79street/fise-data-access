@@ -12,25 +12,25 @@ public class FiseFormato12BDObPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_EMPRESA", insertable=false, updatable=false)
+	@Column(name="COD_EMPRESA",insertable=false, updatable=false)
 	private String codEmpresa;
 
-	@Column(name="ANO_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="ANO_PRESENTACION",insertable=false, updatable=false)
 	private Integer anoPresentacion;
 
-	@Column(name="MES_PRESENTACION", insertable=false, updatable=false)
+	@Column(name="MES_PRESENTACION",insertable=false, updatable=false)
 	private Integer mesPresentacion;
 
-	@Column(name="ANO_EJECUCION_GASTO", insertable=false, updatable=false)
+	@Column(name="ANO_EJECUCION_GASTO",insertable=false, updatable=false)
 	private Integer anoEjecucionGasto;
 
-	@Column(name="MES_EJECUCION_GASTO", insertable=false, updatable=false)
+	@Column(name="MES_EJECUCION_GASTO",insertable=false, updatable=false)
 	private Integer mesEjecucionGasto;
 
 	@Column(insertable=false, updatable=false)
 	private String etapa;
 
-	@Column(name="ID_ZONA_BENEF", insertable=false, updatable=false)
+	@Column(name="ID_ZONA_BENEF",insertable=false, updatable=false)
 	private Integer idZonaBenef;
 
 	@Column(name="ITEM_OBSERVACION")

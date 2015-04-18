@@ -887,8 +887,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			pk.setItemObservacion(itemObservacion); 	
 			obs = formato12AObsDao.obtenerFiseFormato12ADOb(pk);					
 			formato12AObsDao.eliminarFormato12ADOb(obs); 
-			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
-			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			//observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			//fiseObservacionDao.eliminarFiseObservacion(observacion);
 			valor = "1";
 		} catch (Exception e) {
 			valor = "0";

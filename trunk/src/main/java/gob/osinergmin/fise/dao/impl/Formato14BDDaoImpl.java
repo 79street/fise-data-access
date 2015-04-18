@@ -152,7 +152,7 @@ public class Formato14BDDaoImpl extends GenericDaoImpl implements Formato14BDDao
 					+ " d, "+ FiseGrupoInformacion.class.getName() + " g  WHERE ";				
 			
 			if(FormatoUtil.isNotBlank(codEmpresa)){ 
-				q = q  + " AND t.id.codEmpresa = :codEmpresa ";
+				q = q  + " t.id.codEmpresa = :codEmpresa ";
 			}
 			//if(anioVigencia!=0){ 
 				q = q + " AND t.id.anoInicioVigencia <= :anioVigencia ";

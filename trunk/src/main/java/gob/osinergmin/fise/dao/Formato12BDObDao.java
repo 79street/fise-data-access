@@ -18,8 +18,8 @@ public interface Formato12BDObDao extends GenericDao {
 	Integer deleteFormatoObs(String emp,Integer anio,Integer mes,String etapa,Integer anioEjec,
 			Integer mesEjec,Integer idzona,Integer item)throws DataIntegrityViolationException,Exception;
 	
-	long buscarMaximoItemObs12B(String codEmpresa,long anioPres,long mesPres,
-			long anioEjec,long mesEjec,String etapa,long idZona) throws SQLException;
+	Integer buscarMaximoItemObs12B(String codEmpresa,Integer anioPres,Integer mesPres,
+			Integer anioEjec,Integer mesEjec,String etapa,Integer idZona) throws SQLException;
 	
 	void insertarFiseFormato12BObs(FiseFormato12BDOb fiseFormato12BDOb) 
 			throws SQLException;

@@ -348,7 +348,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> listarObsNotificacion(String codEmpresa,
 			String etapa,String formato,Long idGrupoInf) throws SQLException{
@@ -394,10 +394,10 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
 			sb.append(" AND o.ETAPA = c.ETAPA ");
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
-			/***/
+			
 			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//3
 			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'),  ");//4
-			/***/
+			
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE_FORMATO_13A_C c , FISE_FORMATO_13A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
@@ -440,6 +440,89 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){
 			sb.append(" AND o.ETAPA = '"+etapa+"' ");
+		}		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}*/
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarObsNotificacion(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT DISTINCT ");
+		sb.append(" c.COD_EMPRESA, ");//0		
+		sb.append(" c.ANO_PRESENTACION, ");//1
+		sb.append(" c.MES_PRESENTACION, ");//2		
+		if(FiseConstants.NOMBRE_FORMATO_12A.equals(formato)){ 			
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_12A_C c  ");		
+						
+		}else if(FiseConstants.NOMBRE_FORMATO_12B.equals(formato)){ 
+			sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_12B_C c  ");		
+						
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//3			
+			sb.append(" FROM FISE_FORMATO_12C_C c ");		
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
+			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
+			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+			sb.append(" c.ETAPA ");//3			
+			sb.append(" FROM FISE_FORMATO_12D_C c ");		
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
+		
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//3
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'),  ");//4
+			
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_13A_C c  ");		
+			
+		}else if(FiseConstants.NOMBRE_FORMATO_14A.equals(formato)){			
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_14A_C c ");		
+				
+		}else if(FiseConstants.NOMBRE_FORMATO_14B.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_14B_C c  ");		
+				
+		}else if(FiseConstants.NOMBRE_FORMATO_14C.equals(formato)){ 
+			sb.append(" c.ANO_INICIO_VIGENCIA, ");//3
+			sb.append(" c.ANO_FIN_VIGENCIA, ");//4
+			sb.append(" c.ETAPA ");//5				
+			sb.append(" FROM FISE_FORMATO_14C_C c");			
+		}		
+		sb.append(" WHERE 1=1 ");	
+		
+		if(FormatoUtil.isNotBlank(codEmpresa)){			
+			sb.append(" AND c.COD_EMPRESA = '"+codEmpresa+"' ");					
+		}		
+		if(idGrupoInf!=0){			
+			sb.append(" AND c.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){
+			sb.append(" AND c.ETAPA = '"+etapa+"' ");
 		}		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	

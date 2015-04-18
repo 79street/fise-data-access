@@ -102,10 +102,10 @@ public class Formato12DDObDaoImpl extends GenericDaoImpl implements Formato12DDO
 			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa) throws SQLException{		
 		long maxId = 1;		
 		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato12DDOb.class.getName()
-				+ " f WHERE f.id.codEmpresa=:empresa AND"
-				+ " f.id.anoPresentacion=:anioPres AND f.id.mesPresentacion=:mesPres AND"
-				+ " f.id.anoEjecucionGasto=: anioEjec  AND f.id.mesEjecucionGasto=:mesEjec AND"
-				+ " f.id.etapa=:etapa AND  f.id.etapaEjecucion=:etapaEjec AND f.id.numeroItemEtapa=:itemEtapa";
+				+ " f WHERE f.id.codEmpresa= :empresa AND"
+				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
+				+ " f.id.anoEjecucionGasto= :anioEjec  AND f.id.mesEjecucionGasto= :mesEjec AND"
+				+ " f.id.etapa= :etapa AND  f.id.etapaEjecucion= :etapaEjec AND f.id.numeroItemEtapa= :itemEtapa";
 		Query query = em.createQuery(q); 	
 		query.setParameter("empresa", codEmpresa);
 		query.setParameter("anioPres", anioPres);
@@ -114,7 +114,7 @@ public class Formato12DDObDaoImpl extends GenericDaoImpl implements Formato12DDO
 		query.setParameter("mesEjec", mesEjec);
 		query.setParameter("etapa", etapa);
 		query.setParameter("etapaEjec", etapaEjec);
-		query.setParameter("itemEtapa", itemEtapa);
+		query.setParameter("itemEtapa", itemEtapa);	
 		
 		Long verifica = (Long)query.getSingleResult();
 		if(verifica!=null){

@@ -155,9 +155,9 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 	
 	
 	@Override
-	public long buscarMaximoItemObs12B(String codEmpresa,long anioPres,long mesPres,
-			long anioEjec,long mesEjec,String etapa,long idZona) throws SQLException{		
-		long maxId = 1;		
+	public Integer buscarMaximoItemObs12B(String codEmpresa,Integer anioPres,Integer mesPres,
+			Integer anioEjec,Integer mesEjec,String etapa,Integer idZona) throws SQLException{		
+		Integer maxId = 1;		
 		String q = "SELECT MAX(f.id.itemObservacion) FROM " + FiseFormato12BDOb.class.getName()
 				+ " f WHERE f.id.codEmpresa= :empresa AND"
 				+ " f.id.anoPresentacion= :anioPres AND f.id.mesPresentacion= :mesPres AND"
@@ -166,13 +166,13 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 		Query query = em.createQuery(q); 	
 		query.setParameter("empresa", codEmpresa);
 		query.setParameter("anioPres", anioPres);
-		query.setParameter("mesPres", mesPres);
+		query.setParameter("mesPres",  mesPres);
 		query.setParameter("anioEjec", anioEjec);
 		query.setParameter("mesEjec", mesEjec);
 		query.setParameter("etapa", etapa);
 		query.setParameter("zona", idZona);
 		
-		Long verifica = (Long)query.getSingleResult();
+		Integer verifica = (Integer)query.getSingleResult();
 		if(verifica!=null){
 			maxId = verifica +1;
 		}
@@ -184,6 +184,46 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 			throws SQLException{
 		em.persist(fiseFormato12BDOb);	 		
 	}
+	
+	/*@Override
+	public void insertarFiseFormato12BObs(FiseFormato12BDOb f) 
+			throws SQLException{		
+		StringBuilder sb=new StringBuilder();
+		sb.append("INSERT INTO FISE_FORMATO_12B_D_OBS (");
+		sb.append(" COD_EMPRESA ");
+		sb.append(",ANO_PRESENTACION ");
+		sb.append(",MES_PRESENTACION ");
+		sb.append(",ANO_EJECUCION_GASTO ");
+		sb.append(",MES_EJECUCION_GASTO ");
+		sb.append(",ETAPA ");		
+		sb.append(",ID_ZONA_BENEF ");
+		sb.append(",ITEM_OBSERVACION ");
+		sb.append(",ID_OBSERVACION ");
+		sb.append(",USUARIO_CREACION ");
+		sb.append(",TERMINAL_CREACION ");
+		sb.append(",FECHA_CREACION ) ");
+		sb.append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");	
+		
+		System.out.println("SQL ::=>" + sb.toString()); 
+		Query query = em.createNativeQuery(sb.toString());
+		query.setParameter(1, f.getId().getCodEmpresa());
+		query.setParameter(2, f.getId().getAnoPresentacion());
+		query.setParameter(3, f.getId().getMesPresentacion());
+		query.setParameter(4, f.getId().getAnoEjecucionGasto());
+		query.setParameter(5, f.getId().getMesEjecucionGasto());
+		query.setParameter(6, f.getId().getEtapa());
+		query.setParameter(7, f.getId().getIdZonaBenef());
+		query.setParameter(8, f.getId().getItemObservacion());	
+		System.out.println("ID Observacion:: "+ f.getIdObservacion()); 
+		query.setParameter(9, f.getIdObservacion());
+		query.setParameter(10, f.getUsuarioCreacion());
+		query.setParameter(11, f.getTerminalCreacion());
+		query.setParameter(12, f.getFechaCreacion());		
+		int result = query.executeUpdate();
+		System.out.println("inserto en oservacion::=>" + result);
+	}
+	*/
+	
 	
 	@Override
 	public FiseFormato12BDOb obtenerFiseFormato12BDOb(FiseFormato12BDObPK id) 

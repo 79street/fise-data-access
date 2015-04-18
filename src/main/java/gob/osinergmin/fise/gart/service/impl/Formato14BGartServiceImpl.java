@@ -1391,8 +1391,8 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 			pk.setItemObservacion(itemObservacion);  	
 			obs = formato14BObsDao.obtenerFiseFormato14BDOb(pk);			
 			formato14BObsDao.eliminarFormato14BDOb(obs); 
-			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
-			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			//observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			//fiseObservacionDao.eliminarFiseObservacion(observacion);
 			valor = "1";
 		} catch (Exception e) {
 			valor = "0";

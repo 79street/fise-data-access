@@ -25,5 +25,14 @@ public interface ResumenCostosService {
 	
 	List<ResumenCostoBean> buscarResumenCostoF14BRPL(String codEmpresa,
 			Long idGrupoInf) throws Exception;
+	
+	List<ResumenCostoBean> buscarResumenCostoTotalesF12AB(String codEmpresa,
+			Long idGrupoInf,String formato) throws Exception;
+	
+	List<ResumenCostoBean> buscarResumenCostoTotalesAprobadoF12AB(String codEmpresa,
+			Long idGrupoInf,String formato) throws Exception;
+	
+	List<ResumenCostoBean> buscarResumenCostoConsolidadoAprobadoF12AB(String codEmpresa,
+			Long idGrupoInf) throws Exception;
 
 }

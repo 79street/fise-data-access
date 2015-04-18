@@ -357,8 +357,8 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			pk.setItemObservacion(itemObservacion); 	
 			obs = formato13ADObDao.obtenerFiseFormato13ADOb(pk);		
 			formato13ADObDao.eliminarFormato13ADOb(obs); 
-			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
-			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			//observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			//fiseObservacionDao.eliminarFiseObservacion(observacion);
 			valor = "1";
 		} catch (Exception e) {
 			valor = "0";
@@ -481,7 +481,7 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		} 	catch (Exception e) {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
-			throw new Exception("Se produjo un error al guardar los datos del Formato 12C");
+			throw new Exception("Se produjo un error al guardar los datos del Formato 13A");
 		}
 		return dto;
 	}

@@ -319,6 +319,138 @@ public class ResumenCostosServiceImpl implements ResumenCostosService {
 		return lista;
 	}
 	
+	/**metodo para implementar reportes de 12A y 12B totales de solicitado y reconocido*/
+	
+	@Override
+	@Transactional
+	public List<ResumenCostoBean> buscarResumenCostoTotalesF12AB(String codEmpresa,
+			Long idGrupoInf,String formato) throws Exception{
+		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
+		ResumenCostoBean r =null;
+		List<Object[]> listaF12 =null;		
+		try {
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			if(formato.equals("F12A")){ 
+				listaF12 = resumenCostosDao.listarResumenCostosF12A(codEmpreCompleta, idGrupoInf);
+			}else{
+				listaF12 = resumenCostosDao.listarResumenCostosF12B(codEmpreCompleta, idGrupoInf);	
+			}			
+			for(int i = 0; i < listaF12.size(); i++){					
+				r = new ResumenCostoBean();					
+				r.setDesEmpresa(String.valueOf(((String)listaF12.get(i)[0] == null) ? "--" :listaF12.get(i)[0]));				
+				r.setPeriodo(String.valueOf(((String)listaF12.get(i)[1] == null) ? "--" :listaF12.get(i)[1]));	
+				
+				BigDecimal solR = (((BigDecimal)listaF12.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[2]);			   
+				BigDecimal solP = (((BigDecimal)listaF12.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[3]);
+				BigDecimal solL = (((BigDecimal)listaF12.get(i)[4] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[4]);
+				
+				BigDecimal AproR = (((BigDecimal)listaF12.get(i)[5] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[5]);
+				BigDecimal AproP = (((BigDecimal)listaF12.get(i)[6] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[6]);
+				BigDecimal AproL = (((BigDecimal)listaF12.get(i)[7] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[7]);
+				
+				r.setTotalSolicitado(solR.add(solP).add(solL));  
+				r.setTotalReconocido(AproR.add(AproP).add(AproL)); 
+			    
+			    lista.add(r);		
+			 }			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.info("Error al listar resumen de costos totales de F12A o F12B:  "+e); 
+		}finally{
+			if(r!=null){
+				r=null;
+			}
+			if(listaF12!=null){
+				listaF12=null;
+			}	
+		}
+		return lista;
+	}
+	
+	/**metodo para implementar reportes de 12A y 12B totales de reconocido o aprobado*/
+	
+	@Override
+	@Transactional
+	public List<ResumenCostoBean> buscarResumenCostoTotalesAprobadoF12AB(String codEmpresa,
+			Long idGrupoInf,String formato) throws Exception{
+		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
+		ResumenCostoBean r =null;
+		List<Object[]> listaF12 =null;		
+		try {
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			if(formato.equals("F12A")){ 
+				listaF12 = resumenCostosDao.listarResumenCostosAprobadoF12A(codEmpreCompleta, idGrupoInf);
+			}else{
+				listaF12 = resumenCostosDao.listarResumenCostosAprobadoF12B(codEmpreCompleta, idGrupoInf);	
+			}			
+			for(int i = 0; i < listaF12.size(); i++){					
+				r = new ResumenCostoBean();					
+				r.setDesEmpresa(String.valueOf(((String)listaF12.get(i)[0] == null) ? "--" :listaF12.get(i)[0]));				
+				//r.setPeriodo(String.valueOf(((String)listaF12.get(i)[1] == null) ? "--" :listaF12.get(i)[1]));	
+				
+				BigDecimal AproR = (((BigDecimal)listaF12.get(i)[1] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[1]);			   
+				BigDecimal AproP = (((BigDecimal)listaF12.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[2]);
+				BigDecimal AproL = (((BigDecimal)listaF12.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[3]);
+						
+				r.setTotalReconocido(AproR.add(AproP).add(AproL)); 
+			    
+			    lista.add(r);		
+			 }			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.info("Error al listar resumen de costos totales aprobado o reconocido de F12A o F12B:  "+e); 
+		}finally{
+			if(r!=null){
+				r=null;
+			}
+			if(listaF12!=null){
+				listaF12=null;
+			}	
+		}
+		return lista;
+	}
+	
+	/**metodo para implementar reportes de 12A + 12B consolidado por periodo de reconocido o aprobado */
+	
+	@Override
+	@Transactional
+	public List<ResumenCostoBean> buscarResumenCostoConsolidadoAprobadoF12AB(String codEmpresa,
+			Long idGrupoInf) throws Exception{
+		List<ResumenCostoBean> lista = new ArrayList<ResumenCostoBean>();
+		ResumenCostoBean r =null;
+		List<Object[]> listaF12 =null;		
+		try {
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			
+			listaF12 = resumenCostosDao.listarResumenCostosAprobadoF12AB(codEmpreCompleta, idGrupoInf);	
+					
+			for(int i = 0; i < listaF12.size(); i++){					
+				r = new ResumenCostoBean();					
+				r.setDesEmpresa(String.valueOf(((String)listaF12.get(i)[0] == null) ? "--" :listaF12.get(i)[0]));
+				
+				BigDecimal AproF12ABR = (((BigDecimal)listaF12.get(i)[1] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[1]);			   
+				BigDecimal AproF12ABP = (((BigDecimal)listaF12.get(i)[2] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[2]);
+				BigDecimal AproF12ABL = (((BigDecimal)listaF12.get(i)[3] == null) ? new BigDecimal(0.0) :(BigDecimal)listaF12.get(i)[3]);
+			    				
+				r.setTotalReconocido(AproF12ABR.add(AproF12ABP).add(AproF12ABL));  
+			    
+			    lista.add(r);		
+			 }			
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.info("Error al listar resumen de costos consolidado aprobado o reconocido de F12A o F12B:  "+e); 
+		}finally{
+			if(r!=null){
+				r=null;
+			}
+			if(listaF12!=null){
+				listaF12=null;
+			}	
+		}
+		return lista;
+	}
+	
+	
 	
 	/**metodo para implementar reportes de 14A y 14B comparativos de costos*/
 	

@@ -2048,9 +2048,10 @@ public class FiseConstants {
 	public final static String CAMPO_NUMERO_TOTAL_BENEF_POTENCIAL = "NUMERO_TOTAL_BENEF_POTENCIAL";
 
 	
-	/****resumen de costos****/	
+	/****titulos de los reportes de resumen de costos****/	
 	public final static String NOMBRE_F12A = "FORMATO 12A: Resumen de Gastos Operativos - Implementación";
 	public final static String NOMBRE_F12B = "FORMATO 12B: Resumen de Gastos Operativos - Mensual";
+	public final static String NOMBRE_F12AB = "Consolidado de Resumen de Gastos Operativos Mensual e Implementación";
 	
 	public final static String NOMBRE_F14A_COMP = "FORMATO 14A: Comparativo de Costos";
 	public final static String NOMBRE_F14B_COMP = "FORMATO 14B: Comparativo de Costos";

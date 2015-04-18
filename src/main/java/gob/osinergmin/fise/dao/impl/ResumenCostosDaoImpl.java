@@ -536,7 +536,7 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		if(idGrupoInf!=0){			
 			sb.append(" AND F12A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
 		}
-		sb.append(" ORDER BY F12A.COD_EMPRESA ASC ");
+		sb.append(" ORDER BY EMP.DSC_CORTA_EMPRESA ASC ");
 		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
@@ -589,7 +589,7 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 		if(idGrupoInf!=0){			
 			sb.append(" AND F12B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
 		}
-		sb.append(" ORDER BY F12B.COD_EMPRESA ASC ");
+		sb.append(" ORDER BY EMP.DSC_CORTA_EMPRESA ASC ");
 		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
@@ -601,6 +601,182 @@ public class ResumenCostosDaoImpl extends GenericDaoImpl implements ResumenCosto
 			return lista;
 		}		
 	}
+	
+	/****Resumen de costos 12A y 12B Solo APROBADO o RECONOCIDO******/
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarResumenCostosAprobadoF12A(String codEmpresa,
+			Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT");
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");//0		
+		//sb.append(" F12A.ANO_PRESENTACION || '-' || FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(F12A.MES_PRESENTACION) AS periodo ,  ");//1
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'RURAL_APROB') ) AS rural_Aprob, ");//1
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'PROV_APROB')) AS prov_Aprob, ");//2
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'LIMA_APROB')) AS lima_Aprob ");//3	
+		
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_12A_C F12A");		
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F12A.COD_EMPRESA = EMP.COD_EMPRESA ");
+		sb.append(" AND F12A.ETAPA = 'RECONOCIDO' ");	
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F12A.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F12A.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}
+		if(idGrupoInf!=0){			
+			sb.append(" AND F12A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}
+		sb.append(" GROUP BY EMP.DSC_CORTA_EMPRESA  ");		
+		sb.append(" ORDER BY EMP.DSC_CORTA_EMPRESA ASC ");
+		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarResumenCostosAprobadoF12B(String codEmpresa,
+			Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT");
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");//0		
+		//sb.append(" F12B.ANO_PRESENTACION || '-' || FISE_GEN_PKG.FISE_NOMBRE_MES_FUN(F12B.MES_PRESENTACION) AS periodo ,  ");//1
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'RURAL_APROB')) AS rural_Aprob, ");//1
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'PROV_APROB')) AS prov_Aprob, ");//2
+		
+		sb.append(" SUM(FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'LIMA_APROB')) AS lima_Aprob ");//3
+		
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_12B_C F12B");		
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F12B.COD_EMPRESA = EMP.COD_EMPRESA ");
+		sb.append(" AND F12B.ETAPA = 'RECONOCIDO' ");		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F12B.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F12B.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}
+		if(idGrupoInf!=0){			
+			sb.append(" AND F12B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}
+		sb.append(" GROUP BY EMP.DSC_CORTA_EMPRESA  ");		
+		sb.append(" ORDER BY EMP.DSC_CORTA_EMPRESA ASC ");
+		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> listarResumenCostosAprobadoF12AB(String codEmpresa,
+			Long idGrupoInf) throws SQLException{
+		StringBuilder sb = new StringBuilder();	
+		sb.append(" SELECT empresa,");//0
+		sb.append(" sum(rural_Aprob) AS rural_Aprob, ");//1
+		sb.append(" sum(prov_Aprob) AS prov_Aprob,");//2
+		sb.append(" sum(lima_Aprob) AS lima_Aprob ");//3
+		sb.append(" FROM ");		
+		sb.append(" ( SELECT");
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");	
+		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'RURAL_APROB') AS rural_Aprob, ");
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'PROV_APROB') AS prov_Aprob, ");
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12A',F12A.COD_EMPRESA,F12A.ANO_PRESENTACION,"
+				+ " F12A.MES_PRESENTACION,F12A.ANO_EJECUCION_GASTO,"
+				+ " F12A.MES_EJECUCION_GASTO,F12A.ETAPA,'LIMA_APROB') AS lima_Aprob ");
+		
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_12A_C F12A");		
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F12A.COD_EMPRESA = EMP.COD_EMPRESA ");
+		sb.append(" AND F12A.ETAPA = 'RECONOCIDO' ");	
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F12A.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F12A.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}
+		if(idGrupoInf!=0){			
+			sb.append(" AND F12A.ID_GRUPO_INFORMACION = "+idGrupoInf+" ");			
+		}
+		
+		sb.append(" UNION ");
+		
+		sb.append(" SELECT");	
+		sb.append(" EMP.DSC_CORTA_EMPRESA AS empresa, ");		
+		
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'RURAL_APROB') AS rural_Aprob, ");
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'PROV_APROB') AS prov_Aprob, ");
+		sb.append(" FISE_GEN_PKG.FISE_GET_COSTO_F12AB_FUN('F12B',F12B.COD_EMPRESA,F12B.ANO_PRESENTACION,"
+				+ " F12B.MES_PRESENTACION,F12B.ANO_EJECUCION_GASTO,"
+				+ " F12B.MES_EJECUCION_GASTO,F12B.ETAPA,'LIMA_APROB') AS lima_Aprob ");
+		
+		sb.append(" FROM ADM_EMPRESA EMP, ADM_PROC_EMPRESA PEMP, FISE_FORMATO_12B_C F12B");		
+		sb.append(" WHERE EMP.COD_EMPRESA = PEMP.COD_EMPRESA ");		
+		sb.append(" AND PEMP.COD_PROC_SUPERVISION = 'FISE' ");		
+		sb.append(" AND PEMP.COD_FUNCION_PROC_SUPERV = 'REMISION' ");	
+		sb.append(" AND F12B.COD_EMPRESA = EMP.COD_EMPRESA ");
+		sb.append(" AND F12B.ETAPA = 'RECONOCIDO' ");		
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+		    sb.append(" AND F12B.COD_EMPRESA = decode('"+codEmpresa+"', 'TODOS', F12B.COD_EMPRESA, '"+codEmpresa+"') ");		
+		}
+		if(idGrupoInf!=0){			
+			sb.append(" AND F12B.ID_GRUPO_INFORMACION = "+idGrupoInf+" ) ");			
+		}		
+		sb.append(" GROUP BY empresa ");	
+		sb.append(" ORDER BY empresa ASC ");
+		
+		String jql = sb.toString();
+		Query query = em.createNativeQuery(jql);	
+		
+		List<Object[]> lista = query.getResultList();		
+		if (lista == null) {
+			return Collections.EMPTY_LIST;
+		} else {
+			return lista;
+		}		
+	}
+	
+	
 	
 	/**metodo para implementar reportes de 14A y 14B comparativos de costos*/
 	

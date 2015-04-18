@@ -179,7 +179,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			sb.append(" ,COSTO_TOTAL_CANJE_LIQ_VALE_DIG ="+formato.getCostoTotalCanjeLiqValeDig());
 			sb.append(" ,COSTO_TOTAL_ATENCION_CONS_RECL ="+formato.getCostoTotalAtencionConsRecl());
 			
-			sb.append(" ,TOTAL_GESTION_ADMINISTRATIVA ="+formato.getTotalGestionAdministrativa());
+			//sb.append(" ,TOTAL_GESTION_ADMINISTRATIVA ="+formato.getTotalGestionAdministrativa());
 			sb.append(" ,TOTAL_DESPLAZAMIENTO_PERSONAL ="+formato.getTotalDesplazamientoPersonal());
 			sb.append(" ,TOTAL_ACTIVIDADES_EXTRAORD ="+formato.getTotalActividadesExtraord());
 			sb.append(" ,TOTAL_RECONOCER ="+formato.getTotalReconocer());

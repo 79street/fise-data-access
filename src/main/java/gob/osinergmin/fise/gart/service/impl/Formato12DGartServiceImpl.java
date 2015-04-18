@@ -949,8 +949,8 @@ public class Formato12DGartServiceImpl implements Formato12DGartService {
 			pk.setItemObservacion(itemObservacion);  	
 			obs = formato12DDObDao.obtenerFiseFormato12DDOb(pk);			
 			formato12DDObDao.eliminarFormato12DDOb(obs); 
-			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
-			fiseObservacionDao.eliminarFiseObservacion(observacion);
+			//observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			//fiseObservacionDao.eliminarFiseObservacion(observacion);
 			valor = "1";
 		} catch (Exception e) {
 			valor = "0";

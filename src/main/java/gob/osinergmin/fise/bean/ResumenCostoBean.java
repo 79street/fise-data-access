@@ -25,6 +25,7 @@ public class ResumenCostoBean {
 	private String desGrupoInf;//descripcion del grupo de informacion para el reporte
 	private String desEmpresa;	
 	private String periodo;
+	private String tipoFormato;
 	
 	private String optionBienal;
 	private String optionZona;//zonas no incluye para comparativos incluye todos
@@ -112,6 +113,12 @@ public class ResumenCostoBean {
 	private BigDecimal montoLevObs;
 	private BigDecimal montoHistorico;
 	private BigDecimal montoEstablecido;//o tambien monto final
+	
+	
+	//para reporte 12A y 12B totales
+	private BigDecimal totalSolicitado;
+	private BigDecimal totalReconocido;
+	
 	
 		
 	/*****Metodos get y set****/	
@@ -625,6 +632,24 @@ public class ResumenCostoBean {
 	}
 	public void setOptionZonaComp(String optionZonaComp) {
 		this.optionZonaComp = optionZonaComp;
+	}
+	public String getTipoFormato() {
+		return tipoFormato;
+	}
+	public void setTipoFormato(String tipoFormato) {
+		this.tipoFormato = tipoFormato;
+	}
+	public BigDecimal getTotalSolicitado() {
+		return totalSolicitado;
+	}
+	public void setTotalSolicitado(BigDecimal totalSolicitado) {
+		this.totalSolicitado = totalSolicitado;
+	}
+	public BigDecimal getTotalReconocido() {
+		return totalReconocido;
+	}
+	public void setTotalReconocido(BigDecimal totalReconocido) {
+		this.totalReconocido = totalReconocido;
 	}		
 	
 }

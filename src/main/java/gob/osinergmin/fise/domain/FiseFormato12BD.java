@@ -58,11 +58,11 @@ public class FiseFormato12BD implements Serializable {
 	@Column(name="COSTO_TOTAL_REPARTO_VALES_DOMI")
 	private BigDecimal costoTotalRepartoValesDomi;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_ACTUALIZACION")
 	private Date fechaActualizacion;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_CREACION")
 	private Date fechaCreacion;
 

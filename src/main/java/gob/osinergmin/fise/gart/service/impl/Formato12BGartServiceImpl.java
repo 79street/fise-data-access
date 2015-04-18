@@ -535,7 +535,6 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 		}
 	} 
 	
-	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
@@ -546,7 +545,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 		FiseFormato12BDObPK pk = null;
 		FiseFormato12BDOb obs = null;
 		try {
-			long maxItemObs = formato12BDObDao.buscarMaximoItemObs12B(codEmpresa, anioPres, 
+			Integer maxItemObs = formato12BDObDao.buscarMaximoItemObs12B(codEmpresa, anioPres, 
 					mesPres, anioEjec, mesEjec, etapa, idZona);			
 			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
 			observacion = new FiseObservacion();
@@ -565,7 +564,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			pk.setMesEjecucionGasto(mesEjec);
 			pk.setEtapa(etapa);
 			pk.setIdZonaBenef(idZona);		
-			pk.setItemObservacion((int)maxItemObs);  	
+			pk.setItemObservacion(maxItemObs);  	
 			obs = new FiseFormato12BDOb();
 			obs.setId(pk);
 			obs.setFechaCreacion(FechaUtil.obtenerFechaActual());			
@@ -591,7 +590,6 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 		return valor;
 	}
 	
-	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String eliminarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
@@ -613,8 +611,8 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			pk.setItemObservacion(itemObservacion);  	
 			obs = formato12BDObDao.obtenerFiseFormato12BDOb(pk);				
 			formato12BDObDao.eliminarFiseFormato12BDOb(obs);  
-			observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
-			fiseObservacionDao.eliminarFiseObservacion(observacion);	
+			//observacion = fiseObservacionDao.obtenerFiseObservacion(idObservacion);			
+			//fiseObservacionDao.eliminarFiseObservacion(observacion);	
 			valor = "1";
 		} catch (Exception e) {
 			valor = "0";

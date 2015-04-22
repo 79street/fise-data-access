@@ -28,6 +28,7 @@ public class ResumenObsBean {
 	private String optionMensual;
 	
 	/***para el reporte de observaciones*******/
+	private String codEmpresa;
 	private String desEmpresa;	
 	private String periodo;//anio y mes declarado
 	private String formato;//nombre del formato para mostrar
@@ -201,5 +202,10 @@ public class ResumenObsBean {
 	public void setDescEtapaEjecucion(String descEtapaEjecucion) {
 		this.descEtapaEjecucion = descEtapaEjecucion;
 	}
-	
+	public String getCodEmpresa() {
+		return codEmpresa;
+	}
+	public void setCodEmpresa(String codEmpresa) {
+		this.codEmpresa = codEmpresa;
+	}	
 }

@@ -885,23 +885,28 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion12C(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato12CDObPK pk = null;
 		FiseFormato12CDOb obs = null;
 		try {
 			long maxItemObs = formato12CDObDao.buscarMaximoItemObs12C(codEmpresa, anioPres, mesPres, 
-					anioEjec, mesEjec, etapa, etapaEjec, itemEtapa);			
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
+					anioEjec, mesEjec, etapa, etapaEjec, itemEtapa);	
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);
+			}			
 			pk = new FiseFormato12CDObPK();
 			pk.setCodEmpresa(codEmpresa);
 			pk.setAnoPresentacion(anioPres);

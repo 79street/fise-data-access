@@ -42,7 +42,7 @@ public class FiseObservacionGartServiceImpl implements FiseObservacionGartServic
 				obs = new FiseObservacion();
 				obs.setIdObservacion(bean.getId()); 
 				obs.setDescripcion(bean.getDescripcion());	
-				obs.setOrigen(FiseConstants.OBSERVACION_AUTOMATICO); 
+				obs.setOrigen(FiseConstants.TIPO_OBSERVACION_AUTOMATICA); 
 				//auditoria
 				obs.setUsuarioCreacion(bean.getUsuario());
 				obs.setTerminalCreacion(bean.getTerminal()); 

@@ -16,7 +16,11 @@ public class NotificacionBean {
 	private String codEmpresaBusq;		
 	private String optionFormato;
 	private String etapaBusq;
-	private String grupoInfBusq;
+	private String grupoInfBusq;	
+	//para buscar observaciones existentes en el catalogo
+	private String idObsBusq;
+	private String descObsBusq;	
+	
 	
 	private String descGrupoInf;//para envial email
 	
@@ -60,6 +64,12 @@ public class NotificacionBean {
 	private String idObservacion; //fk de la tabla observaciones
 	private String desObservacion;//descripcion de la observacion
 	private String origenObs;//si es manual o es automatico
+	
+	/**para listar y agregar observaciones existentes****/
+	private String tipoObservacion;//manual o automatica
+	private String idObsExistente;
+	private String descObsExistente;
+	
 	
 	/*****Metodos get y set****/
 	public List<AdmEmpresa> getListaEmpresas() {
@@ -284,6 +294,36 @@ public class NotificacionBean {
 	}
 	public void setOrigenObs(String origenObs) {
 		this.origenObs = origenObs;
+	}
+	public String getIdObsBusq() {
+		return idObsBusq;
+	}
+	public void setIdObsBusq(String idObsBusq) {
+		this.idObsBusq = idObsBusq;
+	}
+	public String getDescObsBusq() {
+		return descObsBusq;
+	}
+	public void setDescObsBusq(String descObsBusq) {
+		this.descObsBusq = descObsBusq;
+	}
+	public String getTipoObservacion() {
+		return tipoObservacion;
+	}
+	public void setTipoObservacion(String tipoObservacion) {
+		this.tipoObservacion = tipoObservacion;
+	}
+	public String getIdObsExistente() {
+		return idObsExistente;
+	}
+	public void setIdObsExistente(String idObsExistente) {
+		this.idObsExistente = idObsExistente;
+	}
+	public String getDescObsExistente() {
+		return descObsExistente;
+	}
+	public void setDescObsExistente(String descObsExistente) {
+		this.descObsExistente = descObsExistente;
 	}	
 	
 }

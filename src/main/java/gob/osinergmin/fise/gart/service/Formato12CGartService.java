@@ -28,7 +28,8 @@ public interface Formato12CGartService {
 	
 	String insertarObservacion12C(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
-			String desObservacion,String user,String terminal) throws Exception;
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception;
 	
 	String eliminarObservacion12C(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 

@@ -29,9 +29,13 @@ public interface Formato12AGartService {
 	
 	String insertarObservacion12A(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long idZona, 
-			String desObservacion,String user,String terminal) throws Exception;
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception;
 	
 	String eliminarObservacion12A(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long idZona, 
 			String idObservacion,long itemObservacion) throws Exception;
+	
+	List<FiseFormato12AC> buscarFormato12AReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception;
 }

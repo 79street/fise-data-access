@@ -52,7 +52,8 @@ public interface Formato14CGartService {
     
     String insertarObservacion14C(String codEmpresa,long anioPres,long mesPres,
 			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
-			String desObservacion,String user,String terminal) throws Exception;
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception;
     
     String eliminarObservacion14C(String codEmpresa,long anioPres,long mesPres,
 			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 

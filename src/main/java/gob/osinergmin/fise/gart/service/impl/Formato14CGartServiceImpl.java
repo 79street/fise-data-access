@@ -3268,7 +3268,8 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion14C(String codEmpresa,long anioPres,long mesPres,
 			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato14CDObPK pk = null;
@@ -3277,18 +3278,21 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		FiseFormato14CDPK pkDetalle= null;
 		try {
 			long maxItemObs = formato14CDObDao.buscarMaximoItemObs14C(codEmpresa, anioPres, mesPres,
-					anioIniVig, anioFinVig, etapa, idZona,idPersonal);			
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();	
-			logger.info("Id observacion:  "+idObservacion); 
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
-			
+					anioIniVig, anioFinVig, etapa, idZona,idPersonal);	
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();	
+				logger.info("Id observacion:  "+idObservacion); 
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);	
+			}			
 			pkDetalle = new  FiseFormato14CDPK();
 			pkDetalle.setCodEmpresa(codEmpresa);
 			pkDetalle.setAnoPresentacion(anioPres);

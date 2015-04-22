@@ -231,4 +231,44 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 		 }	
 	}
 	
+	//cambio elozano para reporte observaciones.
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato12AC> buscarFormato12ACReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException{
+		
+		String q = "SELECT f FROM " + FiseFormato12AC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(idGrupoInf!=0){ 		
+			q = q.concat(" AND f.fiseGrupoInformacion.idGrupoInformacion = :idGrupo ");	
+		}			
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		//q = q.concat(" ORDER BY f.id.codEmpresa");		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
+		}		
+		if(idGrupoInf!=0){ 
+			query.setParameter("idGrupo", idGrupoInf);	
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato12AC> lista= query.getResultList();
+		 if(lista==null){
+			 return Collections.EMPTY_LIST;
+		 }else{
+			 return lista;
+		 }	
+	}
+	
+	
+	
 }

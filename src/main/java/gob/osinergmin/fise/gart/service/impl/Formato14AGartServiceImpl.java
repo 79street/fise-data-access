@@ -1086,23 +1086,28 @@ public class Formato14AGartServiceImpl implements Formato14AGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion14A(String codEmpresa,long anioPres,long mesPres,
 			long anioIniVig,long anioFinVig,String etapa,long idZona, 
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato14ADObPK pk = null;
 		FiseFormato14ADOb obs = null;
 		try {
 			long maxItemObs = formato14AObsDao.buscarMaximoItemObs14A(codEmpresa, anioPres, mesPres,
-					anioIniVig, anioFinVig, etapa, idZona);			
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
+					anioIniVig, anioFinVig, etapa, idZona);	
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);
+			}			
 			pk = new FiseFormato14ADObPK();
 			pk.setCodEmpresa(codEmpresa);
 			pk.setAnoPresentacion(anioPres);

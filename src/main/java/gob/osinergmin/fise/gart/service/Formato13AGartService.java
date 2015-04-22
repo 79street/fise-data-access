@@ -43,13 +43,17 @@ public interface Formato13AGartService {
 	
 	String insertarObservacion13A(String codEmpresa,long anioPres,long mesPres,
 			String ubigeo,String sector,String etapa,long idZona,
-			String desObservacion,String user,String terminal) throws Exception;
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception;
 	
 	String eliminarObservacion13A(String codEmpresa,long anioPres,long mesPres,
 			String ubigeo,String sector,String etapa,long idZona,
 			String idObservacion,long itemObservacion) throws Exception;
 	
-	FiseFormato13AC registrarFormato13ACregistrarFormato13AD(Formato13ACBean formato,List<Formato13ACBean> listaDetalleCarga) throws Exception;
-	FiseFormato13AC modificarFormato13ACregistrarFormato13AD(Formato13ACBean formato, FiseFormato13AC fiseFormato13AC,List<Formato13ACBean> listaDetalleCarga) throws Exception;
+	FiseFormato13AC registrarFormato13ACregistrarFormato13AD(Formato13ACBean formato,
+			List<Formato13ACBean> listaDetalleCarga) throws Exception;
+	
+	FiseFormato13AC modificarFormato13ACregistrarFormato13AD(Formato13ACBean formato, 
+			FiseFormato13AC fiseFormato13AC,List<Formato13ACBean> listaDetalleCarga) throws Exception;
 	
 }

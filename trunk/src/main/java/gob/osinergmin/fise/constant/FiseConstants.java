@@ -2055,11 +2055,7 @@ public class FiseConstants {
 	
 	public final static String NOMBRE_F14A_COMP = "FORMATO 14A: Comparativo de Costos";
 	public final static String NOMBRE_F14B_COMP = "FORMATO 14B: Comparativo de Costos";
-	
-	
-	public final static String OBSERVACION_MANUAL = "M";
-	public final static String OBSERVACION_AUTOMATICO = "A";
-	
+		
 	/**conceptos F14a y F14B*/
 	public final static String CONCEPTO_EMP_VALUE = "EMP";
 	public final static String CONCEPTO_GLP_VALUE = "GLP";
@@ -2151,5 +2147,9 @@ public class FiseConstants {
 	
 	public final static String FLAG_CARGA_ARCHIVO_NUEVO = "2";
 	public final static String FLAG_CARGA_ARCHIVO_ACTUALIZAR = "3";
+	
+	public final static String TIPO_OBSERVACION_MANUAL = "M";
+	public final static String TIPO_OBSERVACION_AUTOMATICA = "A";
+	
 	
 }

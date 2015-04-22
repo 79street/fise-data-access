@@ -282,7 +282,8 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion13A(String codEmpresa,long anioPres,long mesPres,
 			String ubigeo,String sector,String etapa,long idZona,
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato13ADObPK pk = null;
@@ -290,17 +291,20 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		try {
 			long maxItemObs = formato13ADObDao.buscarMaximoItemObs13A(codEmpresa, anioPres,
 					mesPres, ubigeo, sector, etapa, idZona);
-			 
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();
 			
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);	
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);
+			}			
 			pk = new FiseFormato13ADObPK();
 			pk.setCodEmpresa(codEmpresa);
 			pk.setAnoPresentacion(anioPres);

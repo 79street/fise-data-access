@@ -539,23 +539,28 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
 			Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato12BDObPK pk = null;
 		FiseFormato12BDOb obs = null;
 		try {
 			Integer maxItemObs = formato12BDObDao.buscarMaximoItemObs12B(codEmpresa, anioPres, 
-					mesPres, anioEjec, mesEjec, etapa, idZona);			
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
+					mesPres, anioEjec, mesEjec, etapa, idZona);	
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();			
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);	
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);
+			}			
 			pk = new FiseFormato12BDObPK();
 			pk.setCodEmpresa(codEmpresa);
 			pk.setAnoPresentacion(anioPres);

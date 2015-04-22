@@ -40,7 +40,8 @@ public interface Formato12BGartService {
 	 
 	 String insertarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
 				Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 
-				String desObservacion,String user,String terminal) throws Exception;
+				String desObservacion,String user,String terminal,
+				String idObsExistente,String tipoObservacion) throws Exception;
 	 
 	 String eliminarObservacion12B(String codEmpresa,Integer anioPres,Integer mesPres,
 				Integer anioEjec,Integer mesEjec,String etapa,Integer idZona, 

@@ -91,6 +91,22 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		}
 		return formato;
 	}
+	//cambios elozano para reporte de obs.	
+    @Override
+	@Transactional
+	public List<FiseFormato12AC> buscarFormato12AReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception {		
+		List<FiseFormato12AC> lista = formato12ACDao.buscarFormato12ACReporteObs(codEmpresa, idGrupoInf, etapa);
+		List<FiseFormato12AC> listaF12A = new ArrayList<FiseFormato12AC>();
+		for(FiseFormato12AC f :lista){
+			f.setFiseFormato12ADs(formato12ADDao.listarFormato12ADByFormato12AC(f));
+			listaF12A.add(f);
+		}		
+		return listaF12A;
+	}
+	
+	
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -812,7 +828,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String insertarObservacion12A(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long idZona, 
-			String desObservacion,String user,String terminal) throws Exception{
+			String desObservacion,String user,String terminal,
+			String idObsExistente,String tipoObservacion) throws Exception{
 		String valor = "0";
 		FiseObservacion observacion = null;
 		FiseFormato12ADObPK pk = null;
@@ -821,16 +838,20 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			long maxItemObs = formato12AObsDao.buscarMaximoItemObs12A(codEmpresa, anioPres, 
 					mesPres, anioEjec, mesEjec, etapa, idZona);
 			logger.info("maximo item observacion:  "+maxItemObs); 
-			String idObservacion = fiseObservacionDao.obtenerIdObservacion();
-			logger.info("id observacion:  "+idObservacion); 
-			observacion = new FiseObservacion();
-			observacion.setIdObservacion(idObservacion); 
-			observacion.setDescripcion(desObservacion);
-			observacion.setOrigen(FiseConstants.OBSERVACION_MANUAL); 
-			observacion.setUsuarioCreacion(user);
-			observacion.setTerminalCreacion(terminal); 
-			observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
-			fiseObservacionDao.insertarFiseObservacion(observacion);
+			if(FiseConstants.TIPO_OBSERVACION_MANUAL.equals(tipoObservacion)){
+				String idObservacion = fiseObservacionDao.obtenerIdObservacion();
+				logger.info("id observacion:  "+idObservacion); 
+				observacion = new FiseObservacion();
+				observacion.setIdObservacion(idObservacion); 
+				observacion.setDescripcion(desObservacion);
+				observacion.setOrigen(FiseConstants.TIPO_OBSERVACION_MANUAL); 
+				observacion.setUsuarioCreacion(user);
+				observacion.setTerminalCreacion(terminal); 
+				observacion.setFechaCreacion(FechaUtil.obtenerFechaActual()); 
+				fiseObservacionDao.insertarFiseObservacion(observacion);	
+			}else{
+				observacion = fiseObservacionDao.obtenerFiseObservacion(idObsExistente);
+			}
 			pk = new FiseFormato12ADObPK();
 			pk.setCodEmpresa(codEmpresa);
 			pk.setAnoPresentacion(anioPres);

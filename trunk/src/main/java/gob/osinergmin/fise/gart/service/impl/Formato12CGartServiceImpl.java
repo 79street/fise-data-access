@@ -106,6 +106,22 @@ public class Formato12CGartServiceImpl implements Formato12CGartService {
 		return formato;
 	}
 	
+	//cambios elozano para reporte de obs.	
+    @Override
+	@Transactional
+	public List<FiseFormato12CC> buscarFormato12CReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception {		
+		List<FiseFormato12CC> lista = formato12CCDao.buscarFormato12CCReporteObs(codEmpresa, idGrupoInf, etapa);
+		List<FiseFormato12CC> listaF12C = new ArrayList<FiseFormato12CC>();
+		for(FiseFormato12CC f :lista){
+			f.setFiseFormato12CDs(formato12CDDao.listarFormato12CDByFormato12CC(f));
+			listaF12C.add(f);
+		}		
+		return listaF12C;
+	}	
+	
+	
+	
 	@Override
 	@Transactional
 	public List<FiseFormato12CC> buscarFormato12CC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa){

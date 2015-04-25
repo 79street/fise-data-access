@@ -118,11 +118,8 @@ public class Formato12BDObDaoImpl extends GenericDaoImpl implements Formato12BDO
 				sb.append(" AND c.id.itemObservacion =:itm ");
 			}
 			
-			Query query = em.createQuery(sb.toString());
-			
-			/*if(emp !=null && !emp.isEmpty()){
-				query.setParameter("emp", emp.trim());
-			}*/
+			Query query = em.createQuery(sb.toString());			
+		
 			if(etapa!=null && !etapa.isEmpty()){
 				query.setParameter("etp", etapa.trim());
 			}

@@ -481,6 +481,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 				if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 					 lista12A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 								etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
+				 }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+					 lista12A = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+								etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
 				 }else{
 					 lista12A = commonDao.listarObsNotificacion(codEmpresa, 
 								etapa, FiseConstants.NOMBRE_FORMATO_12A,idGrupoInf); 
@@ -499,10 +502,14 @@ public class CommonGartServiceImpl implements CommonGartService {
 					n.setAnioIniVig("---");
 					n.setAnioFinVig("---");
 					lista.add(n);
-				 }				
+				 }
+				 
 			    /**FORMATO 12B*/				
 				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 					 lista12B = commonDao.listarObsNotificacionProcesar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
+				 }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+					 lista12B = commonDao.listarObsNotificacionEliminar(codEmpresa, 
 							 etapa, FiseConstants.NOMBRE_FORMATO_12B,idGrupoInf); 
 				 }else{
 					 lista12B = commonDao.listarObsNotificacion(codEmpresa, 
@@ -527,6 +534,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 					 lista12C = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 							 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
+				 }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+					 lista12C = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf);  
 				 }else{
 					 lista12C = commonDao.listarObsNotificacion(codEmpresa, 
 							 etapa, FiseConstants.NOMBRE_FORMATO_12C,idGrupoInf); 
@@ -553,6 +563,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 				 if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 					 lista12D = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 							 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
+				 }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+					 lista12D = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+							 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf);   
 				 }else{
 					 lista12D = commonDao.listarObsNotificacion(codEmpresa, 
 							 etapa, FiseConstants.NOMBRE_FORMATO_12D,idGrupoInf); 
@@ -580,6 +593,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 				   lista13A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf); 
+			   }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+				   lista13A = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf);    
 			   }else{
 				   lista13A = commonDao.listarObsNotificacion(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_13A,idGrupoInf); 
@@ -607,6 +623,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 				   lista14A = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf); 
+			   }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+				   lista14A = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf);     
 			   }else{
 				   lista14A = commonDao.listarObsNotificacion(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14A,idGrupoInf); 
@@ -630,6 +649,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 				   lista14B = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf); 
+			   }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+				   lista14B = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf);    
 			   }else{
 				   lista14B = commonDao.listarObsNotificacion(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14B,idGrupoInf); 
@@ -653,6 +675,9 @@ public class CommonGartServiceImpl implements CommonGartService {
 			   if(FiseConstants.PROCESAR_VALIDACION.equals(procesar)){  
 				   lista14C = commonDao.listarObsNotificacionProcesar(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf); 
+			   }else if(FiseConstants.EXCLUIR_REGISTRO_NOTIFICACION.equals(procesar)){  
+				   lista14C = commonDao.listarObsNotificacionEliminar(codEmpresa, 
+						   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf);    
 			   }else{
 				   lista14C = commonDao.listarObsNotificacion(codEmpresa, 
 						   etapa, FiseConstants.NOMBRE_FORMATO_14C,idGrupoInf); 
@@ -1161,11 +1186,21 @@ public class CommonGartServiceImpl implements CommonGartService {
 	/****Metodo para verificar si realizamos la carga de información de un formato 
 	 * para eso es necesario obtenerla ultima etapa y que esta etapa diferente a RECONOCIDO o ESTABLECIDO******/
 	@Override
+	@Transactional
 	public String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
 			long anioPres, long mesPres, long anioEjec,
 			long mesEjec,long anioIniVig,long anioFinVig) throws Exception{
 		return commonDao.obtenerUltimaEtapaFormato(formato, codEmpresa, anioPres, 
 				mesPres, anioEjec, mesEjec, anioIniVig, anioFinVig);
+	}
+	
+	
+	/***Metodo para verificar si desea volver a notificar con las observaciones de los formatos****/	
+	@Override
+	@Transactional
+	public String obtenerEstadoNotificacion(String codEmpresa,  
+			long idGrupoInf, String etapa) throws Exception{
+		return commonDao.obtenerEstadoNotificacion(codEmpresa, idGrupoInf, etapa);
 	}
 	
 	

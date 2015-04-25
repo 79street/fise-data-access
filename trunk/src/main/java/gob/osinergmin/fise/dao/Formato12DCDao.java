@@ -10,11 +10,22 @@ import java.util.List;
 public interface Formato12DCDao extends GenericDao {
 	
 	FiseFormato12DC obtenerFormato12DCByPK(FiseFormato12DCPK fiseFormato12DCPK);
-	List<FiseFormato12DC> buscarFormato12DC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa);
+	
+	List<FiseFormato12DC> buscarFormato12DC(String codEmpresa, long anioDesde, 			
+			long mesDesde, long anioHasta, long mesHasta, String etapa);
+	
 	void registrarFormato12DC(FiseFormato12DC fiseFormato12DC);
+	
 	void modificarFormato12DC(FiseFormato12DC fiseFormato12DC);
+	
 	void eliminarFormato12DC(FiseFormato12DC fiseFormato12DC);
+	
 	boolean existeFormato12DC(FiseFormato12DC fiseFormato12DC);
-	List<FiseFormato12DC> buscarFormato12DCReenvio(String codEmpresa, long anioPres, long mesPres, String etapa) throws SQLException;
+	
+	List<FiseFormato12DC> buscarFormato12DCReenvio(String codEmpresa, 			
+			long anioPres, long mesPres, String etapa) throws SQLException;
+	
+	List<FiseFormato12DC> buscarFormato12DCReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException;
 	
 }

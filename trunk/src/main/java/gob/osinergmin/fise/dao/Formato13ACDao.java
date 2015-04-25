@@ -28,4 +28,9 @@ public interface Formato13ACDao extends GenericDao {
 			long mesPres, String etapa) throws SQLException;
 	
 	boolean existeFormato13AC(FiseFormato13AC fiseFormato13AC);
+	
+	List<FiseFormato13AC> buscarFormato13ACReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException;
+	
+	
 }

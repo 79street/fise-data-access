@@ -59,5 +59,8 @@ public interface Formato14CGartService {
 			long anioIniVig,long anioFinVig,String etapa,long idZona,long idPersonal, 
 			String idObservacion,long itemObservacion) throws Exception;
     
+    List<FiseFormato14CC> buscarFormato14CReporteObs(String codEmpresa,
+			 long idGrupoInf,String etapa)throws Exception;
+    
 
 }

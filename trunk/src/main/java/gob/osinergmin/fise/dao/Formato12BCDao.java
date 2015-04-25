@@ -27,5 +27,8 @@ public interface Formato12BCDao extends GenericDao{
 
 	boolean existeFormato12BC(FiseFormato12BC fiseFormato12BC);
 	
+	List<FiseFormato12BC> buscarFiseFormato12BCReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException;
+	
 	
 }

@@ -348,9 +348,9 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		return result;
 	}
 	
-	/*@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object[]> listarObsNotificacion(String codEmpresa,
+	public List<Object[]> listarObsNotificacionEliminar(String codEmpresa,
 			String etapa,String formato,Long idGrupoInf) throws SQLException{
 		StringBuilder sb = new StringBuilder();	
 		sb.append(" SELECT DISTINCT ");
@@ -375,18 +375,14 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
 			sb.append(" AND o.ETAPA = c.ETAPA ");			
-		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 			
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE_FORMATO_12C_C c , FISE_FORMATO_12C_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
 			sb.append(" AND o.ANO_PRESENTACION = c.ANO_PRESENTACION ");
 			sb.append(" AND o.MES_PRESENTACION = c.MES_PRESENTACION ");
 			sb.append(" AND o.ETAPA = c.ETAPA ");	
-		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 			
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE_FORMATO_12D_C c , FISE_FORMATO_12D_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
@@ -396,8 +392,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
 			
 			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//3
-			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'),  ");//4
-			
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'),  ");//4			
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE_FORMATO_13A_C c , FISE_FORMATO_13A_D_OBS o ");		
 			sb.append(" WHERE o.COD_EMPRESA = c.COD_EMPRESA");
@@ -441,6 +436,9 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		if(FormatoUtil.isNotBlank(etapa)){
 			sb.append(" AND o.ETAPA = '"+etapa+"' ");
 		}		
+		
+		sb.append(" AND c.FECHA_ENVIO_DEFINITIVO is not null ");	
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -450,7 +448,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		} else {
 			return lista;
 		}		
-	}*/
+	}
 	
 	
 	
@@ -475,15 +473,11 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE_FORMATO_12B_C c  ");		
 						
-		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 		
 			sb.append(" c.ETAPA ");//3			
-			sb.append(" FROM FISE_FORMATO_12C_C c ");		
+			sb.append(" FROM FISE_FORMATO_12C_C c ");	
 			
-		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 			
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE_FORMATO_12D_C c ");		
 			
@@ -524,6 +518,8 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		if(FormatoUtil.isNotBlank(etapa)){
 			sb.append(" AND c.ETAPA = '"+etapa+"' ");
 		}		
+		sb.append(" AND c.FECHA_ENVIO_DEFINITIVO is not null ");		
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -557,23 +553,17 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE_FORMATO_12B_C c ");		
 			sb.append(" WHERE 1=1 ");						
-		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12C.equals(formato)){ 			
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE_FORMATO_12C_C c ");		
 			sb.append(" WHERE 1=1 ");			
-		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 
-			//sb.append(" c.ANO_EJECUCION_GASTO, ");//3
-			//sb.append(" c.MES_EJECUCION_GASTO, ");//4
+		}else if(FiseConstants.NOMBRE_FORMATO_12D.equals(formato)){ 			
 			sb.append(" c.ETAPA ");//3			
 			sb.append(" FROM FISE_FORMATO_12D_C c ");		
 			sb.append(" WHERE 1=1 ");			
-		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 				
-			/***/
+		}else if(FiseConstants.NOMBRE_FORMATO_13A.equals(formato)){ 		
 			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'INICIO'),  ");//3
-			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'), ");//4
-			/***/
+			sb.append(" FISE_GEN_PKG.FISE_GET_ANO_INI_FIN_FUN(c.COD_EMPRESA,c.ANO_PRESENTACION,c.MES_PRESENTACION,c.ETAPA,'FIN'), ");//4		
 			sb.append(" c.ETAPA ");//5				
 			sb.append(" FROM FISE_FORMATO_13A_C c ");		
 			sb.append(" WHERE 1=1 ");					
@@ -603,7 +593,10 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		}		
 		if(FormatoUtil.isNotBlank(etapa)){
 			sb.append(" AND c.ETAPA = '"+etapa+"' ");
-		}		
+		}	
+		
+		sb.append(" AND c.FECHA_ENVIO_DEFINITIVO is not null ");	
+		
 		String jql = sb.toString();
 		Query query = em.createNativeQuery(jql);	
 		
@@ -621,7 +614,7 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 			long idGrupoInf, String periodicidad, String user,String terminal) throws SQLException{
 		String mensaje="";
 		try {
-			StringBuffer jql = new StringBuffer();
+			StringBuffer jql = new StringBuffer();			
 			jql.append("CALL FISE_GEN_PKG.FISE_CREA_ETAPA_PRC(?,?,?,?,?,?)");	
 			Query query = em.createNativeQuery(jql.toString());
 			query.setParameter(1, codEmpresa);
@@ -907,6 +900,29 @@ public class CommonDaoImpl extends GenericDaoImpl implements CommonDao {
 		}
 		return etapa;
 	}
+	
+	
+	/***Metodo para verificar si desea volver a notificar con las observaciones de los formatos****/	
+	@Override
+	public String obtenerEstadoNotificacion(String codEmpresa,  
+			long idGrupoInf, String etapa) throws SQLException{
+		String estado="";//devuelve SI o NO
+		try {
+			StringBuffer jql = new StringBuffer();
+			jql.append("SELECT FISE_GEN_PKG.FISE_NOTITICADO_FUN(?,?,?) FROM DUAL");
+			Query query = em.createNativeQuery(jql.toString());
+			query.setParameter(1, codEmpresa);
+			query.setParameter(2, idGrupoInf);
+			query.setParameter(3, etapa);			
+			estado = (String)query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 em.close();
+		 }
+		return estado;
+	}
+	
 	
 	
 }

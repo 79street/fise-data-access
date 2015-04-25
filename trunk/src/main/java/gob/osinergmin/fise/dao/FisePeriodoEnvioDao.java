@@ -34,5 +34,8 @@ public interface FisePeriodoEnvioDao {
 	
 	boolean verificarPeridoEnvioEmpresa(String codEmpresa, Integer anioPres, 
 			Integer mesPres, String formato,String etapa,String estado) throws SQLException;
+	
+	String listarPlazoMaximoEnvioObs(String codEmpresa,long anioPres,
+    		long mesPres,String etapa,String formato) throws SQLException;
 
 }

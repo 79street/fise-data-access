@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository(value = "fisePeriodoEnvioDaoImpl")
@@ -47,7 +48,8 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 			sql.append(" ANO_INICIO_VIGENCIA ANO_INICIO_VIGENCIA, ");
 			sql.append(" ANO_FIN_VIGENCIA ANO_FIN_VIGENCIA, ");
 			sql.append(" FLAG_HABILITA_COSTOS_D_I_F14C FLAG_HABILITA_COSTOS,");
-			sql.append(" FLAG_ENVIO_CON_OBSERVACIONES FLAG_ENVIO_OBS ");			
+			sql.append(" FLAG_ENVIO_CON_OBSERVACIONES FLAG_ENVIO_OBS, ");
+			sql.append(" FLAG_PERMITIR_EDITAR_COSTO_EST FLAG_EDITAR_COSTO_EST ");
 			sql.append(" FROM FISE_PERIODO_ENVIO t");
 			sql.append(" WHERE 1=1 ");
 			
@@ -75,15 +77,14 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 				periodoEnvio.setAnioFinVig(((BigDecimal)valor[4])!=null?((BigDecimal)valor[4]).toString():FiseConstants.BLANCO);
 				periodoEnvio.setFlagHabilitaCostos((String)valor[5]);
 				periodoEnvio.setFlagEnvioConObservaciones((String)valor[6]);
+				periodoEnvio.setFlagEditarCostosEst((String)valor[7]);
 				lst.add(periodoEnvio);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e) {			
 			e.printStackTrace();
 		} finally {
 			 em.close();
 		 }
-
 		return lst;
 	}
 	
@@ -207,8 +208,7 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 				periodoEnvio.setDescripcionItem((String)valor[1]);
 				lst.add(periodoEnvio);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 
@@ -324,5 +324,38 @@ public class FisePeriodoEnvioDaoImpl extends GenericDaoImpl implements FisePerio
 	}
 	
 	
+	/***Metodo para obtener el plazo maximo para el levantamiento de observaciones***/
+	@Override
+	public String listarPlazoMaximoEnvioObs(String codEmpresa,long anioPres,
+    		long mesPres,String etapa,String formato) throws SQLException{
+    	
+    	StringBuilder sql = new StringBuilder();
+    	String plazo = "";    	
+    	
+    	sql.append("SELECT ");
+    	sql.append(" TO_CHAR(HASTA, 'DD/MM/YYYY') AS FECHA, ");
+    	sql.append(" NVL((SELECT VALOR ");
+    	sql.append(" FROM FISE_PARAMETROS ");
+    	sql.append(" WHERE CODIGO = 'HORA_PLAZO_ENVIO_FORMATO'),'18:00:00') AS HORA ");
+    	sql.append(" FROM FISE_PERIODO_ENVIO t ");
+    	sql.append(" WHERE t.COD_EMPRESA = '").append(codEmpresa.trim()).append("' ");
+    	sql.append(" AND t.ANO_PRESENTACION = ").append(anioPres).append(" ");
+    	sql.append(" AND t.MES_PRESENTACION = ").append(mesPres).append(" ");
+    	sql.append(" AND t.FORMATO = '").append(formato).append("' ");
+    	sql.append(" AND t.ETAPA = '").append(etapa).append("' ");
+    	sql.append(" ORDER BY SECUENCIA DESC ");
+    	
+    	String jql = sql.toString();
+    	Query query = em.createNativeQuery(jql);
+    	
+    	List resultado = query.getResultList();
+		Iterator it=resultado.iterator();
+		while(it.hasNext()){
+			Object[] valor=(Object[] )it.next();			
+			plazo = ((String)valor[0])+" "+((String)valor[1]);
+			break;
+		}
+		return plazo;
+	}
 
 }

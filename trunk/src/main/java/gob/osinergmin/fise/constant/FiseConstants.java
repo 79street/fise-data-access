@@ -160,6 +160,14 @@ public class FiseConstants {
 	public final static String COD_ERROR_F12_353 = "353"; 
 	public final static String COD_ERROR_F12_354 = "354"; 
 	public final static String COD_ERROR_F12_355 = "355"; 
+	public final static String COD_ERROR_F12_11 = "11";
+	public final static String COD_ERROR_F12_12 = "12";
+	public final static String COD_ERROR_F12_13 = "13";
+	public final static String COD_ERROR_F12_14 = "14";
+	public final static String COD_ERROR_F12_15 = "15";
+	public final static String COD_ERROR_F12_16 = "16";
+	
+	
 	// TXT
 	public final static String TIPO_PERIODO_ENVIO = "PERIODO";
 	public final static String TIPO_FORMATO_12A = "F12A";
@@ -218,6 +226,7 @@ public class FiseConstants {
 	
 	public final static String TIPO_FORMATO_CUMPLIMIENTO = "CUMPLIMIENTO";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS = "RESUMEN_COSTO";
+	public final static String TIPO_FORMATO_REPORTE_OBS = "REPORTE_OBS";
 	public final static String TIPO_FORMATO_RESUMEN_COSTOS_COMP = "RESUMEN_COSTO_COMP";
 
 	public final static String NOMBRE_HOJA_FORMATO12B = "F12B";
@@ -255,7 +264,9 @@ public class FiseConstants {
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12A = 4;
 	public final static int NRO_FILA_ANIOMES_FORMATO12A = 5;
 	public final static int NRO_FILA_EMPAD_FORMATO12A = 12;
+	public final static int NRO_FILA_COSTO_UNIT_EMPAD_FORMATO12A = 13;//cambio
 	public final static int NRO_FILA_AGENT_FORMATO12A = 16;
+	public final static int NRO_FILA_COSTO_UNIT_AGENT_FORMATO12A = 17; 
 	public final static int NRO_FILA_DESPLPERSON_FORMATO12A = 19;
 	public final static int NRO_FILA_ACTIVEXTR_FORMATO12A = 20;
 	public final static int NRO_CELDA_EMPRESA_FORMATO12A = 6;
@@ -1336,6 +1347,7 @@ public class FiseConstants {
 	public final static String BIENAL = "BIENAL";
 	public final static String NOMBRE_CONSOLIDADO_EMAIL = "TF";
 	public final static String PROCESAR_VALIDACION = "P";
+	public final static String EXCLUIR_REGISTRO_NOTIFICACION = "E";
 
 	public final static String PROCESO_ENVIO_EMAIL_OK = "1";
 	public final static String PROCESO_ENVIO_EMAIL_ERROR = "0";

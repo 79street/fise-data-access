@@ -51,6 +51,9 @@ public interface Formato12BGartService {
 	 FiseFormato12BC modificarFormato12BC(Formato12BCBean formato, FiseFormato12BC fiseFormato12BC) throws Exception;
 	 
 	 String eliminarArchivoSustentoCab(FiseFormato12BCPK f) throws Exception;
+	 
+	 List<FiseFormato12BC> buscarFormato12BCReporteObs(String codEmpresa,
+				long idGrupoInf,String etapa)throws Exception;
 
 
 }

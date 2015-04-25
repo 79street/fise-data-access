@@ -34,4 +34,7 @@ public interface Formato12CGartService {
 	String eliminarObservacion12C(String codEmpresa,long anioPres,long mesPres,
 			long anioEjec,long mesEjec,String etapa,long etapaEjec,long itemEtapa, 
 			String idObservacion,long itemObservacion) throws Exception;
+	
+	List<FiseFormato12CC> buscarFormato12CReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception;
 }

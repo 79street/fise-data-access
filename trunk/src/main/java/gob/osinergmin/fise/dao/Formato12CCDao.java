@@ -25,4 +25,7 @@ public interface Formato12CCDao extends GenericDao {
 	List<FiseFormato12CC> buscarFormato12CCReenvio(String codEmpresa, long anioPres, 
 			long mesPres, String etapa) throws SQLException;
 	
+	List<FiseFormato12CC> buscarFormato12CCReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException;
+	
 }

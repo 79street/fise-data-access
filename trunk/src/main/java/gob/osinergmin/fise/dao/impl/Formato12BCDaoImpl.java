@@ -205,11 +205,8 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 				sb.append(" AND c.id.mesEjecucionGasto =:mesejec ");
 			}
 			
-			Query query = em.createQuery(sb.toString());
+			Query query = em.createQuery(sb.toString());			
 			
-			/*if(id.getCodEmpresa() !=null && !id.getCodEmpresa().isEmpty()){
-				query.setParameter("emp", id.getCodEmpresa().trim());
-			}*/
 			if(id.getEtapa()!=null && !id.getEtapa().isEmpty()){
 				query.setParameter("etp", id.getEtapa().trim());
 			}
@@ -225,21 +222,16 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 			if(id.getMesEjecucionGasto()!=null && id.getMesEjecucionGasto()>0){
 				query.setParameter("mesejec", id.getMesEjecucionGasto());
 			}		
-			 bean= (FiseFormato12BC) query.getSingleResult();	
-			 
-			
-			//return bean;
+			 bean= (FiseFormato12BC) query.getSingleResult();		
 		}catch(Exception e){
 	      e.printStackTrace();
 	     
 		}finally{
 			em.close();		
-		}
-		
-		 System.out.println("RETORNAMDO BEAN==>"+bean);
-		
-return bean;
+		}	
+       return bean;
 	}
+	
 
 	@Override
 	@Transactional
@@ -402,15 +394,12 @@ return bean;
 	@Override
 	public boolean existeFormato12BC(FiseFormato12BC fiseFormato12BC){
 		boolean existe = false;
-		try{
-			//em.getTransaction().begin();
+		try{			
 			fiseFormato12BC.getId().setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato12BC.getId().getCodEmpresa(), ' ', 4));
 			FiseFormato12BC formato = em.find(FiseFormato12BC.class, fiseFormato12BC.getId());
 			if( formato != null ){
 		    	existe = true;
-		    }
-			//em.persist(fiseFormato12A);
-			//em.getTransaction().commit();
+		    }			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -418,5 +407,46 @@ return bean;
 		 }
 		return existe;
 	}
+	
+	
+	//cambio elozano para reporte observaciones
+	
+	@SuppressWarnings("unchecked")	
+	//@Override
+	public List<FiseFormato12BC> buscarFiseFormato12BCReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException{
+
+		String q = "SELECT f FROM " + FiseFormato12BC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(idGrupoInf!=0){ 		
+			q = q.concat(" AND f.fiseGrupoInformacion.idGrupoInformacion = :idGrupo ");	
+		}			
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		//q = q.concat(" ORDER BY f.id.codEmpresa");		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
+		}		
+		if(idGrupoInf!=0){ 
+			query.setParameter("idGrupo", idGrupoInf);	
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato12BC> lista= query.getResultList();
+		if(lista==null){
+			return Collections.EMPTY_LIST;
+		}else{
+			return lista;
+		}	
+	}
+	
+	
 	
 }

@@ -103,10 +103,8 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			listaF12A.add(f);
 		}		
 		return listaF12A;
-	}
-	
-	
-	
+	}	
+    
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -387,16 +385,10 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			Date hoy = FechaUtil.obtenerFechaActual();
 	
 			BigDecimal total = new BigDecimal(0);
-			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
-			
-			//FiseFormato12AD detalleRural = new FiseFormato12AD();
-			//FiseFormato12AD detalleProvincia = new FiseFormato12AD();
-			//FiseFormato12AD detalleLima = new FiseFormato12AD();
-			
+			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();	
 			FiseFormato12AD detalleRural = null;
 			FiseFormato12AD detalleProvincia = null;
-			FiseFormato12AD detalleLima = null;
-			
+			FiseFormato12AD detalleLima = null;			
 			if( fiseFormato12AC.getFiseFormato12ADs()!=null ){
 				for (FiseFormato12AD detalle : fiseFormato12AC.getFiseFormato12ADs()) {
 					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
@@ -436,9 +428,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleRural.getCostoTotalGestRedAgGlp())
 						.add(detalleRural.getTotalDesplazamientoPersonal())
 						.add(detalleRural.getTotalActividadesExtraord());
-				//
-				//--detalleRural.setFiseFormato12AC(fiseFormato12AC);
-				//
+				
 				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
 				detalleRural.setTerminalActualizacion(formulario.getTerminal());
 				detalleRural.setFechaActualizacion(hoy);
@@ -477,9 +467,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleProvincia.getCostoTotalGestRedAgGlp())
 						.add(detalleProvincia.getTotalDesplazamientoPersonal())
 						.add(detalleProvincia.getTotalActividadesExtraord());
-				//
-				//-detalleProvincia.setFiseFormato12AC(fiseFormato12AC);
-				//
+			
 				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
 				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
 				detalleProvincia.setFechaActualizacion(hoy);
@@ -517,9 +505,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				BigDecimal totalLima = detalleLima.getCostoTotalEmpadronamiento()
 						.add(detalleLima.getCostoTotalGestRedAgGlp())
 						.add(detalleLima.getTotalDesplazamientoPersonal())
-						.add(detalleLima.getTotalActividadesExtraord());
-				//--detalleLima.setFiseFormato12AC(fiseFormato12AC);
-				//
+						.add(detalleLima.getTotalActividadesExtraord());				
 				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
 				detalleLima.setTerminalActualizacion(formulario.getTerminal());
 				detalleLima.setFechaActualizacion(hoy);
@@ -532,8 +518,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				lista.add(detalleLima);
 			}
 			logger.info("total de total"+total);
-			fiseFormato12AC.setTotalAReconocer(total);
-		
+			fiseFormato12AC.setTotalAReconocer(total);	
 		
 			fiseFormato12AC.setUsuarioActualizacion(formulario.getUsuario());
 			fiseFormato12AC.setTerminalActualizacion(formulario.getTerminal());
@@ -546,7 +531,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}
 			
 			formato12ACDao.modificarFormato12AC(fiseFormato12AC);
-			//add
+			
 			for (FiseFormato12AD detalle : lista) {
 				formato12ADDao.modificarFormato12AD(detalle);
 			}
@@ -556,11 +541,10 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			logger.error("--error"+e.getMessage());
 			e.printStackTrace();
 			throw new Exception("Se produjo un error al actualizar los datos del Formato 12A");
-		}
-		//
+		}		
 		return dto;
-
 	}
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -818,7 +802,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void eliminarObservaciones12A(List<FiseFormato12ADOb> listaObs) throws Exception {	
-		for (FiseFormato12ADOb observacion : listaObs) {
+		for (FiseFormato12ADOb observacion : listaObs) {			
 			formato12AObsDao.eliminarFormato12ADOb(observacion);
 		}
 	} 

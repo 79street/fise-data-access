@@ -35,6 +35,8 @@ public class ResumenObsBean {
 	private String etapa;//la etapa en la se encuentra el formato
 	private String usuario;//usuario que reporta la informacion
 	private String fecha; //fecha que reporta la informacion el usuario
+	private String anioInicioVig;
+	private String anioFinVig;
 	
 	private String codigo;//codigo de la observacion
 	private String descripcion;//descripcion de la observacion
@@ -207,5 +209,18 @@ public class ResumenObsBean {
 	}
 	public void setCodEmpresa(String codEmpresa) {
 		this.codEmpresa = codEmpresa;
+	}
+	public String getAnioInicioVig() {
+		return anioInicioVig;
+	}
+	public void setAnioInicioVig(String anioInicioVig) {
+		this.anioInicioVig = anioInicioVig;
+	}
+	public String getAnioFinVig() {
+		return anioFinVig;
+	}
+	public void setAnioFinVig(String anioFinVig) {
+		this.anioFinVig = anioFinVig;
 	}	
+	
 }

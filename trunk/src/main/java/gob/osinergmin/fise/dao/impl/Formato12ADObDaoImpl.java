@@ -52,13 +52,8 @@ public class Formato12ADObDaoImpl extends GenericDaoImpl implements Formato12ADO
 	
 	@Override
 	public void eliminarFormato12ADOb(FiseFormato12ADOb fiseFormato12ADOb){
-		try{
-			//em.getTransaction().begin();
-			//verificar si la entidad pertenece a la transaccion o no
-			em.remove(em.contains(fiseFormato12ADOb) ? fiseFormato12ADOb : em.merge(fiseFormato12ADOb));
-			//em.remove(fiseFormato12AD);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.remove(em.contains(fiseFormato12ADOb) ? fiseFormato12ADOb : em.merge(fiseFormato12ADOb));			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {

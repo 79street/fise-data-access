@@ -64,6 +64,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 				}			
 				periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
 				periodo.setEstado(bean.getEstado()); 
+				periodo.setFlagEditarCostosEst(bean.getFlagEditarCosto()); 
 				//auditoria
 				periodo.setUsuarioCreacion(bean.getUsuario());
 				periodo.setTerminalCreacion(bean.getTerminal()); 
@@ -125,6 +126,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 				}			
 				periodo.setFlagHabilitaCostosDIF14c(bean.getFlagHabCostos()); 
 				periodo.setEstado(bean.getEstado()); 
+				periodo.setFlagEditarCostosEst(bean.getFlagEditarCosto());
 				//auditoria
 				periodo.setUsuarioActualizacion(bean.getUsuario());
 				periodo.setTerminalActualizacion(bean.getTerminal()); 
@@ -188,7 +190,7 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			bean.setAnioPres(""+p.getAnoPresentacion());
 			bean.setMesPres(""+p.getMesPresentacion()); 
 			bean.setFormato(p.getFormato()); 			
-			bean.setEtapa(p.getEtapa());
+			bean.setEtapa(p.getEtapa().equals("LEV.OBS")?FiseConstants.ETAPA_LEVOBS_DESC:p.getEtapa());
 			bean.setDesde(FechaUtil.getFechaDateToString(p.getDesde()));  
 			bean.setHasta(FechaUtil.getFechaDateToString(p.getHasta())); 
 			
@@ -203,7 +205,8 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 			bean.setEstado(p.getEstado());
 			bean.setAnoIniVigencia(""+p.getAnoInicioVigencia());
 			bean.setAnoFinVigencia(""+p.getAnoFinVigencia()); 
-			bean.setFlagHabCostos(p.getFlagHabilitaCostosDIF14c());			
+			bean.setFlagHabCostos(p.getFlagHabilitaCostosDIF14c());	
+			bean.setFlagEditarCosto(p.getFlagEditarCostosEst()); 
 		} catch (Exception e) {
 			logger.info("Error al buscar datos para editar:  "+e); 
 		}finally{
@@ -239,6 +242,22 @@ public class FisePeriodoEnvioGartServiceImpl implements FisePeriodoEnvioGartServ
 	public String obtenerFlagEnvioConObs(String codEmpresa, Integer anioPres, 
 			Integer mesPres, String formato,String etapa,String estado)  throws Exception{
 		return fisePeriodoEnvioDao.obtenerFlagEnvioConObs(codEmpresa, anioPres, mesPres, formato, etapa, estado);
+	}
+	
+	/***metodo para buscar plazo maximo de envio de observaciones****/
+	@Transactional
+	@Override
+	public String listarPlazoMaximoEnvioObs(String codEmpresa,long anioPres,
+    		long mesPres,String etapa,String formato) throws Exception{
+		String plazo = "";
+		try {
+			plazo = fisePeriodoEnvioDao.listarPlazoMaximoEnvioObs(codEmpresa,
+					anioPres, mesPres, etapa, formato);				
+		} catch (Exception e) {
+			//e.printStackTrace();
+			plazo = "";
+		}
+		return plazo;
 	}
 	
 	

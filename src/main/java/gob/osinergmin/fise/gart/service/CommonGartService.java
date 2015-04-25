@@ -72,5 +72,8 @@ public interface CommonGartService {
 	String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
 			long anioPres, long mesPres, long anioEjec,
 			long mesEjec,long anioIniVig,long anioFinVig) throws Exception;
+	
+	String obtenerEstadoNotificacion(String codEmpresa,  
+			long idGrupoInf, String etapa) throws Exception;
 
 }

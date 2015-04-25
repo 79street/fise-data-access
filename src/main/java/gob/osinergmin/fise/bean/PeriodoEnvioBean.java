@@ -35,6 +35,7 @@ public class PeriodoEnvioBean {
 	private String diasNotifCierre; //dias de notificacion antes de cierre
 	private String flagEnvioObs;//flag envio con observaciones
 	private String flagAnioMesEjec; //flag mostrar anio y mes de ejecucion
+	private String flagEditarCosto;//flag para saber si editar o no costos estandaras o unitarios
 	////////////////////////////////////////////////////
 	private String ceginroexp;
     private String ceginrotra;
@@ -300,5 +301,12 @@ public class PeriodoEnvioBean {
 	public void setFechaAmpl(String fechaAmpl) {
 		this.fechaAmpl = fechaAmpl;
 	}
+	public String getFlagEditarCosto() {
+		return flagEditarCosto;
+	}
+	public void setFlagEditarCosto(String flagEditarCosto) {
+		this.flagEditarCosto = flagEditarCosto;
+	}
+	
 	
 }

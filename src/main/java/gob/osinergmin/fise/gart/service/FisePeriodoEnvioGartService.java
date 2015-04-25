@@ -28,5 +28,8 @@ public interface FisePeriodoEnvioGartService {
 	
 	String obtenerFlagEnvioConObs(String codEmpresa, Integer anioPres, 
 			Integer mesPres, String formato,String etapa,String estado)  throws Exception;
+	
+	String listarPlazoMaximoEnvioObs(String codEmpresa,long anioPres,
+    		long mesPres,String etapa,String formato) throws Exception;
 
 }

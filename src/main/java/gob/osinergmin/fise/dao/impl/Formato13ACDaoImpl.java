@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository(value = "formato13ACDaoImpl")
 public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao {
 
-	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa) {
+	@SuppressWarnings("unchecked")
+	public List<FiseFormato13AC> buscarFormato13AC(String codEmpresa, long anioDesde, 
+			long mesDesde, long anioHasta, long mesHasta, String etapa) {
 
 		List<FiseFormato13AC> lista = null;
 		try {
@@ -55,14 +57,7 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 			if (FormatoUtil.isNotBlank(etapa)) {
 				query.setParameter("etapa", etapa);
 			}
-
 			lista = query.getResultList();
-			System.out.println("SQL   > " + q);
-			/*
-			 * if(lista==null){ return Collections.EMPTY_LIST; }else{ return
-			 * lista; }
-			 */
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -232,5 +227,45 @@ public class Formato13ACDaoImpl extends GenericDaoImpl implements Formato13ACDao
 		 }
 		return existe;
 	}
+	
+	
+	//cambio elozano para reporte observaciones.
+	
+	@SuppressWarnings("unchecked")	
+	@Override
+	public List<FiseFormato13AC> buscarFormato13ACReporteObs(String codEmpresa, long idGrupoInf, 
+			String etapa) throws SQLException{
+
+		String q = "SELECT f FROM " + FiseFormato13AC.class.getName()
+				+ " f WHERE 1=1 ";
+		if(FormatoUtil.isNotBlank(codEmpresa)){ 
+			q = q.concat(" AND f.id.codEmpresa = :codEmpresa ");
+		}
+		if(idGrupoInf!=0){ 		
+			q = q.concat(" AND f.fiseGrupoInformacion.idGrupoInformacion = :idGrupo ");	
+		}			
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			q = q.concat(" AND f.id.etapa = :etapa ");
+		}
+		//q = q.concat(" ORDER BY f.id.codEmpresa");		
+		Query query = em.createQuery(q); 
+		if(FormatoUtil.isNotBlank(codEmpresa)){
+			String codEmpreCompleta = FormatoUtil.rellenaDerecha(codEmpresa, ' ', 4);
+			query.setParameter("codEmpresa", codEmpreCompleta);
+		}		
+		if(idGrupoInf!=0){ 
+			query.setParameter("idGrupo", idGrupoInf);	
+		}		
+		if(FormatoUtil.isNotBlank(etapa)){ 
+			query.setParameter("etapa", etapa);
+		}
+		List<FiseFormato13AC> lista= query.getResultList();
+		if(lista==null){
+			return Collections.EMPTY_LIST;
+		}else{
+			return lista;
+		}	
+	}
+	
 	
 }

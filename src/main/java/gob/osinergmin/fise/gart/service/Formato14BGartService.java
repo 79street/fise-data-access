@@ -49,4 +49,7 @@ public interface Formato14BGartService {
 	String eliminarObservacion14B(String codEmpresa,long anioPres,long mesPres,
 			long anioIniVig,long anioFinVig,String etapa,long idZona, 
 			String idObservacion,long itemObservacion) throws Exception;
+	
+	List<FiseFormato14BC> buscarFormato14BReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception;
 }

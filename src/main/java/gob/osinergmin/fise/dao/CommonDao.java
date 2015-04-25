@@ -57,5 +57,11 @@ public interface CommonDao {
 	String obtenerUltimaEtapaFormato(String formato,String codEmpresa, 
 			long anioPres, long mesPres, long anioEjec,
 			long mesEjec,long anioIniVig,long anioFinVig) throws SQLException;
+	
+	List<Object[]> listarObsNotificacionEliminar(String codEmpresa,
+			String etapa,String formato,Long idGrupoInf) throws SQLException;
+	
+	String obtenerEstadoNotificacion(String codEmpresa,  
+			long idGrupoInf, String etapa) throws SQLException;
 			
 }

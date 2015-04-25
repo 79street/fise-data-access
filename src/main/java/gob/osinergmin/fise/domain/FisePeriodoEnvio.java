@@ -124,6 +124,9 @@ public class FisePeriodoEnvio implements Serializable {
 	@Column(name="USUARIO_CREACION")
 	private String usuarioCreacion;
 	
+	@Column(name = "FLAG_PERMITIR_EDITAR_COSTO_EST")
+	private String flagEditarCostosEst;
+	
 	
 	// valores de combo
 	@Transient
@@ -495,8 +498,14 @@ public class FisePeriodoEnvio implements Serializable {
 	public void setDescEstado(String descEstado) {
 		this.descEstado = descEstado;
 	}
-	
-	
+
+	public String getFlagEditarCostosEst() {
+		return flagEditarCostosEst;
+	}
+
+	public void setFlagEditarCostosEst(String flagEditarCostosEst) {
+		this.flagEditarCostosEst = flagEditarCostosEst;
+	}
 	
 
 }

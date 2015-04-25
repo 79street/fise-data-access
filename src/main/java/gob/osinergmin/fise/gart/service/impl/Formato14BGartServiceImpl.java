@@ -94,6 +94,21 @@ public class Formato14BGartServiceImpl implements Formato14BGartService {
 		return formato;
 	}
 	
+	//cambios elozano para reporte de obs.	
+    @Override
+	@Transactional
+	public List<FiseFormato14BC> buscarFormato14BReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception {		
+		List<FiseFormato14BC> lista = formato14BCDao.buscarFormato14BCReporteObs(codEmpresa, idGrupoInf, etapa);
+		List<FiseFormato14BC> listaF14B = new ArrayList<FiseFormato14BC>();
+		for(FiseFormato14BC f :lista){
+			f.setFiseFormato14BDs(formato14BDDao.listarFormato14BDByFormato14BC(f));
+			listaF14B.add(f);
+		}		
+		return listaF14B;
+	}	
+    
+	
 	@Override
 	@Transactional
 	public List<FiseFormato14BC> buscarFormato14BC(String codEmpresa, long anioDesde, long mesDesde, long anioHasta, long mesHasta, String etapa){

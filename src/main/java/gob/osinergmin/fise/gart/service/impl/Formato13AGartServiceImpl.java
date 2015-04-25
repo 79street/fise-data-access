@@ -79,25 +79,17 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 			long anioDesde, long mesDesde, long anioHasta, long mesHasta,
 			String etapa) {
 		List<FiseFormato13AC> lista = null;
-		lista = formato13ACDao.buscarFormato13AC(codEmpresa, anioDesde, mesDesde, anioHasta, mesHasta, etapa);
-		/*for (FiseFormato13AC formato : lista) {
-			formato.setFiseFormato13ADs(formato12ADDao.listarFormato12ADByFormato12AC(formato));
-		}*/
+		lista = formato13ACDao.buscarFormato13AC(codEmpresa, anioDesde, mesDesde, anioHasta, mesHasta, etapa);		
 		return lista;
 	}
 	
 	public List<FiseFormato13AD> listarFormato13ADByFormato13AC(FiseFormato13AC formato13AC) {
 		List<FiseFormato13AD> lista = null;
-		lista = formato13ADDao.listarFormato13ADByFormato13AC(formato13AC);
-		/*for (FiseFormato13AC formato : lista) {
-			formato.setFiseFormato13ADs(formato12ADDao.listarFormato12ADByFormato12AC(formato));
-		}*/
+		lista = formato13ADDao.listarFormato13ADByFormato13AC(formato13AC);		
 		return lista;
 	}
 	
-	public Formato13ACBean estructurarFormato13ABeanByFiseFormato13AC(FiseFormato13AC formato) {
-		
-		//setting the values of Bean
+	public Formato13ACBean estructurarFormato13ABeanByFiseFormato13AC(FiseFormato13AC formato) {	
 		Formato13ACBean formato13ABean = new Formato13ACBean();
 		formato13ABean.setAnioPresent(formato.getId().getAnoPresentacion());
 		formato13ABean.setMesPresent(formato.getId().getMesPresentacion());
@@ -161,6 +153,21 @@ public class Formato13AGartServiceImpl implements Formato13AGartService {
 		}
 		return formato;
 	}
+	
+	//cambios elozano para reporte de obs.	
+    @Override
+	@Transactional
+	public List<FiseFormato13AC> buscarFormato13AReporteObs(String codEmpresa,
+			long idGrupoInf,String etapa)throws Exception {		
+		List<FiseFormato13AC> lista = formato13ACDao.buscarFormato13ACReporteObs(codEmpresa, idGrupoInf, etapa);
+		List<FiseFormato13AC> listaF13A = new ArrayList<FiseFormato13AC>();
+		for(FiseFormato13AC f :lista){
+			f.setFiseFormato13ADs(formato13ADDao.listarFormato13ADByFormato13AC(f));
+			listaF13A.add(f);
+		}		
+		return listaF13A;
+	}		
+	
 	
 	@Transactional
 	public FiseFormato13AC updatecabecera(FiseFormato13AC fiseC) {

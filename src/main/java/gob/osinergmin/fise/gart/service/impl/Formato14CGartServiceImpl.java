@@ -2231,8 +2231,7 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 			idCab.setMesPresentacion(Long.valueOf(bean.getMesPres())); 
 			idCab.setAnoInicioVigencia(Long.valueOf(bean.getAnoIniVigencia())); 
 			idCab.setAnoFinVigencia(Long.valueOf(bean.getAnoFinVigencia())); 
-			idCab.setEtapa(bean.getEtapa()); 
-			/*Obtengo el objeto en session*/			
+			idCab.setEtapa(bean.getEtapa()); 					
 			formato = formato14CCDao.obtenerFormato14CC(idCab);		
 			formato.setListaDetalle14cDs(formato.getFiseFormato14cDs()); 
 			logger.info("Detalle de la lista "+formato.getListaDetalle14cDs().size()); 
@@ -2246,6 +2245,21 @@ public class Formato14CGartServiceImpl implements Formato14CGartService {
 		}
 		return formato;
 	}	
+	
+	 @Override
+	 @Transactional
+	 public List<FiseFormato14CC> buscarFormato14CReporteObs(String codEmpresa,
+			 long idGrupoInf,String etapa)throws Exception {		
+		 List<FiseFormato14CC> lista = formato14CCDao.buscarFormato14CCReporteObs(codEmpresa, idGrupoInf, etapa);
+		 List<FiseFormato14CC> listaF14C = new ArrayList<FiseFormato14CC>();
+		 for(FiseFormato14CC f :lista){
+			 f.setListaDetalle14cDs(f.getFiseFormato14cDs());
+			 listaF14C.add(f);
+		 }		
+		 return listaF14C;
+	 }	
+	
+	
 	
 	@Override
 	@Transactional

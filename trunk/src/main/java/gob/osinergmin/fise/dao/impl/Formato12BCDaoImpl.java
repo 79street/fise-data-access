@@ -18,7 +18,6 @@ import javax.persistence.Query;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository(value = "formato12BCDaoImpl")
@@ -233,27 +232,23 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 	}
 	
 
-	@Override
-	@Transactional
+	@Override	
 	public FiseFormato12BC saveFormatoCabecera(FiseFormato12BC formato) throws DataIntegrityViolationException,Exception{
 		FiseFormato12BC result = null;
 		try {
-				em.persist(formato);
-			result = formato;
-			System.out.println("cabecera persis::=>" + result);
+			em.persist(formato);
+			result = formato;			
 		} finally {
 			em.close();
 		}
 		return result;
 	}
 
-	@Override
-	@Transactional
+	@Override	
 	public Integer updateFormatoCabecera(FiseFormato12BC formato)throws DataIntegrityViolationException,Exception {
 		Integer result = null;
 		try {
-			em.merge(formato);
-			System.out.println("cabecera merge::=>" + formato);
+			em.merge(formato);			
 			result = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,8 +258,7 @@ public class Formato12BCDaoImpl extends GenericDaoImpl implements Formato12BCDao
 		return result;
 	}
 
-	@Override
-	
+	@Override	
 	public Integer deleteFormatoCabecera(FiseFormato12BCPK id) throws DataIntegrityViolationException,Exception{
 
 		try {

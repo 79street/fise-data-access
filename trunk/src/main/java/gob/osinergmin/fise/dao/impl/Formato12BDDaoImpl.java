@@ -1,5 +1,10 @@
 package gob.osinergmin.fise.dao.impl;
 
+import gob.osinergmin.base.dao.impl.GenericDaoImpl;
+import gob.osinergmin.fise.dao.Formato12BDDao;
+import gob.osinergmin.fise.domain.FiseFormato12BCPK;
+import gob.osinergmin.fise.domain.FiseFormato12BD;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +13,6 @@ import javax.persistence.Query;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import gob.osinergmin.base.dao.impl.GenericDaoImpl;
-import gob.osinergmin.fise.dao.Formato12BDDao;
-import gob.osinergmin.fise.domain.FiseFormato12BCPK;
-import gob.osinergmin.fise.domain.FiseFormato12BD;
 
 
 @Repository(value = "formato12BDDaoImpl")
@@ -144,13 +144,11 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 		
 	}
 
-	@Override
-	@Transactional
+	@Override	
 	public FiseFormato12BD saveFormatoDetalle(FiseFormato12BD formato) throws DataIntegrityViolationException, Exception {
 		FiseFormato12BD result = null;
 		try {
-			em.persist(formato);
-			System.out.println("cabecera persis::=>" + formato);
+			em.persist(formato);			
 			result = formato;
 		} finally {
 			em.close();
@@ -158,8 +156,7 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 		return result;
 	}
 
-	@Override
-	@Transactional
+	@Override	
 	public Integer updateFormatoDetalle(FiseFormato12BD formato) throws DataIntegrityViolationException, Exception {
 		Integer result = null;
 		try {
@@ -172,14 +169,25 @@ public class Formato12BDDaoImpl extends GenericDaoImpl implements Formato12BDDao
 			sb.append(" ,NUMERO_VALES_DIGITAL_CANJEADOS ="+formato.getNumeroValesDigitalCanjeados());
 			sb.append(" ,NUMERO_ATENCIONES ="+formato.getNumeroAtenciones());
 			
+			//cambios elozano costos Unitarios
+			sb.append(" ,COSTO_ESTANDAR_UNIT_VALE_IMPRE ="+formato.getCostoEstandarUnitValeImpre());
+			sb.append(" ,COSTO_ESTANDAR_UNIT_VALE_REPAR ="+formato.getCostoEstandarUnitValeRepar());
+			sb.append(" ,COSTO_ESTANDAR_UNIT_VAL_DIS_EL ="+formato.getCostoEstandarUnitValDisEl());
+			
+			sb.append(" ,COSTO_ESTANDAR_UNIT_VAL_FI_CAN ="+formato.getCostoEstandarUnitValFiCan());
+			sb.append(" ,COSTO_ESTANDAR_UNIT_VAL_DG_CAN ="+formato.getCostoEstandarUnitValDgCan());
+			sb.append(" ,COSTO_ESTANDAR_UNIT_ATENCION ="+formato.getCostoEstandarUnitAtencion());		
+			
+			sb.append(" ,TOTAL_GESTION_ADMINISTRATIVA ="+formato.getTotalGestionAdministrativa());
+			//fin de cambios elozano
+			
 			sb.append(" ,COSTO_TOTAL_IMPRESION_VALE = "+formato.getCostoTotalImpresionVale());
 			sb.append(" ,COSTO_TOTAL_REPARTO_VALES_DOMI ="+formato.getCostoTotalRepartoValesDomi());
 			sb.append(" ,COSTO_TOTAL_ENTREGA_VAL_DIS_EL ="+formato.getCostoTotalEntregaValDisEl());
 			sb.append(" ,COSTO_TOTAL_CANJE_LIQ_VALE_FIS ="+formato.getCostoTotalCanjeLiqValeFis());
 			sb.append(" ,COSTO_TOTAL_CANJE_LIQ_VALE_DIG ="+formato.getCostoTotalCanjeLiqValeDig());
-			sb.append(" ,COSTO_TOTAL_ATENCION_CONS_RECL ="+formato.getCostoTotalAtencionConsRecl());
+			sb.append(" ,COSTO_TOTAL_ATENCION_CONS_RECL ="+formato.getCostoTotalAtencionConsRecl());			
 			
-			//sb.append(" ,TOTAL_GESTION_ADMINISTRATIVA ="+formato.getTotalGestionAdministrativa());
 			sb.append(" ,TOTAL_DESPLAZAMIENTO_PERSONAL ="+formato.getTotalDesplazamientoPersonal());
 			sb.append(" ,TOTAL_ACTIVIDADES_EXTRAORD ="+formato.getTotalActividadesExtraord());
 			sb.append(" ,TOTAL_RECONOCER ="+formato.getTotalReconocer());

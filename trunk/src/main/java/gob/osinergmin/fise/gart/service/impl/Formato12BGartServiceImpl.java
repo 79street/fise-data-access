@@ -167,11 +167,13 @@ public class Formato12BGartServiceImpl implements Formato12BGartService {
 	}
 
 	@Override
+	@Transactional
 	public List<FiseFormato12BD> getLstFormatoDetalle(FiseFormato12BCPK idcabecera) {
 		return formato12BDDao.getLstFormatoDetalle(idcabecera);
 	}
 
 	@Override
+	@Transactional
 	public FiseFormato12BD getFormatoDetalleById(FiseFormato12BCPK id, Integer idzona) {
 		return formato12BDDao.getFormatoDetalleById(id, idzona);
 	}
@@ -747,7 +749,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleRural.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleRural.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				//desplazamiento de personal
 				detalleRural.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				//actividades extrordinarias
 				detalleRural.setTotalActividadesExtraord(formulario.getActivExtraordR());
 				
 				BigDecimal totalRural = new BigDecimal(0);
@@ -761,10 +765,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleRural.getTotalDesplazamientoPersonal())
 						.add(detalleRural.getTotalActividadesExtraord());
 				detalleRural.setTotalReconocer(totalRural);
-				//
+				
 				detalleRural.setFiseFormato12BC(fiseFormato12BC);
-				//detalleRural.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleRural.setUsuarioCreacion(formulario.getUsuario());
 				detalleRural.setTerminalCreacion(formulario.getTerminal());
 				detalleRural.setFechaCreacion(hoy);
@@ -783,8 +786,8 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			 if(cambio){
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
-				//
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);				
+				
 				FiseFormato12BD detalleProvincia = new FiseFormato12BD();
 				//pk
 				FiseFormato12BDPK pkDetalle = new FiseFormato12BDPK();
@@ -829,7 +832,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmP());
+				//desplazamiento de personal
 				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalP());
+				//actividades extraordinarias
 				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordP());
 				
 				BigDecimal totalProvincia = new BigDecimal(0);
@@ -843,10 +848,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleProvincia.getTotalDesplazamientoPersonal())
 						.add(detalleProvincia.getTotalActividadesExtraord());
 				detalleProvincia.setTotalReconocer(totalProvincia);
-				//
+				
 				detalleProvincia.setFiseFormato12BC(fiseFormato12BC);
-				//detalleProvincia.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleProvincia.setUsuarioCreacion(formulario.getUsuario());
 				detalleProvincia.setTerminalCreacion(formulario.getTerminal());
 				detalleProvincia.setFechaCreacion(hoy);
@@ -867,8 +871,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				{
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
-				//
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);				
 				FiseFormato12BD detalleLima = new FiseFormato12BD();
 				//pk
 				FiseFormato12BDPK pkDetalle = new FiseFormato12BDPK();
@@ -913,7 +916,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmL());
+				//desplazamiento de personal
 				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalL());
+				//actividades extraordinarias
 				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordL());
 				
 				BigDecimal totalLima = new BigDecimal(0);
@@ -927,10 +932,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleLima.getTotalDesplazamientoPersonal())
 						.add(detalleLima.getTotalActividadesExtraord());
 				detalleLima.setTotalReconocer(totalLima);
-				//
+				
 				detalleLima.setFiseFormato12BC(fiseFormato12BC);
-				//detalleLima.setFiseZonaBenef(zonaBenef);
-				//
+			
 				detalleLima.setUsuarioCreacion(formulario.getUsuario());
 				detalleLima.setTerminalCreacion(formulario.getTerminal());
 				detalleLima.setFechaCreacion(hoy);
@@ -957,8 +961,7 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formato12BCDao.saveFormatoCabecera(fiseFormato12BC);
 				}catch(Exception e){
 					throw new Exception("Se produjo un error al guardar los datos del Formato 12B");
-				}
-				
+				}				
 			}
 			//add
 			for (FiseFormato12BD detalle : lista) {
@@ -966,9 +969,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formato12BDDao.saveFormatoDetalle(detalle);
 				}catch(Exception e){
 					throw new Exception("Se produjo un error al guardar los datos del Formato 12B");
-				}
-				
+				}				
 			}
+			
 			if( lista != null && lista.size()>0 ){
 				fiseFormato12BC.setFiseFormato12BDs(lista);
 			}
@@ -980,7 +983,8 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			throw new Exception(e.getMessage());
 		}
 		return dto;
-	}
+	}	
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -997,20 +1001,21 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 			FiseFormato12BD detalleRural = new FiseFormato12BD();
 			FiseFormato12BD detalleProvincia = new FiseFormato12BD();
 			FiseFormato12BD detalleLima = new FiseFormato12BD();
-			if( fiseFormato12BC.getFiseFormato12BDs()!=null ){
-				for (FiseFormato12BD detalle : fiseFormato12BC.getFiseFormato12BDs()) {
-					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
+			
+			if(fiseFormato12BC.getFiseFormato12BDs()!=null ){
+				for(FiseFormato12BD detalle : fiseFormato12BC.getFiseFormato12BDs()) {
+					if(detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
 						detalleRural = detalle;
-					}else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
+					}else if(detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_PROVINCIA_COD ){
 						detalleProvincia = detalle;
-					} else if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
+					} else if(detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_LIMA_COD ){
 						detalleLima = detalle;
 					}
 				}
 			}
 			
 			//RURAL
-			if( detalleRural != null ){
+			if(detalleRural != null ){
 			/*if( formulario.getNroValeImpR() != 0 ||
 					formulario.getNroValReparDomicR() != 0 ||
 					formulario.getNroValEntDisElR() != 0 ||
@@ -1019,7 +1024,6 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroAtencionesR() != 0
 					){*/
 				logger.info("entro a RURAL");
-				//
 				
 				//impresion vales
 				detalleRural.setNumeroValesImpreso((int)formulario.getNroValeImpR());
@@ -1053,7 +1057,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleRural.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleRural.setTotalGestionAdministrativa(formulario.getGestionAdmR());
+				//desplazamiento de personal
 				detalleRural.setTotalDesplazamientoPersonal(formulario.getDesplPersonalR());
+				//actividades extraordinarias
 				detalleRural.setTotalActividadesExtraord(formulario.getActivExtraordR());
 				
 				BigDecimal totalRural = new BigDecimal(0);
@@ -1067,10 +1073,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleRural.getTotalDesplazamientoPersonal())
 						.add(detalleRural.getTotalActividadesExtraord());
 				detalleRural.setTotalReconocer(totalRural);
-				//
+				
 				detalleRural.setFiseFormato12BC(fiseFormato12BC);
-				//detalleRural.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
 				detalleRural.setTerminalActualizacion(formulario.getTerminal());
 				detalleRural.setFechaActualizacion(hoy);
@@ -1086,7 +1091,6 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroAtencionesP() != 0
 					){*/
 				logger.info("entro a PROVINCIA");
-				//
 				
 				//impresion vales
 				detalleProvincia.setNumeroValesImpreso((int)formulario.getNroValeImpP());
@@ -1120,7 +1124,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleProvincia.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleProvincia.setTotalGestionAdministrativa(formulario.getGestionAdmP());
+				//desplazamiento de personal
 				detalleProvincia.setTotalDesplazamientoPersonal(formulario.getDesplPersonalP());
+				//actividades extraordinarias
 				detalleProvincia.setTotalActividadesExtraord(formulario.getActivExtraordP());
 				
 				BigDecimal totalProvincia = new BigDecimal(0);
@@ -1134,17 +1140,17 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleProvincia.getTotalDesplazamientoPersonal())
 						.add(detalleProvincia.getTotalActividadesExtraord());
 				detalleProvincia.setTotalReconocer(totalProvincia);
-				//
+				
 				detalleProvincia.setFiseFormato12BC(fiseFormato12BC);
-				//detalleProvincia.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
 				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
 				detalleProvincia.setFechaActualizacion(hoy);
 				lista.add(detalleProvincia);
 			}
 			//LIMA
-			if( detalleLima != null ){
+			if(detalleLima != null && detalleLima.getId()!=null 
+					&& detalleLima.getId().getCodEmpresa()!=null){
 			/*if( formulario.getNroValeImpL() != 0 ||
 					formulario.getNroValReparDomicL() != 0 ||
 					formulario.getNroValEntDisElL() != 0 ||
@@ -1153,7 +1159,6 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 					formulario.getNroAtencionesL() != 0
 					){*/
 				logger.info("entro a LIMA");
-				//
 				
 				//impresion vales
 				detalleLima.setNumeroValesImpreso((int)formulario.getNroValeImpL());
@@ -1187,7 +1192,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				detalleLima.setCostoTotalAtencionConsRecl(totalAtenciones);
 				//gestion administrativa
 				detalleLima.setTotalGestionAdministrativa(formulario.getGestionAdmL());
+				//desplazamiento de personal
 				detalleLima.setTotalDesplazamientoPersonal(formulario.getDesplPersonalL());
+				//actividades extraordinarias
 				detalleLima.setTotalActividadesExtraord(formulario.getActivExtraordL());
 				
 				BigDecimal totalLima = new BigDecimal(0);
@@ -1201,10 +1208,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 						.add(detalleLima.getTotalDesplazamientoPersonal())
 						.add(detalleLima.getTotalActividadesExtraord());
 				detalleLima.setTotalReconocer(totalLima);
-				//
+				
 				detalleLima.setFiseFormato12BC(fiseFormato12BC);
-				//detalleLima.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
 				detalleLima.setTerminalActualizacion(formulario.getTerminal());
 				detalleLima.setFechaActualizacion(hoy);
@@ -1221,8 +1227,9 @@ public String modificarEnvioDefinitivoFormato12BC(String user,String terminal,
 				fiseFormato12BC.setNombreArchivoTexto(formulario.getNombreArchivo());
 			}
 			
+			//actualizamos la cabecera del formato 
 			formato12BCDao.updateFormatoCabecera(fiseFormato12BC);
-			//add
+			//actualizamos los detalles
 			for (FiseFormato12BD detalle : lista) {
 				formato12BDDao.updateFormatoDetalle(detalle);
 			}

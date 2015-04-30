@@ -19,12 +19,9 @@ public class Formato12ADDaoImpl extends GenericDaoImpl implements Formato12ADDao
 	@Override
 	public FiseFormato12AD obtenerFormato12ADByPK(FiseFormato12ADPK fiseFormato12ADPK){
 		FiseFormato12AD formato = null;
-		try{
-			//em.getTransaction().begin();
+		try{			
 			fiseFormato12ADPK.setCodEmpresa(FormatoUtil.rellenaDerecha(fiseFormato12ADPK.getCodEmpresa(), ' ', 4));
-			formato = em.find(FiseFormato12AD.class, fiseFormato12ADPK);
-			//em.getTransaction().commit();
-			//return formato;
+			formato = em.find(FiseFormato12AD.class, fiseFormato12ADPK);			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -35,11 +32,8 @@ public class Formato12ADDaoImpl extends GenericDaoImpl implements Formato12ADDao
 	
 	@Override
 	public void registrarFormato12AD(FiseFormato12AD fiseFormato12AD){
-		try{
-			//em.getTransaction().begin();
-			em.persist(fiseFormato12AD);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.persist(fiseFormato12AD);			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -49,11 +43,8 @@ public class Formato12ADDaoImpl extends GenericDaoImpl implements Formato12ADDao
 	
 	@Override
 	public void modificarFormato12AD(FiseFormato12AD fiseFormato12AD){
-		try{
-			//em.getTransaction().begin();
-			em.merge(fiseFormato12AD);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.merge(fiseFormato12AD);			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -63,13 +54,8 @@ public class Formato12ADDaoImpl extends GenericDaoImpl implements Formato12ADDao
 	
 	@Override
 	public void eliminarFormato12AD(FiseFormato12AD fiseFormato12AD){
-		try{
-			//em.getTransaction().begin();
-			//verificar si la entidad pertenece a la transaccion o no
-			em.remove(em.contains(fiseFormato12AD) ? fiseFormato12AD : em.merge(fiseFormato12AD));
-			//em.remove(fiseFormato12AD);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.remove(em.contains(fiseFormato12AD) ? fiseFormato12AD : em.merge(fiseFormato12AD));		
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {

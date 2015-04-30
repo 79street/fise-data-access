@@ -10,6 +10,7 @@ import gob.osinergmin.fise.util.FormatoUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -426,5 +427,62 @@ public class FiseCargoFijoServiceImpl implements FiseCargoFijoService {
 		return listaCargosFijos;
 	}
 	
+	
+	@Override
+	public HashMap<String, Object> mapParametrosDatosProyectoFise(FiseCargoFijoBean bean) 
+			throws Exception {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();	
+				
+		map.put("DESC_EMPRESA",bean.getDesEmpresa());		
+		map.put("ANIO_REPORTADO",bean.getAnioReporte());	
+		map.put("MES_REPORTADO",bean.getDesMesRep());		
+		
+		map.put("NRO_AGENTES_R",bean.getNumAgenteR()!=null?Long.parseLong(bean.getNumAgenteR()):0);		
+		map.put("NRO_AGENTES_P",bean.getNumAgenteP()!=null?Long.parseLong(bean.getNumAgenteP()):0);		
+		map.put("NRO_AGENTES_L",bean.getNumAgenteL()!=null?Long.parseLong(bean.getNumAgenteL()):0);		
+		
+		map.put("NRO_USU_BENEF_R",bean.getNumUsuBenefR()!=null?Long.parseLong(bean.getNumUsuBenefR()):0);	
+		map.put("NRO_USU_BENEF_P",bean.getNumUsuBenefP()!=null?Long.parseLong(bean.getNumUsuBenefP()):0);
+		map.put("NRO_USU_BENEF_L",bean.getNumUsuBenefL()!=null?Long.parseLong(bean.getNumUsuBenefL()):0);
+		
+		map.put("NRO_USU_EMPADRONADO_BENEF_R",bean.getNumUsuEmpR()!=null?Long.parseLong(bean.getNumUsuEmpR()):0);	
+		map.put("NRO_USU_EMPADRONADO_BENEF_P",bean.getNumUsuEmpP()!=null?Long.parseLong(bean.getNumUsuEmpP()):0);		
+		map.put("NRO_USU_EMPADRONADO_BENEF_L",bean.getNumUsuEmpL()!=null?Long.parseLong(bean.getNumUsuEmpL()):0);
+		
+		map.put("NRO_VAL_DIGITAL_CANJ_R",bean.getNumValDCanR()!=null?Long.parseLong(bean.getNumValDCanR()):0);		
+		map.put("NRO_VAL_DIGITAL_CANJ_P",bean.getNumValDCanP()!=null?Long.parseLong(bean.getNumValDCanP()):0);		
+		map.put("NRO_VAL_DIGITAL_CANJ_L",bean.getNumValDCanL()!=null?Long.parseLong(bean.getNumValDCanL()):0);	
+		
+		map.put("NRO_VAL_DIGITAL_EMIT_R",bean.getNumValDEmiR()!=null?Long.parseLong(bean.getNumValDEmiR()):0);		
+		map.put("NRO_VAL_DIGITAL_EMIT_P",bean.getNumValDEmiP()!=null?Long.parseLong(bean.getNumValDEmiP()):0);	
+		map.put("NRO_VAL_DIGITAL_EMIT_L",bean.getNumValDEmiL()!=null?Long.parseLong(bean.getNumValDEmiL()):0);		
+		
+		map.put("NRO_VAL_FISICOS_CANJ_R",bean.getNumValFCanR()!=null?Long.parseLong(bean.getNumValFCanR()):0);	
+		map.put("NRO_VAL_FISICOS_CANJ_P",bean.getNumValFCanP()!=null?Long.parseLong(bean.getNumValFCanP()):0);				
+		map.put("NRO_VAL_FISICOS_CANJ_L",bean.getNumValFCanL()!=null?Long.parseLong(bean.getNumValFCanL()):0);	
+		
+		map.put("NRO_VAL_FISICOS_EMIT_R",bean.getNumValFEmiR()!=null?Long.parseLong(bean.getNumValFEmiR()):0);	
+		map.put("NRO_VAL_FISICOS_EMIT_P",bean.getNumValFEmiP()!=null?Long.parseLong(bean.getNumValFEmiP()):0);		
+		map.put("NRO_VAL_FISICOS_EMIT_L",bean.getNumValFEmiL()!=null?Long.parseLong(bean.getNumValFEmiL()):0);
+				
+		map.put("CARGO_FIJO_MES_R",bean.getMontoMesR()!=null?new BigDecimal(bean.getMontoMesR()):new BigDecimal(0.00));		
+		map.put("CARGO_FIJO_MES_P",bean.getMontoMesP()!=null?new BigDecimal(bean.getMontoMesP()):new BigDecimal(0.00));		
+		map.put("CARGO_FIJO_MES_L",bean.getMontoMesL()!=null?new BigDecimal(bean.getMontoMesL()):new BigDecimal(0.00));
+		
+		map.put("MONTO_TRANSF_CANJE",bean.getMontoCanje()!=null?new BigDecimal(bean.getMontoCanje()):new BigDecimal(0.00));			
+				
+		map.put("IGV",bean.getIgv()!=null?new BigDecimal(bean.getIgv()):new BigDecimal(0.00));
+		logger.info("Aplica igv service:  "+bean.getAplicaIgv()); 
+		map.put("APLICA_IGV",bean.getAplicaIgv().trim().equals("1")?"SI":"NO");			
+		map.put("GLOSA",bean.getGloza());		
+		map.put("FECHA_INFORME_SUST",bean.getFechaSustento());		
+		map.put("NRO_DOC_INFORME_SUST",bean.getNumDoc());			
+		map.put("ESTADO",bean.getEstado().trim().equals("1")?"Activo":"Inactivo");		
+		map.put("FECHA_RECEP_INF",bean.getFechaRecepcion());
+		map.put("NRO_DOC_RECEP_INF",bean.getNumDocRecepcion());	
+		
+		return map;
+	}	
 
 }

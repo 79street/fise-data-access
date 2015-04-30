@@ -39,7 +39,8 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal costoTotalValDigitCanjR = new BigDecimal(0);
 	
 	private long nroAtencionesR=0;
-	
+	private BigDecimal costoUnitAtencionesR = new BigDecimal(0);
+	private BigDecimal costoTotalAtencionesR = new BigDecimal(0);
 	
 	private BigDecimal gestionAdmR = new BigDecimal(0);
 	private BigDecimal desplPersonalR = new BigDecimal(0);
@@ -67,6 +68,8 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal costoTotalValDigitCanjP = new BigDecimal(0);
 	
 	private long nroAtencionesP=0;
+	private BigDecimal costoUnitAtencionesP = new BigDecimal(0);
+	private BigDecimal costoTotalAtencionesP = new BigDecimal(0);
 	
 	
 	
@@ -96,6 +99,8 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal costoTotalValDigitCanjL = new BigDecimal(0);
 	
 	private long nroAtencionesL=0;
+	private BigDecimal costoUnitAtencionesL = new BigDecimal(0);
+	private BigDecimal costoTotalAtencionesL = new BigDecimal(0);
 	
 	
 	private BigDecimal gestionAdmL = new BigDecimal(0);
@@ -123,14 +128,6 @@ private static final long serialVersionUID = 1L;
 	private String descEmpresa;
 	private String descMesPresentacion;
 	private String descMesEjecucion;
-	
-	private BigDecimal costoUnitAtencionesR = new BigDecimal(0);
-	private BigDecimal costoTotalAtencionesR = new BigDecimal(0);
-	private BigDecimal costoUnitAtencionesP = new BigDecimal(0);
-	private BigDecimal costoTotalAtencionesP = new BigDecimal(0);
-	private BigDecimal costoUnitAtencionesL = new BigDecimal(0);
-	private BigDecimal costoTotalAtencionesL = new BigDecimal(0);
-
 	
 	
 	

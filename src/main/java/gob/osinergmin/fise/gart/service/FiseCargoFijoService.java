@@ -1,5 +1,6 @@
 package gob.osinergmin.fise.gart.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import gob.osinergmin.fise.bean.FiseCargoFijoBean;
@@ -21,6 +22,9 @@ public interface FiseCargoFijoService {
 			String anio,String mes) throws Exception;
 	
 	List<FiseCargoFijoBean> buscarFiseCargoFijo(String codEmpresa, Long anioRep,Long mesRep)
+			throws Exception;
+	
+	HashMap<String, Object> mapParametrosDatosProyectoFise(FiseCargoFijoBean bean) 
 			throws Exception;
 
 }

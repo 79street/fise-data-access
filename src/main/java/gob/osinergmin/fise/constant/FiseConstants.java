@@ -296,6 +296,13 @@ public class FiseConstants {
 	public final static int NRO_CELDA_RURAL_FORMATO12B = 6;
 	public final static int NRO_CELDA_PROVINCIA_FORMATO12B = 7;
 	public final static int NRO_CELDA_LIMA_FORMATO12B = 8;
+	
+	public final static int NRO_FILA_COSTOUNIT_VALESIMP_FORMATO12B = 12;
+	public final static int NRO_FILA_COSTOUNIT_VALESREP_FORMATO12B = 16;
+	public final static int NRO_FILA_COSTOUNIT_VALESENTR_FORMATO12B = 20;
+	public final static int NRO_FILA_COSTOUNIT_VALESFIS_FORMATO12B = 24;
+	public final static int NRO_FILA_COSTOUNIT_VALESDIGIT_FORMATO12B = 28;
+	public final static int NRO_FILA_COSTOUNIT_ATEN_FORMATO12B = 32;
 
 	// FORMATO 12C
 	public final static int NRO_FILA_CODEMPRESA_FORMATO12C = 2;
@@ -1032,6 +1039,8 @@ public class FiseConstants {
 	public final static String ENVIO_EMAIL_OK_VALIDACION = "0";
 
 	public final static String OBSERVACIONES_EXPORT_EXEL = "OBS";
+	public final static String TIPO_DOC_REFERENCIA_EXPORT_EXEL = "DOCREF";
+	
 	public final static String PARAMETROS_EXPORT_EXCEL = "PARAM";
 
 	public final static String CARGO_FIJO_EXPORT_EXEL = "CARGOFIJO";
@@ -1406,6 +1415,29 @@ public class FiseConstants {
 	
 	public static final String COD_ERROR_F12B_3721 = "3721";
 	public static final String COD_ERROR_F12B_3722 = "3722";
+	
+	public static final String COD_ERROR_F12B_19 = "19";
+	public static final String COD_ERROR_F12B_20 = "20";
+	public static final String COD_ERROR_F12B_21 = "21";
+	public static final String COD_ERROR_F12B_22 = "22";
+	public static final String COD_ERROR_F12B_23 = "23";
+	public static final String COD_ERROR_F12B_24 = "24";
+	public static final String COD_ERROR_F12B_25 = "25";
+	public static final String COD_ERROR_F12B_26 = "26";
+	public static final String COD_ERROR_F12B_27 = "27";
+	public static final String COD_ERROR_F12B_28 = "28";
+	public static final String COD_ERROR_F12B_29 = "29";
+	public static final String COD_ERROR_F12B_30 = "30";
+	public static final String COD_ERROR_F12B_31 = "31";
+	public static final String COD_ERROR_F12B_32 = "32";
+	public static final String COD_ERROR_F12B_33 = "33";
+	public static final String COD_ERROR_F12B_34 = "34";
+	public static final String COD_ERROR_F12B_35 = "35";
+	public static final String COD_ERROR_F12B_36 = "36";
+	public static final String COD_ERROR_F12B_37 = "37";
+	public static final String COD_ERROR_F12B_38 = "38";
+	
+	
 
 	
 	// F12C

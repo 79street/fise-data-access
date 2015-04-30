@@ -91,6 +91,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		}
 		return formato;
 	}
+	
 	//cambios elozano para reporte de obs.	
     @Override
 	@Transactional
@@ -119,20 +120,16 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			FiseFormato12ACPK id = new FiseFormato12ACPK();
 			id.setCodEmpresa(formulario.getCodigoEmpresa());
 			id.setAnoPresentacion(formulario.getAnioPresent());
-			id.setMesPresentacion(formulario.getMesPresent());
-			//id.setAnoEjecucionGasto(Long.parseLong(FechaUtil.obtenerNroAnioFechaActual()));
-			//id.setMesEjecucionGasto(Long.parseLong(FechaUtil.obtenerNroMesFechaActual()));
+			id.setMesPresentacion(formulario.getMesPresent());		
 			id.setAnoEjecucionGasto(formulario.getAnioEjecuc());
-			id.setMesEjecucionGasto(formulario.getMesEjecuc());
-			//id.setEtapa(FiseConstants.ETAPA_SOLICITUD);
-			id.setEtapa(formulario.getEtapa());
+			id.setMesEjecucionGasto(formulario.getMesEjecuc());			
+			id.setEtapa(formulario.getEtapa());			
+			
 			if( FiseConstants.TIPOARCHIVO_XLS.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12AC.setArchivoExcel(formulario.getNombreArchivo());
 			}else if( FiseConstants.TIPOARCHIVO_TXT.equals(formulario.getTipoArchivo()) ){
 				fiseFormato12AC.setArchivoTexto(formulario.getNombreArchivo());
-			}/*else{
-				id.setEtapa(formulario.getEtapa());
-			}*/
+			}
 			
 			fiseFormato12AC.setId(id);
 			
@@ -143,9 +140,10 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			}	
 			fiseFormato12AC.setFiseGrupoInformacion(grupoInfo);
 			
-		//total de las 3 detalles segun sea el caso
+		    //total de las 3 detalles segun sea el caso
 			BigDecimal total = new BigDecimal(0);
 			List<FiseFormato12AD> lista = new ArrayList<FiseFormato12AD>();
+			
 			//RURAL
 			
 			boolean cambio = true; //cambio elozano
@@ -160,8 +158,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			  if(cambio){
 				logger.info("entro a RURAL");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
-				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);
-				//
+				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_RURAL_COD);				
 				FiseFormato12AD detalleRural = new FiseFormato12AD();
 				//pk
 				FiseFormato12ADPK pkDetalle = new FiseFormato12ADPK();
@@ -190,22 +187,20 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleRural.getCostoTotalGestRedAgGlp())
 						.add(detalleRural.getTotalDesplazamientoPersonal())
 						.add(detalleRural.getTotalActividadesExtraord());
-				//
+				
 				detalleRural.setFiseFormato12AC(fiseFormato12AC);
-				//detalleRural.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleRural.setUsuarioCreacion(formulario.getUsuario());
 				detalleRural.setTerminalCreacion(formulario.getTerminal());
 				detalleRural.setFechaCreacion(hoy);
 				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
 				detalleRural.setTerminalActualizacion(formulario.getTerminal());
 				detalleRural.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totalrural"+totalRural);
-				total = total.add(totalRural);
-				//total.add(totalRural);
-				logger.info("total hasta rural"+total);
-				//TrimUtil.trimAll(detalleRural);
+				total = total.add(totalRural);				
+				logger.info("total hasta rural"+total);				
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
@@ -220,7 +215,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("entro a PROVINCIA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_PROVINCIA_COD);
-				//
+				
 				FiseFormato12AD detalleProvincia = new FiseFormato12AD();
 				//pk
 				FiseFormato12ADPK pkDetalle = new FiseFormato12ADPK();
@@ -249,22 +244,20 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleProvincia.getCostoTotalGestRedAgGlp())
 						.add(detalleProvincia.getTotalDesplazamientoPersonal())
 						.add(detalleProvincia.getTotalActividadesExtraord());
-				//
+				
 				detalleProvincia.setFiseFormato12AC(fiseFormato12AC);
-				//detalleProvincia.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleProvincia.setUsuarioCreacion(formulario.getUsuario());
 				detalleProvincia.setTerminalCreacion(formulario.getTerminal());
 				detalleProvincia.setFechaCreacion(hoy);
 				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
 				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
 				detalleProvincia.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totalprovincia"+totalProvincia);
-				total = total.add(totalProvincia);
-				//total.add(totalProvincia);
-				logger.info("total hasta provincia"+total);
-				//TrimUtil.trimAll(detalleProvincia);
+				total = total.add(totalProvincia);				
+				logger.info("total hasta provincia"+total);				
 				lista.add(detalleProvincia);
 			}
 			//LIMA
@@ -281,7 +274,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				logger.info("entro a LIMA");
 				FiseZonaBenef zonaBenef = new FiseZonaBenef();
 				zonaBenef = zonaBenefDao.obtenerFiseZonaBenefByPK(FiseConstants.ZONABENEF_LIMA_COD);
-				//
+				
 				FiseFormato12AD detalleLima = new FiseFormato12AD();
 				//pk
 				FiseFormato12ADPK pkDetalle = new FiseFormato12ADPK();
@@ -311,20 +304,18 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 						.add(detalleLima.getTotalDesplazamientoPersonal())
 						.add(detalleLima.getTotalActividadesExtraord());
 				detalleLima.setFiseFormato12AC(fiseFormato12AC);
-				//����detalleLima.setFiseZonaBenef(zonaBenef);
-				//
+				
 				detalleLima.setUsuarioCreacion(formulario.getUsuario());
 				detalleLima.setTerminalCreacion(formulario.getTerminal());
 				detalleLima.setFechaCreacion(hoy);
 				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
 				detalleLima.setTerminalActualizacion(formulario.getTerminal());
 				detalleLima.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totallima"+totalLima);
-				total = total.add(totalLima);
-				//total.add(totalLima);
-				logger.info("total hasta lima"+total);
-				//TrimUtil.trimAll(detalleLima);
+				total = total.add(totalLima);				
+				logger.info("total hasta lima"+total);			
 				lista.add(detalleLima);
 			}
 			logger.info("total de total"+total);
@@ -336,8 +327,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			fiseFormato12AC.setTerminalCreacion(formulario.getTerminal());
 			fiseFormato12AC.setFechaCreacion(hoy);
 			
-			logger.info("aca se va  a guardar"+fiseFormato12AC);
-			//fiseFormato12AC = (FiseFormato12AC) TrimUtil.trimReflective(fiseFormato12AC);
+			logger.info("aca se va  a guardar"+fiseFormato12AC);			
 			
 			boolean existe = false;
 			existe = formato12ACDao.existeFormato12AC(fiseFormato12AC);
@@ -357,8 +347,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				}catch(Exception e){
 					throw new Exception("Se produjo un error al guardar los datos del Formato 12A");
 				}
-			}
-			
+			}			
 			if( lista != null && lista.size()>0 ){
 				fiseFormato12AC.setFiseFormato12ADs(lista);
 			}
@@ -371,6 +360,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 		}
 		return dto;
 	}
+	
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -389,6 +379,7 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 			FiseFormato12AD detalleRural = null;
 			FiseFormato12AD detalleProvincia = null;
 			FiseFormato12AD detalleLima = null;			
+			
 			if( fiseFormato12AC.getFiseFormato12ADs()!=null ){
 				for (FiseFormato12AD detalle : fiseFormato12AC.getFiseFormato12ADs()) {
 					if( detalle.getId().getIdZonaBenef()==FiseConstants.ZONABENEF_RURAL_COD ){
@@ -432,12 +423,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				detalleRural.setUsuarioActualizacion(formulario.getUsuario());
 				detalleRural.setTerminalActualizacion(formulario.getTerminal());
 				detalleRural.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totalrural modifica"+totalRural);
-				total = total.add(totalRural);
-				//total.add(totalRural);
-				logger.info("total hasta rural modifica"+total);
-				//TrimUtil.trimAll(detalleRural);
+				total = total.add(totalRural);				
+				logger.info("total hasta rural modifica"+total);				
 				lista.add(detalleRural);
 			}
 			//PROVINCIA
@@ -471,12 +461,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				detalleProvincia.setUsuarioActualizacion(formulario.getUsuario());
 				detalleProvincia.setTerminalActualizacion(formulario.getTerminal());
 				detalleProvincia.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totalprovincia modificar"+totalProvincia);
-				total = total.add(totalProvincia);
-				//total.add(totalProvincia);
-				logger.info("total hasta provincia modificar"+total);
-				//TrimUtil.trimAll(detalleProvincia);
+				total = total.add(totalProvincia);				
+				logger.info("total hasta provincia modificar"+total);				
 				lista.add(detalleProvincia);
 			}
 			//LIMA
@@ -509,12 +498,11 @@ public class Formato12AGartServiceImpl implements Formato12AGartService {
 				detalleLima.setUsuarioActualizacion(formulario.getUsuario());
 				detalleLima.setTerminalActualizacion(formulario.getTerminal());
 				detalleLima.setFechaActualizacion(hoy);
+				
 				//grabar detalle
 				logger.info("totallima modificar"+totalLima);
-				total = total.add(totalLima);
-				//total.add(totalLima);
-				logger.info("total hasta lima modificar"+total);
-				//TrimUtil.trimAll(detalleLima);
+				total = total.add(totalLima);				
+				logger.info("total hasta lima modificar"+total);				
 				lista.add(detalleLima);
 			}
 			logger.info("total de total"+total);

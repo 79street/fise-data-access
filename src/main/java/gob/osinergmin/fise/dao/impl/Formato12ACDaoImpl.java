@@ -56,11 +56,8 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 	
 	@Override
 	public void registrarFormato12AC(FiseFormato12AC fiseFormato12AC){
-		try{
-			//em.getTransaction().begin();
-			em.persist(fiseFormato12AC);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.persist(fiseFormato12AC);			
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -70,11 +67,8 @@ public class Formato12ACDaoImpl extends GenericDaoImpl implements Formato12ACDao
 	
 	@Override
 	public void modificarFormato12AC(FiseFormato12AC fiseFormato12AC){
-		try{
-			//em.getTransaction().begin();
-			em.merge(fiseFormato12AC);
-			//em.flush();
-			//em.getTransaction().commit();
+		try{			
+			em.merge(fiseFormato12AC);		
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {

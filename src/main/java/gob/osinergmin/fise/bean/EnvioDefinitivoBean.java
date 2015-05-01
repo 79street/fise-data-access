@@ -32,6 +32,7 @@ public class EnvioDefinitivoBean {
 	private String usuario;
 	private String terminal;
 	
+	
 	/*******Datos de notificacion*************/
 	private String codEmpresa;
 	private String anioPres;

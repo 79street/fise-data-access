@@ -12,6 +12,7 @@ public class FiseCargoFijoBean {
 	private List<AdmEmpresa> listaEmpresas;
 	private Map<Long,String> listaMes;
 	
+	
 	private String codEmpresaBusq;
 	private String anioRepBusq;
 	private String mesRepBusq;	

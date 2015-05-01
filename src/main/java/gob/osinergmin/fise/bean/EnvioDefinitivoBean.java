@@ -10,7 +10,7 @@ public class EnvioDefinitivoBean {
 	/**********Datos de busqueda***************/
 	private List<AdmEmpresa> listaEmpresas;
 	
-	private List<FiseGrupoInformacion> listaGrupoInf;
+	private List<FiseGrupoInformacion> listaGrupoInf; /// prueba
 	private String idGrupoInf;
 	
 	private String codEmpresaBusq;		

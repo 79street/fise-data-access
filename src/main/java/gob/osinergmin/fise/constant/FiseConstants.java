@@ -1040,6 +1040,8 @@ public class FiseConstants {
 
 	public final static String OBSERVACIONES_EXPORT_EXEL = "OBS";
 	public final static String TIPO_DOC_REFERENCIA_EXPORT_EXEL = "DOCREF";
+	public final static String TIPO_GASTO_EXPORT_EXEL = "TIPOGASTO";
+	public final static String TIPO_PERSONAL_EXPORT_EXEL = "TIPOPERSONAL";
 	
 	public final static String PARAMETROS_EXPORT_EXCEL = "PARAM";
 

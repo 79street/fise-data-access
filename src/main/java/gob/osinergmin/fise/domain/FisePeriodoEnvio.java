@@ -73,7 +73,7 @@ public class FisePeriodoEnvio implements Serializable {
 	@Column(name="COD_EMPRESA")
 	private String codEmpresa;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date desde;
 
 	@Column(name="DIAS_NOTIFICACION_ANTES_CIERRE")
@@ -106,7 +106,7 @@ public class FisePeriodoEnvio implements Serializable {
 
 	private String formato;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date hasta;
 
 	@Column(name="MES_PRESENTACION")
